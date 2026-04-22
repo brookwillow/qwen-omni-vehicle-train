@@ -1,0 +1,1581 @@
+[
+  {
+    "id": "light_001",
+    "category": "灯光",
+    "sub_category": "大灯",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开大灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "大灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_001.wav"
+  },
+  {
+    "id": "light_002",
+    "category": "灯光",
+    "sub_category": "大灯",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭大灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "大灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_002.wav"
+  },
+  {
+    "id": "light_003",
+    "category": "灯光",
+    "sub_category": "大灯",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "大灯切换到自动模式",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "大灯",
+          "value": "自动"
+        }
+      }
+    ],
+    "query_audio": "audio/light_003.wav"
+  },
+  {
+    "id": "light_004",
+    "category": "灯光",
+    "sub_category": "大灯",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "大灯调到标准模式",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "大灯",
+          "value": "标准模式"
+        }
+      }
+    ],
+    "query_audio": "audio/light_004.wav"
+  },
+  {
+    "id": "light_005",
+    "category": "灯光",
+    "sub_category": "大灯",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "大灯调到智能模式",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "大灯",
+          "value": "智能"
+        }
+      }
+    ],
+    "query_audio": "audio/light_005.wav"
+  },
+  {
+    "id": "light_006",
+    "category": "灯光",
+    "sub_category": "远光灯",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开远光灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "远光灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_006.wav"
+  },
+  {
+    "id": "light_007",
+    "category": "灯光",
+    "sub_category": "远光灯",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭远光灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "远光灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_007.wav"
+  },
+  {
+    "id": "light_008",
+    "category": "灯光",
+    "sub_category": "前雾灯",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开前雾灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "前雾灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_008.wav"
+  },
+  {
+    "id": "light_009",
+    "category": "灯光",
+    "sub_category": "前雾灯",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭前雾灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "前雾灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_009.wav"
+  },
+  {
+    "id": "light_010",
+    "category": "灯光",
+    "sub_category": "后雾灯",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开后雾灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后雾灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_010.wav"
+  },
+  {
+    "id": "light_011",
+    "category": "灯光",
+    "sub_category": "后雾灯",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭后雾灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "后雾灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_011.wav"
+  },
+  {
+    "id": "light_012",
+    "category": "灯光",
+    "sub_category": "示宽灯",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开示宽灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "示宽灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_012.wav"
+  },
+  {
+    "id": "light_013",
+    "category": "灯光",
+    "sub_category": "示宽灯",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭示宽灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "示宽灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_013.wav"
+  },
+  {
+    "id": "light_014",
+    "category": "灯光",
+    "sub_category": "阅读灯",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开阅读灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "阅读灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_014.wav"
+  },
+  {
+    "id": "light_015",
+    "category": "灯光",
+    "sub_category": "阅读灯",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭阅读灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "阅读灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_015.wav"
+  },
+  {
+    "id": "light_016",
+    "category": "灯光",
+    "sub_category": "阅读灯",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开主驾阅读灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "阅读灯",
+          "position": "主驾"
+        }
+      }
+    ],
+    "query_audio": "audio/light_016.wav"
+  },
+  {
+    "id": "light_017",
+    "category": "灯光",
+    "sub_category": "阅读灯",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关闭副驾阅读灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "阅读灯",
+          "position": "副驾"
+        }
+      }
+    ],
+    "query_audio": "audio/light_017.wav"
+  },
+  {
+    "id": "light_018",
+    "category": "灯光",
+    "sub_category": "阅读灯",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开第二排阅读灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "阅读灯",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/light_018.wav"
+  },
+  {
+    "id": "light_019",
+    "category": "灯光",
+    "sub_category": "阅读灯",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关闭全部阅读灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "阅读灯",
+          "position": "全部"
+        }
+      }
+    ],
+    "query_audio": "audio/light_019.wav"
+  },
+  {
+    "id": "light_020",
+    "category": "灯光",
+    "sub_category": "氛围灯",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开氛围灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "氛围灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_020.wav"
+  },
+  {
+    "id": "light_021",
+    "category": "灯光",
+    "sub_category": "氛围灯",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭氛围灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "氛围灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_021.wav"
+  },
+  {
+    "id": "light_022",
+    "category": "灯光",
+    "sub_category": "氛围灯",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "氛围灯调到红色",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "氛围灯",
+          "feature": "颜色",
+          "value": "红色"
+        }
+      }
+    ],
+    "query_audio": "audio/light_022.wav"
+  },
+  {
+    "id": "light_023",
+    "category": "灯光",
+    "sub_category": "氛围灯",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "把氛围灯换成蓝色",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "氛围灯",
+          "feature": "颜色",
+          "value": "蓝色"
+        }
+      }
+    ],
+    "query_audio": "audio/light_023.wav"
+  },
+  {
+    "id": "light_024",
+    "category": "灯光",
+    "sub_category": "氛围灯",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "氛围灯设置为紫色",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "氛围灯",
+          "feature": "颜色",
+          "value": "紫色"
+        }
+      }
+    ],
+    "query_audio": "audio/light_024.wav"
+  },
+  {
+    "id": "light_025",
+    "category": "灯光",
+    "sub_category": "氛围灯",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "氛围灯调成绿色",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "氛围灯",
+          "feature": "颜色",
+          "value": "绿色"
+        }
+      }
+    ],
+    "query_audio": "audio/light_025.wav"
+  },
+  {
+    "id": "light_026",
+    "category": "灯光",
+    "sub_category": "氛围灯",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "氛围灯设成白色",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "氛围灯",
+          "feature": "颜色",
+          "value": "白色"
+        }
+      }
+    ],
+    "query_audio": "audio/light_026.wav"
+  },
+  {
+    "id": "light_027",
+    "category": "灯光",
+    "sub_category": "氛围灯",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "氛围灯切换到下一个颜色",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "切换",
+          "device": "氛围灯",
+          "feature": "颜色",
+          "value": "下一个"
+        }
+      }
+    ],
+    "query_audio": "audio/light_027.wav"
+  },
+  {
+    "id": "light_028",
+    "category": "灯光",
+    "sub_category": "氛围灯",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "氛围灯开光剑模式",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "氛围灯",
+          "value": "光剑"
+        }
+      }
+    ],
+    "query_audio": "audio/light_028.wav"
+  },
+  {
+    "id": "light_029",
+    "category": "灯光",
+    "sub_category": "大灯",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "切换大灯模式",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "切换",
+          "device": "大灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_029.wav"
+  },
+  {
+    "id": "light_030",
+    "category": "灯光",
+    "sub_category": "阅读灯",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开第三排左侧阅读灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "阅读灯",
+          "position": "第三排左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/light_030.wav"
+  },
+  {
+    "id": "light_031",
+    "category": "灯光",
+    "sub_category": "阅读灯",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关闭第二排右侧阅读灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "阅读灯",
+          "position": "第二排右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/light_031.wav"
+  },
+  {
+    "id": "light_032",
+    "category": "灯光",
+    "sub_category": "前雾灯",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "把前雾灯和后雾灯都打开",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "前雾灯"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后雾灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_032.wav"
+  },
+  {
+    "id": "light_033",
+    "category": "灯光",
+    "sub_category": "氛围灯",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "前排氛围灯调成橙色",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "氛围灯",
+          "feature": "颜色",
+          "position": "前排",
+          "value": "橙色"
+        }
+      }
+    ],
+    "query_audio": "audio/light_033.wav"
+  },
+  {
+    "id": "light_034",
+    "category": "灯光",
+    "sub_category": "阅读灯",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开前排阅读灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "阅读灯",
+          "position": "前排"
+        }
+      }
+    ],
+    "query_audio": "audio/light_034.wav"
+  },
+  {
+    "id": "light_035",
+    "category": "灯光",
+    "sub_category": "氛围灯",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "第二排氛围灯调成暖黄色",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "氛围灯",
+          "feature": "颜色",
+          "position": "第二排",
+          "value": "暖黄色"
+        }
+      }
+    ],
+    "query_audio": "audio/light_035.wav"
+  },
+  {
+    "id": "light_036",
+    "category": "灯光",
+    "sub_category": "大灯",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "天黑了看不清路",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "大灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_036.wav"
+  },
+  {
+    "id": "light_037",
+    "category": "灯光",
+    "sub_category": "远光灯",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "前面太暗了大灯不够亮",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "远光灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_037.wav"
+  },
+  {
+    "id": "light_038",
+    "category": "灯光",
+    "sub_category": "远光灯",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "对面来车了把远光关了别晃人家",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "远光灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_038.wav"
+  },
+  {
+    "id": "light_039",
+    "category": "灯光",
+    "sub_category": "前雾灯",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "雾好大看不清前面",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "前雾灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_039.wav"
+  },
+  {
+    "id": "light_040",
+    "category": "灯光",
+    "sub_category": "后雾灯",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "雾太大了后面的车看不到我",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后雾灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_040.wav"
+  },
+  {
+    "id": "light_041",
+    "category": "灯光",
+    "sub_category": "阅读灯",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我想在车上看会儿书",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "阅读灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_041.wav"
+  },
+  {
+    "id": "light_042",
+    "category": "灯光",
+    "sub_category": "阅读灯",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "头顶的灯太亮了影响我开车",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "阅读灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_042.wav"
+  },
+  {
+    "id": "light_043",
+    "category": "灯光",
+    "sub_category": "氛围灯",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "车里太暗了调个氛围出来",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "氛围灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_043.wav"
+  },
+  {
+    "id": "light_044",
+    "category": "灯光",
+    "sub_category": "氛围灯",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "想要一个浪漫的感觉",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "氛围灯",
+          "feature": "颜色",
+          "value": "紫色"
+        }
+      }
+    ],
+    "query_audio": "audio/light_044.wav"
+  },
+  {
+    "id": "light_045",
+    "category": "灯光",
+    "sub_category": "氛围灯",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "氛围灯换个颜色吧看腻了",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "切换",
+          "device": "氛围灯",
+          "feature": "颜色",
+          "value": "下一个"
+        }
+      }
+    ],
+    "query_audio": "audio/light_045.wav"
+  },
+  {
+    "id": "light_046",
+    "category": "灯光",
+    "sub_category": "大灯",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "天亮了不用开灯了",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "大灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_046.wav"
+  },
+  {
+    "id": "light_047",
+    "category": "灯光",
+    "sub_category": "阅读灯",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "副驾想看东西帮忙开个灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "阅读灯",
+          "position": "副驾"
+        }
+      }
+    ],
+    "query_audio": "audio/light_047.wav"
+  },
+  {
+    "id": "light_048",
+    "category": "灯光",
+    "sub_category": "大灯",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "灯光调成自动的吧别手动了",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "大灯",
+          "value": "自动"
+        }
+      }
+    ],
+    "query_audio": "audio/light_048.wav"
+  },
+  {
+    "id": "light_049",
+    "category": "灯光",
+    "sub_category": "前雾灯",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "雾散了把雾灯都关了吧",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "前雾灯"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "后雾灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_049.wav"
+  },
+  {
+    "id": "light_050",
+    "category": "灯光",
+    "sub_category": "氛围灯",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "车里灯光太花了把氛围灯关掉",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "氛围灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_050.wav"
+  },
+  {
+    "id": "light_051",
+    "category": "灯光",
+    "sub_category": "阅读灯",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "后排小朋友要睡觉了把那边灯灭了",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "阅读灯",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/light_051.wav"
+  },
+  {
+    "id": "light_052",
+    "category": "灯光",
+    "sub_category": "氛围灯",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "整一个科技感的灯光效果",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "氛围灯",
+          "value": "光剑"
+        }
+      }
+    ],
+    "query_audio": "audio/light_052.wav"
+  },
+  {
+    "id": "light_053",
+    "category": "灯光",
+    "sub_category": "示宽灯",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "停路边等人把小灯开开让人家能看到我",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "示宽灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_053.wav"
+  },
+  {
+    "id": "light_054",
+    "category": "灯光",
+    "sub_category": "氛围灯",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我想要暖一点的氛围灯颜色",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "氛围灯",
+          "feature": "颜色",
+          "value": "橙色"
+        }
+      }
+    ],
+    "query_audio": "audio/light_054.wav"
+  },
+  {
+    "id": "light_055",
+    "category": "灯光",
+    "sub_category": "大灯",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "进隧道了赶紧开灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "大灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_055.wav"
+  },
+  {
+    "id": "light_056",
+    "category": "灯光",
+    "sub_category": "大灯",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开大灯然后把远光也开了",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "大灯"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "远光灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_056.wav"
+  },
+  {
+    "id": "light_057",
+    "category": "灯光",
+    "sub_category": "雾灯",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "前雾灯和后雾灯都打开",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "前雾灯"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后雾灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_057.wav"
+  },
+  {
+    "id": "light_058",
+    "category": "灯光",
+    "sub_category": "氛围灯",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开氛围灯调成蓝色",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "氛围灯"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "氛围灯",
+          "feature": "颜色",
+          "value": "蓝色"
+        }
+      }
+    ],
+    "query_audio": "audio/light_058.wav"
+  },
+  {
+    "id": "light_059",
+    "category": "灯光",
+    "sub_category": "阅读灯",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "主驾和副驾的阅读灯都打开",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "阅读灯",
+          "position": "主驾"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "阅读灯",
+          "position": "副驾"
+        }
+      }
+    ],
+    "query_audio": "audio/light_059.wav"
+  },
+  {
+    "id": "light_060",
+    "category": "灯光",
+    "sub_category": "大灯",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "关闭远光灯然后大灯调到自动",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "远光灯"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "大灯",
+          "value": "自动"
+        }
+      }
+    ],
+    "query_audio": "audio/light_060.wav"
+  },
+  {
+    "id": "light_061",
+    "category": "灯光",
+    "sub_category": "阅读灯",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "关掉前排阅读灯把第二排阅读灯打开",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "阅读灯",
+          "position": "前排"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "阅读灯",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/light_061.wav"
+  },
+  {
+    "id": "light_062",
+    "category": "灯光",
+    "sub_category": "氛围灯",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "氛围灯开光剑模式然后把阅读灯关了",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "氛围灯",
+          "value": "光剑"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "阅读灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_062.wav"
+  },
+  {
+    "id": "light_063",
+    "category": "灯光",
+    "sub_category": "大灯",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "大灯开智能模式然后前雾灯也打开",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "大灯",
+          "value": "智能"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "前雾灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_063.wav"
+  },
+  {
+    "id": "light_064",
+    "category": "灯光",
+    "sub_category": "氛围灯",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "关闭所有车内灯光包括阅读灯和氛围灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "阅读灯",
+          "position": "全部"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "氛围灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_064.wav"
+  },
+  {
+    "id": "light_065",
+    "category": "灯光",
+    "sub_category": "大灯",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "关掉大灯和示宽灯",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "大灯"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "示宽灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_065.wav"
+  },
+  {
+    "id": "light_066",
+    "category": "灯光",
+    "sub_category": "氛围灯",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "氛围灯换成红色然后第二排阅读灯打开",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "氛围灯",
+          "feature": "颜色",
+          "value": "红色"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "阅读灯",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/light_066.wav"
+  },
+  {
+    "id": "light_067",
+    "category": "灯光",
+    "sub_category": "雾灯",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "把前后雾灯都关了然后大灯调到自动模式",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "前雾灯"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "后雾灯"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "大灯",
+          "value": "自动"
+        }
+      }
+    ],
+    "query_audio": "audio/light_067.wav"
+  },
+  {
+    "id": "light_068",
+    "category": "灯光",
+    "sub_category": "阅读灯",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开主驾阅读灯然后氛围灯调暗一点调成暖色",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "阅读灯",
+          "position": "主驾"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "氛围灯",
+          "feature": "颜色",
+          "value": "橙色"
+        }
+      }
+    ],
+    "query_audio": "audio/light_068.wav"
+  },
+  {
+    "id": "light_069",
+    "category": "灯光",
+    "sub_category": "大灯",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "出了隧道了把灯光交给车自己控制吧",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "大灯",
+          "value": "自动"
+        }
+      }
+    ],
+    "query_audio": "audio/light_069.wav"
+  },
+  {
+    "id": "light_070",
+    "category": "灯光",
+    "sub_category": "阅读灯",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "第三排有人要看书帮忙把灯开了",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "阅读灯",
+          "position": "第三排"
+        }
+      }
+    ],
+    "query_audio": "audio/light_070.wav"
+  },
+  {
+    "id": "light_071",
+    "category": "灯光",
+    "sub_category": "示宽灯",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "示宽灯切换到光剑模式",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "示宽灯",
+          "value": "光剑"
+        }
+      }
+    ],
+    "query_audio": "audio/light_071.wav"
+  },
+  {
+    "id": "light_072",
+    "category": "灯光",
+    "sub_category": "远光灯",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开远光灯智能模式",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "远光灯",
+          "value": "智能"
+        }
+      }
+    ],
+    "query_audio": "audio/light_072.wav"
+  },
+  {
+    "id": "light_073",
+    "category": "灯光",
+    "sub_category": "远光灯",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭远光灯智能模式",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "远光灯"
+        }
+      }
+    ],
+    "query_audio": "audio/light_073.wav"
+  },
+  {
+    "id": "light_074",
+    "category": "灯光",
+    "sub_category": "示宽灯",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "把示宽灯弄得酷炫一点",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "示宽灯",
+          "value": "光剑"
+        }
+      }
+    ],
+    "query_audio": "audio/light_074.wav"
+  },
+  {
+    "id": "light_075",
+    "category": "灯光",
+    "sub_category": "远光灯",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "远光灯设成自动控制的",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "远光灯",
+          "value": "智能"
+        }
+      }
+    ],
+    "query_audio": "audio/light_075.wav"
+  },
+  {
+    "id": "light_076",
+    "category": "灯光",
+    "sub_category": "远光灯",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "大灯调自动然后远光灯也开智能模式",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "大灯",
+          "value": "自动"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "远光灯",
+          "value": "智能"
+        }
+      }
+    ],
+    "query_audio": "audio/light_076.wav"
+  },
+  {
+    "id": "light_077",
+    "category": "灯光",
+    "sub_category": "示宽灯",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "示宽灯开光剑模式然后氛围灯调成蓝色",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "示宽灯",
+          "value": "光剑"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "氛围灯",
+          "feature": "颜色",
+          "value": "蓝色"
+        }
+      }
+    ],
+    "query_audio": "audio/light_077.wav"
+  }
+]

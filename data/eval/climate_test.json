@@ -1,0 +1,1896 @@
+[
+  {
+    "id": "climate_001",
+    "category": "空调",
+    "sub_category": "空调开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开空调",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_001.wav"
+  },
+  {
+    "id": "climate_002",
+    "category": "空调",
+    "sub_category": "空调开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭空调",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "空调"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_002.wav"
+  },
+  {
+    "id": "climate_003",
+    "category": "空调",
+    "sub_category": "空调模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "空调切换到舒适模式",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "节能模式"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_003.wav"
+  },
+  {
+    "id": "climate_004",
+    "category": "空调",
+    "sub_category": "空调模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "开启节能模式",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "节能模式"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_004.wav"
+  },
+  {
+    "id": "climate_005",
+    "category": "空调",
+    "sub_category": "温度",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "空调温度调到25度",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "温度",
+          "value": "25"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_005.wav"
+  },
+  {
+    "id": "climate_006",
+    "category": "空调",
+    "sub_category": "温度",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "温度调高一点",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调大",
+          "device": "空调",
+          "feature": "温度",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_006.wav"
+  },
+  {
+    "id": "climate_007",
+    "category": "空调",
+    "sub_category": "温度",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "温度调低一点",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调小",
+          "device": "空调",
+          "feature": "温度",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_007.wav"
+  },
+  {
+    "id": "climate_008",
+    "category": "空调",
+    "sub_category": "温度",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "主驾温度调到22度",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "温度",
+          "position": "主驾",
+          "value": "22"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_008.wav"
+  },
+  {
+    "id": "climate_009",
+    "category": "空调",
+    "sub_category": "温度",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "副驾温度调到24度",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "温度",
+          "position": "副驾",
+          "value": "24"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_009.wav"
+  },
+  {
+    "id": "climate_010",
+    "category": "空调",
+    "sub_category": "温度",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "温度调到最大",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "温度",
+          "value": "最大"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_010.wav"
+  },
+  {
+    "id": "climate_011",
+    "category": "空调",
+    "sub_category": "温度",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "温度调到最小",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "温度",
+          "value": "最小"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_011.wav"
+  },
+  {
+    "id": "climate_012",
+    "category": "空调",
+    "sub_category": "温度",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "空调温度调到20.5度",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "温度",
+          "value": "20.5"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_012.wav"
+  },
+  {
+    "id": "climate_013",
+    "category": "空调",
+    "sub_category": "风量",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "风量调大一点",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调大",
+          "device": "空调",
+          "feature": "风",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_013.wav"
+  },
+  {
+    "id": "climate_014",
+    "category": "空调",
+    "sub_category": "风量",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "风量调小一点",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调小",
+          "device": "空调",
+          "feature": "风",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_014.wav"
+  },
+  {
+    "id": "climate_015",
+    "category": "空调",
+    "sub_category": "风量",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "风量调到最大",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "风",
+          "value": "最大"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_015.wav"
+  },
+  {
+    "id": "climate_016",
+    "category": "空调",
+    "sub_category": "风量",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "风量调到最小",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "风",
+          "value": "最小"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_016.wav"
+  },
+  {
+    "id": "climate_017",
+    "category": "空调",
+    "sub_category": "风量",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "空调风量调到3挡",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "风",
+          "value": "3"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_017.wav"
+  },
+  {
+    "id": "climate_018",
+    "category": "空调",
+    "sub_category": "风量",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "风量调到中挡",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "风",
+          "value": "中"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_018.wav"
+  },
+  {
+    "id": "climate_019",
+    "category": "空调",
+    "sub_category": "风量",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "风量调到自动",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "风",
+          "value": "自动"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_019.wav"
+  },
+  {
+    "id": "climate_020",
+    "category": "空调",
+    "sub_category": "制式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "空调切换到制冷模式",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "制冷"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_020.wav"
+  },
+  {
+    "id": "climate_021",
+    "category": "空调",
+    "sub_category": "制式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "空调开制热",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_021.wav"
+  },
+  {
+    "id": "climate_022",
+    "category": "空调",
+    "sub_category": "制式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "切换到自然风",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "自然风"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_022.wav"
+  },
+  {
+    "id": "climate_023",
+    "category": "空调",
+    "sub_category": "内外循环",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开内循环",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "内循环"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_023.wav"
+  },
+  {
+    "id": "climate_024",
+    "category": "空调",
+    "sub_category": "内外循环",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "切换到外循环",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "外循环"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_024.wav"
+  },
+  {
+    "id": "climate_025",
+    "category": "空调",
+    "sub_category": "扫风",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开自动扫风",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "自动扫风"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_025.wav"
+  },
+  {
+    "id": "climate_026",
+    "category": "空调",
+    "sub_category": "扫风",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭自动扫风",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "空调",
+          "value": "自动扫风"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_026.wav"
+  },
+  {
+    "id": "climate_027",
+    "category": "空调",
+    "sub_category": "风向",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "空调吹头",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "出风口",
+          "feature": "风",
+          "position": "中间"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_027.wav"
+  },
+  {
+    "id": "climate_028",
+    "category": "空调",
+    "sub_category": "风向",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "空调吹脚",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "出风口",
+          "feature": "风"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_028.wav"
+  },
+  {
+    "id": "climate_029",
+    "category": "空调",
+    "sub_category": "温度同步",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开温度同步",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "温度同步"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_029.wav"
+  },
+  {
+    "id": "climate_030",
+    "category": "空调",
+    "sub_category": "温度同步",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭温度同步",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "空调",
+          "value": "温度同步"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_030.wav"
+  },
+  {
+    "id": "climate_031",
+    "category": "空调",
+    "sub_category": "空气净化",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开空气净化器",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空气净化器"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_031.wav"
+  },
+  {
+    "id": "climate_032",
+    "category": "空调",
+    "sub_category": "空气净化",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭空气净化器",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "空气净化器"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_032.wav"
+  },
+  {
+    "id": "climate_033",
+    "category": "空调",
+    "sub_category": "前除雾",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开前挡风除雾",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "前挡风",
+          "feature": "除雾"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_033.wav"
+  },
+  {
+    "id": "climate_034",
+    "category": "空调",
+    "sub_category": "前除雾",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭前挡风除雾",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "前挡风",
+          "feature": "除雾"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_034.wav"
+  },
+  {
+    "id": "climate_035",
+    "category": "空调",
+    "sub_category": "后挡风除雾",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开后挡风除雾",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后挡风",
+          "feature": "除雾"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_035.wav"
+  },
+  {
+    "id": "climate_036",
+    "category": "空调",
+    "sub_category": "后挡风除雾",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭后挡风除雾",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "后挡风",
+          "feature": "除雾"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_036.wav"
+  },
+  {
+    "id": "climate_037",
+    "category": "空调",
+    "sub_category": "全部除雾",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开全部除雾",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "前挡风",
+          "feature": "除雾"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后挡风",
+          "feature": "除雾"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_037.wav"
+  },
+  {
+    "id": "climate_038",
+    "category": "空调",
+    "sub_category": "全部除雾",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关闭全部除雾",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "前挡风",
+          "feature": "除雾"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "后挡风",
+          "feature": "除雾"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_038.wav"
+  },
+  {
+    "id": "climate_039",
+    "category": "空调",
+    "sub_category": "后视镜加热",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开后视镜加热",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后视镜"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_039.wav"
+  },
+  {
+    "id": "climate_040",
+    "category": "空调",
+    "sub_category": "后视镜加热",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭后视镜加热",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "后视镜"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_040.wav"
+  },
+  {
+    "id": "climate_041",
+    "category": "空调",
+    "sub_category": "守护模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开守护模式",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "守护模式"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_041.wav"
+  },
+  {
+    "id": "climate_042",
+    "category": "空调",
+    "sub_category": "守护模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭守护模式",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "空调",
+          "value": "守护模式"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_042.wav"
+  },
+  {
+    "id": "climate_043",
+    "category": "空调",
+    "sub_category": "极速降温",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开极速降温",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "极速降温"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_043.wav"
+  },
+  {
+    "id": "climate_044",
+    "category": "空调",
+    "sub_category": "极速降温",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭极速降温",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "空调",
+          "value": "极速降温"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_044.wav"
+  },
+  {
+    "id": "climate_045",
+    "category": "空调",
+    "sub_category": "极速升温",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开极速升温",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "极速升温"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_045.wav"
+  },
+  {
+    "id": "climate_046",
+    "category": "空调",
+    "sub_category": "极速升温",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭极速升温",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "空调",
+          "value": "极速升温"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_046.wav"
+  },
+  {
+    "id": "climate_047",
+    "category": "空调",
+    "sub_category": "智能除味",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开智能除味",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "智能除味"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_047.wav"
+  },
+  {
+    "id": "climate_048",
+    "category": "空调",
+    "sub_category": "智能除味",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭智能除味",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "空调",
+          "value": "智能除味"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_048.wav"
+  },
+  {
+    "id": "climate_049",
+    "category": "空调",
+    "sub_category": "吹风模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开对人吹",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "对人"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_049.wav"
+  },
+  {
+    "id": "climate_050",
+    "category": "空调",
+    "sub_category": "吹风模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开避人吹",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "避人"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_050.wav"
+  },
+  {
+    "id": "climate_051",
+    "category": "空调",
+    "sub_category": "温度",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "有点热了",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调小",
+          "device": "空调",
+          "feature": "温度",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_051.wav"
+  },
+  {
+    "id": "climate_052",
+    "category": "空调",
+    "sub_category": "温度",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "好冷啊",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调大",
+          "device": "空调",
+          "feature": "温度",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_052.wav"
+  },
+  {
+    "id": "climate_053",
+    "category": "空调",
+    "sub_category": "温度",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "车里太闷了",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "外循环"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_053.wav"
+  },
+  {
+    "id": "climate_054",
+    "category": "空调",
+    "sub_category": "风量",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "风吹得太大了",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调小",
+          "device": "空调",
+          "feature": "风",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_054.wav"
+  },
+  {
+    "id": "climate_055",
+    "category": "空调",
+    "sub_category": "风量",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "风太小了几乎感觉不到",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调大",
+          "device": "空调",
+          "feature": "风",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_055.wav"
+  },
+  {
+    "id": "climate_056",
+    "category": "空调",
+    "sub_category": "除雾",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "前面玻璃起雾了看不清",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "前挡风",
+          "feature": "除雾"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_056.wav"
+  },
+  {
+    "id": "climate_057",
+    "category": "空调",
+    "sub_category": "除雾",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "后面的玻璃全是雾",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后挡风",
+          "feature": "除雾"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_057.wav"
+  },
+  {
+    "id": "climate_058",
+    "category": "空调",
+    "sub_category": "除雾",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "玻璃全部都起雾了什么都看不见",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "前挡风",
+          "feature": "除雾"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后挡风",
+          "feature": "除雾"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_058.wav"
+  },
+  {
+    "id": "climate_059",
+    "category": "空调",
+    "sub_category": "空调开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "这车里空气好差",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空气净化器"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_059.wav"
+  },
+  {
+    "id": "climate_060",
+    "category": "空调",
+    "sub_category": "温度",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我觉得车里温度刚好不用动",
+    "expected_tool_calls": [],
+    "query_audio": "audio/climate_060.wav"
+  },
+  {
+    "id": "climate_061",
+    "category": "空调",
+    "sub_category": "吹风模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "空调别对着我吹",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "避人"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_061.wav"
+  },
+  {
+    "id": "climate_062",
+    "category": "空调",
+    "sub_category": "吹风模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "风对着我吹可以吗",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "对人"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_062.wav"
+  },
+  {
+    "id": "climate_063",
+    "category": "空调",
+    "sub_category": "温度",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "副驾那边有点冷主驾还好",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调大",
+          "device": "空调",
+          "feature": "温度",
+          "position": "副驾",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_063.wav"
+  },
+  {
+    "id": "climate_064",
+    "category": "空调",
+    "sub_category": "极速降温",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "太热了给我快速降温",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "极速降温"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_064.wav"
+  },
+  {
+    "id": "climate_065",
+    "category": "空调",
+    "sub_category": "极速升温",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "冻死了赶紧暖和起来",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "极速升温"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_065.wav"
+  },
+  {
+    "id": "climate_066",
+    "category": "空调",
+    "sub_category": "内外循环",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "外面空气不好别让外面的风进来",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "内循环"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_066.wav"
+  },
+  {
+    "id": "climate_067",
+    "category": "空调",
+    "sub_category": "内外循环",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "让外面的新鲜空气进来",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "外循环"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_067.wav"
+  },
+  {
+    "id": "climate_068",
+    "category": "空调",
+    "sub_category": "智能除味",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "车里好大的味道",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "智能除味"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_068.wav"
+  },
+  {
+    "id": "climate_069",
+    "category": "空调",
+    "sub_category": "守护模式",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "我要下车一会儿狗在车里帮我看着空调别关",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "宠物模式"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_069.wav"
+  },
+  {
+    "id": "climate_070",
+    "category": "空调",
+    "sub_category": "守护模式",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "小孩在车上我先去办个事空调别停",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "守护模式"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_070.wav"
+  },
+  {
+    "id": "climate_071",
+    "category": "空调",
+    "sub_category": "后视镜除雾",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "后视镜看不清了全是雾",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后视镜"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_071.wav"
+  },
+  {
+    "id": "climate_072",
+    "category": "空调",
+    "sub_category": "制式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "不想吹那么冷的风",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "自然风"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_072.wav"
+  },
+  {
+    "id": "climate_073",
+    "category": "空调",
+    "sub_category": "温度",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "让左右两边温度一样",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "温度同步"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_073.wav"
+  },
+  {
+    "id": "climate_074",
+    "category": "空调",
+    "sub_category": "风量",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "把风量调到比较大",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "风",
+          "value": "较大"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_074.wav"
+  },
+  {
+    "id": "climate_075",
+    "category": "空调",
+    "sub_category": "风量",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "风量小一些就好",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "风",
+          "value": "较小"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_075.wav"
+  },
+  {
+    "id": "climate_076",
+    "category": "空调",
+    "sub_category": "温度",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "空调温度调到23度风量调大一点",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "温度",
+          "value": "23"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调大",
+          "device": "空调",
+          "feature": "风",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_076.wav"
+  },
+  {
+    "id": "climate_077",
+    "category": "空调",
+    "sub_category": "温度",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "主驾温度22度副驾温度24度",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "温度",
+          "position": "主驾",
+          "value": "22"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "温度",
+          "position": "副驾",
+          "value": "24"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_077.wav"
+  },
+  {
+    "id": "climate_078",
+    "category": "空调",
+    "sub_category": "制式",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "空调开制冷温度调到22度",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "制冷"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "温度",
+          "value": "22"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_078.wav"
+  },
+  {
+    "id": "climate_079",
+    "category": "空调",
+    "sub_category": "除雾",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "前后挡风都开除雾然后后视镜也加热一下",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "前挡风",
+          "feature": "除雾"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后挡风",
+          "feature": "除雾"
+        }
+      },
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后视镜"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_079.wav"
+  },
+  {
+    "id": "climate_080",
+    "category": "空调",
+    "sub_category": "内外循环",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "开内循环然后温度降低两度",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "内循环"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调小",
+          "device": "空调",
+          "feature": "温度",
+          "value": "2"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_080.wav"
+  },
+  {
+    "id": "climate_081",
+    "category": "空调",
+    "sub_category": "空调开关",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开空调制冷模式温度25度风量3挡",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "制冷"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "温度",
+          "value": "25"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "风",
+          "value": "3"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_081.wav"
+  },
+  {
+    "id": "climate_082",
+    "category": "空调",
+    "sub_category": "吹风模式",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "空调避人吹然后风量调小一点",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "避人"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调小",
+          "device": "空调",
+          "feature": "风",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_082.wav"
+  },
+  {
+    "id": "climate_083",
+    "category": "空调",
+    "sub_category": "空气净化",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "开空气净化器然后开内循环",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空气净化器"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "内循环"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_083.wav"
+  },
+  {
+    "id": "climate_084",
+    "category": "空调",
+    "sub_category": "温度",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "温度同步然后调到24度",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "温度同步"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "温度",
+          "value": "24"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_084.wav"
+  },
+  {
+    "id": "climate_085",
+    "category": "空调",
+    "sub_category": "制式",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "空调切自然风风量调到中挡",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "自然风"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "风",
+          "value": "中"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_085.wav"
+  },
+  {
+    "id": "climate_086",
+    "category": "空调",
+    "sub_category": "极速降温",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "极速降温然后打开外循环",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "极速降温"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "外循环"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_086.wav"
+  },
+  {
+    "id": "climate_087",
+    "category": "空调",
+    "sub_category": "守护模式",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "开守护模式温度调到26度",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "守护模式"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "温度",
+          "value": "26"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_087.wav"
+  },
+  {
+    "id": "climate_088",
+    "category": "空调",
+    "sub_category": "温度",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "空调制热温度调到最大然后打开后挡风除雾",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调",
+          "value": "制热"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "温度",
+          "value": "最大"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后挡风",
+          "feature": "除雾"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_088.wav"
+  },
+  {
+    "id": "climate_089",
+    "category": "空调",
+    "sub_category": "风量",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "吹得我头疼把风关小点温度也别那么低了",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调小",
+          "device": "空调",
+          "feature": "风",
+          "value": "一点"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调大",
+          "device": "空调",
+          "feature": "温度",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_089.wav"
+  },
+  {
+    "id": "climate_090",
+    "category": "空调",
+    "sub_category": "空调开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "外面下大雨了什么都看不清",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "前挡风",
+          "feature": "除雾"
+        }
+      }
+    ],
+    "query_audio": "audio/climate_090.wav"
+  }
+]

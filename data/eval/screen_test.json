@@ -1,0 +1,1228 @@
+[
+  {
+    "id": "screen_001",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开屏幕",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "打开",
+          "device": "屏幕"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_001.wav"
+  },
+  {
+    "id": "screen_002",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭屏幕",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "屏幕"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_002.wav"
+  },
+  {
+    "id": "screen_003",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开仪表盘",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "打开",
+          "device": "仪表"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_003.wav"
+  },
+  {
+    "id": "screen_004",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭仪表",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "仪表"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_004.wav"
+  },
+  {
+    "id": "screen_005",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开娱乐屏",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "打开",
+          "device": "娱乐屏"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_005.wav"
+  },
+  {
+    "id": "screen_006",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭娱乐屏",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "娱乐屏"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_006.wav"
+  },
+  {
+    "id": "screen_007",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开副驾娱乐屏",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "打开",
+          "device": "娱乐屏",
+          "position": "副驾"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_007.wav"
+  },
+  {
+    "id": "screen_008",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭第二排左侧的屏幕",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "屏幕",
+          "position": "第二排左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_008.wav"
+  },
+  {
+    "id": "screen_009",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "展开第二排屏幕",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "展开",
+          "device": "屏幕",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_009.wav"
+  },
+  {
+    "id": "screen_010",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "收起第三排的娱乐屏",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "收起",
+          "device": "娱乐屏",
+          "position": "第三排"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_010.wav"
+  },
+  {
+    "id": "screen_011",
+    "category": "屏幕控制",
+    "sub_category": "屏幕亮度",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "调大屏幕亮度",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调大",
+          "device": "屏幕",
+          "feature": "亮度"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_011.wav"
+  },
+  {
+    "id": "screen_012",
+    "category": "屏幕控制",
+    "sub_category": "屏幕亮度",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "调小屏幕亮度",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调小",
+          "device": "屏幕",
+          "feature": "亮度"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_012.wav"
+  },
+  {
+    "id": "screen_013",
+    "category": "屏幕控制",
+    "sub_category": "屏幕亮度",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "把仪表亮度调到最大",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "仪表",
+          "feature": "亮度",
+          "value": "最大"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_013.wav"
+  },
+  {
+    "id": "screen_014",
+    "category": "屏幕控制",
+    "sub_category": "屏幕亮度",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "把屏幕亮度调到最小",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "屏幕",
+          "feature": "亮度",
+          "value": "最小"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_014.wav"
+  },
+  {
+    "id": "screen_015",
+    "category": "屏幕控制",
+    "sub_category": "屏幕亮度",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "娱乐屏亮度调到百分之五十",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "娱乐屏",
+          "feature": "亮度",
+          "value": "50%"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_015.wav"
+  },
+  {
+    "id": "screen_016",
+    "category": "屏幕控制",
+    "sub_category": "屏幕亮度",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "主驾屏幕亮度调大一点",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调大",
+          "device": "屏幕",
+          "feature": "亮度",
+          "position": "主驾",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_016.wav"
+  },
+  {
+    "id": "screen_017",
+    "category": "屏幕控制",
+    "sub_category": "屏幕模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "屏幕切换到清洁模式",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "屏幕",
+          "value": "清洁模式"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_017.wav"
+  },
+  {
+    "id": "screen_018",
+    "category": "屏幕控制",
+    "sub_category": "屏幕模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "屏幕调到白天模式",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "屏幕",
+          "value": "白天模式"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_018.wav"
+  },
+  {
+    "id": "screen_019",
+    "category": "屏幕控制",
+    "sub_category": "屏幕模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "屏幕调到黑夜模式",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "屏幕",
+          "value": "黑夜模式"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_019.wav"
+  },
+  {
+    "id": "screen_020",
+    "category": "屏幕控制",
+    "sub_category": "屏幕模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "屏幕切换到等人模式",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "屏幕",
+          "value": "等人模式"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_020.wav"
+  },
+  {
+    "id": "screen_021",
+    "category": "屏幕控制",
+    "sub_category": "屏幕模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "屏幕调到自动模式",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "屏幕",
+          "value": "自动模式"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_021.wav"
+  },
+  {
+    "id": "screen_022",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关闭全部屏幕",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "屏幕",
+          "position": "全部"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_022.wav"
+  },
+  {
+    "id": "screen_023",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开第二排右侧的娱乐屏",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "打开",
+          "device": "娱乐屏",
+          "position": "第二排右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_023.wav"
+  },
+  {
+    "id": "screen_024",
+    "category": "屏幕控制",
+    "sub_category": "屏幕亮度",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "第二排屏幕亮度调小一点",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调小",
+          "device": "屏幕",
+          "feature": "亮度",
+          "position": "第二排",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_024.wav"
+  },
+  {
+    "id": "screen_025",
+    "category": "屏幕控制",
+    "sub_category": "屏幕亮度",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "副驾娱乐屏亮度调到百分之八十",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "娱乐屏",
+          "feature": "亮度",
+          "position": "副驾",
+          "value": "80%"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_025.wav"
+  },
+  {
+    "id": "screen_026",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "把那个屏幕亮起来",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "打开",
+          "device": "屏幕"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_026.wav"
+  },
+  {
+    "id": "screen_027",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "屏幕太刺眼了，关掉吧",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "屏幕"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_027.wav"
+  },
+  {
+    "id": "screen_028",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我想看看后排的娱乐系统",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "打开",
+          "device": "娱乐屏",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_028.wav"
+  },
+  {
+    "id": "screen_029",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "后面小朋友不看了，把屏幕收了吧",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "收起",
+          "device": "屏幕",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_029.wav"
+  },
+  {
+    "id": "screen_030",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "让仪表盘显示出来",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "打开",
+          "device": "仪表"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_030.wav"
+  },
+  {
+    "id": "screen_031",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "副驾那边的屏幕放下来",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "展开",
+          "device": "屏幕",
+          "position": "副驾"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_031.wav"
+  },
+  {
+    "id": "screen_032",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "孩子要在后排看动画片，把屏幕弄出来",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "展开",
+          "device": "娱乐屏",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_032.wav"
+  },
+  {
+    "id": "screen_033",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "第三排那个不用了，收回去",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "收起",
+          "device": "屏幕",
+          "position": "第三排"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_033.wav"
+  },
+  {
+    "id": "screen_034",
+    "category": "屏幕控制",
+    "sub_category": "屏幕亮度",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "屏幕有点暗了",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调大",
+          "device": "屏幕",
+          "feature": "亮度"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_034.wav"
+  },
+  {
+    "id": "screen_035",
+    "category": "屏幕控制",
+    "sub_category": "屏幕亮度",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "屏幕太亮了，刺眼",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调小",
+          "device": "屏幕",
+          "feature": "亮度"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_035.wav"
+  },
+  {
+    "id": "screen_036",
+    "category": "屏幕控制",
+    "sub_category": "屏幕亮度",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "仪表盘看不太清楚，亮度不够",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调大",
+          "device": "仪表",
+          "feature": "亮度"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_036.wav"
+  },
+  {
+    "id": "screen_037",
+    "category": "屏幕控制",
+    "sub_category": "屏幕亮度",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "晚上开车屏幕太晃眼了，降低一些",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调小",
+          "device": "屏幕",
+          "feature": "亮度"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_037.wav"
+  },
+  {
+    "id": "screen_038",
+    "category": "屏幕控制",
+    "sub_category": "屏幕亮度",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "娱乐屏亮度拉到最高",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "娱乐屏",
+          "feature": "亮度",
+          "value": "最大"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_038.wav"
+  },
+  {
+    "id": "screen_039",
+    "category": "屏幕控制",
+    "sub_category": "屏幕亮度",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "亮度帮我压到最低",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "屏幕",
+          "feature": "亮度",
+          "value": "最小"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_039.wav"
+  },
+  {
+    "id": "screen_040",
+    "category": "屏幕控制",
+    "sub_category": "屏幕亮度",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "阳光太强了，屏幕什么都看不见，帮我提高亮度",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调大",
+          "device": "屏幕",
+          "feature": "亮度"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_040.wav"
+  },
+  {
+    "id": "screen_041",
+    "category": "屏幕控制",
+    "sub_category": "屏幕亮度",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "后排那个屏幕太刺眼了，亮度低一些吧",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调小",
+          "device": "屏幕",
+          "feature": "亮度",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_041.wav"
+  },
+  {
+    "id": "screen_042",
+    "category": "屏幕控制",
+    "sub_category": "屏幕模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我要擦屏幕，进清洁模式",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "屏幕",
+          "value": "清洁模式"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_042.wav"
+  },
+  {
+    "id": "screen_043",
+    "category": "屏幕控制",
+    "sub_category": "屏幕模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "天黑了，屏幕换成夜间的那个模式",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "屏幕",
+          "value": "黑夜模式"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_043.wav"
+  },
+  {
+    "id": "screen_044",
+    "category": "屏幕控制",
+    "sub_category": "屏幕模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "外面太阳大，屏幕调成白天的",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "屏幕",
+          "value": "白天模式"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_044.wav"
+  },
+  {
+    "id": "screen_045",
+    "category": "屏幕控制",
+    "sub_category": "屏幕模式",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "我在车里等人，把屏幕弄成等人那个状态",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "屏幕",
+          "value": "等人模式"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_045.wav"
+  },
+  {
+    "id": "screen_046",
+    "category": "屏幕控制",
+    "sub_category": "屏幕模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "屏幕亮度自动调节吧",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "屏幕",
+          "value": "自动模式"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_046.wav"
+  },
+  {
+    "id": "screen_047",
+    "category": "屏幕控制",
+    "sub_category": "屏幕模式",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "屏幕上有灰，我想擦一下",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "屏幕",
+          "value": "清洁模式"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_047.wav"
+  },
+  {
+    "id": "screen_048",
+    "category": "屏幕控制",
+    "sub_category": "屏幕模式",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "进隧道了屏幕太亮，换成深色的吧",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "屏幕",
+          "value": "黑夜模式"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_048.wav"
+  },
+  {
+    "id": "screen_049",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "所有的屏幕都不要亮着了",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "屏幕",
+          "position": "全部"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_049.wav"
+  },
+  {
+    "id": "screen_050",
+    "category": "屏幕控制",
+    "sub_category": "屏幕亮度",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "主驾这边看起来有点模糊，亮度搞高一点",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调大",
+          "device": "屏幕",
+          "feature": "亮度",
+          "position": "主驾"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_050.wav"
+  },
+  {
+    "id": "screen_051",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关+屏幕亮度",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开娱乐屏，顺便把亮度调到最大",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "打开",
+          "device": "娱乐屏"
+        }
+      },
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "娱乐屏",
+          "feature": "亮度",
+          "value": "最大"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_051.wav"
+  },
+  {
+    "id": "screen_052",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关+屏幕模式",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开屏幕然后切换到黑夜模式",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "打开",
+          "device": "屏幕"
+        }
+      },
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "屏幕",
+          "value": "黑夜模式"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_052.wav"
+  },
+  {
+    "id": "screen_053",
+    "category": "屏幕控制",
+    "sub_category": "屏幕控制+空调",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "把屏幕亮度调低一点，空调温度也降两度",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调小",
+          "device": "屏幕",
+          "feature": "亮度",
+          "value": "一点"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调小",
+          "device": "空调",
+          "feature": "温度"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_053.wav"
+  },
+  {
+    "id": "screen_054",
+    "category": "屏幕控制",
+    "sub_category": "屏幕控制+车窗",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "关闭屏幕，然后帮我打开主驾车窗",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "屏幕"
+        }
+      },
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "打开",
+          "device": "车窗",
+          "position": "主驾"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_054.wav"
+  },
+  {
+    "id": "screen_055",
+    "category": "屏幕控制",
+    "sub_category": "屏幕控制+灯光",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "屏幕调到黑夜模式，氛围灯也打开",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "屏幕",
+          "value": "黑夜模式"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "氛围灯"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_055.wav"
+  },
+  {
+    "id": "screen_056",
+    "category": "屏幕控制",
+    "sub_category": "屏幕控制+音量",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "屏幕亮度拉到最低，音量也调小一点",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "屏幕",
+          "feature": "亮度",
+          "value": "最小"
+        }
+      },
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "音量",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_056.wav"
+  },
+  {
+    "id": "screen_057",
+    "category": "屏幕控制",
+    "sub_category": "屏幕控制+座椅",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "展开第二排的娱乐屏，然后第二排座椅放平",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "展开",
+          "device": "娱乐屏",
+          "position": "第二排"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "放平",
+          "device": "座椅",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_057.wav"
+  },
+  {
+    "id": "screen_058",
+    "category": "屏幕控制",
+    "sub_category": "屏幕开关+屏幕开关",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开第二排的屏幕，关闭第三排的屏幕",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "打开",
+          "device": "屏幕",
+          "position": "第二排"
+        }
+      },
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "屏幕",
+          "position": "第三排"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_058.wav"
+  },
+  {
+    "id": "screen_059",
+    "category": "屏幕控制",
+    "sub_category": "屏幕控制+驾驶模式",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "仪表亮度调到最大，切换运动模式",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "仪表",
+          "feature": "亮度",
+          "value": "最大"
+        }
+      },
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "运动模式"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_059.wav"
+  },
+  {
+    "id": "screen_060",
+    "category": "屏幕控制",
+    "sub_category": "屏幕控制+屏幕亮度",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "把后排左边的屏幕展开，亮度调到百分之六十",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "展开",
+          "device": "屏幕",
+          "position": "第二排左侧"
+        }
+      },
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调到",
+          "device": "屏幕",
+          "feature": "亮度",
+          "position": "第二排左侧",
+          "value": "60%"
+        }
+      }
+    ],
+    "query_audio": "audio/screen_060.wav"
+  }
+]

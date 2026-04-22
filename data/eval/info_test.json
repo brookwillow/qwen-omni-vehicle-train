@@ -1,0 +1,919 @@
+[
+  {
+    "id": "info_001",
+    "category": "信息查询",
+    "sub_category": "剩余距离",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "查询剩余距离",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "剩余距离"
+        }
+      }
+    ],
+    "query_audio": "audio/info_001.wav"
+  },
+  {
+    "id": "info_002",
+    "category": "信息查询",
+    "sub_category": "当前位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "查询当前位置",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "当前位置"
+        }
+      }
+    ],
+    "query_audio": "audio/info_002.wav"
+  },
+  {
+    "id": "info_003",
+    "category": "信息查询",
+    "sub_category": "时间",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "现在几点了",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "时间"
+        }
+      }
+    ],
+    "query_audio": "audio/info_003.wav"
+  },
+  {
+    "id": "info_004",
+    "category": "信息查询",
+    "sub_category": "百公里能耗",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "查询百公里能耗",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "百公里能耗"
+        }
+      }
+    ],
+    "query_audio": "audio/info_004.wav"
+  },
+  {
+    "id": "info_005",
+    "category": "信息查询",
+    "sub_category": "胎压",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "查询胎压",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "胎压"
+        }
+      }
+    ],
+    "query_audio": "audio/info_005.wav"
+  },
+  {
+    "id": "info_006",
+    "category": "信息查询",
+    "sub_category": "行驶总里程",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "查询行驶总里程",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "行驶总里程"
+        }
+      }
+    ],
+    "query_audio": "audio/info_006.wav"
+  },
+  {
+    "id": "info_007",
+    "category": "信息查询",
+    "sub_category": "路况信息",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "查询路况信息",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "路况信息"
+        }
+      }
+    ],
+    "query_audio": "audio/info_007.wav"
+  },
+  {
+    "id": "info_008",
+    "category": "信息查询",
+    "sub_category": "剩余距离",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "还有多远到目的地",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "剩余距离"
+        }
+      }
+    ],
+    "query_audio": "audio/info_008.wav"
+  },
+  {
+    "id": "info_009",
+    "category": "信息查询",
+    "sub_category": "当前位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "我现在在哪里",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "当前位置"
+        }
+      }
+    ],
+    "query_audio": "audio/info_009.wav"
+  },
+  {
+    "id": "info_010",
+    "category": "信息查询",
+    "sub_category": "时间",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "查询当前时间",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "时间"
+        }
+      }
+    ],
+    "query_audio": "audio/info_010.wav"
+  },
+  {
+    "id": "info_011",
+    "category": "信息查询",
+    "sub_category": "百公里能耗",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "当前能耗是多少",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "百公里能耗"
+        }
+      }
+    ],
+    "query_audio": "audio/info_011.wav"
+  },
+  {
+    "id": "info_012",
+    "category": "信息查询",
+    "sub_category": "胎压",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "看一下胎压多少",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "胎压"
+        }
+      }
+    ],
+    "query_audio": "audio/info_012.wav"
+  },
+  {
+    "id": "info_013",
+    "category": "信息查询",
+    "sub_category": "行驶总里程",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "这辆车总共跑了多少公里",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "行驶总里程"
+        }
+      }
+    ],
+    "query_audio": "audio/info_013.wav"
+  },
+  {
+    "id": "info_014",
+    "category": "信息查询",
+    "sub_category": "路况信息",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "前方路况怎么样",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "路况信息"
+        }
+      }
+    ],
+    "query_audio": "audio/info_014.wav"
+  },
+  {
+    "id": "info_015",
+    "category": "信息查询",
+    "sub_category": "剩余距离",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "距离目的地还剩多少公里",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "剩余距离"
+        }
+      }
+    ],
+    "query_audio": "audio/info_015.wav"
+  },
+  {
+    "id": "info_016",
+    "category": "信息查询",
+    "sub_category": "剩余距离",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "快到了吗，还有多少路要走",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "剩余距离"
+        }
+      }
+    ],
+    "query_audio": "audio/info_016.wav"
+  },
+  {
+    "id": "info_017",
+    "category": "信息查询",
+    "sub_category": "剩余距离",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "孩子一直问还有多久到，帮我看看还有多远",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "剩余距离"
+        }
+      }
+    ],
+    "query_audio": "audio/info_017.wav"
+  },
+  {
+    "id": "info_018",
+    "category": "信息查询",
+    "sub_category": "剩余距离",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "这段路还剩多少没走",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "剩余距离"
+        }
+      }
+    ],
+    "query_audio": "audio/info_018.wav"
+  },
+  {
+    "id": "info_019",
+    "category": "信息查询",
+    "sub_category": "当前位置",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "这是哪条路啊，我迷路了",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "当前位置"
+        }
+      }
+    ],
+    "query_audio": "audio/info_019.wav"
+  },
+  {
+    "id": "info_020",
+    "category": "信息查询",
+    "sub_category": "当前位置",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "朋友问我在什么地方，帮我查一下定位",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "当前位置"
+        }
+      }
+    ],
+    "query_audio": "audio/info_020.wav"
+  },
+  {
+    "id": "info_021",
+    "category": "信息查询",
+    "sub_category": "当前位置",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我开到哪儿了",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "当前位置"
+        }
+      }
+    ],
+    "query_audio": "audio/info_021.wav"
+  },
+  {
+    "id": "info_022",
+    "category": "信息查询",
+    "sub_category": "时间",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "几点了，会不会迟到",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "时间"
+        }
+      }
+    ],
+    "query_audio": "audio/info_022.wav"
+  },
+  {
+    "id": "info_023",
+    "category": "信息查询",
+    "sub_category": "时间",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "开了好久了，现在什么时候了",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "时间"
+        }
+      }
+    ],
+    "query_audio": "audio/info_023.wav"
+  },
+  {
+    "id": "info_024",
+    "category": "信息查询",
+    "sub_category": "百公里能耗",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我这车费不费电啊",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "百公里能耗"
+        }
+      }
+    ],
+    "query_audio": "audio/info_024.wav"
+  },
+  {
+    "id": "info_025",
+    "category": "信息查询",
+    "sub_category": "百公里能耗",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "最近油耗怎么这么高，帮我看看每百公里耗多少",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "百公里能耗"
+        }
+      }
+    ],
+    "query_audio": "audio/info_025.wav"
+  },
+  {
+    "id": "info_026",
+    "category": "信息查询",
+    "sub_category": "百公里能耗",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "想知道这车跑一百公里得花多少电",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "百公里能耗"
+        }
+      }
+    ],
+    "query_audio": "audio/info_026.wav"
+  },
+  {
+    "id": "info_027",
+    "category": "信息查询",
+    "sub_category": "胎压",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "轮胎气压正常吗",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "胎压"
+        }
+      }
+    ],
+    "query_audio": "audio/info_027.wav"
+  },
+  {
+    "id": "info_028",
+    "category": "信息查询",
+    "sub_category": "胎压",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "感觉车开起来有点软，看看是不是轮胎没气了",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "胎压"
+        }
+      }
+    ],
+    "query_audio": "audio/info_028.wav"
+  },
+  {
+    "id": "info_029",
+    "category": "信息查询",
+    "sub_category": "胎压",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "四个轮胎的气压分别是多少",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "胎压"
+        }
+      }
+    ],
+    "query_audio": "audio/info_029.wav"
+  },
+  {
+    "id": "info_030",
+    "category": "信息查询",
+    "sub_category": "行驶总里程",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "这车买了以后一共开了多少公里",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "行驶总里程"
+        }
+      }
+    ],
+    "query_audio": "audio/info_030.wav"
+  },
+  {
+    "id": "info_031",
+    "category": "信息查询",
+    "sub_category": "行驶总里程",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "该保养了吧，看看总里程是多少了",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "行驶总里程"
+        }
+      }
+    ],
+    "query_audio": "audio/info_031.wav"
+  },
+  {
+    "id": "info_032",
+    "category": "信息查询",
+    "sub_category": "行驶总里程",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "我这车里程表跑到多少了",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "行驶总里程"
+        }
+      }
+    ],
+    "query_audio": "audio/info_032.wav"
+  },
+  {
+    "id": "info_033",
+    "category": "信息查询",
+    "sub_category": "路况信息",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "前面堵不堵车",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "路况信息"
+        }
+      }
+    ],
+    "query_audio": "audio/info_033.wav"
+  },
+  {
+    "id": "info_034",
+    "category": "信息查询",
+    "sub_category": "路况信息",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "上班高峰期了，帮我看看路上什么情况",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "路况信息"
+        }
+      }
+    ],
+    "query_audio": "audio/info_034.wav"
+  },
+  {
+    "id": "info_035",
+    "category": "信息查询",
+    "sub_category": "路况信息",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "现在路上车多不多，会不会很堵",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "路况信息"
+        }
+      }
+    ],
+    "query_audio": "audio/info_035.wav"
+  },
+  {
+    "id": "info_036",
+    "category": "信息查询",
+    "sub_category": "路况信息",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "看一下道路是不是通畅的",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "路况信息"
+        }
+      }
+    ],
+    "query_audio": "audio/info_036.wav"
+  },
+  {
+    "id": "info_037",
+    "category": "信息查询",
+    "sub_category": "时间",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "帮我报个时",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "时间"
+        }
+      }
+    ],
+    "query_audio": "audio/info_037.wav"
+  },
+  {
+    "id": "info_038",
+    "category": "信息查询",
+    "sub_category": "当前位置",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "导航显示我在哪个位置",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "当前位置"
+        }
+      }
+    ],
+    "query_audio": "audio/info_038.wav"
+  },
+  {
+    "id": "info_039",
+    "category": "信息查询",
+    "sub_category": "百公里能耗",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "看一下平均能耗数据",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "百公里能耗"
+        }
+      }
+    ],
+    "query_audio": "audio/info_039.wav"
+  },
+  {
+    "id": "info_040",
+    "category": "信息查询",
+    "sub_category": "胎压",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "刚才压了个坑，帮我检查下轮胎有没有问题",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "胎压"
+        }
+      }
+    ],
+    "query_audio": "audio/info_040.wav"
+  },
+  {
+    "id": "info_041",
+    "category": "信息查询",
+    "sub_category": "剩余距离+时间",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "还有多远到目的地，顺便告诉我现在几点了",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "剩余距离"
+        }
+      },
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "时间"
+        }
+      }
+    ],
+    "query_audio": "audio/info_041.wav"
+  },
+  {
+    "id": "info_042",
+    "category": "信息查询",
+    "sub_category": "路况信息+剩余距离",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "看看前面堵不堵，还有多少公里到",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "路况信息"
+        }
+      },
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "剩余距离"
+        }
+      }
+    ],
+    "query_audio": "audio/info_042.wav"
+  },
+  {
+    "id": "info_043",
+    "category": "信息查询",
+    "sub_category": "胎压+行驶总里程",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "帮我看看胎压和总里程",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "胎压"
+        }
+      },
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "行驶总里程"
+        }
+      }
+    ],
+    "query_audio": "audio/info_043.wav"
+  },
+  {
+    "id": "info_044",
+    "category": "信息查询",
+    "sub_category": "当前位置+路况信息",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "我在什么位置，周围路况怎么样",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "当前位置"
+        }
+      },
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "路况信息"
+        }
+      }
+    ],
+    "query_audio": "audio/info_044.wav"
+  },
+  {
+    "id": "info_045",
+    "category": "信息查询",
+    "sub_category": "信息查询+空调",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "现在几点了，把空调打开",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "时间"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调"
+        }
+      }
+    ],
+    "query_audio": "audio/info_045.wav"
+  },
+  {
+    "id": "info_046",
+    "category": "信息查询",
+    "sub_category": "信息查询+车窗",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "查一下胎压，然后把车窗关上",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "胎压"
+        }
+      },
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "车窗"
+        }
+      }
+    ],
+    "query_audio": "audio/info_046.wav"
+  },
+  {
+    "id": "info_047",
+    "category": "信息查询",
+    "sub_category": "信息查询+音量",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "看看前面路况，导航音量调大一点",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "路况信息"
+        }
+      },
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "导航音量",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/info_047.wav"
+  },
+  {
+    "id": "info_048",
+    "category": "信息查询",
+    "sub_category": "信息查询+灯光",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "现在什么时间了，把大灯打开",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "时间"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "大灯"
+        }
+      }
+    ],
+    "query_audio": "audio/info_048.wav"
+  },
+  {
+    "id": "info_049",
+    "category": "信息查询",
+    "sub_category": "信息查询+驾驶模式",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "百公里能耗多少，切换到节能模式",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "百公里能耗"
+        }
+      },
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "节能模式"
+        }
+      }
+    ],
+    "query_audio": "audio/info_049.wav"
+  },
+  {
+    "id": "info_050",
+    "category": "信息查询",
+    "sub_category": "百公里能耗+行驶总里程",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "帮我查一下百公里能耗和总里程数",
+    "expected_tool_calls": [
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "百公里能耗"
+        }
+      },
+      {
+        "name": "InfoQuery",
+        "arguments": {
+          "feature": "行驶总里程"
+        }
+      }
+    ],
+    "query_audio": "audio/info_050.wav"
+  }
+]

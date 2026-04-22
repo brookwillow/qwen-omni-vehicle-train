@@ -1,0 +1,1260 @@
+[
+  {
+    "id": "steering_001",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开方向盘加热",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "打开",
+          "device": "方向盘",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_001.wav"
+  },
+  {
+    "id": "steering_002",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭方向盘加热",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "方向盘",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_002.wav"
+  },
+  {
+    "id": "steering_003",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "开启方向盘制热",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "打开",
+          "device": "方向盘",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_003.wav"
+  },
+  {
+    "id": "steering_004",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热档位",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "方向盘加热调大",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调大",
+          "device": "方向盘",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_004.wav"
+  },
+  {
+    "id": "steering_005",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热档位",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "方向盘加热调小",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调小",
+          "device": "方向盘",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_005.wav"
+  },
+  {
+    "id": "steering_006",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热档位",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "方向盘加热调到最大",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "制热",
+          "value": "最大"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_006.wav"
+  },
+  {
+    "id": "steering_007",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热档位",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "方向盘制热调到最小",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "制热",
+          "value": "最小"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_007.wav"
+  },
+  {
+    "id": "steering_008",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热档位",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "方向盘加热调到中档",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "制热",
+          "value": "中"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_008.wav"
+  },
+  {
+    "id": "steering_009",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热档位",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "方向盘加热调大一点",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调大",
+          "device": "方向盘",
+          "feature": "制热",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_009.wav"
+  },
+  {
+    "id": "steering_010",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热档位",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "方向盘制热调到三档",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "制热",
+          "value": "3"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_010.wav"
+  },
+  {
+    "id": "steering_011",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开方向盘助力",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "打开",
+          "device": "方向盘",
+          "feature": "助力"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_011.wav"
+  },
+  {
+    "id": "steering_012",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭方向盘助力",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "方向盘",
+          "feature": "助力"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_012.wav"
+  },
+  {
+    "id": "steering_013",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力模式",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "方向盘助力调到运动模式",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "运动模式"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_013.wav"
+  },
+  {
+    "id": "steering_014",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力模式",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "方向盘助力切换到舒适模式",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "舒适模式"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_014.wav"
+  },
+  {
+    "id": "steering_015",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力模式",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "方向盘助力调到标准模式",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "标准模式"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_015.wav"
+  },
+  {
+    "id": "steering_016",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力模式",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "方向盘助力设为轻盈模式",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "轻盈模式"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_016.wav"
+  },
+  {
+    "id": "steering_017",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力模式",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "方向盘助力调到稳重模式",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "稳重模式"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_017.wav"
+  },
+  {
+    "id": "steering_018",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力模式",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "方向盘助力切换到适中模式",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "适中模式"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_018.wav"
+  },
+  {
+    "id": "steering_019",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力档位",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "方向盘助力调大",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调大",
+          "device": "方向盘",
+          "feature": "助力"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_019.wav"
+  },
+  {
+    "id": "steering_020",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力档位",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "方向盘助力调小",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调小",
+          "device": "方向盘",
+          "feature": "助力"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_020.wav"
+  },
+  {
+    "id": "steering_021",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力档位",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "方向盘助力调到最大",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "最大"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_021.wav"
+  },
+  {
+    "id": "steering_022",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力档位",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "方向盘助力调到最小",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "最小"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_022.wav"
+  },
+  {
+    "id": "steering_023",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力档位",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "方向盘助力调小一点",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调小",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_023.wav"
+  },
+  {
+    "id": "steering_024",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热档位",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "方向盘加热调到大档",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "制热",
+          "value": "大"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_024.wav"
+  },
+  {
+    "id": "steering_025",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热档位",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "方向盘制热调小一点",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调小",
+          "device": "方向盘",
+          "feature": "制热",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_025.wav"
+  },
+  {
+    "id": "steering_026",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "手握方向盘好冷啊",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "打开",
+          "device": "方向盘",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_026.wav"
+  },
+  {
+    "id": "steering_027",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "方向盘冰凉冰凉的，给它热起来",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "打开",
+          "device": "方向盘",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_027.wav"
+  },
+  {
+    "id": "steering_028",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "冬天开车手冻僵了，方向盘能不能暖和点",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "打开",
+          "device": "方向盘",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_028.wav"
+  },
+  {
+    "id": "steering_029",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "方向盘太烫了，把加热关了",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "方向盘",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_029.wav"
+  },
+  {
+    "id": "steering_030",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "天热了不需要方向盘加热了",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "方向盘",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_030.wav"
+  },
+  {
+    "id": "steering_031",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热档位",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "方向盘还是不够暖，再加大一点",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调大",
+          "device": "方向盘",
+          "feature": "制热",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_031.wav"
+  },
+  {
+    "id": "steering_032",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热档位",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "方向盘有点烫手，加热小一些",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调小",
+          "device": "方向盘",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_032.wav"
+  },
+  {
+    "id": "steering_033",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热档位",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "加热开到最猛的档位吧，手太冷了",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "制热",
+          "value": "最大"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_033.wav"
+  },
+  {
+    "id": "steering_034",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热档位",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "方向盘温度差不多了，降到最低档就行",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "制热",
+          "value": "最小"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_034.wav"
+  },
+  {
+    "id": "steering_035",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "把方向盘的转向助力开一下",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "打开",
+          "device": "方向盘",
+          "feature": "助力"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_035.wav"
+  },
+  {
+    "id": "steering_036",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "方向盘转起来太沉了，调轻一点",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "轻盈模式"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_036.wav"
+  },
+  {
+    "id": "steering_037",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力模式",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "跑高速了，方向盘要稳一些",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "稳重模式"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_037.wav"
+  },
+  {
+    "id": "steering_038",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力模式",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "我想要那种比较有驾驶感的方向盘手感",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "运动模式"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_038.wav"
+  },
+  {
+    "id": "steering_039",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力模式",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "在城里慢慢开，方向盘弄舒服点",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "舒适模式"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_039.wav"
+  },
+  {
+    "id": "steering_040",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "转向力度恢复默认吧",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "标准模式"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_040.wav"
+  },
+  {
+    "id": "steering_041",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力档位",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "方向盘打起来太轻了，沉一点",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调大",
+          "device": "方向盘",
+          "feature": "助力"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_041.wav"
+  },
+  {
+    "id": "steering_042",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力档位",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "转向太重了，帮我减轻一些",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调小",
+          "device": "方向盘",
+          "feature": "助力"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_042.wav"
+  },
+  {
+    "id": "steering_043",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力模式",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "准备去赛道了，方向盘手感要运动的",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "运动模式"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_043.wav"
+  },
+  {
+    "id": "steering_044",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力模式",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "倒车入库好费劲，方向盘能不能轻一些",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "轻盈模式"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_044.wav"
+  },
+  {
+    "id": "steering_045",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "转向力度调到不轻不重的那个",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "适中模式"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_045.wav"
+  },
+  {
+    "id": "steering_046",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "刚上车方向盘跟冰块似的，赶紧热起来",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "打开",
+          "device": "方向盘",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_046.wav"
+  },
+  {
+    "id": "steering_047",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力档位",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "助力拉满",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "最大"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_047.wav"
+  },
+  {
+    "id": "steering_048",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热档位",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "方向盘加热开到中间那个档",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "制热",
+          "value": "中"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_048.wav"
+  },
+  {
+    "id": "steering_049",
+    "category": "方向盘控制",
+    "sub_category": "方向盘助力档位",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "老婆说方向盘太重了打不动，帮她调到最轻",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "最小"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_049.wav"
+  },
+  {
+    "id": "steering_050",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "车里暖和了方向盘不用加热了",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "方向盘",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_050.wav"
+  },
+  {
+    "id": "steering_051",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热+助力",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开方向盘加热，助力切到运动模式",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "打开",
+          "device": "方向盘",
+          "feature": "制热"
+        }
+      },
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "运动模式"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_051.wav"
+  },
+  {
+    "id": "steering_052",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热+助力",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "方向盘加热关掉，助力调到舒适",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "方向盘",
+          "feature": "制热"
+        }
+      },
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "舒适模式"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_052.wav"
+  },
+  {
+    "id": "steering_053",
+    "category": "方向盘控制",
+    "sub_category": "方向盘+座椅加热",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "方向盘加热打开，主驾座椅加热也开一下",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "打开",
+          "device": "方向盘",
+          "feature": "制热"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "制热",
+          "position": "主驾"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_053.wav"
+  },
+  {
+    "id": "steering_054",
+    "category": "方向盘控制",
+    "sub_category": "方向盘+空调",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "方向盘加热打开，空调温度调高两度",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "打开",
+          "device": "方向盘",
+          "feature": "制热"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调大",
+          "device": "空调",
+          "feature": "温度"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_054.wav"
+  },
+  {
+    "id": "steering_055",
+    "category": "方向盘控制",
+    "sub_category": "方向盘+驾驶模式",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "方向盘助力切运动模式，驾驶模式也切运动",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "运动模式"
+        }
+      },
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "运动模式"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_055.wav"
+  },
+  {
+    "id": "steering_056",
+    "category": "方向盘控制",
+    "sub_category": "方向盘+车窗",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "方向盘加热关掉，把主驾车窗开一下透透气",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "方向盘",
+          "feature": "制热"
+        }
+      },
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "打开",
+          "device": "车窗",
+          "position": "主驾"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_056.wav"
+  },
+  {
+    "id": "steering_057",
+    "category": "方向盘控制",
+    "sub_category": "方向盘+音量",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "方向盘助力调到轻盈模式，音量也调小一点",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "轻盈模式"
+        }
+      },
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "音量",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_057.wav"
+  },
+  {
+    "id": "steering_058",
+    "category": "方向盘控制",
+    "sub_category": "方向盘+灯光",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "方向盘加热开到最大，把大灯也打开",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "制热",
+          "value": "最大"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "大灯"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_058.wav"
+  },
+  {
+    "id": "steering_059",
+    "category": "方向盘控制",
+    "sub_category": "方向盘制热+制热档位",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "开启方向盘加热并调到中档",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "打开",
+          "device": "方向盘",
+          "feature": "制热"
+        }
+      },
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "制热",
+          "value": "中"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_059.wav"
+  },
+  {
+    "id": "steering_060",
+    "category": "方向盘控制",
+    "sub_category": "方向盘+屏幕",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "方向盘助力切稳重模式，仪表亮度调大一点",
+    "expected_tool_calls": [
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "调到",
+          "device": "方向盘",
+          "feature": "助力",
+          "value": "稳重模式"
+        }
+      },
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调大",
+          "device": "仪表",
+          "feature": "亮度",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/steering_060.wav"
+  }
+]

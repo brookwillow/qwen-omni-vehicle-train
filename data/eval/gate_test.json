@@ -1,0 +1,1188 @@
+[
+  {
+    "id": "gate_001",
+    "category": "门控",
+    "sub_category": "后备箱",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开后备箱",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后备箱"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_001.wav"
+  },
+  {
+    "id": "gate_002",
+    "category": "门控",
+    "sub_category": "后备箱",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭后备箱",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "后备箱"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_002.wav"
+  },
+  {
+    "id": "gate_003",
+    "category": "门控",
+    "sub_category": "后备箱",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "暂停后备箱",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "暂停",
+          "device": "后备箱"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_003.wav"
+  },
+  {
+    "id": "gate_004",
+    "category": "门控",
+    "sub_category": "充电口",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开充电口",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "充电口"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_004.wav"
+  },
+  {
+    "id": "gate_005",
+    "category": "门控",
+    "sub_category": "充电口",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭充电口",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "充电口"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_005.wav"
+  },
+  {
+    "id": "gate_006",
+    "category": "门控",
+    "sub_category": "充电口",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开交流充电口",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "交流充电口"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_006.wav"
+  },
+  {
+    "id": "gate_007",
+    "category": "门控",
+    "sub_category": "充电口",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关闭交流充电口",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "交流充电口"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_007.wav"
+  },
+  {
+    "id": "gate_008",
+    "category": "门控",
+    "sub_category": "充电口",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开直流充电口",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "直流充电口"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_008.wav"
+  },
+  {
+    "id": "gate_009",
+    "category": "门控",
+    "sub_category": "充电口",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关闭直流充电口",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "直流充电口"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_009.wav"
+  },
+  {
+    "id": "gate_010",
+    "category": "门控",
+    "sub_category": "侧滑门",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开侧滑门",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "侧滑门"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_010.wav"
+  },
+  {
+    "id": "gate_011",
+    "category": "门控",
+    "sub_category": "侧滑门",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭侧滑门",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "侧滑门"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_011.wav"
+  },
+  {
+    "id": "gate_012",
+    "category": "门控",
+    "sub_category": "侧滑门",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "暂停侧滑门",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "暂停",
+          "device": "侧滑门"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_012.wav"
+  },
+  {
+    "id": "gate_013",
+    "category": "门控",
+    "sub_category": "侧滑门",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开左侧侧滑门",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "侧滑门",
+          "position": "左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_013.wav"
+  },
+  {
+    "id": "gate_014",
+    "category": "门控",
+    "sub_category": "侧滑门",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关闭右侧侧滑门",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "侧滑门",
+          "position": "右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_014.wav"
+  },
+  {
+    "id": "gate_015",
+    "category": "门控",
+    "sub_category": "侧滑门",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开全部侧滑门",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "侧滑门",
+          "position": "全部"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_015.wav"
+  },
+  {
+    "id": "gate_016",
+    "category": "门控",
+    "sub_category": "侧滑门",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关闭全部侧滑门",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "侧滑门",
+          "position": "全部"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_016.wav"
+  },
+  {
+    "id": "gate_017",
+    "category": "门控",
+    "sub_category": "鹏翼门",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开鹏翼门",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "鹏翼门"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_017.wav"
+  },
+  {
+    "id": "gate_018",
+    "category": "门控",
+    "sub_category": "鹏翼门",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭鹏翼门",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "鹏翼门"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_018.wav"
+  },
+  {
+    "id": "gate_019",
+    "category": "门控",
+    "sub_category": "鹏翼门",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "暂停鹏翼门",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "暂停",
+          "device": "鹏翼门"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_019.wav"
+  },
+  {
+    "id": "gate_020",
+    "category": "门控",
+    "sub_category": "鹏翼门",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开左侧鹏翼门",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "鹏翼门",
+          "position": "左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_020.wav"
+  },
+  {
+    "id": "gate_021",
+    "category": "门控",
+    "sub_category": "鹏翼门",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关闭右侧鹏翼门",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "鹏翼门",
+          "position": "右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_021.wav"
+  },
+  {
+    "id": "gate_022",
+    "category": "门控",
+    "sub_category": "鹏翼门",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开全部鹏翼门",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "鹏翼门",
+          "position": "全部"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_022.wav"
+  },
+  {
+    "id": "gate_023",
+    "category": "门控",
+    "sub_category": "鹏翼门",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关闭全部鹏翼门",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "鹏翼门",
+          "position": "全部"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_023.wav"
+  },
+  {
+    "id": "gate_024",
+    "category": "门控",
+    "sub_category": "侧滑门",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开副驾侧滑门",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "侧滑门",
+          "position": "副驾"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_024.wav"
+  },
+  {
+    "id": "gate_025",
+    "category": "门控",
+    "sub_category": "侧滑门",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开第二排右侧侧滑门",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "侧滑门",
+          "position": "第二排右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_025.wav"
+  },
+  {
+    "id": "gate_026",
+    "category": "门控",
+    "sub_category": "侧滑门",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关闭第二排左侧侧滑门",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "侧滑门",
+          "position": "第二排左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_026.wav"
+  },
+  {
+    "id": "gate_027",
+    "category": "门控",
+    "sub_category": "鹏翼门",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开第二排鹏翼门",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "鹏翼门",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_027.wav"
+  },
+  {
+    "id": "gate_028",
+    "category": "门控",
+    "sub_category": "充电口",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开左侧充电口",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "充电口",
+          "position": "左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_028.wav"
+  },
+  {
+    "id": "gate_029",
+    "category": "门控",
+    "sub_category": "充电口",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开右侧充电口",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "充电口",
+          "position": "右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_029.wav"
+  },
+  {
+    "id": "gate_030",
+    "category": "门控",
+    "sub_category": "后备箱",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我要放东西到后面去",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后备箱"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_030.wav"
+  },
+  {
+    "id": "gate_031",
+    "category": "门控",
+    "sub_category": "后备箱",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "行李放好了后面关上吧",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "后备箱"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_031.wav"
+  },
+  {
+    "id": "gate_032",
+    "category": "门控",
+    "sub_category": "后备箱",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "尾箱帮我开一下",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后备箱"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_032.wav"
+  },
+  {
+    "id": "gate_033",
+    "category": "门控",
+    "sub_category": "后备箱",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "后备箱别关了先停着",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "暂停",
+          "device": "后备箱"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_033.wav"
+  },
+  {
+    "id": "gate_034",
+    "category": "门控",
+    "sub_category": "充电口",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我要充电了把盖子打开",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "充电口"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_034.wav"
+  },
+  {
+    "id": "gate_035",
+    "category": "门控",
+    "sub_category": "充电口",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "充完电了把充电口盖上",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "充电口"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_035.wav"
+  },
+  {
+    "id": "gate_036",
+    "category": "门控",
+    "sub_category": "充电口",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "这个充电桩是快充的帮我开直流那边的口",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "直流充电口"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_036.wav"
+  },
+  {
+    "id": "gate_037",
+    "category": "门控",
+    "sub_category": "充电口",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "用慢充的把那个充电盖子打开",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "交流充电口"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_037.wav"
+  },
+  {
+    "id": "gate_038",
+    "category": "门控",
+    "sub_category": "侧滑门",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "后排乘客要下车",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "侧滑门"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_038.wav"
+  },
+  {
+    "id": "gate_039",
+    "category": "门控",
+    "sub_category": "侧滑门",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "人都上来了门关上",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "侧滑门"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_039.wav"
+  },
+  {
+    "id": "gate_040",
+    "category": "门控",
+    "sub_category": "侧滑门",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "左边有人要上车帮忙开一下门",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "侧滑门",
+          "position": "左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_040.wav"
+  },
+  {
+    "id": "gate_041",
+    "category": "门控",
+    "sub_category": "侧滑门",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "等一下门先别关有人还没上来",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "暂停",
+          "device": "侧滑门"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_041.wav"
+  },
+  {
+    "id": "gate_042",
+    "category": "门控",
+    "sub_category": "侧滑门",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "两边的门都打开让大家一起下",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "侧滑门",
+          "position": "全部"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_042.wav"
+  },
+  {
+    "id": "gate_043",
+    "category": "门控",
+    "sub_category": "鹏翼门",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "把翅膀门打开",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "鹏翼门"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_043.wav"
+  },
+  {
+    "id": "gate_044",
+    "category": "门控",
+    "sub_category": "鹏翼门",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "空间太低了鹏翼门先停一下别升了",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "暂停",
+          "device": "鹏翼门"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_044.wav"
+  },
+  {
+    "id": "gate_045",
+    "category": "门控",
+    "sub_category": "鹏翼门",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "右边有人要上车开一下那边的鹏翼门",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "鹏翼门",
+          "position": "右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_045.wav"
+  },
+  {
+    "id": "gate_046",
+    "category": "门控",
+    "sub_category": "后备箱",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "帮我把后面的箱子打开取个东西",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后备箱"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_046.wav"
+  },
+  {
+    "id": "gate_047",
+    "category": "门控",
+    "sub_category": "鹏翼门",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "到了把鹏翼门都合上吧",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "鹏翼门",
+          "position": "全部"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_047.wav"
+  },
+  {
+    "id": "gate_048",
+    "category": "门控",
+    "sub_category": "侧滑门",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "靠马路那边的门别开有车过来",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "侧滑门",
+          "position": "左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_048.wav"
+  },
+  {
+    "id": "gate_049",
+    "category": "门控",
+    "sub_category": "后备箱",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开后备箱然后把充电口也打开",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后备箱"
+        }
+      },
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "充电口"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_049.wav"
+  },
+  {
+    "id": "gate_050",
+    "category": "门控",
+    "sub_category": "侧滑门",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "左右两边的侧滑门都打开",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "侧滑门",
+          "position": "左侧"
+        }
+      },
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "侧滑门",
+          "position": "右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_050.wav"
+  },
+  {
+    "id": "gate_051",
+    "category": "门控",
+    "sub_category": "鹏翼门",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "左边鹏翼门打开右边鹏翼门关上",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "鹏翼门",
+          "position": "左侧"
+        }
+      },
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "鹏翼门",
+          "position": "右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_051.wav"
+  },
+  {
+    "id": "gate_052",
+    "category": "门控",
+    "sub_category": "侧滑门",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "关闭侧滑门然后打开后备箱",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "侧滑门"
+        }
+      },
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后备箱"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_052.wav"
+  },
+  {
+    "id": "gate_053",
+    "category": "门控",
+    "sub_category": "充电口",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "交流和直流充电口都打开",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "交流充电口"
+        }
+      },
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "直流充电口"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_053.wav"
+  },
+  {
+    "id": "gate_054",
+    "category": "门控",
+    "sub_category": "后备箱",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "后备箱关上然后充电口也关了",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "后备箱"
+        }
+      },
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "充电口"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_054.wav"
+  },
+  {
+    "id": "gate_055",
+    "category": "门控",
+    "sub_category": "鹏翼门",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "鹏翼门全部关了然后把后备箱打开",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "鹏翼门",
+          "position": "全部"
+        }
+      },
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后备箱"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_055.wav"
+  },
+  {
+    "id": "gate_056",
+    "category": "门控",
+    "sub_category": "侧滑门",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开左侧侧滑门和后备箱",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "侧滑门",
+          "position": "左侧"
+        }
+      },
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后备箱"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_056.wav"
+  },
+  {
+    "id": "gate_057",
+    "category": "门控",
+    "sub_category": "鹏翼门",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "右边鹏翼门打开然后左边侧滑门也打开",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "鹏翼门",
+          "position": "右侧"
+        }
+      },
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "侧滑门",
+          "position": "左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_057.wav"
+  },
+  {
+    "id": "gate_058",
+    "category": "门控",
+    "sub_category": "侧滑门",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "两边侧滑门都关了然后后备箱也关上",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "侧滑门",
+          "position": "全部"
+        }
+      },
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "后备箱"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_058.wav"
+  },
+  {
+    "id": "gate_059",
+    "category": "门控",
+    "sub_category": "充电口",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "关掉充电口然后打开后备箱帮我取充电线",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "充电口"
+        }
+      },
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后备箱"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_059.wav"
+  },
+  {
+    "id": "gate_060",
+    "category": "门控",
+    "sub_category": "侧滑门",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "副驾那边开门让客人上车",
+    "expected_tool_calls": [
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "侧滑门",
+          "position": "副驾"
+        }
+      }
+    ],
+    "query_audio": "audio/gate_060.wav"
+  }
+]

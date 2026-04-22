@@ -1,0 +1,1021 @@
+[
+  {
+    "id": "camera_001",
+    "category": "摄像头",
+    "sub_category": "摄像头开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开摄像头",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_001.wav"
+  },
+  {
+    "id": "camera_002",
+    "category": "摄像头",
+    "sub_category": "摄像头开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭摄像头",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "摄像头"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_002.wav"
+  },
+  {
+    "id": "camera_003",
+    "category": "摄像头",
+    "sub_category": "摄像头位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开前方摄像头",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "前侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_003.wav"
+  },
+  {
+    "id": "camera_004",
+    "category": "摄像头",
+    "sub_category": "摄像头位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开后方摄像头",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "后侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_004.wav"
+  },
+  {
+    "id": "camera_005",
+    "category": "摄像头",
+    "sub_category": "摄像头位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开左侧摄像头",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_005.wav"
+  },
+  {
+    "id": "camera_006",
+    "category": "摄像头",
+    "sub_category": "摄像头位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开右侧摄像头",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_006.wav"
+  },
+  {
+    "id": "camera_007",
+    "category": "摄像头",
+    "sub_category": "摄像头位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开全部摄像头",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "全部"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_007.wav"
+  },
+  {
+    "id": "camera_008",
+    "category": "摄像头",
+    "sub_category": "摄像头位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭前侧摄像头",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "摄像头",
+          "position": "前侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_008.wav"
+  },
+  {
+    "id": "camera_009",
+    "category": "摄像头",
+    "sub_category": "摄像头位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭后方摄像头",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "摄像头",
+          "position": "后侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_009.wav"
+  },
+  {
+    "id": "camera_010",
+    "category": "摄像头",
+    "sub_category": "摄像头位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭左侧摄像头",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "摄像头",
+          "position": "左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_010.wav"
+  },
+  {
+    "id": "camera_011",
+    "category": "摄像头",
+    "sub_category": "摄像头位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭右侧摄像头",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "摄像头",
+          "position": "右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_011.wav"
+  },
+  {
+    "id": "camera_012",
+    "category": "摄像头",
+    "sub_category": "摄像头位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭所有摄像头",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "摄像头",
+          "position": "全部"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_012.wav"
+  },
+  {
+    "id": "camera_013",
+    "category": "摄像头",
+    "sub_category": "哨兵模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开哨兵模式",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "value": "哨兵模式"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_013.wav"
+  },
+  {
+    "id": "camera_014",
+    "category": "摄像头",
+    "sub_category": "哨兵模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭哨兵模式",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "摄像头",
+          "value": "哨兵模式"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_014.wav"
+  },
+  {
+    "id": "camera_015",
+    "category": "摄像头",
+    "sub_category": "哨兵模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "开启摄像头哨兵模式",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "value": "哨兵模式"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_015.wav"
+  },
+  {
+    "id": "camera_016",
+    "category": "摄像头",
+    "sub_category": "摄像头开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "开启车载摄像头",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_016.wav"
+  },
+  {
+    "id": "camera_017",
+    "category": "摄像头",
+    "sub_category": "摄像头位置",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "帮我开一下车头的摄像头",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "前侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_017.wav"
+  },
+  {
+    "id": "camera_018",
+    "category": "摄像头",
+    "sub_category": "摄像头位置",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "把车尾摄像头关了",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "摄像头",
+          "position": "后侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_018.wav"
+  },
+  {
+    "id": "camera_019",
+    "category": "摄像头",
+    "sub_category": "摄像头位置",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "开启车辆左边的摄像头",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_019.wav"
+  },
+  {
+    "id": "camera_020",
+    "category": "摄像头",
+    "sub_category": "摄像头位置",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "把右边的摄像头打开",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_020.wav"
+  },
+  {
+    "id": "camera_021",
+    "category": "摄像头",
+    "sub_category": "摄像头开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我想看看车外面什么情况",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "全部"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_021.wav"
+  },
+  {
+    "id": "camera_022",
+    "category": "摄像头",
+    "sub_category": "摄像头开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "帮我看一下车周围的环境",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "全部"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_022.wav"
+  },
+  {
+    "id": "camera_023",
+    "category": "摄像头",
+    "sub_category": "摄像头位置",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "看一下车后面有没有东西",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "后侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_023.wav"
+  },
+  {
+    "id": "camera_024",
+    "category": "摄像头",
+    "sub_category": "摄像头位置",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我想看看车头前面的路况",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "前侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_024.wav"
+  },
+  {
+    "id": "camera_025",
+    "category": "摄像头",
+    "sub_category": "摄像头位置",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "左边是不是有人靠近了，帮我看看",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_025.wav"
+  },
+  {
+    "id": "camera_026",
+    "category": "摄像头",
+    "sub_category": "摄像头位置",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "右边车道有车吗，打开看看",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_026.wav"
+  },
+  {
+    "id": "camera_027",
+    "category": "摄像头",
+    "sub_category": "哨兵模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我要停车了，帮我开启车辆监控",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "value": "哨兵模式"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_027.wav"
+  },
+  {
+    "id": "camera_028",
+    "category": "摄像头",
+    "sub_category": "哨兵模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "车停在外面不太安全，帮我监控一下",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "value": "哨兵模式"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_028.wav"
+  },
+  {
+    "id": "camera_029",
+    "category": "摄像头",
+    "sub_category": "哨兵模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "开启停车守护功能",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "value": "哨兵模式"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_029.wav"
+  },
+  {
+    "id": "camera_030",
+    "category": "摄像头",
+    "sub_category": "哨兵模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "不用再监控了，把哨兵关掉吧",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "摄像头",
+          "value": "哨兵模式"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_030.wav"
+  },
+  {
+    "id": "camera_031",
+    "category": "摄像头",
+    "sub_category": "摄像头开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "不看了，把摄像头都关了吧",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "摄像头",
+          "position": "全部"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_031.wav"
+  },
+  {
+    "id": "camera_032",
+    "category": "摄像头",
+    "sub_category": "摄像头位置",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "倒车的时候帮我看看后面",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "后侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_032.wav"
+  },
+  {
+    "id": "camera_033",
+    "category": "摄像头",
+    "sub_category": "摄像头开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "把车载相机给我打开",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_033.wav"
+  },
+  {
+    "id": "camera_034",
+    "category": "摄像头",
+    "sub_category": "摄像头开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "把行车记录仪打开",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_034.wav"
+  },
+  {
+    "id": "camera_035",
+    "category": "摄像头",
+    "sub_category": "摄像头开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "关掉行车记录仪",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "摄像头"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_035.wav"
+  },
+  {
+    "id": "camera_036",
+    "category": "摄像头",
+    "sub_category": "哨兵模式",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "这个地方不太安全，帮我盯着点车",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "value": "哨兵模式"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_036.wav"
+  },
+  {
+    "id": "camera_037",
+    "category": "摄像头",
+    "sub_category": "哨兵模式",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "晚上停车场车多，帮我看着车别被剐蹭了",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "value": "哨兵模式"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_037.wav"
+  },
+  {
+    "id": "camera_038",
+    "category": "摄像头",
+    "sub_category": "摄像头位置",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "并线前帮我看一眼右边有没有车",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_038.wav"
+  },
+  {
+    "id": "camera_039",
+    "category": "摄像头",
+    "sub_category": "摄像头位置",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "我听到左边有声音，帮我看下左边",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_039.wav"
+  },
+  {
+    "id": "camera_040",
+    "category": "摄像头",
+    "sub_category": "摄像头位置",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "前面是不是堵车了，帮我看看前面",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "前侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_040.wav"
+  },
+  {
+    "id": "camera_041",
+    "category": "摄像头",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开前方摄像头和后方摄像头",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "前侧"
+        }
+      },
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "后侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_041.wav"
+  },
+  {
+    "id": "camera_042",
+    "category": "摄像头",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "把左右两边的摄像头都打开",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "左侧"
+        }
+      },
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_042.wav"
+  },
+  {
+    "id": "camera_043",
+    "category": "摄像头",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "关掉左边摄像头，打开右边摄像头",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "摄像头",
+          "position": "左侧"
+        }
+      },
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_043.wav"
+  },
+  {
+    "id": "camera_044",
+    "category": "摄像头",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开哨兵模式，再把后方摄像头也开一下",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "value": "哨兵模式"
+        }
+      },
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "后侧"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_044.wav"
+  },
+  {
+    "id": "camera_045",
+    "category": "摄像头",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开摄像头，顺便把车窗关上",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头"
+        }
+      },
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "车窗"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_045.wav"
+  },
+  {
+    "id": "camera_046",
+    "category": "摄像头",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "开启哨兵模式，把车窗全部关上",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "value": "哨兵模式"
+        }
+      },
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "车窗",
+          "position": "全部"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_046.wav"
+  },
+  {
+    "id": "camera_047",
+    "category": "摄像头",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "关闭哨兵模式，然后把大灯也关了",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "摄像头",
+          "value": "哨兵模式"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "大灯"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_047.wav"
+  },
+  {
+    "id": "camera_048",
+    "category": "摄像头",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开后方摄像头，同时打开后备箱",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "后侧"
+        }
+      },
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后备箱"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_048.wav"
+  },
+  {
+    "id": "camera_049",
+    "category": "摄像头",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开前方摄像头，再把空调也打开",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "position": "前侧"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_049.wav"
+  },
+  {
+    "id": "camera_050",
+    "category": "摄像头",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "我要下车了，开启哨兵模式，锁好车门，把车窗关上",
+    "expected_tool_calls": [
+      {
+        "name": "CameraControl",
+        "arguments": {
+          "action": "打开",
+          "device": "摄像头",
+          "value": "哨兵模式"
+        }
+      },
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "车窗",
+          "position": "全部"
+        }
+      }
+    ],
+    "query_audio": "audio/camera_050.wav"
+  }
+]

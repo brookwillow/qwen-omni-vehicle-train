@@ -1,0 +1,1401 @@
+[
+  {
+    "id": "seat_001",
+    "category": "座椅",
+    "sub_category": "基础调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "座椅往前调",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调前",
+          "device": "座椅",
+          "feature": "位置"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_001.wav"
+  },
+  {
+    "id": "seat_002",
+    "category": "座椅",
+    "sub_category": "基础调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "座椅往后调",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调后",
+          "device": "座椅",
+          "feature": "位置"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_002.wav"
+  },
+  {
+    "id": "seat_003",
+    "category": "座椅",
+    "sub_category": "基础调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "主驾座椅调高一点",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调大",
+          "device": "座椅",
+          "feature": "高度",
+          "position": "主驾",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_003.wav"
+  },
+  {
+    "id": "seat_004",
+    "category": "座椅",
+    "sub_category": "基础调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "座椅调低一点",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调小",
+          "device": "座椅",
+          "feature": "高度",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_004.wav"
+  },
+  {
+    "id": "seat_005",
+    "category": "座椅",
+    "sub_category": "基础调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "副驾座椅往前调一点",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调前",
+          "device": "座椅",
+          "feature": "位置",
+          "position": "副驾",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_005.wav"
+  },
+  {
+    "id": "seat_006",
+    "category": "座椅",
+    "sub_category": "基础调节",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "座椅调到最前",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调到",
+          "device": "座椅",
+          "feature": "位置",
+          "value": "最前"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_006.wav"
+  },
+  {
+    "id": "seat_007",
+    "category": "座椅",
+    "sub_category": "基础调节",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "主驾座椅调到最后",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调到",
+          "device": "座椅",
+          "feature": "位置",
+          "position": "主驾",
+          "value": "最后"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_007.wav"
+  },
+  {
+    "id": "seat_008",
+    "category": "座椅",
+    "sub_category": "基础调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "座椅复位",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "复位",
+          "device": "座椅"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_008.wav"
+  },
+  {
+    "id": "seat_009",
+    "category": "座椅",
+    "sub_category": "靠背调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "靠背往前调一点",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调前",
+          "device": "靠背",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_009.wav"
+  },
+  {
+    "id": "seat_010",
+    "category": "座椅",
+    "sub_category": "靠背调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "靠背往后调一点",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调后",
+          "device": "靠背",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_010.wav"
+  },
+  {
+    "id": "seat_011",
+    "category": "座椅",
+    "sub_category": "靠背调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "主驾靠背往后调",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调后",
+          "device": "靠背",
+          "position": "主驾"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_011.wav"
+  },
+  {
+    "id": "seat_012",
+    "category": "座椅",
+    "sub_category": "放平",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "把座椅放平",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "放平",
+          "device": "座椅"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_012.wav"
+  },
+  {
+    "id": "seat_013",
+    "category": "座椅",
+    "sub_category": "放平",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "副驾座椅放平",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "放平",
+          "device": "座椅",
+          "position": "副驾"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_013.wav"
+  },
+  {
+    "id": "seat_014",
+    "category": "座椅",
+    "sub_category": "收起",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "收起座椅",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "收起",
+          "device": "座椅"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_014.wav"
+  },
+  {
+    "id": "seat_015",
+    "category": "座椅",
+    "sub_category": "收起",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "把第二排座椅收起来",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "收起",
+          "device": "座椅",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_015.wav"
+  },
+  {
+    "id": "seat_016",
+    "category": "座椅",
+    "sub_category": "按摩",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开座椅按摩",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "按摩"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_016.wav"
+  },
+  {
+    "id": "seat_017",
+    "category": "座椅",
+    "sub_category": "按摩",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭座椅按摩",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "座椅",
+          "feature": "按摩"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_017.wav"
+  },
+  {
+    "id": "seat_018",
+    "category": "座椅",
+    "sub_category": "按摩",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开主驾按摩",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "按摩",
+          "position": "主驾"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_018.wav"
+  },
+  {
+    "id": "seat_019",
+    "category": "座椅",
+    "sub_category": "按摩",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "座椅按摩调到长途解乏模式",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调到",
+          "device": "座椅",
+          "feature": "按摩",
+          "value": "长途解乏"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_019.wav"
+  },
+  {
+    "id": "seat_020",
+    "category": "座椅",
+    "sub_category": "按摩",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "按摩模式切换到压力释放",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调到",
+          "device": "座椅",
+          "feature": "按摩",
+          "value": "压力释放"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_020.wav"
+  },
+  {
+    "id": "seat_021",
+    "category": "座椅",
+    "sub_category": "按摩",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "座椅按摩调到体能恢复",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调到",
+          "device": "座椅",
+          "feature": "按摩",
+          "value": "体能恢复"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_021.wav"
+  },
+  {
+    "id": "seat_022",
+    "category": "座椅",
+    "sub_category": "按摩",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "按摩换成休闲放松",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调到",
+          "device": "座椅",
+          "feature": "按摩",
+          "value": "休闲放松"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_022.wav"
+  },
+  {
+    "id": "seat_023",
+    "category": "座椅",
+    "sub_category": "按摩",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "座椅按摩调到活力唤醒",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调到",
+          "device": "座椅",
+          "feature": "按摩",
+          "value": "活力唤醒"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_023.wav"
+  },
+  {
+    "id": "seat_024",
+    "category": "座椅",
+    "sub_category": "按摩",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "按摩力度调大一点",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调大",
+          "device": "座椅",
+          "feature": "按摩",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_024.wav"
+  },
+  {
+    "id": "seat_025",
+    "category": "座椅",
+    "sub_category": "按摩",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "按摩力度调小一点",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调小",
+          "device": "座椅",
+          "feature": "按摩",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_025.wav"
+  },
+  {
+    "id": "seat_026",
+    "category": "座椅",
+    "sub_category": "按摩",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "按摩力度调到最大",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调到",
+          "device": "座椅",
+          "feature": "按摩",
+          "value": "最大"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_026.wav"
+  },
+  {
+    "id": "seat_027",
+    "category": "座椅",
+    "sub_category": "按摩",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "按摩力度调到最小",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调到",
+          "device": "座椅",
+          "feature": "按摩",
+          "value": "最小"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_027.wav"
+  },
+  {
+    "id": "seat_028",
+    "category": "座椅",
+    "sub_category": "通风",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开座椅通风",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "通风"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_028.wav"
+  },
+  {
+    "id": "seat_029",
+    "category": "座椅",
+    "sub_category": "通风",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭座椅通风",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "座椅",
+          "feature": "通风"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_029.wav"
+  },
+  {
+    "id": "seat_030",
+    "category": "座椅",
+    "sub_category": "通风",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开主驾座椅通风",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "通风",
+          "position": "主驾"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_030.wav"
+  },
+  {
+    "id": "seat_031",
+    "category": "座椅",
+    "sub_category": "加热",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开座椅加热",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_031.wav"
+  },
+  {
+    "id": "seat_032",
+    "category": "座椅",
+    "sub_category": "加热",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭座椅加热",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "座椅",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_032.wav"
+  },
+  {
+    "id": "seat_033",
+    "category": "座椅",
+    "sub_category": "加热",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开副驾座椅加热",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "制热",
+          "position": "副驾"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_033.wav"
+  },
+  {
+    "id": "seat_034",
+    "category": "座椅",
+    "sub_category": "加热",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "座椅加热调到中档",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调到",
+          "device": "座椅",
+          "feature": "制热",
+          "value": "中"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_034.wav"
+  },
+  {
+    "id": "seat_035",
+    "category": "座椅",
+    "sub_category": "加热",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "座椅加热调大一点",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调大",
+          "device": "座椅",
+          "feature": "制热",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_035.wav"
+  },
+  {
+    "id": "seat_036",
+    "category": "座椅",
+    "sub_category": "基础调节",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "腿伸不开，座椅往后挪挪",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调后",
+          "device": "座椅",
+          "feature": "位置"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_036.wav"
+  },
+  {
+    "id": "seat_037",
+    "category": "座椅",
+    "sub_category": "基础调节",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "离方向盘太远了",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调前",
+          "device": "座椅",
+          "feature": "位置"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_037.wav"
+  },
+  {
+    "id": "seat_038",
+    "category": "座椅",
+    "sub_category": "基础调节",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "我坐着有点矮，看不清路",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调大",
+          "device": "座椅",
+          "feature": "高度",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_038.wav"
+  },
+  {
+    "id": "seat_039",
+    "category": "座椅",
+    "sub_category": "基础调节",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "视野太高了，头都快顶到车顶了",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调小",
+          "device": "座椅",
+          "feature": "高度",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_039.wav"
+  },
+  {
+    "id": "seat_040",
+    "category": "座椅",
+    "sub_category": "靠背调节",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "靠背太直了，往后仰一点",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调后",
+          "device": "靠背",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_040.wav"
+  },
+  {
+    "id": "seat_041",
+    "category": "座椅",
+    "sub_category": "靠背调节",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "坐得太躺了，直起来一点",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调前",
+          "device": "靠背",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_041.wav"
+  },
+  {
+    "id": "seat_042",
+    "category": "座椅",
+    "sub_category": "放平",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "我想躺一会儿",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "放平",
+          "device": "座椅"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_042.wav"
+  },
+  {
+    "id": "seat_043",
+    "category": "座椅",
+    "sub_category": "放平",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "等人好无聊，想平躺休息",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "放平",
+          "device": "座椅"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_043.wav"
+  },
+  {
+    "id": "seat_044",
+    "category": "座椅",
+    "sub_category": "收起",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "后排不坐人了，座椅收起来腾点空间",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "收起",
+          "device": "座椅",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_044.wav"
+  },
+  {
+    "id": "seat_045",
+    "category": "座椅",
+    "sub_category": "按摩",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "开了好久了，腰酸背痛的",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "按摩"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_045.wav"
+  },
+  {
+    "id": "seat_046",
+    "category": "座椅",
+    "sub_category": "按摩",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "肩膀好僵，帮我放松一下",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "按摩"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_046.wav"
+  },
+  {
+    "id": "seat_047",
+    "category": "座椅",
+    "sub_category": "按摩",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "按摩劲儿不够，再大点",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调大",
+          "device": "座椅",
+          "feature": "按摩",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_047.wav"
+  },
+  {
+    "id": "seat_048",
+    "category": "座椅",
+    "sub_category": "按摩",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "按摩太重了，轻一点",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调小",
+          "device": "座椅",
+          "feature": "按摩",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_048.wav"
+  },
+  {
+    "id": "seat_049",
+    "category": "座椅",
+    "sub_category": "按摩",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "跑了一天好累，来个长途解乏",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调到",
+          "device": "座椅",
+          "feature": "按摩",
+          "value": "长途解乏"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_049.wav"
+  },
+  {
+    "id": "seat_050",
+    "category": "座椅",
+    "sub_category": "按摩",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "不按了，有点痒",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "座椅",
+          "feature": "按摩"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_050.wav"
+  },
+  {
+    "id": "seat_051",
+    "category": "座椅",
+    "sub_category": "通风",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "屁股好热，闷得慌",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "通风"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_051.wav"
+  },
+  {
+    "id": "seat_052",
+    "category": "座椅",
+    "sub_category": "通风",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "夏天坐皮座椅好粘，透透气",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "通风"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_052.wav"
+  },
+  {
+    "id": "seat_053",
+    "category": "座椅",
+    "sub_category": "通风",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "座椅通风有点冷，关掉吧",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "座椅",
+          "feature": "通风"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_053.wav"
+  },
+  {
+    "id": "seat_054",
+    "category": "座椅",
+    "sub_category": "加热",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "冬天座椅冰凉冰凉的",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_054.wav"
+  },
+  {
+    "id": "seat_055",
+    "category": "座椅",
+    "sub_category": "加热",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "坐上去屁股好凉",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_055.wav"
+  },
+  {
+    "id": "seat_056",
+    "category": "座椅",
+    "sub_category": "加热",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "座椅烫屁股了",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "座椅",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_056.wav"
+  },
+  {
+    "id": "seat_057",
+    "category": "座椅",
+    "sub_category": "加热",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "加热太猛了，调低一些",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调小",
+          "device": "座椅",
+          "feature": "制热",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_057.wav"
+  },
+  {
+    "id": "seat_058",
+    "category": "座椅",
+    "sub_category": "按摩+通风",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开按摩和座椅通风",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "按摩"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "通风"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_058.wav"
+  },
+  {
+    "id": "seat_059",
+    "category": "座椅",
+    "sub_category": "按摩+加热",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "座椅加热打开，按摩也开着",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "制热"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "按摩"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_059.wav"
+  },
+  {
+    "id": "seat_060",
+    "category": "座椅",
+    "sub_category": "按摩+加热",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "好冷好累，座椅加热开起来，再来个按摩",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "制热"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "按摩"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_060.wav"
+  },
+  {
+    "id": "seat_061",
+    "category": "座椅",
+    "sub_category": "基础调节+放平",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "副驾座椅放平，我这边的往后调一点",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "放平",
+          "device": "座椅",
+          "position": "副驾"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调后",
+          "device": "座椅",
+          "feature": "位置",
+          "position": "主驾",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_061.wav"
+  },
+  {
+    "id": "seat_062",
+    "category": "座椅",
+    "sub_category": "通风+加热",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "座椅加热关了，通风打开",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "座椅",
+          "feature": "制热"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "通风"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_062.wav"
+  },
+  {
+    "id": "seat_063",
+    "category": "座椅",
+    "sub_category": "按摩+基础调节",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "靠背往后调一些，然后开个长途解乏按摩",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调后",
+          "device": "靠背",
+          "value": "一点"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调到",
+          "device": "座椅",
+          "feature": "按摩",
+          "value": "长途解乏"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_063.wav"
+  },
+  {
+    "id": "seat_064",
+    "category": "座椅",
+    "sub_category": "按摩+通风+加热",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "按摩关了，通风也关了，把座椅加热打开",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "座椅",
+          "feature": "按摩"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "座椅",
+          "feature": "通风"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_064.wav"
+  },
+  {
+    "id": "seat_065",
+    "category": "座椅",
+    "sub_category": "放平+按摩+加热",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "午休一下，座椅放平，开个按摩和加热",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "放平",
+          "device": "座椅"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "按摩"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_065.wav"
+  },
+  {
+    "id": "seat_066",
+    "category": "座椅",
+    "sub_category": "按摩+通风",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "天太热了，开个座椅通风，再来个休闲放松按摩",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "通风"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调到",
+          "device": "座椅",
+          "feature": "按摩",
+          "value": "休闲放松"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_066.wav"
+  },
+  {
+    "id": "seat_067",
+    "category": "座椅",
+    "sub_category": "基础调节",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "主驾往前调一点，副驾往后调一点",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调前",
+          "device": "座椅",
+          "feature": "位置",
+          "position": "主驾",
+          "value": "一点"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调后",
+          "device": "座椅",
+          "feature": "位置",
+          "position": "副驾",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/seat_067.wav"
+  }
+]

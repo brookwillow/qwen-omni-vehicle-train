@@ -1,0 +1,1201 @@
+[
+  {
+    "id": "lock_001",
+    "category": "锁控",
+    "sub_category": "儿童锁开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_001.wav"
+  },
+  {
+    "id": "lock_002",
+    "category": "锁控",
+    "sub_category": "儿童锁开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_002.wav"
+  },
+  {
+    "id": "lock_003",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开全部儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "全部"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_003.wav"
+  },
+  {
+    "id": "lock_004",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭全部儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁",
+          "position": "全部"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_004.wav"
+  },
+  {
+    "id": "lock_005",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开主驾儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "主驾"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_005.wav"
+  },
+  {
+    "id": "lock_006",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开副驾儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "副驾"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_006.wav"
+  },
+  {
+    "id": "lock_007",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开左侧儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_007.wav"
+  },
+  {
+    "id": "lock_008",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开右侧儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_008.wav"
+  },
+  {
+    "id": "lock_009",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开前排儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "前排"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_009.wav"
+  },
+  {
+    "id": "lock_010",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开第二排儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_010.wav"
+  },
+  {
+    "id": "lock_011",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开第三排儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "第三排"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_011.wav"
+  },
+  {
+    "id": "lock_012",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开第二排右侧儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "第二排右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_012.wav"
+  },
+  {
+    "id": "lock_013",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开第二排左侧儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "第二排左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_013.wav"
+  },
+  {
+    "id": "lock_014",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开第三排右侧儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "第三排右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_014.wav"
+  },
+  {
+    "id": "lock_015",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开第三排左侧儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "第三排左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_015.wav"
+  },
+  {
+    "id": "lock_016",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭主驾儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁",
+          "position": "主驾"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_016.wav"
+  },
+  {
+    "id": "lock_017",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭副驾儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁",
+          "position": "副驾"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_017.wav"
+  },
+  {
+    "id": "lock_018",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭第二排儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_018.wav"
+  },
+  {
+    "id": "lock_019",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭第三排儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁",
+          "position": "第三排"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_019.wav"
+  },
+  {
+    "id": "lock_020",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭左侧儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁",
+          "position": "左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_020.wav"
+  },
+  {
+    "id": "lock_021",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭右侧儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁",
+          "position": "右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_021.wav"
+  },
+  {
+    "id": "lock_022",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "帮我把后排左边的儿童锁开一下",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "第二排左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_022.wav"
+  },
+  {
+    "id": "lock_023",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "把后排右边的儿童锁关了",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁",
+          "position": "第二排右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_023.wav"
+  },
+  {
+    "id": "lock_024",
+    "category": "锁控",
+    "sub_category": "儿童锁开关",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "帮我开启儿童安全锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_024.wav"
+  },
+  {
+    "id": "lock_025",
+    "category": "锁控",
+    "sub_category": "儿童锁开关",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "把儿童安全锁关掉",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_025.wav"
+  },
+  {
+    "id": "lock_026",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关闭第三排右侧儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁",
+          "position": "第三排右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_026.wav"
+  },
+  {
+    "id": "lock_027",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关闭第三排左侧儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁",
+          "position": "第三排左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_027.wav"
+  },
+  {
+    "id": "lock_028",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关闭第二排左侧儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁",
+          "position": "第二排左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_028.wav"
+  },
+  {
+    "id": "lock_029",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关闭第二排右侧儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁",
+          "position": "第二排右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_029.wav"
+  },
+  {
+    "id": "lock_030",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关闭前排儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁",
+          "position": "前排"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_030.wav"
+  },
+  {
+    "id": "lock_031",
+    "category": "锁控",
+    "sub_category": "儿童锁开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "车上有小孩，帮我把儿童锁开了",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_031.wav"
+  },
+  {
+    "id": "lock_032",
+    "category": "锁控",
+    "sub_category": "儿童锁开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "孩子在后面坐着，别让他自己开门",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_032.wav"
+  },
+  {
+    "id": "lock_033",
+    "category": "锁控",
+    "sub_category": "儿童锁开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "小朋友上车了，锁好门别让他乱开",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_033.wav"
+  },
+  {
+    "id": "lock_034",
+    "category": "锁控",
+    "sub_category": "儿童锁开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "宝宝太调皮了，帮我锁住车门",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_034.wav"
+  },
+  {
+    "id": "lock_035",
+    "category": "锁控",
+    "sub_category": "儿童锁开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "孩子已经下车了，儿童锁可以关了",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_035.wav"
+  },
+  {
+    "id": "lock_036",
+    "category": "锁控",
+    "sub_category": "儿童锁开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "小孩不在车上了，解除儿童锁吧",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_036.wav"
+  },
+  {
+    "id": "lock_037",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "孩子坐在后排左边，把那边的儿童锁开了",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "第二排左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_037.wav"
+  },
+  {
+    "id": "lock_038",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "小孩坐右边，帮我锁一下右边的门",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_038.wav"
+  },
+  {
+    "id": "lock_039",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "两个娃都在后排，把后排都锁住",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_039.wav"
+  },
+  {
+    "id": "lock_040",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "第三排坐了小朋友，帮我锁好",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "第三排"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_040.wav"
+  },
+  {
+    "id": "lock_041",
+    "category": "锁控",
+    "sub_category": "儿童锁开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "开车的时候怕小孩自己开门，帮我防护一下",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_041.wav"
+  },
+  {
+    "id": "lock_042",
+    "category": "锁控",
+    "sub_category": "儿童锁开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "行驶途中不让后排乘客打开车门",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_042.wav"
+  },
+  {
+    "id": "lock_043",
+    "category": "锁控",
+    "sub_category": "儿童锁开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "把所有门都用儿童保护锁住",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "全部"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_043.wav"
+  },
+  {
+    "id": "lock_044",
+    "category": "锁控",
+    "sub_category": "儿童锁开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "到家了，把儿童保护都解除",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁",
+          "position": "全部"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_044.wav"
+  },
+  {
+    "id": "lock_045",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "左后门那个小孩老是碰门把手，锁住",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_045.wav"
+  },
+  {
+    "id": "lock_046",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "第三排左边的小朋友下车了，解锁那边",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁",
+          "position": "第三排左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_046.wav"
+  },
+  {
+    "id": "lock_047",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "第三排右边那个孩子要下车，把锁解了",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁",
+          "position": "第三排右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_047.wav"
+  },
+  {
+    "id": "lock_048",
+    "category": "锁控",
+    "sub_category": "儿童锁开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "高速上了，怕孩子误开门，安全措施搞起来",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_048.wav"
+  },
+  {
+    "id": "lock_049",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "第二排右边坐了个小宝宝，帮我把那扇门锁了",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "第二排右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_049.wav"
+  },
+  {
+    "id": "lock_050",
+    "category": "锁控",
+    "sub_category": "儿童锁位置",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "第二排左边的孩子到站了，解锁让他下车",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁",
+          "position": "第二排左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_050.wav"
+  },
+  {
+    "id": "lock_051",
+    "category": "锁控",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开儿童锁，再把车窗也关上",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁"
+        }
+      },
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "车窗"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_051.wav"
+  },
+  {
+    "id": "lock_052",
+    "category": "锁控",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "把儿童锁开了，后排车窗也关到",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁"
+        }
+      },
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "车窗",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_052.wav"
+  },
+  {
+    "id": "lock_053",
+    "category": "锁控",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "开启全部儿童锁，空调温度调到25度",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "全部"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "温度",
+          "value": "25"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_053.wav"
+  },
+  {
+    "id": "lock_054",
+    "category": "锁控",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开儿童锁，把后排阅读灯也开一下",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "阅读灯",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_054.wav"
+  },
+  {
+    "id": "lock_055",
+    "category": "锁控",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "关闭儿童锁，打开后备箱",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁"
+        }
+      },
+      {
+        "name": "GateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后备箱"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_055.wav"
+  },
+  {
+    "id": "lock_056",
+    "category": "锁控",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "孩子上车了，开儿童锁，放个儿歌",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁"
+        }
+      },
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "media_category": "歌"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_056.wav"
+  },
+  {
+    "id": "lock_057",
+    "category": "锁控",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "第二排儿童锁打开，座椅加热也开一下",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "第二排"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "制热",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_057.wav"
+  },
+  {
+    "id": "lock_058",
+    "category": "锁控",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开儿童锁，然后音量调小一点，孩子睡着了",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁"
+        }
+      },
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "音量",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_058.wav"
+  },
+  {
+    "id": "lock_059",
+    "category": "锁控",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "开启左侧和右侧的儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "左侧"
+        }
+      },
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "打开",
+          "device": "儿童锁",
+          "position": "右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_059.wav"
+  },
+  {
+    "id": "lock_060",
+    "category": "锁控",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "关闭第二排和第三排的儿童锁",
+    "expected_tool_calls": [
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁",
+          "position": "第二排"
+        }
+      },
+      {
+        "name": "LockControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "儿童锁",
+          "position": "第三排"
+        }
+      }
+    ],
+    "query_audio": "audio/lock_060.wav"
+  }
+]

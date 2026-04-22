@@ -1,0 +1,1222 @@
+[
+  {
+    "id": "driving_001",
+    "category": "驾驶模式",
+    "sub_category": "标准模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "切换到标准模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "标准模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_001.wav"
+  },
+  {
+    "id": "driving_002",
+    "category": "驾驶模式",
+    "sub_category": "标准模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开标准驾驶模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "标准模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_002.wav"
+  },
+  {
+    "id": "driving_003",
+    "category": "驾驶模式",
+    "sub_category": "运动模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "切换到运动模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "运动模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_003.wav"
+  },
+  {
+    "id": "driving_004",
+    "category": "驾驶模式",
+    "sub_category": "运动模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开运动模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "运动模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_004.wav"
+  },
+  {
+    "id": "driving_005",
+    "category": "驾驶模式",
+    "sub_category": "运动模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭运动模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "驾驶模式",
+          "value": "运动模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_005.wav"
+  },
+  {
+    "id": "driving_006",
+    "category": "驾驶模式",
+    "sub_category": "舒适模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "切换到舒适模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "舒适模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_006.wav"
+  },
+  {
+    "id": "driving_007",
+    "category": "驾驶模式",
+    "sub_category": "舒适模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开舒适驾驶模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "舒适模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_007.wav"
+  },
+  {
+    "id": "driving_008",
+    "category": "驾驶模式",
+    "sub_category": "舒适模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭舒适模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "驾驶模式",
+          "value": "舒适模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_008.wav"
+  },
+  {
+    "id": "driving_009",
+    "category": "驾驶模式",
+    "sub_category": "节能模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "切换到节能模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "节能模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_009.wav"
+  },
+  {
+    "id": "driving_010",
+    "category": "驾驶模式",
+    "sub_category": "节能模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开节能驾驶模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "节能模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_010.wav"
+  },
+  {
+    "id": "driving_011",
+    "category": "驾驶模式",
+    "sub_category": "节能模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭节能模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "驾驶模式",
+          "value": "节能模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_011.wav"
+  },
+  {
+    "id": "driving_012",
+    "category": "驾驶模式",
+    "sub_category": "弹射模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开弹射模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "弹射模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_012.wav"
+  },
+  {
+    "id": "driving_013",
+    "category": "驾驶模式",
+    "sub_category": "弹射模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭弹射模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "驾驶模式",
+          "value": "弹射模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_013.wav"
+  },
+  {
+    "id": "driving_014",
+    "category": "驾驶模式",
+    "sub_category": "弹射模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "切换到弹射模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "弹射模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_014.wav"
+  },
+  {
+    "id": "driving_015",
+    "category": "驾驶模式",
+    "sub_category": "脱困模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开脱困模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "脱困模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_015.wav"
+  },
+  {
+    "id": "driving_016",
+    "category": "驾驶模式",
+    "sub_category": "脱困模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭脱困模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "驾驶模式",
+          "value": "脱困模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_016.wav"
+  },
+  {
+    "id": "driving_017",
+    "category": "驾驶模式",
+    "sub_category": "脱困模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "切换到脱困模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "脱困模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_017.wav"
+  },
+  {
+    "id": "driving_018",
+    "category": "驾驶模式",
+    "sub_category": "单踏板",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开单踏板模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "单踏板"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_018.wav"
+  },
+  {
+    "id": "driving_019",
+    "category": "驾驶模式",
+    "sub_category": "单踏板",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭单踏板模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "驾驶模式",
+          "value": "单踏板"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_019.wav"
+  },
+  {
+    "id": "driving_020",
+    "category": "驾驶模式",
+    "sub_category": "单踏板",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "切换到单踏板",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "单踏板"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_020.wav"
+  },
+  {
+    "id": "driving_021",
+    "category": "驾驶模式",
+    "sub_category": "自定义",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开自定义驾驶模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "自定义"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_021.wav"
+  },
+  {
+    "id": "driving_022",
+    "category": "驾驶模式",
+    "sub_category": "自定义",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "切换到自定义模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "自定义"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_022.wav"
+  },
+  {
+    "id": "driving_023",
+    "category": "驾驶模式",
+    "sub_category": "自定义",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭自定义驾驶模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "驾驶模式",
+          "value": "自定义"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_023.wav"
+  },
+  {
+    "id": "driving_024",
+    "category": "驾驶模式",
+    "sub_category": "标准模式",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "帮我把驾驶模式调到标准",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "标准模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_024.wav"
+  },
+  {
+    "id": "driving_025",
+    "category": "驾驶模式",
+    "sub_category": "运动模式",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "驾驶模式设置为运动",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "运动模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_025.wav"
+  },
+  {
+    "id": "driving_026",
+    "category": "驾驶模式",
+    "sub_category": "舒适模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "开车有点颠簸，帮我调个舒服点的模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "舒适模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_026.wav"
+  },
+  {
+    "id": "driving_027",
+    "category": "驾驶模式",
+    "sub_category": "舒适模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我想开得平稳一些",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "舒适模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_027.wav"
+  },
+  {
+    "id": "driving_028",
+    "category": "驾驶模式",
+    "sub_category": "运动模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我想开快一点，动力猛一些",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "运动模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_028.wav"
+  },
+  {
+    "id": "driving_029",
+    "category": "驾驶模式",
+    "sub_category": "运动模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "给我来点激烈驾驶的感觉",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "运动模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_029.wav"
+  },
+  {
+    "id": "driving_030",
+    "category": "驾驶模式",
+    "sub_category": "运动模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "提升一下动力响应",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "运动模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_030.wav"
+  },
+  {
+    "id": "driving_031",
+    "category": "驾驶模式",
+    "sub_category": "节能模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "电量不多了，帮我省点电",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "节能模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_031.wav"
+  },
+  {
+    "id": "driving_032",
+    "category": "驾驶模式",
+    "sub_category": "节能模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "续航快不够了，切个省电的模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "节能模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_032.wav"
+  },
+  {
+    "id": "driving_033",
+    "category": "驾驶模式",
+    "sub_category": "节能模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "帮我开个最省电的驾驶方式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "节能模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_033.wav"
+  },
+  {
+    "id": "driving_034",
+    "category": "驾驶模式",
+    "sub_category": "弹射模式",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "我要弹射起步",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "弹射模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_034.wav"
+  },
+  {
+    "id": "driving_035",
+    "category": "驾驶模式",
+    "sub_category": "弹射模式",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "来个零百加速，最快起步",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "弹射模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_035.wav"
+  },
+  {
+    "id": "driving_036",
+    "category": "驾驶模式",
+    "sub_category": "脱困模式",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "车轮打滑了，帮我脱困",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "脱困模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_036.wav"
+  },
+  {
+    "id": "driving_037",
+    "category": "驾驶模式",
+    "sub_category": "脱困模式",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "陷在泥地里出不来了，有没有什么办法",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "脱困模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_037.wav"
+  },
+  {
+    "id": "driving_038",
+    "category": "驾驶模式",
+    "sub_category": "脱困模式",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "车子被困住了，开不出去",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "脱困模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_038.wav"
+  },
+  {
+    "id": "driving_039",
+    "category": "驾驶模式",
+    "sub_category": "单踏板",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我想用一个踏板控制加速和刹车",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "单踏板"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_039.wav"
+  },
+  {
+    "id": "driving_040",
+    "category": "驾驶模式",
+    "sub_category": "单踏板",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "开启单踏板驾驶",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "单踏板"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_040.wav"
+  },
+  {
+    "id": "driving_041",
+    "category": "驾驶模式",
+    "sub_category": "舒适模式",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "车上有老人和孩子，开稳一点",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "舒适模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_041.wav"
+  },
+  {
+    "id": "driving_042",
+    "category": "驾驶模式",
+    "sub_category": "标准模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "恢复到默认的驾驶状态",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "标准模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_042.wav"
+  },
+  {
+    "id": "driving_043",
+    "category": "驾驶模式",
+    "sub_category": "标准模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "不想要特殊模式了，回到正常驾驶",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "标准模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_043.wav"
+  },
+  {
+    "id": "driving_044",
+    "category": "驾驶模式",
+    "sub_category": "自定义",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "用我自己设定的驾驶模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "自定义"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_044.wav"
+  },
+  {
+    "id": "driving_045",
+    "category": "驾驶模式",
+    "sub_category": "自定义",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "切到我上次自己调的那个模式",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "自定义"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_045.wav"
+  },
+  {
+    "id": "driving_046",
+    "category": "驾驶模式",
+    "sub_category": "节能模式",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "还有三十公里才到充电桩，帮我想办法撑过去",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "节能模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_046.wav"
+  },
+  {
+    "id": "driving_047",
+    "category": "驾驶模式",
+    "sub_category": "运动模式",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "前面路况好，给我来点推背感",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "运动模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_047.wav"
+  },
+  {
+    "id": "driving_048",
+    "category": "驾驶模式",
+    "sub_category": "舒适模式",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "孩子在后面睡觉，悠着点开",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "舒适模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_048.wav"
+  },
+  {
+    "id": "driving_049",
+    "category": "驾驶模式",
+    "sub_category": "单踏板",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "城里开走走停停的，帮我换成一个踏板操控",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "单踏板"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_049.wav"
+  },
+  {
+    "id": "driving_050",
+    "category": "驾驶模式",
+    "sub_category": "弹射模式",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "绿灯亮了我想第一个冲出去",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "弹射模式"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_050.wav"
+  },
+  {
+    "id": "driving_051",
+    "category": "驾驶模式",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "切到运动模式，再把车窗关上",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "运动模式"
+        }
+      },
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "车窗"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_051.wav"
+  },
+  {
+    "id": "driving_052",
+    "category": "驾驶模式",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开节能模式，同时把空调温度调到26度",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "节能模式"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "温度",
+          "value": "26"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_052.wav"
+  },
+  {
+    "id": "driving_053",
+    "category": "驾驶模式",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "切换到舒适模式，把座椅加热打开",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "舒适模式"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_053.wav"
+  },
+  {
+    "id": "driving_054",
+    "category": "驾驶模式",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "开启运动模式，顺便把氛围灯调成红色",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "运动模式"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "调到",
+          "device": "氛围灯",
+          "feature": "颜色",
+          "value": "xx色"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_054.wav"
+  },
+  {
+    "id": "driving_055",
+    "category": "驾驶模式",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "电量不够了，开节能模式，再把空调关了",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "节能模式"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "空调"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_055.wav"
+  },
+  {
+    "id": "driving_056",
+    "category": "驾驶模式",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "弹射模式打开，车窗全关上",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "弹射模式"
+        }
+      },
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "车窗",
+          "position": "全部"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_056.wav"
+  },
+  {
+    "id": "driving_057",
+    "category": "驾驶模式",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "帮我脱困模式开一下，方向盘加热也打开",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "脱困模式"
+        }
+      },
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "打开",
+          "device": "方向盘",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_057.wav"
+  },
+  {
+    "id": "driving_058",
+    "category": "驾驶模式",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "节能模式打开，把音量也调小一点",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "节能模式"
+        }
+      },
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "音量",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_058.wav"
+  },
+  {
+    "id": "driving_059",
+    "category": "驾驶模式",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "开舒适模式，然后把座椅按摩也开了",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "舒适模式"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "按摩"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_059.wav"
+  },
+  {
+    "id": "driving_060",
+    "category": "驾驶模式",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "切到运动模式，空调调大一点",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "运动模式"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调大",
+          "device": "空调",
+          "feature": "风"
+        }
+      }
+    ],
+    "query_audio": "audio/driving_060.wav"
+  }
+]

@@ -1,0 +1,964 @@
+[
+  {
+    "id": "phone_001",
+    "category": "电话控制",
+    "sub_category": "搜索联系人",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "搜索联系人张三",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "张三"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_001.wav"
+  },
+  {
+    "id": "phone_002",
+    "category": "电话控制",
+    "sub_category": "搜索联系人",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "查找联系人李四",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "李四"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_002.wav"
+  },
+  {
+    "id": "phone_003",
+    "category": "电话控制",
+    "sub_category": "搜索联系人",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "搜索王经理的电话",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "王经理"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_003.wav"
+  },
+  {
+    "id": "phone_004",
+    "category": "电话控制",
+    "sub_category": "搜索号码",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "搜索电话号码13800138000",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "telephone": "13800138000"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_004.wav"
+  },
+  {
+    "id": "phone_005",
+    "category": "电话控制",
+    "sub_category": "搜索号码",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "查找号码15912345678",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "telephone": "15912345678"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_005.wav"
+  },
+  {
+    "id": "phone_006",
+    "category": "电话控制",
+    "sub_category": "搜索联系人",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "帮我搜索妈妈的电话",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "妈妈"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_006.wav"
+  },
+  {
+    "id": "phone_007",
+    "category": "电话控制",
+    "sub_category": "搜索联系人",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "搜索爸爸的联系方式",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "爸爸"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_007.wav"
+  },
+  {
+    "id": "phone_008",
+    "category": "电话控制",
+    "sub_category": "搜索联系人",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "找一下老婆的手机号",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "老婆"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_008.wav"
+  },
+  {
+    "id": "phone_009",
+    "category": "电话控制",
+    "sub_category": "重拨",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "重拨电话",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "重拨"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_009.wav"
+  },
+  {
+    "id": "phone_010",
+    "category": "电话控制",
+    "sub_category": "重拨",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "重新拨打",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "重拨"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_010.wav"
+  },
+  {
+    "id": "phone_011",
+    "category": "电话控制",
+    "sub_category": "回拨",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "回拨电话",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "回拨"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_011.wav"
+  },
+  {
+    "id": "phone_012",
+    "category": "电话控制",
+    "sub_category": "回拨",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "回拨上一个来电",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "回拨"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_012.wav"
+  },
+  {
+    "id": "phone_013",
+    "category": "电话控制",
+    "sub_category": "搜索联系人",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "搜索陈总的号码",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "陈总"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_013.wav"
+  },
+  {
+    "id": "phone_014",
+    "category": "电话控制",
+    "sub_category": "搜索联系人",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "搜索小明",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "小明"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_014.wav"
+  },
+  {
+    "id": "phone_015",
+    "category": "电话控制",
+    "sub_category": "搜索号码",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "帮我查一下18688886666这个号码",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "telephone": "18688886666"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_015.wav"
+  },
+  {
+    "id": "phone_016",
+    "category": "电话控制",
+    "sub_category": "重拨",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "再拨一次刚才的电话",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "重拨"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_016.wav"
+  },
+  {
+    "id": "phone_017",
+    "category": "电话控制",
+    "sub_category": "回拨",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "把刚才的未接来电回拨过去",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "回拨"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_017.wav"
+  },
+  {
+    "id": "phone_018",
+    "category": "电话控制",
+    "sub_category": "搜索联系人",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "搜索联系人刘老师",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "刘老师"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_018.wav"
+  },
+  {
+    "id": "phone_019",
+    "category": "电话控制",
+    "sub_category": "搜索联系人",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "在通讯录搜索赵医生",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "赵医生"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_019.wav"
+  },
+  {
+    "id": "phone_020",
+    "category": "电话控制",
+    "sub_category": "搜索号码",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "搜索010-88889999",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "telephone": "010-88889999"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_020.wav"
+  },
+  {
+    "id": "phone_021",
+    "category": "电话控制",
+    "sub_category": "搜索联系人",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "帮我找一下张三的电话打给他",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "张三"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_021.wav"
+  },
+  {
+    "id": "phone_022",
+    "category": "电话控制",
+    "sub_category": "搜索联系人",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我想联系李总帮我找下他的号码",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "李总"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_022.wav"
+  },
+  {
+    "id": "phone_023",
+    "category": "电话控制",
+    "sub_category": "搜索联系人",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "我老婆让我到了给她打电话先找下她号码",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "老婆"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_023.wav"
+  },
+  {
+    "id": "phone_024",
+    "category": "电话控制",
+    "sub_category": "重拨",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "刚才没接通再打一次",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "重拨"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_024.wav"
+  },
+  {
+    "id": "phone_025",
+    "category": "电话控制",
+    "sub_category": "重拨",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "他一直占线帮我再试一次",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "重拨"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_025.wav"
+  },
+  {
+    "id": "phone_026",
+    "category": "电话控制",
+    "sub_category": "重拨",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "对方没接到电话再拨一遍",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "重拨"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_026.wav"
+  },
+  {
+    "id": "phone_027",
+    "category": "电话控制",
+    "sub_category": "回拨",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "刚才有人打过来我没接到打回去",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "回拨"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_027.wav"
+  },
+  {
+    "id": "phone_028",
+    "category": "电话控制",
+    "sub_category": "回拨",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "漏了一个电话不知道谁打的回过去看看",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "回拨"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_028.wav"
+  },
+  {
+    "id": "phone_029",
+    "category": "电话控制",
+    "sub_category": "回拨",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "那个未接来电给他回过去",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "回拨"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_029.wav"
+  },
+  {
+    "id": "phone_030",
+    "category": "电话控制",
+    "sub_category": "搜索联系人",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "我记得通讯录里有个姓周的同事帮我查查",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "周"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_030.wav"
+  },
+  {
+    "id": "phone_031",
+    "category": "电话控制",
+    "sub_category": "搜索号码",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "帮我找下139开头的那个号码",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "telephone": "139"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_031.wav"
+  },
+  {
+    "id": "phone_032",
+    "category": "电话控制",
+    "sub_category": "搜索联系人",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "有个朋友叫小王帮我搜一下",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "小王"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_032.wav"
+  },
+  {
+    "id": "phone_033",
+    "category": "电话控制",
+    "sub_category": "重拨",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "信号不好刚断了帮我重新打过去",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "重拨"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_033.wav"
+  },
+  {
+    "id": "phone_034",
+    "category": "电话控制",
+    "sub_category": "搜索联系人",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "快到公司了找下前台小姐姐的电话说一声",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "前台"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_034.wav"
+  },
+  {
+    "id": "phone_035",
+    "category": "电话控制",
+    "sub_category": "回拨",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "开车的时候有个电话没接到现在回给他",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "回拨"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_035.wav"
+  },
+  {
+    "id": "phone_036",
+    "category": "电话控制",
+    "sub_category": "搜索联系人",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "翻翻通讯录看看有没有外卖店的电话",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "外卖店"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_036.wav"
+  },
+  {
+    "id": "phone_037",
+    "category": "电话控制",
+    "sub_category": "搜索联系人",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "搜一下我弟弟的电话号码",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "弟弟"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_037.wav"
+  },
+  {
+    "id": "phone_038",
+    "category": "电话控制",
+    "sub_category": "搜索号码",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "那个尾号8888的号码帮我查查是谁的",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "telephone": "8888"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_038.wav"
+  },
+  {
+    "id": "phone_039",
+    "category": "电话控制",
+    "sub_category": "重拨",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "刚才打的那个号码再来一次",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "重拨"
+        }
+      }
+    ],
+    "query_audio": null
+  },
+  {
+    "id": "phone_040",
+    "category": "电话控制",
+    "sub_category": "搜索联系人",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "约了修车师傅帮我找下他的电话叫孙师傅",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "孙师傅"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_040.wav"
+  },
+  {
+    "id": "phone_041",
+    "category": "电话+音量",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "搜索妈妈的电话顺便把通话音量调大一点",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "妈妈"
+        }
+      },
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "通话音量"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_041.wav"
+  },
+  {
+    "id": "phone_042",
+    "category": "电话+媒体",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "先把音乐暂停然后回拨刚才的电话",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "media_category": "歌",
+          "media_control_action": "暂停"
+        }
+      },
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "回拨"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_042.wav"
+  },
+  {
+    "id": "phone_043",
+    "category": "电话+车窗",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "关上车窗然后帮我搜索李四的号码",
+    "expected_tool_calls": [
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "车窗"
+        }
+      },
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "李四"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_043.wav"
+  },
+  {
+    "id": "phone_044",
+    "category": "电话+音量",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "通话音量调到最大然后重拨上一个电话",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "通话音量",
+          "value": "最大"
+        }
+      },
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "重拨"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_044.wav"
+  },
+  {
+    "id": "phone_045",
+    "category": "电话+空调",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "帮我搜索王总的电话然后把空调关了",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "王总"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "空调"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_045.wav"
+  },
+  {
+    "id": "phone_046",
+    "category": "电话+媒体",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "暂停播放的读物然后回拨那个未接来电",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "media_category": "读物",
+          "media_control_action": "暂停"
+        }
+      },
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "回拨"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_046.wav"
+  },
+  {
+    "id": "phone_047",
+    "category": "电话+音量+车窗",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "把车窗关上音量调小一点然后搜索老板的电话",
+    "expected_tool_calls": [
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "车窗"
+        }
+      },
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "音量"
+        }
+      },
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "老板"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_047.wav"
+  },
+  {
+    "id": "phone_048",
+    "category": "电话+导航",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "搜索张师傅的电话然后导航去公司",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "张师傅"
+        }
+      },
+      {
+        "name": "Navigation",
+        "arguments": {
+          "action": "开始",
+          "category": "公司",
+          "value": "公司"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_048.wav"
+  },
+  {
+    "id": "phone_049",
+    "category": "电话+屏幕",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "屏幕亮度调高一点然后帮我搜索18600001111",
+    "expected_tool_calls": [
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调大",
+          "device": "屏幕",
+          "feature": "亮度"
+        }
+      },
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "telephone": "18600001111"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_049.wav"
+  },
+  {
+    "id": "phone_050",
+    "category": "电话+灯光",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开阅读灯然后搜索一下赵哥的电话",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "阅读灯"
+        }
+      },
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "搜索",
+          "person": "赵哥"
+        }
+      }
+    ],
+    "query_audio": "audio/phone_050.wav"
+  }
+]

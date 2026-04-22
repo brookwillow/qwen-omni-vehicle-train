@@ -1,0 +1,1337 @@
+[
+  {
+    "id": "app_001",
+    "category": "应用控制",
+    "sub_category": "导航地图",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开导航地图",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "导航地图"
+        }
+      }
+    ],
+    "query_audio": "audio/app_001.wav"
+  },
+  {
+    "id": "app_002",
+    "category": "应用控制",
+    "sub_category": "导航地图",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭导航地图",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "导航地图"
+        }
+      }
+    ],
+    "query_audio": "audio/app_002.wav"
+  },
+  {
+    "id": "app_003",
+    "category": "应用控制",
+    "sub_category": "音乐应用",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开音乐应用",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "音乐应用"
+        }
+      }
+    ],
+    "query_audio": "audio/app_003.wav"
+  },
+  {
+    "id": "app_004",
+    "category": "应用控制",
+    "sub_category": "音乐应用",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭音乐应用",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "音乐应用"
+        }
+      }
+    ],
+    "query_audio": "audio/app_004.wav"
+  },
+  {
+    "id": "app_005",
+    "category": "应用控制",
+    "sub_category": "空调",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开空调应用",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "空调"
+        }
+      }
+    ],
+    "query_audio": "audio/app_005.wav"
+  },
+  {
+    "id": "app_006",
+    "category": "应用控制",
+    "sub_category": "空调",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭空调应用",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "空调"
+        }
+      }
+    ],
+    "query_audio": "audio/app_006.wav"
+  },
+  {
+    "id": "app_007",
+    "category": "应用控制",
+    "sub_category": "蓝牙电话",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开蓝牙电话",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "蓝牙电话"
+        }
+      }
+    ],
+    "query_audio": "audio/app_007.wav"
+  },
+  {
+    "id": "app_008",
+    "category": "应用控制",
+    "sub_category": "蓝牙电话",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭蓝牙电话",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "蓝牙电话"
+        }
+      }
+    ],
+    "query_audio": "audio/app_008.wav"
+  },
+  {
+    "id": "app_009",
+    "category": "应用控制",
+    "sub_category": "车控",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开车控",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "车控"
+        }
+      }
+    ],
+    "query_audio": "audio/app_009.wav"
+  },
+  {
+    "id": "app_010",
+    "category": "应用控制",
+    "sub_category": "车控",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭车控",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "车控"
+        }
+      }
+    ],
+    "query_audio": "audio/app_010.wav"
+  },
+  {
+    "id": "app_011",
+    "category": "应用控制",
+    "sub_category": "媒体",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开媒体",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "媒体"
+        }
+      }
+    ],
+    "query_audio": "audio/app_011.wav"
+  },
+  {
+    "id": "app_012",
+    "category": "应用控制",
+    "sub_category": "媒体",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭媒体",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "媒体"
+        }
+      }
+    ],
+    "query_audio": "audio/app_012.wav"
+  },
+  {
+    "id": "app_013",
+    "category": "应用控制",
+    "sub_category": "智能影像",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开智能影像",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "智能影像"
+        }
+      }
+    ],
+    "query_audio": "audio/app_013.wav"
+  },
+  {
+    "id": "app_014",
+    "category": "应用控制",
+    "sub_category": "智能影像",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭智能影像",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "智能影像"
+        }
+      }
+    ],
+    "query_audio": "audio/app_014.wav"
+  },
+  {
+    "id": "app_015",
+    "category": "应用控制",
+    "sub_category": "应用列表",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开应用列表",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "应用列表"
+        }
+      }
+    ],
+    "query_audio": "audio/app_015.wav"
+  },
+  {
+    "id": "app_016",
+    "category": "应用控制",
+    "sub_category": "应用列表",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭应用列表",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "应用列表"
+        }
+      }
+    ],
+    "query_audio": "audio/app_016.wav"
+  },
+  {
+    "id": "app_017",
+    "category": "应用控制",
+    "sub_category": "投屏助手",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开投屏助手",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "投屏助手"
+        }
+      }
+    ],
+    "query_audio": "audio/app_017.wav"
+  },
+  {
+    "id": "app_018",
+    "category": "应用控制",
+    "sub_category": "投屏助手",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭投屏助手",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "投屏助手"
+        }
+      }
+    ],
+    "query_audio": "audio/app_018.wav"
+  },
+  {
+    "id": "app_019",
+    "category": "应用控制",
+    "sub_category": "日历",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开日历",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "日历"
+        }
+      }
+    ],
+    "query_audio": "audio/app_019.wav"
+  },
+  {
+    "id": "app_020",
+    "category": "应用控制",
+    "sub_category": "日历",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭日历",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "日历"
+        }
+      }
+    ],
+    "query_audio": "audio/app_020.wav"
+  },
+  {
+    "id": "app_021",
+    "category": "应用控制",
+    "sub_category": "用户手册",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开用户手册",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "用户手册"
+        }
+      }
+    ],
+    "query_audio": "audio/app_021.wav"
+  },
+  {
+    "id": "app_022",
+    "category": "应用控制",
+    "sub_category": "用户手册",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭用户手册",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "用户手册"
+        }
+      }
+    ],
+    "query_audio": "audio/app_022.wav"
+  },
+  {
+    "id": "app_023",
+    "category": "应用控制",
+    "sub_category": "ota",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开OTA",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "ota"
+        }
+      }
+    ],
+    "query_audio": "audio/app_023.wav"
+  },
+  {
+    "id": "app_024",
+    "category": "应用控制",
+    "sub_category": "ota",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭OTA",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "ota"
+        }
+      }
+    ],
+    "query_audio": "audio/app_024.wav"
+  },
+  {
+    "id": "app_025",
+    "category": "应用控制",
+    "sub_category": "全域共驾",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开全域共驾",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "全域共驾"
+        }
+      }
+    ],
+    "query_audio": "audio/app_025.wav"
+  },
+  {
+    "id": "app_026",
+    "category": "应用控制",
+    "sub_category": "全域共驾",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭全域共驾",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "全域共驾"
+        }
+      }
+    ],
+    "query_audio": "audio/app_026.wav"
+  },
+  {
+    "id": "app_027",
+    "category": "应用控制",
+    "sub_category": "导航地图",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "帮我把导航打开",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "导航地图"
+        }
+      }
+    ],
+    "query_audio": "audio/app_027.wav"
+  },
+  {
+    "id": "app_028",
+    "category": "应用控制",
+    "sub_category": "音乐应用",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "帮我把音乐打开",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "音乐应用"
+        }
+      }
+    ],
+    "query_audio": "audio/app_028.wav"
+  },
+  {
+    "id": "app_029",
+    "category": "应用控制",
+    "sub_category": "蓝牙电话",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "开启蓝牙电话应用",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "蓝牙电话"
+        }
+      }
+    ],
+    "query_audio": "audio/app_029.wav"
+  },
+  {
+    "id": "app_030",
+    "category": "应用控制",
+    "sub_category": "车控",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "帮我打开车辆控制面板",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "车控"
+        }
+      }
+    ],
+    "query_audio": "audio/app_030.wav"
+  },
+  {
+    "id": "app_031",
+    "category": "应用控制",
+    "sub_category": "导航地图",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我想看看地图",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "导航地图"
+        }
+      }
+    ],
+    "query_audio": "audio/app_031.wav"
+  },
+  {
+    "id": "app_032",
+    "category": "应用控制",
+    "sub_category": "导航地图",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "帮我导航一下",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "导航地图"
+        }
+      }
+    ],
+    "query_audio": "audio/app_032.wav"
+  },
+  {
+    "id": "app_033",
+    "category": "应用控制",
+    "sub_category": "导航地图",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "不认识路了，打开地图看看",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "导航地图"
+        }
+      }
+    ],
+    "query_audio": "audio/app_033.wav"
+  },
+  {
+    "id": "app_034",
+    "category": "应用控制",
+    "sub_category": "音乐应用",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我想听歌",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "音乐应用"
+        }
+      }
+    ],
+    "query_audio": "audio/app_034.wav"
+  },
+  {
+    "id": "app_035",
+    "category": "应用控制",
+    "sub_category": "音乐应用",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "开车无聊，来点音乐吧",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "音乐应用"
+        }
+      }
+    ],
+    "query_audio": "audio/app_035.wav"
+  },
+  {
+    "id": "app_036",
+    "category": "应用控制",
+    "sub_category": "音乐应用",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "不听歌了，关掉音乐",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "音乐应用"
+        }
+      }
+    ],
+    "query_audio": "audio/app_036.wav"
+  },
+  {
+    "id": "app_037",
+    "category": "应用控制",
+    "sub_category": "蓝牙电话",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我要打电话",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "蓝牙电话"
+        }
+      }
+    ],
+    "query_audio": "audio/app_037.wav"
+  },
+  {
+    "id": "app_038",
+    "category": "应用控制",
+    "sub_category": "蓝牙电话",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "帮我把电话功能调出来，我要联系人",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "蓝牙电话"
+        }
+      }
+    ],
+    "query_audio": "audio/app_038.wav"
+  },
+  {
+    "id": "app_039",
+    "category": "应用控制",
+    "sub_category": "空调",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "帮我打开空调设置界面",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "空调"
+        }
+      }
+    ],
+    "query_audio": "audio/app_039.wav"
+  },
+  {
+    "id": "app_040",
+    "category": "应用控制",
+    "sub_category": "空调",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "我想调一下空调参数，把面板打开",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "空调"
+        }
+      }
+    ],
+    "query_audio": "audio/app_040.wav"
+  },
+  {
+    "id": "app_041",
+    "category": "应用控制",
+    "sub_category": "投屏助手",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我想把手机投到车上",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "投屏助手"
+        }
+      }
+    ],
+    "query_audio": "audio/app_041.wav"
+  },
+  {
+    "id": "app_042",
+    "category": "应用控制",
+    "sub_category": "投屏助手",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "帮我连一下手机屏幕到车机上",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "投屏助手"
+        }
+      }
+    ],
+    "query_audio": "audio/app_042.wav"
+  },
+  {
+    "id": "app_043",
+    "category": "应用控制",
+    "sub_category": "日历",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我想看看今天有什么安排",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "日历"
+        }
+      }
+    ],
+    "query_audio": "audio/app_043.wav"
+  },
+  {
+    "id": "app_044",
+    "category": "应用控制",
+    "sub_category": "日历",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "查一下我的日程表",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "日历"
+        }
+      }
+    ],
+    "query_audio": "audio/app_044.wav"
+  },
+  {
+    "id": "app_045",
+    "category": "应用控制",
+    "sub_category": "ota",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "看看有没有系统更新",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "ota"
+        }
+      }
+    ],
+    "query_audio": "audio/app_045.wav"
+  },
+  {
+    "id": "app_046",
+    "category": "应用控制",
+    "sub_category": "ota",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "车机有新版本了吗，帮我检查一下",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "ota"
+        }
+      }
+    ],
+    "query_audio": "audio/app_046.wav"
+  },
+  {
+    "id": "app_047",
+    "category": "应用控制",
+    "sub_category": "智能影像",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我想看看车上拍的照片和视频",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "智能影像"
+        }
+      }
+    ],
+    "query_audio": "audio/app_047.wav"
+  },
+  {
+    "id": "app_048",
+    "category": "应用控制",
+    "sub_category": "智能影像",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "帮我调出行车记录的影像回放",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "智能影像"
+        }
+      }
+    ],
+    "query_audio": "audio/app_048.wav"
+  },
+  {
+    "id": "app_049",
+    "category": "应用控制",
+    "sub_category": "用户手册",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "这个功能怎么用，帮我看看说明书",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "用户手册"
+        }
+      }
+    ],
+    "query_audio": "audio/app_049.wav"
+  },
+  {
+    "id": "app_050",
+    "category": "应用控制",
+    "sub_category": "用户手册",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "我是新车主，帮我打开车辆使用说明",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "用户手册"
+        }
+      }
+    ],
+    "query_audio": "audio/app_050.wav"
+  },
+  {
+    "id": "app_051",
+    "category": "应用控制",
+    "sub_category": "车控",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我想看看车辆状态",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "车控"
+        }
+      }
+    ],
+    "query_audio": "audio/app_051.wav"
+  },
+  {
+    "id": "app_052",
+    "category": "应用控制",
+    "sub_category": "车控",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "帮我调出车辆控制的那个界面",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "车控"
+        }
+      }
+    ],
+    "query_audio": "audio/app_052.wav"
+  },
+  {
+    "id": "app_053",
+    "category": "应用控制",
+    "sub_category": "媒体",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "帮我打开多媒体播放器",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "媒体"
+        }
+      }
+    ],
+    "query_audio": "audio/app_053.wav"
+  },
+  {
+    "id": "app_054",
+    "category": "应用控制",
+    "sub_category": "媒体",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "我想看点视频或者听点东西",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "媒体"
+        }
+      }
+    ],
+    "query_audio": "audio/app_054.wav"
+  },
+  {
+    "id": "app_055",
+    "category": "应用控制",
+    "sub_category": "全域共驾",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "开启远程共驾功能",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "全域共驾"
+        }
+      }
+    ],
+    "query_audio": "audio/app_055.wav"
+  },
+  {
+    "id": "app_056",
+    "category": "应用控制",
+    "sub_category": "应用列表",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我想看看车上有哪些应用",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "应用列表"
+        }
+      }
+    ],
+    "query_audio": "audio/app_056.wav"
+  },
+  {
+    "id": "app_057",
+    "category": "应用控制",
+    "sub_category": "应用列表",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "帮我看看车机上装了什么软件",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "应用列表"
+        }
+      }
+    ],
+    "query_audio": "audio/app_057.wav"
+  },
+  {
+    "id": "app_058",
+    "category": "应用控制",
+    "sub_category": "投屏助手",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "不投屏了，关掉吧",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "投屏助手"
+        }
+      }
+    ],
+    "query_audio": "audio/app_058.wav"
+  },
+  {
+    "id": "app_059",
+    "category": "应用控制",
+    "sub_category": "导航地图",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "到了，把导航关掉",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "导航地图"
+        }
+      }
+    ],
+    "query_audio": "audio/app_059.wav"
+  },
+  {
+    "id": "app_060",
+    "category": "应用控制",
+    "sub_category": "蓝牙电话",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "电话打完了，把通话界面关掉",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "蓝牙电话"
+        }
+      }
+    ],
+    "query_audio": "audio/app_060.wav"
+  },
+  {
+    "id": "app_061",
+    "category": "应用控制",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开导航地图，顺便把空调开了",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "导航地图"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调"
+        }
+      }
+    ],
+    "query_audio": "audio/app_061.wav"
+  },
+  {
+    "id": "app_062",
+    "category": "应用控制",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开音乐应用，把音量调到5",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "音乐应用"
+        }
+      },
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "音量",
+          "value": "5"
+        }
+      }
+    ],
+    "query_audio": "audio/app_062.wav"
+  },
+  {
+    "id": "app_063",
+    "category": "应用控制",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "关掉导航，打开音乐",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "导航地图"
+        }
+      },
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "音乐应用"
+        }
+      }
+    ],
+    "query_audio": "audio/app_063.wav"
+  },
+  {
+    "id": "app_064",
+    "category": "应用控制",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开蓝牙电话，把车窗关上",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "蓝牙电话"
+        }
+      },
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "车窗"
+        }
+      }
+    ],
+    "query_audio": "audio/app_064.wav"
+  },
+  {
+    "id": "app_065",
+    "category": "应用控制",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开投屏助手，同时把阅读灯开了",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "投屏助手"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "阅读灯"
+        }
+      }
+    ],
+    "query_audio": "audio/app_065.wav"
+  },
+  {
+    "id": "app_066",
+    "category": "应用控制",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "关闭媒体和音乐应用",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "媒体"
+        }
+      },
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "音乐应用"
+        }
+      }
+    ],
+    "query_audio": "audio/app_066.wav"
+  },
+  {
+    "id": "app_067",
+    "category": "应用控制",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开车控，再帮我把座椅加热开了",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "车控"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/app_067.wav"
+  },
+  {
+    "id": "app_068",
+    "category": "应用控制",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开导航地图和音乐应用",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "导航地图"
+        }
+      },
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "音乐应用"
+        }
+      }
+    ],
+    "query_audio": "audio/app_068.wav"
+  },
+  {
+    "id": "app_069",
+    "category": "应用控制",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开智能影像，把屏幕亮度调大一点",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "智能影像"
+        }
+      },
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调大",
+          "device": "屏幕",
+          "feature": "亮度"
+        }
+      }
+    ],
+    "query_audio": "audio/app_069.wav"
+  },
+  {
+    "id": "app_070",
+    "category": "应用控制",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "我要出发了，打开导航，再把空调温度调到24度",
+    "expected_tool_calls": [
+      {
+        "name": "AppControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "导航地图"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "温度",
+          "value": "24"
+        }
+      }
+    ],
+    "query_audio": "audio/app_070.wav"
+  }
+]

@@ -1,0 +1,1111 @@
+[
+  {
+    "id": "power_001",
+    "category": "能源控制",
+    "sub_category": "充电开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开充电",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "充电"
+        }
+      }
+    ],
+    "query_audio": "audio/power_001.wav"
+  },
+  {
+    "id": "power_002",
+    "category": "能源控制",
+    "sub_category": "充电开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭充电",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "充电"
+        }
+      }
+    ],
+    "query_audio": "audio/power_002.wav"
+  },
+  {
+    "id": "power_003",
+    "category": "能源控制",
+    "sub_category": "无线充电开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开无线充电",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "无线充电"
+        }
+      }
+    ],
+    "query_audio": "audio/power_003.wav"
+  },
+  {
+    "id": "power_004",
+    "category": "能源控制",
+    "sub_category": "无线充电开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭无线充电",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "无线充电"
+        }
+      }
+    ],
+    "query_audio": "audio/power_004.wav"
+  },
+  {
+    "id": "power_005",
+    "category": "能源控制",
+    "sub_category": "能量回收开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开能量回收",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "能量回收"
+        }
+      }
+    ],
+    "query_audio": "audio/power_005.wav"
+  },
+  {
+    "id": "power_006",
+    "category": "能源控制",
+    "sub_category": "能量回收开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭能量回收",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "能量回收"
+        }
+      }
+    ],
+    "query_audio": "audio/power_006.wav"
+  },
+  {
+    "id": "power_007",
+    "category": "能源控制",
+    "sub_category": "能量回收调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "能量回收调大",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "能量回收"
+        }
+      }
+    ],
+    "query_audio": "audio/power_007.wav"
+  },
+  {
+    "id": "power_008",
+    "category": "能源控制",
+    "sub_category": "能量回收调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "能量回收调小",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "能量回收"
+        }
+      }
+    ],
+    "query_audio": "audio/power_008.wav"
+  },
+  {
+    "id": "power_009",
+    "category": "能源控制",
+    "sub_category": "能量回收调节",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "把能量回收调到最大",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "能量回收",
+          "value": "最大"
+        }
+      }
+    ],
+    "query_audio": "audio/power_009.wav"
+  },
+  {
+    "id": "power_010",
+    "category": "能源控制",
+    "sub_category": "能量回收调节",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "能量回收调到最小",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "能量回收",
+          "value": "最小"
+        }
+      }
+    ],
+    "query_audio": "audio/power_010.wav"
+  },
+  {
+    "id": "power_011",
+    "category": "能源控制",
+    "sub_category": "能量回收调节",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "能量回收设置为中档",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "能量回收",
+          "value": "中"
+        }
+      }
+    ],
+    "query_audio": "audio/power_011.wav"
+  },
+  {
+    "id": "power_012",
+    "category": "能源控制",
+    "sub_category": "能量回收调节",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "能量回收调大一点",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "能量回收",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/power_012.wav"
+  },
+  {
+    "id": "power_013",
+    "category": "能源控制",
+    "sub_category": "能量回收调节",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "能量回收调小一点",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "能量回收",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/power_013.wav"
+  },
+  {
+    "id": "power_014",
+    "category": "能源控制",
+    "sub_category": "能量回收调节",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "把能量回收切换到单踏板模式",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "能量回收",
+          "value": "单踏板"
+        }
+      }
+    ],
+    "query_audio": "audio/power_014.wav"
+  },
+  {
+    "id": "power_015",
+    "category": "能源控制",
+    "sub_category": "无线充电位置",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开主驾的无线充电",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "无线充电",
+          "position": "主驾"
+        }
+      }
+    ],
+    "query_audio": "audio/power_015.wav"
+  },
+  {
+    "id": "power_016",
+    "category": "能源控制",
+    "sub_category": "无线充电位置",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开副驾的无线充电",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "无线充电",
+          "position": "副驾"
+        }
+      }
+    ],
+    "query_audio": "audio/power_016.wav"
+  },
+  {
+    "id": "power_017",
+    "category": "能源控制",
+    "sub_category": "无线充电位置",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关闭前排无线充电",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "无线充电",
+          "position": "前排"
+        }
+      }
+    ],
+    "query_audio": "audio/power_017.wav"
+  },
+  {
+    "id": "power_018",
+    "category": "能源控制",
+    "sub_category": "无线充电位置",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开第二排的无线充电",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "无线充电",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/power_018.wav"
+  },
+  {
+    "id": "power_019",
+    "category": "能源控制",
+    "sub_category": "无线充电位置",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关闭第二排左侧无线充电",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "无线充电",
+          "position": "第二排左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/power_019.wav"
+  },
+  {
+    "id": "power_020",
+    "category": "能源控制",
+    "sub_category": "无线充电位置",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开第二排右侧无线充电",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "无线充电",
+          "position": "第二排右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/power_020.wav"
+  },
+  {
+    "id": "power_021",
+    "category": "能源控制",
+    "sub_category": "充电限制",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "把充电调到80%",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "充电",
+          "value": "80%"
+        }
+      }
+    ],
+    "query_audio": "audio/power_021.wav"
+  },
+  {
+    "id": "power_022",
+    "category": "能源控制",
+    "sub_category": "充电限制",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "充电上限设置为90%",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "充电",
+          "value": "90%"
+        }
+      }
+    ],
+    "query_audio": "audio/power_022.wav"
+  },
+  {
+    "id": "power_023",
+    "category": "能源控制",
+    "sub_category": "无线充电全部",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开全部无线充电",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "无线充电",
+          "position": "全部"
+        }
+      }
+    ],
+    "query_audio": "audio/power_023.wav"
+  },
+  {
+    "id": "power_024",
+    "category": "能源控制",
+    "sub_category": "能量回收调节",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "能量回收调到大档",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "能量回收",
+          "value": "大"
+        }
+      }
+    ],
+    "query_audio": "audio/power_024.wav"
+  },
+  {
+    "id": "power_025",
+    "category": "能源控制",
+    "sub_category": "能量回收调节",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "能量回收调到小档",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "能量回收",
+          "value": "小"
+        }
+      }
+    ],
+    "query_audio": "audio/power_025.wav"
+  },
+  {
+    "id": "power_026",
+    "category": "能源控制",
+    "sub_category": "充电开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "电量不够了开始充电吧",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "充电"
+        }
+      }
+    ],
+    "query_audio": "audio/power_026.wav"
+  },
+  {
+    "id": "power_027",
+    "category": "能源控制",
+    "sub_category": "充电开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "充好了不用充了",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "充电"
+        }
+      }
+    ],
+    "query_audio": "audio/power_027.wav"
+  },
+  {
+    "id": "power_028",
+    "category": "能源控制",
+    "sub_category": "无线充电开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "手机没电了开一下无线充电板",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "无线充电"
+        }
+      }
+    ],
+    "query_audio": "audio/power_028.wav"
+  },
+  {
+    "id": "power_029",
+    "category": "能源控制",
+    "sub_category": "无线充电开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "手机充满了把充电板关掉吧",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "无线充电"
+        }
+      }
+    ],
+    "query_audio": "audio/power_029.wav"
+  },
+  {
+    "id": "power_030",
+    "category": "能源控制",
+    "sub_category": "无线充电位置",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "我这边手机要充电帮我开一下无线充",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "无线充电",
+          "position": "主驾"
+        }
+      }
+    ],
+    "query_audio": "audio/power_030.wav"
+  },
+  {
+    "id": "power_031",
+    "category": "能源控制",
+    "sub_category": "无线充电位置",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "副驾那边的手机需要充一下电",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "无线充电",
+          "position": "副驾"
+        }
+      }
+    ],
+    "query_audio": "audio/power_031.wav"
+  },
+  {
+    "id": "power_032",
+    "category": "能源控制",
+    "sub_category": "无线充电位置",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "后排乘客手机没电了帮他们开下无线充",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "无线充电",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/power_032.wav"
+  },
+  {
+    "id": "power_033",
+    "category": "能源控制",
+    "sub_category": "能量回收调节",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "刹车的时候回收力度太弱了调大些",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "能量回收"
+        }
+      }
+    ],
+    "query_audio": "audio/power_033.wav"
+  },
+  {
+    "id": "power_034",
+    "category": "能源控制",
+    "sub_category": "能量回收调节",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "松油门拖拽感太强了减弱一下回收力度",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "能量回收"
+        }
+      }
+    ],
+    "query_audio": "audio/power_034.wav"
+  },
+  {
+    "id": "power_035",
+    "category": "能源控制",
+    "sub_category": "能量回收调节",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "回收的感觉太明显了减轻一点",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "能量回收",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/power_035.wav"
+  },
+  {
+    "id": "power_036",
+    "category": "能源控制",
+    "sub_category": "能量回收调节",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "想要更多的动能回收帮我拉到最高",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "能量回收",
+          "value": "最大"
+        }
+      }
+    ],
+    "query_audio": "audio/power_036.wav"
+  },
+  {
+    "id": "power_037",
+    "category": "能源控制",
+    "sub_category": "能量回收调节",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "市区走走停停开单踏板比较方便",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "能量回收",
+          "value": "单踏板"
+        }
+      }
+    ],
+    "query_audio": "audio/power_037.wav"
+  },
+  {
+    "id": "power_038",
+    "category": "能源控制",
+    "sub_category": "能量回收开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "不想要能量回收了松油门太顿挫关掉吧",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "能量回收"
+        }
+      }
+    ],
+    "query_audio": "audio/power_038.wav"
+  },
+  {
+    "id": "power_039",
+    "category": "能源控制",
+    "sub_category": "充电限制",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "电池别充太满了设到八成就行",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "充电",
+          "value": "80%"
+        }
+      }
+    ],
+    "query_audio": "audio/power_039.wav"
+  },
+  {
+    "id": "power_040",
+    "category": "能源控制",
+    "sub_category": "能量回收调节",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "回收力度帮我设个中档差不多就行",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "能量回收",
+          "value": "中"
+        }
+      }
+    ],
+    "query_audio": "audio/power_040.wav"
+  },
+  {
+    "id": "power_041",
+    "category": "能源控制",
+    "sub_category": "充电限制",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "明天要跑长途充电充满一点调到100%",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "充电",
+          "value": "100%"
+        }
+      }
+    ],
+    "query_audio": "audio/power_041.wav"
+  },
+  {
+    "id": "power_042",
+    "category": "能源控制",
+    "sub_category": "无线充电位置",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "所有位置的无线充电都给我关了吧",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "无线充电",
+          "position": "全部"
+        }
+      }
+    ],
+    "query_audio": "audio/power_042.wav"
+  },
+  {
+    "id": "power_043",
+    "category": "能源控制",
+    "sub_category": "能量回收调节",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "高速上回收不需要那么大调到最低就行",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "能量回收",
+          "value": "最小"
+        }
+      }
+    ],
+    "query_audio": "audio/power_043.wav"
+  },
+  {
+    "id": "power_044",
+    "category": "能源控制",
+    "sub_category": "无线充电位置",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "后排左边那个无线充电关掉",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "无线充电",
+          "position": "第二排左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/power_044.wav"
+  },
+  {
+    "id": "power_045",
+    "category": "能源控制",
+    "sub_category": "无线充电位置",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "后排右边帮忙开一下充电板",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "无线充电",
+          "position": "第二排右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/power_045.wav"
+  },
+  {
+    "id": "power_046",
+    "category": "能源+驾驶模式",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "能量回收调到最大然后切换到节能模式",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "能量回收",
+          "value": "最大"
+        }
+      },
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "节能模式"
+        }
+      }
+    ],
+    "query_audio": "audio/power_046.wav"
+  },
+  {
+    "id": "power_047",
+    "category": "能源+空调",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "关闭充电然后把空调打开",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "充电"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调"
+        }
+      }
+    ],
+    "query_audio": "audio/power_047.wav"
+  },
+  {
+    "id": "power_048",
+    "category": "能源+座椅",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开无线充电顺便开一下座椅加热",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "无线充电"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/power_048.wav"
+  },
+  {
+    "id": "power_049",
+    "category": "能源+车窗",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "能量回收关掉然后把车窗打开透透气",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "能量回收"
+        }
+      },
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "打开",
+          "device": "车窗"
+        }
+      }
+    ],
+    "query_audio": "audio/power_049.wav"
+  },
+  {
+    "id": "power_050",
+    "category": "能源+音量",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "把能量回收调到单踏板然后音量调小一点",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "能量回收",
+          "value": "单踏板"
+        }
+      },
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "音量"
+        }
+      }
+    ],
+    "query_audio": "audio/power_050.wav"
+  },
+  {
+    "id": "power_051",
+    "category": "能源+灯光",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开主驾无线充电然后把阅读灯打开",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "无线充电",
+          "position": "主驾"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "阅读灯"
+        }
+      }
+    ],
+    "query_audio": "audio/power_051.wav"
+  },
+  {
+    "id": "power_052",
+    "category": "能源+屏幕",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "充电限制调到80%然后把屏幕亮度调低一点",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "充电",
+          "value": "80%"
+        }
+      },
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调小",
+          "device": "屏幕",
+          "feature": "亮度"
+        }
+      }
+    ],
+    "query_audio": "audio/power_052.wav"
+  },
+  {
+    "id": "power_053",
+    "category": "能源+方向盘",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "能量回收调到中档然后方向盘加热打开",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "能量回收",
+          "value": "中"
+        }
+      },
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "打开",
+          "device": "方向盘",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/power_053.wav"
+  },
+  {
+    "id": "power_054",
+    "category": "能源+驾驶模式+无线充电",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "切换到运动模式能量回收调到最大再开一下无线充电",
+    "expected_tool_calls": [
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "运动模式"
+        }
+      },
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "能量回收",
+          "value": "最大"
+        }
+      },
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "无线充电"
+        }
+      }
+    ],
+    "query_audio": "audio/power_054.wav"
+  },
+  {
+    "id": "power_055",
+    "category": "能源+网络",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开副驾无线充电顺便把蓝牙也打开",
+    "expected_tool_calls": [
+      {
+        "name": "PowerControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "无线充电",
+          "position": "副驾"
+        }
+      },
+      {
+        "name": "NetworkControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "蓝牙"
+        }
+      }
+    ],
+    "query_audio": "audio/power_055.wav"
+  }
+]

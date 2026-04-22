@@ -1,0 +1,1294 @@
+[
+  {
+    "id": "voice_001",
+    "category": "音量控制",
+    "sub_category": "音量调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "调大音量",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "音量"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_001.wav"
+  },
+  {
+    "id": "voice_002",
+    "category": "音量控制",
+    "sub_category": "音量调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "调小音量",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "音量"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_002.wav"
+  },
+  {
+    "id": "voice_003",
+    "category": "音量控制",
+    "sub_category": "音量调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "音量调到最大",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "音量",
+          "value": "最大"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_003.wav"
+  },
+  {
+    "id": "voice_004",
+    "category": "音量控制",
+    "sub_category": "音量调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "音量调到最小",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "音量",
+          "value": "最小"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_004.wav"
+  },
+  {
+    "id": "voice_005",
+    "category": "音量控制",
+    "sub_category": "音量调节",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "音量调大一点",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "音量",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_005.wav"
+  },
+  {
+    "id": "voice_006",
+    "category": "音量控制",
+    "sub_category": "音量调节",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "音量调小一点",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "音量",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_006.wav"
+  },
+  {
+    "id": "voice_007",
+    "category": "音量控制",
+    "sub_category": "音量调节",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "音量调到百分之五十",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "音量",
+          "value": "50%"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_007.wav"
+  },
+  {
+    "id": "voice_008",
+    "category": "音量控制",
+    "sub_category": "音量调节",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "音量调到五",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "音量",
+          "value": "5"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_008.wav"
+  },
+  {
+    "id": "voice_009",
+    "category": "音量控制",
+    "sub_category": "音量调节",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "音量调到中等",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "音量",
+          "value": "中"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_009.wav"
+  },
+  {
+    "id": "voice_010",
+    "category": "音量控制",
+    "sub_category": "声音开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开声音",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "声音"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_010.wav"
+  },
+  {
+    "id": "voice_011",
+    "category": "音量控制",
+    "sub_category": "声音开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭声音",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "声音"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_011.wav"
+  },
+  {
+    "id": "voice_012",
+    "category": "音量控制",
+    "sub_category": "导航音量",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "调大导航音量",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "导航音量"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_012.wav"
+  },
+  {
+    "id": "voice_013",
+    "category": "音量控制",
+    "sub_category": "导航音量",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "调小导航音量",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "导航音量"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_013.wav"
+  },
+  {
+    "id": "voice_014",
+    "category": "音量控制",
+    "sub_category": "导航音量",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "导航音量调到最大",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "导航音量",
+          "value": "最大"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_014.wav"
+  },
+  {
+    "id": "voice_015",
+    "category": "音量控制",
+    "sub_category": "导航音量",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关闭导航音量",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "导航音量"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_015.wav"
+  },
+  {
+    "id": "voice_016",
+    "category": "音量控制",
+    "sub_category": "语音音量",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "调大语音音量",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "语音音量"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_016.wav"
+  },
+  {
+    "id": "voice_017",
+    "category": "音量控制",
+    "sub_category": "语音音量",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "语音音量调到最小",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "语音音量",
+          "value": "最小"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_017.wav"
+  },
+  {
+    "id": "voice_018",
+    "category": "音量控制",
+    "sub_category": "通话音量",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "调大通话音量",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "通话音量"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_018.wav"
+  },
+  {
+    "id": "voice_019",
+    "category": "音量控制",
+    "sub_category": "通话音量",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "调小通话音量",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "通话音量"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_019.wav"
+  },
+  {
+    "id": "voice_020",
+    "category": "音量控制",
+    "sub_category": "通话音量",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "通话音量调到最大",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "通话音量",
+          "value": "最大"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_020.wav"
+  },
+  {
+    "id": "voice_021",
+    "category": "音量控制",
+    "sub_category": "位置音量",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "调大主驾音量",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "音量",
+          "position": "主驾"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_021.wav"
+  },
+  {
+    "id": "voice_022",
+    "category": "音量控制",
+    "sub_category": "位置音量",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "副驾音量调小一点",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "音量",
+          "position": "副驾",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_022.wav"
+  },
+  {
+    "id": "voice_023",
+    "category": "音量控制",
+    "sub_category": "位置音量",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "第二排音量调到最大",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "音量",
+          "position": "第二排",
+          "value": "最大"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_023.wav"
+  },
+  {
+    "id": "voice_024",
+    "category": "音量控制",
+    "sub_category": "位置音量",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关闭车外音量",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "音量",
+          "position": "车外"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_024.wav"
+  },
+  {
+    "id": "voice_025",
+    "category": "音量控制",
+    "sub_category": "位置音量",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "全部音量调到百分之三十",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "音量",
+          "position": "全部",
+          "value": "30%"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_025.wav"
+  },
+  {
+    "id": "voice_026",
+    "category": "音量控制",
+    "sub_category": "声音开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "静音",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "声音"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_026.wav"
+  },
+  {
+    "id": "voice_027",
+    "category": "音量控制",
+    "sub_category": "导航音量",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "导航音量调大一点",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "导航音量",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_027.wav"
+  },
+  {
+    "id": "voice_028",
+    "category": "音量控制",
+    "sub_category": "语音音量",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "语音音量调小一点",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "语音音量",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_028.wav"
+  },
+  {
+    "id": "voice_029",
+    "category": "音量控制",
+    "sub_category": "位置音量",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "车顶音量调大",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "音量",
+          "position": "车顶"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_029.wav"
+  },
+  {
+    "id": "voice_030",
+    "category": "音量控制",
+    "sub_category": "位置音量",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "第三排的音量调到最小",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "音量",
+          "position": "第三排",
+          "value": "最小"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_030.wav"
+  },
+  {
+    "id": "voice_031",
+    "category": "音量控制",
+    "sub_category": "音量调节",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "声音太小了，听不清",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "音量"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_031.wav"
+  },
+  {
+    "id": "voice_032",
+    "category": "音量控制",
+    "sub_category": "音量调节",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "太吵了，小声一点",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "音量"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_032.wav"
+  },
+  {
+    "id": "voice_033",
+    "category": "音量控制",
+    "sub_category": "音量调节",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "宝宝睡着了，把声音弄小一些",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "音量"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_033.wav"
+  },
+  {
+    "id": "voice_034",
+    "category": "音量控制",
+    "sub_category": "音量调节",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "声音开到最大声",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "音量",
+          "value": "最大"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_034.wav"
+  },
+  {
+    "id": "voice_035",
+    "category": "音量控制",
+    "sub_category": "声音开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "别出声了，安静一下",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "声音"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_035.wav"
+  },
+  {
+    "id": "voice_036",
+    "category": "音量控制",
+    "sub_category": "声音开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "车里怎么没声音了，恢复一下",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "声音"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_036.wav"
+  },
+  {
+    "id": "voice_037",
+    "category": "音量控制",
+    "sub_category": "导航音量",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "导航播报的声音太小了，大一点",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "导航音量"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_037.wav"
+  },
+  {
+    "id": "voice_038",
+    "category": "音量控制",
+    "sub_category": "导航音量",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "导航的声音吵到后排了，关掉导航声音",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "导航音量"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_038.wav"
+  },
+  {
+    "id": "voice_039",
+    "category": "音量控制",
+    "sub_category": "导航音量",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "路上太吵听不见导航在说什么，声音拉满",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "导航音量",
+          "value": "最大"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_039.wav"
+  },
+  {
+    "id": "voice_040",
+    "category": "音量控制",
+    "sub_category": "通话音量",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "打电话听不太清楚，通话声音大一点",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "通话音量"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_040.wav"
+  },
+  {
+    "id": "voice_041",
+    "category": "音量控制",
+    "sub_category": "通话音量",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "电话声音太大了旁边人都能听到，降低一些",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "通话音量"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_041.wav"
+  },
+  {
+    "id": "voice_042",
+    "category": "音量控制",
+    "sub_category": "语音音量",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "语音助手说话声太大了",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "语音音量"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_042.wav"
+  },
+  {
+    "id": "voice_043",
+    "category": "音量控制",
+    "sub_category": "语音音量",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "你说话的声音我听不太清，大声一点好吗",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "语音音量"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_043.wav"
+  },
+  {
+    "id": "voice_044",
+    "category": "音量控制",
+    "sub_category": "位置音量",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "后排小孩在睡觉，后面的声音关掉",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "音量",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_044.wav"
+  },
+  {
+    "id": "voice_045",
+    "category": "音量控制",
+    "sub_category": "位置音量",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "我这边音量有点小，帮我加大主驾的声音",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "音量",
+          "position": "主驾"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_045.wav"
+  },
+  {
+    "id": "voice_046",
+    "category": "音量控制",
+    "sub_category": "位置音量",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "副驾那边太吵了，给她那边音量降低",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "音量",
+          "position": "副驾"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_046.wav"
+  },
+  {
+    "id": "voice_047",
+    "category": "音量控制",
+    "sub_category": "音量调节",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "这首歌好好听，声音再大一些",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "音量"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_047.wav"
+  },
+  {
+    "id": "voice_048",
+    "category": "音量控制",
+    "sub_category": "音量调节",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "要过收费站了，把声音先调低",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "音量"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_048.wav"
+  },
+  {
+    "id": "voice_049",
+    "category": "音量控制",
+    "sub_category": "音量调节",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "音量帮我搞到一半就好了",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "音量",
+          "value": "中"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_049.wav"
+  },
+  {
+    "id": "voice_050",
+    "category": "音量控制",
+    "sub_category": "位置音量",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "车外面的喇叭声音太大了扰民，关掉车外的",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "音量",
+          "position": "车外"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_050.wav"
+  },
+  {
+    "id": "voice_051",
+    "category": "音量控制",
+    "sub_category": "声音开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "全车安静，不要任何声音",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "声音"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_051.wav"
+  },
+  {
+    "id": "voice_052",
+    "category": "音量控制",
+    "sub_category": "通话音量",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "接电话的声音拉到最大",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "通话音量",
+          "value": "最大"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_052.wav"
+  },
+  {
+    "id": "voice_053",
+    "category": "音量控制",
+    "sub_category": "位置音量",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "第三排的人要看视频，后面声音开大些",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "音量",
+          "position": "第三排"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_053.wav"
+  },
+  {
+    "id": "voice_054",
+    "category": "音量控制",
+    "sub_category": "导航音量",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "导航声音不用那么大",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "导航音量"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_054.wav"
+  },
+  {
+    "id": "voice_055",
+    "category": "音量控制",
+    "sub_category": "音量调节",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "音量拉满吧",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "音量",
+          "value": "最大"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_055.wav"
+  },
+  {
+    "id": "voice_056",
+    "category": "音量控制",
+    "sub_category": "音量+空调",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "音量调小一点，空调温度也降一度",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "音量",
+          "value": "一点"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调小",
+          "device": "空调",
+          "feature": "温度"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_056.wav"
+  },
+  {
+    "id": "voice_057",
+    "category": "音量控制",
+    "sub_category": "音量+车窗",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "把声音关了，打开主驾车窗",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "声音"
+        }
+      },
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "打开",
+          "device": "车窗",
+          "position": "主驾"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_057.wav"
+  },
+  {
+    "id": "voice_058",
+    "category": "音量控制",
+    "sub_category": "导航音量+通话音量",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "导航音量调大一点，通话音量也调大",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "导航音量",
+          "value": "一点"
+        }
+      },
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "通话音量"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_058.wav"
+  },
+  {
+    "id": "voice_059",
+    "category": "音量控制",
+    "sub_category": "音量+灯光",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "音量调到最大，打开氛围灯",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "音量",
+          "value": "最大"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "氛围灯"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_059.wav"
+  },
+  {
+    "id": "voice_060",
+    "category": "音量控制",
+    "sub_category": "音量+屏幕",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "声音调小，屏幕亮度也调低一点",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "音量"
+        }
+      },
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调小",
+          "device": "屏幕",
+          "feature": "亮度",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_060.wav"
+  },
+  {
+    "id": "voice_061",
+    "category": "音量控制",
+    "sub_category": "音量+座椅",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "音量调到百分之二十，主驾座椅按摩打开",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "音量",
+          "value": "20%"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "按摩",
+          "position": "主驾"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_061.wav"
+  },
+  {
+    "id": "voice_062",
+    "category": "音量控制",
+    "sub_category": "音量+方向盘",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "音量调到最小，方向盘加热打开",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "音量",
+          "value": "最小"
+        }
+      },
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "打开",
+          "device": "方向盘",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_062.wav"
+  },
+  {
+    "id": "voice_063",
+    "category": "音量控制",
+    "sub_category": "位置音量+位置音量",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "主驾音量调大，第二排的音量调到最小",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "音量",
+          "position": "主驾"
+        }
+      },
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "音量",
+          "position": "第二排",
+          "value": "最小"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_063.wav"
+  },
+  {
+    "id": "voice_064",
+    "category": "音量控制",
+    "sub_category": "音量+驾驶模式",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "音量拉满，切换运动模式",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "音量",
+          "value": "最大"
+        }
+      },
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "运动模式"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_064.wav"
+  },
+  {
+    "id": "voice_065",
+    "category": "音量控制",
+    "sub_category": "声音+导航",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "把声音调到中等，导航音量调到最大",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "音量",
+          "value": "中"
+        }
+      },
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "导航音量",
+          "value": "最大"
+        }
+      }
+    ],
+    "query_audio": "audio/voice_065.wav"
+  }
+]

@@ -1,0 +1,1487 @@
+[
+  {
+    "id": "media_001",
+    "category": "媒体控制",
+    "sub_category": "音乐播放控制",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "暂停音乐",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "media_category": "歌",
+          "media_control_action": "暂停"
+        }
+      }
+    ],
+    "query_audio": "audio/media_001.wav"
+  },
+  {
+    "id": "media_002",
+    "category": "媒体控制",
+    "sub_category": "音乐播放控制",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "继续播放音乐",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "media_category": "歌",
+          "media_control_action": "继续"
+        }
+      }
+    ],
+    "query_audio": "audio/media_002.wav"
+  },
+  {
+    "id": "media_003",
+    "category": "媒体控制",
+    "sub_category": "音乐播放控制",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "下一首歌",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "media_category": "歌",
+          "media_control_action": "下一个"
+        }
+      }
+    ],
+    "query_audio": "audio/media_003.wav"
+  },
+  {
+    "id": "media_004",
+    "category": "媒体控制",
+    "sub_category": "音乐播放控制",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "上一首歌",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "media_category": "歌",
+          "media_control_action": "上一个"
+        }
+      }
+    ],
+    "query_audio": "audio/media_004.wav"
+  },
+  {
+    "id": "media_005",
+    "category": "媒体控制",
+    "sub_category": "音乐播放控制",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭音乐",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "media_category": "歌",
+          "media_control_action": "关闭"
+        }
+      }
+    ],
+    "query_audio": "audio/media_005.wav"
+  },
+  {
+    "id": "media_006",
+    "category": "媒体控制",
+    "sub_category": "FM控制",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "暂停FM",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "media_category": "FM",
+          "media_control_action": "暂停"
+        }
+      }
+    ],
+    "query_audio": "audio/media_006.wav"
+  },
+  {
+    "id": "media_007",
+    "category": "媒体控制",
+    "sub_category": "FM控制",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "下一个FM频道",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "media_category": "FM",
+          "media_control_action": "下一个"
+        }
+      }
+    ],
+    "query_audio": "audio/media_007.wav"
+  },
+  {
+    "id": "media_008",
+    "category": "媒体控制",
+    "sub_category": "读物控制",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "暂停读物播放",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "media_category": "读物",
+          "media_control_action": "暂停"
+        }
+      }
+    ],
+    "query_audio": "audio/media_008.wav"
+  },
+  {
+    "id": "media_009",
+    "category": "媒体控制",
+    "sub_category": "读物控制",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "继续播放有声书",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "media_category": "读物",
+          "media_control_action": "继续"
+        }
+      }
+    ],
+    "query_audio": "audio/media_009.wav"
+  },
+  {
+    "id": "media_010",
+    "category": "媒体控制",
+    "sub_category": "Spotify控制",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "在Spotify上播放下一首",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "app_name": "spotify",
+          "media_control_action": "下一个"
+        }
+      }
+    ],
+    "query_audio": "audio/media_010.wav"
+  },
+  {
+    "id": "media_011",
+    "category": "媒体控制",
+    "sub_category": "YouTube控制",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关闭YouTube视频",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "app_name": "youtube",
+          "media_control_action": "关闭"
+        }
+      }
+    ],
+    "query_audio": "audio/media_011.wav"
+  },
+  {
+    "id": "media_012",
+    "category": "媒体控制",
+    "sub_category": "TuneIn控制",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "暂停TuneIn电台",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "app_name": "tunein",
+          "media_category": "TuneIn",
+          "media_control_action": "暂停"
+        }
+      }
+    ],
+    "query_audio": "audio/media_012.wav"
+  },
+  {
+    "id": "media_013",
+    "category": "媒体播放",
+    "sub_category": "音乐播放",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "播放音乐",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "media_category": "歌"
+        }
+      }
+    ],
+    "query_audio": "audio/media_013.wav"
+  },
+  {
+    "id": "media_014",
+    "category": "媒体播放",
+    "sub_category": "FM播放",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "播放FM广播",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "media_category": "FM"
+        }
+      }
+    ],
+    "query_audio": "audio/media_014.wav"
+  },
+  {
+    "id": "media_015",
+    "category": "媒体播放",
+    "sub_category": "视频播放",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "播放视频",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "media_category": "视频"
+        }
+      }
+    ],
+    "query_audio": "audio/media_015.wav"
+  },
+  {
+    "id": "media_016",
+    "category": "媒体播放",
+    "sub_category": "读物播放",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "播放有声读物",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "media_category": "读物"
+        }
+      }
+    ],
+    "query_audio": "audio/media_016.wav"
+  },
+  {
+    "id": "media_017",
+    "category": "媒体播放",
+    "sub_category": "蓝牙音乐",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "用蓝牙播放音乐",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "media_category": "歌",
+          "media_source": "蓝牙"
+        }
+      }
+    ],
+    "query_audio": "audio/media_017.wav"
+  },
+  {
+    "id": "media_018",
+    "category": "媒体播放",
+    "sub_category": "Spotify播放",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开Spotify播放歌曲",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "app_name": "spotify",
+          "media_category": "歌"
+        }
+      }
+    ],
+    "query_audio": "audio/media_018.wav"
+  },
+  {
+    "id": "media_019",
+    "category": "媒体播放",
+    "sub_category": "YouTube播放",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "用YouTube播放视频",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "app_name": "youtube",
+          "media_category": "视频"
+        }
+      }
+    ],
+    "query_audio": "audio/media_019.wav"
+  },
+  {
+    "id": "media_020",
+    "category": "媒体播放",
+    "sub_category": "TikTok播放",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开TikTok看视频",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "app_name": "tiktok",
+          "media_category": "视频"
+        }
+      }
+    ],
+    "query_audio": "audio/media_020.wav"
+  },
+  {
+    "id": "media_021",
+    "category": "媒体播放",
+    "sub_category": "Apple Music播放",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "用Apple Music放歌",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "app_name": "applemusic",
+          "media_category": "歌"
+        }
+      }
+    ],
+    "query_audio": "audio/media_021.wav"
+  },
+  {
+    "id": "media_022",
+    "category": "媒体播放",
+    "sub_category": "Disney+播放",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开迪士尼播放视频",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "app_name": "disneyplus",
+          "media_category": "视频"
+        }
+      }
+    ],
+    "query_audio": "audio/media_022.wav"
+  },
+  {
+    "id": "media_023",
+    "category": "音乐搜索",
+    "sub_category": "歌曲搜索",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "播放周杰伦的晴天",
+    "expected_tool_calls": [
+      {
+        "name": "MusicSearchPlay",
+        "arguments": {
+          "song": "周杰伦 晴天"
+        }
+      }
+    ],
+    "query_audio": "audio/media_023.wav"
+  },
+  {
+    "id": "media_024",
+    "category": "音乐搜索",
+    "sub_category": "歌曲搜索",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "我想听孤勇者",
+    "expected_tool_calls": [
+      {
+        "name": "MusicSearchPlay",
+        "arguments": {
+          "song": "孤勇者"
+        }
+      }
+    ],
+    "query_audio": "audio/media_024.wav"
+  },
+  {
+    "id": "media_025",
+    "category": "音乐搜索",
+    "sub_category": "Spotify搜索",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "在Spotify上搜索并播放Shape of You",
+    "expected_tool_calls": [
+      {
+        "name": "MusicSearchPlay",
+        "arguments": {
+          "app_name": "spotify",
+          "song": "Shape of You"
+        }
+      }
+    ],
+    "query_audio": "audio/media_025.wav"
+  },
+  {
+    "id": "media_026",
+    "category": "音乐搜索",
+    "sub_category": "歌曲搜索",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "播放一首邓紫棋的歌",
+    "expected_tool_calls": [
+      {
+        "name": "MusicSearchPlay",
+        "arguments": {
+          "song": "邓紫棋"
+        }
+      }
+    ],
+    "query_audio": "audio/media_026.wav"
+  },
+  {
+    "id": "media_027",
+    "category": "FM搜索",
+    "sub_category": "FM频道搜索",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "播放FM103.7",
+    "expected_tool_calls": [
+      {
+        "name": "FmSearchPlay",
+        "arguments": {
+          "fm_channel": "103.7",
+          "media_category": "FM"
+        }
+      }
+    ],
+    "query_audio": "audio/media_027.wav"
+  },
+  {
+    "id": "media_028",
+    "category": "FM搜索",
+    "sub_category": "FM频道搜索",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "调到FM98.5",
+    "expected_tool_calls": [
+      {
+        "name": "FmSearchPlay",
+        "arguments": {
+          "fm_channel": "98.5",
+          "media_category": "FM"
+        }
+      }
+    ],
+    "query_audio": "audio/media_028.wav"
+  },
+  {
+    "id": "media_029",
+    "category": "FM搜索",
+    "sub_category": "AM频道搜索",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "播放AM1638",
+    "expected_tool_calls": [
+      {
+        "name": "FmSearchPlay",
+        "arguments": {
+          "fm_channel": "1638",
+          "media_category": "1638 am"
+        }
+      }
+    ],
+    "query_audio": "audio/media_029.wav"
+  },
+  {
+    "id": "media_030",
+    "category": "FM搜索",
+    "sub_category": "FM频道搜索",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "帮我搜索FM88.1中国之声",
+    "expected_tool_calls": [
+      {
+        "name": "FmSearchPlay",
+        "arguments": {
+          "fm_channel": "88.1",
+          "media_category": "FM"
+        }
+      }
+    ],
+    "query_audio": "audio/media_030.wav"
+  },
+  {
+    "id": "media_031",
+    "category": "喜马拉雅",
+    "sub_category": "播客搜索",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "播放喜马拉雅上的三体",
+    "expected_tool_calls": [
+      {
+        "name": "XmlySearchPlay",
+        "arguments": {
+          "podcast_name": "三体"
+        }
+      }
+    ],
+    "query_audio": "audio/media_031.wav"
+  },
+  {
+    "id": "media_032",
+    "category": "喜马拉雅",
+    "sub_category": "播客搜索",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "在喜马拉雅搜索郭德纲相声",
+    "expected_tool_calls": [
+      {
+        "name": "XmlySearchPlay",
+        "arguments": {
+          "podcast_name": "郭德纲相声"
+        }
+      }
+    ],
+    "query_audio": "audio/media_032.wav"
+  },
+  {
+    "id": "media_033",
+    "category": "喜马拉雅",
+    "sub_category": "播客搜索",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "用喜马拉雅听一下明朝那些事儿",
+    "expected_tool_calls": [
+      {
+        "name": "XmlySearchPlay",
+        "arguments": {
+          "podcast_name": "明朝那些事儿"
+        }
+      }
+    ],
+    "query_audio": "audio/media_033.wav"
+  },
+  {
+    "id": "media_034",
+    "category": "喜马拉雅",
+    "sub_category": "播客搜索",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "喜马拉雅播放盗墓笔记",
+    "expected_tool_calls": [
+      {
+        "name": "XmlySearchPlay",
+        "arguments": {
+          "podcast_name": "盗墓笔记"
+        }
+      }
+    ],
+    "query_audio": "audio/media_034.wav"
+  },
+  {
+    "id": "media_035",
+    "category": "媒体控制",
+    "sub_category": "音乐播放控制",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "把Spotify上的歌暂停一下",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "app_name": "spotify",
+          "media_category": "歌",
+          "media_control_action": "暂停"
+        }
+      }
+    ],
+    "query_audio": "audio/media_035.wav"
+  },
+  {
+    "id": "media_036",
+    "category": "媒体播放",
+    "sub_category": "TuneIn播放",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "用TuneIn播放电台",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "app_name": "tunein",
+          "media_category": "FM"
+        }
+      }
+    ],
+    "query_audio": "audio/media_036.wav"
+  },
+  {
+    "id": "media_037",
+    "category": "音乐搜索",
+    "sub_category": "TuneIn搜索",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "在TuneIn上搜索播放Hotel California",
+    "expected_tool_calls": [
+      {
+        "name": "MusicSearchPlay",
+        "arguments": {
+          "app_name": "tunein",
+          "song": "Hotel California"
+        }
+      }
+    ],
+    "query_audio": "audio/media_037.wav"
+  },
+  {
+    "id": "media_038",
+    "category": "媒体播放",
+    "sub_category": "蓝牙音乐",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "切换到蓝牙音源",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "media_source": "蓝牙"
+        }
+      }
+    ],
+    "query_audio": "audio/media_038.wav"
+  },
+  {
+    "id": "media_039",
+    "category": "媒体控制",
+    "sub_category": "读物控制",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "下一章读物",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "media_category": "读物",
+          "media_control_action": "下一个"
+        }
+      }
+    ],
+    "query_audio": "audio/media_039.wav"
+  },
+  {
+    "id": "media_040",
+    "category": "媒体控制",
+    "sub_category": "FM控制",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭收音机",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "media_category": "FM",
+          "media_control_action": "关闭"
+        }
+      }
+    ],
+    "query_audio": "audio/media_040.wav"
+  },
+  {
+    "id": "media_041",
+    "category": "媒体控制",
+    "sub_category": "音乐播放控制",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "别放了太吵了",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "media_control_action": "暂停"
+        }
+      }
+    ],
+    "query_audio": "audio/media_041.wav"
+  },
+  {
+    "id": "media_042",
+    "category": "媒体控制",
+    "sub_category": "音乐播放控制",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "换一首吧这首不好听",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "media_category": "歌",
+          "media_control_action": "下一个"
+        }
+      }
+    ],
+    "query_audio": "audio/media_042.wav"
+  },
+  {
+    "id": "media_043",
+    "category": "媒体控制",
+    "sub_category": "音乐播放控制",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "刚才那首歌挺好听的再放一遍",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "media_category": "歌",
+          "media_control_action": "上一个"
+        }
+      }
+    ],
+    "query_audio": "audio/media_043.wav"
+  },
+  {
+    "id": "media_044",
+    "category": "媒体控制",
+    "sub_category": "音乐播放控制",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "安静一下不想听了",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "media_control_action": "关闭"
+        }
+      }
+    ],
+    "query_audio": "audio/media_044.wav"
+  },
+  {
+    "id": "media_045",
+    "category": "媒体控制",
+    "sub_category": "音乐播放控制",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "接着放吧刚才听到一半",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "media_control_action": "继续"
+        }
+      }
+    ],
+    "query_audio": "audio/media_045.wav"
+  },
+  {
+    "id": "media_046",
+    "category": "媒体播放",
+    "sub_category": "音乐播放",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "车里有点无聊放点歌吧",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "media_category": "歌"
+        }
+      }
+    ],
+    "query_audio": "audio/media_046.wav"
+  },
+  {
+    "id": "media_047",
+    "category": "媒体播放",
+    "sub_category": "FM播放",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "想听听广播了解一下新闻",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "media_category": "FM"
+        }
+      }
+    ],
+    "query_audio": "audio/media_047.wav"
+  },
+  {
+    "id": "media_048",
+    "category": "媒体播放",
+    "sub_category": "视频播放",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "等人无聊看会儿视频打发时间",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "media_category": "视频"
+        }
+      }
+    ],
+    "query_audio": "audio/media_048.wav"
+  },
+  {
+    "id": "media_049",
+    "category": "媒体播放",
+    "sub_category": "读物播放",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "路上太长了听本书吧",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "media_category": "读物"
+        }
+      }
+    ],
+    "query_audio": "audio/media_049.wav"
+  },
+  {
+    "id": "media_050",
+    "category": "媒体播放",
+    "sub_category": "蓝牙音乐",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "从手机上传音乐过来播放",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "media_source": "蓝牙"
+        }
+      }
+    ],
+    "query_audio": "audio/media_050.wav"
+  },
+  {
+    "id": "media_051",
+    "category": "媒体播放",
+    "sub_category": "YouTube播放",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "打开油管看看有什么有趣的",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "app_name": "youtube",
+          "media_category": "视频"
+        }
+      }
+    ],
+    "query_audio": "audio/media_051.wav"
+  },
+  {
+    "id": "media_052",
+    "category": "媒体播放",
+    "sub_category": "TikTok播放",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "刷会儿抖音打发一下时间",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "app_name": "tiktok",
+          "media_category": "视频"
+        }
+      }
+    ],
+    "query_audio": "audio/media_052.wav"
+  },
+  {
+    "id": "media_053",
+    "category": "音乐搜索",
+    "sub_category": "歌曲搜索",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "来一首适合开车听的歌就放七里香吧",
+    "expected_tool_calls": [
+      {
+        "name": "MusicSearchPlay",
+        "arguments": {
+          "song": "七里香"
+        }
+      }
+    ],
+    "query_audio": "audio/media_053.wav"
+  },
+  {
+    "id": "media_054",
+    "category": "音乐搜索",
+    "sub_category": "歌曲搜索",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "想听那首很火的歌叫什么来着起风了",
+    "expected_tool_calls": [
+      {
+        "name": "MusicSearchPlay",
+        "arguments": {
+          "song": "起风了"
+        }
+      }
+    ],
+    "query_audio": "audio/media_054.wav"
+  },
+  {
+    "id": "media_055",
+    "category": "音乐搜索",
+    "sub_category": "歌曲搜索",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "放一首陈奕迅的歌最好是那首很经典的十年",
+    "expected_tool_calls": [
+      {
+        "name": "MusicSearchPlay",
+        "arguments": {
+          "song": "陈奕迅 十年"
+        }
+      }
+    ],
+    "query_audio": "audio/media_055.wav"
+  },
+  {
+    "id": "media_056",
+    "category": "音乐搜索",
+    "sub_category": "歌曲搜索",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "给我找一首林俊杰的歌来听听",
+    "expected_tool_calls": [
+      {
+        "name": "MusicSearchPlay",
+        "arguments": {
+          "song": "林俊杰"
+        }
+      }
+    ],
+    "query_audio": "audio/media_056.wav"
+  },
+  {
+    "id": "media_057",
+    "category": "音乐搜索",
+    "sub_category": "歌曲搜索",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "心情不太好想听点伤感的歌放一首后来吧",
+    "expected_tool_calls": [
+      {
+        "name": "MusicSearchPlay",
+        "arguments": {
+          "song": "后来"
+        }
+      }
+    ],
+    "query_audio": "audio/media_057.wav"
+  },
+  {
+    "id": "media_058",
+    "category": "FM搜索",
+    "sub_category": "FM频道搜索",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "听听交通广播FM99.6",
+    "expected_tool_calls": [
+      {
+        "name": "FmSearchPlay",
+        "arguments": {
+          "fm_channel": "99.6",
+          "media_category": "FM"
+        }
+      }
+    ],
+    "query_audio": "audio/media_058.wav"
+  },
+  {
+    "id": "media_059",
+    "category": "FM搜索",
+    "sub_category": "FM频道搜索",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "帮我找那个音乐台好像是97.4",
+    "expected_tool_calls": [
+      {
+        "name": "FmSearchPlay",
+        "arguments": {
+          "fm_channel": "97.4",
+          "media_category": "FM"
+        }
+      }
+    ],
+    "query_audio": "audio/media_059.wav"
+  },
+  {
+    "id": "media_060",
+    "category": "FM搜索",
+    "sub_category": "FM频道搜索",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "路上堵车了调个广播听听FM105.1",
+    "expected_tool_calls": [
+      {
+        "name": "FmSearchPlay",
+        "arguments": {
+          "fm_channel": "105.1",
+          "media_category": "FM"
+        }
+      }
+    ],
+    "query_audio": "audio/media_060.wav"
+  },
+  {
+    "id": "media_061",
+    "category": "喜马拉雅",
+    "sub_category": "播客搜索",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "路上挺无聊的听个相声解解闷就听德云社的吧",
+    "expected_tool_calls": [
+      {
+        "name": "XmlySearchPlay",
+        "arguments": {
+          "podcast_name": "德云社"
+        }
+      }
+    ],
+    "query_audio": "audio/media_061.wav"
+  },
+  {
+    "id": "media_062",
+    "category": "喜马拉雅",
+    "sub_category": "播客搜索",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "给我找一下喜马拉雅上的罗辑思维",
+    "expected_tool_calls": [
+      {
+        "name": "XmlySearchPlay",
+        "arguments": {
+          "podcast_name": "罗辑思维"
+        }
+      }
+    ],
+    "query_audio": "audio/media_062.wav"
+  },
+  {
+    "id": "media_063",
+    "category": "喜马拉雅",
+    "sub_category": "播客搜索",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "想听点悬疑故事有没有鬼吹灯",
+    "expected_tool_calls": [
+      {
+        "name": "XmlySearchPlay",
+        "arguments": {
+          "podcast_name": "鬼吹灯"
+        }
+      }
+    ],
+    "query_audio": "audio/media_063.wav"
+  },
+  {
+    "id": "media_064",
+    "category": "喜马拉雅",
+    "sub_category": "播客搜索",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "孩子想听故事找个西游记的节目",
+    "expected_tool_calls": [
+      {
+        "name": "XmlySearchPlay",
+        "arguments": {
+          "podcast_name": "西游记"
+        }
+      }
+    ],
+    "query_audio": "audio/media_064.wav"
+  },
+  {
+    "id": "media_065",
+    "category": "媒体控制",
+    "sub_category": "音乐播放控制",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "这歌不错但是我要接电话先停一下",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "media_category": "歌",
+          "media_control_action": "暂停"
+        }
+      }
+    ],
+    "query_audio": "audio/media_065.wav"
+  },
+  {
+    "id": "media_066",
+    "category": "媒体播放",
+    "sub_category": "Apple Music播放",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "苹果那个音乐软件打开放点歌听",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "app_name": "applemusic",
+          "media_category": "歌"
+        }
+      }
+    ],
+    "query_audio": "audio/media_066.wav"
+  },
+  {
+    "id": "media_067",
+    "category": "媒体控制",
+    "sub_category": "TuneIn控制",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "这个电台频道不好听换下一个",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "media_category": "FM",
+          "media_control_action": "下一个"
+        }
+      }
+    ],
+    "query_audio": "audio/media_067.wav"
+  },
+  {
+    "id": "media_068",
+    "category": "媒体播放",
+    "sub_category": "Disney+播放",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "小朋友想看动画片用迪士尼给她放",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "app_name": "disneyplus",
+          "media_category": "视频"
+        }
+      }
+    ],
+    "query_audio": "audio/media_068.wav"
+  },
+  {
+    "id": "media_069",
+    "category": "媒体播放",
+    "sub_category": "蓝牙音乐",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "我手机里有个歌单想连到车上播放",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "media_category": "歌",
+          "media_source": "蓝牙"
+        }
+      }
+    ],
+    "query_audio": "audio/media_069.wav"
+  },
+  {
+    "id": "media_070",
+    "category": "媒体控制",
+    "sub_category": "YouTube控制",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "YouTube那个视频先停一下马上要开车了",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "app_name": "youtube",
+          "media_control_action": "暂停"
+        }
+      }
+    ],
+    "query_audio": "audio/media_070.wav"
+  },
+  {
+    "id": "media_071",
+    "category": "媒体控制+空调",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "暂停音乐然后把空调温度调到24度",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "media_category": "歌",
+          "media_control_action": "暂停"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "温度",
+          "value": "24"
+        }
+      }
+    ],
+    "query_audio": "audio/media_071.wav"
+  },
+  {
+    "id": "media_072",
+    "category": "音乐搜索+车窗",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "播放周杰伦的稻香然后把车窗关上",
+    "expected_tool_calls": [
+      {
+        "name": "MusicSearchPlay",
+        "arguments": {
+          "song": "周杰伦 稻香"
+        }
+      },
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "关闭"
+        }
+      }
+    ],
+    "query_audio": "audio/media_072.wav"
+  },
+  {
+    "id": "media_073",
+    "category": "FM搜索+音量",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "调到FM103.7然后音量调大一点",
+    "expected_tool_calls": [
+      {
+        "name": "FmSearchPlay",
+        "arguments": {
+          "fm_channel": "103.7",
+          "media_category": "FM"
+        }
+      },
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "音量"
+        }
+      }
+    ],
+    "query_audio": "audio/media_073.wav"
+  },
+  {
+    "id": "media_074",
+    "category": "喜马拉雅+座椅",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "播放喜马拉雅的三体然后把座椅放平",
+    "expected_tool_calls": [
+      {
+        "name": "XmlySearchPlay",
+        "arguments": {
+          "podcast_name": "三体"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "放平"
+        }
+      }
+    ],
+    "query_audio": "audio/media_074.wav"
+  },
+  {
+    "id": "media_075",
+    "category": "媒体播放+灯光",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "用Spotify播放音乐顺便把车内灯关了",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "app_name": "spotify",
+          "media_category": "歌"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "feature": "氛围灯"
+        }
+      }
+    ],
+    "query_audio": "audio/media_075.wav"
+  },
+  {
+    "id": "media_076",
+    "category": "媒体控制+驾驶模式",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "关掉音乐切换到运动模式",
+    "expected_tool_calls": [
+      {
+        "name": "MediaControl",
+        "arguments": {
+          "media_category": "歌",
+          "media_control_action": "关闭"
+        }
+      },
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "切换",
+          "feature": "驾驶模式",
+          "value": "运动"
+        }
+      }
+    ],
+    "query_audio": "audio/media_076.wav"
+  },
+  {
+    "id": "media_077",
+    "category": "视频播放+屏幕",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开YouTube看视频把屏幕亮度调高一点",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "app_name": "youtube",
+          "media_category": "视频"
+        }
+      },
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调大",
+          "feature": "亮度"
+        }
+      }
+    ],
+    "query_audio": "audio/media_077.wav"
+  },
+  {
+    "id": "media_078",
+    "category": "音乐搜索+空调",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "给我放一首告白气球然后开一下空调",
+    "expected_tool_calls": [
+      {
+        "name": "MusicSearchPlay",
+        "arguments": {
+          "song": "告白气球"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开"
+        }
+      }
+    ],
+    "query_audio": "audio/media_078.wav"
+  },
+  {
+    "id": "media_079",
+    "category": "媒体播放+方向盘",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "放点轻音乐然后方向盘加热打开",
+    "expected_tool_calls": [
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "media_category": "歌"
+        }
+      },
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/media_079.wav"
+  },
+  {
+    "id": "media_080",
+    "category": "喜马拉雅+音量+车窗",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "播放喜马拉雅的故事把音量调到50然后关上车窗",
+    "expected_tool_calls": [
+      {
+        "name": "XmlySearchPlay",
+        "arguments": {
+          "podcast_name": "故事"
+        }
+      },
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "音量",
+          "value": "50"
+        }
+      },
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "关闭"
+        }
+      }
+    ],
+    "query_audio": "audio/media_080.wav"
+  }
+]

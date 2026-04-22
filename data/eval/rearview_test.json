@@ -1,0 +1,1139 @@
+[
+  {
+    "id": "rearview_001",
+    "category": "后视镜控制",
+    "sub_category": "后视镜展开收起",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "展开后视镜",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "展开",
+          "device": "后视镜"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_001.wav"
+  },
+  {
+    "id": "rearview_002",
+    "category": "后视镜控制",
+    "sub_category": "后视镜展开收起",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "收起后视镜",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "收起",
+          "device": "后视镜"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_002.wav"
+  },
+  {
+    "id": "rearview_003",
+    "category": "后视镜控制",
+    "sub_category": "后视镜开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开后视镜",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后视镜"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_003.wav"
+  },
+  {
+    "id": "rearview_004",
+    "category": "后视镜控制",
+    "sub_category": "后视镜开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭后视镜",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "后视镜"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_004.wav"
+  },
+  {
+    "id": "rearview_005",
+    "category": "后视镜控制",
+    "sub_category": "后视镜高度调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "后视镜调大",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "调大",
+          "device": "后视镜"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_005.wav"
+  },
+  {
+    "id": "rearview_006",
+    "category": "后视镜控制",
+    "sub_category": "后视镜高度调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "后视镜调小",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "调小",
+          "device": "后视镜"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_006.wav"
+  },
+  {
+    "id": "rearview_007",
+    "category": "后视镜控制",
+    "sub_category": "后视镜高度调节",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "后视镜高度调大一点",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "调大",
+          "device": "后视镜",
+          "feature": "高度",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_007.wav"
+  },
+  {
+    "id": "rearview_008",
+    "category": "后视镜控制",
+    "sub_category": "后视镜高度调节",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "后视镜高度调小一点",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "调小",
+          "device": "后视镜",
+          "feature": "高度",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_008.wav"
+  },
+  {
+    "id": "rearview_009",
+    "category": "后视镜控制",
+    "sub_category": "主驾后视镜",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "展开主驾后视镜",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "展开",
+          "device": "后视镜",
+          "position": "主驾"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_009.wav"
+  },
+  {
+    "id": "rearview_010",
+    "category": "后视镜控制",
+    "sub_category": "副驾后视镜",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "展开副驾后视镜",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "展开",
+          "device": "后视镜",
+          "position": "副驾"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_010.wav"
+  },
+  {
+    "id": "rearview_011",
+    "category": "后视镜控制",
+    "sub_category": "左侧后视镜",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "收起左侧后视镜",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "收起",
+          "device": "后视镜",
+          "position": "左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_011.wav"
+  },
+  {
+    "id": "rearview_012",
+    "category": "后视镜控制",
+    "sub_category": "右侧后视镜",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "收起右侧后视镜",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "收起",
+          "device": "后视镜",
+          "position": "右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_012.wav"
+  },
+  {
+    "id": "rearview_013",
+    "category": "后视镜控制",
+    "sub_category": "主驾后视镜高度",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "主驾后视镜高度调大一点",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "调大",
+          "device": "后视镜",
+          "feature": "高度",
+          "position": "主驾",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_013.wav"
+  },
+  {
+    "id": "rearview_014",
+    "category": "后视镜控制",
+    "sub_category": "副驾后视镜高度",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "副驾后视镜高度调小一点",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "调小",
+          "device": "后视镜",
+          "feature": "高度",
+          "position": "副驾",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_014.wav"
+  },
+  {
+    "id": "rearview_015",
+    "category": "后视镜控制",
+    "sub_category": "左侧后视镜高度",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "左侧后视镜高度调大",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "调大",
+          "device": "后视镜",
+          "feature": "高度",
+          "position": "左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_015.wav"
+  },
+  {
+    "id": "rearview_016",
+    "category": "后视镜控制",
+    "sub_category": "右侧后视镜高度",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "右侧后视镜高度调小",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "调小",
+          "device": "后视镜",
+          "feature": "高度",
+          "position": "右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_016.wav"
+  },
+  {
+    "id": "rearview_017",
+    "category": "后视镜控制",
+    "sub_category": "左侧后视镜",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开左侧后视镜",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后视镜",
+          "position": "左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_017.wav"
+  },
+  {
+    "id": "rearview_018",
+    "category": "后视镜控制",
+    "sub_category": "右侧后视镜",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭右侧后视镜",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "后视镜",
+          "position": "右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_018.wav"
+  },
+  {
+    "id": "rearview_019",
+    "category": "后视镜控制",
+    "sub_category": "主驾后视镜",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "收起主驾后视镜",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "收起",
+          "device": "后视镜",
+          "position": "主驾"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_019.wav"
+  },
+  {
+    "id": "rearview_020",
+    "category": "后视镜控制",
+    "sub_category": "副驾后视镜",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "打开副驾那边的后视镜",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后视镜",
+          "position": "副驾"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_020.wav"
+  },
+  {
+    "id": "rearview_021",
+    "category": "后视镜控制",
+    "sub_category": "后视镜高度调节",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "后视镜调大一点",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "调大",
+          "device": "后视镜",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_021.wav"
+  },
+  {
+    "id": "rearview_022",
+    "category": "后视镜控制",
+    "sub_category": "后视镜高度调节",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "后视镜调小一点",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "调小",
+          "device": "后视镜",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_022.wav"
+  },
+  {
+    "id": "rearview_023",
+    "category": "后视镜控制",
+    "sub_category": "左侧后视镜",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "展开左侧后视镜",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "展开",
+          "device": "后视镜",
+          "position": "左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_023.wav"
+  },
+  {
+    "id": "rearview_024",
+    "category": "后视镜控制",
+    "sub_category": "右侧后视镜",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "展开右侧后视镜",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "展开",
+          "device": "后视镜",
+          "position": "右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_024.wav"
+  },
+  {
+    "id": "rearview_025",
+    "category": "后视镜控制",
+    "sub_category": "主驾后视镜",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关闭主驾后视镜",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "后视镜",
+          "position": "主驾"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_025.wav"
+  },
+  {
+    "id": "rearview_026",
+    "category": "后视镜控制",
+    "sub_category": "后视镜展开收起",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "要出发了把后视镜打开吧",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "展开",
+          "device": "后视镜"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_026.wav"
+  },
+  {
+    "id": "rearview_027",
+    "category": "后视镜控制",
+    "sub_category": "后视镜展开收起",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "停好车了把两边的镜子折叠起来",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "收起",
+          "device": "后视镜"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_027.wav"
+  },
+  {
+    "id": "rearview_028",
+    "category": "后视镜控制",
+    "sub_category": "后视镜展开收起",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "这个车位太窄了镜子收一下免得剐蹭",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "收起",
+          "device": "后视镜"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_028.wav"
+  },
+  {
+    "id": "rearview_029",
+    "category": "后视镜控制",
+    "sub_category": "后视镜展开收起",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "侧面的反光镜还没弹出来帮我弄一下",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "展开",
+          "device": "后视镜"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_029.wav"
+  },
+  {
+    "id": "rearview_030",
+    "category": "后视镜控制",
+    "sub_category": "后视镜高度调节",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "后视镜看不清后面的车往上调调",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "调大",
+          "device": "后视镜",
+          "feature": "高度"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_030.wav"
+  },
+  {
+    "id": "rearview_031",
+    "category": "后视镜控制",
+    "sub_category": "后视镜高度调节",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "后视镜角度太高了往下压一压",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "调小",
+          "device": "后视镜",
+          "feature": "高度"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_031.wav"
+  },
+  {
+    "id": "rearview_032",
+    "category": "后视镜控制",
+    "sub_category": "主驾后视镜",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "我这边的镜子看不太到后面的情况调高一些",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "调大",
+          "device": "后视镜",
+          "feature": "高度",
+          "position": "主驾"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_032.wav"
+  },
+  {
+    "id": "rearview_033",
+    "category": "后视镜控制",
+    "sub_category": "副驾后视镜",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "副驾那边的倒车镜有点低了升一升",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "调大",
+          "device": "后视镜",
+          "feature": "高度",
+          "position": "副驾"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_033.wav"
+  },
+  {
+    "id": "rearview_034",
+    "category": "后视镜控制",
+    "sub_category": "左侧后视镜",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "左边那个镜子帮我展开一下忘记打开了",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "展开",
+          "device": "后视镜",
+          "position": "左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_034.wav"
+  },
+  {
+    "id": "rearview_035",
+    "category": "后视镜控制",
+    "sub_category": "右侧后视镜",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "右边倒车镜还折着呢弹出来",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "展开",
+          "device": "后视镜",
+          "position": "右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_035.wav"
+  },
+  {
+    "id": "rearview_036",
+    "category": "后视镜控制",
+    "sub_category": "左侧后视镜高度",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "变道看不清左后方把左边镜子稍微调一下高度",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "调大",
+          "device": "后视镜",
+          "feature": "高度",
+          "position": "左侧",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_036.wav"
+  },
+  {
+    "id": "rearview_037",
+    "category": "后视镜控制",
+    "sub_category": "右侧后视镜高度",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "右边的镜子照到地面太多了往上抬一抬",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "调大",
+          "device": "后视镜",
+          "feature": "高度",
+          "position": "右侧",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_037.wav"
+  },
+  {
+    "id": "rearview_038",
+    "category": "后视镜控制",
+    "sub_category": "后视镜展开收起",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "进地库了镜子收一下",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "收起",
+          "device": "后视镜"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_038.wav"
+  },
+  {
+    "id": "rearview_039",
+    "category": "后视镜控制",
+    "sub_category": "后视镜展开收起",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "出库了把镜子展开",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "展开",
+          "device": "后视镜"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_039.wav"
+  },
+  {
+    "id": "rearview_040",
+    "category": "后视镜控制",
+    "sub_category": "后视镜高度调节",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "倒车的时候看不太清楚后视镜低一点点",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "调小",
+          "device": "后视镜",
+          "feature": "高度",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_040.wav"
+  },
+  {
+    "id": "rearview_041",
+    "category": "后视镜控制",
+    "sub_category": "右侧后视镜",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "右边那个反光镜折起来",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "收起",
+          "device": "后视镜",
+          "position": "右侧"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_041.wav"
+  },
+  {
+    "id": "rearview_042",
+    "category": "后视镜控制",
+    "sub_category": "主驾后视镜高度",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "刚换了个人开车我这边的镜子位置不对往下调一下",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "调小",
+          "device": "后视镜",
+          "feature": "高度",
+          "position": "主驾",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_042.wav"
+  },
+  {
+    "id": "rearview_043",
+    "category": "后视镜控制",
+    "sub_category": "左侧后视镜",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "左边的外后视镜关掉",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "后视镜",
+          "position": "左侧"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_043.wav"
+  },
+  {
+    "id": "rearview_044",
+    "category": "后视镜控制",
+    "sub_category": "副驾后视镜高度",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "右前方那个镜子调低一些看不到路沿",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "调小",
+          "device": "后视镜",
+          "feature": "高度",
+          "position": "副驾"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_044.wav"
+  },
+  {
+    "id": "rearview_045",
+    "category": "后视镜控制",
+    "sub_category": "后视镜高度调节",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "两个后视镜都往上调调看不清后车",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "调大",
+          "device": "后视镜",
+          "feature": "高度"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_045.wav"
+  },
+  {
+    "id": "rearview_046",
+    "category": "后视镜+车窗",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "展开后视镜然后把车窗关上",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "展开",
+          "device": "后视镜"
+        }
+      },
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "车窗"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_046.wav"
+  },
+  {
+    "id": "rearview_047",
+    "category": "后视镜+灯光",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "收起后视镜顺便把大灯关了",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "收起",
+          "device": "后视镜"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "大灯"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_047.wav"
+  },
+  {
+    "id": "rearview_048",
+    "category": "后视镜+空调",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "后视镜高度调高一点然后空调温度调到22度",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "调大",
+          "device": "后视镜",
+          "feature": "高度",
+          "value": "一点"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "温度",
+          "value": "22"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_048.wav"
+  },
+  {
+    "id": "rearview_049",
+    "category": "后视镜+座椅",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "左边后视镜调高一些然后座椅往后退一点",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "调大",
+          "device": "后视镜",
+          "feature": "高度",
+          "position": "左侧"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调后",
+          "device": "座椅"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_049.wav"
+  },
+  {
+    "id": "rearview_050",
+    "category": "后视镜+驾驶模式",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "展开后视镜切换到舒适模式",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "展开",
+          "device": "后视镜"
+        }
+      },
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "舒适模式"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_050.wav"
+  },
+  {
+    "id": "rearview_051",
+    "category": "后视镜+音量",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "把后视镜收起来然后把音量调小",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "收起",
+          "device": "后视镜"
+        }
+      },
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "音量"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_051.wav"
+  },
+  {
+    "id": "rearview_052",
+    "category": "后视镜+屏幕",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "展开后视镜然后屏幕亮度调高一点",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "展开",
+          "device": "后视镜"
+        }
+      },
+      {
+        "name": "ScreenControl",
+        "arguments": {
+          "action": "调大",
+          "device": "屏幕",
+          "feature": "亮度"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_052.wav"
+  },
+  {
+    "id": "rearview_053",
+    "category": "后视镜+方向盘",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "主驾后视镜调高一点方向盘加热打开",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "调大",
+          "device": "后视镜",
+          "feature": "高度",
+          "position": "主驾",
+          "value": "一点"
+        }
+      },
+      {
+        "name": "SteeringwheelControl",
+        "arguments": {
+          "action": "打开",
+          "device": "方向盘",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_053.wav"
+  },
+  {
+    "id": "rearview_054",
+    "category": "后视镜+车窗+灯光",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "收起后视镜关上车窗然后把大灯关了",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "收起",
+          "device": "后视镜"
+        }
+      },
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "车窗"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "大灯"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_054.wav"
+  },
+  {
+    "id": "rearview_055",
+    "category": "后视镜+空调+座椅",
+    "sub_category": "多意图组合",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "展开后视镜打开空调座椅加热也开一下",
+    "expected_tool_calls": [
+      {
+        "name": "RearviewControl",
+        "arguments": {
+          "action": "展开",
+          "device": "后视镜"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "制热"
+        }
+      }
+    ],
+    "query_audio": "audio/rearview_055.wav"
+  }
+]

@@ -1,0 +1,804 @@
+[
+  {
+    "id": "fridge_001",
+    "category": "冰箱",
+    "sub_category": "冰箱开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开冰箱",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_001.wav"
+  },
+  {
+    "id": "fridge_002",
+    "category": "冰箱",
+    "sub_category": "冰箱开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭冰箱",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "冰箱"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_002.wav"
+  },
+  {
+    "id": "fridge_003",
+    "category": "冰箱",
+    "sub_category": "冰箱开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "开启车载冰箱",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_003.wav"
+  },
+  {
+    "id": "fridge_004",
+    "category": "冰箱",
+    "sub_category": "冰箱开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关掉车载冰箱",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "冰箱"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_004.wav"
+  },
+  {
+    "id": "fridge_005",
+    "category": "冰箱",
+    "sub_category": "冰箱位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开第二排冰箱",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_005.wav"
+  },
+  {
+    "id": "fridge_006",
+    "category": "冰箱",
+    "sub_category": "冰箱位置",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭第二排冰箱",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "冰箱",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_006.wav"
+  },
+  {
+    "id": "fridge_007",
+    "category": "冰箱",
+    "sub_category": "冰箱开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "把冰箱打开",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_007.wav"
+  },
+  {
+    "id": "fridge_008",
+    "category": "冰箱",
+    "sub_category": "冰箱开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "把冰箱关了",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "冰箱"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_008.wav"
+  },
+  {
+    "id": "fridge_009",
+    "category": "冰箱",
+    "sub_category": "冰箱开关",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "帮我把车上的冰箱开一下",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_009.wav"
+  },
+  {
+    "id": "fridge_010",
+    "category": "冰箱",
+    "sub_category": "冰箱开关",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "帮我把车上的冰箱关掉",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "冰箱"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_010.wav"
+  },
+  {
+    "id": "fridge_011",
+    "category": "冰箱",
+    "sub_category": "冰箱位置",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "开启二排的冰箱",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_011.wav"
+  },
+  {
+    "id": "fridge_012",
+    "category": "冰箱",
+    "sub_category": "冰箱位置",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "关掉二排的冰箱",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "冰箱",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_012.wav"
+  },
+  {
+    "id": "fridge_013",
+    "category": "冰箱",
+    "sub_category": "冰箱开关",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "启动冰箱制冷",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_013.wav"
+  },
+  {
+    "id": "fridge_014",
+    "category": "冰箱",
+    "sub_category": "冰箱位置",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "把后排冰箱开起来",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_014.wav"
+  },
+  {
+    "id": "fridge_015",
+    "category": "冰箱",
+    "sub_category": "冰箱开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "冰箱关闭",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "冰箱"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_015.wav"
+  },
+  {
+    "id": "fridge_016",
+    "category": "冰箱",
+    "sub_category": "冰箱开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我想喝点冰的，把冰箱开了",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_016.wav"
+  },
+  {
+    "id": "fridge_017",
+    "category": "冰箱",
+    "sub_category": "冰箱开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "天气太热了，帮我冰几瓶水",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_017.wav"
+  },
+  {
+    "id": "fridge_018",
+    "category": "冰箱",
+    "sub_category": "冰箱开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "饮料该冰一下了",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_018.wav"
+  },
+  {
+    "id": "fridge_019",
+    "category": "冰箱",
+    "sub_category": "冰箱开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "车上的饮料不凉了，帮我制冷一下",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_019.wav"
+  },
+  {
+    "id": "fridge_020",
+    "category": "冰箱",
+    "sub_category": "冰箱开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "冰箱不用了，帮我关掉吧",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "冰箱"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_020.wav"
+  },
+  {
+    "id": "fridge_021",
+    "category": "冰箱",
+    "sub_category": "冰箱开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "饮料已经冰好了，可以关掉了",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "冰箱"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_021.wav"
+  },
+  {
+    "id": "fridge_022",
+    "category": "冰箱",
+    "sub_category": "冰箱开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "等会要野餐，先把冰箱准备好",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_022.wav"
+  },
+  {
+    "id": "fridge_023",
+    "category": "冰箱",
+    "sub_category": "冰箱开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "买了冰激凌放车上，赶紧冷藏起来",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_023.wav"
+  },
+  {
+    "id": "fridge_024",
+    "category": "冰箱",
+    "sub_category": "冰箱开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "车里有水果，怕坏掉，帮我保鲜一下",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_024.wav"
+  },
+  {
+    "id": "fridge_025",
+    "category": "冰箱",
+    "sub_category": "冰箱开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "到家了，冰箱可以停了，省点电",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "冰箱"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_025.wav"
+  },
+  {
+    "id": "fridge_026",
+    "category": "冰箱",
+    "sub_category": "冰箱位置",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "后座那个冰箱帮我开一下",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_026.wav"
+  },
+  {
+    "id": "fridge_027",
+    "category": "冰箱",
+    "sub_category": "冰箱位置",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "后排那个小冰箱关掉吧",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "冰箱",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_027.wav"
+  },
+  {
+    "id": "fridge_028",
+    "category": "冰箱",
+    "sub_category": "冰箱开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "刚买了几罐可乐，帮我冰着",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_028.wav"
+  },
+  {
+    "id": "fridge_029",
+    "category": "冰箱",
+    "sub_category": "冰箱开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "长途开车，先把冰箱打开备着",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_029.wav"
+  },
+  {
+    "id": "fridge_030",
+    "category": "冰箱",
+    "sub_category": "冰箱开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "电量不太够了，先把冰箱停了省点电",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "冰箱"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_030.wav"
+  },
+  {
+    "id": "fridge_031",
+    "category": "冰箱",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开冰箱，空调温度调低一点",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调小",
+          "device": "空调",
+          "feature": "温度"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_031.wav"
+  },
+  {
+    "id": "fridge_032",
+    "category": "冰箱",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "把冰箱开了，顺便把车窗关上",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱"
+        }
+      },
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "车窗"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_032.wav"
+  },
+  {
+    "id": "fridge_033",
+    "category": "冰箱",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "关掉冰箱，把座椅通风打开",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "冰箱"
+        }
+      },
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "通风"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_033.wav"
+  },
+  {
+    "id": "fridge_034",
+    "category": "冰箱",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "天太热了，冰箱和空调都打开",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "打开",
+          "device": "空调"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_034.wav"
+  },
+  {
+    "id": "fridge_035",
+    "category": "冰箱",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开冰箱，再帮我放首歌",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱"
+        }
+      },
+      {
+        "name": "MediaPlay",
+        "arguments": {
+          "media_category": "歌"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_035.wav"
+  },
+  {
+    "id": "fridge_036",
+    "category": "冰箱",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "关掉冰箱和空调，省点电",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "冰箱"
+        }
+      },
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "空调"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_036.wav"
+  },
+  {
+    "id": "fridge_037",
+    "category": "冰箱",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "开冰箱，然后把氛围灯也打开",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱"
+        }
+      },
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "氛围灯"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_037.wav"
+  },
+  {
+    "id": "fridge_038",
+    "category": "冰箱",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "把冰箱关了，开节能模式",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "冰箱"
+        }
+      },
+      {
+        "name": "DrivingControl",
+        "arguments": {
+          "action": "打开",
+          "feature": "驾驶模式",
+          "value": "节能模式"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_038.wav"
+  },
+  {
+    "id": "fridge_039",
+    "category": "冰箱",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "打开第二排冰箱，把后排车窗也关上",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱",
+          "position": "第二排"
+        }
+      },
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "车窗",
+          "position": "第二排"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_039.wav"
+  },
+  {
+    "id": "fridge_040",
+    "category": "冰箱",
+    "sub_category": "多意图",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "冰箱打开，音量调小一点",
+    "expected_tool_calls": [
+      {
+        "name": "FridgeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "冰箱"
+        }
+      },
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调小",
+          "feature": "音量",
+          "value": "一点"
+        }
+      }
+    ],
+    "query_audio": "audio/fridge_040.wav"
+  }
+]

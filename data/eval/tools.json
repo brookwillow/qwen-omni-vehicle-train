@@ -1,0 +1,1507 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "AppControl",
+      "description": "Open the built-in apps.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "关闭",
+              "打开"
+            ]
+          },
+          "feature": {
+            "type": "string",
+            "enum": [
+              "ota",
+              "全域共驾",
+              "媒体",
+              "导航地图",
+              "应用列表",
+              "投屏助手",
+              "日历",
+              "智能影像",
+              "用户手册",
+              "空调",
+              "蓝牙电话",
+              "车控",
+              "音乐应用"
+            ]
+          }
+        },
+        "required": [
+          "action",
+          "feature"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "CameraControl",
+      "description": "Control various camera devices, including cameras and recorders, and toggle camera-related functions such as photo capture, video recording, and transparent chassis.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "关闭",
+              "打开"
+            ]
+          },
+          "device": {
+            "type": "string",
+            "enum": [
+              "摄像头"
+            ]
+          },
+          "position": {
+            "type": "string",
+            "enum": [
+              "全部",
+              "前侧",
+              "右侧",
+              "后侧",
+              "左侧"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "enum": [
+              "哨兵模式"
+            ]
+          }
+        },
+        "required": [
+          "action",
+          "device"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "ClimateControl",
+      "description": "Control heating, ventilation, and air conditioning, which involves modifying the power and operating modes of devices such as air conditioners, air purifiers, and air vents; adjust settings such as temperature, humidity, and airflow direction.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "关闭",
+              "打开",
+              "调到",
+              "调大",
+              "调小"
+            ]
+          },
+          "device": {
+            "type": "string",
+            "enum": [
+              "出风口",
+              "前挡风",
+              "后挡风",
+              "空气净化器",
+              "空调"
+            ]
+          },
+          "feature": {
+            "type": "string",
+            "enum": [
+              "温度",
+              "除雾",
+              "风"
+            ]
+          },
+          "position": {
+            "type": "string",
+            "enum": [
+              "中间",
+              "主驾",
+              "主驾右侧",
+              "主驾左侧",
+              "全部",
+              "前排",
+              "副驾",
+              "副驾右侧",
+              "副驾左侧",
+              "第三排",
+              "第三排右侧",
+              "第三排左侧",
+              "第二排",
+              "第二排中间",
+              "第二排右侧",
+              "第二排左侧"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "enum": [
+              "20.5",
+              "AQS",
+              "一点",
+              "中",
+              "内循环",
+              "制冷",
+              "制热",
+              "外循环",
+              "大",
+              "守护模式",
+              "宠物模式",
+              "对人",
+              "小",
+              "智能除味",
+              "最大",
+              "最小",
+              "极速升温",
+              "极速降温",
+              "温度同步",
+              "自动",
+              "自动扫风",
+              "自然风",
+              "节能模式",
+              "较大",
+              "较小",
+              "避人"
+            ],
+            "description": "also support numeric values alongside enums, e.g. 3"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "DrivingControl",
+      "description": "Control driving-related modes, such as driving mode, power mode, and braking mode.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "关闭",
+              "打开"
+            ]
+          },
+          "feature": {
+            "type": "string",
+            "enum": [
+              "驾驶模式"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "enum": [
+              "单踏板",
+              "弹射模式",
+              "标准模式",
+              "脱困模式",
+              "自定义",
+              "舒适模式",
+              "节能模式",
+              "运动模式"
+            ]
+          }
+        },
+        "required": [
+          "action",
+          "feature",
+          "value"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "FmSearchPlay",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "fm_channel": {
+            "type": "string"
+          },
+          "media_category": {
+            "type": "string",
+            "enum": [
+              "1638 am",
+              "FM"
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "FridgeControl",
+      "description": "Control the refrigerator's power switch and various modes",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "关闭",
+              "打开"
+            ]
+          },
+          "device": {
+            "type": "string",
+            "enum": [
+              "冰箱"
+            ]
+          },
+          "position": {
+            "type": "string",
+            "enum": [
+              "第二排"
+            ]
+          }
+        },
+        "required": [
+          "action",
+          "device"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GateControl",
+      "description": "Control the switching and pausing of door-related equipment, such as car doors, sliding side doors, gull-wing doors, front and rear trunk lids, and charging port covers.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "关闭",
+              "打开",
+              "暂停"
+            ]
+          },
+          "device": {
+            "type": "string",
+            "enum": [
+              "交流充电口",
+              "侧滑门",
+              "充电口",
+              "后备箱",
+              "直流充电口",
+              "鹏翼门"
+            ]
+          },
+          "position": {
+            "type": "string",
+            "enum": [
+              "主驾",
+              "全部",
+              "前排",
+              "副驾",
+              "右侧",
+              "左侧",
+              "第一排右侧",
+              "第三排",
+              "第三排右侧",
+              "第三排左侧",
+              "第二排",
+              "第二排右侧",
+              "第二排左侧"
+            ]
+          }
+        },
+        "required": [
+          "action",
+          "device"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GeneralBack",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "home_page": {
+            "type": "string",
+            "enum": [
+              "主页面"
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GeneralExit",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "all_page": {
+            "type": "string",
+            "enum": [
+              "所有应用"
+            ]
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "phone"
+            ]
+          },
+          "page": {
+            "type": "string",
+            "enum": [
+              "当前页面",
+              "页面"
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "GeneralSelect",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "cancel",
+              "confirm"
+            ]
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "phone"
+            ]
+          },
+          "order": {
+            "type": "string",
+            "enum": [
+              "倒数"
+            ]
+          },
+          "page_select": {
+            "type": "string",
+            "enum": [
+              "x"
+            ]
+          },
+          "serial": {
+            "type": "string",
+            "enum": [
+              "x"
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "InfoQuery",
+      "description": "Inquire about vehicle status, road conditions, navigation, and energy consumption information.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "feature": {
+            "type": "string",
+            "enum": [
+              "剩余距离",
+              "当前位置",
+              "时间",
+              "百公里能耗",
+              "胎压",
+              "行驶总里程",
+              "路况信息"
+            ]
+          }
+        },
+        "required": [
+          "feature"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "LightControl",
+      "description": "Control interior lights (reading lights, ambient lighting, etc.) and exterior lights (headlights, high beams, daytime running lights, etc.), toggle various modes for these lights, and adjust brightness and color.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "关闭",
+              "切换",
+              "打开",
+              "调到"
+            ]
+          },
+          "device": {
+            "type": "string",
+            "enum": [
+              "前雾灯",
+              "后雾灯",
+              "大灯",
+              "氛围灯",
+              "示宽灯",
+              "远光灯",
+              "阅读灯"
+            ]
+          },
+          "feature": {
+            "type": "string",
+            "enum": [
+              "颜色"
+            ]
+          },
+          "position": {
+            "type": "string",
+            "enum": [
+              "主驾",
+              "全部",
+              "前排",
+              "副驾",
+              "第三排",
+              "第三排右侧",
+              "第三排左侧",
+              "第二排",
+              "第二排右侧",
+              "第二排左侧"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "enum": [
+              "xx色",
+              "下一个",
+              "光剑",
+              "其他",
+              "智能",
+              "标准模式",
+              "自动"
+            ]
+          }
+        },
+        "required": [
+          "action",
+          "device"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "LockControl",
+      "description": "Control lock-related devices and functions, such as window locks, door locks and child locks.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "关闭",
+              "打开"
+            ]
+          },
+          "device": {
+            "type": "string",
+            "enum": [
+              "儿童锁"
+            ]
+          },
+          "position": {
+            "type": "string",
+            "enum": [
+              "主驾",
+              "全部",
+              "前排",
+              "副驾",
+              "右侧",
+              "左侧",
+              "第三排",
+              "第三排右侧",
+              "第三排左侧",
+              "第二排",
+              "第二排右侧",
+              "第二排左侧"
+            ]
+          }
+        },
+        "required": [
+          "action",
+          "device"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "MediaControl",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "app_name": {
+            "type": "string",
+            "enum": [
+              "spotify",
+              "tunein",
+              "youtube"
+            ]
+          },
+          "media_category": {
+            "type": "string",
+            "enum": [
+              "FM",
+              "TuneIn",
+              "歌",
+              "读物"
+            ]
+          },
+          "media_control_action": {
+            "type": "string",
+            "enum": [
+              "上一个",
+              "下一个",
+              "关闭",
+              "暂停",
+              "继续"
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "MediaPlay",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "app_name": {
+            "type": "string",
+            "enum": [
+              "applemusic",
+              "disneyplus",
+              "spotify",
+              "tiktok",
+              "tunein",
+              "youtube"
+            ]
+          },
+          "media_category": {
+            "type": "string",
+            "enum": [
+              "FM",
+              "歌",
+              "视频",
+              "读物"
+            ]
+          },
+          "media_source": {
+            "type": "string",
+            "enum": [
+              "蓝牙"
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "MusicSearchPlay",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "app_name": {
+            "type": "string",
+            "enum": [
+              "spotify",
+              "tunein"
+            ]
+          },
+          "song": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "Navigation",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "删除",
+              "开始",
+              "搜索",
+              "设置",
+              "退出",
+              "选择"
+            ]
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "公司",
+              "家",
+              "途经点",
+              "地点",
+              "路线"
+            ]
+          },
+          "constraint": {
+            "type": "string",
+            "enum": [
+              "当前位置"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "enum": [
+              "parking lot",
+              "shopping",
+              "restaurant",
+              "cafe",
+              "bar",
+              "train station",
+              "hotel",
+              "tourist",
+              "market",
+              "atm",
+              "pharmacy",
+              "toilet",
+              "charging station",
+              "充电站",
+              "公司",
+              "家"
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "NavigationControl",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "关闭",
+              "打开",
+              "更新",
+              "调到",
+              "调大",
+              "调小"
+            ]
+          },
+          "feature": {
+            "type": "string",
+            "enum": [
+              "地图",
+              "播报模式",
+              "路线"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "enum": [
+              "100m",
+              "200m",
+              "300m",
+              "500m",
+              "全览",
+              "最大",
+              "最小",
+              "标准播报",
+              "简洁播报"
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "NetworkControl",
+      "description": "Connect various wireless devices such as Bluetooth, Wi-Fi, and in-car hotspots.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "关闭",
+              "打开"
+            ]
+          },
+          "feature": {
+            "type": "string",
+            "enum": [
+              "WIFI",
+              "蓝牙",
+              "车载热点"
+            ]
+          },
+          "position": {
+            "type": "string",
+            "enum": [
+              "主驾",
+              "前排",
+              "副驾",
+              "第二排"
+            ]
+          }
+        },
+        "required": [
+          "action",
+          "feature"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "NoiseAction",
+      "description": "Uncertain functions to execute.",
+      "parameters": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "PageMove",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "enum": [
+              "bottom",
+              "down",
+              "next",
+              "top",
+              "up"
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "PhoneControl",
+      "description": "Perform phone-related operations such as searching for contacts, redialing, hanging up, and exiting calls.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "回拨",
+              "搜索",
+              "重拨"
+            ]
+          },
+          "person": {
+            "type": "string",
+            "description": "Search keyword for contact person name."
+          },
+          "telephone": {
+            "type": "string",
+            "description": "Search keyword for contact phone number."
+          }
+        },
+        "required": [
+          "action"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "PowerControl",
+      "description": "Switches and modes for controlling energy-related functions such as charging, discharging, and energy recovery.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "关闭",
+              "打开",
+              "调到",
+              "调大",
+              "调小"
+            ]
+          },
+          "feature": {
+            "type": "string",
+            "enum": [
+              "充电",
+              "无线充电",
+              "能量回收"
+            ]
+          },
+          "position": {
+            "type": "string",
+            "enum": [
+              "主驾",
+              "全部",
+              "前排",
+              "副驾",
+              "第二排",
+              "第二排右侧",
+              "第二排左侧"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "enum": [
+              "一点",
+              "中",
+              "单踏板",
+              "大",
+              "小",
+              "最大",
+              "最小"
+            ],
+            "description": "also support percentage values alongside enums, e.g. 20%"
+          }
+        },
+        "required": [
+          "action",
+          "feature"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "ProfileControl",
+      "description": "Control habit patterns, adjust personal settings such as habits, shortcuts, and accounts.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "保存",
+              "切换",
+              "复位",
+              "打开",
+              "调到"
+            ]
+          },
+          "feature": {
+            "type": "string",
+            "enum": [
+              "习惯"
+            ]
+          },
+          "position": {
+            "type": "string",
+            "enum": [
+              "主驾",
+              "前排",
+              "副驾",
+              "第三排",
+              "第三排右侧",
+              "第三排左侧",
+              "第二排",
+              "第二排右侧",
+              "第二排左侧"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "enum": [
+              "上一个",
+              "下一个",
+              "小憩模式",
+              "放松模式",
+              "标准模式"
+            ],
+            "description": "also support numeric values alongside enums, e.g. 3"
+          }
+        },
+        "required": [
+          "action",
+          "feature"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "RearviewControl",
+      "description": "Adjust rearview mirror height, or control rearview mirror heating and defogging.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "关闭",
+              "展开",
+              "打开",
+              "收起",
+              "调大",
+              "调小"
+            ]
+          },
+          "device": {
+            "type": "string",
+            "enum": [
+              "后视镜"
+            ]
+          },
+          "feature": {
+            "type": "string",
+            "enum": [
+              "高度"
+            ]
+          },
+          "position": {
+            "type": "string",
+            "enum": [
+              "主驾",
+              "副驾",
+              "右侧",
+              "左侧"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "enum": [
+              "一点"
+            ]
+          }
+        },
+        "required": [
+          "action",
+          "device"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "ScenarioAccess",
+      "description": "Access the configuration pages for various features.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "feature": {
+            "type": "string",
+            "enum": [
+              "主驾屏幕亮度",
+              "位置调节",
+              "充电",
+              "关于",
+              "后视镜调节",
+              "声音",
+              "大灯控制",
+              "座椅通风加热",
+              "抬头显示",
+              "无线网络连接",
+              "显示",
+              "显示调节",
+              "智能语音",
+              "最近通话",
+              "氛围灯",
+              "等人模式",
+              "联系人",
+              "能量回收",
+              "蓝牙连接",
+              "车灯",
+              "车辆",
+              "辅助驾驶",
+              "连接",
+              "门窗",
+              "音效",
+              "驾驶模式"
+            ]
+          }
+        },
+        "required": [
+          "feature"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "ScreenControl",
+      "description": "Control the power, mode, and orientation of various screens.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "关闭",
+              "展开",
+              "打开",
+              "收起",
+              "调到",
+              "调大",
+              "调小"
+            ]
+          },
+          "device": {
+            "type": "string",
+            "enum": [
+              "仪表",
+              "娱乐屏",
+              "屏幕"
+            ]
+          },
+          "feature": {
+            "type": "string",
+            "enum": [
+              "亮度"
+            ]
+          },
+          "position": {
+            "type": "string",
+            "enum": [
+              "主驾",
+              "全部",
+              "前排",
+              "副驾",
+              "第三排",
+              "第三排右侧",
+              "第三排左侧",
+              "第二排",
+              "第二排右侧",
+              "第二排左侧"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "enum": [
+              "一点",
+              "小",
+              "最大",
+              "最小",
+              "清洁模式",
+              "白天模式",
+              "等人模式",
+              "自动模式",
+              "黑夜模式"
+            ],
+            "description": "also support numeric and percentage values alongside enums, e.g. 3, 20%"
+          }
+        },
+        "required": [
+          "action",
+          "device"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "SeatControl",
+      "description": "Adjust the position and mode of seats, cushions, lumbar supports, headrests, etc., and activate or deactivate seat heating, ventilation, and other functions.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "关闭",
+              "切换",
+              "复位",
+              "打开",
+              "收起",
+              "放平",
+              "调到",
+              "调前",
+              "调后",
+              "调大",
+              "调小"
+            ]
+          },
+          "device": {
+            "type": "string",
+            "enum": [
+              "座椅",
+              "靠背"
+            ]
+          },
+          "feature": {
+            "type": "string",
+            "enum": [
+              "位置",
+              "制热",
+              "按摩",
+              "通风",
+              "高度"
+            ]
+          },
+          "position": {
+            "type": "string",
+            "enum": [
+              "主驾",
+              "全部",
+              "前排",
+              "副驾",
+              "第一排右侧",
+              "第一排左侧",
+              "第三排",
+              "第三排中间",
+              "第三排右侧",
+              "第三排左侧",
+              "第二排",
+              "第二排中间",
+              "第二排右侧",
+              "第二排左侧"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "enum": [
+              "一点",
+              "下一个",
+              "中",
+              "休闲放松",
+              "体能恢复",
+              "压力释放",
+              "双排",
+              "大",
+              "小",
+              "最前",
+              "最后",
+              "最大",
+              "最小",
+              "波浪",
+              "活力唤醒",
+              "猫步",
+              "脉冲",
+              "腰部舒缓",
+              "蛇形",
+              "长途解乏"
+            ],
+            "description": "also support numeric and percentage values alongside enums, e.g. 3, 20%"
+          }
+        },
+        "required": [
+          "device"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "SpecialControl",
+      "description": "Several special functions for switching vehicles, such as combination function mode, LCC, and tow-and-carry mode.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "关闭",
+              "打开"
+            ]
+          },
+          "feature": {
+            "type": "string",
+            "enum": [
+              "LCC",
+              "冥想空间",
+              "单人床模式",
+              "大床模式",
+              "拖挂模式",
+              "旅居模式",
+              "睡眠空间"
+            ]
+          },
+          "position": {
+            "type": "string",
+            "enum": [
+              "主驾",
+              "全部",
+              "前排",
+              "副驾",
+              "我这排",
+              "第三排",
+              "第三排右侧",
+              "第三排左侧",
+              "第二排",
+              "第二排右侧",
+              "第二排左侧"
+            ]
+          }
+        },
+        "required": [
+          "action",
+          "feature"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "SteeringwheelControl",
+      "description": "Switch and adjust steering wheel power assistance, heating-related modes, and intensity levels.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "关闭",
+              "打开",
+              "调到",
+              "调大",
+              "调小"
+            ]
+          },
+          "device": {
+            "type": "string",
+            "enum": [
+              "方向盘"
+            ]
+          },
+          "feature": {
+            "type": "string",
+            "enum": [
+              "制热",
+              "助力"
+            ]
+          },
+          "position": {
+            "type": "string",
+            "enum": [
+              "主驾"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "enum": [
+              "一点",
+              "中",
+              "大",
+              "最大",
+              "最小",
+              "标准模式",
+              "稳重模式",
+              "舒适模式",
+              "轻盈模式",
+              "运动模式",
+              "适中模式"
+            ],
+            "description": "also support numeric values alongside enums, e.g. 3"
+          }
+        },
+        "required": [
+          "device"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "VoiceControl",
+      "description": "Adjust the volume for sounds, navigation, voice commands, and calls.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "关闭",
+              "切换",
+              "打开",
+              "调到",
+              "调大",
+              "调小"
+            ]
+          },
+          "feature": {
+            "type": "string",
+            "enum": [
+              "声音",
+              "导航音量",
+              "语音音量",
+              "通话音量",
+              "音量"
+            ]
+          },
+          "position": {
+            "type": "string",
+            "enum": [
+              "中间",
+              "主驾",
+              "全部",
+              "前排",
+              "前排中间",
+              "副驾",
+              "右侧",
+              "左侧",
+              "第三排",
+              "第三排中间",
+              "第三排右侧",
+              "第三排左侧",
+              "第二排",
+              "第二排中间",
+              "第二排右侧",
+              "第二排左侧",
+              "车外",
+              "车顶"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "enum": [
+              "一点",
+              "中",
+              "最大",
+              "最小"
+            ],
+            "description": "also support numeric and percentage values alongside enums, e.g. 3, 20%"
+          }
+        },
+        "required": [
+          "action",
+          "feature"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "WindowControl",
+      "description": "Control switches and modes for windows and sunshades.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "关到",
+              "关闭",
+              "再关",
+              "再开",
+              "开到",
+              "打开",
+              "暂停"
+            ]
+          },
+          "device": {
+            "type": "string",
+            "enum": [
+              "车窗",
+              "遮阳帘"
+            ]
+          },
+          "position": {
+            "type": "string",
+            "enum": [
+              "主驾",
+              "全部",
+              "前排",
+              "副驾",
+              "右侧",
+              "左侧",
+              "第一排右侧",
+              "第一排左侧",
+              "第三排右侧",
+              "第三排左侧",
+              "第二排",
+              "第二排右侧",
+              "第二排左侧"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "enum": [
+              "一点"
+            ],
+            "description": "also support numeric and percentage values alongside enums, e.g. 3, 20%"
+          }
+        },
+        "required": [
+          "action",
+          "device"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "XmlySearchPlay",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "podcast_name": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+]
