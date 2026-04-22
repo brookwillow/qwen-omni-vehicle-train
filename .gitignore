@@ -1,11 +1,9 @@
 # Model weights
 models/
 
-# Large data files
-data/react_merged_train_only_messages_v3*.jsonl
+# Large data files (regeneratable)
 data/train_final.jsonl
 data/reject_original.jsonl.bak
-data/eval/audio/
 
 # Archive
 _archive/
