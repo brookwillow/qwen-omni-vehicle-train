@@ -18,7 +18,9 @@ from __future__ import annotations
 import argparse
 import glob
 import json
+import logging
 import re
+import warnings
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
@@ -28,6 +30,14 @@ import torch
 from peft import PeftModel
 from qwen_omni_utils import process_mm_info
 from transformers import Qwen2_5OmniForConditionalGeneration, Qwen2_5OmniProcessor
+
+# Suppress the per-sample "System prompt modified" warning from Qwen2.5-Omni;
+# it fires once per inference call when using a custom system prompt and is expected.
+logging.getLogger().addFilter(
+    type("_IgnoreQwenSPWarn", (logging.Filter,), {
+        "filter": lambda self, r: "System prompt modified" not in r.getMessage()
+    })()
+)
 
 ACTION_RE = re.compile(r"Action:\s*([A-Za-z0-9_]+)")
 ACTION_INPUT_RE = re.compile(r"Action Input:\s*(\{[\s\S]*\})")
