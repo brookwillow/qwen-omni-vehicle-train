@@ -44,6 +44,18 @@ def load_model(model_dir: str, lora_dir: str):
         model_dir, torch_dtype="auto", device_map="auto",
     )
     if lora_dir:
+        # Workaround: PEFT/accelerate bug where _no_split_modules is a set-of-sets
+        # causing "unhashable type: 'set'" in get_balanced_memory.
+        if hasattr(model, "_no_split_modules"):
+            raw = model._no_split_modules
+            if isinstance(raw, (set, frozenset)):
+                flat: list = []
+                for item in raw:
+                    if isinstance(item, (set, frozenset, list, tuple)):
+                        flat.extend(item)
+                    else:
+                        flat.append(item)
+                model._no_split_modules = flat
         model = PeftModel.from_pretrained(model, lora_dir)
     if hasattr(model, "disable_talker"):
         model.disable_talker()
