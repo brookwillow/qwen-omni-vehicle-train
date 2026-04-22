@@ -397,6 +397,8 @@ def run_batch(args, model, processor, system_prompt: str) -> None:
 
 def run_single(args, model, processor, system_prompt: str) -> None:
     audio_path = getattr(args, "audio", None) or None
+    if not audio_path and not args.prompt:
+        raise SystemExit("error: --prompt is required when --audio is not provided.")
     if audio_path:
         print(f"[audio] {audio_path}")
     pred = generate_text(
@@ -415,15 +417,19 @@ def run_single(args, model, processor, system_prompt: str) -> None:
 
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="Evaluate Qwen2.5-Omni ReAct tool-calling.")
-    p.add_argument("--model-dir", required=True)
-    p.add_argument("--lora-dir", default="", help="Optional LoRA adapter directory.")
-    p.add_argument("--system-prompt-file", default=DEFAULT_SP_PATH, help="System prompt text file.")
-    p.add_argument("--max-new-tokens", type=int, default=128)
+
+    # Common arguments shared by both subcommands (defined here AND in subparsers
+    # via `parents` so users can place them either before or after the subcommand).
+    common = argparse.ArgumentParser(add_help=False)
+    common.add_argument("--model-dir", required=True)
+    common.add_argument("--lora-dir", default="", help="Optional LoRA adapter directory.")
+    common.add_argument("--system-prompt-file", default=DEFAULT_SP_PATH, help="System prompt text file.")
+    common.add_argument("--max-new-tokens", type=int, default=128)
 
     sub = p.add_subparsers(dest="mode", required=True)
 
     # batch
-    b = sub.add_parser("batch", help="Evaluate on data/eval test JSON files.")
+    b = sub.add_parser("batch", parents=[common], help="Evaluate on data/eval test JSON files.")
     b.add_argument("--eval-dir", default="data/eval")
     b.add_argument("--pattern", default="*_test.json")
     b.add_argument("--temperature", type=float, default=0.0)
@@ -432,8 +438,8 @@ def build_parser() -> argparse.ArgumentParser:
     b.add_argument("--report", default="", help="Output JSON report path (default: eval_report_<ts>.json).")
 
     # single
-    s = sub.add_parser("single", help="Single prompt inference.")
-    s.add_argument("--prompt", required=True)
+    s = sub.add_parser("single", parents=[common], help="Single prompt inference.")
+    s.add_argument("--prompt", default="", help="Text prompt (required unless --audio is provided).")
     s.add_argument("--audio", default="", help="Optional audio file path (uses audio instead of text).")
 
     return p

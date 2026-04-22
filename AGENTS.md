@@ -55,6 +55,10 @@ If `Makefile` or task runners are introduced, add canonical commands such as `ma
 - After every code, script, or config change, check if `docs/README.md` (or other docs) needs updating.
 - If docs are affected, update them immediately in the same turn. Never leave docs out of sync with the codebase.
 
+## Temporary File Cleanup Rule
+- Temporary scripts (e.g., one-off data augmentation, migration, or diagnostic scripts) and temporary documents must be deleted immediately after use.
+- Do not let temporary files accumulate in the repository.
+
 ## Security & Configuration Tips
 - Never commit secrets, API keys, or raw credentials.
 - Use `.env` files locally and provide `.env.example` with placeholder values.

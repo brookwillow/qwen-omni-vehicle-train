@@ -1028,3 +1028,181 @@
 {"messages": [{"role": "user", "content": "打开家里的电视"}, {"role": "assistant", "content": "Reject"}]}
 {"messages": [{"role": "user", "content": "帮我关一下家里的燃气"}, {"role": "assistant", "content": "Reject"}]}
 {"messages": [{"role": "user", "content": "帮我锁门"}, {"role": "assistant", "content": "Clarify: 请问是要锁车门吗？"}, {"role": "user", "content": "不是，是家里的门"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "你好"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "嗨"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "hello"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "嗨，你好啊"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "你好呀"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "早上好"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "晚上好"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "吃了吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "吃饭了吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "今天很热啊"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "今天心情不错"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "哇好棒"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "谢谢"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "谢谢你"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "没事"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "好的好的"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "嗯嗯"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "哦"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "哈哈哈"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "哦好"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "你是谁"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "你叫什么名字"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "你是什么"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "你是机器人吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "你能做什么"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "你有什么功能"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "介绍一下你自己"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "你是AI吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "你是哪个公司的"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "你会说话吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "谁开发了你"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "空调开着了吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "空调现在是开着的吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "车窗关好了吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "现在用的是什么驾驶模式"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "充电口有没有插着"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "鹏翼门关了吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "后备箱是开着的吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "电量还剩多少"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "现在温度是多少"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "空调温度设的是多少"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "氛围灯开着吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "音量调到多少了"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "冰箱开着吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "座椅加热开着吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "现在是什么驾驶模式"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我打开家里的灯"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "我卧室的灯打开"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我把客厅灯关了"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "家里的空调打开一下"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我把家里的热水器打开"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "把家里的窗帘拉上"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我关一下家里的煤气"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "开门"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我开家门"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我把公司的空调打开"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "今天天气怎么样"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "明天会下雨吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我推荐一首歌"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我写一份邮件"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "讲个笑话"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "你会唱歌吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "附近哪里好吃"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "现在油价多少"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我查股票"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我算一道数学题"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "今天新闻有什么"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我翻译一句英文"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "最近有什么好看的电影"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "如何减肥"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我找个附近的酒店"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "打开主驾车窗"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"打开\", \"device\": \"车窗\", \"position\": \"主驾\"}"}, {"role": "user", "content": "工具结果: 成功"}, {"role": "assistant", "content": "Final Answer: 好的，主驾车窗已为您打开。"}, {"role": "user", "content": "你是谁"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我把空调开一下"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"空调\"}"}, {"role": "user", "content": "工具结果: 成功"}, {"role": "assistant", "content": "Final Answer: 好的，空调已为您打开。"}, {"role": "user", "content": "你叫什么名字"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "打开鹏翼门"}, {"role": "assistant", "content": "Action: GateControl\nAction Input: {\"action\": \"打开\", \"device\": \"鹏翼门\"}"}, {"role": "user", "content": "工具结果: 成功"}, {"role": "assistant", "content": "Final Answer: 好的，鹏翼门已为您打开。"}, {"role": "user", "content": "你好"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我把驾驶模式切到运动模式"}, {"role": "assistant", "content": "Action: DrivingControl\nAction Input: {\"action\": \"打开\", \"feature\": \"驾驶模式\", \"value\": \"运动模式\"}"}, {"role": "user", "content": "工具结果: 成功"}, {"role": "assistant", "content": "Final Answer: 好的，已切换到运动模式。"}, {"role": "user", "content": "现在是什么驾驶模式"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我关闭空调"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"关闭\", \"device\": \"空调\"}"}, {"role": "user", "content": "工具结果: 成功"}, {"role": "assistant", "content": "Final Answer: 好的，空调已关闭。"}, {"role": "user", "content": "空调关了吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "把音量调大一点"}, {"role": "assistant", "content": "Action: VoiceControl\nAction Input: {\"action\": \"调大\", \"feature\": \"音量\"}"}, {"role": "user", "content": "工具结果: 成功"}, {"role": "assistant", "content": "Final Answer: 好的，音量已为您调大。"}, {"role": "user", "content": "现在音量是多少"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "开一下后备箱"}, {"role": "assistant", "content": "Action: GateControl\nAction Input: {\"action\": \"打开\", \"device\": \"后备箱\"}"}, {"role": "user", "content": "工具结果: 成功"}, {"role": "assistant", "content": "Final Answer: 好的，后备箱已为您打开。"}, {"role": "user", "content": "今天天气怎么样"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我把氛围灯打开"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"打开\", \"device\": \"氛围灯\"}"}, {"role": "user", "content": "工具结果: 成功"}, {"role": "assistant", "content": "Final Answer: 好的，氛围灯已为您打开。"}, {"role": "user", "content": "讲个笑话吧"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我开一下灯"}, {"role": "assistant", "content": "Clarify: 请问您需要打开哪里的灯？"}, {"role": "user", "content": "主驾阅读灯"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"打开\", \"device\": \"阅读灯\", \"position\": \"主驾\"}"}, {"role": "user", "content": "工具结果: 成功"}, {"role": "assistant", "content": "Final Answer: 好的，主驾阅读灯已为您打开。"}, {"role": "user", "content": "你好"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我开个窗"}, {"role": "assistant", "content": "Clarify: 请问您需要打开哪个位置的车窗？"}, {"role": "user", "content": "副驾的"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"打开\", \"device\": \"车窗\", \"position\": \"副驾\"}"}, {"role": "user", "content": "工具结果: 成功"}, {"role": "assistant", "content": "Final Answer: 好的，副驾车窗已为您打开。"}, {"role": "user", "content": "谢谢"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "打开空调"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"空调\"}"}, {"role": "user", "content": "工具结果: 成功"}, {"role": "assistant", "content": "Final Answer: 好的，空调已打开。"}, {"role": "user", "content": "再把温度调到23度"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"调到\", \"device\": \"空调\", \"feature\": \"温度\", \"value\": \"23\"}"}, {"role": "user", "content": "工具结果: 成功"}, {"role": "assistant", "content": "Final Answer: 好的，已将空调温度调到23度。"}, {"role": "user", "content": "你是谁啊"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "打开主驾阅读灯"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"打开\", \"device\": \"阅读灯\", \"position\": \"主驾\"}"}, {"role": "user", "content": "工具结果: 成功"}, {"role": "assistant", "content": "Final Answer: 好的，主驾阅读灯已打开。"}, {"role": "user", "content": "顺便把副驾的也打开"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"打开\", \"device\": \"阅读灯\", \"position\": \"副驾\"}"}, {"role": "user", "content": "工具结果: 成功"}, {"role": "assistant", "content": "Final Answer: 好的，副驾阅读灯也已打开。"}, {"role": "user", "content": "你能帮我点外卖吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "关闭鹏翼门"}, {"role": "assistant", "content": "Action: GateControl\nAction Input: {\"action\": \"关闭\", \"device\": \"鹏翼门\"}"}, {"role": "user", "content": "工具结果: 成功"}, {"role": "assistant", "content": "Final Answer: 好的，鹏翼门已为您关闭。"}, {"role": "user", "content": "帮我把家里的灯打开"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "把座椅加热打开"}, {"role": "assistant", "content": "Action: SeatControl\nAction Input: {\"action\": \"打开\", \"device\": \"座椅\", \"feature\": \"制热\", \"position\": \"主驾\"}"}, {"role": "user", "content": "工具结果: 成功"}, {"role": "assistant", "content": "Final Answer: 好的，主驾座椅加热已打开。"}, {"role": "user", "content": "帮我查一下今天股票"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "打开空调"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"空调\"}"}, {"role": "user", "content": "工具结果: 成功"}, {"role": "assistant", "content": "Final Answer: 好的，空调已打开。"}, {"role": "user", "content": "嗯"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我关一下车窗"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"关闭\", \"device\": \"车窗\"}"}, {"role": "user", "content": "工具结果: 成功"}, {"role": "assistant", "content": "Final Answer: 好的，车窗已为您关闭。"}, {"role": "user", "content": "哦"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "啊"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "哇"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "嗯嗯嗯"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "好好"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "ok"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "OK"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "好的好的好的"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "嗯"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "哦对"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "好哦"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "真棒"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "厉害"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "太好了"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "不错不错"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "好烦啊"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "累死了"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "困了"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "饿了"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "心情不好"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "开心"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "拜拜"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "再见"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "byebye"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "晚安"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "早安"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "下午好"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "好久不见"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "最近怎么样"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "你还好吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "你最近忙吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "你喜欢什么"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "你有什么爱好"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "你会玩游戏吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "你会做饭吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "你有没有朋友"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "你会唱歌吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "给我讲个故事"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "讲个冷笑话"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "你觉得生活有意义吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "世界上最高的山是哪座"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "太阳系有几颗行星"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我查一下今天汇率"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "比特币现在多少钱"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我搜索一下北京今天有什么活动"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "查一下最近的超市"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我找个好吃的餐厅"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "现在几点了，上海时间"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "今天是几号"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "明天是什么节日"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我查快递"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "嗯啊"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "哦啊"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "啊对对对"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "就是就是"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "我也不知道"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "随便"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "无所谓"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "都行"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "没事没事"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "算了算了"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "打开空调"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"空调\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，空调已开启。"}, {"role": "user", "content": "你好"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我把主驾车窗打开"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"打开\", \"device\": \"车窗\", \"position\": \"主驾\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，主驾车窗已打开。"}, {"role": "user", "content": "嗯嗯"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "关闭后备箱"}, {"role": "assistant", "content": "Action: GateControl\nAction Input: {\"action\": \"关闭\", \"device\": \"后备箱\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，后备箱已关闭。"}, {"role": "user", "content": "好的好的"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "把驾驶模式切到运动模式"}, {"role": "assistant", "content": "Action: DrivingControl\nAction Input: {\"action\": \"打开\", \"feature\": \"驾驶模式\", \"value\": \"运动模式\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已切换运动模式。"}, {"role": "user", "content": "哈哈"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "打开氛围灯"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"打开\", \"device\": \"氛围灯\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，氛围灯已打开。"}, {"role": "user", "content": "你叫什么名字"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我把音量调大"}, {"role": "assistant", "content": "Action: VoiceControl\nAction Input: {\"action\": \"调大\", \"feature\": \"音量\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，音量已调大。"}, {"role": "user", "content": "你是谁"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "打开充电"}, {"role": "assistant", "content": "Action: PowerControl\nAction Input: {\"action\": \"打开\", \"feature\": \"充电\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，充电已开启。"}, {"role": "user", "content": "你是AI吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "打开冰箱"}, {"role": "assistant", "content": "Action: FridgeControl\nAction Input: {\"action\": \"打开\", \"device\": \"冰箱\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，冰箱已打开。"}, {"role": "user", "content": "今天天气好吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "关闭鹏翼门"}, {"role": "assistant", "content": "Action: GateControl\nAction Input: {\"action\": \"关闭\", \"device\": \"鹏翼门\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，鹏翼门已关闭。"}, {"role": "user", "content": "告诉我一个笑话"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "打开WIFI"}, {"role": "assistant", "content": "Action: NetworkControl\nAction Input: {\"action\": \"打开\", \"feature\": \"WIFI\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，WIFI已打开。"}, {"role": "user", "content": "帮我查股票"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "打开空调"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"空调\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，空调已打开。"}, {"role": "user", "content": "空调开着吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "关闭车窗"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"关闭\", \"device\": \"车窗\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，车窗已关闭。"}, {"role": "user", "content": "车窗关了吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "打开充电"}, {"role": "assistant", "content": "Action: PowerControl\nAction Input: {\"action\": \"打开\", \"feature\": \"充电\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，充电已开启。"}, {"role": "user", "content": "现在电量多少"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "调节座椅制热"}, {"role": "assistant", "content": "Action: SeatControl\nAction Input: {\"action\": \"打开\", \"device\": \"座椅\", \"feature\": \"制热\", \"position\": \"主驾\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，座椅加热已开启。"}, {"role": "user", "content": "座椅加热开着吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "切换到舒适模式"}, {"role": "assistant", "content": "Action: DrivingControl\nAction Input: {\"action\": \"打开\", \"feature\": \"驾驶模式\", \"value\": \"舒适模式\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已切换舒适模式。"}, {"role": "user", "content": "现在是什么驾驶模式"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "打开主驾阅读灯"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"打开\", \"device\": \"阅读灯\", \"position\": \"主驾\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，主驾阅读灯已打开。"}, {"role": "user", "content": "帮我开一下家里的灯"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "关闭空调外循环"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"关闭\", \"device\": \"空调\", \"value\": \"外循环\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，外循环已关闭。"}, {"role": "user", "content": "帮我把家里空调也打开"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "打开能量回收"}, {"role": "assistant", "content": "Action: PowerControl\nAction Input: {\"action\": \"打开\", \"feature\": \"能量回收\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，能量回收已开启。"}, {"role": "user", "content": "帮我买杯咖啡"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "打开主驾车窗"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"打开\", \"device\": \"车窗\", \"position\": \"主驾\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，主驾车窗已打开。"}, {"role": "user", "content": "顺便把副驾的也开了"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"打开\", \"device\": \"车窗\", \"position\": \"副驾\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，副驾车窗也已打开。"}, {"role": "user", "content": "你好"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "打开空调"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"空调\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，空调已打开。"}, {"role": "user", "content": "温度调到24度"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"调到\", \"device\": \"空调\", \"feature\": \"温度\", \"value\": \"24\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已调到24度。"}, {"role": "user", "content": "你是谁"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我打开座椅按摩"}, {"role": "assistant", "content": "Action: SeatControl\nAction Input: {\"action\": \"打开\", \"device\": \"座椅\", \"feature\": \"按摩\", \"position\": \"主驾\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，座椅按摩已开启。"}, {"role": "user", "content": "换成脉冲模式"}, {"role": "assistant", "content": "Action: SeatControl\nAction Input: {\"action\": \"调到\", \"device\": \"座椅\", \"feature\": \"按摩\", \"position\": \"主驾\", \"value\": \"脉冲\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已切换到脉冲模式。"}, {"role": "user", "content": "今天几号"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "打开氛围灯"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"打开\", \"device\": \"氛围灯\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，氛围灯已打开。"}, {"role": "user", "content": "换成光剑模式"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"调到\", \"device\": \"氛围灯\", \"value\": \"光剑\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已切换光剑模式。"}, {"role": "user", "content": "空调开着吗"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "开后备箱"}, {"role": "assistant", "content": "Action: GateControl\nAction Input: {\"action\": \"打开\", \"device\": \"后备箱\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，后备箱已打开。"}, {"role": "user", "content": "关上后备箱"}, {"role": "assistant", "content": "Action: GateControl\nAction Input: {\"action\": \"关闭\", \"device\": \"后备箱\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，后备箱已关闭。"}, {"role": "user", "content": "帮我订外卖"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "把音量调大"}, {"role": "assistant", "content": "Action: VoiceControl\nAction Input: {\"action\": \"调大\", \"feature\": \"音量\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，音量已调大。"}, {"role": "user", "content": "再大一点"}, {"role": "assistant", "content": "Action: VoiceControl\nAction Input: {\"action\": \"调大\", \"feature\": \"音量\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，音量已继续调大。"}, {"role": "user", "content": "嗯"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "打开前排阅读灯"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"打开\", \"device\": \"阅读灯\", \"position\": \"前排\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，前排阅读灯已打开。"}, {"role": "user", "content": "把副驾的也打开"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"打开\", \"device\": \"阅读灯\", \"position\": \"副驾\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，副驾阅读灯已打开。"}, {"role": "user", "content": "你有什么功能"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我开个灯"}, {"role": "assistant", "content": "Clarify: 请问您需要打开哪里的灯？"}, {"role": "user", "content": "主驾阅读灯"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"打开\", \"device\": \"阅读灯\", \"position\": \"主驾\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，主驾阅读灯已打开。"}, {"role": "user", "content": "谢谢"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "开一下窗"}, {"role": "assistant", "content": "Clarify: 请问您需要打开哪个位置的车窗？"}, {"role": "user", "content": "副驾的"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"打开\", \"device\": \"车窗\", \"position\": \"副驾\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，副驾车窗已打开。"}, {"role": "user", "content": "你好"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "帮我加热一下"}, {"role": "assistant", "content": "Clarify: 请问您是需要打开座椅加热还是方向盘加热？"}, {"role": "user", "content": "座椅加热，主驾"}, {"role": "assistant", "content": "Action: SeatControl\nAction Input: {\"action\": \"打开\", \"device\": \"座椅\", \"feature\": \"制热\", \"position\": \"主驾\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，主驾座椅加热已打开。"}, {"role": "user", "content": "现在温度多少"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "打开空调"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"空调\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，空调已打开。"}, {"role": "user", "content": "温度调到22度"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"调到\", \"device\": \"空调\", \"feature\": \"温度\", \"value\": \"22\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已调到22度。"}, {"role": "user", "content": "风速调大一点"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"调大\", \"device\": \"空调\", \"feature\": \"风\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，风速已调大。"}, {"role": "user", "content": "你是什么"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "打开主驾车窗"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"打开\", \"device\": \"车窗\", \"position\": \"主驾\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，主驾车窗已打开。"}, {"role": "user", "content": "副驾的也开一下"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"打开\", \"device\": \"车窗\", \"position\": \"副驾\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，副驾车窗也已打开。"}, {"role": "user", "content": "把第二排左边也开了"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"打开\", \"device\": \"车窗\", \"position\": \"第二排左侧\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，第二排左侧车窗已打开。"}, {"role": "user", "content": "好的好的"}, {"role": "assistant", "content": "Reject"}]}
+{"messages": [{"role": "user", "content": "打开氛围灯"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"打开\", \"device\": \"氛围灯\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，氛围灯已打开。"}, {"role": "user", "content": "把座椅按摩也打开"}, {"role": "assistant", "content": "Action: SeatControl\nAction Input: {\"action\": \"打开\", \"device\": \"座椅\", \"feature\": \"按摩\", \"position\": \"主驾\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，主驾座椅按摩已打开。"}, {"role": "user", "content": "再把音量调小一点"}, {"role": "assistant", "content": "Action: VoiceControl\nAction Input: {\"action\": \"调小\", \"feature\": \"音量\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，音量已调小。"}, {"role": "user", "content": "嗯嗯，谢谢"}, {"role": "assistant", "content": "Reject"}]}
