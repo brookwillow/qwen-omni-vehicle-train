@@ -243,8 +243,12 @@ def eval_file(
             if ap.exists():
                 audio_path = str(ap)
 
-        src = f"[audio]" if audio_path else f"[text]"
-        q_display = (query or raw_audio or "")[:60]
+        if audio_path:
+            src = "[audio]"
+            q_display = Path(audio_path).name
+        else:
+            src = "[text] "
+            q_display = (query or "")[:55]
         print(f"  [{idx+1}/{n_total}] {src} {q_display}", end=" ... ", flush=True)
 
         pred = generate_text(model, processor, system_prompt, query, max_new_tokens, temperature, audio_path=audio_path)
