@@ -43,6 +43,12 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--print-structure", action="store_true",
                    help="Print audio tower module names and exit")
     p.add_argument("--language", default="zh", help="ASR language hint for Whisper decoder")
+    p.add_argument("--hook-layer", default="ln_post",
+                   choices=["ln_post", "avg_pooler", "full"],
+                   help="Which layer to hook for encoder features: "
+                        "ln_post=pre-projection 1280-dim (recommended), "
+                        "avg_pooler=after pooling but before proj, "
+                        "full=entire audio_tower output (2048-dim, likely incompatible)")
     return p.parse_args()
 
 
@@ -92,7 +98,21 @@ def main() -> None:
 
     audio_tower = find_audio_tower(qwen_model)
     print(f"[probe] Audio tower type: {type(audio_tower).__name__}")
-    print(f"[probe] Audio tower config: {getattr(audio_tower, 'config', {})}")
+
+    # Hook at the chosen layer to get pre-projection 1280-dim features.
+    # audio_tower.ln_post  → before avg_pooler and proj (full sequence, 1280-dim) ← best for Whisper
+    # audio_tower.avg_pooler → after pooling, before proj (shorter sequence, 1280-dim)
+    # full audio_tower     → after proj (2048-dim, incompatible with Whisper decoder)
+    hook_layer = args.hook_layer
+    if hook_layer == "ln_post" and hasattr(audio_tower, "ln_post"):
+        hook_target = audio_tower.ln_post
+        print(f"[probe] Hooking at: audio_tower.ln_post (1280-dim, pre-pooling)")
+    elif hook_layer == "avg_pooler" and hasattr(audio_tower, "avg_pooler"):
+        hook_target = audio_tower.avg_pooler
+        print(f"[probe] Hooking at: audio_tower.avg_pooler (1280-dim, post-pooling)")
+    else:
+        hook_target = audio_tower
+        print(f"[probe] Hooking entire audio_tower (likely 2048-dim, may be incompatible)")
 
     # ── Step 1: get mel spectrogram via Qwen processor ──────────────────────
     print(f"\n[2/4] Processing audio: {args.audio}")
@@ -129,7 +149,7 @@ def main() -> None:
         else:
             encoder_hidden = output.detach().float()
 
-    handle = audio_tower.register_forward_hook(_hook)
+    handle = hook_target.register_forward_hook(_hook)
 
     with torch.inference_mode():
         if "input_features" in inputs:
