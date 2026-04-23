@@ -50,8 +50,15 @@ DEFAULT_SP_PATH = str(_PROJECT_DIR / "data" / "system-prompt.txt")
 # ── Model loading ────────────────────────────────────────────
 
 def load_model(model_dir: str, lora_dir: str):
+    # Try flash_attention_2 for faster inference; fall back to default if unavailable.
+    try:
+        import flash_attn  # noqa: F401
+        attn_impl = "flash_attention_2"
+    except ImportError:
+        attn_impl = "eager"
     model = Qwen2_5OmniForConditionalGeneration.from_pretrained(
         model_dir, torch_dtype="auto", device_map="auto",
+        attn_implementation=attn_impl,
     )
     if lora_dir:
         # Workaround: PEFT/accelerate bug where _no_split_modules is a set-of-sets
