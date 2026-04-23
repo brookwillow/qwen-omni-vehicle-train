@@ -152,14 +152,13 @@ def main() -> None:
     handle = hook_target.register_forward_hook(_hook)
 
     with torch.inference_mode():
-        if "input_features" in inputs:
-            audio_tower(inputs["input_features"].to(qwen_model.device).to(torch.float16))
-        else:
-            # trigger full forward pass and capture via hook
-            _ = qwen_model.thinker(
-                **{k: v for k, v in inputs.items() if k != "labels"},
-                output_hidden_states=False,
-            )
+        # Always trigger via the full thinker forward pass so that
+        # feature_lens (derived from feature_attention_mask internally)
+        # is computed and passed to the audio tower correctly.
+        _ = qwen_model.thinker(
+            **{k: v for k, v in inputs.items() if k != "labels"},
+            output_hidden_states=False,
+        )
 
     handle.remove()
 
