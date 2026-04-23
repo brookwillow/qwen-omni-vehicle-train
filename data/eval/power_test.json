@@ -15,7 +15,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_001.wav"
+    "query_audio": "audio/power/power_001.wav"
   },
   {
     "id": "power_002",
@@ -33,7 +33,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_002.wav"
+    "query_audio": "audio/power/power_002.wav"
   },
   {
     "id": "power_003",
@@ -51,7 +51,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_003.wav"
+    "query_audio": "audio/power/power_003.wav"
   },
   {
     "id": "power_004",
@@ -69,7 +69,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_004.wav"
+    "query_audio": "audio/power/power_004.wav"
   },
   {
     "id": "power_005",
@@ -87,7 +87,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_005.wav"
+    "query_audio": "audio/power/power_005.wav"
   },
   {
     "id": "power_006",
@@ -105,7 +105,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_006.wav"
+    "query_audio": "audio/power/power_006.wav"
   },
   {
     "id": "power_007",
@@ -123,7 +123,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_007.wav"
+    "query_audio": "audio/power/power_007.wav"
   },
   {
     "id": "power_008",
@@ -141,7 +141,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_008.wav"
+    "query_audio": "audio/power/power_008.wav"
   },
   {
     "id": "power_009",
@@ -160,7 +160,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_009.wav"
+    "query_audio": "audio/power/power_009.wav"
   },
   {
     "id": "power_010",
@@ -179,7 +179,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_010.wav"
+    "query_audio": "audio/power/power_010.wav"
   },
   {
     "id": "power_011",
@@ -198,7 +198,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_011.wav"
+    "query_audio": "audio/power/power_011.wav"
   },
   {
     "id": "power_012",
@@ -217,7 +217,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_012.wav"
+    "query_audio": "audio/power/power_012.wav"
   },
   {
     "id": "power_013",
@@ -236,7 +236,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_013.wav"
+    "query_audio": "audio/power/power_013.wav"
   },
   {
     "id": "power_014",
@@ -255,7 +255,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_014.wav"
+    "query_audio": "audio/power/power_014.wav"
   },
   {
     "id": "power_015",
@@ -274,7 +274,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_015.wav"
+    "query_audio": "audio/power/power_015.wav"
   },
   {
     "id": "power_016",
@@ -293,7 +293,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_016.wav"
+    "query_audio": "audio/power/power_016.wav"
   },
   {
     "id": "power_017",
@@ -312,7 +312,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_017.wav"
+    "query_audio": "audio/power/power_017.wav"
   },
   {
     "id": "power_018",
@@ -331,7 +331,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_018.wav"
+    "query_audio": "audio/power/power_018.wav"
   },
   {
     "id": "power_019",
@@ -350,7 +350,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_019.wav"
+    "query_audio": "audio/power/power_019.wav"
   },
   {
     "id": "power_020",
@@ -369,7 +369,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_020.wav"
+    "query_audio": "audio/power/power_020.wav"
   },
   {
     "id": "power_021",
@@ -388,7 +388,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_021.wav"
+    "query_audio": "audio/power/power_021.wav"
   },
   {
     "id": "power_022",
@@ -407,7 +407,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_022.wav"
+    "query_audio": "audio/power/power_022.wav"
   },
   {
     "id": "power_023",
@@ -426,7 +426,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_023.wav"
+    "query_audio": "audio/power/power_023.wav"
   },
   {
     "id": "power_024",
@@ -445,7 +445,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_024.wav"
+    "query_audio": "audio/power/power_024.wav"
   },
   {
     "id": "power_025",
@@ -464,7 +464,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_025.wav"
+    "query_audio": "audio/power/power_025.wav"
   },
   {
     "id": "power_026",
@@ -482,7 +482,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_026.wav"
+    "query_audio": "audio/power/power_026.wav"
   },
   {
     "id": "power_027",
@@ -500,7 +500,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_027.wav"
+    "query_audio": "audio/power/power_027.wav"
   },
   {
     "id": "power_028",
@@ -518,7 +518,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_028.wav"
+    "query_audio": "audio/power/power_028.wav"
   },
   {
     "id": "power_029",
@@ -536,7 +536,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_029.wav"
+    "query_audio": "audio/power/power_029.wav"
   },
   {
     "id": "power_030",
@@ -555,7 +555,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_030.wav"
+    "query_audio": "audio/power/power_030.wav"
   },
   {
     "id": "power_031",
@@ -574,7 +574,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_031.wav"
+    "query_audio": "audio/power/power_031.wav"
   },
   {
     "id": "power_032",
@@ -593,7 +593,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_032.wav"
+    "query_audio": "audio/power/power_032.wav"
   },
   {
     "id": "power_033",
@@ -611,7 +611,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_033.wav"
+    "query_audio": "audio/power/power_033.wav"
   },
   {
     "id": "power_034",
@@ -629,7 +629,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_034.wav"
+    "query_audio": "audio/power/power_034.wav"
   },
   {
     "id": "power_035",
@@ -648,7 +648,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_035.wav"
+    "query_audio": "audio/power/power_035.wav"
   },
   {
     "id": "power_036",
@@ -667,7 +667,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_036.wav"
+    "query_audio": "audio/power/power_036.wav"
   },
   {
     "id": "power_037",
@@ -686,7 +686,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_037.wav"
+    "query_audio": "audio/power/power_037.wav"
   },
   {
     "id": "power_038",
@@ -704,7 +704,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_038.wav"
+    "query_audio": "audio/power/power_038.wav"
   },
   {
     "id": "power_039",
@@ -723,7 +723,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_039.wav"
+    "query_audio": "audio/power/power_039.wav"
   },
   {
     "id": "power_040",
@@ -742,7 +742,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_040.wav"
+    "query_audio": "audio/power/power_040.wav"
   },
   {
     "id": "power_041",
@@ -761,7 +761,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_041.wav"
+    "query_audio": "audio/power/power_041.wav"
   },
   {
     "id": "power_042",
@@ -780,7 +780,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_042.wav"
+    "query_audio": "audio/power/power_042.wav"
   },
   {
     "id": "power_043",
@@ -799,7 +799,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_043.wav"
+    "query_audio": "audio/power/power_043.wav"
   },
   {
     "id": "power_044",
@@ -818,7 +818,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_044.wav"
+    "query_audio": "audio/power/power_044.wav"
   },
   {
     "id": "power_045",
@@ -837,7 +837,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_045.wav"
+    "query_audio": "audio/power/power_045.wav"
   },
   {
     "id": "power_046",
@@ -864,7 +864,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_046.wav"
+    "query_audio": "audio/power/power_046.wav"
   },
   {
     "id": "power_047",
@@ -889,7 +889,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_047.wav"
+    "query_audio": "audio/power/power_047.wav"
   },
   {
     "id": "power_048",
@@ -915,7 +915,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_048.wav"
+    "query_audio": "audio/power/power_048.wav"
   },
   {
     "id": "power_049",
@@ -940,7 +940,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_049.wav"
+    "query_audio": "audio/power/power_049.wav"
   },
   {
     "id": "power_050",
@@ -966,7 +966,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_050.wav"
+    "query_audio": "audio/power/power_050.wav"
   },
   {
     "id": "power_051",
@@ -992,7 +992,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_051.wav"
+    "query_audio": "audio/power/power_051.wav"
   },
   {
     "id": "power_052",
@@ -1019,7 +1019,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_052.wav"
+    "query_audio": "audio/power/power_052.wav"
   },
   {
     "id": "power_053",
@@ -1046,7 +1046,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_053.wav"
+    "query_audio": "audio/power/power_053.wav"
   },
   {
     "id": "power_054",
@@ -1080,7 +1080,7 @@
         }
       }
     ],
-    "query_audio": "audio/power_054.wav"
+    "query_audio": "audio/power/power_054.wav"
   },
   {
     "id": "power_055",
@@ -1106,6 +1106,6 @@
         }
       }
     ],
-    "query_audio": "audio/power_055.wav"
+    "query_audio": "audio/power/power_055.wav"
   }
 ]

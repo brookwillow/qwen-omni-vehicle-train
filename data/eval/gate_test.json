@@ -15,7 +15,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_001.wav"
+    "query_audio": "audio/gate/gate_001.wav"
   },
   {
     "id": "gate_002",
@@ -33,7 +33,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_002.wav"
+    "query_audio": "audio/gate/gate_002.wav"
   },
   {
     "id": "gate_003",
@@ -51,7 +51,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_003.wav"
+    "query_audio": "audio/gate/gate_003.wav"
   },
   {
     "id": "gate_004",
@@ -69,7 +69,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_004.wav"
+    "query_audio": "audio/gate/gate_004.wav"
   },
   {
     "id": "gate_005",
@@ -87,7 +87,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_005.wav"
+    "query_audio": "audio/gate/gate_005.wav"
   },
   {
     "id": "gate_006",
@@ -105,7 +105,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_006.wav"
+    "query_audio": "audio/gate/gate_006.wav"
   },
   {
     "id": "gate_007",
@@ -123,7 +123,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_007.wav"
+    "query_audio": "audio/gate/gate_007.wav"
   },
   {
     "id": "gate_008",
@@ -141,7 +141,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_008.wav"
+    "query_audio": "audio/gate/gate_008.wav"
   },
   {
     "id": "gate_009",
@@ -159,7 +159,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_009.wav"
+    "query_audio": "audio/gate/gate_009.wav"
   },
   {
     "id": "gate_010",
@@ -177,7 +177,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_010.wav"
+    "query_audio": "audio/gate/gate_010.wav"
   },
   {
     "id": "gate_011",
@@ -195,7 +195,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_011.wav"
+    "query_audio": "audio/gate/gate_011.wav"
   },
   {
     "id": "gate_012",
@@ -213,7 +213,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_012.wav"
+    "query_audio": "audio/gate/gate_012.wav"
   },
   {
     "id": "gate_013",
@@ -232,7 +232,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_013.wav"
+    "query_audio": "audio/gate/gate_013.wav"
   },
   {
     "id": "gate_014",
@@ -251,7 +251,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_014.wav"
+    "query_audio": "audio/gate/gate_014.wav"
   },
   {
     "id": "gate_015",
@@ -270,7 +270,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_015.wav"
+    "query_audio": "audio/gate/gate_015.wav"
   },
   {
     "id": "gate_016",
@@ -289,7 +289,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_016.wav"
+    "query_audio": "audio/gate/gate_016.wav"
   },
   {
     "id": "gate_017",
@@ -307,7 +307,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_017.wav"
+    "query_audio": "audio/gate/gate_017.wav"
   },
   {
     "id": "gate_018",
@@ -325,7 +325,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_018.wav"
+    "query_audio": "audio/gate/gate_018.wav"
   },
   {
     "id": "gate_019",
@@ -343,7 +343,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_019.wav"
+    "query_audio": "audio/gate/gate_019.wav"
   },
   {
     "id": "gate_020",
@@ -362,7 +362,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_020.wav"
+    "query_audio": "audio/gate/gate_020.wav"
   },
   {
     "id": "gate_021",
@@ -381,7 +381,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_021.wav"
+    "query_audio": "audio/gate/gate_021.wav"
   },
   {
     "id": "gate_022",
@@ -400,7 +400,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_022.wav"
+    "query_audio": "audio/gate/gate_022.wav"
   },
   {
     "id": "gate_023",
@@ -419,7 +419,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_023.wav"
+    "query_audio": "audio/gate/gate_023.wav"
   },
   {
     "id": "gate_024",
@@ -438,7 +438,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_024.wav"
+    "query_audio": "audio/gate/gate_024.wav"
   },
   {
     "id": "gate_025",
@@ -457,7 +457,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_025.wav"
+    "query_audio": "audio/gate/gate_025.wav"
   },
   {
     "id": "gate_026",
@@ -476,7 +476,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_026.wav"
+    "query_audio": "audio/gate/gate_026.wav"
   },
   {
     "id": "gate_027",
@@ -495,7 +495,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_027.wav"
+    "query_audio": "audio/gate/gate_027.wav"
   },
   {
     "id": "gate_028",
@@ -514,7 +514,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_028.wav"
+    "query_audio": "audio/gate/gate_028.wav"
   },
   {
     "id": "gate_029",
@@ -533,7 +533,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_029.wav"
+    "query_audio": "audio/gate/gate_029.wav"
   },
   {
     "id": "gate_030",
@@ -551,7 +551,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_030.wav"
+    "query_audio": "audio/gate/gate_030.wav"
   },
   {
     "id": "gate_031",
@@ -569,7 +569,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_031.wav"
+    "query_audio": "audio/gate/gate_031.wav"
   },
   {
     "id": "gate_032",
@@ -587,7 +587,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_032.wav"
+    "query_audio": "audio/gate/gate_032.wav"
   },
   {
     "id": "gate_033",
@@ -605,7 +605,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_033.wav"
+    "query_audio": "audio/gate/gate_033.wav"
   },
   {
     "id": "gate_034",
@@ -623,7 +623,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_034.wav"
+    "query_audio": "audio/gate/gate_034.wav"
   },
   {
     "id": "gate_035",
@@ -641,7 +641,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_035.wav"
+    "query_audio": "audio/gate/gate_035.wav"
   },
   {
     "id": "gate_036",
@@ -659,7 +659,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_036.wav"
+    "query_audio": "audio/gate/gate_036.wav"
   },
   {
     "id": "gate_037",
@@ -677,7 +677,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_037.wav"
+    "query_audio": "audio/gate/gate_037.wav"
   },
   {
     "id": "gate_038",
@@ -695,7 +695,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_038.wav"
+    "query_audio": "audio/gate/gate_038.wav"
   },
   {
     "id": "gate_039",
@@ -713,7 +713,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_039.wav"
+    "query_audio": "audio/gate/gate_039.wav"
   },
   {
     "id": "gate_040",
@@ -732,7 +732,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_040.wav"
+    "query_audio": "audio/gate/gate_040.wav"
   },
   {
     "id": "gate_041",
@@ -750,7 +750,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_041.wav"
+    "query_audio": "audio/gate/gate_041.wav"
   },
   {
     "id": "gate_042",
@@ -769,7 +769,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_042.wav"
+    "query_audio": "audio/gate/gate_042.wav"
   },
   {
     "id": "gate_043",
@@ -787,7 +787,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_043.wav"
+    "query_audio": "audio/gate/gate_043.wav"
   },
   {
     "id": "gate_044",
@@ -805,7 +805,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_044.wav"
+    "query_audio": "audio/gate/gate_044.wav"
   },
   {
     "id": "gate_045",
@@ -824,7 +824,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_045.wav"
+    "query_audio": "audio/gate/gate_045.wav"
   },
   {
     "id": "gate_046",
@@ -842,7 +842,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_046.wav"
+    "query_audio": "audio/gate/gate_046.wav"
   },
   {
     "id": "gate_047",
@@ -861,7 +861,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_047.wav"
+    "query_audio": "audio/gate/gate_047.wav"
   },
   {
     "id": "gate_048",
@@ -880,7 +880,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_048.wav"
+    "query_audio": "audio/gate/gate_048.wav"
   },
   {
     "id": "gate_049",
@@ -905,7 +905,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_049.wav"
+    "query_audio": "audio/gate/gate_049.wav"
   },
   {
     "id": "gate_050",
@@ -932,7 +932,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_050.wav"
+    "query_audio": "audio/gate/gate_050.wav"
   },
   {
     "id": "gate_051",
@@ -959,7 +959,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_051.wav"
+    "query_audio": "audio/gate/gate_051.wav"
   },
   {
     "id": "gate_052",
@@ -984,7 +984,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_052.wav"
+    "query_audio": "audio/gate/gate_052.wav"
   },
   {
     "id": "gate_053",
@@ -1009,7 +1009,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_053.wav"
+    "query_audio": "audio/gate/gate_053.wav"
   },
   {
     "id": "gate_054",
@@ -1034,7 +1034,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_054.wav"
+    "query_audio": "audio/gate/gate_054.wav"
   },
   {
     "id": "gate_055",
@@ -1060,7 +1060,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_055.wav"
+    "query_audio": "audio/gate/gate_055.wav"
   },
   {
     "id": "gate_056",
@@ -1086,7 +1086,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_056.wav"
+    "query_audio": "audio/gate/gate_056.wav"
   },
   {
     "id": "gate_057",
@@ -1113,7 +1113,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_057.wav"
+    "query_audio": "audio/gate/gate_057.wav"
   },
   {
     "id": "gate_058",
@@ -1139,7 +1139,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_058.wav"
+    "query_audio": "audio/gate/gate_058.wav"
   },
   {
     "id": "gate_059",
@@ -1164,7 +1164,7 @@
         }
       }
     ],
-    "query_audio": "audio/gate_059.wav"
+    "query_audio": "audio/gate/gate_059.wav"
   },
   {
     "id": "gate_060",
@@ -1183,6 +1183,6 @@
         }
       }
     ],
-    "query_audio": "audio/gate_060.wav"
+    "query_audio": "audio/gate/gate_060.wav"
   }
 ]

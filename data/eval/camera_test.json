@@ -15,7 +15,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_001.wav"
+    "query_audio": "audio/camera/camera_001.wav"
   },
   {
     "id": "camera_002",
@@ -33,7 +33,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_002.wav"
+    "query_audio": "audio/camera/camera_002.wav"
   },
   {
     "id": "camera_003",
@@ -52,7 +52,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_003.wav"
+    "query_audio": "audio/camera/camera_003.wav"
   },
   {
     "id": "camera_004",
@@ -71,7 +71,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_004.wav"
+    "query_audio": "audio/camera/camera_004.wav"
   },
   {
     "id": "camera_005",
@@ -90,7 +90,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_005.wav"
+    "query_audio": "audio/camera/camera_005.wav"
   },
   {
     "id": "camera_006",
@@ -109,7 +109,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_006.wav"
+    "query_audio": "audio/camera/camera_006.wav"
   },
   {
     "id": "camera_007",
@@ -128,7 +128,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_007.wav"
+    "query_audio": "audio/camera/camera_007.wav"
   },
   {
     "id": "camera_008",
@@ -147,7 +147,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_008.wav"
+    "query_audio": "audio/camera/camera_008.wav"
   },
   {
     "id": "camera_009",
@@ -166,7 +166,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_009.wav"
+    "query_audio": "audio/camera/camera_009.wav"
   },
   {
     "id": "camera_010",
@@ -185,7 +185,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_010.wav"
+    "query_audio": "audio/camera/camera_010.wav"
   },
   {
     "id": "camera_011",
@@ -204,7 +204,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_011.wav"
+    "query_audio": "audio/camera/camera_011.wav"
   },
   {
     "id": "camera_012",
@@ -223,7 +223,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_012.wav"
+    "query_audio": "audio/camera/camera_012.wav"
   },
   {
     "id": "camera_013",
@@ -242,7 +242,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_013.wav"
+    "query_audio": "audio/camera/camera_013.wav"
   },
   {
     "id": "camera_014",
@@ -261,7 +261,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_014.wav"
+    "query_audio": "audio/camera/camera_014.wav"
   },
   {
     "id": "camera_015",
@@ -280,7 +280,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_015.wav"
+    "query_audio": "audio/camera/camera_015.wav"
   },
   {
     "id": "camera_016",
@@ -298,7 +298,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_016.wav"
+    "query_audio": "audio/camera/camera_016.wav"
   },
   {
     "id": "camera_017",
@@ -317,7 +317,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_017.wav"
+    "query_audio": "audio/camera/camera_017.wav"
   },
   {
     "id": "camera_018",
@@ -336,7 +336,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_018.wav"
+    "query_audio": "audio/camera/camera_018.wav"
   },
   {
     "id": "camera_019",
@@ -355,7 +355,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_019.wav"
+    "query_audio": "audio/camera/camera_019.wav"
   },
   {
     "id": "camera_020",
@@ -374,7 +374,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_020.wav"
+    "query_audio": "audio/camera/camera_020.wav"
   },
   {
     "id": "camera_021",
@@ -393,7 +393,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_021.wav"
+    "query_audio": "audio/camera/camera_021.wav"
   },
   {
     "id": "camera_022",
@@ -412,7 +412,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_022.wav"
+    "query_audio": "audio/camera/camera_022.wav"
   },
   {
     "id": "camera_023",
@@ -431,7 +431,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_023.wav"
+    "query_audio": "audio/camera/camera_023.wav"
   },
   {
     "id": "camera_024",
@@ -450,7 +450,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_024.wav"
+    "query_audio": "audio/camera/camera_024.wav"
   },
   {
     "id": "camera_025",
@@ -469,7 +469,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_025.wav"
+    "query_audio": "audio/camera/camera_025.wav"
   },
   {
     "id": "camera_026",
@@ -488,7 +488,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_026.wav"
+    "query_audio": "audio/camera/camera_026.wav"
   },
   {
     "id": "camera_027",
@@ -507,7 +507,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_027.wav"
+    "query_audio": "audio/camera/camera_027.wav"
   },
   {
     "id": "camera_028",
@@ -526,7 +526,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_028.wav"
+    "query_audio": "audio/camera/camera_028.wav"
   },
   {
     "id": "camera_029",
@@ -545,7 +545,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_029.wav"
+    "query_audio": "audio/camera/camera_029.wav"
   },
   {
     "id": "camera_030",
@@ -564,7 +564,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_030.wav"
+    "query_audio": "audio/camera/camera_030.wav"
   },
   {
     "id": "camera_031",
@@ -583,7 +583,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_031.wav"
+    "query_audio": "audio/camera/camera_031.wav"
   },
   {
     "id": "camera_032",
@@ -602,7 +602,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_032.wav"
+    "query_audio": "audio/camera/camera_032.wav"
   },
   {
     "id": "camera_033",
@@ -620,7 +620,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_033.wav"
+    "query_audio": "audio/camera/camera_033.wav"
   },
   {
     "id": "camera_034",
@@ -638,7 +638,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_034.wav"
+    "query_audio": "audio/camera/camera_034.wav"
   },
   {
     "id": "camera_035",
@@ -656,7 +656,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_035.wav"
+    "query_audio": "audio/camera/camera_035.wav"
   },
   {
     "id": "camera_036",
@@ -675,7 +675,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_036.wav"
+    "query_audio": "audio/camera/camera_036.wav"
   },
   {
     "id": "camera_037",
@@ -694,7 +694,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_037.wav"
+    "query_audio": "audio/camera/camera_037.wav"
   },
   {
     "id": "camera_038",
@@ -713,7 +713,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_038.wav"
+    "query_audio": "audio/camera/camera_038.wav"
   },
   {
     "id": "camera_039",
@@ -732,7 +732,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_039.wav"
+    "query_audio": "audio/camera/camera_039.wav"
   },
   {
     "id": "camera_040",
@@ -751,7 +751,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_040.wav"
+    "query_audio": "audio/camera/camera_040.wav"
   },
   {
     "id": "camera_041",
@@ -778,7 +778,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_041.wav"
+    "query_audio": "audio/camera/camera_041.wav"
   },
   {
     "id": "camera_042",
@@ -805,7 +805,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_042.wav"
+    "query_audio": "audio/camera/camera_042.wav"
   },
   {
     "id": "camera_043",
@@ -832,7 +832,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_043.wav"
+    "query_audio": "audio/camera/camera_043.wav"
   },
   {
     "id": "camera_044",
@@ -859,7 +859,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_044.wav"
+    "query_audio": "audio/camera/camera_044.wav"
   },
   {
     "id": "camera_045",
@@ -884,7 +884,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_045.wav"
+    "query_audio": "audio/camera/camera_045.wav"
   },
   {
     "id": "camera_046",
@@ -911,7 +911,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_046.wav"
+    "query_audio": "audio/camera/camera_046.wav"
   },
   {
     "id": "camera_047",
@@ -937,7 +937,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_047.wav"
+    "query_audio": "audio/camera/camera_047.wav"
   },
   {
     "id": "camera_048",
@@ -963,7 +963,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_048.wav"
+    "query_audio": "audio/camera/camera_048.wav"
   },
   {
     "id": "camera_049",
@@ -989,7 +989,7 @@
         }
       }
     ],
-    "query_audio": "audio/camera_049.wav"
+    "query_audio": "audio/camera/camera_049.wav"
   },
   {
     "id": "camera_050",
@@ -1016,6 +1016,6 @@
         }
       }
     ],
-    "query_audio": "audio/camera_050.wav"
+    "query_audio": "audio/camera/camera_050.wav"
   }
 ]

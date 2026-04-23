@@ -15,7 +15,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_001.wav"
+    "query_audio": "audio/fridge/fridge_001.wav"
   },
   {
     "id": "fridge_002",
@@ -33,7 +33,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_002.wav"
+    "query_audio": "audio/fridge/fridge_002.wav"
   },
   {
     "id": "fridge_003",
@@ -51,7 +51,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_003.wav"
+    "query_audio": "audio/fridge/fridge_003.wav"
   },
   {
     "id": "fridge_004",
@@ -69,7 +69,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_004.wav"
+    "query_audio": "audio/fridge/fridge_004.wav"
   },
   {
     "id": "fridge_005",
@@ -88,7 +88,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_005.wav"
+    "query_audio": "audio/fridge/fridge_005.wav"
   },
   {
     "id": "fridge_006",
@@ -107,7 +107,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_006.wav"
+    "query_audio": "audio/fridge/fridge_006.wav"
   },
   {
     "id": "fridge_007",
@@ -125,7 +125,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_007.wav"
+    "query_audio": "audio/fridge/fridge_007.wav"
   },
   {
     "id": "fridge_008",
@@ -143,7 +143,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_008.wav"
+    "query_audio": "audio/fridge/fridge_008.wav"
   },
   {
     "id": "fridge_009",
@@ -161,7 +161,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_009.wav"
+    "query_audio": "audio/fridge/fridge_009.wav"
   },
   {
     "id": "fridge_010",
@@ -179,7 +179,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_010.wav"
+    "query_audio": "audio/fridge/fridge_010.wav"
   },
   {
     "id": "fridge_011",
@@ -198,7 +198,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_011.wav"
+    "query_audio": "audio/fridge/fridge_011.wav"
   },
   {
     "id": "fridge_012",
@@ -217,7 +217,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_012.wav"
+    "query_audio": "audio/fridge/fridge_012.wav"
   },
   {
     "id": "fridge_013",
@@ -235,7 +235,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_013.wav"
+    "query_audio": "audio/fridge/fridge_013.wav"
   },
   {
     "id": "fridge_014",
@@ -254,7 +254,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_014.wav"
+    "query_audio": "audio/fridge/fridge_014.wav"
   },
   {
     "id": "fridge_015",
@@ -272,7 +272,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_015.wav"
+    "query_audio": "audio/fridge/fridge_015.wav"
   },
   {
     "id": "fridge_016",
@@ -290,7 +290,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_016.wav"
+    "query_audio": "audio/fridge/fridge_016.wav"
   },
   {
     "id": "fridge_017",
@@ -308,7 +308,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_017.wav"
+    "query_audio": "audio/fridge/fridge_017.wav"
   },
   {
     "id": "fridge_018",
@@ -326,7 +326,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_018.wav"
+    "query_audio": "audio/fridge/fridge_018.wav"
   },
   {
     "id": "fridge_019",
@@ -344,7 +344,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_019.wav"
+    "query_audio": "audio/fridge/fridge_019.wav"
   },
   {
     "id": "fridge_020",
@@ -362,7 +362,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_020.wav"
+    "query_audio": "audio/fridge/fridge_020.wav"
   },
   {
     "id": "fridge_021",
@@ -380,7 +380,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_021.wav"
+    "query_audio": "audio/fridge/fridge_021.wav"
   },
   {
     "id": "fridge_022",
@@ -398,7 +398,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_022.wav"
+    "query_audio": "audio/fridge/fridge_022.wav"
   },
   {
     "id": "fridge_023",
@@ -416,7 +416,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_023.wav"
+    "query_audio": "audio/fridge/fridge_023.wav"
   },
   {
     "id": "fridge_024",
@@ -434,7 +434,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_024.wav"
+    "query_audio": "audio/fridge/fridge_024.wav"
   },
   {
     "id": "fridge_025",
@@ -452,7 +452,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_025.wav"
+    "query_audio": "audio/fridge/fridge_025.wav"
   },
   {
     "id": "fridge_026",
@@ -471,7 +471,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_026.wav"
+    "query_audio": "audio/fridge/fridge_026.wav"
   },
   {
     "id": "fridge_027",
@@ -490,7 +490,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_027.wav"
+    "query_audio": "audio/fridge/fridge_027.wav"
   },
   {
     "id": "fridge_028",
@@ -508,7 +508,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_028.wav"
+    "query_audio": "audio/fridge/fridge_028.wav"
   },
   {
     "id": "fridge_029",
@@ -526,7 +526,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_029.wav"
+    "query_audio": "audio/fridge/fridge_029.wav"
   },
   {
     "id": "fridge_030",
@@ -544,7 +544,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_030.wav"
+    "query_audio": "audio/fridge/fridge_030.wav"
   },
   {
     "id": "fridge_031",
@@ -570,7 +570,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_031.wav"
+    "query_audio": "audio/fridge/fridge_031.wav"
   },
   {
     "id": "fridge_032",
@@ -595,7 +595,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_032.wav"
+    "query_audio": "audio/fridge/fridge_032.wav"
   },
   {
     "id": "fridge_033",
@@ -621,7 +621,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_033.wav"
+    "query_audio": "audio/fridge/fridge_033.wav"
   },
   {
     "id": "fridge_034",
@@ -646,7 +646,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_034.wav"
+    "query_audio": "audio/fridge/fridge_034.wav"
   },
   {
     "id": "fridge_035",
@@ -670,7 +670,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_035.wav"
+    "query_audio": "audio/fridge/fridge_035.wav"
   },
   {
     "id": "fridge_036",
@@ -695,7 +695,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_036.wav"
+    "query_audio": "audio/fridge/fridge_036.wav"
   },
   {
     "id": "fridge_037",
@@ -720,7 +720,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_037.wav"
+    "query_audio": "audio/fridge/fridge_037.wav"
   },
   {
     "id": "fridge_038",
@@ -746,7 +746,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_038.wav"
+    "query_audio": "audio/fridge/fridge_038.wav"
   },
   {
     "id": "fridge_039",
@@ -773,7 +773,7 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_039.wav"
+    "query_audio": "audio/fridge/fridge_039.wav"
   },
   {
     "id": "fridge_040",
@@ -799,6 +799,6 @@
         }
       }
     ],
-    "query_audio": "audio/fridge_040.wav"
+    "query_audio": "audio/fridge/fridge_040.wav"
   }
 ]

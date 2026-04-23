@@ -15,7 +15,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_001.wav"
+    "query_audio": "audio/light/light_001.wav"
   },
   {
     "id": "light_002",
@@ -33,7 +33,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_002.wav"
+    "query_audio": "audio/light/light_002.wav"
   },
   {
     "id": "light_003",
@@ -52,7 +52,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_003.wav"
+    "query_audio": "audio/light/light_003.wav"
   },
   {
     "id": "light_004",
@@ -71,7 +71,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_004.wav"
+    "query_audio": "audio/light/light_004.wav"
   },
   {
     "id": "light_005",
@@ -90,7 +90,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_005.wav"
+    "query_audio": "audio/light/light_005.wav"
   },
   {
     "id": "light_006",
@@ -108,7 +108,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_006.wav"
+    "query_audio": "audio/light/light_006.wav"
   },
   {
     "id": "light_007",
@@ -126,7 +126,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_007.wav"
+    "query_audio": "audio/light/light_007.wav"
   },
   {
     "id": "light_008",
@@ -144,7 +144,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_008.wav"
+    "query_audio": "audio/light/light_008.wav"
   },
   {
     "id": "light_009",
@@ -162,7 +162,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_009.wav"
+    "query_audio": "audio/light/light_009.wav"
   },
   {
     "id": "light_010",
@@ -180,7 +180,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_010.wav"
+    "query_audio": "audio/light/light_010.wav"
   },
   {
     "id": "light_011",
@@ -198,7 +198,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_011.wav"
+    "query_audio": "audio/light/light_011.wav"
   },
   {
     "id": "light_012",
@@ -216,7 +216,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_012.wav"
+    "query_audio": "audio/light/light_012.wav"
   },
   {
     "id": "light_013",
@@ -234,7 +234,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_013.wav"
+    "query_audio": "audio/light/light_013.wav"
   },
   {
     "id": "light_014",
@@ -252,7 +252,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_014.wav"
+    "query_audio": "audio/light/light_014.wav"
   },
   {
     "id": "light_015",
@@ -270,7 +270,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_015.wav"
+    "query_audio": "audio/light/light_015.wav"
   },
   {
     "id": "light_016",
@@ -289,7 +289,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_016.wav"
+    "query_audio": "audio/light/light_016.wav"
   },
   {
     "id": "light_017",
@@ -308,7 +308,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_017.wav"
+    "query_audio": "audio/light/light_017.wav"
   },
   {
     "id": "light_018",
@@ -327,7 +327,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_018.wav"
+    "query_audio": "audio/light/light_018.wav"
   },
   {
     "id": "light_019",
@@ -346,7 +346,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_019.wav"
+    "query_audio": "audio/light/light_019.wav"
   },
   {
     "id": "light_020",
@@ -364,7 +364,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_020.wav"
+    "query_audio": "audio/light/light_020.wav"
   },
   {
     "id": "light_021",
@@ -382,7 +382,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_021.wav"
+    "query_audio": "audio/light/light_021.wav"
   },
   {
     "id": "light_022",
@@ -402,7 +402,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_022.wav"
+    "query_audio": "audio/light/light_022.wav"
   },
   {
     "id": "light_023",
@@ -422,7 +422,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_023.wav"
+    "query_audio": "audio/light/light_023.wav"
   },
   {
     "id": "light_024",
@@ -442,7 +442,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_024.wav"
+    "query_audio": "audio/light/light_024.wav"
   },
   {
     "id": "light_025",
@@ -462,7 +462,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_025.wav"
+    "query_audio": "audio/light/light_025.wav"
   },
   {
     "id": "light_026",
@@ -482,7 +482,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_026.wav"
+    "query_audio": "audio/light/light_026.wav"
   },
   {
     "id": "light_027",
@@ -502,7 +502,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_027.wav"
+    "query_audio": "audio/light/light_027.wav"
   },
   {
     "id": "light_028",
@@ -521,7 +521,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_028.wav"
+    "query_audio": "audio/light/light_028.wav"
   },
   {
     "id": "light_029",
@@ -539,7 +539,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_029.wav"
+    "query_audio": "audio/light/light_029.wav"
   },
   {
     "id": "light_030",
@@ -558,7 +558,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_030.wav"
+    "query_audio": "audio/light/light_030.wav"
   },
   {
     "id": "light_031",
@@ -577,7 +577,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_031.wav"
+    "query_audio": "audio/light/light_031.wav"
   },
   {
     "id": "light_032",
@@ -602,7 +602,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_032.wav"
+    "query_audio": "audio/light/light_032.wav"
   },
   {
     "id": "light_033",
@@ -623,7 +623,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_033.wav"
+    "query_audio": "audio/light/light_033.wav"
   },
   {
     "id": "light_034",
@@ -642,7 +642,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_034.wav"
+    "query_audio": "audio/light/light_034.wav"
   },
   {
     "id": "light_035",
@@ -663,7 +663,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_035.wav"
+    "query_audio": "audio/light/light_035.wav"
   },
   {
     "id": "light_036",
@@ -681,7 +681,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_036.wav"
+    "query_audio": "audio/light/light_036.wav"
   },
   {
     "id": "light_037",
@@ -699,7 +699,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_037.wav"
+    "query_audio": "audio/light/light_037.wav"
   },
   {
     "id": "light_038",
@@ -717,7 +717,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_038.wav"
+    "query_audio": "audio/light/light_038.wav"
   },
   {
     "id": "light_039",
@@ -735,7 +735,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_039.wav"
+    "query_audio": "audio/light/light_039.wav"
   },
   {
     "id": "light_040",
@@ -753,7 +753,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_040.wav"
+    "query_audio": "audio/light/light_040.wav"
   },
   {
     "id": "light_041",
@@ -771,7 +771,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_041.wav"
+    "query_audio": "audio/light/light_041.wav"
   },
   {
     "id": "light_042",
@@ -789,7 +789,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_042.wav"
+    "query_audio": "audio/light/light_042.wav"
   },
   {
     "id": "light_043",
@@ -807,7 +807,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_043.wav"
+    "query_audio": "audio/light/light_043.wav"
   },
   {
     "id": "light_044",
@@ -827,7 +827,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_044.wav"
+    "query_audio": "audio/light/light_044.wav"
   },
   {
     "id": "light_045",
@@ -847,7 +847,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_045.wav"
+    "query_audio": "audio/light/light_045.wav"
   },
   {
     "id": "light_046",
@@ -865,7 +865,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_046.wav"
+    "query_audio": "audio/light/light_046.wav"
   },
   {
     "id": "light_047",
@@ -884,7 +884,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_047.wav"
+    "query_audio": "audio/light/light_047.wav"
   },
   {
     "id": "light_048",
@@ -903,7 +903,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_048.wav"
+    "query_audio": "audio/light/light_048.wav"
   },
   {
     "id": "light_049",
@@ -928,7 +928,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_049.wav"
+    "query_audio": "audio/light/light_049.wav"
   },
   {
     "id": "light_050",
@@ -946,7 +946,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_050.wav"
+    "query_audio": "audio/light/light_050.wav"
   },
   {
     "id": "light_051",
@@ -965,7 +965,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_051.wav"
+    "query_audio": "audio/light/light_051.wav"
   },
   {
     "id": "light_052",
@@ -984,7 +984,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_052.wav"
+    "query_audio": "audio/light/light_052.wav"
   },
   {
     "id": "light_053",
@@ -1002,7 +1002,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_053.wav"
+    "query_audio": "audio/light/light_053.wav"
   },
   {
     "id": "light_054",
@@ -1022,7 +1022,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_054.wav"
+    "query_audio": "audio/light/light_054.wav"
   },
   {
     "id": "light_055",
@@ -1040,7 +1040,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_055.wav"
+    "query_audio": "audio/light/light_055.wav"
   },
   {
     "id": "light_056",
@@ -1065,7 +1065,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_056.wav"
+    "query_audio": "audio/light/light_056.wav"
   },
   {
     "id": "light_057",
@@ -1090,7 +1090,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_057.wav"
+    "query_audio": "audio/light/light_057.wav"
   },
   {
     "id": "light_058",
@@ -1117,7 +1117,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_058.wav"
+    "query_audio": "audio/light/light_058.wav"
   },
   {
     "id": "light_059",
@@ -1144,7 +1144,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_059.wav"
+    "query_audio": "audio/light/light_059.wav"
   },
   {
     "id": "light_060",
@@ -1170,7 +1170,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_060.wav"
+    "query_audio": "audio/light/light_060.wav"
   },
   {
     "id": "light_061",
@@ -1197,7 +1197,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_061.wav"
+    "query_audio": "audio/light/light_061.wav"
   },
   {
     "id": "light_062",
@@ -1223,7 +1223,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_062.wav"
+    "query_audio": "audio/light/light_062.wav"
   },
   {
     "id": "light_063",
@@ -1249,7 +1249,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_063.wav"
+    "query_audio": "audio/light/light_063.wav"
   },
   {
     "id": "light_064",
@@ -1275,7 +1275,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_064.wav"
+    "query_audio": "audio/light/light_064.wav"
   },
   {
     "id": "light_065",
@@ -1300,7 +1300,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_065.wav"
+    "query_audio": "audio/light/light_065.wav"
   },
   {
     "id": "light_066",
@@ -1328,7 +1328,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_066.wav"
+    "query_audio": "audio/light/light_066.wav"
   },
   {
     "id": "light_067",
@@ -1361,7 +1361,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_067.wav"
+    "query_audio": "audio/light/light_067.wav"
   },
   {
     "id": "light_068",
@@ -1389,7 +1389,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_068.wav"
+    "query_audio": "audio/light/light_068.wav"
   },
   {
     "id": "light_069",
@@ -1408,7 +1408,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_069.wav"
+    "query_audio": "audio/light/light_069.wav"
   },
   {
     "id": "light_070",
@@ -1427,7 +1427,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_070.wav"
+    "query_audio": "audio/light/light_070.wav"
   },
   {
     "id": "light_071",
@@ -1446,7 +1446,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_071.wav"
+    "query_audio": "audio/light/light_071.wav"
   },
   {
     "id": "light_072",
@@ -1465,7 +1465,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_072.wav"
+    "query_audio": "audio/light/light_072.wav"
   },
   {
     "id": "light_073",
@@ -1483,7 +1483,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_073.wav"
+    "query_audio": "audio/light/light_073.wav"
   },
   {
     "id": "light_074",
@@ -1502,7 +1502,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_074.wav"
+    "query_audio": "audio/light/light_074.wav"
   },
   {
     "id": "light_075",
@@ -1521,7 +1521,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_075.wav"
+    "query_audio": "audio/light/light_075.wav"
   },
   {
     "id": "light_076",
@@ -1548,7 +1548,7 @@
         }
       }
     ],
-    "query_audio": "audio/light_076.wav"
+    "query_audio": "audio/light/light_076.wav"
   },
   {
     "id": "light_077",
@@ -1576,6 +1576,6 @@
         }
       }
     ],
-    "query_audio": "audio/light_077.wav"
+    "query_audio": "audio/light/light_077.wav"
   }
 ]
