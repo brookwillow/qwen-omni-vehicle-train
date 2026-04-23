@@ -215,10 +215,11 @@ def eval_file(
         data = data[:max_per_file]
     metric = Metric()
     bad = 0
+    n_total = len(data)
 
     eval_dir = Path(file_path).parent
 
-    for row in data:
+    for idx, row in enumerate(data):
         query = row.get("query", "")
         gt_calls = row.get("expected_tool_calls", []) or []
         gt_tool = gt_calls[0].get("name") if gt_calls else None
@@ -235,8 +236,16 @@ def eval_file(
             if ap.exists():
                 audio_path = str(ap)
 
+        src = f"[audio]" if audio_path else f"[text]"
+        q_display = (query or raw_audio or "")[:60]
+        print(f"  [{idx+1}/{n_total}] {src} {q_display}", end=" ... ", flush=True)
+
         pred = generate_text(model, processor, system_prompt, query, max_new_tokens, temperature, audio_path=audio_path)
         pred_tool, pred_args, pred_type = parse_action(pred)
+
+        # Per-sample inline result
+        type_ok = "✓" if pred_type == expected_type else "✗"
+        print(f"{type_ok} {pred_type}({pred_tool or '-'})", flush=True)
 
         # Build per-sample metric
         sm = Metric(total=1)
