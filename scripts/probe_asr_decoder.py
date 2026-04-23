@@ -92,22 +92,42 @@ def _resolve_whisper_dir(whisper_dir: str) -> str:
     if Path(whisper_dir).exists():
         return whisper_dir
 
-    # Try modelscope cache first (may already be downloaded)
+    # Map HF model IDs to modelscope equivalents
+    ms_id_map = {
+        "openai/whisper-large-v3": "AI-ModelScope/whisper-large-v3",
+        "openai/whisper-large-v2": "AI-ModelScope/whisper-large-v2",
+        "openai/whisper-medium": "AI-ModelScope/whisper-medium",
+    }
+
     try:
+        import os
         from modelscope.hub.snapshot_download import snapshot_download
-        # Map HF model IDs to modelscope equivalents
-        ms_id_map = {
-            "openai/whisper-large-v3": "AI-ModelScope/whisper-large-v3",
-            "openai/whisper-large-v2": "AI-ModelScope/whisper-large-v2",
-            "openai/whisper-medium": "AI-ModelScope/whisper-medium",
-        }
+        from modelscope.utils.file_utils import get_model_cache_root
+
         ms_id = ms_id_map.get(whisper_dir, whisper_dir)
+
+        # Check if already cached before attempting download
+        cache_root = get_model_cache_root()
+        # modelscope stores as <cache_root>/models/<org>/<name>
+        ms_org, ms_name = ms_id.split("/", 1)
+        cached_path = Path(cache_root) / "models" / ms_org / ms_name
+        if cached_path.is_dir() and (cached_path / "config.json").exists():
+            print(f"[probe] Using cached Whisper from modelscope: {cached_path}")
+            return str(cached_path)
+
         print(f"[probe] Downloading Whisper via modelscope: {ms_id} ...")
         local_dir = snapshot_download(ms_id)
         print(f"[probe] Whisper cached at: {local_dir}")
         return local_dir
     except Exception as e:
-        print(f"[probe] modelscope download failed ({e}), falling back to: {whisper_dir}")
+        # Even if download failed, check the standard modelscope cache path
+        import os
+        ms_id = ms_id_map.get(whisper_dir, whisper_dir)
+        fallback_cache = Path(os.path.expanduser("~/.cache/modelscope/hub/models")) / ms_id
+        if fallback_cache.is_dir() and (fallback_cache / "config.json").exists():
+            print(f"[probe] Download errored but cache exists; using: {fallback_cache}")
+            return str(fallback_cache)
+        print(f"[probe] modelscope unavailable ({e}), falling back to: {whisper_dir}")
         return whisper_dir
 
 
