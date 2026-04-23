@@ -82,6 +82,35 @@ def print_structure(model) -> None:
             print(f"  {'  ' * depth}{name}: {type(mod).__name__}")
 
 
+def _resolve_whisper_dir(whisper_dir: str) -> str:
+    """Return a local path for the Whisper model.
+
+    If `whisper_dir` is already a local path that exists, return it as-is.
+    Otherwise try to resolve via modelscope (avoids slow/blocked HuggingFace downloads).
+    Falls back to the original value so transformers can attempt its own download.
+    """
+    if Path(whisper_dir).exists():
+        return whisper_dir
+
+    # Try modelscope cache first (may already be downloaded)
+    try:
+        from modelscope.hub.snapshot_download import snapshot_download
+        # Map HF model IDs to modelscope equivalents
+        ms_id_map = {
+            "openai/whisper-large-v3": "AI-ModelScope/whisper-large-v3",
+            "openai/whisper-large-v2": "AI-ModelScope/whisper-large-v2",
+            "openai/whisper-medium": "AI-ModelScope/whisper-medium",
+        }
+        ms_id = ms_id_map.get(whisper_dir, whisper_dir)
+        print(f"[probe] Downloading Whisper via modelscope: {ms_id} ...")
+        local_dir = snapshot_download(ms_id)
+        print(f"[probe] Whisper cached at: {local_dir}")
+        return local_dir
+    except Exception as e:
+        print(f"[probe] modelscope download failed ({e}), falling back to: {whisper_dir}")
+        return whisper_dir
+
+
 def main() -> None:
     args = parse_args()
 
@@ -165,16 +194,20 @@ def main() -> None:
     if encoder_hidden is None:
         raise RuntimeError("Hook did not capture any output. Check the audio tower path.")
 
+    # Ensure shape is [B, T, 1280] — hook may return [T, 1280] without batch dim
+    if encoder_hidden.ndim == 2:
+        encoder_hidden = encoder_hidden.unsqueeze(0)
     print(f"[probe] Encoder hidden state shape: {encoder_hidden.shape}")
     # Expected: [1, T, 1280]  where T ~ audio_len / 2 frames
 
     # ── Step 3: load Whisper decoder and decode ──────────────────────────────
-    print(f"\n[4/4] Loading Whisper decoder from {args.whisper_dir} ...")
+    whisper_source = _resolve_whisper_dir(args.whisper_dir)
+    print(f"\n[4/4] Loading Whisper decoder from {whisper_source} ...")
     whisper_model = WhisperForConditionalGeneration.from_pretrained(
-        args.whisper_dir, torch_dtype=torch.float16, device_map="auto",
+        whisper_source, torch_dtype=torch.float16, device_map="auto",
     )
     whisper_model.eval()
-    whisper_proc = WhisperProcessor.from_pretrained(args.whisper_dir)
+    whisper_proc = WhisperProcessor.from_pretrained(whisper_source)
 
     # Whisper encoder expects shape [B, T, d_model] where d_model=1280 for large
     encoder_dim = encoder_hidden.shape[-1]
