@@ -1,6 +1,6 @@
 # 车载语音助手 LoRA 训练方案
 
-> 更新时间：2026-04-22
+> 更新时间：2026-04-27
 
 ## 项目概要
 
@@ -103,6 +103,13 @@ python eval.py batch \
   --lora-dir lora_output \
   --report eval_report.json
 
+# 提高 GPU 利用率（默认 batch_size=1，推荐 4-8，OOM 则减小）
+python eval.py batch \
+  --model-dir models/Qwen2.5-Omni-3B \
+  --lora-dir lora_output \
+  --batch-size 4 \
+  --report eval_report.json
+
 # 单条测试（文本）
 python eval.py single \
   --model-dir models/Qwen2.5-Omni-3B \
@@ -153,7 +160,8 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 | `build_train_data.py` | 合并 splits + 注入 SP → 训练集 |
 | `train_thinker_lora.py` | LoRA 训练（389 行） |
 | `infer_cli_omni.py` | 交互式 CLI 推理 |
-| `eval.py` | 统一评测（batch / single），音频输入 + 多维度统计 |
+| `eval.py` | 统一评测（batch / single），音频输入 + 多维度统计，支持 `--batch-size` 批量推理 |
+| `scripts/probe_asr_decoder.py` | Qwen 音频编码器 → Whisper 解码器 ASR 探测实验 |
 
 已归档至 `_archive/`：`split_data_by_type.py`、`augment_reject_samples.py`、`build_system_prompt.py`
 
@@ -172,6 +180,8 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 - [x] Reject 数据增强（103 条硬负例：家电混淆、多轮拒绝、跨域请求）
 - [x] 分类逻辑按最后一条 assistant turn 判断（多轮样本正确分类）
 - [x] 冻结审计自动化（forbidden keyword → auto-freeze → fail-fast）
+- [x] R4 数据增强（+358 条：修复过度-Clarify、补齐弱工具媒体/电话/信息）
+- [x] eval.py `--batch-size` 批量推理（单 GPU 利用率从 ~30% → ~75%）
 
 ## 下一步
 
