@@ -85,18 +85,46 @@ def generate_text(
     max_new_tokens: int, temperature: float = 0.0,
     audio_path: Optional[str] = None,
 ) -> str:
-    if audio_path:
-        user_content = [{"type": "audio", "audio": audio_path}]
-    else:
-        user_content = [{"type": "text", "text": user_query}]
-    messages = [
-        {"role": "system", "content": [{"type": "text", "text": system_prompt}]},
-        {"role": "user", "content": user_content},
-    ]
-    text = processor.apply_chat_template(messages, add_generation_prompt=True, tokenize=False)
-    audios, images, videos = process_mm_info(messages, use_audio_in_video=False)
+    return generate_batch(
+        model, processor, system_prompt,
+        [user_query], max_new_tokens, temperature, [audio_path],
+    )[0]
+
+
+def generate_batch(
+    model, processor, system_prompt: str,
+    user_queries: List[str], max_new_tokens: int, temperature: float = 0.0,
+    audio_paths: Optional[List[Optional[str]]] = None,
+) -> List[str]:
+    """Run inference on multiple samples in one forward pass."""
+    if audio_paths is None:
+        audio_paths = [None] * len(user_queries)
+
+    all_texts: List[str] = []
+    all_audios: list = []
+    all_images: list = []
+    all_videos: list = []
+    for query, audio_path in zip(user_queries, audio_paths):
+        if audio_path:
+            user_content = [{"type": "audio", "audio": audio_path}]
+        else:
+            user_content = [{"type": "text", "text": query}]
+        messages = [
+            {"role": "system", "content": [{"type": "text", "text": system_prompt}]},
+            {"role": "user", "content": user_content},
+        ]
+        text = processor.apply_chat_template(messages, add_generation_prompt=True, tokenize=False)
+        audios, images, videos = process_mm_info(messages, use_audio_in_video=False)
+        all_texts.append(text)
+        all_audios.extend(audios or [])
+        all_images.extend(images or [])
+        all_videos.extend(videos or [])
+
     inputs = processor(
-        text=text, audio=audios, images=images, videos=videos,
+        text=all_texts,
+        audio=all_audios if all_audios else None,
+        images=all_images if all_images else None,
+        videos=all_videos if all_videos else None,
         return_tensors="pt", padding=True, use_audio_in_video=False,
     )
     inputs = inputs.to(model.device)
@@ -108,10 +136,14 @@ def generate_text(
             temperature=temperature, do_sample=temperature > 0,
             return_audio=False,
         )
+    # Strip the shared prompt prefix (all rows padded to same length)
     input_len = inputs["input_ids"].shape[-1] if "input_ids" in inputs else 0
-    gen_ids = out_ids[:, input_len:] if input_len > 0 else out_ids
-    decoded = processor.batch_decode(gen_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)
-    return (decoded[0] if decoded else "").strip()
+    results: List[str] = []
+    for row_ids in out_ids:
+        gen_ids = row_ids[input_len:]
+        decoded = processor.decode(gen_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)
+        results.append(decoded.strip())
+    return results
 
 
 # ── Parsing helpers ──────────────────────────────────────────
@@ -216,6 +248,7 @@ def eval_file(
     by_difficulty: Optional[Dict[str, Metric]] = None,
     by_category: Optional[Dict[str, Metric]] = None,
     errors: Optional[List[Dict[str, Any]]] = None,
+    batch_size: int = 1,
 ) -> Metric:
     data = json.loads(Path(file_path).read_text(encoding="utf-8"))
     if max_per_file > 0:
@@ -223,10 +256,11 @@ def eval_file(
     metric = Metric()
     bad = 0
     n_total = len(data)
-
     eval_dir = Path(file_path).parent
 
-    for idx, row in enumerate(data):
+    # Pre-compute per-row metadata once
+    rows_meta = []
+    for row in data:
         query = row.get("query", "")
         gt_calls = row.get("expected_tool_calls", []) or []
         gt_tool = gt_calls[0].get("name") if gt_calls else None
@@ -234,104 +268,128 @@ def eval_file(
         expected_type = get_expected_type(row)
         difficulty = row.get("difficulty", "unknown")
         category = row.get("category", "unknown")
-
-        # Use audio file when available
         audio_path = None
         raw_audio = row.get("query_audio", "")
         if raw_audio:
             ap = eval_dir / raw_audio
             if ap.exists():
                 audio_path = str(ap)
+        rows_meta.append((row, query, gt_tool, gt_args, expected_type, difficulty, category, audio_path))
 
-        if audio_path:
-            src = "[audio]"
-            q_display = Path(audio_path).name
-        else:
-            src = "[text] "
-            q_display = (query or "")[:55]
-        print(f"  [{idx+1}/{n_total}] {src} {q_display}", end=" ... ", flush=True)
+    # Process in mini-batches
+    for batch_start in range(0, n_total, batch_size):
+        chunk = rows_meta[batch_start: batch_start + batch_size]
+        b_queries  = [m[1] for m in chunk]
+        b_audios   = [m[7] for m in chunk]
 
-        pred = generate_text(model, processor, system_prompt, query, max_new_tokens, temperature, audio_path=audio_path)
-        pred_tool, pred_args, pred_type = parse_action(pred)
-
-        # Per-sample inline result
-        type_ok = "✓" if pred_type == expected_type else "✗"
-        print(f"{type_ok} {pred_type}({pred_tool or '-'})", flush=True)
-
-        # Build per-sample metric
-        sm = Metric(total=1)
-        sm.reject_pred = int(pred_type == "Reject")
-        sm.clarify_pred = int(pred_type == "Clarify")
-        sm.parse_fail = int(pred_type == "ParseFail")
-        sm.type_correct = int(pred_type == expected_type)
-
-        if expected_type == "Reject":
-            if pred_type == "Reject":
-                sm.reject_hit = 1
-                sm.tool_hit = 1
-                sm.args_em = 1
-        elif expected_type == "Clarify":
-            if pred_type == "Clarify":
-                sm.clarify_hit = 1
-                sm.tool_hit = 1
-                sm.args_em = 1
-        else:  # Action
-            if pred_type == "Action" and pred_tool == gt_tool:
-                sm.tool_hit = 1
-                if normalize_args(pred_args or {}) == normalize_args(gt_args or {}):
-                    sm.args_em = 1
-
-        # Collect & print errors
-        err_type = None
-        if sm.tool_hit == 0:
-            if pred_type != expected_type:
-                err_type = "type-err"
-            elif expected_type == "Action" and pred_tool != gt_tool:
-                err_type = "tool-err"
+        # Print "processing" line(s) before the batch runs
+        for i, (row, query, gt_tool, gt_args, expected_type, difficulty, category, audio_path) in enumerate(chunk):
+            idx = batch_start + i
+            if audio_path:
+                src = "[audio]"
+                q_display = Path(audio_path).name
             else:
-                err_type = "miss"
-        elif sm.args_em == 0:
-            err_type = "args-err"
+                src = "[text] "
+                q_display = (query or "")[:55]
+            if batch_size == 1:
+                print(f"  [{idx+1}/{n_total}] {src} {q_display}", end=" ... ", flush=True)
+            else:
+                print(f"  [{idx+1}/{n_total}] {src} {q_display}", flush=True)
 
-        if err_type:
-            if errors is not None:
-                errors.append({
-                    "id": row.get("id", ""),
-                    "file": Path(file_path).name,
-                    "err_type": err_type,
-                    "query": query,
-                    "expected_type": expected_type,
-                    "gt_tool": gt_tool,
-                    "gt_args": gt_args,
-                    "pred_type": pred_type,
-                    "pred_tool": pred_tool,
-                    "pred_args": pred_args,
-                    "pred_raw": pred[:300],
-                    "difficulty": difficulty,
-                    "category": category,
-                })
-            if bad < show_errors:
-                if err_type == "type-err":
-                    print(f"  [type-err] q={query}")
-                    print(f"        expected={expected_type}({gt_tool or ''}), pred={pred_type}")
-                    print(f"        raw={pred[:200].replace(chr(10), ' | ')}")
-                elif err_type == "tool-err":
-                    print(f"  [tool-err] q={query}")
-                    print(f"        gt={gt_tool} {gt_args}")
-                    print(f"        pred={pred_tool} {pred_args}")
-                elif err_type == "args-err":
-                    print(f"  [args-err] q={query}")
-                    print(f"        gt={gt_args}")
-                    print(f"        pred={pred_args}")
-                bad += 1
+        if batch_size > 1:
+            print(f"  [batch {batch_start+1}-{batch_start+len(chunk)}/{n_total}] running ...", flush=True)
 
-        metric += sm
-        if by_difficulty is not None:
-            by_difficulty.setdefault(difficulty, Metric())
-            by_difficulty[difficulty] += sm
-        if by_category is not None:
-            by_category.setdefault(category, Metric())
-            by_category[category] += sm
+        preds = generate_batch(
+            model, processor, system_prompt,
+            b_queries, max_new_tokens, temperature, b_audios,
+        )
+
+        for i, (row, query, gt_tool, gt_args, expected_type, difficulty, category, audio_path) in enumerate(chunk):
+            idx = batch_start + i
+            pred = preds[i]
+            pred_tool, pred_args, pred_type = parse_action(pred)
+
+            # Per-sample result
+            type_ok = "✓" if pred_type == expected_type else "✗"
+            if batch_size == 1:
+                print(f"{type_ok} {pred_type}({pred_tool or '-'})", flush=True)
+            else:
+                print(f"  [{idx+1}/{n_total}] {type_ok} {pred_type}({pred_tool or '-'})", flush=True)
+
+            # Build per-sample metric
+            sm = Metric(total=1)
+            sm.reject_pred = int(pred_type == "Reject")
+            sm.clarify_pred = int(pred_type == "Clarify")
+            sm.parse_fail = int(pred_type == "ParseFail")
+            sm.type_correct = int(pred_type == expected_type)
+
+            if expected_type == "Reject":
+                if pred_type == "Reject":
+                    sm.reject_hit = 1
+                    sm.tool_hit = 1
+                    sm.args_em = 1
+            elif expected_type == "Clarify":
+                if pred_type == "Clarify":
+                    sm.clarify_hit = 1
+                    sm.tool_hit = 1
+                    sm.args_em = 1
+            else:  # Action
+                if pred_type == "Action" and pred_tool == gt_tool:
+                    sm.tool_hit = 1
+                    if normalize_args(pred_args or {}) == normalize_args(gt_args or {}):
+                        sm.args_em = 1
+
+            # Collect & print errors
+            err_type = None
+            if sm.tool_hit == 0:
+                if pred_type != expected_type:
+                    err_type = "type-err"
+                elif expected_type == "Action" and pred_tool != gt_tool:
+                    err_type = "tool-err"
+                else:
+                    err_type = "miss"
+            elif sm.args_em == 0:
+                err_type = "args-err"
+
+            if err_type:
+                if errors is not None:
+                    errors.append({
+                        "id": row.get("id", ""),
+                        "file": Path(file_path).name,
+                        "err_type": err_type,
+                        "query": query,
+                        "expected_type": expected_type,
+                        "gt_tool": gt_tool,
+                        "gt_args": gt_args,
+                        "pred_type": pred_type,
+                        "pred_tool": pred_tool,
+                        "pred_args": pred_args,
+                        "pred_raw": pred[:300],
+                        "difficulty": difficulty,
+                        "category": category,
+                    })
+                if bad < show_errors:
+                    if err_type == "type-err":
+                        print(f"  [type-err] q={query}")
+                        print(f"        expected={expected_type}({gt_tool or ''}), pred={pred_type}")
+                        print(f"        raw={pred[:200].replace(chr(10), ' | ')}")
+                    elif err_type == "tool-err":
+                        print(f"  [tool-err] q={query}")
+                        print(f"        gt={gt_tool} {gt_args}")
+                        print(f"        pred={pred_tool} {pred_args}")
+                    elif err_type == "args-err":
+                        print(f"  [args-err] q={query}")
+                        print(f"        gt={gt_args}")
+                        print(f"        pred={pred_args}")
+                    bad += 1
+
+            metric += sm
+            if by_difficulty is not None:
+                by_difficulty.setdefault(difficulty, Metric())
+                by_difficulty[difficulty] += sm
+            if by_category is not None:
+                by_category.setdefault(category, Metric())
+                by_category[category] += sm
 
     return metric
 
@@ -372,6 +430,7 @@ def run_batch(args, model, processor, system_prompt: str) -> None:
             args.max_new_tokens, args.temperature,
             args.max_per_file, args.show_errors,
             by_difficulty, by_category, errors,
+            batch_size=args.batch_size,
         )
         total += m
         per_file[fname] = m
@@ -477,6 +536,8 @@ def build_parser() -> argparse.ArgumentParser:
     b.add_argument("--temperature", type=float, default=0.0)
     b.add_argument("--max-per-file", type=int, default=0, help="0 = all samples")
     b.add_argument("--show-errors", type=int, default=3)
+    b.add_argument("--batch-size", type=int, default=1,
+                   help="Samples per forward pass (default 1). Try 4-8 to improve GPU utilization.")
     b.add_argument("--report", default="", help="Output JSON report path (default: eval_report_<ts>.json).")
 
     # single
