@@ -1,6 +1,6 @@
 # 车载语音助手 LoRA 训练方案
 
-> 更新时间：2026-04-27
+> 更新时间：2026-04-29
 
 ## 项目概要
 
@@ -162,6 +162,7 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 | `infer_cli_omni.py` | 交互式 CLI 推理 |
 | `eval.py` | 统一评测（batch / single），音频输入 + 多维度统计，支持 `--batch-size` 批量推理 |
 | `scripts/probe_asr_decoder.py` | Qwen 音频编码器 → Whisper 解码器 ASR 探测实验 |
+| `scripts/build_r5_augment.py` | R5 数据增强（position/anti-clarify/climate/light） |
 
 已归档至 `_archive/`：`split_data_by_type.py`、`augment_reject_samples.py`、`build_system_prompt.py`
 
@@ -182,6 +183,7 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 - [x] 冻结审计自动化（forbidden keyword → auto-freeze → fail-fast）
 - [x] R4 数据增强（+358 条：修复过度-Clarify、补齐弱工具媒体/电话/信息）
 - [x] eval.py `--batch-size` 批量推理（单 GPU 利用率从 ~30% → ~75%）
+- [x] R5 数据增强（+164 条：position 字段覆盖、抗过度-Clarify、Climate/Light 多样性）
 
 ## 下一步
 
