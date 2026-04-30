@@ -549,6 +549,13 @@ async def log_requests(request: Request, call_next):
             print(f"\n[REQUEST] POST {request.url.path}", flush=True, file=sys.stderr)
             print(f"[REQUEST] Content-Type: {request.headers.get('content-type', 'N/A')}", flush=True, file=sys.stderr)
             print(f"[REQUEST] Body: {truncated}\n", flush=True, file=sys.stderr)
+            # Save full raw request to /tmp for inspection
+            try:
+                with open("/tmp/qwen_last_request.json", "wb") as _rf:
+                    _rf.write(raw)
+                print(f"[REQUEST] Full body saved → /tmp/qwen_last_request.json ({len(raw)} bytes)", flush=True, file=sys.stderr)
+            except OSError:
+                pass
         except Exception as e:
             print(f"[REQUEST] Could not read body: {e}", flush=True, file=sys.stderr)
     response = await call_next(request)
