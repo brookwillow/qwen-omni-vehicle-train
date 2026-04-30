@@ -60,6 +60,51 @@ python train_thinker_lora.py \
   --output-dir ./lora_output
 ```
 
+### RTX 3090 (24GB) 显存控制
+
+训练脚本所有超参均可通过命令行覆盖。以下是针对 3090 的推荐配置：
+
+**标准配置（稳定，显存约 20GB）**
+```bash
+python train_thinker_lora.py \
+  --model /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
+  --train-file data/train_final.jsonl \
+  --output-dir ./lora_output \
+  --torch-dtype bfloat16 \
+  --max-length 4096 \
+  --train-batch-size 1 \
+  --grad-accum 8 \
+  --lora-r 8 \
+  --lora-alpha 16 \
+  --epochs 3
+```
+
+**激进省显存配置（显存约 16GB，适合 OOM 时）**
+```bash
+python train_thinker_lora.py \
+  --model /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
+  --train-file data/train_final.jsonl \
+  --output-dir ./lora_output \
+  --torch-dtype bfloat16 \
+  --max-length 2048 \
+  --train-batch-size 1 \
+  --grad-accum 16 \
+  --lora-r 4 \
+  --lora-alpha 8 \
+  --epochs 3
+```
+
+**关键参数说明**
+
+| 参数 | 省显存方向 | 说明 |
+|------|-----------|------|
+| `--max-length` | ↓ 降低 | 最大影响显存；系统提示 ~5K tokens，4096 已够用 |
+| `--train-batch-size` | 保持 1 | 已是最小值，降不了 |
+| `--grad-accum` | ↑ 增大 | 等效 batch 不变，用时间换显存 |
+| `--lora-r` | ↓ 降低 | r=4 可节省约 10% 显存，精度略降 |
+| `--torch-dtype bfloat16` | 保持 | 3090 原生支持 bf16，不要用 fp32 |
+| `gradient_checkpointing` | 已内置 True | 以 30% 速度换显存，不需要手动开 |
+
 ### 默认超参
 
 | 参数 | 值 | 说明 |
