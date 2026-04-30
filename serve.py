@@ -36,6 +36,7 @@ from __future__ import annotations
 import argparse
 import base64
 import json
+import logging
 import os
 import re
 import tempfile
@@ -44,9 +45,13 @@ import uuid
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+logger = logging.getLogger("serve")
+
 import torch
 import uvicorn
 from fastapi import FastAPI, HTTPException, Request
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from peft import PeftModel
 from pydantic import BaseModel, ConfigDict, Field
@@ -307,6 +312,26 @@ def parse_model_output(text: str) -> tuple:
 # ── FastAPI app ───────────────────────────────────────────────
 
 app = FastAPI(title="Qwen2.5-Omni Inference Server", version="1.0.0")
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    """Log validation errors with request body for debugging."""
+    try:
+        raw = await request.body()
+        # Truncate audio data in log to avoid flooding
+        body_str = raw.decode("utf-8", errors="replace")
+        if len(body_str) > 2000:
+            body_str = body_str[:2000] + f"...(truncated, total {len(raw)} bytes)"
+        logger.error("[422] Validation error: %s", exc.errors())
+        logger.error("[422] Request body (truncated): %s", body_str)
+    except Exception as log_err:
+        logger.error("[422] Could not log request body: %s", log_err)
+    return JSONResponse(
+        status_code=422,
+        content={"detail": exc.errors()},
+    )
+
 
 # Globals set at startup
 _model = None
