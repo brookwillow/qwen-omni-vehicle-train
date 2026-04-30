@@ -226,6 +226,47 @@ def _run_ffmpeg(src_path: str, wav_path: str, fmt_flag: str = "", extra_input_ar
     return result.returncode == 0
 
 
+# ── Debug ASR (lazy-loaded, CPU-only) ────────────────────────
+_asr_debug_model: "Any" = None
+_asr_debug_available: bool | None = None  # None = not tried yet
+
+
+def _asr_transcribe_debug(wav_path: str) -> str | None:
+    """Transcribe wav_path with a tiny Whisper model for debugging. Returns text or None."""
+    global _asr_debug_model, _asr_debug_available
+    if _asr_debug_available is False:
+        return None
+    try:
+        if _asr_debug_model is None:
+            try:
+                from faster_whisper import WhisperModel
+                _asr_debug_model = WhisperModel("tiny", device="cpu", compute_type="int8")
+                _asr_debug_available = True
+                print("[ASR] loaded faster-whisper tiny (cpu)", file=sys.stderr, flush=True)
+            except ImportError:
+                import whisper as _oai_whisper
+                _asr_debug_model = _oai_whisper.load_model("tiny", device="cpu")
+                _asr_debug_available = True
+                print("[ASR] loaded openai-whisper tiny (cpu)", file=sys.stderr, flush=True)
+
+        model = _asr_debug_model
+        # Detect API flavour
+        try:
+            from faster_whisper import WhisperModel
+            if isinstance(model, WhisperModel):
+                segs, _ = model.transcribe(wav_path, language="zh", beam_size=1)
+                return "".join(s.text for s in segs)
+        except ImportError:
+            pass
+        # openai-whisper API
+        result = model.transcribe(wav_path, language="zh")
+        return result["text"]
+    except Exception as _e:
+        _asr_debug_available = False
+        print(f"[ASR] disabled after error: {_e}", file=sys.stderr, flush=True)
+        return None
+
+
 def _write_audio_tmp(raw_bytes: bytes, fmt: str, tmp_dir: str) -> str:
     """Write audio bytes to a temp WAV (16 kHz mono) that librosa can read."""
     import subprocess
@@ -277,6 +318,10 @@ def _write_audio_tmp(raw_bytes: bytes, fmt: str, tmp_dir: str) -> str:
                 print("[AUDIO] fallback: treated as raw s16le 16kHz", flush=True, file=sys.stderr)
 
         if ok:
+            # Debug ASR: transcribe to verify audio content
+            transcript = _asr_transcribe_debug(wav_path)
+            if transcript is not None:
+                print(f"[ASR] transcript: {transcript!r}", file=sys.stderr, flush=True)
             try:
                 os.remove(src_path)
             except OSError:
