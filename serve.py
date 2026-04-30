@@ -186,28 +186,62 @@ def _safe_b64decode(data: str) -> bytes:
     return base64.b64decode(data)
 
 
-def _write_audio_tmp(raw_bytes: bytes, fmt: str, tmp_dir: str) -> str:
-    """Write audio bytes to a temp WAV file, converting with ffmpeg if needed.
+def _detect_audio_fmt(data: bytes, declared_fmt: str) -> tuple[str, str]:
+    """Return (ffmpeg_input_flag, file_ext) based on magic bytes.
 
-    Handles any format (pcm, mp3, m4a, opus, webm, etc.) by normalizing to
-    16 kHz / mono / PCM-WAV that librosa can always read.
+    ffmpeg_input_flag is passed as -f <flag> to tell ffmpeg the actual input
+    format (important for raw PCM which has no container header).
+    """
+    if len(data) >= 12 and data[:4] == b'RIFF' and data[8:12] == b'WAVE':
+        return ("wav", "wav")
+    if len(data) >= 3 and (data[:3] == b'ID3' or data[:2] in (b'\xff\xfb', b'\xff\xf3', b'\xff\xf2')):
+        return ("mp3", "mp3")
+    if len(data) >= 4 and data[:4] == b'OggS':
+        return ("ogg", "ogg")
+    if len(data) >= 8 and data[4:8] == b'ftyp':
+        return ("mp4", "m4a")
+    if len(data) >= 4 and data[:4] == b'\x1aE\xdf\xa3':
+        return ("webm", "webm")
+    # Raw PCM detected — declared format or keyword hints
+    dl = declared_fmt.lower()
+    if any(k in dl for k in ("pcm", "raw", "s16", "f32")):
+        return ("s16le", "pcm")   # assume 16-bit LE PCM
+    # Unknown: give ffmpeg the declared extension and let it probe
+    ext = declared_fmt.lower().lstrip('.')
+    return ("", ext)
+
+
+def _write_audio_tmp(raw_bytes: bytes, fmt: str, tmp_dir: str) -> str:
+    """Write audio bytes to a temp WAV (16 kHz mono) that librosa can read.
+
+    Detects actual format from magic bytes, then uses ffmpeg to convert.
+    Falls back to the raw file if ffmpeg is unavailable.
     """
     import subprocess
     import sys
 
-    src_ext = fmt.lower().lstrip('.')
+    ffmpeg_fmt, src_ext = _detect_audio_fmt(raw_bytes, fmt)
     src_path = os.path.join(tmp_dir, f"audio_in_{uuid.uuid4().hex}.{src_ext}")
     wav_path = os.path.join(tmp_dir, f"audio_{uuid.uuid4().hex}.wav")
 
     with open(src_path, "wb") as f:
         f.write(raw_bytes)
 
+    # Build ffmpeg command: for raw PCM supply -f + sample rate/channels
+    if ffmpeg_fmt == "s16le":
+        cmd = ["ffmpeg", "-y",
+               "-f", "s16le", "-ar", "16000", "-ac", "1",
+               "-i", src_path,
+               "-ar", "16000", "-ac", "1", "-f", "wav", wav_path]
+    elif ffmpeg_fmt:
+        cmd = ["ffmpeg", "-y", "-f", ffmpeg_fmt, "-i", src_path,
+               "-ar", "16000", "-ac", "1", "-f", "wav", wav_path]
+    else:
+        cmd = ["ffmpeg", "-y", "-i", src_path,
+               "-ar", "16000", "-ac", "1", "-f", "wav", wav_path]
+
     try:
-        result = subprocess.run(
-            ["ffmpeg", "-y", "-i", src_path,
-             "-ar", "16000", "-ac", "1", "-f", "wav", wav_path],
-            capture_output=True,
-        )
+        result = subprocess.run(cmd, capture_output=True)
         if result.returncode == 0:
             try:
                 os.remove(src_path)
@@ -215,17 +249,19 @@ def _write_audio_tmp(raw_bytes: bytes, fmt: str, tmp_dir: str) -> str:
                 pass
             return wav_path
         else:
-            print(f"[WARN] ffmpeg conversion failed: {result.stderr.decode(errors='replace')[:300]}",
-                  flush=True, file=sys.stderr)
+            stderr_msg = result.stderr.decode(errors='replace')
+            # Show last 500 chars which usually contains the actual error
+            print(f"[WARN] ffmpeg failed (fmt={ffmpeg_fmt!r} ext={src_ext!r}): "
+                  f"...{stderr_msg[-500:]}", flush=True, file=sys.stderr)
     except FileNotFoundError:
-        print("[WARN] ffmpeg not found; passing raw audio file to librosa", flush=True, file=sys.stderr)
+        print("[WARN] ffmpeg not found; passing raw file to librosa", flush=True, file=sys.stderr)
 
-    # ffmpeg unavailable or failed – fall back to original file (may still work for real WAV)
     try:
         os.remove(wav_path)
     except OSError:
         pass
     return src_path
+
 
 def _messages_to_qwen(
     messages: List[Message],
