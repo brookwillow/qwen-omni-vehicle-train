@@ -314,23 +314,31 @@ def parse_model_output(text: str) -> tuple:
 app = FastAPI(title="Qwen2.5-Omni Inference Server", version="1.0.0")
 
 
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    """Log every POST body before validation, so 422 source is always visible."""
+    import sys
+    if request.method == "POST":
+        try:
+            raw = await request.body()
+            body_str = raw.decode("utf-8", errors="replace")
+            truncated = body_str[:1000] + f"...(total {len(raw)} bytes)" if len(body_str) > 1000 else body_str
+            print(f"\n[REQUEST] POST {request.url.path}", flush=True, file=sys.stderr)
+            print(f"[REQUEST] Content-Type: {request.headers.get('content-type', 'N/A')}", flush=True, file=sys.stderr)
+            print(f"[REQUEST] Body: {truncated}\n", flush=True, file=sys.stderr)
+        except Exception as e:
+            print(f"[REQUEST] Could not read body: {e}", flush=True, file=sys.stderr)
+    response = await call_next(request)
+    if response.status_code == 422:
+        print(f"[RESPONSE] 422 Unprocessable Entity for {request.url.path}", flush=True, file=sys.stderr)
+    return response
+
+
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
-    """Log validation errors with request body for debugging."""
     import sys
-    try:
-        raw = await request.body()
-        body_str = raw.decode("utf-8", errors="replace")
-        if len(body_str) > 2000:
-            body_str = body_str[:2000] + f"...(truncated, total {len(raw)} bytes)"
-        print(f"\n[422 DEBUG] Validation errors: {exc.errors()}", flush=True, file=sys.stderr)
-        print(f"[422 DEBUG] Request body: {body_str}\n", flush=True, file=sys.stderr)
-    except Exception as log_err:
-        print(f"[422 DEBUG] Could not log body: {log_err}", flush=True, file=sys.stderr)
-    return JSONResponse(
-        status_code=422,
-        content={"detail": exc.errors()},
-    )
+    print(f"[422 DETAIL] Validation errors: {exc.errors()}", flush=True, file=sys.stderr)
+    return JSONResponse(status_code=422, content={"detail": exc.errors()})
 
 
 # Globals set at startup
