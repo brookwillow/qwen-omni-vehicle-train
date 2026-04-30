@@ -19,6 +19,7 @@ conda activate qwen-omni
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
 pip install "ms-swift[all]" modelscope peft
 pip install "qwen-omni-utils[decord]" soundfile
+pip install fastapi uvicorn pydantic   # serve.py 推理服务依赖
 ```
 
 ## 数据流水线
@@ -133,12 +134,76 @@ python train_thinker_lora.py \
 
 ## 推理 / 评测
 
+### OpenAI 兼容推理服务（serve.py）
+
 ```bash
-# 交互式 CLI 推理
+# 启动服务（加载 LoRA）
+pip install fastapi uvicorn pydantic   # 首次运行需安装
+python serve.py \
+  --model-dir /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
+  --lora-dir lora_output \
+  --host 0.0.0.0 \
+  --port 8000
+```
+
+服务启动后监听 `http://<ip>:8000`，兼容 OpenAI Chat Completions API：
+
+**文本请求**
+```bash
+curl http://localhost:8000/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "qwen2.5-omni",
+    "messages": [{"role": "user", "content": "帮我打开主驾车窗"}],
+    "max_tokens": 128,
+    "temperature": 0
+  }'
+```
+
+**音频请求（base64 编码 WAV）**
+```bash
+curl http://localhost:8000/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "qwen2.5-omni",
+    "messages": [{
+      "role": "user",
+      "content": [{"type": "input_audio", "input_audio": {"data": "<base64>", "format": "wav"}}]
+    }],
+    "max_tokens": 128,
+    "temperature": 0
+  }'
+```
+
+**Python 客户端（openai SDK）**
+```python
+from openai import OpenAI
+client = OpenAI(base_url="http://localhost:8000/v1", api_key="none")
+resp = client.chat.completions.create(
+    model="qwen2.5-omni",
+    messages=[{"role": "user", "content": "帮我打开主驾车窗"}],
+    max_tokens=128,
+    temperature=0,
+)
+print(resp.choices[0].message.content)
+```
+
+API 端点：
+- `POST /v1/chat/completions` – 推理
+- `GET  /v1/models` – 列出模型
+- `GET  /health` – 健康检查
+
+### 交互式 CLI 推理
+
+```bash
 python infer_cli_omni.py \
   --model-dir models/Qwen2.5-Omni-3B \
   --lora-dir lora_output
+```
 
+### 评测
+
+```bash
 # 批量评测（data/eval/ 下所有场景，自动使用音频输入）
 python eval.py batch \
   --model-dir models/Qwen2.5-Omni-3B \
@@ -206,6 +271,7 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 |------|------|
 | `build_train_data.py` | 合并 splits + 注入 SP → 训练集 |
 | `train_thinker_lora.py` | LoRA 训练（389 行） |
+| `serve.py` | **OpenAI 兼容推理服务**（FastAPI，支持文本+音频） |
 | `infer_cli_omni.py` | 交互式 CLI 推理 |
 | `eval.py` | 统一评测（batch / single），音频输入 + 多维度统计，支持 `--batch-size` 批量推理 |
 | `scripts/probe_asr_decoder.py` | Qwen 音频编码器 → Whisper 解码器 ASR 探测实验 |
