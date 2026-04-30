@@ -517,7 +517,7 @@ async def chat_completions(req: ChatRequest):
             finish_reason="stop",
         )
 
-    return ChatResponse(
+    resp = ChatResponse(
         id=f"chatcmpl-{uuid.uuid4().hex}",
         created=int(time.time()),
         model=req.model or _model_name,
@@ -528,6 +528,8 @@ async def chat_completions(req: ChatRequest):
             total_tokens=prompt_tokens + gen_tokens,
         ),
     )
+    print(f"[RESPONSE] {resp.model_dump_json()}", file=sys.stderr, flush=True)
+    return resp
 
 
 @app.get("/health")
