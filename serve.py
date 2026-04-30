@@ -185,6 +185,48 @@ def _safe_b64decode(data: str) -> bytes:
         data += '=' * (4 - missing)
     return base64.b64decode(data)
 
+
+def _write_audio_tmp(raw_bytes: bytes, fmt: str, tmp_dir: str) -> str:
+    """Write audio bytes to a temp WAV file, converting with ffmpeg if needed.
+
+    Handles any format (pcm, mp3, m4a, opus, webm, etc.) by normalizing to
+    16 kHz / mono / PCM-WAV that librosa can always read.
+    """
+    import subprocess
+    import sys
+
+    src_ext = fmt.lower().lstrip('.')
+    src_path = os.path.join(tmp_dir, f"audio_in_{uuid.uuid4().hex}.{src_ext}")
+    wav_path = os.path.join(tmp_dir, f"audio_{uuid.uuid4().hex}.wav")
+
+    with open(src_path, "wb") as f:
+        f.write(raw_bytes)
+
+    try:
+        result = subprocess.run(
+            ["ffmpeg", "-y", "-i", src_path,
+             "-ar", "16000", "-ac", "1", "-f", "wav", wav_path],
+            capture_output=True,
+        )
+        if result.returncode == 0:
+            try:
+                os.remove(src_path)
+            except OSError:
+                pass
+            return wav_path
+        else:
+            print(f"[WARN] ffmpeg conversion failed: {result.stderr.decode(errors='replace')[:300]}",
+                  flush=True, file=sys.stderr)
+    except FileNotFoundError:
+        print("[WARN] ffmpeg not found; passing raw audio file to librosa", flush=True, file=sys.stderr)
+
+    # ffmpeg unavailable or failed – fall back to original file (may still work for real WAV)
+    try:
+        os.remove(wav_path)
+    except OSError:
+        pass
+    return src_path
+
 def _messages_to_qwen(
     messages: List[Message],
     system_prompt: str,
@@ -223,9 +265,7 @@ def _messages_to_qwen(
                         fmt = audio_info.get("format", "wav")
                         if b64data:
                             raw = _safe_b64decode(b64data)
-                            tmp_path = os.path.join(tmp_dir, f"audio_{uuid.uuid4().hex}.{fmt}")
-                            with open(tmp_path, "wb") as f:
-                                f.write(raw)
+                            tmp_path = _write_audio_tmp(raw, fmt, tmp_dir)
                             tmp_files.append(tmp_path)
                             qwen_content.append({"type": "audio", "audio": tmp_path})
                 else:
@@ -237,9 +277,7 @@ def _messages_to_qwen(
                         fmt = part.input_audio.get("format", "wav")
                         if b64data:
                             raw = _safe_b64decode(b64data)
-                            tmp_path = os.path.join(tmp_dir, f"audio_{uuid.uuid4().hex}.{fmt}")
-                            with open(tmp_path, "wb") as f:
-                                f.write(raw)
+                            tmp_path = _write_audio_tmp(raw, fmt, tmp_dir)
                             tmp_files.append(tmp_path)
                             qwen_content.append({"type": "audio", "audio": tmp_path})
 
