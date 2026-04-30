@@ -173,6 +173,14 @@ def load_model(model_dir: str, lora_dir: str, torch_dtype: str = "auto"):
 
 # ── Message conversion ────────────────────────────────────────
 
+def _safe_b64decode(data: str) -> bytes:
+    """Decode base64, tolerating missing '=' padding."""
+    data = data.strip()
+    missing = len(data) % 4
+    if missing:
+        data += '=' * (4 - missing)
+    return base64.b64decode(data)
+
 def _messages_to_qwen(
     messages: List[Message],
     system_prompt: str,
@@ -210,7 +218,7 @@ def _messages_to_qwen(
                         b64data = audio_info.get("data", "")
                         fmt = audio_info.get("format", "wav")
                         if b64data:
-                            raw = base64.b64decode(b64data)
+                            raw = _safe_b64decode(b64data)
                             tmp_path = os.path.join(tmp_dir, f"audio_{uuid.uuid4().hex}.{fmt}")
                             with open(tmp_path, "wb") as f:
                                 f.write(raw)
@@ -224,7 +232,7 @@ def _messages_to_qwen(
                         b64data = part.input_audio.get("data", "")
                         fmt = part.input_audio.get("format", "wav")
                         if b64data:
-                            raw = base64.b64decode(b64data)
+                            raw = _safe_b64decode(b64data)
                             tmp_path = os.path.join(tmp_dir, f"audio_{uuid.uuid4().hex}.{fmt}")
                             with open(tmp_path, "wb") as f:
                                 f.write(raw)
