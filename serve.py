@@ -359,12 +359,15 @@ async def list_models():
 
 @app.post("/v1/chat/completions", response_model=ChatResponse)
 async def chat_completions(req: ChatRequest):
+    import sys, traceback
     if req.stream:
         raise HTTPException(status_code=400, detail="Streaming is not supported yet.")
 
     try:
         qwen_msgs, tmp_files = _messages_to_qwen(req.messages, _system_prompt, _tmp_dir)
     except Exception as e:
+        print(f"\n[ERROR] _messages_to_qwen failed: {e}", flush=True, file=sys.stderr)
+        traceback.print_exc(file=sys.stderr)
         raise HTTPException(status_code=422, detail=f"Message conversion error: {e}") from e
 
     try:
@@ -374,6 +377,8 @@ async def chat_completions(req: ChatRequest):
             temperature=req.temperature,
         )
     except Exception as e:
+        print(f"\n[ERROR] run_inference failed: {e}", flush=True, file=sys.stderr)
+        traceback.print_exc(file=sys.stderr)
         raise HTTPException(status_code=500, detail=f"Inference error: {e}") from e
     finally:
         for f in tmp_files:
