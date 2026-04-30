@@ -49,7 +49,7 @@ import uvicorn
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 from peft import PeftModel
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 from qwen_omni_utils import process_mm_info
 from transformers import Qwen2_5OmniForConditionalGeneration, Qwen2_5OmniProcessor
 
@@ -61,22 +61,33 @@ _DEFAULT_SP_FILE = _PROJECT_DIR / "data" / "system-prompt.txt"
 # ── Pydantic models (OpenAI schema subset) ───────────────────
 
 class ContentPart(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+
     type: str          # "text" | "input_audio"
     text: Optional[str] = None
     input_audio: Optional[Dict[str, str]] = None  # {"data": "<b64>", "format": "wav"}
 
 
 class Message(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+
     role: str
     content: Any  # str | list[ContentPart]
 
 
 class ChatRequest(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+
     model: Optional[str] = "qwen2.5-omni"
     messages: List[Message]
-    max_tokens: int = Field(default=128, ge=1, le=2048)
+    max_tokens: Optional[int] = Field(default=None, ge=1, le=8192)
+    max_completion_tokens: Optional[int] = Field(default=None, ge=1, le=8192)
     temperature: float = Field(default=0.0, ge=0.0, le=2.0)
     stream: bool = False
+
+    def resolved_max_tokens(self) -> int:
+        """Return max_tokens, falling back to max_completion_tokens, then default 256."""
+        return self.max_tokens or self.max_completion_tokens or 256
 
 
 class ToolFunction(BaseModel):
@@ -326,7 +337,7 @@ async def chat_completions(req: ChatRequest):
     try:
         reply, prompt_tokens, gen_tokens = run_inference(
             _model, _processor, qwen_msgs,
-            max_new_tokens=req.max_tokens,
+            max_new_tokens=req.resolved_max_tokens(),
             temperature=req.temperature,
         )
     except Exception as e:
