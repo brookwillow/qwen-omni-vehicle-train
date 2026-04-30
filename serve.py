@@ -187,11 +187,7 @@ def _safe_b64decode(data: str) -> bytes:
 
 
 def _detect_audio_fmt(data: bytes, declared_fmt: str) -> tuple[str, str]:
-    """Return (ffmpeg_input_flag, file_ext) based on magic bytes.
-
-    ffmpeg_input_flag is passed as -f <flag> to tell ffmpeg the actual input
-    format (important for raw PCM which has no container header).
-    """
+    """Return (ffmpeg_input_flag, file_ext) based on magic bytes."""
     if len(data) >= 12 and data[:4] == b'RIFF' and data[8:12] == b'WAVE':
         return ("wav", "wav")
     if len(data) >= 3 and (data[:3] == b'ID3' or data[:2] in (b'\xff\xfb', b'\xff\xf3', b'\xff\xf2')):
@@ -202,23 +198,36 @@ def _detect_audio_fmt(data: bytes, declared_fmt: str) -> tuple[str, str]:
         return ("mp4", "m4a")
     if len(data) >= 4 and data[:4] == b'\x1aE\xdf\xa3':
         return ("webm", "webm")
-    # Raw PCM detected — declared format or keyword hints
+    # Raw PCM hint from declared format
     dl = declared_fmt.lower()
     if any(k in dl for k in ("pcm", "raw", "s16", "f32")):
-        return ("s16le", "pcm")   # assume 16-bit LE PCM
-    # Unknown: give ffmpeg the declared extension and let it probe
+        return ("s16le", "pcm")
+    # Unknown: let ffmpeg probe, but use declared extension
     ext = declared_fmt.lower().lstrip('.')
     return ("", ext)
 
 
-def _write_audio_tmp(raw_bytes: bytes, fmt: str, tmp_dir: str) -> str:
-    """Write audio bytes to a temp WAV (16 kHz mono) that librosa can read.
+def _run_ffmpeg(src_path: str, wav_path: str, fmt_flag: str = "", extra_input_args: list = None) -> bool:
+    """Run ffmpeg to convert src_path -> wav_path (16kHz mono WAV). Returns True on success."""
+    import subprocess
+    cmd = ["ffmpeg", "-y"]
+    if extra_input_args:
+        cmd += extra_input_args
+    if fmt_flag:
+        cmd += ["-f", fmt_flag]
+    cmd += ["-i", src_path, "-ar", "16000", "-ac", "1", "-f", "wav", wav_path]
+    result = subprocess.run(cmd, capture_output=True)
+    return result.returncode == 0
 
-    Detects actual format from magic bytes, then uses ffmpeg to convert.
-    Falls back to the raw file if ffmpeg is unavailable.
-    """
+
+def _write_audio_tmp(raw_bytes: bytes, fmt: str, tmp_dir: str) -> str:
+    """Write audio bytes to a temp WAV (16 kHz mono) that librosa can read."""
     import subprocess
     import sys
+
+    # Log first bytes for debugging unknown formats
+    hex_head = raw_bytes[:16].hex() if raw_bytes else ""
+    print(f"[AUDIO] declared_fmt={fmt!r} size={len(raw_bytes)} head={hex_head}", flush=True, file=sys.stderr)
 
     ffmpeg_fmt, src_ext = _detect_audio_fmt(raw_bytes, fmt)
     src_path = os.path.join(tmp_dir, f"audio_in_{uuid.uuid4().hex}.{src_ext}")
@@ -227,34 +236,42 @@ def _write_audio_tmp(raw_bytes: bytes, fmt: str, tmp_dir: str) -> str:
     with open(src_path, "wb") as f:
         f.write(raw_bytes)
 
-    # Build ffmpeg command: for raw PCM supply -f + sample rate/channels
-    if ffmpeg_fmt == "s16le":
-        cmd = ["ffmpeg", "-y",
-               "-f", "s16le", "-ar", "16000", "-ac", "1",
-               "-i", src_path,
-               "-ar", "16000", "-ac", "1", "-f", "wav", wav_path]
-    elif ffmpeg_fmt:
-        cmd = ["ffmpeg", "-y", "-f", ffmpeg_fmt, "-i", src_path,
-               "-ar", "16000", "-ac", "1", "-f", "wav", wav_path]
-    else:
-        cmd = ["ffmpeg", "-y", "-i", src_path,
-               "-ar", "16000", "-ac", "1", "-f", "wav", wav_path]
-
     try:
-        result = subprocess.run(cmd, capture_output=True)
-        if result.returncode == 0:
+        ok = False
+
+        if ffmpeg_fmt == "s16le":
+            # Raw PCM: try common sample rates
+            for sr in ("16000", "8000", "44100", "48000"):
+                ok = _run_ffmpeg(src_path, wav_path,
+                                 extra_input_args=["-f", "s16le", "-ar", sr, "-ac", "1"])
+                if ok:
+                    print(f"[AUDIO] raw PCM decoded at {sr} Hz", flush=True, file=sys.stderr)
+                    break
+        elif ffmpeg_fmt:
+            ok = _run_ffmpeg(src_path, wav_path, fmt_flag=ffmpeg_fmt)
+        
+        if not ok:
+            # Try without any format hint (ffmpeg auto-probe)
+            ok = _run_ffmpeg(src_path, wav_path)
+
+        if not ok:
+            # Last resort: try treating as raw s16le 16kHz
+            ok = _run_ffmpeg(src_path, wav_path,
+                             extra_input_args=["-f", "s16le", "-ar", "16000", "-ac", "1"])
+            if ok:
+                print("[AUDIO] fallback: treated as raw s16le 16kHz", flush=True, file=sys.stderr)
+
+        if ok:
             try:
                 os.remove(src_path)
             except OSError:
                 pass
             return wav_path
         else:
-            stderr_msg = result.stderr.decode(errors='replace')
-            # Show last 500 chars which usually contains the actual error
-            print(f"[WARN] ffmpeg failed (fmt={ffmpeg_fmt!r} ext={src_ext!r}): "
-                  f"...{stderr_msg[-500:]}", flush=True, file=sys.stderr)
+            print(f"[WARN] all ffmpeg attempts failed for fmt={fmt!r}", flush=True, file=sys.stderr)
+
     except FileNotFoundError:
-        print("[WARN] ffmpeg not found; passing raw file to librosa", flush=True, file=sys.stderr)
+        print("[WARN] ffmpeg not found", flush=True, file=sys.stderr)
 
     try:
         os.remove(wav_path)
