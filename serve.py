@@ -235,6 +235,15 @@ def _write_audio_tmp(raw_bytes: bytes, fmt: str, tmp_dir: str) -> str:
     hex_head = raw_bytes[:16].hex() if raw_bytes else ""
     print(f"[AUDIO] declared_fmt={fmt!r} size={len(raw_bytes)} head={hex_head}", flush=True, file=sys.stderr)
 
+    # Save a debug copy for manual inspection (overwrite each time so disk doesn't fill up)
+    debug_copy = "/tmp/qwen_audio_debug_latest.bin"
+    try:
+        with open(debug_copy, "wb") as _df:
+            _df.write(raw_bytes)
+        print(f"[AUDIO] debug copy saved → {debug_copy}", flush=True, file=sys.stderr)
+    except OSError as _e:
+        print(f"[AUDIO] could not save debug copy: {_e}", flush=True, file=sys.stderr)
+
     ffmpeg_fmt, src_ext = _detect_audio_fmt(raw_bytes, fmt)
     src_path = os.path.join(tmp_dir, f"audio_in_{uuid.uuid4().hex}.{src_ext}")
     wav_path = os.path.join(tmp_dir, f"audio_{uuid.uuid4().hex}.wav")
@@ -496,6 +505,7 @@ async def chat_completions(req: ChatRequest):
             except OSError:
                 pass
 
+    print(f"[MODEL_RAW] {repr(reply)}", flush=True, file=sys.stderr)
     parsed = parse_model_output(reply)
     if parsed[0] == "tool_call":
         _, tool_name, args_str = parsed
