@@ -174,15 +174,21 @@ def load_model(model_dir: str, lora_dir: str, torch_dtype: str = "auto"):
 # ── Message conversion ────────────────────────────────────────
 
 def _safe_b64decode(data: str) -> bytes:
-    """Decode base64 (standard or URL-safe), tolerating whitespace and missing padding."""
-    # Normalize URL-safe base64 chars (- -> +, _ -> /)
+    """Decode base64 (standard or URL-safe), tolerating whitespace, missing padding,
+    and the 'mod-4 == 1' corruption case (drop one char to make it decodable).
+    """
+    # Normalize URL-safe chars
     data = data.replace('-', '+').replace('_', '/')
-    # Strip whitespace and all non-base64 chars (including stray '=')
+    # Strip all non-base64 chars
     data = re.sub(r'[^A-Za-z0-9+/]', '', data)
-    # Re-pad correctly based on pure data character count
-    missing = len(data) % 4
-    if missing:
-        data += '=' * (4 - missing)
+    r = len(data) % 4
+    if r == 1:
+        # 1 mod 4 is always invalid (6 bits < 1 byte).
+        # One extra char snuck in; drop it so we get 0 mod 4.
+        data = data[:-1]
+    elif r:
+        # 2 or 3 mod 4: just add padding
+        data += '=' * (4 - r)
     return base64.b64decode(data)
 
 
