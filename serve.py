@@ -174,8 +174,10 @@ def load_model(model_dir: str, lora_dir: str, torch_dtype: str = "auto"):
 # ── Message conversion ────────────────────────────────────────
 
 def _safe_b64decode(data: str) -> bytes:
-    """Decode base64, tolerating missing '=' padding."""
-    data = data.strip()
+    """Decode base64, tolerating whitespace and missing '=' padding."""
+    # Strip any whitespace/newlines that may have been injected
+    data = re.sub(r'[^A-Za-z0-9+/=]', '', data)
+    # Re-pad to a multiple of 4
     missing = len(data) % 4
     if missing:
         data += '=' * (4 - missing)
