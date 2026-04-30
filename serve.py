@@ -204,13 +204,15 @@ def _detect_audio_fmt(data: bytes, declared_fmt: str) -> tuple[str, str]:
         return ("mp4", "m4a")
     if len(data) >= 4 and data[:4] == b'\x1aE\xdf\xa3':
         return ("webm", "webm")
-    # Raw PCM hint from declared format
+    # Raw PCM hint from declared format or unknown bytes claiming to be wav
     dl = declared_fmt.lower()
     if any(k in dl for k in ("pcm", "raw", "s16", "f32")):
         return ("s16le", "pcm")
-    # Unknown: let ffmpeg probe, but use declared extension
-    ext = declared_fmt.lower().lstrip('.')
-    return ("", ext)
+    # Declared wav but no RIFF header → likely raw PCM
+    if dl in ("wav", "wave"):
+        return ("s16le", "pcm")
+    # Unknown: let ffmpeg probe, use .bin to avoid extension-based misdetection
+    return ("", "bin")
 
 
 def _run_ffmpeg(src_path: str, wav_path: str, fmt_flag: str = "", extra_input_args: list = None) -> bool:
@@ -304,13 +306,54 @@ def _write_audio_tmp(raw_bytes: bytes, fmt: str, tmp_dir: str) -> str:
         ok = False
 
         if ffmpeg_fmt == "s16le":
-            # Raw PCM: try common sample rates
-            for sr in ("16000", "8000", "44100", "48000"):
-                ok = _run_ffmpeg(src_path, wav_path,
-                                 extra_input_args=["-f", "s16le", "-ar", sr, "-ac", "1"])
-                if ok:
-                    print(f"[AUDIO] raw PCM decoded at {sr} Hz", flush=True, file=sys.stderr)
-                    break
+            # Raw PCM: try multiple configurations, pick best via ASR
+            pcm_configs = [
+                ("s16le", "16000", "1"),
+                ("s16le", "48000", "1"),
+                ("s16le", "44100", "1"),
+                ("s16le", "48000", "2"),
+                ("s16le", "44100", "2"),
+                ("f32le", "16000", "1"),
+                ("f32le", "48000", "1"),
+            ]
+            best_wav = None
+            best_transcript = ""
+            for pcm_fmt, sr, ch in pcm_configs:
+                trial_wav = os.path.join(tmp_dir, f"audio_trial_{uuid.uuid4().hex}.wav")
+                trial_ok = _run_ffmpeg(src_path, trial_wav,
+                                       extra_input_args=["-f", pcm_fmt, "-ar", sr, "-ac", ch])
+                if not trial_ok:
+                    try:
+                        os.remove(trial_wav)
+                    except OSError:
+                        pass
+                    continue
+                transcript = _asr_transcribe_debug(trial_wav)
+                print(f"[AUDIO] trial {pcm_fmt}/{sr}Hz/{ch}ch → ASR: {transcript!r}",
+                      flush=True, file=sys.stderr)
+                if transcript and len(transcript) > len(best_transcript):
+                    # Prefer the config that yields longer (more meaningful) transcript
+                    if best_wav:
+                        try:
+                            os.remove(best_wav)
+                        except OSError:
+                            pass
+                    best_wav = trial_wav
+                    best_transcript = transcript
+                else:
+                    if not best_wav:
+                        best_wav = trial_wav  # keep first success as fallback
+                    else:
+                        try:
+                            os.remove(trial_wav)
+                        except OSError:
+                            pass
+            if best_wav:
+                import shutil
+                shutil.move(best_wav, wav_path)
+                ok = True
+                print(f"[AUDIO] best PCM decode → ASR: {best_transcript!r}",
+                      flush=True, file=sys.stderr)
         elif ffmpeg_fmt:
             ok = _run_ffmpeg(src_path, wav_path, fmt_flag=ffmpeg_fmt)
         
@@ -334,10 +377,11 @@ def _write_audio_tmp(raw_bytes: bytes, fmt: str, tmp_dir: str) -> str:
                 print(f"[AUDIO] converted WAV saved → {debug_wav}", flush=True, file=sys.stderr)
             except OSError as _e:
                 print(f"[AUDIO] could not save converted WAV: {_e}", flush=True, file=sys.stderr)
-            # Debug ASR: transcribe to verify audio content
-            transcript = _asr_transcribe_debug(wav_path)
-            if transcript is not None:
-                print(f"[ASR] transcript: {transcript!r}", file=sys.stderr, flush=True)
+            # Final ASR check (skip if already done in PCM trial)
+            if ffmpeg_fmt != "s16le":
+                transcript = _asr_transcribe_debug(wav_path)
+                if transcript is not None:
+                    print(f"[ASR] transcript: {transcript!r}", file=sys.stderr, flush=True)
             try:
                 os.remove(src_path)
             except OSError:
