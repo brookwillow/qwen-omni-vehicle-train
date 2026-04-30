@@ -71,7 +71,7 @@ python train_thinker_lora.py \
   --train-file data/train_final.jsonl \
   --output-dir ./lora_output \
   --torch-dtype bfloat16 \
-  --max-length 4096 \
+  --max-length 8192 \
   --train-batch-size 1 \
   --grad-accum 8 \
   --lora-r 8 \
@@ -86,7 +86,7 @@ python train_thinker_lora.py \
   --train-file data/train_final.jsonl \
   --output-dir ./lora_output \
   --torch-dtype bfloat16 \
-  --max-length 2048 \
+  --max-length 8192 \
   --train-batch-size 1 \
   --grad-accum 16 \
   --lora-r 4 \
@@ -94,11 +94,13 @@ python train_thinker_lora.py \
   --epochs 3
 ```
 
+> ⚠️ `--max-length` 不能低于 7168。系统提示约 5K tokens，加对话内容约需 7000+。设得过低会直接截断系统提示，导致训练数据损坏。
+
 **关键参数说明**
 
 | 参数 | 省显存方向 | 说明 |
 |------|-----------|------|
-| `--max-length` | ↓ 降低 | 最大影响显存；系统提示 ~5K tokens，4096 已够用 |
+| `--max-length` | **不可低于 7168** | 系统提示 ~5K tokens，对话 ~1-2K，最低 7168 |
 | `--train-batch-size` | 保持 1 | 已是最小值，降不了 |
 | `--grad-accum` | ↑ 增大 | 等效 batch 不变，用时间换显存 |
 | `--lora-r` | ↓ 降低 | r=4 可节省约 10% 显存，精度略降 |
