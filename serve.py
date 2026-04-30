@@ -37,6 +37,7 @@ import argparse
 import base64
 import json
 import os
+import re
 import tempfile
 import time
 import uuid
@@ -78,10 +79,30 @@ class ChatRequest(BaseModel):
     stream: bool = False
 
 
+class ToolFunction(BaseModel):
+    name: str
+    arguments: str
+
+
+class ToolCall(BaseModel):
+    id: str
+    type: str = "function"
+    index: int = 0
+    function: ToolFunction
+
+
+class AssistantMessage(BaseModel):
+    role: str = "assistant"
+    content: str = ""
+    reasoning_content: str = ""
+    tool_calls: Optional[List[ToolCall]] = None
+
+
 class Choice(BaseModel):
     index: int = 0
-    message: Dict[str, str]
+    message: AssistantMessage
     finish_reason: str = "stop"
+    logprobs: Optional[Any] = None
 
 
 class Usage(BaseModel):
@@ -97,6 +118,7 @@ class ChatResponse(BaseModel):
     model: str
     choices: List[Choice]
     usage: Usage
+    system_fingerprint: Optional[str] = None
 
 
 # ── Model loading ─────────────────────────────────────────────
@@ -237,6 +259,40 @@ def run_inference(
     return decoded.strip(), int(prompt_len), int(gen_ids.shape[-1])
 
 
+# ── Output parsing ───────────────────────────────────────────
+
+_ACTION_RE = re.compile(
+    r"Action:\s*(\w+)\s*\nAction Input:\s*(\{.*\})",
+    re.DOTALL,
+)
+
+
+def parse_model_output(text: str) -> tuple:
+    """Parse model text output into structured form.
+
+    Returns:
+        ("tool_call", tool_name: str, args_json: str)
+      | ("text", content: str)
+    """
+    m = _ACTION_RE.search(text)
+    if m:
+        tool_name = m.group(1).strip()
+        args_str = m.group(2).strip()
+        # Validate JSON; keep raw string regardless
+        try:
+            json.loads(args_str)
+        except json.JSONDecodeError:
+            pass  # still return as-is; caller receives raw string
+        return ("tool_call", tool_name, args_str)
+
+    # Strip "Final Answer: " prefix if present
+    if text.startswith("Final Answer:"):
+        content = text[len("Final Answer:"):].strip()
+    else:
+        content = text
+    return ("text", content)
+
+
 # ── FastAPI app ───────────────────────────────────────────────
 
 app = FastAPI(title="Qwen2.5-Omni Inference Server", version="1.0.0")
@@ -282,11 +338,32 @@ async def chat_completions(req: ChatRequest):
             except OSError:
                 pass
 
+    parsed = parse_model_output(reply)
+    if parsed[0] == "tool_call":
+        _, tool_name, args_str = parsed
+        choice = Choice(
+            message=AssistantMessage(
+                tool_calls=[
+                    ToolCall(
+                        id=f"call_{uuid.uuid4().hex[:22]}",
+                        function=ToolFunction(name=tool_name, arguments=args_str),
+                    )
+                ]
+            ),
+            finish_reason="tool_calls",
+        )
+    else:
+        _, content = parsed
+        choice = Choice(
+            message=AssistantMessage(content=content),
+            finish_reason="stop",
+        )
+
     return ChatResponse(
         id=f"chatcmpl-{uuid.uuid4().hex}",
         created=int(time.time()),
         model=req.model or _model_name,
-        choices=[Choice(message={"role": "assistant", "content": reply})],
+        choices=[choice],
         usage=Usage(
             prompt_tokens=prompt_tokens,
             completion_tokens=gen_tokens,
