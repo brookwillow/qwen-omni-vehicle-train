@@ -233,6 +233,7 @@ _asr_debug_available: bool | None = None  # None = not tried yet
 
 def _asr_transcribe_debug(wav_path: str) -> str | None:
     """Transcribe wav_path with a tiny Whisper model for debugging. Returns text or None."""
+    import sys as _sys
     global _asr_debug_model, _asr_debug_available
     if _asr_debug_available is False:
         return None
@@ -242,12 +243,18 @@ def _asr_transcribe_debug(wav_path: str) -> str | None:
                 from faster_whisper import WhisperModel
                 _asr_debug_model = WhisperModel("tiny", device="cpu", compute_type="int8")
                 _asr_debug_available = True
-                print("[ASR] loaded faster-whisper tiny (cpu)", file=sys.stderr, flush=True)
+                print("[ASR] loaded faster-whisper tiny (cpu)", file=_sys.stderr, flush=True)
             except ImportError:
-                import whisper as _oai_whisper
-                _asr_debug_model = _oai_whisper.load_model("tiny", device="cpu")
-                _asr_debug_available = True
-                print("[ASR] loaded openai-whisper tiny (cpu)", file=sys.stderr, flush=True)
+                try:
+                    import whisper as _oai_whisper
+                    _asr_debug_model = _oai_whisper.load_model("tiny", device="cpu")
+                    _asr_debug_available = True
+                    print("[ASR] loaded openai-whisper tiny (cpu)", file=_sys.stderr, flush=True)
+                except ImportError:
+                    _asr_debug_available = False
+                    print("[ASR] disabled: neither faster-whisper nor openai-whisper installed. "
+                          "Run: pip install faster-whisper", file=_sys.stderr, flush=True)
+                    return None
 
         model = _asr_debug_model
         # Detect API flavour
@@ -263,7 +270,7 @@ def _asr_transcribe_debug(wav_path: str) -> str | None:
         return result["text"]
     except Exception as _e:
         _asr_debug_available = False
-        print(f"[ASR] disabled after error: {_e}", file=sys.stderr, flush=True)
+        print(f"[ASR] disabled after error: {_e}", file=_sys.stderr, flush=True)
         return None
 
 
