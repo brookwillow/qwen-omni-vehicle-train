@@ -317,16 +317,16 @@ app = FastAPI(title="Qwen2.5-Omni Inference Server", version="1.0.0")
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
     """Log validation errors with request body for debugging."""
+    import sys
     try:
         raw = await request.body()
-        # Truncate audio data in log to avoid flooding
         body_str = raw.decode("utf-8", errors="replace")
         if len(body_str) > 2000:
             body_str = body_str[:2000] + f"...(truncated, total {len(raw)} bytes)"
-        logger.error("[422] Validation error: %s", exc.errors())
-        logger.error("[422] Request body (truncated): %s", body_str)
+        print(f"\n[422 DEBUG] Validation errors: {exc.errors()}", flush=True, file=sys.stderr)
+        print(f"[422 DEBUG] Request body: {body_str}\n", flush=True, file=sys.stderr)
     except Exception as log_err:
-        logger.error("[422] Could not log request body: %s", log_err)
+        print(f"[422 DEBUG] Could not log body: {log_err}", flush=True, file=sys.stderr)
     return JSONResponse(
         status_code=422,
         content={"detail": exc.errors()},
