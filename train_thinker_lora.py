@@ -204,22 +204,54 @@ def summarize_trainable_params(
 
 class ConsoleMetricsCallback(TrainerCallback):
     @staticmethod
-    def _fmt(v):
-        return f"{v:.6f}" if isinstance(v, float) else str(v)
+    def _fmt_metric(key, value):
+        if not isinstance(value, float):
+            return str(value)
+        if key == "learning_rate":
+            return f"{value:.6e}"
+        return f"{value:.6f}"
 
     def on_log(self, args, state, control, logs=None, **kwargs):
         logs = logs or {}
-        parts = [f"{k}={self._fmt(logs[k])}" for k in ("loss", "learning_rate", "grad_norm", "token_acc") if k in logs]
+        parts = [
+            f"{k}={self._fmt_metric(k, logs[k])}"
+            for k in ("loss", "learning_rate", "grad_norm", "token_acc")
+            if k in logs
+        ]
         if parts:
             step, max_s = state.global_step, state.max_steps or "?"
-            epoch = self._fmt(state.epoch) if state.epoch is not None else "?"
+            epoch = self._fmt_metric("epoch", state.epoch) if state.epoch is not None else "?"
             print(f"[train][step {step}/{max_s}][epoch {epoch}] " + " | ".join(parts))
 
     def on_evaluate(self, args, state, control, metrics=None, **kwargs):
         metrics = metrics or {}
-        parts = [f"{k}={self._fmt(metrics[k])}" for k in ("eval_loss", "eval_token_acc") if k in metrics]
+        parts = [
+            f"{k}={self._fmt_metric(k, metrics[k])}"
+            for k in ("eval_loss", "eval_token_acc")
+            if k in metrics
+        ]
         if parts:
             print(f"[eval][step {state.global_step}] " + " | ".join(parts))
+
+
+def silence_default_trainer_console_callbacks(trainer) -> list[str]:
+    """Remove default Trainer console callbacks so metrics print in one format."""
+    handler = getattr(trainer, "callback_handler", None)
+    callbacks = getattr(handler, "callbacks", None)
+    if callbacks is None:
+        return []
+
+    muted_names = {"PrinterCallback", "ProgressCallback"}
+    kept = []
+    removed = []
+    for callback in callbacks:
+        name = callback.__class__.__name__
+        if name in muted_names:
+            removed.append(name)
+        else:
+            kept.append(callback)
+    handler.callbacks = kept
+    return removed
 
 
 # ── Main ─────────────────────────────────────────────────────
@@ -362,6 +394,9 @@ def main() -> None:
         trainer_kwargs["model"] = model
 
     trainer = SafeKeySeq2SeqTrainer(**trainer_kwargs)
+    muted_callbacks = silence_default_trainer_console_callbacks(trainer)
+    if muted_callbacks:
+        print(f"[log] Disabled default Trainer console callbacks: {', '.join(muted_callbacks)}")
     trainer.add_callback(ConsoleMetricsCallback)
 
     # Freeze audit: ensure no audio/talker/vocoder params are trainable.
