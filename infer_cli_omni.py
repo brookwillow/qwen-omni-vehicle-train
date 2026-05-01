@@ -14,6 +14,8 @@ from peft import PeftModel
 from qwen_omni_utils import process_mm_info
 from transformers import Qwen2_5OmniForConditionalGeneration, Qwen2_5OmniProcessor
 
+from tool_postprocess import postprocess_action_args
+
 
 DEFAULT_SYSTEM_PROMPT_FALLBACK = (
     "你是车载语音助手。你可以动态决策下一步是：Clarify 或 Action。"
@@ -235,6 +237,7 @@ def main() -> None:
         )
         prev_input_ids = current_input_ids
         tool, action_args = parse_action(reply)
+        action_args = postprocess_action_args(user_text, tool, action_args)
         if tool and tool_map and not validate_action(tool_map, tool, action_args):
             print(
                 f"[warn] invalid action against tool schema: tool={tool}, args={action_args} "

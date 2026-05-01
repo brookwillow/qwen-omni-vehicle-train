@@ -58,6 +58,8 @@ from pydantic import BaseModel, ConfigDict, Field
 from qwen_omni_utils import process_mm_info
 from transformers import Qwen2_5OmniForConditionalGeneration, Qwen2_5OmniProcessor
 
+from tool_postprocess import postprocess_action_args
+
 
 _PROJECT_DIR = Path(__file__).resolve().parent
 _DEFAULT_SP_FILE = _PROJECT_DIR / "data" / "system-prompt.txt"
@@ -506,7 +508,7 @@ _ACTION_RE = re.compile(
 )
 
 
-def parse_model_output(text: str) -> tuple:
+def parse_model_output(text: str, query: str = "") -> tuple:
     """Parse model text output into structured form.
 
     Returns:
@@ -517,9 +519,10 @@ def parse_model_output(text: str) -> tuple:
     if m:
         tool_name = m.group(1).strip()
         args_str = m.group(2).strip()
-        # Validate JSON; keep raw string regardless
         try:
-            json.loads(args_str)
+            args = json.loads(args_str)
+            args = postprocess_action_args(query, tool_name, args)
+            args_str = json.dumps(args, ensure_ascii=False)
         except json.JSONDecodeError:
             pass  # still return as-is; caller receives raw string
         return ("tool_call", tool_name, args_str)
@@ -535,6 +538,20 @@ def parse_model_output(text: str) -> tuple:
 # ── FastAPI app ───────────────────────────────────────────────
 
 app = FastAPI(title="Qwen2.5-Omni Inference Server", version="1.0.0")
+
+
+def _last_text_query(messages: List[Message]) -> str:
+    for msg in reversed(messages):
+        if msg.role != "user":
+            continue
+        if isinstance(msg.content, str):
+            return msg.content
+        for part in reversed(msg.content if isinstance(msg.content, list) else []):
+            if isinstance(part, dict) and part.get("type") == "text":
+                return part.get("text", "")
+            if not isinstance(part, dict) and getattr(part, "type", "") == "text":
+                return getattr(part, "text", "") or ""
+    return ""
 
 
 @app.middleware("http")
@@ -618,7 +635,7 @@ async def chat_completions(req: ChatRequest):
                 pass
 
     print(f"[MODEL_RAW] {repr(reply)}", flush=True, file=sys.stderr)
-    parsed = parse_model_output(reply)
+    parsed = parse_model_output(reply, _last_text_query(req.messages))
     if parsed[0] == "tool_call":
         _, tool_name, args_str = parsed
         choice = Choice(

@@ -257,6 +257,7 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 - 时间戳、模型路径、LoRA 路径
 - 总体指标 + per-file / per-difficulty / per-category 明细
 - 所有错误样本（含 query、gt、pred、err_type）
+- 解析后的工具参数会经过 `tool_postprocess.py` 做确定性修正，例如泛化座椅指令不会默认补 `position=主驾`，并修正部分座椅/车窗参数格式偏差
 
 ### 评测数据
 
@@ -274,6 +275,7 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 | `serve.py` | **OpenAI 兼容推理服务**（FastAPI，支持文本+音频） |
 | `infer_cli_omni.py` | 交互式 CLI 推理 |
 | `eval.py` | 统一评测（batch / single），音频输入 + 多维度统计，支持 `--batch-size` 批量推理 |
+| `tool_postprocess.py` | 工具调用参数后处理，修正确定性的模型输出偏差 |
 | `scripts/probe_asr_decoder.py` | Qwen 音频编码器 → Whisper 解码器 ASR 探测实验 |
 | `scripts/build_r5_augment.py` | R5 数据增强（position/anti-clarify/climate/light） |
 
