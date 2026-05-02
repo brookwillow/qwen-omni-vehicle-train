@@ -44,13 +44,13 @@ data/splits/{action,clarify,reject,reject_augmented}.jsonl  (已拆分好的数�
 | `data/train_final.jsonl` | 最终训练数据（含 SP） |
 | `data/eval/` | 评测数据集（18 个场景 + 音频） |
 
-### 数据分布（v3 基线）
+### 数据分布（当前）
 
 | 类型 | 数量 | 说明 |
 |------|------|------|
-| Action | ~2399 | 2 轮：Action → FinalAnswer |
-| Clarify | ~605 | 2 轮：Clarify → FinalAnswer |
-| Reject | ~1030 | 单轮 + 多轮硬负例（已合并） |
+| Action | 3797 | 2 轮：Action → FinalAnswer |
+| Clarify | 177 | 2 轮：Clarify → FinalAnswer；仅保留缺少必需信息或目标不明确的追问 |
+| Reject | 1208 | 单轮 + 多轮硬负例（已合并） |
 
 ## 训练配置
 
@@ -258,6 +258,7 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 - 总体指标 + per-file / per-difficulty / per-category 明细
 - 所有错误样本（含 query、gt、pred、err_type）
 - 解析后的工具参数会经过 `tool_postprocess.py` 做确定性修正，例如泛化座椅指令不会默认补 `position=主驾`，并修正部分座椅/车窗参数格式偏差
+- `position` 为可选参数；用户未明确位置时不因缺少位置追问，直接省略 `position`，由工具侧按说话人位置补全
 
 ### 评测数据
 
@@ -299,13 +300,13 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 - [x] R4 数据增强（+358 条：修复过度-Clarify、补齐弱工具媒体/电话/信息）
 - [x] eval.py `--batch-size` 批量推理（单 GPU 利用率从 ~30% → ~75%）
 - [x] R5 数据增强（+164 条：position 字段覆盖、抗过度-Clarify、Climate/Light 多样性）
+- [x] R6 anti-Clarify 清理：位置缺失不追问，口语意图/信息查询/电话与 FM 搜索直接 Action
 
 ## 下一步
 
-- [ ] 补充 Clarify 评测数据（当前 0 条，训练集有 605 条）
+- [ ] 补充 Clarify 评测数据（当前 0 条，训练集有 177 条）
 - [ ] 补充 Reject 评测数据（当前 1 条，训练集有 ~1030 条）
 - [ ] 补齐 9 个无覆盖工具的测试数据（GeneralBack/Exit/Select、NavigationControl 等）
-- [ ] 补充 Clarify 训练数据（605 → 目标 ~1500）
 - [ ] 工具混淆问题（雨刮→ClimateControl、播放→MediaControl vs MusicSearchPlay）
 - [ ] 阶段 B：DPO/ORPO 定向提准
 - [ ] 导出部署：合并 LoRA → ONNX/GGUF

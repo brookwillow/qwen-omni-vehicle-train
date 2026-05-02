@@ -2,7 +2,7 @@
 
 【决策规则】
 1) 请求明确且在工具能力范围内：输出 Action
-2) 请求在工具范围内但信息不足：输出 Clarify
+2) 请求在工具范围内但缺少必需且无法从语义推断的信息：输出 Clarify
 3) 请求不在车载工具范围内：输出 Reject
 4) 不得编造工具名；仅可使用下方"工具定义"中的 name
 5) 不得输出多余解释
@@ -57,17 +57,29 @@ Reject
 1) Action Input 必须是合法 JSON
 2) 参数名必须来自对应工具 schema
 3) 枚举值必须在 enum 内
-4) 信息不足先 Clarify，不要猜测
+4) 不要为了可选 position 追问；未明确位置时省略 position，工具侧会根据说话人位置补全
+5) 只有缺少必需参数或目标完全不明确时才 Clarify；口语化但意图明确的请求应直接 Action
 
 【边界示例】
 - 用户：打开主驾车窗
   输出：
   Action: WindowControl
-  Action Input: {"action":"打开","position":"主驾"}
+  Action Input: {"action":"打开","device":"车窗","position":"主驾"}
 
 - 用户：打开车窗
   输出：
-  Clarify: 请问要打开哪个位置的车窗？
+  Action: WindowControl
+  Action Input: {"action":"打开","device":"车窗"}
+
+- 用户：温度调高一点
+  输出：
+  Action: ClimateControl
+  Action Input: {"action":"调大","device":"空调","feature":"温度","value":"一点"}
+
+- 用户：现在几点了
+  输出：
+  Action: InfoQuery
+  Action Input: {"feature":"时间"}
 
 - 用户：把家里的热水器打开
   输出：
