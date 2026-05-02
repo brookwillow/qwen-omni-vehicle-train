@@ -1,6 +1,6 @@
 # 车载语音助手 LoRA 训练方案
 
-> 更新时间：2026-04-29
+> 更新时间：2026-05-02
 
 ## 项目概要
 
@@ -48,7 +48,7 @@ data/splits/{action,clarify,reject,reject_augmented}.jsonl  (已拆分好的数�
 
 | 类型 | 数量 | 说明 |
 |------|------|------|
-| Action | 3797 | 2 轮：Action → FinalAnswer |
+| Action | 3880 | 2 轮：Action → FinalAnswer；已补充工具混淆对比和参数精确样本 |
 | Clarify | 177 | 2 轮：Clarify → FinalAnswer；仅保留缺少必需信息或目标不明确的追问 |
 | Reject | 1208 | 单轮 + 多轮硬负例（已合并） |
 
