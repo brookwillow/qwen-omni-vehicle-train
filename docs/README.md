@@ -257,7 +257,7 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 - 时间戳、模型路径、LoRA 路径
 - 总体指标 + per-file / per-difficulty / per-category 明细
 - 所有错误样本（含 query、gt、pred、err_type）
-- 解析后的工具参数会经过 `tool_postprocess.py` 做确定性修正，例如泛化座椅指令不会默认补 `position=主驾`，并修正部分座椅/车窗参数格式偏差
+- 解析后的工具参数会经过 `tool_postprocess.py` 做确定性修正，覆盖座椅、车窗、灯光、空调、后视镜、充电、音量、屏幕、儿童锁和车门等高频参数偏差
 - `position` 为可选参数；用户未明确位置时不因缺少位置追问，直接省略 `position`，由工具侧按说话人位置补全
 
 ### 评测数据
