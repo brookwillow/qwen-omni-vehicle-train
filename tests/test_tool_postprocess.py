@@ -1,4 +1,4 @@
-from tool_postprocess import postprocess_action_args
+from tool_postprocess import postprocess_action_args, postprocess_action_call
 
 
 def test_removes_implicit_driver_position_from_generic_seat_command():
@@ -745,4 +745,133 @@ def test_keeps_full_xmly_podcast_name():
 
     assert fixed == {
         "podcast_name": "郭德纲相声",
+    }
+
+
+def test_remaps_camera_environment_from_app_control():
+    tool, args = postprocess_action_call(
+        "帮我看一下车周围的环境",
+        "AppControl",
+        {"action": "打开", "feature": "智能影像"},
+    )
+
+    assert tool == "CameraControl"
+    assert args == {
+        "action": "打开",
+        "device": "摄像头",
+        "position": "全部",
+    }
+
+
+def test_remaps_driving_energy_mode_from_climate_control():
+    tool, args = postprocess_action_call(
+        "关闭节能模式",
+        "ClimateControl",
+        {"action": "关闭", "device": "空调", "value": "节能模式"},
+    )
+
+    assert tool == "DrivingControl"
+    assert args == {
+        "action": "关闭",
+        "feature": "驾驶模式",
+        "value": "节能模式",
+    }
+
+
+def test_does_not_remap_explicit_climate_mode_to_driving():
+    tool, args = postprocess_action_call(
+        "空调切换到舒适模式",
+        "ClimateControl",
+        {"action": "调到", "device": "空调", "value": "舒适模式"},
+    )
+
+    assert tool == "ClimateControl"
+    assert args == {
+        "action": "调到",
+        "device": "空调",
+        "value": "舒适模式",
+    }
+
+
+def test_closes_climate_guard_mode():
+    tool, args = postprocess_action_call(
+        "关闭守护模式",
+        "ClimateControl",
+        {"action": "打开", "device": "空调", "value": "守护模式"},
+    )
+
+    assert tool == "ClimateControl"
+    assert args == {
+        "action": "关闭",
+        "device": "空调",
+        "value": "守护模式",
+    }
+
+
+def test_remaps_sentry_monitoring_from_full_query():
+    tool, args = postprocess_action_call(
+        "车停在外面不太安全，帮我监控一下",
+        "AppControl",
+        {"action": "打开", "feature": "智能影像"},
+    )
+
+    assert tool == "CameraControl"
+    assert args == {
+        "action": "打开",
+        "device": "摄像头",
+        "value": "哨兵模式",
+    }
+
+
+def test_remaps_steering_assist_from_voice_control():
+    tool, args = postprocess_action_call(
+        "方向盘助力切换到舒适模式",
+        "VoiceControl",
+        {"action": "打开", "feature": "导航音量"},
+    )
+
+    assert tool == "SteeringwheelControl"
+    assert args == {
+        "action": "调到",
+        "device": "方向盘",
+        "feature": "助力",
+        "value": "舒适模式",
+    }
+
+
+def test_remaps_window_lock_from_window_control():
+    tool, args = postprocess_action_call(
+        "打开车窗锁",
+        "WindowControl",
+        {"action": "打开", "device": "车窗"},
+    )
+
+    assert tool == "LockControl"
+    assert args == {
+        "action": "打开",
+        "device": "车窗锁",
+    }
+
+
+def test_remaps_phone_search_from_noise_action():
+    tool, args = postprocess_action_call("帮我查一下18688886666这个号码", "NoiseAction", {})
+
+    assert tool == "PhoneControl"
+    assert args == {
+        "action": "搜索",
+        "telephone": "18688886666",
+    }
+
+
+def test_remaps_first_window_command_before_phone_search():
+    tool, args = postprocess_action_call(
+        "关上车窗然后帮我搜索李四的号码",
+        "PhoneControl",
+        {"action": "搜索", "person": "李四"},
+    )
+
+    assert tool == "WindowControl"
+    assert args == {
+        "action": "关闭",
+        "device": "车窗",
     }

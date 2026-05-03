@@ -537,7 +537,8 @@
           "device": {
             "type": "string",
             "enum": [
-              "儿童锁"
+              "儿童锁",
+              "车窗锁"
             ]
           },
           "position": {

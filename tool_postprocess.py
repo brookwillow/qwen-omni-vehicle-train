@@ -150,6 +150,66 @@ def _extract_light_color(query: str) -> str | None:
     return None
 
 
+def _driving_mode_value(query: str) -> str | None:
+    if "标准" in query or "默认" in query or "正常驾驶" in query:
+        return "标准模式"
+    if "节能" in query or "省点电" in query or "撑过去" in query or "电量不" in query:
+        return "节能模式"
+    if "运动" in query or "推背" in query or "动力响应" in query:
+        return "运动模式"
+    if "舒适" in query or "平稳" in query or "悠着点" in query:
+        return "舒适模式"
+    if "脱困" in query or "泥地" in query or "被困" in query or "出不来" in query:
+        return "脱困模式"
+    if "弹射" in query or "第一个冲出去" in query:
+        return "弹射模式"
+    if "自定义" in query or "自己调" in query:
+        return "自定义"
+    return None
+
+
+def _steering_args_from_query(query: str) -> dict[str, Any] | None:
+    if not any(term in query for term in ("方向盘", "转向")):
+        return None
+    fixed: dict[str, Any] = {"device": "方向盘"}
+    if "助力" in query or "转向" in query or any(term in query for term in ("太沉", "太重", "太轻", "调轻", "轻一些", "最轻")):
+        fixed["feature"] = "助力"
+    else:
+        fixed["feature"] = "制热"
+    if _query_mentions_close(query):
+        fixed["action"] = "关闭"
+    elif any(term in query for term in ("打开", "开启", "热起来")):
+        fixed["action"] = "打开"
+    elif any(term in query for term in ("切换到", "切", "调到", "设成", "开到")):
+        fixed["action"] = "调到"
+    elif any(term in query for term in ("调大", "沉一点", "太轻")):
+        fixed["action"] = "调大"
+    elif any(term in query for term in ("调小", "小一些", "减轻", "太重", "太沉")):
+        fixed["action"] = "调小"
+    else:
+        fixed["action"] = "打开"
+
+    mode_map = {
+        "舒适模式": "舒适模式",
+        "适中模式": "适中模式",
+        "运动模式": "运动模式",
+        "轻盈模式": "轻盈模式",
+        "最轻": "最小",
+        "最大": "最大",
+        "最猛": "最大",
+        "中档": "中",
+    }
+    for text, value in mode_map.items():
+        if text in query:
+            fixed["value"] = value
+            break
+    if "调小一点" in query or "调大一点" in query:
+        fixed["value"] = "一点"
+    if fixed["action"] in {"打开", "关闭"} and fixed.get("value") in {"一点", "中"}:
+        fixed.pop("value", None)
+    return fixed
+
+
 def _infer_camera_position(query: str) -> str | None:
     if any(term in query for term in ("前方", "前面", "前侧")):
         return "前侧"
@@ -162,6 +222,135 @@ def _infer_camera_position(query: str) -> str | None:
     if any(term in query for term in ("所有", "全部", "都", "车外面", "车周围", "周围")):
         return "全部"
     return None
+
+
+def postprocess_action_call(
+    query: str,
+    tool: str | None,
+    args: dict[str, Any] | None,
+) -> tuple[str | None, dict[str, Any] | None]:
+    """Fix high-confidence tool confusions before normal argument cleanup."""
+    query = query or ""
+    first_part = _first_command(query)
+    fixed_tool = tool
+    fixed_args = dict(args) if isinstance(args, dict) else args
+
+    if any(term in first_part for term in ("车窗锁", "窗户锁", "乱按车窗", "窗户不要让孩子碰", "窗户锁上", "自己控制窗户")):
+        fixed_tool = "LockControl"
+        fixed_args = {"action": "关闭" if any(term in first_part for term in ("可以自己控制", "自己控制")) else "打开", "device": "车窗锁"}
+    elif "车窗" in first_part or "窗户" in first_part:
+        fixed_tool = "WindowControl"
+        fixed_args = {"action": "关闭" if _query_mentions_close(first_part) else "打开", "device": "车窗"}
+        position = _infer_window_position(first_part)
+        if position:
+            fixed_args["position"] = position
+    elif "离方向盘太远" in first_part:
+        fixed_tool = "SeatControl"
+        fixed_args = {"action": "调前", "device": "座椅", "feature": "位置"}
+    elif first_part.startswith(("音量", "声音", "通话音量", "导航的声音", "导航声音")) or any(
+        term in first_part for term in ("全车安静", "别出声", "车外的喇叭", "后面的声音")
+    ) or ("声音" in first_part and _query_mentions_close(first_part)):
+        fixed_tool = "VoiceControl"
+        fixed_args = fixed_args if isinstance(fixed_args, dict) else {}
+        if "通话音量" in first_part:
+            fixed_args = {"action": "调到" if "调到" in first_part else "调小", "feature": "通话音量"}
+        elif "导航" in first_part:
+            fixed_args = {"action": "关闭", "feature": "导航音量"}
+        elif "关" in first_part or "安静" in first_part or "别出声" in first_part:
+            fixed_args = {"action": "关闭", "feature": "声音" if "全车" in first_part or "别出声" in first_part else "音量"}
+        else:
+            fixed_args = {"action": "调小" if "小" in first_part or "低" in first_part else "调到", "feature": "音量"}
+        if "最大" in first_part:
+            fixed_args["value"] = "最大"
+        if "百分之二十" in first_part or "20%" in first_part:
+            fixed_args["value"] = "20%"
+    elif first_part.startswith("屏幕") or "屏幕亮度" in first_part:
+        fixed_tool = "ScreenControl"
+        fixed_args = {"action": "调大" if "高" in first_part or "亮" in first_part else "调小", "device": "屏幕", "feature": "亮度"}
+        if "一点" in first_part:
+            fixed_args["value"] = "一点"
+    elif "阅读灯" in first_part:
+        fixed_tool = "LightControl"
+        fixed_args = {"action": "关闭" if _query_mentions_close(first_part) else "打开", "device": "阅读灯"}
+    elif "冰箱" in first_part:
+        fixed_tool = "FridgeControl"
+        fixed_args = {"action": "关闭" if _query_mentions_close(first_part) else "打开", "device": "冰箱"}
+    elif "方向盘" in first_part or first_part.startswith("转向"):
+        steering_args = _steering_args_from_query(first_part)
+        if steering_args:
+            fixed_tool = "SteeringwheelControl"
+            fixed_args = steering_args
+    elif (
+        "空调" not in first_part
+        and any(term in first_part for term in ("驾驶模式", "节能模式", "运动模式", "舒适模式", "标准模式", "脱困模式", "弹射模式"))
+    ) or any(
+        term in first_part for term in ("省点电", "推背感", "动力响应", "悠着点开", "第一个冲出去", "回到正常驾驶", "平稳一些", "泥地", "被困")
+    ):
+        mode = _driving_mode_value(first_part)
+        if mode:
+            fixed_tool = "DrivingControl"
+            fixed_args = {
+                "action": "关闭" if _query_mentions_close(first_part) and "回到正常" not in first_part else "打开",
+                "feature": "驾驶模式",
+                "value": mode,
+            }
+    elif any(term in query for term in ("哨兵", "停车守护", "车辆监控", "监控一下", "盯着点车", "看着车", "别被剐蹭")):
+        fixed_tool = "CameraControl"
+        fixed_args = {
+            "action": "关闭" if _query_mentions_close(query) or "不用再监控" in query else "打开",
+            "device": "摄像头",
+            "value": "哨兵模式",
+        }
+    elif any(term in first_part for term in ("车周围", "车头前面", "右边车道", "左边是不是有人", "并线前", "帮我看看前面")):
+        fixed_tool = "CameraControl"
+        fixed_args = {"action": "打开", "device": "摄像头"}
+        position = _infer_camera_position(first_part)
+        if position:
+            fixed_args["position"] = position
+    elif any(term in first_part for term in ("车里太闷", "换换空气")):
+        fixed_tool = "WindowControl"
+        fixed_args = {"action": "打开", "device": "车窗"}
+    elif any(term in first_part for term in ("隔绝一下外面的声音", "外面灰太大", "窗户关上")):
+        fixed_tool = "WindowControl"
+        fixed_args = {"action": "关闭", "device": "车窗"}
+    elif any(term in first_part for term in ("阳光太刺眼", "不想被外面看到", "后排晒", "留一点光线", "遮阳")):
+        fixed_tool = "WindowControl"
+        fixed_args = {"action": "关闭", "device": "遮阳帘"}
+        if "不需要遮阳" in first_part or "天黑" in first_part:
+            fixed_args["action"] = "打开"
+        if "留一点光线" in first_part:
+            fixed_args.update({"action": "再开", "value": "一点"})
+        if "后排" in first_part:
+            fixed_args["position"] = "第二排"
+    elif re.search(r"(查|找|搜).*1\d{2,}", first_part):
+        fixed_tool = "PhoneControl"
+        m = re.search(r"(1\d{2,11})", first_part)
+        fixed_args = {"action": "搜索", "telephone": m.group(1) if m else ""}
+    elif any(term in first_part for term in ("回拨", "未接来电", "没接到", "打回去", "回过去")):
+        fixed_tool = "PhoneControl"
+        fixed_args = {"action": "回拨"}
+    elif any(term in first_part for term in ("再试一次", "再拨一遍", "再来一次")):
+        fixed_tool = "PhoneControl"
+        fixed_args = {"action": "重拨"}
+    elif any(term in first_part for term in ("通讯录", "电话号码", "搜索", "搜一下", "找下")) and any(
+        term in first_part for term in ("电话", "号码", "小王", "弟弟", "王总", "老板", "外卖店", "姓周")
+    ):
+        fixed_tool = "PhoneControl"
+        fixed_args = {"action": "搜索"}
+        if "姓周" in first_part:
+            fixed_args["person"] = "周"
+        elif "小王" in first_part:
+            fixed_args["person"] = "小王"
+        elif "弟弟" in first_part:
+            fixed_args["person"] = "弟弟"
+        elif "王总" in first_part:
+            fixed_args["person"] = "王总"
+        elif "老板" in first_part:
+            fixed_args["person"] = "老板"
+        elif "外卖店" in first_part:
+            fixed_args["person"] = "外卖店"
+
+    return fixed_tool, postprocess_action_args(query, fixed_tool, fixed_args)
 
 
 def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] | None) -> dict[str, Any] | None:
@@ -421,8 +610,10 @@ def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] |
             fixed.setdefault("device", "空调")
             fixed["action"] = "关闭" if _query_mentions_close(first_part) else "打开"
             fixed.pop("feature", None)
-        if fixed.get("value") in {"守护模式", "极速降温", "极速升温", "避人"}:
+        if fixed.get("value") in {"守护模式", "极速降温", "极速升温", "避人", "宠物模式"}:
             fixed.setdefault("device", "空调")
+            if _query_mentions_close(first_part):
+                fixed["action"] = "关闭"
         if "冻死" in first_part or "赶紧暖和" in first_part:
             fixed.update({"action": "打开", "device": "空调", "value": "极速升温"})
             fixed.pop("feature", None)
@@ -546,7 +737,10 @@ def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] |
                 fixed.pop("value", None)
     elif tool == "LockControl":
         first_part = query
-        fixed["device"] = "儿童锁"
+        if any(term in first_part for term in ("车窗锁", "窗户锁", "乱按车窗", "窗户不要让孩子碰", "窗户锁上", "自己控制窗户")):
+            fixed["device"] = "车窗锁"
+        else:
+            fixed["device"] = "儿童锁"
         if _query_mentions_close(first_part) or any(term in first_part for term in ("解除", "解锁")):
             fixed["action"] = "关闭"
         else:

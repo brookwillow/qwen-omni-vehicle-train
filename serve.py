@@ -58,7 +58,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from qwen_omni_utils import process_mm_info
 from transformers import Qwen2_5OmniForConditionalGeneration, Qwen2_5OmniProcessor
 
-from tool_postprocess import postprocess_action_args
+from tool_postprocess import postprocess_action_call
 
 
 _PROJECT_DIR = Path(__file__).resolve().parent
@@ -521,7 +521,7 @@ def parse_model_output(text: str, query: str = "") -> tuple:
         args_str = m.group(2).strip()
         try:
             args = json.loads(args_str)
-            args = postprocess_action_args(query, tool_name, args)
+            tool_name, args = postprocess_action_call(query, tool_name, args)
             args_str = json.dumps(args, ensure_ascii=False)
         except json.JSONDecodeError:
             pass  # still return as-is; caller receives raw string

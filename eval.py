@@ -31,7 +31,7 @@ from peft import PeftModel
 from qwen_omni_utils import process_mm_info
 from transformers import Qwen2_5OmniForConditionalGeneration, Qwen2_5OmniProcessor
 
-from tool_postprocess import postprocess_action_args
+from tool_postprocess import postprocess_action_call
 
 # Suppress the per-sample "System prompt modified" warning from Qwen2.5-Omni;
 # it fires once per inference call when using a custom system prompt and is expected.
@@ -310,7 +310,7 @@ def eval_file(
             idx = batch_start + i
             pred = preds[i]
             pred_tool, pred_args, pred_type = parse_action(pred)
-            pred_args = postprocess_action_args(query, pred_tool, pred_args)
+            pred_tool, pred_args = postprocess_action_call(query, pred_tool, pred_args)
 
             # Per-sample result
             type_ok = "✓" if pred_type == expected_type else "✗"
@@ -510,7 +510,7 @@ def run_single(args, model, processor, system_prompt: str) -> None:
         audio_path=audio_path,
     )
     tool, tool_args, pred_type = parse_action(pred)
-    tool_args = postprocess_action_args(args.prompt, tool, tool_args)
+    tool, tool_args = postprocess_action_call(args.prompt, tool, tool_args)
     print(f"[type] {pred_type}")
     if pred_type == "Action":
         print(f"[tool] {tool}")

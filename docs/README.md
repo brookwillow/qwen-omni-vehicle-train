@@ -39,7 +39,7 @@ data/splits/{action,clarify,reject,reject_augmented}.jsonl  (已拆分好的数�
 | 文件 | 说明 |
 |------|------|
 | `data/system-prompt.txt` | 紧凑版 System Prompt（~12K chars，~5K tokens） |
-| `data/tools.json` | 20 个车载工具定义 |
+| `data/tools.json` | 33 个车载工具定义 |
 | `data/splits/` | 按类型拆分的训练数据（无 SP） |
 | `data/train_final.jsonl` | 最终训练数据（含 SP） |
 | `data/eval/` | 评测数据集（18 个场景 + 音频） |
@@ -48,7 +48,7 @@ data/splits/{action,clarify,reject,reject_augmented}.jsonl  (已拆分好的数�
 
 | 类型 | 数量 | 说明 |
 |------|------|------|
-| Action | 3880 | 2 轮：Action → FinalAnswer；已补充工具混淆对比和参数精确样本 |
+| Action | 3957 | 2 轮：Action → FinalAnswer；已补充工具混淆对比、参数精确和车窗锁样本 |
 | Clarify | 177 | 2 轮：Clarify → FinalAnswer；仅保留缺少必需信息或目标不明确的追问 |
 | Reject | 1208 | 单轮 + 多轮硬负例（已合并） |
 
@@ -257,7 +257,7 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 - 时间戳、模型路径、LoRA 路径
 - 总体指标 + per-file / per-difficulty / per-category 明细
 - 所有错误样本（含 query、gt、pred、err_type）
-- 解析后的工具参数会经过 `tool_postprocess.py` 做确定性修正，覆盖座椅、车窗、灯光、空调、后视镜、充电、音量、屏幕、儿童锁和车门等高频参数偏差
+- 解析后的工具参数会经过 `tool_postprocess.py` 做确定性修正，覆盖座椅、车窗、灯光、空调、后视镜、充电、音量、屏幕、儿童锁/车窗锁和车门等高频参数偏差
 - `position` 为可选参数；用户未明确位置时不因缺少位置追问，直接省略 `position`，由工具侧按说话人位置补全
 
 ### 评测数据
