@@ -190,6 +190,21 @@ resp = client.chat.completions.create(
 print(resp.choices[0].message.content)
 ```
 
+**本地录音端到端测试**
+```bash
+# 本地录 4 秒音频，发送到远端 serve.py 服务
+python scripts/record_remote_infer.py \
+  --server http://10.95.64.153:8000 \
+  --duration 4
+
+# 使用已有 WAV 文件测试
+python scripts/record_remote_infer.py \
+  --server http://10.95.64.153:8000 \
+  --audio data/eval/audio/window/window_001.wav
+```
+
+`record_remote_infer.py` 会把本地 WAV 转成 OpenAI 兼容的 `input_audio` base64 请求，并打印返回的 `tool_call` 或文本结果。默认是纯音频端到端测试；如需调试服务端后处理，可额外传 `--hint-text "打开主驾车窗"`。
+
 API 端点：
 - `POST /v1/chat/completions` – 推理
 - `GET  /v1/models` – 列出模型
