@@ -132,7 +132,15 @@ def analyze_audio_for_ui(audio_path: str | None) -> str:
     try:
         stats = analyze_audio_file(path)
         status = "OK" if stats.get("rms", 0) >= 5 and stats.get("peak_abs", 0) else "SILENT"
-        return f"{status}: {path}\n{json.dumps(stats, ensure_ascii=False, indent=2)}"
+        msg = f"{status}: {path}\n{json.dumps(stats, ensure_ascii=False, indent=2)}"
+        if status == "SILENT":
+            msg += (
+                "\n\n⚠️ Audio is silent! Check:\n"
+                "  1. macOS: System Settings → Privacy & Security → Microphone → enable for your browser\n"
+                "  2. Browser: allow microphone access for this page (click lock icon in address bar)\n"
+                "  3. Try the 'Backend Record' button instead (uses ffmpeg avfoundation directly)"
+            )
+        return msg
     except Exception as exc:
         return f"Could not analyze audio: {exc}"
 
@@ -185,7 +193,7 @@ def build_app(default_server: str, default_model: str):
             label="Browser Audio",
             sources=["microphone", "upload"],
             type="filepath",
-            format="mp3",
+            format="wav",
         )
 
         with gr.Row():

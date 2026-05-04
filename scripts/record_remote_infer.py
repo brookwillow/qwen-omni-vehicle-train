@@ -89,6 +89,38 @@ def _run(cmd: list[str]) -> None:
         raise RuntimeError(f"recorder failed with exit code {exc.returncode}: {' '.join(cmd)}") from exc
 
 
+def _record_with_ffmpeg_avfoundation(path: Path, duration: float, sample_rate: int) -> bool:
+    """macOS: record via ffmpeg -f avfoundation.
+
+    This correctly triggers the system microphone permission dialog, whereas
+    sounddevice/PortAudio may silently capture all-zeros when the process has
+    not been granted microphone access.
+    """
+    if not shutil.which("ffmpeg"):
+        return False
+    cmd = [
+        "ffmpeg", "-y",
+        "-f", "avfoundation",
+        "-i", ":0",  # default audio input device
+        "-ar", str(sample_rate),
+        "-ac", "1",
+        "-t", str(duration),
+        "-f", "wav",
+        str(path),
+    ]
+    print(f"[record] recording {duration:.1f}s via ffmpeg avfoundation (sr={sample_rate}) -> {path}", flush=True)
+    try:
+        result = subprocess.run(cmd, capture_output=True, timeout=duration + 15)
+        if result.returncode != 0:
+            stderr_tail = result.stderr.decode("utf-8", errors="replace")[-400:]
+            print(f"[record] ffmpeg avfoundation failed: {stderr_tail}", flush=True)
+            return False
+        return path.exists() and path.stat().st_size > 1024
+    except (FileNotFoundError, subprocess.TimeoutExpired) as exc:
+        print(f"[record] ffmpeg avfoundation error: {exc}", flush=True)
+        return False
+
+
 def _record_with_sounddevice(path: Path, duration: float, sample_rate: int) -> bool:
     try:
         import sounddevice as sd
@@ -116,10 +148,16 @@ def _record_with_sounddevice(path: Path, duration: float, sample_rate: int) -> b
 
 def record_wav(path: Path, duration: float, sample_rate: int) -> None:
     system = platform.system().lower()
-    if system == "darwin" and shutil.which("afrecord"):
-        print(f"[record] recording {duration:.1f}s via afrecord -> {path}")
-        _run(["afrecord", "-f", "WAVE", "-d", str(duration), "-r", str(sample_rate), "-c", "1", str(path)])
-        return
+    if system == "darwin":
+        # afrecord (older Xcode tools, rarely present)
+        if shutil.which("afrecord"):
+            print(f"[record] recording {duration:.1f}s via afrecord -> {path}")
+            _run(["afrecord", "-f", "WAVE", "-d", str(duration), "-r", str(sample_rate), "-c", "1", str(path)])
+            return
+        # ffmpeg avfoundation — preferred on macOS: triggers permission dialog
+        # and does not silently record all-zeros when mic access is denied
+        if _record_with_ffmpeg_avfoundation(path, duration, sample_rate):
+            return
 
     if _record_with_sounddevice(path, duration, sample_rate):
         return

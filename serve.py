@@ -39,6 +39,7 @@ import json
 import logging
 import os
 import re
+import shutil
 import tempfile
 import time
 import uuid
@@ -63,6 +64,7 @@ from tool_postprocess import postprocess_action_call
 
 _PROJECT_DIR = Path(__file__).resolve().parent
 _DEFAULT_SP_FILE = _PROJECT_DIR / "data" / "system-prompt.txt"
+_SAVE_DIR = _PROJECT_DIR / "data" / "serve_logs"
 
 
 # ── Pydantic models (OpenAI schema subset) ───────────────────
@@ -72,7 +74,7 @@ class ContentPart(BaseModel):
 
     type: str          # "text" | "input_audio"
     text: Optional[str] = None
-    input_audio: Optional[Dict[str, str]] = None  # {"data": "<b64>", "format": "wav"}
+    input_audio: Optional[Dict[str, Any]] = None  # {"data": "<b64>", "format": "wav", "sample_rate": int, "channels": int}
 
 
 class Message(BaseModel):
@@ -278,7 +280,8 @@ def _asr_transcribe_debug(wav_path: str) -> str | None:
         return None
 
 
-def _write_audio_tmp(raw_bytes: bytes, fmt: str, tmp_dir: str) -> str:
+def _write_audio_tmp(raw_bytes: bytes, fmt: str, tmp_dir: str,
+                      sample_rate: int | None = None, channels: int | None = None) -> str:
     """Write audio bytes to a temp WAV (16 kHz mono) that librosa can read."""
     import subprocess
     import sys
@@ -308,54 +311,65 @@ def _write_audio_tmp(raw_bytes: bytes, fmt: str, tmp_dir: str) -> str:
         ok = False
 
         if ffmpeg_fmt == "s16le":
-            # Raw PCM: try multiple configurations, pick best via ASR
-            pcm_configs = [
-                ("s16le", "16000", "1"),
-                ("s16le", "48000", "1"),
-                ("s16le", "44100", "1"),
-                ("s16le", "48000", "2"),
-                ("s16le", "44100", "2"),
-                ("f32le", "16000", "1"),
-                ("f32le", "48000", "1"),
-            ]
-            best_wav = None
-            best_transcript = ""
-            for pcm_fmt, sr, ch in pcm_configs:
-                trial_wav = os.path.join(tmp_dir, f"audio_trial_{uuid.uuid4().hex}.wav")
-                trial_ok = _run_ffmpeg(src_path, trial_wav,
-                                       extra_input_args=["-f", pcm_fmt, "-ar", sr, "-ac", ch])
-                if not trial_ok:
-                    try:
-                        os.remove(trial_wav)
-                    except OSError:
-                        pass
-                    continue
-                transcript = _asr_transcribe_debug(trial_wav)
-                print(f"[AUDIO] trial {pcm_fmt}/{sr}Hz/{ch}ch → ASR: {transcript!r}",
-                      flush=True, file=sys.stderr)
-                if transcript and len(transcript) > len(best_transcript):
-                    # Prefer the config that yields longer (more meaningful) transcript
-                    if best_wav:
-                        try:
-                            os.remove(best_wav)
-                        except OSError:
-                            pass
-                    best_wav = trial_wav
-                    best_transcript = transcript
-                else:
-                    if not best_wav:
-                        best_wav = trial_wav  # keep first success as fallback
-                    else:
+            # If client declared sample_rate and channels, use them directly
+            if sample_rate and channels:
+                print(f"[AUDIO] PCM direct decode sr={sample_rate} ch={channels}", flush=True, file=sys.stderr)
+                ok = _run_ffmpeg(src_path, wav_path,
+                                 extra_input_args=["-f", "s16le", "-ar", str(sample_rate), "-ac", str(channels)])
+                if ok:
+                    transcript = _asr_transcribe_debug(wav_path)
+                    if transcript is not None:
+                        print(f"[ASR] transcript: {transcript!r}", file=sys.stderr, flush=True)
+
+            if not ok:
+                # Raw PCM: try multiple configurations, pick best via ASR
+                pcm_configs = [
+                    ("s16le", "16000", "1"),
+                    ("s16le", "48000", "1"),
+                    ("s16le", "44100", "1"),
+                    ("s16le", "48000", "2"),
+                    ("s16le", "44100", "2"),
+                    ("f32le", "16000", "1"),
+                    ("f32le", "48000", "1"),
+                ]
+                best_wav = None
+                best_transcript = ""
+                for pcm_fmt, sr, ch in pcm_configs:
+                    trial_wav = os.path.join(tmp_dir, f"audio_trial_{uuid.uuid4().hex}.wav")
+                    trial_ok = _run_ffmpeg(src_path, trial_wav,
+                                           extra_input_args=["-f", pcm_fmt, "-ar", sr, "-ac", ch])
+                    if not trial_ok:
                         try:
                             os.remove(trial_wav)
                         except OSError:
                             pass
-            if best_wav:
-                import shutil
-                shutil.move(best_wav, wav_path)
-                ok = True
-                print(f"[AUDIO] best PCM decode → ASR: {best_transcript!r}",
-                      flush=True, file=sys.stderr)
+                        continue
+                    transcript = _asr_transcribe_debug(trial_wav)
+                    print(f"[AUDIO] trial {pcm_fmt}/{sr}Hz/{ch}ch → ASR: {transcript!r}",
+                          flush=True, file=sys.stderr)
+                    if transcript and len(transcript) > len(best_transcript):
+                        # Prefer the config that yields longer (more meaningful) transcript
+                        if best_wav:
+                            try:
+                                os.remove(best_wav)
+                            except OSError:
+                                pass
+                        best_wav = trial_wav
+                        best_transcript = transcript
+                    else:
+                        if not best_wav:
+                            best_wav = trial_wav  # keep first success as fallback
+                        else:
+                            try:
+                                os.remove(trial_wav)
+                            except OSError:
+                                pass
+                if best_wav:
+                    import shutil
+                    shutil.move(best_wav, wav_path)
+                    ok = True
+                    print(f"[AUDIO] best PCM decode → ASR: {best_transcript!r}",
+                          flush=True, file=sys.stderr)
         elif ffmpeg_fmt:
             ok = _run_ffmpeg(src_path, wav_path, fmt_flag=ffmpeg_fmt)
         
@@ -440,7 +454,9 @@ def _messages_to_qwen(
                         fmt = audio_info.get("format", "wav")
                         if b64data:
                             raw = _safe_b64decode(b64data)
-                            tmp_path = _write_audio_tmp(raw, fmt, tmp_dir)
+                            sr = int(audio_info["sample_rate"]) if audio_info.get("sample_rate") else None
+                            ch = int(audio_info.get("channels") or audio_info.get("channel") or 0) or None
+                            tmp_path = _write_audio_tmp(raw, fmt, tmp_dir, sample_rate=sr, channels=ch)
                             tmp_files.append(tmp_path)
                             qwen_content.append({"type": "audio", "audio": tmp_path})
                 else:
@@ -452,7 +468,9 @@ def _messages_to_qwen(
                         fmt = part.input_audio.get("format", "wav")
                         if b64data:
                             raw = _safe_b64decode(b64data)
-                            tmp_path = _write_audio_tmp(raw, fmt, tmp_dir)
+                            sr = int(part.input_audio["sample_rate"]) if part.input_audio.get("sample_rate") else None
+                            ch = int(part.input_audio.get("channels") or part.input_audio.get("channel") or 0) or None
+                            tmp_path = _write_audio_tmp(raw, fmt, tmp_dir, sample_rate=sr, channels=ch)
                             tmp_files.append(tmp_path)
                             qwen_content.append({"type": "audio", "audio": tmp_path})
 
@@ -533,6 +551,41 @@ def parse_model_output(text: str, query: str = "") -> tuple:
     else:
         content = text
     return ("text", content)
+
+
+# ── Request/Response persistence ──────────────────────────────
+
+def _save_request_artifacts(
+    request_id: str,
+    tmp_files: list[str],
+    response: "ChatResponse",
+    messages: List[Message],
+) -> None:
+    """Save audio files and response for each request, keyed by request_id."""
+    try:
+        req_dir = _SAVE_DIR / request_id
+        req_dir.mkdir(parents=True, exist_ok=True)
+
+        # Save audio wav files
+        for i, fpath in enumerate(tmp_files):
+            if os.path.exists(fpath):
+                suffix = Path(fpath).suffix or ".wav"
+                dst = req_dir / f"audio_{i}{suffix}"
+                shutil.copy2(fpath, dst)
+
+        # Save the user text query (if any)
+        text_query = _last_text_query(messages)
+        if text_query:
+            (req_dir / "query.txt").write_text(text_query, encoding="utf-8")
+
+        # Save the full response JSON
+        (req_dir / "response.json").write_text(
+            response.model_dump_json(indent=2), encoding="utf-8"
+        )
+
+        logger.info(f"[SAVE] artifacts saved → {req_dir}")
+    except Exception as e:
+        logger.warning(f"[SAVE] failed to save artifacts for {request_id}: {e}")
 
 
 # ── FastAPI app ───────────────────────────────────────────────
@@ -626,13 +679,12 @@ async def chat_completions(req: ChatRequest):
     except Exception as e:
         print(f"\n[ERROR] run_inference failed: {e}", flush=True, file=sys.stderr)
         traceback.print_exc(file=sys.stderr)
-        raise HTTPException(status_code=500, detail=f"Inference error: {e}") from e
-    finally:
         for f in tmp_files:
             try:
                 os.remove(f)
             except OSError:
                 pass
+        raise HTTPException(status_code=500, detail=f"Inference error: {e}") from e
 
     print(f"[MODEL_RAW] {repr(reply)}", flush=True, file=sys.stderr)
     parsed = parse_model_output(reply, _last_text_query(req.messages))
@@ -668,6 +720,17 @@ async def chat_completions(req: ChatRequest):
         ),
     )
     print(f"[RESPONSE] {resp.model_dump_json()}", file=sys.stderr, flush=True)
+
+    # Persist audio + response for training data collection
+    _save_request_artifacts(resp.id, tmp_files, resp, req.messages)
+
+    # Cleanup temp audio files
+    for f in tmp_files:
+        try:
+            os.remove(f)
+        except OSError:
+            pass
+
     return resp
 
 
