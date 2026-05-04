@@ -96,21 +96,32 @@ def _record_with_sounddevice(path: Path, duration: float, sample_rate: int) -> b
     except ImportError:
         return False
 
-    print(f"[record] recording {duration:.1f}s via sounddevice -> {path}")
-    audio = sd.rec(int(duration * sample_rate), samplerate=sample_rate, channels=1, dtype="int16")
+    devices = sd.query_devices()
+    input_devices = [
+        idx for idx, dev in enumerate(devices)
+        if int(dev.get("max_input_channels", 0)) > 0
+    ]
+    if not input_devices:
+        return False
+
+    default_input = sd.default.device[0] if isinstance(sd.default.device, (list, tuple)) else sd.default.device
+    device = default_input if isinstance(default_input, int) and default_input >= 0 else input_devices[0]
+
+    print(f"[record] recording {duration:.1f}s via sounddevice device={device} -> {path}")
+    audio = sd.rec(int(duration * sample_rate), samplerate=sample_rate, channels=1, dtype="int16", device=device)
     sd.wait()
     sf.write(str(path), audio, sample_rate, subtype="PCM_16")
     return True
 
 
 def record_wav(path: Path, duration: float, sample_rate: int) -> None:
-    if _record_with_sounddevice(path, duration, sample_rate):
-        return
-
     system = platform.system().lower()
     if system == "darwin" and shutil.which("afrecord"):
         print(f"[record] recording {duration:.1f}s via afrecord -> {path}")
         _run(["afrecord", "-f", "WAVE", "-d", str(duration), "-r", str(sample_rate), "-c", "1", str(path)])
+        return
+
+    if _record_with_sounddevice(path, duration, sample_rate):
         return
 
     if shutil.which("arecord"):

@@ -6,11 +6,23 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shutil
+import subprocess
 import tempfile
+import wave
 from pathlib import Path
 from typing import Any
 
-from record_remote_infer import DEFAULT_SERVER, build_payload, post_json, record_wav, validate_wav_has_audio
+from record_remote_infer import (
+    DEFAULT_SERVER,
+    analyze_wav,
+    build_payload,
+    post_json,
+    record_wav,
+)
+
+
+MIN_AUDIO_RMS = 5
 
 
 def _extract_result(resp: dict[str, Any]) -> tuple[str, str, str]:
@@ -34,6 +46,55 @@ def _extract_result(resp: dict[str, Any]) -> tuple[str, str, str]:
     return summary, str(content), json.dumps(resp, ensure_ascii=False, indent=2)
 
 
+def _convert_to_wav_for_analysis(path: Path) -> Path:
+    if not shutil.which("ffmpeg"):
+        raise RuntimeError("ffmpeg is required to analyze non-WAV browser recordings.")
+    fd, name = tempfile.mkstemp(prefix="qwen_omni_analyze_", suffix=".wav")
+    os.close(fd)
+    wav_path = Path(name)
+    cmd = [
+        "ffmpeg", "-y", "-i", str(path),
+        "-ar", "16000", "-ac", "1", "-f", "wav", str(wav_path),
+    ]
+    result = subprocess.run(cmd, capture_output=True)
+    if result.returncode != 0:
+        detail = result.stderr.decode("utf-8", errors="replace")[-500:]
+        raise RuntimeError(f"ffmpeg could not decode audio: {detail}")
+    return wav_path
+
+
+def analyze_audio_file(path: Path) -> dict[str, Any]:
+    try:
+        stats = dict(analyze_wav(path))
+        stats["analysis_source"] = "wav"
+        return stats
+    except (wave.Error, EOFError):
+        wav_path = _convert_to_wav_for_analysis(path)
+        try:
+            stats = dict(analyze_wav(wav_path))
+            stats["analysis_source"] = "ffmpeg"
+            stats["original_size_bytes"] = path.stat().st_size
+            stats["original_suffix"] = path.suffix
+            return stats
+        finally:
+            try:
+                wav_path.unlink()
+            except OSError:
+                pass
+
+
+def validate_audio_has_sound(path: Path) -> dict[str, Any]:
+    stats = analyze_audio_file(path)
+    if stats.get("size_bytes", 0) < 1024 and stats.get("original_size_bytes", 1024) < 1024:
+        raise RuntimeError(f"audio file is too small: {path.stat().st_size} bytes")
+    if stats.get("rms", 0) < MIN_AUDIO_RMS or stats.get("peak_abs", 0) == 0:
+        raise RuntimeError(
+            "audio appears to be silent: "
+            f"rms={stats.get('rms')} peak_abs={stats.get('peak_abs')} duration={stats.get('duration_sec')}s"
+        )
+    return stats
+
+
 def infer_audio(
     audio_path: str | None,
     server: str,
@@ -51,13 +112,29 @@ def infer_audio(
         return "Audio Missing", f"File not found: {path}", "{}"
 
     try:
-        validate_wav_has_audio(path)
+        validate_audio_has_sound(path)
         url = f"{server.rstrip('/')}/v1/chat/completions"
         payload = build_payload(path, model, int(max_tokens), float(temperature), hint_text.strip())
         resp = post_json(url, payload, float(timeout))
         return _extract_result(resp)
     except Exception as exc:
         return "Request Failed", str(exc), "{}"
+
+
+def analyze_audio_for_ui(audio_path: str | None) -> str:
+    if not audio_path:
+        return "No audio selected."
+
+    path = Path(audio_path).expanduser().resolve()
+    if not path.exists():
+        return f"File not found: {path}"
+
+    try:
+        stats = analyze_audio_file(path)
+        status = "OK" if stats.get("rms", 0) >= 5 and stats.get("peak_abs", 0) else "SILENT"
+        return f"{status}: {path}\n{json.dumps(stats, ensure_ascii=False, indent=2)}"
+    except Exception as exc:
+        return f"Could not analyze audio: {exc}"
 
 
 def record_backend(duration: float, sample_rate: int) -> tuple[str | None, str]:
@@ -70,8 +147,8 @@ def record_backend(duration: float, sample_rate: int) -> tuple[str | None, str]:
         path = Path(name)
         path.unlink(missing_ok=True)
         record_wav(path, float(duration), int(sample_rate))
-        stats = validate_wav_has_audio(path)
-        return str(path), f"Recorded {duration:.1f}s to {path}. Stats: {json.dumps(stats, ensure_ascii=False)}"
+        stats_text = analyze_audio_for_ui(str(path))
+        return str(path), f"Recorded {duration:.1f}s.\n{stats_text}"
     except Exception as exc:
         return None, f"Backend recording failed: {exc}"
 
@@ -108,7 +185,7 @@ def build_app(default_server: str, default_model: str):
             label="Browser Audio",
             sources=["microphone", "upload"],
             type="filepath",
-            format="wav",
+            format="mp3",
         )
 
         with gr.Row():
@@ -139,6 +216,11 @@ def build_app(default_server: str, default_model: str):
             infer_audio,
             inputs=[audio, server, model, hint_text, max_tokens, temperature, timeout],
             outputs=[result_summary, parsed_output, raw_response],
+        )
+        audio.change(
+            analyze_audio_for_ui,
+            inputs=[audio],
+            outputs=[record_status],
         )
         backend_record.click(
             record_backend,

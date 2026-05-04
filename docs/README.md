@@ -217,6 +217,8 @@ python scripts/gradio_remote_infer.py \
 打开 `http://127.0.0.1:7860` 后可直接录音或上传 WAV，页面会展示解析后的 `tool_call`、参数和完整响应。
 如果浏览器录音按钮没有录上声音，可以使用页面里的 `Backend Record` 或 `Backend Record + Send`，它会绕过浏览器录音，直接由本地 Python 进程调用系统录音工具生成 WAV。
 客户端会检查 WAV 的 RMS 和峰值，若录到静音文件会直接提示，不再把空音频发送到远端。
+macOS 下如果存在系统 `afrecord` 会优先使用它；否则使用 Python 音频库时会检查输入设备，避免选错设备后录到静音。浏览器录音完成后页面也会自动显示 RMS/峰值诊断信息。
+Chrome 浏览器录音会保存为 `mp3`，避免当前前端 WAV 转换链路产生静音文件；发送到服务端后由 `serve.py` 自动识别并转码。
 
 API 端点：
 - `POST /v1/chat/completions` – 推理
