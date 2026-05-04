@@ -10,10 +10,7 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-from record_remote_infer import DEFAULT_SERVER, build_payload, post_json, record_wav
-
-
-MIN_AUDIO_BYTES = 1024
+from record_remote_infer import DEFAULT_SERVER, build_payload, post_json, record_wav, validate_wav_has_audio
 
 
 def _extract_result(resp: dict[str, Any]) -> tuple[str, str, str]:
@@ -52,10 +49,9 @@ def infer_audio(
     path = Path(audio_path).expanduser().resolve()
     if not path.exists():
         return "Audio Missing", f"File not found: {path}", "{}"
-    if path.stat().st_size < MIN_AUDIO_BYTES:
-        return "Empty Audio", f"Audio file is too small: {path.stat().st_size} bytes. Please record again.", "{}"
 
     try:
+        validate_wav_has_audio(path)
         url = f"{server.rstrip('/')}/v1/chat/completions"
         payload = build_payload(path, model, int(max_tokens), float(temperature), hint_text.strip())
         resp = post_json(url, payload, float(timeout))
@@ -74,10 +70,8 @@ def record_backend(duration: float, sample_rate: int) -> tuple[str | None, str]:
         path = Path(name)
         path.unlink(missing_ok=True)
         record_wav(path, float(duration), int(sample_rate))
-        size = path.stat().st_size
-        if size < MIN_AUDIO_BYTES:
-            return None, f"Backend recording generated an empty audio file ({size} bytes)."
-        return str(path), f"Recorded {duration:.1f}s to {path} ({size} bytes)."
+        stats = validate_wav_has_audio(path)
+        return str(path), f"Recorded {duration:.1f}s to {path}. Stats: {json.dumps(stats, ensure_ascii=False)}"
     except Exception as exc:
         return None, f"Backend recording failed: {exc}"
 

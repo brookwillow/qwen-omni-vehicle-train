@@ -19,11 +19,65 @@ import sys
 import tempfile
 import urllib.error
 import urllib.request
+import wave
 from pathlib import Path
 from typing import Any
 
 
 DEFAULT_SERVER = os.environ.get("QWEN_OMNI_SERVER_URL", "http://10.95.64.153:8000")
+MIN_AUDIO_BYTES = 1024
+MIN_AUDIO_RMS = 5
+
+
+def analyze_wav(path: Path) -> dict[str, float | int]:
+    """Return simple PCM WAV stats used to catch empty/silent recordings."""
+    with wave.open(str(path), "rb") as wav:
+        channels = wav.getnchannels()
+        sample_width = wav.getsampwidth()
+        sample_rate = wav.getframerate()
+        frames = wav.getnframes()
+        raw = wav.readframes(frames)
+
+    stats: dict[str, float | int] = {
+        "channels": channels,
+        "sample_width": sample_width,
+        "sample_rate": sample_rate,
+        "frames": frames,
+        "duration_sec": round(frames / sample_rate, 3) if sample_rate else 0,
+        "size_bytes": path.stat().st_size,
+        "rms": 0,
+        "peak_abs": 0,
+    }
+    if not raw or sample_width != 2:
+        return stats
+
+    sample_count = len(raw) // 2
+    if sample_count <= 0:
+        return stats
+
+    sum_sq = 0
+    peak = 0
+    for i in range(0, len(raw), 2):
+        sample = int.from_bytes(raw[i:i + 2], byteorder="little", signed=True)
+        abs_sample = abs(sample)
+        peak = max(peak, abs_sample)
+        sum_sq += sample * sample
+    stats["rms"] = round((sum_sq / sample_count) ** 0.5, 2)
+    stats["peak_abs"] = peak
+    return stats
+
+
+def validate_wav_has_audio(path: Path) -> dict[str, float | int]:
+    if path.stat().st_size < MIN_AUDIO_BYTES:
+        raise RuntimeError(f"audio file is too small: {path.stat().st_size} bytes")
+
+    stats = analyze_wav(path)
+    if stats.get("rms", 0) < MIN_AUDIO_RMS or stats.get("peak_abs", 0) == 0:
+        raise RuntimeError(
+            "audio appears to be silent: "
+            f"rms={stats.get('rms')} peak_abs={stats.get('peak_abs')} duration={stats.get('duration_sec')}s"
+        )
+    return stats
 
 
 def _run(cmd: list[str]) -> None:
@@ -169,7 +223,9 @@ def main() -> int:
             record_wav(audio_path, args.duration, args.sample_rate)
 
         print(f"[request] POST {url}")
+        stats = validate_wav_has_audio(audio_path)
         print(f"[audio] {audio_path} ({audio_path.stat().st_size} bytes)")
+        print(f"[audio_stats] {json.dumps(stats, ensure_ascii=False)}")
         payload = build_payload(audio_path, args.model, args.max_tokens, args.temperature, args.hint_text)
         resp = post_json(url, payload, args.timeout)
         print_response(resp)
