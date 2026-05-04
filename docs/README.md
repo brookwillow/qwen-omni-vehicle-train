@@ -205,6 +205,17 @@ python scripts/record_remote_infer.py \
 
 `record_remote_infer.py` 会把本地 WAV 转成 OpenAI 兼容的 `input_audio` base64 请求，并打印返回的 `tool_call` 或文本结果。默认是纯音频端到端测试；如需调试服务端后处理，可额外传 `--hint-text "打开主驾车窗"`。
 
+**Gradio 本地录音界面**
+```bash
+pip install gradio   # 首次运行需安装
+python scripts/gradio_remote_infer.py \
+  --server http://10.95.64.153:8000 \
+  --host 127.0.0.1 \
+  --port 7860
+```
+
+打开 `http://127.0.0.1:7860` 后可直接录音或上传 WAV，页面会展示解析后的 `tool_call`、参数和完整响应。
+
 API 端点：
 - `POST /v1/chat/completions` – 推理
 - `GET  /v1/models` – 列出模型
