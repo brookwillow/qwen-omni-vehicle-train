@@ -875,3 +875,132 @@ def test_remaps_first_window_command_before_phone_search():
         "action": "关闭",
         "device": "车窗",
     }
+
+
+def test_fixes_steering_exact_mode_and_level_values():
+    assert postprocess_action_call(
+        "方向盘制热调到三档",
+        "SteeringwheelControl",
+        {"action": "调到", "device": "方向盘", "feature": "制热"},
+    ) == (
+        "SteeringwheelControl",
+        {"action": "调到", "device": "方向盘", "feature": "制热", "value": "3"},
+    )
+
+    assert postprocess_action_call(
+        "方向盘助力调到稳重模式",
+        "SteeringwheelControl",
+        {"action": "调到", "device": "方向盘", "feature": "助力"},
+    ) == (
+        "SteeringwheelControl",
+        {"action": "调到", "device": "方向盘", "feature": "助力", "value": "稳重模式"},
+    )
+
+
+def test_fixes_screen_mode_and_brightness_direction():
+    assert postprocess_action_call(
+        "屏幕调到黑夜模式",
+        "ScreenControl",
+        {"action": "调小", "device": "屏幕", "feature": "亮度"},
+    ) == (
+        "ScreenControl",
+        {"action": "调到", "device": "屏幕", "value": "黑夜模式"},
+    )
+
+    assert postprocess_action_call(
+        "调小屏幕亮度",
+        "ScreenControl",
+        {"action": "调大", "device": "屏幕", "feature": "亮度"},
+    ) == (
+        "ScreenControl",
+        {"action": "调小", "device": "屏幕", "feature": "亮度"},
+    )
+
+
+def test_fixes_window_delta_percent_and_precise_position():
+    assert postprocess_action_call(
+        "车窗再关一点",
+        "WindowControl",
+        {"action": "打开", "device": "车窗"},
+    ) == (
+        "WindowControl",
+        {"action": "再关", "device": "车窗", "value": "一点"},
+    )
+
+    assert postprocess_action_call(
+        "打开第二排右侧的车窗",
+        "WindowControl",
+        {"action": "打开", "device": "车窗", "position": "右侧"},
+    ) == (
+        "WindowControl",
+        {"action": "打开", "device": "车窗", "position": "第二排右侧"},
+    )
+
+
+def test_fixes_lock_first_command_without_later_window_pollution():
+    assert postprocess_action_call(
+        "打开儿童锁，再把车窗也关上",
+        "LockControl",
+        {"action": "关闭", "device": "儿童锁"},
+    ) == (
+        "LockControl",
+        {"action": "打开", "device": "儿童锁"},
+    )
+
+    assert postprocess_action_call(
+        "帮我把后排左边的儿童锁开一下",
+        "LockControl",
+        {"action": "打开", "device": "儿童锁", "position": "第二排"},
+    ) == (
+        "LockControl",
+        {"action": "打开", "device": "儿童锁", "position": "第二排左侧"},
+    )
+
+
+def test_fixes_voice_exact_value_and_sound_feature():
+    assert postprocess_action_call(
+        "音量调到百分之五十",
+        "VoiceControl",
+        {"action": "调到", "feature": "音量"},
+    ) == (
+        "VoiceControl",
+        {"action": "调到", "feature": "音量", "value": "50%"},
+    )
+
+    assert postprocess_action_call(
+        "静音",
+        "VoiceControl",
+        {"action": "关闭", "feature": "音量"},
+    ) == (
+        "VoiceControl",
+        {"action": "关闭", "feature": "声音"},
+    )
+
+
+def test_fixes_app_media_and_info_boundaries():
+    assert postprocess_action_call(
+        "我想听歌",
+        "MediaPlay",
+        {"media_category": "歌"},
+    ) == (
+        "AppControl",
+        {"action": "打开", "feature": "音乐应用"},
+    )
+
+    assert postprocess_action_call(
+        "关闭音乐",
+        "AppControl",
+        {"action": "关闭", "feature": "音乐应用"},
+    ) == (
+        "MediaControl",
+        {"media_category": "歌", "media_control_action": "关闭"},
+    )
+
+    assert postprocess_action_call(
+        "现在路上车多不多，会不会很堵",
+        "AppControl",
+        {"action": "打开", "feature": "导航地图"},
+    ) == (
+        "InfoQuery",
+        {"feature": "路况信息"},
+    )
