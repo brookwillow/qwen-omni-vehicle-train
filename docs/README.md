@@ -124,6 +124,8 @@ python train_thinker_lora.py \
 | gradient_checkpointing | True | 节省显存 |
 | metric_for_best_model | eval_token_acc | 自动选最优 checkpoint |
 
+编码后会过滤 `labels` 全为 `-100` 的空监督样本，避免空 label batch 让 `eval_loss` 变成 `nan`。
+
 ### 冻结保障
 
 训练脚本通过关键词 `audio,talker,vocoder,audio_decoder,speech_decoder` 自动冻结非 Thinker 参数，并输出审计文件：
@@ -294,6 +296,7 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 - [x] lr 1e-4 → 2e-5，alpha 32 → 16，添加 warmup/weight_decay/grad_clip
 - [x] load_best_model_at_end，按 eval_token_acc 选最优 checkpoint
 - [x] gradient_checkpointing，batch=1 + grad_accum=8（24GB 显存适配）
+- [x] 过滤空监督样本，避免全 `-100` label batch 污染 `eval_loss`
 - [x] Reject 数据增强（103 条硬负例：家电混淆、多轮拒绝、跨域请求）
 - [x] 分类逻辑按最后一条 assistant turn 判断（多轮样本正确分类）
 - [x] 冻结审计自动化（forbidden keyword → auto-freeze → fail-fast）

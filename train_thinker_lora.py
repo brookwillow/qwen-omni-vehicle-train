@@ -140,6 +140,28 @@ def ensure_labels_column(dataset_obj, im_start_id: int = 151644, im_end_id: int 
     return dataset_obj.map(_build_masked_labels)
 
 
+def count_valid_label_tokens(example: dict) -> int:
+    labels = example.get("labels") or []
+    return sum(1 for label in labels if label != -100)
+
+
+def filter_empty_label_examples(dataset_obj, split_name: str):
+    """Drop examples that would produce NaN loss because all labels are ignored."""
+    if "labels" not in dataset_obj.column_names:
+        raise ValueError(f"{split_name} dataset has no labels column after encoding.")
+
+    before = len(dataset_obj)
+    dataset_obj = dataset_obj.filter(lambda example: count_valid_label_tokens(example) > 0)
+    removed = before - len(dataset_obj)
+    if removed:
+        print(f"[warn] filtered {removed}/{before} {split_name} examples with no supervised label tokens.")
+    else:
+        print(f"[data] {split_name} label check: {before} examples, 0 empty-label examples.")
+    if len(dataset_obj) == 0:
+        raise ValueError(f"{split_name} dataset is empty after filtering empty-label examples.")
+    return dataset_obj
+
+
 # ── Freeze / audit helpers ───────────────────────────────────
 
 def freeze_forbidden_params(model: torch.nn.Module, forbidden_keywords: Iterable[str]) -> int:
@@ -311,6 +333,8 @@ def main() -> None:
 
     train_dataset = ensure_labels_column(train_dataset)
     eval_dataset = ensure_labels_column(eval_dataset)
+    train_dataset = filter_empty_label_examples(train_dataset, "train")
+    eval_dataset = filter_empty_label_examples(eval_dataset, "eval")
 
     # Keep only model-relevant columns.
     MODEL_COLS = {"input_ids", "attention_mask", "labels", "position_ids"}
