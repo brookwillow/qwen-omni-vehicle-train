@@ -1,6 +1,6 @@
 # 车载语音助手 LoRA 训练方案
 
-> 更新时间：2026-05-02
+> 更新时间：2026-05-04
 
 ## 项目概要
 
@@ -246,6 +246,8 @@ python eval.py single \
 | `reject_hit` | Reject 命中数（正确拒绝 / 预测拒绝） |
 | `clarify_hit` | Clarify 命中数（正确追问 / 预测追问） |
 | `parse_fail` | 输出格式解析失败数 |
+
+评测脚本支持少量业务等价答案：例如「车里太闷了」这类未明确指定车窗或空调的通风意图，`ClimateControl` 切外循环和 `WindowControl` 打开车窗都计为正确。
 
 ### 评测维度
 

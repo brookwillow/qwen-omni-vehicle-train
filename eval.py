@@ -178,6 +178,54 @@ def normalize_args(d: Dict[str, Any]) -> Dict[str, Any]:
     return json.loads(json.dumps(d, ensure_ascii=False, sort_keys=True))
 
 
+def _is_ambiguous_ventilation_query(query: str) -> bool:
+    """Return true when both opening windows and outside circulation are valid."""
+    q = (query or "").strip()
+    if not ("车里" in q and "闷" in q):
+        return False
+    explicit_terms = (
+        "车窗", "窗户", "空调", "外循环", "内循环", "空气净化器",
+        "净化器", "座椅", "通风", "遮阳帘",
+    )
+    return not any(term in q for term in explicit_terms)
+
+
+def _equivalent_action_candidates(query: str) -> List[Tuple[str, Dict[str, Any]]]:
+    if not _is_ambiguous_ventilation_query(query):
+        return []
+    return [
+        ("ClimateControl", {"action": "打开", "device": "空调", "value": "外循环"}),
+        ("ClimateControl", {"action": "调到", "device": "空调", "value": "外循环"}),
+        ("WindowControl", {"action": "打开", "device": "车窗"}),
+        ("WindowControl", {"action": "打开", "device": "车窗", "position": "全部"}),
+    ]
+
+
+def is_action_match(
+    query: str,
+    pred_tool: Optional[str],
+    pred_args: Optional[Dict[str, Any]],
+    gt_tool: Optional[str],
+    gt_args: Optional[Dict[str, Any]],
+) -> Tuple[bool, bool]:
+    """Return (tool_match, args_match), including evaluator-approved equivalents."""
+    pred_norm = normalize_args(pred_args or {})
+    gt_norm = normalize_args(gt_args or {})
+    direct_tool_match = pred_tool == gt_tool
+    direct_args_match = direct_tool_match and pred_norm == gt_norm
+    if direct_args_match:
+        return True, True
+
+    for alt_tool, alt_args in _equivalent_action_candidates(query):
+        alt_norm = normalize_args(alt_args)
+        if gt_tool == alt_tool and gt_norm == alt_norm:
+            for cand_tool, cand_args in _equivalent_action_candidates(query):
+                if pred_tool == cand_tool and pred_norm == normalize_args(cand_args):
+                    return True, True
+
+    return direct_tool_match, False
+
+
 # ── Metrics ──────────────────────────────────────────────────
 
 @dataclass
@@ -337,10 +385,10 @@ def eval_file(
                     sm.tool_hit = 1
                     sm.args_em = 1
             else:  # Action
-                if pred_type == "Action" and pred_tool == gt_tool:
-                    sm.tool_hit = 1
-                    if normalize_args(pred_args or {}) == normalize_args(gt_args or {}):
-                        sm.args_em = 1
+                if pred_type == "Action":
+                    tool_match, args_match = is_action_match(query, pred_tool, pred_args, gt_tool, gt_args)
+                    sm.tool_hit = int(tool_match)
+                    sm.args_em = int(args_match)
 
             # Collect & print errors
             err_type = None
