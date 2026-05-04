@@ -95,6 +95,10 @@ def _query_mentions_open(query: str) -> bool:
     return any(term in query for term in ("打开", "开启", "开一下", "开了", "开开", "开起来"))
 
 
+def _query_mentions_no_need(query: str) -> bool:
+    return any(term in query for term in ("不需要", "不用", "别", "不要"))
+
+
 def _first_command(query: str) -> str:
     return re.split(r"[，,。；;]|顺便|然后|再把|也", query, maxsplit=1)[0]
 
@@ -185,15 +189,15 @@ def _steering_args_from_query(query: str) -> dict[str, Any] | None:
         fixed["feature"] = "助力"
     else:
         fixed["feature"] = "制热"
-    if _query_mentions_close(query):
+    if _query_mentions_close(query) or ("加热" in query and _query_mentions_no_need(query)) or "太烫" in query:
         fixed["action"] = "关闭"
     elif any(term in query for term in ("打开", "开启", "热起来")):
         fixed["action"] = "打开"
     elif any(term in query for term in ("切换到", "切", "调到", "设成", "设为", "设置为", "开到")):
         fixed["action"] = "调到"
-    elif any(term in query for term in ("调大", "沉一点", "太轻")):
+    elif any(term in query for term in ("调大", "加大", "不够暖", "沉一点", "太轻")):
         fixed["action"] = "调大"
-    elif any(term in query for term in ("调小", "小一些", "减轻", "太重", "太沉")):
+    elif any(term in query for term in ("调小", "小一些", "轻一点", "减轻", "太重", "太沉", "烫手")):
         fixed["action"] = "调小"
     else:
         fixed["action"] = "打开"
@@ -214,12 +218,17 @@ def _steering_args_from_query(query: str) -> dict[str, Any] | None:
         "3档": "3",
         "大档": "大",
         "小档": "小",
+        "最低档": "最小",
+        "中间那个档": "中",
+        "不轻不重": "适中模式",
+        "默认": "标准模式",
+        "驾驶感": "运动模式",
     }
     for text, value in mode_map.items():
         if text in query:
             fixed["value"] = value
             break
-    if "调小一点" in query or "调大一点" in query:
+    if "调小一点" in query or "调大一点" in query or "加大一点" in query:
         fixed["value"] = "一点"
     if fixed["action"] in {"打开", "关闭"} and fixed.get("value") in {"一点", "中"}:
         fixed.pop("value", None)
@@ -256,7 +265,11 @@ def postprocess_action_call(
         fixed_args = {"action": "关闭" if any(term in first_part for term in ("可以自己控制", "自己控制")) else "打开", "device": "车窗锁"}
     elif "车窗" in first_part or "窗户" in first_part:
         fixed_tool = "WindowControl"
-        fixed_args = {"action": "关闭" if _query_mentions_close(first_part) else "打开", "device": "车窗"}
+        if "暂停" in first_part:
+            action = "暂停"
+        else:
+            action = "关闭" if _query_mentions_close(first_part) else "打开"
+        fixed_args = {"action": action, "device": "车窗"}
         position = _infer_window_position(first_part)
         if position:
             fixed_args["position"] = position
@@ -303,11 +316,46 @@ def postprocess_action_call(
     elif "冰箱" in first_part:
         fixed_tool = "FridgeControl"
         fixed_args = {"action": "关闭" if _query_mentions_close(first_part) else "打开", "device": "冰箱"}
+        if "二排" in first_part or "第二排" in first_part:
+            fixed_args["position"] = "第二排"
     elif "方向盘" in first_part or first_part.startswith("转向"):
-        steering_args = _steering_args_from_query(first_part)
+        steering_args = _steering_args_from_query(query)
         if steering_args:
             fixed_tool = "SteeringwheelControl"
             fixed_args = steering_args
+    elif "加热" in first_part and "手" in first_part and any(term in first_part for term in ("冷", "冻", "暖")):
+        fixed_tool = "SteeringwheelControl"
+        fixed_args = {"action": "打开", "device": "方向盘", "feature": "制热"}
+        if "最猛" in first_part or "最大" in first_part:
+            fixed_args.update({"action": "调到", "value": "最大"})
+    elif (
+        "节能模式" in first_part
+        and "驾驶" not in first_part
+        and not _query_mentions_close(first_part)
+        and not any(term in first_part for term in ("电量", "省点电", "撑过去"))
+    ):
+        fixed_tool = "ClimateControl"
+        fixed_args = {"action": "打开", "device": "空调", "value": "节能模式"}
+    elif any(term in first_part for term in ("风吹得太大", "风太大", "风太小", "风量太小", "风量太大")):
+        fixed_tool = "ClimateControl"
+        fixed_args = {
+            "action": "调小" if "大" in first_part else "调大",
+            "device": "空调",
+            "feature": "风",
+            "value": "一点",
+        }
+    elif any(term in first_part for term in ("不想吹那么冷", "别对着我吹", "外面空气不好", "狗在车里", "副驾那边有点冷")):
+        fixed_tool = "ClimateControl"
+        if "不想吹那么冷" in first_part:
+            fixed_args = {"action": "打开", "device": "空调", "value": "自然风"}
+        elif "别对着我吹" in first_part:
+            fixed_args = {"action": "打开", "device": "空调", "value": "避人"}
+        elif "外面空气不好" in first_part:
+            fixed_args = {"action": "打开", "device": "空调", "value": "内循环"}
+        elif "狗在车里" in first_part:
+            fixed_args = {"action": "打开", "device": "空调", "value": "宠物模式"}
+        else:
+            fixed_args = {"action": "调大", "device": "空调", "feature": "温度", "position": "副驾", "value": "一点"}
     elif (
         "空调" not in first_part
         and any(term in first_part for term in ("驾驶模式", "节能模式", "运动模式", "舒适模式", "标准模式", "脱困模式", "弹射模式"))
@@ -335,15 +383,73 @@ def postprocess_action_call(
         position = _infer_camera_position(first_part)
         if position:
             fixed_args["position"] = position
+    elif "车外面" in first_part and any(term in first_part for term in ("什么情况", "看看", "看一下")):
+        fixed_tool = "CameraControl"
+        fixed_args = {"action": "打开", "device": "摄像头", "position": "全部"}
     elif any(term in first_part for term in ("我想听歌", "来点音乐", "打开音乐应用", "进音乐应用")):
         fixed_tool = "AppControl"
         fixed_args = {"action": "打开", "feature": "音乐应用"}
     elif "不听歌" in first_part and any(term in first_part for term in ("关掉音乐", "关闭音乐")):
         fixed_tool = "AppControl"
         fixed_args = {"action": "关闭", "feature": "音乐应用"}
+    elif "关闭音乐应用" in first_part or "关掉音乐应用" in first_part:
+        fixed_tool = "AppControl"
+        fixed_args = {"action": "关闭", "feature": "音乐应用"}
     elif "关闭音乐" in first_part or "关掉音乐" in first_part:
         fixed_tool = "MediaControl"
         fixed_args = {"media_category": "歌", "media_control_action": "关闭"}
+    elif "关闭收音机" in first_part:
+        fixed_tool = "MediaControl"
+        fixed_args = {"media_category": "FM", "media_control_action": "关闭"}
+    elif any(term in first_part for term in ("别放了", "暂停播放")):
+        fixed_tool = "MediaControl"
+        fixed_args = {"media_control_action": "暂停"}
+    elif any(term in first_part for term in ("安静一下不想听", "不想听了")):
+        fixed_tool = "MediaControl"
+        fixed_args = {"media_control_action": "关闭"}
+    elif any(term in first_part for term in ("下一个FM频道", "下个FM频道")):
+        fixed_tool = "MediaControl"
+        fixed_args = {"media_category": "FM", "media_control_action": "下一个"}
+    elif "继续播放有声书" in first_part:
+        fixed_tool = "MediaControl"
+        fixed_args = {"media_category": "读物", "media_control_action": "继续"}
+    elif "Spotify" in first_part and "下一首" in first_part:
+        fixed_tool = "MediaControl"
+        fixed_args = {"app_name": "spotify", "media_control_action": "下一个"}
+    elif "播放FM广播" in first_part or "想听听广播" in first_part:
+        fixed_tool = "MediaPlay"
+        fixed_args = {"media_category": "FM"}
+    elif "蓝牙音源" in first_part:
+        fixed_tool = "MediaPlay"
+        fixed_args = {"media_source": "蓝牙"}
+    elif ("油管" in first_part or "YouTube" in first_part) and any(term in first_part for term in ("打开", "看视频", "看看")):
+        fixed_tool = "MediaPlay"
+        fixed_args = {"app_name": "youtube", "media_category": "视频"}
+    elif re.search(r"(播放|放).*周杰伦.*(晴天|稻香)", first_part):
+        song = "周杰伦 晴天" if "晴天" in first_part else "周杰伦 稻香"
+        fixed_tool = "MusicSearchPlay"
+        fixed_args = {"song": song}
+    elif "孤勇者" in first_part and any(term in first_part for term in ("听", "播放", "放")):
+        fixed_tool = "MusicSearchPlay"
+        fixed_args = {"song": "孤勇者"}
+    elif "七里香" in first_part:
+        fixed_tool = "MusicSearchPlay"
+        fixed_args = {"song": "七里香"}
+    elif "陈奕迅" in first_part and "十年" in first_part:
+        fixed_tool = "MusicSearchPlay"
+        fixed_args = {"song": "陈奕迅 十年"}
+    elif "林俊杰" in first_part and "歌" in first_part:
+        fixed_tool = "MusicSearchPlay"
+        fixed_args = {"song": "林俊杰"}
+    elif "TuneIn" in first_part and "Hotel California" in first_part:
+        fixed_tool = "MusicSearchPlay"
+        fixed_args = {"app_name": "tunein", "song": "Hotel California"}
+    elif "鬼吹灯" in first_part:
+        fixed_tool = "XmlySearchPlay"
+        fixed_args = {"podcast_name": "鬼吹灯"}
+    elif "FM88.1" in first_part or "FM88" in first_part:
+        fixed_tool = "FmSearchPlay"
+        fixed_args = {"fm_channel": "88.1", "media_category": "FM"}
     elif "苹果" in first_part and "音乐" in first_part and any(term in first_part for term in ("放点歌", "放歌", "听歌")):
         fixed_tool = "MediaPlay"
         fixed_args = {"app_name": "applemusic", "media_category": "歌"}
@@ -362,12 +468,24 @@ def postprocess_action_call(
     elif any(term in first_part for term in ("显示我在哪个位置", "我在哪个位置", "当前位置")):
         fixed_tool = "InfoQuery"
         fixed_args = {"feature": "当前位置"}
-    elif any(term in first_part for term in ("车里太闷", "换换空气")):
+    elif "换换空气" in first_part:
         fixed_tool = "WindowControl"
         fixed_args = {"action": "打开", "device": "车窗"}
     elif any(term in first_part for term in ("隔绝一下外面的声音", "外面灰太大", "窗户关上")):
         fixed_tool = "WindowControl"
         fixed_args = {"action": "关闭", "device": "车窗"}
+    elif any(term in first_part for term in ("暂停车窗", "暂停窗户")):
+        fixed_tool = "WindowControl"
+        fixed_args = {"action": "暂停", "device": "车窗"}
+    elif any(term in first_part for term in ("开一条缝", "小口透气")):
+        fixed_tool = "WindowControl"
+        fixed_args = {"action": "开到", "device": "车窗", "value": "10%"}
+    elif any(term in first_part for term in ("进高速", "准备睡一会儿")) and any(term in first_part for term in ("关上窗", "窗户关上")):
+        fixed_tool = "WindowControl"
+        fixed_args = {"action": "关闭", "device": "车窗", "position": "全部"}
+    elif any(term in first_part for term in ("我这边", "老婆那边")) and "窗" in first_part:
+        fixed_tool = "WindowControl"
+        fixed_args = {"action": "开到", "device": "车窗", "position": "主驾", "value": "50%"}
     elif any(term in first_part for term in ("阳光太刺眼", "不想被外面看到", "后排晒", "留一点光线", "遮阳")):
         fixed_tool = "WindowControl"
         fixed_args = {"action": "关闭", "device": "遮阳帘"}
@@ -443,7 +561,7 @@ def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] |
             fixed["action"] = "打开"
         if "行车记录仪" in camera_part:
             fixed["device"] = "摄像头"
-        if "哨兵模式" in camera_part or any(term in camera_part for term in ("不太安全", "监控一下")):
+        if "哨兵模式" in camera_part or any(term in camera_part for term in ("不太安全", "监控一下", "停车守护", "车辆监控", "看着车", "剐蹭")):
             fixed["value"] = "哨兵模式"
             fixed.pop("position", None)
         else:
@@ -463,7 +581,9 @@ def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] |
             fixed.update({"action": "打开", "device": "冰箱"})
         if "冰箱" in first_part:
             fixed.setdefault("device", "冰箱")
-        position = _infer_common_position(first_part)
+        if "不用" in first_part or "关掉" in first_part:
+            fixed["action"] = "关闭"
+        position = _infer_common_position(first_part.replace("二排", "第二排"))
         if position in {"第二排", "第三排"}:
             fixed["position"] = position
     elif tool == "SeatControl":
@@ -484,6 +604,8 @@ def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] |
         if fixed.get("action") in {"调前", "调后"} and fixed.get("value") == "一点" and "一点" not in first_part:
             fixed.pop("value", None)
         if fixed.get("feature") == "按摩" and fixed.get("action") in {"调大", "调小"} and _query_has_small_delta(first_part):
+            fixed["value"] = "一点"
+        if fixed.get("device") == "靠背" and fixed.get("action") in {"调前", "调后"} and any(term in first_part for term in ("一点", "一些")):
             fixed["value"] = "一点"
         if fixed.get("action") == "打开":
             fixed.pop("value", None)
@@ -507,10 +629,15 @@ def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] |
             fixed["feature"] = "制热"
             if _query_mentions_close(first_part):
                 fixed["action"] = "关闭"
+            elif any(term in first_part for term in ("太猛", "调低", "低一些")):
+                fixed["action"] = "调小"
+                fixed["value"] = "一点"
         if "按摩" in first_part:
             fixed["feature"] = "按摩"
             if _query_mentions_close(first_part):
                 fixed["action"] = "关闭"
+        if "加热" in first_part and "按摩" in first_part and first_part.find("加热") < first_part.find("按摩"):
+            fixed["feature"] = "制热"
         if "通风" in first_part and "加热" not in first_part and "按摩" not in first_part:
             fixed["feature"] = "通风"
     elif tool == "WindowControl":
@@ -523,6 +650,10 @@ def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] |
         position = _infer_window_position(first_part)
         if position:
             fixed["position"] = position
+        if "我这边" in first_part:
+            fixed["position"] = "主驾"
+        if "前排" in first_part:
+            fixed["position"] = "前排"
         if fixed.get("device") == "遮阳帘":
             if "再开" in first_part:
                 fixed["action"] = "再开"
@@ -557,6 +688,9 @@ def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] |
             elif "开太大" in first_part:
                 fixed["action"] = "再关"
                 fixed["value"] = "一点"
+            elif "摇下来一点" in first_part:
+                fixed["action"] = "再开"
+                fixed["value"] = "一点"
         percent_value = _infer_percent_value(first_part)
         if percent_value and fixed.get("value") in {None, "一半"}:
             fixed["value"] = percent_value
@@ -567,6 +701,8 @@ def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] |
                     fixed["action"] = "关到"
         if fixed.get("position") and not _mentions_seat_position(first_part) and fixed.get("position") != "全部":
             fixed.pop("position", None)
+        if any(term in first_part for term in ("进高速", "关上窗")) and fixed.get("device") == "车窗":
+            fixed["position"] = "全部"
         if "下雨" in first_part and fixed.get("device") == "车窗":
             fixed["position"] = "全部"
     elif tool == "LightControl":
@@ -589,6 +725,8 @@ def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] |
         if fixed.get("device") in {"雾灯", "尾灯"}:
             fixed["device"] = "前雾灯" if "前" in first_part or "雾灯" in first_part else fixed["device"]
         if fixed.get("device") == "小灯":
+            fixed["device"] = "示宽灯"
+        if "小灯" in first_part:
             fixed["device"] = "示宽灯"
         if "阅读灯" in first_part:
             fixed["device"] = "阅读灯"
@@ -648,9 +786,11 @@ def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] |
             fixed.pop("position", None)
         if "示宽灯" in first_part and "大灯" not in first_part:
             fixed["device"] = "示宽灯"
-            if "光剑" in first_part:
+            if any(term in first_part for term in ("光剑", "酷炫")):
                 fixed["action"] = "调到"
                 fixed["value"] = "光剑"
+        if fixed.get("device") == "阅读灯" and fixed.get("position") == "主驾" and "主驾" not in first_part:
+            fixed.pop("position", None)
         if fixed.get("value") == "智能" and fixed.get("action") != "关闭":
             fixed["action"] = "调到"
         if fixed.get("device") == "远光灯" and fixed.get("value") == "自动":
@@ -663,6 +803,9 @@ def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] |
             fixed.pop("position", None)
     elif tool == "ClimateControl":
         first_part = _first_command(query)
+        if "节能模式" in first_part and "空调" in first_part:
+            fixed.clear()
+            fixed.update({"action": "打开", "device": "空调", "value": "节能模式"})
         if "小孩" in first_part and "空调别停" in first_part:
             fixed.clear()
             fixed.update({"action": "打开", "device": "空调", "value": "守护模式"})
@@ -710,6 +853,10 @@ def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] |
             fixed["feature"] = "除雾"
             fixed.pop("value", None)
             fixed.pop("position", None)
+        if "下大雨" in first_part and "看不清" in first_part:
+            fixed.update({"action": "打开", "device": "前挡风", "feature": "除雾"})
+            fixed.pop("value", None)
+            fixed.pop("position", None)
         if fixed.get("value") in {"制冷", "制热", "自然风", "外循环", "内循环", "温度同步"}:
             fixed.setdefault("device", "空调")
             fixed["action"] = "关闭" if _query_mentions_close(first_part) else "打开"
@@ -739,6 +886,10 @@ def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] |
             fixed["feature"] = "风"
         if "风关小" in first_part or "风调小" in first_part:
             fixed.update({"action": "调小", "device": "空调", "feature": "风", "value": "一点"})
+        if "温度调到" in first_part:
+            m = re.search(r"温度调到(\d{1,2})", first_part)
+            if m:
+                fixed.update({"action": "调到", "device": "空调", "feature": "温度", "value": m.group(1)})
         if fixed.get("device") == "空气净化器":
             fixed.pop("value", None)
     elif tool == "RearviewControl":
@@ -802,6 +953,8 @@ def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] |
             fixed["feature"] = "音量"
         if "音量" in first_part and not any(term in first_part for term in ("导航音量", "语音音量", "通话音量")):
             fixed["feature"] = "音量"
+        if any(term in first_part for term in ("导航播报", "导航声音")):
+            fixed["feature"] = "导航音量"
         if fixed.get("feature") == "声音" and any(term in first_part for term in ("开到", "调到", "中等")):
             fixed["feature"] = "音量"
         if _query_has_small_delta(first_part) and "一点" in first_part:
@@ -826,6 +979,16 @@ def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] |
                 fixed["value"] = cn_digits.get(m.group(1), m.group(1))
         if "全部" in first_part or "全车" in first_part:
             fixed["position"] = "全部"
+        position = _infer_common_position(first_part)
+        if position in {"副驾", "第二排", "第三排"} and fixed.get("feature") == "音量":
+            fixed["position"] = position
+        if "后面" in first_part and fixed.get("feature") == "音量":
+            fixed["position"] = "第二排"
+        if "拉满" in first_part:
+            fixed["action"] = "调到"
+            fixed["value"] = "最大"
+        if "导航声音不用那么大" in first_part:
+            fixed.update({"action": "调小", "feature": "导航音量"})
         if fixed.get("feature") in {"导航音量", "语音音量", "通话音量"}:
             fixed.pop("position", None)
         if isinstance(fixed.get("feature"), str) and "," in fixed["feature"]:
@@ -839,6 +1002,12 @@ def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] |
             fixed.pop("feature", None)
         if "亮度" in first_part or "暗" in first_part or "亮" in first_part or "刺眼" in first_part:
             fixed["feature"] = "亮度"
+        if "亮起来" in first_part:
+            fixed["action"] = "打开"
+            fixed.pop("feature", None)
+        if "关掉" in first_part and "屏幕" in first_part:
+            fixed["action"] = "关闭"
+            fixed.pop("feature", None)
         if "调小" in first_part:
             fixed["action"] = "调小"
         if "调大" in first_part or "调高" in first_part:
@@ -888,7 +1057,7 @@ def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] |
             fixed["device"] = "车窗锁"
         else:
             fixed["device"] = "儿童锁"
-        if _query_mentions_close(first_part) or any(term in first_part for term in ("解除", "解锁")):
+        if _query_mentions_close(first_part) or any(term in first_part for term in ("解除", "解锁", "可以自己控制")):
             fixed["action"] = "关闭"
         else:
             fixed["action"] = "打开"
@@ -900,6 +1069,10 @@ def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] |
         if "后排" in first_part and not any(term in first_part for term in ("后排左", "后排右", "左边", "右边", "左侧", "右侧")):
             fixed["position"] = "第二排"
         if not any(term in first_part for term in ("左", "右", "第二排", "第三排", "后排")) and fixed.get("position") == "第二排":
+            fixed.pop("position", None)
+        if fixed.get("device") == "车窗锁":
+            fixed.pop("position", None)
+        if "行驶途中" in first_part and "后排乘客" in first_part:
             fixed.pop("position", None)
         fixed.pop("third_position", None)
     elif tool == "GateControl":
@@ -937,6 +1110,8 @@ def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] |
         first_part = _first_command(query)
         if any(term in first_part for term in ("音乐", "歌", "下一首", "上一首", "换一首")):
             fixed["media_category"] = "歌"
+        if "收音机" in first_part or "FM" in first_part:
+            fixed["media_category"] = "FM"
         if "YouTube" in first_part or "youtube" in first_part:
             fixed.pop("media_category", None)
             fixed["app_name"] = "youtube"
@@ -948,6 +1123,12 @@ def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] |
             fixed["media_category"] = "歌"
         if "别放了" in first_part:
             fixed["media_control_action"] = "暂停"
+        if "关闭" in first_part or "关掉" in first_part:
+            fixed["media_control_action"] = "关闭"
+        if "继续播放" in first_part:
+            fixed["media_control_action"] = "继续"
+            if "有声书" in first_part:
+                fixed["media_category"] = "读物"
         if "再放一遍" in first_part:
             fixed["media_category"] = "歌"
             fixed["media_control_action"] = "上一个"

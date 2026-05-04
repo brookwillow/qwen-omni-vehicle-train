@@ -1004,3 +1004,112 @@ def test_fixes_app_media_and_info_boundaries():
         "InfoQuery",
         {"feature": "路况信息"},
     )
+
+
+def test_fixes_0504_steering_heat_actions():
+    assert postprocess_action_call(
+        "方向盘太烫了，把加热关了",
+        "SteeringwheelControl",
+        {"action": "打开", "device": "方向盘", "feature": "制热"},
+    ) == (
+        "SteeringwheelControl",
+        {"action": "关闭", "device": "方向盘", "feature": "制热"},
+    )
+
+    assert postprocess_action_call(
+        "方向盘还是不够暖，再加大一点",
+        "SteeringwheelControl",
+        {"action": "打开", "device": "方向盘", "feature": "制热"},
+    ) == (
+        "SteeringwheelControl",
+        {"action": "调大", "device": "方向盘", "feature": "制热", "value": "一点"},
+    )
+
+
+def test_fixes_0504_climate_wind_and_mode_boundaries():
+    assert postprocess_action_call(
+        "风太小了几乎感觉不到",
+        "WindowControl",
+        {"action": "打开", "device": "遮阳帘"},
+    ) == (
+        "ClimateControl",
+        {"action": "调大", "device": "空调", "feature": "风", "value": "一点"},
+    )
+
+    assert postprocess_action_call(
+        "开启节能模式",
+        "DrivingControl",
+        {"action": "打开", "feature": "驾驶模式", "value": "节能模式"},
+    ) == (
+        "ClimateControl",
+        {"action": "打开", "device": "空调", "value": "节能模式"},
+    )
+
+
+def test_fixes_0504_media_boundaries():
+    assert postprocess_action_call(
+        "关闭音乐应用",
+        "MediaControl",
+        {"media_category": "歌", "media_control_action": "关闭"},
+    ) == (
+        "AppControl",
+        {"action": "关闭", "feature": "音乐应用"},
+    )
+
+    assert postprocess_action_call(
+        "播放FM广播",
+        "FmSearchPlay",
+        {"fm_channel": "100.7", "media_category": "FM"},
+    ) == (
+        "MediaPlay",
+        {"media_category": "FM"},
+    )
+
+    assert postprocess_action_call(
+        "别放了太吵了",
+        "NoiseAction",
+        {},
+    ) == (
+        "MediaControl",
+        {"media_control_action": "暂停"},
+    )
+
+
+def test_fixes_0504_window_and_lock_args():
+    assert postprocess_action_call(
+        "暂停车窗",
+        "WindowControl",
+        {"action": "打开", "device": "车窗"},
+    ) == (
+        "WindowControl",
+        {"action": "暂停", "device": "车窗"},
+    )
+
+    assert postprocess_action_call(
+        "孩子们可以自己控制窗户了",
+        "LockControl",
+        {"action": "打开", "device": "车窗锁"},
+    ) == (
+        "LockControl",
+        {"action": "关闭", "device": "车窗锁"},
+    )
+
+
+def test_fixes_0504_voice_and_fridge_args():
+    assert postprocess_action_call(
+        "导航播报的声音太小了，大一点",
+        "VoiceControl",
+        {"action": "调大", "feature": "音量"},
+    ) == (
+        "VoiceControl",
+        {"action": "调大", "feature": "导航音量"},
+    )
+
+    assert postprocess_action_call(
+        "打开第二排冰箱",
+        "FridgeControl",
+        {"action": "打开", "device": "冰箱"},
+    ) == (
+        "FridgeControl",
+        {"action": "打开", "device": "冰箱", "position": "第二排"},
+    )

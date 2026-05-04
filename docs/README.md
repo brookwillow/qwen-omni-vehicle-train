@@ -48,7 +48,7 @@ data/splits/{action,clarify,reject,reject_augmented}.jsonl  (已拆分好的数�
 
 | 类型 | 数量 | 说明 |
 |------|------|------|
-| Action | 4014 | 2 轮：Action → FinalAnswer；已补充工具混淆对比、参数精确、颜色枚举和车窗锁样本 |
+| Action | 4062 | 2 轮：Action → FinalAnswer；已补充工具混淆对比、参数精确、颜色枚举和车窗锁样本 |
 | Clarify | 177 | 2 轮：Clarify → FinalAnswer；仅保留缺少必需信息或目标不明确的追问 |
 | Reject | 1208 | 单轮 + 多轮硬负例（已合并） |
 
