@@ -5,10 +5,15 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import tempfile
 from pathlib import Path
 from typing import Any
 
-from record_remote_infer import DEFAULT_SERVER, build_payload, post_json
+from record_remote_infer import DEFAULT_SERVER, build_payload, post_json, record_wav
+
+
+MIN_AUDIO_BYTES = 1024
 
 
 def _extract_result(resp: dict[str, Any]) -> tuple[str, str, str]:
@@ -47,6 +52,8 @@ def infer_audio(
     path = Path(audio_path).expanduser().resolve()
     if not path.exists():
         return "Audio Missing", f"File not found: {path}", "{}"
+    if path.stat().st_size < MIN_AUDIO_BYTES:
+        return "Empty Audio", f"Audio file is too small: {path.stat().st_size} bytes. Please record again.", "{}"
 
     try:
         url = f"{server.rstrip('/')}/v1/chat/completions"
@@ -55,6 +62,41 @@ def infer_audio(
         return _extract_result(resp)
     except Exception as exc:
         return "Request Failed", str(exc), "{}"
+
+
+def record_backend(duration: float, sample_rate: int) -> tuple[str | None, str]:
+    try:
+        fd, name = tempfile.mkstemp(prefix="qwen_omni_gradio_", suffix=".wav")
+        try:
+            os.close(fd)
+        except OSError:
+            pass
+        path = Path(name)
+        path.unlink(missing_ok=True)
+        record_wav(path, float(duration), int(sample_rate))
+        size = path.stat().st_size
+        if size < MIN_AUDIO_BYTES:
+            return None, f"Backend recording generated an empty audio file ({size} bytes)."
+        return str(path), f"Recorded {duration:.1f}s to {path} ({size} bytes)."
+    except Exception as exc:
+        return None, f"Backend recording failed: {exc}"
+
+
+def record_backend_and_infer(
+    duration: float,
+    sample_rate: int,
+    server: str,
+    model: str,
+    hint_text: str,
+    max_tokens: int,
+    temperature: float,
+    timeout: float,
+) -> tuple[str | None, str, str, str, str]:
+    audio_path, status = record_backend(duration, sample_rate)
+    if not audio_path:
+        return None, status, "Record Failed", status, "{}"
+    summary, parsed, raw = infer_audio(audio_path, server, model, hint_text, max_tokens, temperature, timeout)
+    return audio_path, status, summary, parsed, raw
 
 
 def build_app(default_server: str, default_model: str):
@@ -69,11 +111,19 @@ def build_app(default_server: str, default_model: str):
             model = gr.Textbox(label="Model", value=default_model)
 
         audio = gr.Audio(
-            label="Audio",
+            label="Browser Audio",
             sources=["microphone", "upload"],
             type="filepath",
             format="wav",
         )
+
+        with gr.Row():
+            duration = gr.Number(label="Backend Record Seconds", value=4.0)
+            sample_rate = gr.Number(label="Sample Rate", value=16000, precision=0)
+            backend_record = gr.Button("Backend Record")
+            backend_record_send = gr.Button("Backend Record + Send", variant="secondary")
+
+        record_status = gr.Textbox(label="Record Status", interactive=False)
 
         with gr.Row():
             hint_text = gr.Textbox(
@@ -95,6 +145,16 @@ def build_app(default_server: str, default_model: str):
             infer_audio,
             inputs=[audio, server, model, hint_text, max_tokens, temperature, timeout],
             outputs=[result_summary, parsed_output, raw_response],
+        )
+        backend_record.click(
+            record_backend,
+            inputs=[duration, sample_rate],
+            outputs=[audio, record_status],
+        )
+        backend_record_send.click(
+            record_backend_and_infer,
+            inputs=[duration, sample_rate, server, model, hint_text, max_tokens, temperature, timeout],
+            outputs=[audio, record_status, result_summary, parsed_output, raw_response],
         )
 
     return demo
