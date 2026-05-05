@@ -1,6 +1,6 @@
 # 车载语音助手 LoRA 训练方案
 
-> 更新时间：2026-05-04
+> 更新时间：2026-05-05
 
 ## 项目概要
 
@@ -25,7 +25,7 @@ pip install fastapi uvicorn pydantic   # serve.py 推理服务依赖
 ## 数据流水线
 
 ```
-data/splits/{action,clarify,reject,reject_augmented}.jsonl  (已拆分好的数据，无 SP)
+data/splits/{action,clarify,multiturn,reject}.jsonl  (已拆分好的数据，无 SP)
   │
   └─ build_train_data.py ──→ data/train_final.jsonl (注入 SP，打散，可过采样)
                                 │
@@ -41,6 +41,7 @@ data/splits/{action,clarify,reject,reject_augmented}.jsonl  (已拆分好的数�
 | `data/system-prompt.txt` | 紧凑版 System Prompt（~12K chars，~5K tokens） |
 | `data/tools.json` | 33 个车载工具定义 |
 | `data/splits/` | 按类型拆分的训练数据（无 SP） |
+| `data/splits/multiturn.jsonl` | 多轮上下文继承与 Tool Result/Final Answer 训练样本 |
 | `data/train_final.jsonl` | 最终训练数据（含 SP） |
 | `data/eval/` | 评测数据集（18 个场景 + 音频） |
 
@@ -50,7 +51,10 @@ data/splits/{action,clarify,reject,reject_augmented}.jsonl  (已拆分好的数�
 |------|------|------|
 | Action | 4062 | 2 轮：Action → FinalAnswer；已补充工具混淆对比、参数精确、颜色枚举和车窗锁样本 |
 | Clarify | 177 | 2 轮：Clarify → FinalAnswer；仅保留缺少必需信息或目标不明确的追问 |
+| Multiturn | 43 | 8 轮：上下文继承、目标修正、参数延续、Tool Result → FinalAnswer |
 | Reject | 1208 | 单轮 + 多轮硬负例（已合并） |
+
+`build_train_data.py` 默认合并全部 split，当前最终训练集为 5490 条。统计时多轮样本按最后一个有效决策标签计入对应类别。
 
 ## 训练配置
 
