@@ -70,3 +70,10 @@ def test_explicit_window_query_does_not_accept_climate_equivalence(monkeypatch):
 
     assert not tool_ok
     assert not args_ok
+
+
+def test_eval_reports_raw_model_output_mode(monkeypatch):
+    eval_mod = _load_eval_module(monkeypatch)
+
+    assert eval_mod.EVALUATION_MODE == "raw_model_output"
+    assert eval_mod.POSTPROCESS_APPLIED is False

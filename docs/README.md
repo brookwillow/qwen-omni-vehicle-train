@@ -1,6 +1,6 @@
 # 车载语音助手 LoRA 训练方案
 
-> 更新时间：2026-05-05
+> 更新时间：2026-05-06
 
 ## 项目概要
 
@@ -237,6 +237,8 @@ python infer_cli_omni.py \
   --lora-dir lora_output
 ```
 
+CLI 推理直接展示模型解析出的原始工具名和参数，不经过 `tool_postprocess.py` 修正，便于检查训练后的真实输出能力。
+
 ### 评测
 
 ```bash
@@ -282,6 +284,7 @@ python eval.py single \
 | `parse_fail` | 输出格式解析失败数 |
 
 评测脚本支持少量业务等价答案：例如「车里太闷了」这类未明确指定车窗或空调的通风意图，`ClimateControl` 切外循环和 `WindowControl` 打开车窗都计为正确。
+评测不调用 `tool_postprocess.py` 修正预测工具或参数，指标反映模型原始输出；服务端运行时仍可使用后处理作为兜底。
 
 ### 评测维度
 
@@ -293,9 +296,10 @@ python eval.py single \
 
 Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.json`），包含：
 - 时间戳、模型路径、LoRA 路径
+- `evaluation_mode: raw_model_output` 和 `postprocess_applied: false`
 - 总体指标 + per-file / per-difficulty / per-category 明细
 - 所有错误样本（含 query、gt、pred、err_type）
-- 解析后的工具参数会经过 `tool_postprocess.py` 做确定性修正，覆盖座椅、车窗、灯光、空调、后视镜、充电、音量、屏幕、儿童锁/车窗锁和车门等高频参数偏差
+- 解析后的工具名和参数保持模型原始输出，不做规则后处理修正
 - `position` 为可选参数；用户未明确位置时不因缺少位置追问，直接省略 `position`，由工具侧按说话人位置补全
 
 ### 评测数据
@@ -314,7 +318,7 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 | `serve.py` | **OpenAI 兼容推理服务**（FastAPI，支持文本+音频） |
 | `infer_cli_omni.py` | 交互式 CLI 推理 |
 | `eval.py` | 统一评测（batch / single），音频输入 + 多维度统计，支持 `--batch-size` 批量推理 |
-| `tool_postprocess.py` | 工具调用参数后处理，修正确定性的模型输出偏差 |
+| `tool_postprocess.py` | 服务端工具调用后处理兜底；训练、CLI 和评测路径不使用 |
 | `scripts/probe_asr_decoder.py` | Qwen 音频编码器 → Whisper 解码器 ASR 探测实验 |
 | `scripts/build_r5_augment.py` | R5 数据增强（position/anti-clarify/climate/light） |
 

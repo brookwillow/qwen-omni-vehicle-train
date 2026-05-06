@@ -1,0 +1,4027 @@
+{
+  "timestamp": "2026-05-05T09:00:40.985857",
+  "model_dir": "/home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B",
+  "lora_dir": "lora_output_0504_2",
+  "eval_dir": "data/eval",
+  "pattern": "*_test.json",
+  "max_per_file": 0,
+  "temperature": 0.0,
+  "overall": {
+    "total": 1109,
+    "type_acc": 0.9973,
+    "tool_acc": 0.9396,
+    "args_em": 0.8837,
+    "type_correct": 1106,
+    "tool_hit": 1042,
+    "args_em_count": 980,
+    "reject_pred": 1,
+    "reject_hit": 0,
+    "clarify_pred": 1,
+    "clarify_hit": 0,
+    "parse_fail": 0
+  },
+  "by_file": {
+    "app_test.json": {
+      "total": 70,
+      "type_acc": 0.9857,
+      "tool_acc": 0.8857,
+      "args_em": 0.8857,
+      "type_correct": 69,
+      "tool_hit": 62,
+      "args_em_count": 62,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 1,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "camera_test.json": {
+      "total": 50,
+      "type_acc": 1.0,
+      "tool_acc": 0.98,
+      "args_em": 0.92,
+      "type_correct": 50,
+      "tool_hit": 49,
+      "args_em_count": 46,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "climate_test.json": {
+      "total": 90,
+      "type_acc": 0.9889,
+      "tool_acc": 0.9889,
+      "args_em": 0.9222,
+      "type_correct": 89,
+      "tool_hit": 89,
+      "args_em_count": 83,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "driving_test.json": {
+      "total": 60,
+      "type_acc": 1.0,
+      "tool_acc": 0.85,
+      "args_em": 0.8333,
+      "type_correct": 60,
+      "tool_hit": 51,
+      "args_em_count": 50,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "fridge_test.json": {
+      "total": 40,
+      "type_acc": 1.0,
+      "tool_acc": 0.95,
+      "args_em": 0.95,
+      "type_correct": 40,
+      "tool_hit": 38,
+      "args_em_count": 38,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "gate_test.json": {
+      "total": 60,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 0.9667,
+      "type_correct": 60,
+      "tool_hit": 60,
+      "args_em_count": 58,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "info_test.json": {
+      "total": 50,
+      "type_acc": 1.0,
+      "tool_acc": 0.9,
+      "args_em": 0.86,
+      "type_correct": 50,
+      "tool_hit": 45,
+      "args_em_count": 43,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "light_test.json": {
+      "total": 77,
+      "type_acc": 1.0,
+      "tool_acc": 0.9221,
+      "args_em": 0.8831,
+      "type_correct": 77,
+      "tool_hit": 71,
+      "args_em_count": 68,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "lock_test.json": {
+      "total": 60,
+      "type_acc": 1.0,
+      "tool_acc": 0.95,
+      "args_em": 0.9333,
+      "type_correct": 60,
+      "tool_hit": 57,
+      "args_em_count": 56,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "media_test.json": {
+      "total": 80,
+      "type_acc": 1.0,
+      "tool_acc": 0.9375,
+      "args_em": 0.9,
+      "type_correct": 80,
+      "tool_hit": 75,
+      "args_em_count": 72,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "phone_test.json": {
+      "total": 50,
+      "type_acc": 0.98,
+      "tool_acc": 0.96,
+      "args_em": 0.88,
+      "type_correct": 49,
+      "tool_hit": 48,
+      "args_em_count": 44,
+      "reject_pred": 1,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "power_test.json": {
+      "total": 55,
+      "type_acc": 1.0,
+      "tool_acc": 0.9455,
+      "args_em": 0.9455,
+      "type_correct": 55,
+      "tool_hit": 52,
+      "args_em_count": 52,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "rearview_test.json": {
+      "total": 55,
+      "type_acc": 1.0,
+      "tool_acc": 0.8909,
+      "args_em": 0.8182,
+      "type_correct": 55,
+      "tool_hit": 49,
+      "args_em_count": 45,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "screen_test.json": {
+      "total": 60,
+      "type_acc": 1.0,
+      "tool_acc": 0.9333,
+      "args_em": 0.7833,
+      "type_correct": 60,
+      "tool_hit": 56,
+      "args_em_count": 47,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "seat_test.json": {
+      "total": 67,
+      "type_acc": 1.0,
+      "tool_acc": 0.9104,
+      "args_em": 0.8507,
+      "type_correct": 67,
+      "tool_hit": 61,
+      "args_em_count": 57,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "steering_test.json": {
+      "total": 60,
+      "type_acc": 1.0,
+      "tool_acc": 0.9833,
+      "args_em": 0.8167,
+      "type_correct": 60,
+      "tool_hit": 59,
+      "args_em_count": 49,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "voice_test.json": {
+      "total": 65,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 0.9538,
+      "type_correct": 65,
+      "tool_hit": 65,
+      "args_em_count": 62,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "window_test.json": {
+      "total": 60,
+      "type_acc": 1.0,
+      "tool_acc": 0.9167,
+      "args_em": 0.8,
+      "type_correct": 60,
+      "tool_hit": 55,
+      "args_em_count": 48,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "total": 308,
+      "type_acc": 1.0,
+      "tool_acc": 0.9838,
+      "args_em": 0.9675,
+      "type_correct": 308,
+      "tool_hit": 303,
+      "args_em_count": 298,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "medium": {
+      "total": 400,
+      "type_acc": 0.9925,
+      "tool_acc": 0.9525,
+      "args_em": 0.9025,
+      "type_correct": 397,
+      "tool_hit": 381,
+      "args_em_count": 361,
+      "reject_pred": 1,
+      "reject_hit": 0,
+      "clarify_pred": 1,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "hard": {
+      "total": 401,
+      "type_acc": 1.0,
+      "tool_acc": 0.8928,
+      "args_em": 0.8005,
+      "type_correct": 401,
+      "tool_hit": 358,
+      "args_em_count": 321,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    }
+  },
+  "by_category": {
+    "媒体控制+驾驶模式": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 0.0,
+      "args_em": 0.0,
+      "type_correct": 1,
+      "tool_hit": 0,
+      "args_em_count": 0,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "视频播放+屏幕": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 0.0,
+      "args_em": 0.0,
+      "type_correct": 1,
+      "tool_hit": 0,
+      "args_em_count": 0,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "后视镜+空调": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 0.0,
+      "args_em": 0.0,
+      "type_correct": 1,
+      "tool_hit": 0,
+      "args_em_count": 0,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "后视镜+驾驶模式": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 0.0,
+      "args_em": 0.0,
+      "type_correct": 1,
+      "tool_hit": 0,
+      "args_em_count": 0,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "后视镜+方向盘": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 0.0,
+      "args_em": 0.0,
+      "type_correct": 1,
+      "tool_hit": 0,
+      "args_em_count": 0,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "后视镜+车窗+灯光": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 0.0,
+      "args_em": 0.0,
+      "type_correct": 1,
+      "tool_hit": 0,
+      "args_em_count": 0,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "后视镜+空调+座椅": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 0.0,
+      "args_em": 0.0,
+      "type_correct": 1,
+      "tool_hit": 0,
+      "args_em_count": 0,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "电话+媒体": {
+      "total": 2,
+      "type_acc": 1.0,
+      "tool_acc": 0.5,
+      "args_em": 0.0,
+      "type_correct": 2,
+      "tool_hit": 1,
+      "args_em_count": 0,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "驾驶模式": {
+      "total": 60,
+      "type_acc": 1.0,
+      "tool_acc": 0.85,
+      "args_em": 0.8333,
+      "type_correct": 60,
+      "tool_hit": 51,
+      "args_em_count": 50,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "应用控制": {
+      "total": 70,
+      "type_acc": 0.9857,
+      "tool_acc": 0.8857,
+      "args_em": 0.8857,
+      "type_correct": 69,
+      "tool_hit": 62,
+      "args_em_count": 62,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 1,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "信息查询": {
+      "total": 50,
+      "type_acc": 1.0,
+      "tool_acc": 0.9,
+      "args_em": 0.86,
+      "type_correct": 50,
+      "tool_hit": 45,
+      "args_em_count": 43,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "音乐搜索": {
+      "total": 10,
+      "type_acc": 1.0,
+      "tool_acc": 0.9,
+      "args_em": 0.9,
+      "type_correct": 10,
+      "tool_hit": 9,
+      "args_em_count": 9,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "座椅": {
+      "total": 67,
+      "type_acc": 1.0,
+      "tool_acc": 0.9104,
+      "args_em": 0.8507,
+      "type_correct": 67,
+      "tool_hit": 61,
+      "args_em_count": 57,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "车窗": {
+      "total": 60,
+      "type_acc": 1.0,
+      "tool_acc": 0.9167,
+      "args_em": 0.8,
+      "type_correct": 60,
+      "tool_hit": 55,
+      "args_em_count": 48,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "灯光": {
+      "total": 77,
+      "type_acc": 1.0,
+      "tool_acc": 0.9221,
+      "args_em": 0.8831,
+      "type_correct": 77,
+      "tool_hit": 71,
+      "args_em_count": 68,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "能源控制": {
+      "total": 45,
+      "type_acc": 1.0,
+      "tool_acc": 0.9333,
+      "args_em": 0.9333,
+      "type_correct": 45,
+      "tool_hit": 42,
+      "args_em_count": 42,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "屏幕控制": {
+      "total": 60,
+      "type_acc": 1.0,
+      "tool_acc": 0.9333,
+      "args_em": 0.7833,
+      "type_correct": 60,
+      "tool_hit": 56,
+      "args_em_count": 47,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "冰箱": {
+      "total": 40,
+      "type_acc": 1.0,
+      "tool_acc": 0.95,
+      "args_em": 0.95,
+      "type_correct": 40,
+      "tool_hit": 38,
+      "args_em_count": 38,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "锁控": {
+      "total": 60,
+      "type_acc": 1.0,
+      "tool_acc": 0.95,
+      "args_em": 0.9333,
+      "type_correct": 60,
+      "tool_hit": 57,
+      "args_em_count": 56,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "媒体播放": {
+      "total": 22,
+      "type_acc": 1.0,
+      "tool_acc": 0.9545,
+      "args_em": 0.9545,
+      "type_correct": 22,
+      "tool_hit": 21,
+      "args_em_count": 21,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "媒体控制": {
+      "total": 23,
+      "type_acc": 1.0,
+      "tool_acc": 0.9565,
+      "args_em": 0.8696,
+      "type_correct": 23,
+      "tool_hit": 22,
+      "args_em_count": 20,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "电话控制": {
+      "total": 40,
+      "type_acc": 0.975,
+      "tool_acc": 0.975,
+      "args_em": 0.95,
+      "type_correct": 39,
+      "tool_hit": 39,
+      "args_em_count": 38,
+      "reject_pred": 1,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "后视镜控制": {
+      "total": 45,
+      "type_acc": 1.0,
+      "tool_acc": 0.9778,
+      "args_em": 0.8889,
+      "type_correct": 45,
+      "tool_hit": 44,
+      "args_em_count": 40,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "摄像头": {
+      "total": 50,
+      "type_acc": 1.0,
+      "tool_acc": 0.98,
+      "args_em": 0.92,
+      "type_correct": 50,
+      "tool_hit": 49,
+      "args_em_count": 46,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "方向盘控制": {
+      "total": 60,
+      "type_acc": 1.0,
+      "tool_acc": 0.9833,
+      "args_em": 0.8167,
+      "type_correct": 60,
+      "tool_hit": 59,
+      "args_em_count": 49,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "空调": {
+      "total": 90,
+      "type_acc": 0.9889,
+      "tool_acc": 0.9889,
+      "args_em": 0.9222,
+      "type_correct": 89,
+      "tool_hit": 89,
+      "args_em_count": 83,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "门控": {
+      "total": 60,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 0.9667,
+      "type_correct": 60,
+      "tool_hit": 60,
+      "args_em_count": 58,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "FM搜索": {
+      "total": 7,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 7,
+      "tool_hit": 7,
+      "args_em_count": 7,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "喜马拉雅": {
+      "total": 8,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 8,
+      "tool_hit": 8,
+      "args_em_count": 8,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "媒体控制+空调": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "音乐搜索+车窗": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "FM搜索+音量": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "喜马拉雅+座椅": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "媒体播放+灯光": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "音乐搜索+空调": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "媒体播放+方向盘": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 0.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 0,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "喜马拉雅+音量+车窗": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "电话+音量": {
+      "total": 2,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 2,
+      "tool_hit": 2,
+      "args_em_count": 2,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "电话+车窗": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "电话+空调": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "电话+音量+车窗": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "电话+导航": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 0.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 0,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "电话+屏幕": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 0.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 0,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "电话+灯光": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "能源+驾驶模式": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "能源+空调": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "能源+座椅": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "能源+车窗": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "能源+音量": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "能源+灯光": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "能源+屏幕": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "能源+方向盘": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "能源+驾驶模式+无线充电": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "能源+网络": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "后视镜+车窗": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "后视镜+灯光": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "后视镜+座椅": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "后视镜+音量": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "后视镜+屏幕": {
+      "total": 1,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 1.0,
+      "type_correct": 1,
+      "tool_hit": 1,
+      "args_em_count": 1,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    },
+    "音量控制": {
+      "total": 65,
+      "type_acc": 1.0,
+      "tool_acc": 1.0,
+      "args_em": 0.9538,
+      "type_correct": 65,
+      "tool_hit": 65,
+      "args_em_count": 62,
+      "reject_pred": 0,
+      "reject_hit": 0,
+      "clarify_pred": 0,
+      "clarify_hit": 0,
+      "parse_fail": 0
+    }
+  },
+  "errors": [
+    {
+      "id": "app_032",
+      "file": "app_test.json",
+      "err_type": "type-err",
+      "query": "帮我导航一下",
+      "expected_type": "Action",
+      "gt_tool": "AppControl",
+      "gt_args": {
+        "action": "打开",
+        "feature": "导航地图"
+      },
+      "pred_type": "Clarify",
+      "pred_tool": null,
+      "pred_args": null,
+      "pred_raw": "Clarify: 请问您要导航去哪里？",
+      "difficulty": "medium",
+      "category": "应用控制"
+    },
+    {
+      "id": "app_035",
+      "file": "app_test.json",
+      "err_type": "tool-err",
+      "query": "开车无聊，来点音乐吧",
+      "expected_type": "Action",
+      "gt_tool": "AppControl",
+      "gt_args": {
+        "action": "打开",
+        "feature": "音乐应用"
+      },
+      "pred_type": "Action",
+      "pred_tool": "MediaPlay",
+      "pred_args": {
+        "media_category": "歌"
+      },
+      "pred_raw": "Action: MediaPlay\nAction Input: {\"media_category\": \"歌\"}",
+      "difficulty": "hard",
+      "category": "应用控制"
+    },
+    {
+      "id": "app_036",
+      "file": "app_test.json",
+      "err_type": "tool-err",
+      "query": "不听歌了，关掉音乐",
+      "expected_type": "Action",
+      "gt_tool": "AppControl",
+      "gt_args": {
+        "action": "关闭",
+        "feature": "音乐应用"
+      },
+      "pred_type": "Action",
+      "pred_tool": "MediaControl",
+      "pred_args": {
+        "media_category": "歌",
+        "media_control_action": "关闭"
+      },
+      "pred_raw": "Action: MediaControl\nAction Input: {\"media_category\": \"歌\", \"media_control_action\": \"关闭\"}",
+      "difficulty": "medium",
+      "category": "应用控制"
+    },
+    {
+      "id": "app_047",
+      "file": "app_test.json",
+      "err_type": "tool-err",
+      "query": "我想看看车上拍的照片和视频",
+      "expected_type": "Action",
+      "gt_tool": "AppControl",
+      "gt_args": {
+        "action": "打开",
+        "feature": "智能影像"
+      },
+      "pred_type": "Action",
+      "pred_tool": "CameraControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "摄像头"
+      },
+      "pred_raw": "Action: CameraControl\nAction Input: {\"action\": \"打开\", \"device\": \"摄像头\"}",
+      "difficulty": "medium",
+      "category": "应用控制"
+    },
+    {
+      "id": "app_048",
+      "file": "app_test.json",
+      "err_type": "tool-err",
+      "query": "帮我调出行车记录的影像回放",
+      "expected_type": "Action",
+      "gt_tool": "AppControl",
+      "gt_args": {
+        "action": "打开",
+        "feature": "智能影像"
+      },
+      "pred_type": "Action",
+      "pred_tool": "CameraControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "摄像头"
+      },
+      "pred_raw": "Action: CameraControl\nAction Input: {\"action\": \"打开\", \"device\": \"摄像头\", \"value\": \"哨兵模式\"}",
+      "difficulty": "hard",
+      "category": "应用控制"
+    },
+    {
+      "id": "app_054",
+      "file": "app_test.json",
+      "err_type": "tool-err",
+      "query": "我想看点视频或者听点东西",
+      "expected_type": "Action",
+      "gt_tool": "AppControl",
+      "gt_args": {
+        "action": "打开",
+        "feature": "媒体"
+      },
+      "pred_type": "Action",
+      "pred_tool": "MediaPlay",
+      "pred_args": {
+        "media_category": "视频"
+      },
+      "pred_raw": "Action: MediaPlay\nAction Input: {\"media_category\": \"视频\"}",
+      "difficulty": "hard",
+      "category": "应用控制"
+    },
+    {
+      "id": "app_059",
+      "file": "app_test.json",
+      "err_type": "tool-err",
+      "query": "到了，把导航关掉",
+      "expected_type": "Action",
+      "gt_tool": "AppControl",
+      "gt_args": {
+        "action": "关闭",
+        "feature": "导航地图"
+      },
+      "pred_type": "Action",
+      "pred_tool": "NavigationControl",
+      "pred_args": {
+        "action": "关闭",
+        "feature": "播报模式"
+      },
+      "pred_raw": "Action: NavigationControl\nAction Input: {\"action\": \"关闭\", \"feature\": \"播报模式\"}",
+      "difficulty": "medium",
+      "category": "应用控制"
+    },
+    {
+      "id": "app_060",
+      "file": "app_test.json",
+      "err_type": "tool-err",
+      "query": "电话打完了，把通话界面关掉",
+      "expected_type": "Action",
+      "gt_tool": "AppControl",
+      "gt_args": {
+        "action": "关闭",
+        "feature": "蓝牙电话"
+      },
+      "pred_type": "Action",
+      "pred_tool": "GeneralSelect",
+      "pred_args": {
+        "action": "confirm",
+        "mode": "phone"
+      },
+      "pred_raw": "Action: GeneralSelect\nAction Input: {\"action\": \"confirm\", \"mode\": \"phone\"}",
+      "difficulty": "hard",
+      "category": "应用控制"
+    },
+    {
+      "id": "camera_030",
+      "file": "camera_test.json",
+      "err_type": "args-err",
+      "query": "不用再监控了，把哨兵关掉吧",
+      "expected_type": "Action",
+      "gt_tool": "CameraControl",
+      "gt_args": {
+        "action": "关闭",
+        "device": "摄像头",
+        "value": "哨兵模式"
+      },
+      "pred_type": "Action",
+      "pred_tool": "CameraControl",
+      "pred_args": {
+        "action": "关闭",
+        "device": "摄像头"
+      },
+      "pred_raw": "Action: CameraControl\nAction Input: {\"action\": \"关闭\", \"device\": \"摄像头\", \"value\": \"哨兵模式\"}",
+      "difficulty": "medium",
+      "category": "摄像头"
+    },
+    {
+      "id": "camera_040",
+      "file": "camera_test.json",
+      "err_type": "tool-err",
+      "query": "前面是不是堵车了，帮我看看前面",
+      "expected_type": "Action",
+      "gt_tool": "CameraControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "摄像头",
+        "position": "前侧"
+      },
+      "pred_type": "Action",
+      "pred_tool": "InfoQuery",
+      "pred_args": {
+        "feature": "路况信息"
+      },
+      "pred_raw": "Action: InfoQuery\nAction Input: {\"feature\": \"路况信息\"}",
+      "difficulty": "hard",
+      "category": "摄像头"
+    },
+    {
+      "id": "camera_046",
+      "file": "camera_test.json",
+      "err_type": "args-err",
+      "query": "开启哨兵模式，把车窗全部关上",
+      "expected_type": "Action",
+      "gt_tool": "CameraControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "摄像头",
+        "value": "哨兵模式"
+      },
+      "pred_type": "Action",
+      "pred_tool": "CameraControl",
+      "pred_args": {
+        "action": "关闭",
+        "device": "摄像头",
+        "value": "哨兵模式"
+      },
+      "pred_raw": "Action: CameraControl\nAction Input: {\"action\": \"打开\", \"device\": \"摄像头\", \"value\": \"哨兵模式\"}",
+      "difficulty": "hard",
+      "category": "摄像头"
+    },
+    {
+      "id": "camera_050",
+      "file": "camera_test.json",
+      "err_type": "args-err",
+      "query": "我要下车了，开启哨兵模式，锁好车门，把车窗关上",
+      "expected_type": "Action",
+      "gt_tool": "CameraControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "摄像头",
+        "value": "哨兵模式"
+      },
+      "pred_type": "Action",
+      "pred_tool": "CameraControl",
+      "pred_args": {
+        "action": "关闭",
+        "device": "摄像头",
+        "value": "哨兵模式"
+      },
+      "pred_raw": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"空调\", \"value\": \"哨兵模式\"}",
+      "difficulty": "hard",
+      "category": "摄像头"
+    },
+    {
+      "id": "climate_003",
+      "file": "climate_test.json",
+      "err_type": "args-err",
+      "query": "空调切换到舒适模式",
+      "expected_type": "Action",
+      "gt_tool": "ClimateControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "空调",
+        "value": "节能模式"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ClimateControl",
+      "pred_args": {
+        "action": "调到",
+        "device": "空调",
+        "value": "舒适模式"
+      },
+      "pred_raw": "Action: ClimateControl\nAction Input: {\"action\": \"调到\", \"device\": \"空调\", \"value\": \"舒适模式\"}",
+      "difficulty": "easy",
+      "category": "空调"
+    },
+    {
+      "id": "climate_012",
+      "file": "climate_test.json",
+      "err_type": "args-err",
+      "query": "空调温度调到20.5度",
+      "expected_type": "Action",
+      "gt_tool": "ClimateControl",
+      "gt_args": {
+        "action": "调到",
+        "device": "空调",
+        "feature": "温度",
+        "value": "20.5"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ClimateControl",
+      "pred_args": {
+        "action": "调到",
+        "device": "空调",
+        "feature": "温度",
+        "value": "20"
+      },
+      "pred_raw": "Action: ClimateControl\nAction Input: {\"action\": \"调到\", \"device\": \"空调\", \"feature\": \"温度\", \"value\": \"20.5\"}",
+      "difficulty": "medium",
+      "category": "空调"
+    },
+    {
+      "id": "climate_026",
+      "file": "climate_test.json",
+      "err_type": "args-err",
+      "query": "关闭自动扫风",
+      "expected_type": "Action",
+      "gt_tool": "ClimateControl",
+      "gt_args": {
+        "action": "关闭",
+        "device": "空调",
+        "value": "自动扫风"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ClimateControl",
+      "pred_args": {
+        "action": "关闭",
+        "device": "空调",
+        "feature": "自动扫风"
+      },
+      "pred_raw": "Action: ClimateControl\nAction Input: {\"action\": \"关闭\", \"device\": \"空调\", \"feature\": \"自动扫风\"}",
+      "difficulty": "easy",
+      "category": "空调"
+    },
+    {
+      "id": "climate_060",
+      "file": "climate_test.json",
+      "err_type": "type-err",
+      "query": "我觉得车里温度刚好不用动",
+      "expected_type": "Reject",
+      "gt_tool": null,
+      "gt_args": {},
+      "pred_type": "Action",
+      "pred_tool": "ClimateControl",
+      "pred_args": {
+        "action": "关闭",
+        "device": "空调",
+        "value": "自动"
+      },
+      "pred_raw": "Action: ClimateControl\nAction Input: {\"action\": \"关闭\", \"device\": \"空调\", \"value\": \"自动\"}",
+      "difficulty": "medium",
+      "category": "空调"
+    },
+    {
+      "id": "climate_066",
+      "file": "climate_test.json",
+      "err_type": "args-err",
+      "query": "外面空气不好别让外面的风进来",
+      "expected_type": "Action",
+      "gt_tool": "ClimateControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "空调",
+        "value": "内循环"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ClimateControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "空气净化器"
+      },
+      "pred_raw": "Action: WindowControl\nAction Input: {\"action\": \"关闭\", \"device\": \"车窗\"}",
+      "difficulty": "medium",
+      "category": "空调"
+    },
+    {
+      "id": "climate_078",
+      "file": "climate_test.json",
+      "err_type": "args-err",
+      "query": "空调开制冷温度调到22度",
+      "expected_type": "Action",
+      "gt_tool": "ClimateControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "空调",
+        "value": "制冷"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ClimateControl",
+      "pred_args": {
+        "action": "调到",
+        "device": "空调",
+        "value": "22",
+        "feature": "温度"
+      },
+      "pred_raw": "Action: ClimateControl\nAction Input: {\"action\": \"调到\", \"device\": \"空调\", \"feature\": \"温度\", \"value\": \"22\"}",
+      "difficulty": "hard",
+      "category": "空调"
+    },
+    {
+      "id": "climate_087",
+      "file": "climate_test.json",
+      "err_type": "args-err",
+      "query": "开守护模式温度调到26度",
+      "expected_type": "Action",
+      "gt_tool": "ClimateControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "空调",
+        "value": "守护模式"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ClimateControl",
+      "pred_args": {
+        "action": "调到",
+        "device": "空调",
+        "value": "26",
+        "feature": "温度"
+      },
+      "pred_raw": "Action: ClimateControl\nAction Input: {\"action\": \"调到\", \"device\": \"空调\", \"feature\": \"温度\", \"value\": \"26\"}",
+      "difficulty": "hard",
+      "category": "空调"
+    },
+    {
+      "id": "driving_009",
+      "file": "driving_test.json",
+      "err_type": "tool-err",
+      "query": "切换到节能模式",
+      "expected_type": "Action",
+      "gt_tool": "DrivingControl",
+      "gt_args": {
+        "action": "打开",
+        "feature": "驾驶模式",
+        "value": "节能模式"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ClimateControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "空调",
+        "value": "节能模式"
+      },
+      "pred_raw": "Action: DrivingControl\nAction Input: {\"action\": \"打开\", \"feature\": \"驾驶模式\", \"value\": \"节能模式\"}",
+      "difficulty": "easy",
+      "category": "驾驶模式"
+    },
+    {
+      "id": "driving_013",
+      "file": "driving_test.json",
+      "err_type": "args-err",
+      "query": "关闭弹射模式",
+      "expected_type": "Action",
+      "gt_tool": "DrivingControl",
+      "gt_args": {
+        "action": "关闭",
+        "feature": "驾驶模式",
+        "value": "弹射模式"
+      },
+      "pred_type": "Action",
+      "pred_tool": "DrivingControl",
+      "pred_args": {
+        "action": "打开",
+        "feature": "驾驶模式",
+        "value": "弹射模式"
+      },
+      "pred_raw": "Action: DrivingControl\nAction Input: {\"action\": \"关闭\", \"feature\": \"驾驶模式\", \"value\": \"弹射模式\"}",
+      "difficulty": "easy",
+      "category": "驾驶模式"
+    },
+    {
+      "id": "driving_031",
+      "file": "driving_test.json",
+      "err_type": "tool-err",
+      "query": "电量不多了，帮我省点电",
+      "expected_type": "Action",
+      "gt_tool": "DrivingControl",
+      "gt_args": {
+        "action": "打开",
+        "feature": "驾驶模式",
+        "value": "节能模式"
+      },
+      "pred_type": "Action",
+      "pred_tool": "PowerControl",
+      "pred_args": {
+        "action": "调小",
+        "feature": "能量回收"
+      },
+      "pred_raw": "Action: PowerControl\nAction Input: {\"action\": \"调小\", \"feature\": \"能量回收\"}",
+      "difficulty": "medium",
+      "category": "驾驶模式"
+    },
+    {
+      "id": "driving_045",
+      "file": "driving_test.json",
+      "err_type": "tool-err",
+      "query": "切到我上次自己调的那个模式",
+      "expected_type": "Action",
+      "gt_tool": "DrivingControl",
+      "gt_args": {
+        "action": "打开",
+        "feature": "驾驶模式",
+        "value": "自定义"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ScenarioAccess",
+      "pred_args": {
+        "feature": "等人模式"
+      },
+      "pred_raw": "Action: ScenarioAccess\nAction Input: {\"feature\": \"等人模式\"}",
+      "difficulty": "medium",
+      "category": "驾驶模式"
+    },
+    {
+      "id": "driving_046",
+      "file": "driving_test.json",
+      "err_type": "tool-err",
+      "query": "还有三十公里才到充电桩，帮我想办法撑过去",
+      "expected_type": "Action",
+      "gt_tool": "DrivingControl",
+      "gt_args": {
+        "action": "打开",
+        "feature": "驾驶模式",
+        "value": "节能模式"
+      },
+      "pred_type": "Action",
+      "pred_tool": "Navigation",
+      "pred_args": {
+        "action": "搜索",
+        "category": "充电站"
+      },
+      "pred_raw": "Action: Navigation\nAction Input: {\"action\": \"搜索\", \"category\": \"充电站\"}",
+      "difficulty": "hard",
+      "category": "驾驶模式"
+    },
+    {
+      "id": "driving_047",
+      "file": "driving_test.json",
+      "err_type": "tool-err",
+      "query": "前面路况好，给我来点推背感",
+      "expected_type": "Action",
+      "gt_tool": "DrivingControl",
+      "gt_args": {
+        "action": "打开",
+        "feature": "驾驶模式",
+        "value": "运动模式"
+      },
+      "pred_type": "Action",
+      "pred_tool": "SeatControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "座椅",
+        "feature": "按摩"
+      },
+      "pred_raw": "Action: SeatControl\nAction Input: {\"action\": \"打开\", \"device\": \"座椅\", \"feature\": \"按摩\", \"position\": \"主驾\"}",
+      "difficulty": "hard",
+      "category": "驾驶模式"
+    },
+    {
+      "id": "driving_048",
+      "file": "driving_test.json",
+      "err_type": "tool-err",
+      "query": "孩子在后面睡觉，悠着点开",
+      "expected_type": "Action",
+      "gt_tool": "DrivingControl",
+      "gt_args": {
+        "action": "打开",
+        "feature": "驾驶模式",
+        "value": "舒适模式"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ClimateControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "空调",
+        "value": "宠物模式"
+      },
+      "pred_raw": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"空调\", \"value\": \"宠物模式\"}",
+      "difficulty": "hard",
+      "category": "驾驶模式"
+    },
+    {
+      "id": "driving_052",
+      "file": "driving_test.json",
+      "err_type": "tool-err",
+      "query": "打开节能模式，同时把空调温度调到26度",
+      "expected_type": "Action",
+      "gt_tool": "DrivingControl",
+      "gt_args": {
+        "action": "打开",
+        "feature": "驾驶模式",
+        "value": "节能模式"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ClimateControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "空调",
+        "value": "节能模式"
+      },
+      "pred_raw": "Action: ClimateControl\nAction Input: {\"action\": \"调到\", \"device\": \"空调\", \"feature\": \"温度\", \"value\": \"26\"}",
+      "difficulty": "hard",
+      "category": "驾驶模式"
+    },
+    {
+      "id": "driving_055",
+      "file": "driving_test.json",
+      "err_type": "tool-err",
+      "query": "电量不够了，开节能模式，再把空调关了",
+      "expected_type": "Action",
+      "gt_tool": "DrivingControl",
+      "gt_args": {
+        "action": "打开",
+        "feature": "驾驶模式",
+        "value": "节能模式"
+      },
+      "pred_type": "Action",
+      "pred_tool": "PowerControl",
+      "pred_args": {
+        "action": "打开",
+        "feature": "能量回收",
+        "value": "最大"
+      },
+      "pred_raw": "Action: PowerControl\nAction Input: {\"action\": \"打开\", \"feature\": \"能量回收\", \"value\": \"最大\"}",
+      "difficulty": "hard",
+      "category": "驾驶模式"
+    },
+    {
+      "id": "driving_058",
+      "file": "driving_test.json",
+      "err_type": "tool-err",
+      "query": "节能模式打开，把音量也调小一点",
+      "expected_type": "Action",
+      "gt_tool": "DrivingControl",
+      "gt_args": {
+        "action": "打开",
+        "feature": "驾驶模式",
+        "value": "节能模式"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ClimateControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "空调",
+        "value": "节能模式"
+      },
+      "pred_raw": "Action: GeneralBack\nAction Input: {}",
+      "difficulty": "hard",
+      "category": "驾驶模式"
+    },
+    {
+      "id": "fridge_018",
+      "file": "fridge_test.json",
+      "err_type": "tool-err",
+      "query": "饮料该冰一下了",
+      "expected_type": "Action",
+      "gt_tool": "FridgeControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "冰箱"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ClimateControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "空调",
+        "value": "制冷"
+      },
+      "pred_raw": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"空调\", \"value\": \"制冷\"}",
+      "difficulty": "medium",
+      "category": "冰箱"
+    },
+    {
+      "id": "fridge_034",
+      "file": "fridge_test.json",
+      "err_type": "tool-err",
+      "query": "天太热了，冰箱和空调都打开",
+      "expected_type": "Action",
+      "gt_tool": "FridgeControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "冰箱"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ClimateControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "空调"
+      },
+      "pred_raw": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"空调\"}",
+      "difficulty": "hard",
+      "category": "冰箱"
+    },
+    {
+      "id": "gate_043",
+      "file": "gate_test.json",
+      "err_type": "args-err",
+      "query": "把翅膀门打开",
+      "expected_type": "Action",
+      "gt_tool": "GateControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "鹏翼门"
+      },
+      "pred_type": "Action",
+      "pred_tool": "GateControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "侧滑门"
+      },
+      "pred_raw": "Action: GateControl\nAction Input: {\"action\": \"打开\", \"device\": \"鹏翼门\"}",
+      "difficulty": "medium",
+      "category": "门控"
+    },
+    {
+      "id": "gate_048",
+      "file": "gate_test.json",
+      "err_type": "args-err",
+      "query": "靠马路那边的门别开有车过来",
+      "expected_type": "Action",
+      "gt_tool": "GateControl",
+      "gt_args": {
+        "action": "关闭",
+        "device": "侧滑门",
+        "position": "左侧"
+      },
+      "pred_type": "Action",
+      "pred_tool": "GateControl",
+      "pred_args": {
+        "action": "关闭",
+        "device": "侧滑门",
+        "position": "右侧"
+      },
+      "pred_raw": "Action: GateControl\nAction Input: {\"action\": \"关闭\", \"device\": \"鹏翼门\", \"position\": \"右侧\"}",
+      "difficulty": "hard",
+      "category": "门控"
+    },
+    {
+      "id": "info_007",
+      "file": "info_test.json",
+      "err_type": "tool-err",
+      "query": "查询路况信息",
+      "expected_type": "Action",
+      "gt_tool": "InfoQuery",
+      "gt_args": {
+        "feature": "路况信息"
+      },
+      "pred_type": "Action",
+      "pred_tool": "NoiseAction",
+      "pred_args": {},
+      "pred_raw": "Action: NoiseAction\nAction Input: {}",
+      "difficulty": "easy",
+      "category": "信息查询"
+    },
+    {
+      "id": "info_009",
+      "file": "info_test.json",
+      "err_type": "tool-err",
+      "query": "我现在在哪里",
+      "expected_type": "Action",
+      "gt_tool": "InfoQuery",
+      "gt_args": {
+        "feature": "当前位置"
+      },
+      "pred_type": "Action",
+      "pred_tool": "GeneralSelect",
+      "pred_args": {
+        "action": "confirm"
+      },
+      "pred_raw": "Action: GeneralSelect\nAction Input: {\"action\": \"confirm\"}",
+      "difficulty": "easy",
+      "category": "信息查询"
+    },
+    {
+      "id": "info_013",
+      "file": "info_test.json",
+      "err_type": "args-err",
+      "query": "这辆车总共跑了多少公里",
+      "expected_type": "Action",
+      "gt_tool": "InfoQuery",
+      "gt_args": {
+        "feature": "行驶总里程"
+      },
+      "pred_type": "Action",
+      "pred_tool": "InfoQuery",
+      "pred_args": {
+        "feature": "剩余距离"
+      },
+      "pred_raw": "Action: InfoQuery\nAction Input: {\"feature\": \"行驶总里程\"}",
+      "difficulty": "easy",
+      "category": "信息查询"
+    },
+    {
+      "id": "info_030",
+      "file": "info_test.json",
+      "err_type": "args-err",
+      "query": "这车买了以后一共开了多少公里",
+      "expected_type": "Action",
+      "gt_tool": "InfoQuery",
+      "gt_args": {
+        "feature": "行驶总里程"
+      },
+      "pred_type": "Action",
+      "pred_tool": "InfoQuery",
+      "pred_args": {
+        "feature": "剩余距离"
+      },
+      "pred_raw": "Action: InfoQuery\nAction Input: {\"feature\": \"行驶总里程\"}",
+      "difficulty": "medium",
+      "category": "信息查询"
+    },
+    {
+      "id": "info_037",
+      "file": "info_test.json",
+      "err_type": "tool-err",
+      "query": "帮我报个时",
+      "expected_type": "Action",
+      "gt_tool": "InfoQuery",
+      "gt_args": {
+        "feature": "时间"
+      },
+      "pred_type": "Action",
+      "pred_tool": "NoiseAction",
+      "pred_args": {},
+      "pred_raw": "Action: NoiseAction\nAction Input: {}",
+      "difficulty": "medium",
+      "category": "信息查询"
+    },
+    {
+      "id": "info_044",
+      "file": "info_test.json",
+      "err_type": "tool-err",
+      "query": "我在什么位置，周围路况怎么样",
+      "expected_type": "Action",
+      "gt_tool": "InfoQuery",
+      "gt_args": {
+        "feature": "当前位置"
+      },
+      "pred_type": "Action",
+      "pred_tool": "NoiseAction",
+      "pred_args": {},
+      "pred_raw": "Action: NoiseAction\nAction Input: {}",
+      "difficulty": "hard",
+      "category": "信息查询"
+    },
+    {
+      "id": "info_047",
+      "file": "info_test.json",
+      "err_type": "tool-err",
+      "query": "看看前面路况，导航音量调大一点",
+      "expected_type": "Action",
+      "gt_tool": "InfoQuery",
+      "gt_args": {
+        "feature": "路况信息"
+      },
+      "pred_type": "Action",
+      "pred_tool": "VoiceControl",
+      "pred_args": {
+        "action": "调大",
+        "feature": "导航音量"
+      },
+      "pred_raw": "Action: VoiceControl\nAction Input: {\"action\": \"调大\", \"feature\": \"导航音量\"}",
+      "difficulty": "hard",
+      "category": "信息查询"
+    },
+    {
+      "id": "light_004",
+      "file": "light_test.json",
+      "err_type": "tool-err",
+      "query": "大灯调到标准模式",
+      "expected_type": "Action",
+      "gt_tool": "LightControl",
+      "gt_args": {
+        "action": "调到",
+        "device": "大灯",
+        "value": "标准模式"
+      },
+      "pred_type": "Action",
+      "pred_tool": "DrivingControl",
+      "pred_args": {
+        "action": "打开",
+        "feature": "驾驶模式",
+        "value": "标准模式"
+      },
+      "pred_raw": "Action: LightControl\nAction Input: {\"action\": \"调到\", \"device\": \"大灯\", \"value\": \"标准模式\"}",
+      "difficulty": "easy",
+      "category": "灯光"
+    },
+    {
+      "id": "light_018",
+      "file": "light_test.json",
+      "err_type": "args-err",
+      "query": "打开第二排阅读灯",
+      "expected_type": "Action",
+      "gt_tool": "LightControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "阅读灯",
+        "position": "第二排"
+      },
+      "pred_type": "Action",
+      "pred_tool": "LightControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "阅读灯"
+      },
+      "pred_raw": "Action: LightControl\nAction Input: {\"action\": \"打开\", \"device\": \"阅读灯\", \"position\": \"第二排\"}",
+      "difficulty": "medium",
+      "category": "灯光"
+    },
+    {
+      "id": "light_036",
+      "file": "light_test.json",
+      "err_type": "tool-err",
+      "query": "天黑了看不清路",
+      "expected_type": "Action",
+      "gt_tool": "LightControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "大灯"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ClimateControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "前挡风",
+        "feature": "除雾"
+      },
+      "pred_raw": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"前挡风\", \"feature\": \"除雾\"}",
+      "difficulty": "medium",
+      "category": "灯光"
+    },
+    {
+      "id": "light_039",
+      "file": "light_test.json",
+      "err_type": "tool-err",
+      "query": "雾好大看不清前面",
+      "expected_type": "Action",
+      "gt_tool": "LightControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "前雾灯"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ClimateControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "前挡风",
+        "feature": "除雾"
+      },
+      "pred_raw": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"前挡风\", \"feature\": \"除雾\"}",
+      "difficulty": "medium",
+      "category": "灯光"
+    },
+    {
+      "id": "light_040",
+      "file": "light_test.json",
+      "err_type": "tool-err",
+      "query": "雾太大了后面的车看不到我",
+      "expected_type": "Action",
+      "gt_tool": "LightControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "后雾灯"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ClimateControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "后挡风",
+        "feature": "除雾"
+      },
+      "pred_raw": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"后挡风\", \"feature\": \"除雾\"}",
+      "difficulty": "hard",
+      "category": "灯光"
+    },
+    {
+      "id": "light_041",
+      "file": "light_test.json",
+      "err_type": "tool-err",
+      "query": "我想在车上看会儿书",
+      "expected_type": "Action",
+      "gt_tool": "LightControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "阅读灯"
+      },
+      "pred_type": "Action",
+      "pred_tool": "MediaControl",
+      "pred_args": {
+        "media_category": "读物"
+      },
+      "pred_raw": "Action: MediaControl\nAction Input: {\"media_category\": \"读物\"}",
+      "difficulty": "medium",
+      "category": "灯光"
+    },
+    {
+      "id": "light_044",
+      "file": "light_test.json",
+      "err_type": "tool-err",
+      "query": "想要一个浪漫的感觉",
+      "expected_type": "Action",
+      "gt_tool": "LightControl",
+      "gt_args": {
+        "action": "调到",
+        "device": "氛围灯",
+        "feature": "颜色",
+        "value": "紫色"
+      },
+      "pred_type": "Action",
+      "pred_tool": "NoiseAction",
+      "pred_args": {},
+      "pred_raw": "Action: NoiseAction\nAction Input: {}",
+      "difficulty": "hard",
+      "category": "灯光"
+    },
+    {
+      "id": "light_065",
+      "file": "light_test.json",
+      "err_type": "args-err",
+      "query": "关掉大灯和示宽灯",
+      "expected_type": "Action",
+      "gt_tool": "LightControl",
+      "gt_args": {
+        "action": "关闭",
+        "device": "大灯"
+      },
+      "pred_type": "Action",
+      "pred_tool": "LightControl",
+      "pred_args": {
+        "action": "关闭",
+        "device": "大灯",
+        "position": "主驾"
+      },
+      "pred_raw": "Action: LightControl\nAction Input: {\"action\": \"关闭\", \"device\": \"大灯\", \"position\": \"主驾\"}",
+      "difficulty": "hard",
+      "category": "灯光"
+    },
+    {
+      "id": "light_074",
+      "file": "light_test.json",
+      "err_type": "args-err",
+      "query": "把示宽灯弄得酷炫一点",
+      "expected_type": "Action",
+      "gt_tool": "LightControl",
+      "gt_args": {
+        "action": "调到",
+        "device": "示宽灯",
+        "value": "光剑"
+      },
+      "pred_type": "Action",
+      "pred_tool": "LightControl",
+      "pred_args": {
+        "action": "调到",
+        "device": "示宽灯",
+        "feature": "颜色",
+        "value": "光剑"
+      },
+      "pred_raw": "Action: LightControl\nAction Input: {\"action\": \"调到\", \"device\": \"示宽灯\", \"feature\": \"颜色\", \"value\": \"xx色\"}",
+      "difficulty": "hard",
+      "category": "灯光"
+    },
+    {
+      "id": "lock_045",
+      "file": "lock_test.json",
+      "err_type": "tool-err",
+      "query": "左后门那个小孩老是碰门把手，锁住",
+      "expected_type": "Action",
+      "gt_tool": "LockControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "儿童锁",
+        "position": "左侧"
+      },
+      "pred_type": "Action",
+      "pred_tool": "GateControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "侧滑门",
+        "position": "左侧"
+      },
+      "pred_raw": "Action: GateControl\nAction Input: {\"action\": \"打开\", \"device\": \"鹏翼门\", \"position\": \"左侧\"}",
+      "difficulty": "hard",
+      "category": "锁控"
+    },
+    {
+      "id": "lock_047",
+      "file": "lock_test.json",
+      "err_type": "args-err",
+      "query": "第三排右边那个孩子要下车，把锁解了",
+      "expected_type": "Action",
+      "gt_tool": "LockControl",
+      "gt_args": {
+        "action": "关闭",
+        "device": "儿童锁",
+        "position": "第三排右侧"
+      },
+      "pred_type": "Action",
+      "pred_tool": "LockControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "儿童锁",
+        "position": "第三排右侧"
+      },
+      "pred_raw": "Action: LockControl\nAction Input: {\"action\": \"关闭\", \"device\": \"儿童锁\", \"position\": \"第三排右侧\"}",
+      "difficulty": "hard",
+      "category": "锁控"
+    },
+    {
+      "id": "lock_050",
+      "file": "lock_test.json",
+      "err_type": "tool-err",
+      "query": "第二排左边的孩子到站了，解锁让他下车",
+      "expected_type": "Action",
+      "gt_tool": "LockControl",
+      "gt_args": {
+        "action": "关闭",
+        "device": "儿童锁",
+        "position": "第二排左侧"
+      },
+      "pred_type": "Action",
+      "pred_tool": "GateControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "鹏翼门",
+        "position": "第二排左侧"
+      },
+      "pred_raw": "Action: GateControl\nAction Input: {\"action\": \"打开\", \"device\": \"鹏翼门\", \"position\": \"第二排左侧\"}",
+      "difficulty": "hard",
+      "category": "锁控"
+    },
+    {
+      "id": "lock_054",
+      "file": "lock_test.json",
+      "err_type": "tool-err",
+      "query": "打开儿童锁，把后排阅读灯也开一下",
+      "expected_type": "Action",
+      "gt_tool": "LockControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "儿童锁"
+      },
+      "pred_type": "Action",
+      "pred_tool": "LightControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "阅读灯",
+        "position": "第二排"
+      },
+      "pred_raw": "Action: LightControl\nAction Input: {\"action\": \"打开\", \"device\": \"阅读灯\", \"position\": \"第二排\"}",
+      "difficulty": "hard",
+      "category": "锁控"
+    },
+    {
+      "id": "media_010",
+      "file": "media_test.json",
+      "err_type": "args-err",
+      "query": "在Spotify上播放下一首",
+      "expected_type": "Action",
+      "gt_tool": "MediaControl",
+      "gt_args": {
+        "app_name": "spotify",
+        "media_control_action": "下一个"
+      },
+      "pred_type": "Action",
+      "pred_tool": "MediaControl",
+      "pred_args": {
+        "app_name": "spotify",
+        "media_control_action": "下一个",
+        "media_category": "歌"
+      },
+      "pred_raw": "Action: MediaPlay\nAction Input: {\"app_name\": \"spotify\", \"media_category\": \"歌\", \"media_source\": \"蓝牙\"}",
+      "difficulty": "medium",
+      "category": "媒体控制"
+    },
+    {
+      "id": "media_042",
+      "file": "media_test.json",
+      "err_type": "tool-err",
+      "query": "换一首吧这首不好听",
+      "expected_type": "Action",
+      "gt_tool": "MediaControl",
+      "gt_args": {
+        "media_category": "歌",
+        "media_control_action": "下一个"
+      },
+      "pred_type": "Action",
+      "pred_tool": "MediaPlay",
+      "pred_args": {
+        "media_category": "歌"
+      },
+      "pred_raw": "Action: MediaPlay\nAction Input: {\"media_category\": \"歌\"}",
+      "difficulty": "medium",
+      "category": "媒体控制"
+    },
+    {
+      "id": "media_050",
+      "file": "media_test.json",
+      "err_type": "tool-err",
+      "query": "从手机上传音乐过来播放",
+      "expected_type": "Action",
+      "gt_tool": "MediaPlay",
+      "gt_args": {
+        "media_source": "蓝牙"
+      },
+      "pred_type": "Action",
+      "pred_tool": "MusicSearchPlay",
+      "pred_args": {
+        "song": "从手机上传音乐过来播放"
+      },
+      "pred_raw": "Action: MusicSearchPlay\nAction Input: {\"song\": \"从手机上传音乐过来播放\"}",
+      "difficulty": "hard",
+      "category": "媒体播放"
+    },
+    {
+      "id": "media_054",
+      "file": "media_test.json",
+      "err_type": "tool-err",
+      "query": "想听那首很火的歌叫什么来着起风了",
+      "expected_type": "Action",
+      "gt_tool": "MusicSearchPlay",
+      "gt_args": {
+        "song": "起风了"
+      },
+      "pred_type": "Action",
+      "pred_tool": "XmlySearchPlay",
+      "pred_args": {
+        "podcast_name": "起风了"
+      },
+      "pred_raw": "Action: XmlySearchPlay\nAction Input: {\"podcast_name\": \"起风了\"}",
+      "difficulty": "medium",
+      "category": "音乐搜索"
+    },
+    {
+      "id": "media_067",
+      "file": "media_test.json",
+      "err_type": "args-err",
+      "query": "这个电台频道不好听换下一个",
+      "expected_type": "Action",
+      "gt_tool": "MediaControl",
+      "gt_args": {
+        "media_category": "FM",
+        "media_control_action": "下一个"
+      },
+      "pred_type": "Action",
+      "pred_tool": "MediaControl",
+      "pred_args": {
+        "media_control_action": "下一个"
+      },
+      "pred_raw": "Action: MediaControl\nAction Input: {\"media_control_action\": \"下一个\"}",
+      "difficulty": "medium",
+      "category": "媒体控制"
+    },
+    {
+      "id": "media_076",
+      "file": "media_test.json",
+      "err_type": "tool-err",
+      "query": "关掉音乐切换到运动模式",
+      "expected_type": "Action",
+      "gt_tool": "MediaControl",
+      "gt_args": {
+        "media_category": "歌",
+        "media_control_action": "关闭"
+      },
+      "pred_type": "Action",
+      "pred_tool": "DrivingControl",
+      "pred_args": {
+        "action": "关闭",
+        "feature": "驾驶模式",
+        "value": "运动模式"
+      },
+      "pred_raw": "Action: DrivingControl\nAction Input: {\"action\": \"打开\", \"feature\": \"驾驶模式\", \"value\": \"运动模式\"}",
+      "difficulty": "hard",
+      "category": "媒体控制+驾驶模式"
+    },
+    {
+      "id": "media_077",
+      "file": "media_test.json",
+      "err_type": "tool-err",
+      "query": "打开YouTube看视频把屏幕亮度调高一点",
+      "expected_type": "Action",
+      "gt_tool": "MediaPlay",
+      "gt_args": {
+        "app_name": "youtube",
+        "media_category": "视频"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ScreenControl",
+      "pred_args": {
+        "action": "调大",
+        "device": "屏幕",
+        "feature": "亮度",
+        "value": "一点"
+      },
+      "pred_raw": "Action: MediaPlay\nAction Input: {\"app_name\": \"youtube\", \"media_category\": \"视频\"}",
+      "difficulty": "hard",
+      "category": "视频播放+屏幕"
+    },
+    {
+      "id": "media_079",
+      "file": "media_test.json",
+      "err_type": "args-err",
+      "query": "放点轻音乐然后方向盘加热打开",
+      "expected_type": "Action",
+      "gt_tool": "MediaPlay",
+      "gt_args": {
+        "media_category": "歌"
+      },
+      "pred_type": "Action",
+      "pred_tool": "MediaPlay",
+      "pred_args": {
+        "media_category": "歌",
+        "media_source": "蓝牙"
+      },
+      "pred_raw": "Action: MediaPlay\nAction Input: {\"media_category\": \"歌\", \"media_source\": \"蓝牙\"}",
+      "difficulty": "hard",
+      "category": "媒体播放+方向盘"
+    },
+    {
+      "id": "phone_021",
+      "file": "phone_test.json",
+      "err_type": "type-err",
+      "query": "帮我找一下张三的电话打给他",
+      "expected_type": "Action",
+      "gt_tool": "PhoneControl",
+      "gt_args": {
+        "action": "搜索",
+        "person": "张三"
+      },
+      "pred_type": "Reject",
+      "pred_tool": null,
+      "pred_args": null,
+      "pred_raw": "Reject",
+      "difficulty": "medium",
+      "category": "电话控制"
+    },
+    {
+      "id": "phone_026",
+      "file": "phone_test.json",
+      "err_type": "args-err",
+      "query": "对方没接到电话再拨一遍",
+      "expected_type": "Action",
+      "gt_tool": "PhoneControl",
+      "gt_args": {
+        "action": "重拨"
+      },
+      "pred_type": "Action",
+      "pred_tool": "PhoneControl",
+      "pred_args": {
+        "action": "回拨"
+      },
+      "pred_raw": "Action: PhoneControl\nAction Input: {\"action\": \"重拨\"}",
+      "difficulty": "medium",
+      "category": "电话控制"
+    },
+    {
+      "id": "phone_042",
+      "file": "phone_test.json",
+      "err_type": "tool-err",
+      "query": "先把音乐暂停然后回拨刚才的电话",
+      "expected_type": "Action",
+      "gt_tool": "MediaControl",
+      "gt_args": {
+        "media_category": "歌",
+        "media_control_action": "暂停"
+      },
+      "pred_type": "Action",
+      "pred_tool": "PhoneControl",
+      "pred_args": {
+        "action": "回拨"
+      },
+      "pred_raw": "Action: PhoneControl\nAction Input: {\"action\": \"回拨\"}",
+      "difficulty": "hard",
+      "category": "电话+媒体"
+    },
+    {
+      "id": "phone_046",
+      "file": "phone_test.json",
+      "err_type": "args-err",
+      "query": "暂停播放的读物然后回拨那个未接来电",
+      "expected_type": "Action",
+      "gt_tool": "MediaControl",
+      "gt_args": {
+        "media_category": "读物",
+        "media_control_action": "暂停"
+      },
+      "pred_type": "Action",
+      "pred_tool": "MediaControl",
+      "pred_args": {
+        "media_control_action": "暂停"
+      },
+      "pred_raw": "Action: GeneralSelect\nAction Input: {\"action\": \"cancel\", \"mode\": \"phone\"}",
+      "difficulty": "hard",
+      "category": "电话+媒体"
+    },
+    {
+      "id": "phone_048",
+      "file": "phone_test.json",
+      "err_type": "args-err",
+      "query": "搜索张师傅的电话然后导航去公司",
+      "expected_type": "Action",
+      "gt_tool": "PhoneControl",
+      "gt_args": {
+        "action": "搜索",
+        "person": "张师傅"
+      },
+      "pred_type": "Action",
+      "pred_tool": "PhoneControl",
+      "pred_args": {
+        "action": "搜索"
+      },
+      "pred_raw": "Action: PhoneControl\nAction Input: {\"action\": \"搜索\", \"person\": \"张师傅\"}",
+      "difficulty": "hard",
+      "category": "电话+导航"
+    },
+    {
+      "id": "phone_049",
+      "file": "phone_test.json",
+      "err_type": "args-err",
+      "query": "屏幕亮度调高一点然后帮我搜索18600001111",
+      "expected_type": "Action",
+      "gt_tool": "ScreenControl",
+      "gt_args": {
+        "action": "调大",
+        "device": "屏幕",
+        "feature": "亮度"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ScreenControl",
+      "pred_args": {
+        "action": "调大",
+        "device": "屏幕",
+        "feature": "亮度",
+        "value": "一点"
+      },
+      "pred_raw": "Action: MusicSearchPlay\nAction Input: {\"song\": \"18600001111\"}",
+      "difficulty": "hard",
+      "category": "电话+屏幕"
+    },
+    {
+      "id": "power_029",
+      "file": "power_test.json",
+      "err_type": "tool-err",
+      "query": "手机充满了把充电板关掉吧",
+      "expected_type": "Action",
+      "gt_tool": "PowerControl",
+      "gt_args": {
+        "action": "关闭",
+        "feature": "无线充电"
+      },
+      "pred_type": "Action",
+      "pred_tool": "GateControl",
+      "pred_args": {
+        "action": "关闭",
+        "device": "充电口"
+      },
+      "pred_raw": "Action: GateControl\nAction Input: {\"action\": \"关闭\", \"device\": \"充电口\"}",
+      "difficulty": "hard",
+      "category": "能源控制"
+    },
+    {
+      "id": "power_037",
+      "file": "power_test.json",
+      "err_type": "tool-err",
+      "query": "市区走走停停开单踏板比较方便",
+      "expected_type": "Action",
+      "gt_tool": "PowerControl",
+      "gt_args": {
+        "action": "调到",
+        "feature": "能量回收",
+        "value": "单踏板"
+      },
+      "pred_type": "Action",
+      "pred_tool": "DrivingControl",
+      "pred_args": {
+        "action": "打开",
+        "feature": "驾驶模式",
+        "value": "单踏板"
+      },
+      "pred_raw": "Action: DrivingControl\nAction Input: {\"action\": \"打开\", \"feature\": \"驾驶模式\", \"value\": \"单踏板\"}",
+      "difficulty": "hard",
+      "category": "能源控制"
+    },
+    {
+      "id": "power_045",
+      "file": "power_test.json",
+      "err_type": "tool-err",
+      "query": "后排右边帮忙开一下充电板",
+      "expected_type": "Action",
+      "gt_tool": "PowerControl",
+      "gt_args": {
+        "action": "打开",
+        "feature": "无线充电",
+        "position": "第二排右侧"
+      },
+      "pred_type": "Action",
+      "pred_tool": "GateControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "充电口",
+        "position": "第二排"
+      },
+      "pred_raw": "Action: GateControl\nAction Input: {\"action\": \"打开\", \"device\": \"充电口\", \"position\": \"第二排\"}",
+      "difficulty": "medium",
+      "category": "能源控制"
+    },
+    {
+      "id": "rearview_026",
+      "file": "rearview_test.json",
+      "err_type": "args-err",
+      "query": "要出发了把后视镜打开吧",
+      "expected_type": "Action",
+      "gt_tool": "RearviewControl",
+      "gt_args": {
+        "action": "展开",
+        "device": "后视镜"
+      },
+      "pred_type": "Action",
+      "pred_tool": "RearviewControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "后视镜"
+      },
+      "pred_raw": "Action: RearviewControl\nAction Input: {\"action\": \"打开\", \"device\": \"后视镜\"}",
+      "difficulty": "medium",
+      "category": "后视镜控制"
+    },
+    {
+      "id": "rearview_027",
+      "file": "rearview_test.json",
+      "err_type": "tool-err",
+      "query": "停好车了把两边的镜子折叠起来",
+      "expected_type": "Action",
+      "gt_tool": "RearviewControl",
+      "gt_args": {
+        "action": "收起",
+        "device": "后视镜"
+      },
+      "pred_type": "Action",
+      "pred_tool": "SpecialControl",
+      "pred_args": {
+        "action": "打开",
+        "feature": "冥想空间"
+      },
+      "pred_raw": "Action: SpecialControl\nAction Input: {\"action\": \"打开\", \"feature\": \"冥想空间\"}",
+      "difficulty": "medium",
+      "category": "后视镜控制"
+    },
+    {
+      "id": "rearview_036",
+      "file": "rearview_test.json",
+      "err_type": "args-err",
+      "query": "变道看不清左后方把左边镜子稍微调一下高度",
+      "expected_type": "Action",
+      "gt_tool": "RearviewControl",
+      "gt_args": {
+        "action": "调大",
+        "device": "后视镜",
+        "feature": "高度",
+        "position": "左侧",
+        "value": "一点"
+      },
+      "pred_type": "Action",
+      "pred_tool": "RearviewControl",
+      "pred_args": {
+        "action": "调小",
+        "device": "后视镜",
+        "feature": "高度",
+        "position": "左侧",
+        "value": "一点"
+      },
+      "pred_raw": "Action: RearviewControl\nAction Input: {\"action\": \"调小\", \"device\": \"后视镜\", \"feature\": \"高度\", \"position\": \"左侧\"}",
+      "difficulty": "hard",
+      "category": "后视镜控制"
+    },
+    {
+      "id": "rearview_042",
+      "file": "rearview_test.json",
+      "err_type": "args-err",
+      "query": "刚换了个人开车我这边的镜子位置不对往下调一下",
+      "expected_type": "Action",
+      "gt_tool": "RearviewControl",
+      "gt_args": {
+        "action": "调小",
+        "device": "后视镜",
+        "feature": "高度",
+        "position": "主驾",
+        "value": "一点"
+      },
+      "pred_type": "Action",
+      "pred_tool": "RearviewControl",
+      "pred_args": {
+        "action": "调小",
+        "device": "后视镜",
+        "feature": "高度",
+        "position": "主驾"
+      },
+      "pred_raw": "Action: RearviewControl\nAction Input: {\"action\": \"调小\", \"device\": \"后视镜\", \"feature\": \"高度\"}",
+      "difficulty": "hard",
+      "category": "后视镜控制"
+    },
+    {
+      "id": "rearview_045",
+      "file": "rearview_test.json",
+      "err_type": "args-err",
+      "query": "两个后视镜都往上调调看不清后车",
+      "expected_type": "Action",
+      "gt_tool": "RearviewControl",
+      "gt_args": {
+        "action": "调大",
+        "device": "后视镜",
+        "feature": "高度"
+      },
+      "pred_type": "Action",
+      "pred_tool": "RearviewControl",
+      "pred_args": {
+        "action": "调大",
+        "device": "后视镜",
+        "position": "右侧",
+        "feature": "高度"
+      },
+      "pred_raw": "Action: RearviewControl\nAction Input: {\"action\": \"调小\", \"device\": \"后视镜\", \"position\": \"右侧\", \"value\": \"一点\"}",
+      "difficulty": "medium",
+      "category": "后视镜控制"
+    },
+    {
+      "id": "rearview_048",
+      "file": "rearview_test.json",
+      "err_type": "tool-err",
+      "query": "后视镜高度调高一点然后空调温度调到22度",
+      "expected_type": "Action",
+      "gt_tool": "RearviewControl",
+      "gt_args": {
+        "action": "调大",
+        "device": "后视镜",
+        "feature": "高度",
+        "value": "一点"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ClimateControl",
+      "pred_args": {
+        "action": "调到",
+        "device": "空调",
+        "feature": "温度",
+        "value": "22"
+      },
+      "pred_raw": "Action: ClimateControl\nAction Input: {\"action\": \"调到\", \"device\": \"空调\", \"feature\": \"温度\", \"value\": \"22\"}",
+      "difficulty": "hard",
+      "category": "后视镜+空调"
+    },
+    {
+      "id": "rearview_050",
+      "file": "rearview_test.json",
+      "err_type": "tool-err",
+      "query": "展开后视镜切换到舒适模式",
+      "expected_type": "Action",
+      "gt_tool": "RearviewControl",
+      "gt_args": {
+        "action": "展开",
+        "device": "后视镜"
+      },
+      "pred_type": "Action",
+      "pred_tool": "DrivingControl",
+      "pred_args": {
+        "action": "打开",
+        "feature": "驾驶模式",
+        "value": "舒适模式"
+      },
+      "pred_raw": "Action: RearviewControl\nAction Input: {\"action\": \"展开\", \"device\": \"后视镜\"}",
+      "difficulty": "hard",
+      "category": "后视镜+驾驶模式"
+    },
+    {
+      "id": "rearview_053",
+      "file": "rearview_test.json",
+      "err_type": "tool-err",
+      "query": "主驾后视镜调高一点方向盘加热打开",
+      "expected_type": "Action",
+      "gt_tool": "RearviewControl",
+      "gt_args": {
+        "action": "调大",
+        "device": "后视镜",
+        "feature": "高度",
+        "position": "主驾",
+        "value": "一点"
+      },
+      "pred_type": "Action",
+      "pred_tool": "SteeringwheelControl",
+      "pred_args": {
+        "device": "方向盘",
+        "feature": "制热",
+        "action": "打开"
+      },
+      "pred_raw": "Action: RearviewControl\nAction Input: {\"action\": \"调大\", \"device\": \"后视镜\", \"feature\": \"高度\", \"position\": \"主驾\"}",
+      "difficulty": "hard",
+      "category": "后视镜+方向盘"
+    },
+    {
+      "id": "rearview_054",
+      "file": "rearview_test.json",
+      "err_type": "tool-err",
+      "query": "收起后视镜关上车窗然后把大灯关了",
+      "expected_type": "Action",
+      "gt_tool": "RearviewControl",
+      "gt_args": {
+        "action": "收起",
+        "device": "后视镜"
+      },
+      "pred_type": "Action",
+      "pred_tool": "WindowControl",
+      "pred_args": {
+        "action": "关闭",
+        "device": "车窗"
+      },
+      "pred_raw": "Action: RearviewControl\nAction Input: {\"action\": \"收起\", \"device\": \"后视镜\"}",
+      "difficulty": "hard",
+      "category": "后视镜+车窗+灯光"
+    },
+    {
+      "id": "rearview_055",
+      "file": "rearview_test.json",
+      "err_type": "tool-err",
+      "query": "展开后视镜打开空调座椅加热也开一下",
+      "expected_type": "Action",
+      "gt_tool": "RearviewControl",
+      "gt_args": {
+        "action": "展开",
+        "device": "后视镜"
+      },
+      "pred_type": "Action",
+      "pred_tool": "SeatControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "后视镜",
+        "feature": "制热"
+      },
+      "pred_raw": "Action: SeatControl\nAction Input: {\"action\": \"打开\", \"device\": \"后视镜\", \"value\": \"展开\"}",
+      "difficulty": "hard",
+      "category": "后视镜+空调+座椅"
+    },
+    {
+      "id": "screen_002",
+      "file": "screen_test.json",
+      "err_type": "tool-err",
+      "query": "关闭屏幕",
+      "expected_type": "Action",
+      "gt_tool": "ScreenControl",
+      "gt_args": {
+        "action": "关闭",
+        "device": "屏幕"
+      },
+      "pred_type": "Action",
+      "pred_tool": "VoiceControl",
+      "pred_args": {
+        "action": "关闭",
+        "feature": "导航音量"
+      },
+      "pred_raw": "Action: VoiceControl\nAction Input: {\"action\": \"打开\", \"feature\": \"导航音量\"}",
+      "difficulty": "easy",
+      "category": "屏幕控制"
+    },
+    {
+      "id": "screen_024",
+      "file": "screen_test.json",
+      "err_type": "args-err",
+      "query": "第二排屏幕亮度调小一点",
+      "expected_type": "Action",
+      "gt_tool": "ScreenControl",
+      "gt_args": {
+        "action": "调小",
+        "device": "屏幕",
+        "feature": "亮度",
+        "position": "第二排",
+        "value": "一点"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ScreenControl",
+      "pred_args": {
+        "action": "调小",
+        "device": "屏幕",
+        "feature": "亮度",
+        "value": "一点"
+      },
+      "pred_raw": "Action: ScreenControl\nAction Input: {\"action\": \"调小\", \"device\": \"屏幕\", \"feature\": \"亮度\", \"position\": \"第二排\"}",
+      "difficulty": "medium",
+      "category": "屏幕控制"
+    },
+    {
+      "id": "screen_027",
+      "file": "screen_test.json",
+      "err_type": "args-err",
+      "query": "屏幕太刺眼了，关掉吧",
+      "expected_type": "Action",
+      "gt_tool": "ScreenControl",
+      "gt_args": {
+        "action": "关闭",
+        "device": "屏幕"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ScreenControl",
+      "pred_args": {
+        "action": "调小",
+        "device": "屏幕",
+        "feature": "亮度"
+      },
+      "pred_raw": "Action: ScreenControl\nAction Input: {\"action\": \"关闭\", \"device\": \"屏幕\"}",
+      "difficulty": "medium",
+      "category": "屏幕控制"
+    },
+    {
+      "id": "screen_028",
+      "file": "screen_test.json",
+      "err_type": "tool-err",
+      "query": "我想看看后排的娱乐系统",
+      "expected_type": "Action",
+      "gt_tool": "ScreenControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "娱乐屏",
+        "position": "第二排"
+      },
+      "pred_type": "Action",
+      "pred_tool": "AppControl",
+      "pred_args": {
+        "action": "打开",
+        "feature": "媒体"
+      },
+      "pred_raw": "Action: AppControl\nAction Input: {\"action\": \"打开\", \"feature\": \"媒体\"}",
+      "difficulty": "medium",
+      "category": "屏幕控制"
+    },
+    {
+      "id": "screen_033",
+      "file": "screen_test.json",
+      "err_type": "tool-err",
+      "query": "第三排那个不用了，收回去",
+      "expected_type": "Action",
+      "gt_tool": "ScreenControl",
+      "gt_args": {
+        "action": "收起",
+        "device": "屏幕",
+        "position": "第三排"
+      },
+      "pred_type": "Action",
+      "pred_tool": "SeatControl",
+      "pred_args": {
+        "action": "收起",
+        "device": "座椅",
+        "position": "第三排"
+      },
+      "pred_raw": "Action: SeatControl\nAction Input: {\"action\": \"收起\", \"device\": \"座椅\", \"position\": \"第三排\"}",
+      "difficulty": "hard",
+      "category": "屏幕控制"
+    },
+    {
+      "id": "screen_046",
+      "file": "screen_test.json",
+      "err_type": "args-err",
+      "query": "屏幕亮度自动调节吧",
+      "expected_type": "Action",
+      "gt_tool": "ScreenControl",
+      "gt_args": {
+        "action": "调到",
+        "device": "屏幕",
+        "value": "自动模式"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ScreenControl",
+      "pred_args": {
+        "action": "调大",
+        "device": "屏幕",
+        "feature": "亮度"
+      },
+      "pred_raw": "Action: ScreenControl\nAction Input: {\"action\": \"调到\", \"device\": \"屏幕\", \"value\": \"自动模式\"}",
+      "difficulty": "medium",
+      "category": "屏幕控制"
+    },
+    {
+      "id": "screen_048",
+      "file": "screen_test.json",
+      "err_type": "args-err",
+      "query": "进隧道了屏幕太亮，换成深色的吧",
+      "expected_type": "Action",
+      "gt_tool": "ScreenControl",
+      "gt_args": {
+        "action": "调到",
+        "device": "屏幕",
+        "value": "黑夜模式"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ScreenControl",
+      "pred_args": {
+        "action": "调小",
+        "device": "屏幕",
+        "value": "黑夜模式",
+        "feature": "亮度"
+      },
+      "pred_raw": "Action: ScreenControl\nAction Input: {\"action\": \"调到\", \"device\": \"屏幕\", \"value\": \"黑夜模式\"}",
+      "difficulty": "hard",
+      "category": "屏幕控制"
+    },
+    {
+      "id": "screen_049",
+      "file": "screen_test.json",
+      "err_type": "args-err",
+      "query": "所有的屏幕都不要亮着了",
+      "expected_type": "Action",
+      "gt_tool": "ScreenControl",
+      "gt_args": {
+        "action": "关闭",
+        "device": "屏幕",
+        "position": "全部"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ScreenControl",
+      "pred_args": {
+        "action": "关闭",
+        "device": "屏幕",
+        "feature": "亮度",
+        "position": "全部"
+      },
+      "pred_raw": "Action: ScreenControl\nAction Input: {\"action\": \"关闭\", \"device\": \"屏幕\"}",
+      "difficulty": "hard",
+      "category": "屏幕控制"
+    },
+    {
+      "id": "screen_053",
+      "file": "screen_test.json",
+      "err_type": "args-err",
+      "query": "把屏幕亮度调低一点，空调温度也降两度",
+      "expected_type": "Action",
+      "gt_tool": "ScreenControl",
+      "gt_args": {
+        "action": "调小",
+        "device": "屏幕",
+        "feature": "亮度",
+        "value": "一点"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ScreenControl",
+      "pred_args": {
+        "action": "调大",
+        "device": "屏幕",
+        "feature": "亮度",
+        "value": "一点"
+      },
+      "pred_raw": "Action: ClimateControl\nAction Input: {\"action\": \"调小\", \"device\": \"空调\", \"feature\": \"温度\", \"value\": \"2\"}",
+      "difficulty": "hard",
+      "category": "屏幕控制"
+    },
+    {
+      "id": "screen_054",
+      "file": "screen_test.json",
+      "err_type": "tool-err",
+      "query": "关闭屏幕，然后帮我打开主驾车窗",
+      "expected_type": "Action",
+      "gt_tool": "ScreenControl",
+      "gt_args": {
+        "action": "关闭",
+        "device": "屏幕"
+      },
+      "pred_type": "Action",
+      "pred_tool": "WindowControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "车窗"
+      },
+      "pred_raw": "Action: WindowControl\nAction Input: {\"action\": \"打开\", \"device\": \"车窗\", \"position\": \"主驾\"}",
+      "difficulty": "hard",
+      "category": "屏幕控制"
+    },
+    {
+      "id": "screen_056",
+      "file": "screen_test.json",
+      "err_type": "args-err",
+      "query": "屏幕亮度拉到最低，音量也调小一点",
+      "expected_type": "Action",
+      "gt_tool": "ScreenControl",
+      "gt_args": {
+        "action": "调到",
+        "device": "屏幕",
+        "feature": "亮度",
+        "value": "最小"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ScreenControl",
+      "pred_args": {
+        "action": "调到",
+        "device": "屏幕",
+        "feature": "亮度"
+      },
+      "pred_raw": "Action: ScreenControl\nAction Input: {\"action\": \"调到\", \"device\": \"屏幕\", \"value\": \"最小\"}",
+      "difficulty": "hard",
+      "category": "屏幕控制"
+    },
+    {
+      "id": "screen_058",
+      "file": "screen_test.json",
+      "err_type": "args-err",
+      "query": "打开第二排的屏幕，关闭第三排的屏幕",
+      "expected_type": "Action",
+      "gt_tool": "ScreenControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "屏幕",
+        "position": "第二排"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ScreenControl",
+      "pred_args": {},
+      "pred_raw": "Action: ScreenControl\nAction Input: {\"action\": \"打开\", \"device\": \"屏幕\", \"position\": \"第二排\"}\nAction: ScreenControl\nAction Input: {\"action\": \"关闭\", \"device\": \"屏幕\", \"position\": \"第三排\"}",
+      "difficulty": "hard",
+      "category": "屏幕控制"
+    },
+    {
+      "id": "screen_060",
+      "file": "screen_test.json",
+      "err_type": "args-err",
+      "query": "把后排左边的屏幕展开，亮度调到百分之六十",
+      "expected_type": "Action",
+      "gt_tool": "ScreenControl",
+      "gt_args": {
+        "action": "展开",
+        "device": "屏幕",
+        "position": "第二排左侧"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ScreenControl",
+      "pred_args": {
+        "action": "展开",
+        "device": "屏幕",
+        "position": "第二排左侧",
+        "value": "60%"
+      },
+      "pred_raw": "Action: ScreenControl\nAction Input: {\"action\": \"展开\", \"device\": \"屏幕\", \"position\": \"第二排左侧\", \"value\": \"60%\"}",
+      "difficulty": "hard",
+      "category": "屏幕控制"
+    },
+    {
+      "id": "seat_040",
+      "file": "seat_test.json",
+      "err_type": "args-err",
+      "query": "靠背太直了，往后仰一点",
+      "expected_type": "Action",
+      "gt_tool": "SeatControl",
+      "gt_args": {
+        "action": "调后",
+        "device": "靠背",
+        "value": "一点"
+      },
+      "pred_type": "Action",
+      "pred_tool": "SeatControl",
+      "pred_args": {
+        "action": "调后",
+        "device": "靠背"
+      },
+      "pred_raw": "Action: SeatControl\nAction Input: {\"action\": \"调后\", \"device\": \"靠背\", \"value\": \"一点\"}",
+      "difficulty": "medium",
+      "category": "座椅"
+    },
+    {
+      "id": "seat_042",
+      "file": "seat_test.json",
+      "err_type": "tool-err",
+      "query": "我想躺一会儿",
+      "expected_type": "Action",
+      "gt_tool": "SeatControl",
+      "gt_args": {
+        "action": "放平",
+        "device": "座椅"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ProfileControl",
+      "pred_args": {
+        "action": "打开",
+        "feature": "习惯",
+        "value": "小憩模式"
+      },
+      "pred_raw": "Action: ProfileControl\nAction Input: {\"action\": \"打开\", \"feature\": \"习惯\", \"value\": \"小憩模式\"}",
+      "difficulty": "hard",
+      "category": "座椅"
+    },
+    {
+      "id": "seat_043",
+      "file": "seat_test.json",
+      "err_type": "tool-err",
+      "query": "等人好无聊，想平躺休息",
+      "expected_type": "Action",
+      "gt_tool": "SeatControl",
+      "gt_args": {
+        "action": "放平",
+        "device": "座椅"
+      },
+      "pred_type": "Action",
+      "pred_tool": "SpecialControl",
+      "pred_args": {
+        "action": "打开",
+        "feature": "冥想空间"
+      },
+      "pred_raw": "Action: SpecialControl\nAction Input: {\"action\": \"打开\", \"feature\": \"冥想空间\"}",
+      "difficulty": "hard",
+      "category": "座椅"
+    },
+    {
+      "id": "seat_050",
+      "file": "seat_test.json",
+      "err_type": "tool-err",
+      "query": "不按了，有点痒",
+      "expected_type": "Action",
+      "gt_tool": "SeatControl",
+      "gt_args": {
+        "action": "关闭",
+        "device": "座椅",
+        "feature": "按摩"
+      },
+      "pred_type": "Action",
+      "pred_tool": "LockControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "儿童锁"
+      },
+      "pred_raw": "Action: LockControl\nAction Input: {\"action\": \"关闭\", \"device\": \"儿童锁\"}",
+      "difficulty": "hard",
+      "category": "座椅"
+    },
+    {
+      "id": "seat_051",
+      "file": "seat_test.json",
+      "err_type": "tool-err",
+      "query": "屁股好热，闷得慌",
+      "expected_type": "Action",
+      "gt_tool": "SeatControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "座椅",
+        "feature": "通风"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ClimateControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "空调",
+        "value": "外循环"
+      },
+      "pred_raw": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"空调\", \"value\": \"外循环\"}",
+      "difficulty": "hard",
+      "category": "座椅"
+    },
+    {
+      "id": "seat_052",
+      "file": "seat_test.json",
+      "err_type": "tool-err",
+      "query": "夏天坐皮座椅好粘，透透气",
+      "expected_type": "Action",
+      "gt_tool": "SeatControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "座椅",
+        "feature": "通风"
+      },
+      "pred_type": "Action",
+      "pred_tool": "WindowControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "车窗"
+      },
+      "pred_raw": "Action: WindowControl\nAction Input: {\"action\": \"打开\", \"device\": \"车窗\"}",
+      "difficulty": "hard",
+      "category": "座椅"
+    },
+    {
+      "id": "seat_055",
+      "file": "seat_test.json",
+      "err_type": "args-err",
+      "query": "坐上去屁股好凉",
+      "expected_type": "Action",
+      "gt_tool": "SeatControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "座椅",
+        "feature": "制热"
+      },
+      "pred_type": "Action",
+      "pred_tool": "SeatControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "座椅",
+        "feature": "制热",
+        "position": "第二排"
+      },
+      "pred_raw": "Action: SeatControl\nAction Input: {\"action\": \"打开\", \"device\": \"座椅\", \"feature\": \"制热\", \"position\": \"第二排\"}",
+      "difficulty": "hard",
+      "category": "座椅"
+    },
+    {
+      "id": "seat_057",
+      "file": "seat_test.json",
+      "err_type": "tool-err",
+      "query": "加热太猛了，调低一些",
+      "expected_type": "Action",
+      "gt_tool": "SeatControl",
+      "gt_args": {
+        "action": "调小",
+        "device": "座椅",
+        "feature": "制热",
+        "value": "一点"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ClimateControl",
+      "pred_args": {
+        "action": "调小",
+        "device": "空调",
+        "feature": "温度",
+        "value": "一点"
+      },
+      "pred_raw": "Action: ClimateControl\nAction Input: {\"action\": \"调小\", \"device\": \"空调\", \"feature\": \"温度\", \"value\": \"一点\"}",
+      "difficulty": "medium",
+      "category": "座椅"
+    },
+    {
+      "id": "seat_060",
+      "file": "seat_test.json",
+      "err_type": "args-err",
+      "query": "好冷好累，座椅加热开起来，再来个按摩",
+      "expected_type": "Action",
+      "gt_tool": "SeatControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "座椅",
+        "feature": "制热"
+      },
+      "pred_type": "Action",
+      "pred_tool": "SeatControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "座椅",
+        "feature": "按摩"
+      },
+      "pred_raw": "Action: SeatControl\nAction Input: {\"action\": \"打开\", \"device\": \"座椅\", \"feature\": \"按摩\"}",
+      "difficulty": "hard",
+      "category": "座椅"
+    },
+    {
+      "id": "seat_063",
+      "file": "seat_test.json",
+      "err_type": "args-err",
+      "query": "靠背往后调一些，然后开个长途解乏按摩",
+      "expected_type": "Action",
+      "gt_tool": "SeatControl",
+      "gt_args": {
+        "action": "调后",
+        "device": "靠背",
+        "value": "一点"
+      },
+      "pred_type": "Action",
+      "pred_tool": "SeatControl",
+      "pred_args": {
+        "action": "调到",
+        "device": "靠背",
+        "feature": "按摩",
+        "value": "长途解乏"
+      },
+      "pred_raw": "Action: SeatControl\nAction Input: {\"action\": \"调后\", \"device\": \"靠背\", \"feature\": \"位置\", \"value\": \"一点\"}",
+      "difficulty": "hard",
+      "category": "座椅"
+    },
+    {
+      "id": "steering_033",
+      "file": "steering_test.json",
+      "err_type": "tool-err",
+      "query": "加热开到最猛的档位吧，手太冷了",
+      "expected_type": "Action",
+      "gt_tool": "SteeringwheelControl",
+      "gt_args": {
+        "action": "调到",
+        "device": "方向盘",
+        "feature": "制热",
+        "value": "最大"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ClimateControl",
+      "pred_args": {
+        "action": "调到",
+        "device": "空调",
+        "feature": "温度",
+        "value": "最大"
+      },
+      "pred_raw": "Action: ClimateControl\nAction Input: {\"action\": \"调到\", \"device\": \"空调\", \"feature\": \"温度\", \"value\": \"最大\"}",
+      "difficulty": "hard",
+      "category": "方向盘控制"
+    },
+    {
+      "id": "steering_034",
+      "file": "steering_test.json",
+      "err_type": "args-err",
+      "query": "方向盘温度差不多了，降到最低档就行",
+      "expected_type": "Action",
+      "gt_tool": "SteeringwheelControl",
+      "gt_args": {
+        "action": "调到",
+        "device": "方向盘",
+        "feature": "制热",
+        "value": "最小"
+      },
+      "pred_type": "Action",
+      "pred_tool": "SteeringwheelControl",
+      "pred_args": {
+        "device": "方向盘",
+        "feature": "制热",
+        "action": "打开",
+        "value": "最小"
+      },
+      "pred_raw": "Action: SteeringwheelControl\nAction Input: {\"action\": \"调到\", \"device\": \"方向盘\", \"feature\": \"制热\", \"value\": \"最小\"}",
+      "difficulty": "hard",
+      "category": "方向盘控制"
+    },
+    {
+      "id": "steering_036",
+      "file": "steering_test.json",
+      "err_type": "args-err",
+      "query": "方向盘转起来太沉了，调轻一点",
+      "expected_type": "Action",
+      "gt_tool": "SteeringwheelControl",
+      "gt_args": {
+        "action": "调到",
+        "device": "方向盘",
+        "feature": "助力",
+        "value": "轻盈模式"
+      },
+      "pred_type": "Action",
+      "pred_tool": "SteeringwheelControl",
+      "pred_args": {
+        "device": "方向盘",
+        "feature": "助力",
+        "action": "调小"
+      },
+      "pred_raw": "Action: SteeringwheelControl\nAction Input: {\"action\": \"调小\", \"device\": \"方向盘\", \"feature\": \"助力\"}",
+      "difficulty": "medium",
+      "category": "方向盘控制"
+    },
+    {
+      "id": "steering_038",
+      "file": "steering_test.json",
+      "err_type": "args-err",
+      "query": "我想要那种比较有驾驶感的方向盘手感",
+      "expected_type": "Action",
+      "gt_tool": "SteeringwheelControl",
+      "gt_args": {
+        "action": "调到",
+        "device": "方向盘",
+        "feature": "助力",
+        "value": "运动模式"
+      },
+      "pred_type": "Action",
+      "pred_tool": "SteeringwheelControl",
+      "pred_args": {
+        "device": "方向盘",
+        "feature": "制热",
+        "action": "打开",
+        "value": "运动模式"
+      },
+      "pred_raw": "Action: SteeringwheelControl\nAction Input: {\"action\": \"调到\", \"device\": \"方向盘\", \"feature\": \"助力\", \"value\": \"运动模式\"}",
+      "difficulty": "hard",
+      "category": "方向盘控制"
+    },
+    {
+      "id": "steering_040",
+      "file": "steering_test.json",
+      "err_type": "args-err",
+      "query": "转向力度恢复默认吧",
+      "expected_type": "Action",
+      "gt_tool": "SteeringwheelControl",
+      "gt_args": {
+        "action": "调到",
+        "device": "方向盘",
+        "feature": "助力",
+        "value": "标准模式"
+      },
+      "pred_type": "Action",
+      "pred_tool": "SteeringwheelControl",
+      "pred_args": {
+        "device": "方向盘",
+        "feature": "助力",
+        "action": "打开",
+        "value": "标准模式"
+      },
+      "pred_raw": "Action: SteeringwheelControl\nAction Input: {\"action\": \"调到\", \"device\": \"方向盘\", \"feature\": \"助力\", \"value\": \"标准模式\"}",
+      "difficulty": "medium",
+      "category": "方向盘控制"
+    },
+    {
+      "id": "steering_044",
+      "file": "steering_test.json",
+      "err_type": "args-err",
+      "query": "倒车入库好费劲，方向盘能不能轻一些",
+      "expected_type": "Action",
+      "gt_tool": "SteeringwheelControl",
+      "gt_args": {
+        "action": "调到",
+        "device": "方向盘",
+        "feature": "助力",
+        "value": "轻盈模式"
+      },
+      "pred_type": "Action",
+      "pred_tool": "SteeringwheelControl",
+      "pred_args": {
+        "action": "调小",
+        "device": "方向盘",
+        "feature": "助力"
+      },
+      "pred_raw": "Action: SteeringwheelControl\nAction Input: {\"action\": \"调小\", \"device\": \"方向盘\", \"feature\": \"助力\"}",
+      "difficulty": "hard",
+      "category": "方向盘控制"
+    },
+    {
+      "id": "steering_051",
+      "file": "steering_test.json",
+      "err_type": "args-err",
+      "query": "打开方向盘加热，助力切到运动模式",
+      "expected_type": "Action",
+      "gt_tool": "SteeringwheelControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "方向盘",
+        "feature": "制热"
+      },
+      "pred_type": "Action",
+      "pred_tool": "SteeringwheelControl",
+      "pred_args": {
+        "device": "方向盘",
+        "feature": "助力",
+        "action": "打开",
+        "value": "运动模式"
+      },
+      "pred_raw": "Action: SteeringwheelControl\nAction Input: {\"action\": \"打开\", \"device\": \"方向盘\", \"feature\": \"制热\"}",
+      "difficulty": "hard",
+      "category": "方向盘控制"
+    },
+    {
+      "id": "steering_052",
+      "file": "steering_test.json",
+      "err_type": "args-err",
+      "query": "方向盘加热关掉，助力调到舒适",
+      "expected_type": "Action",
+      "gt_tool": "SteeringwheelControl",
+      "gt_args": {
+        "action": "关闭",
+        "device": "方向盘",
+        "feature": "制热"
+      },
+      "pred_type": "Action",
+      "pred_tool": "SteeringwheelControl",
+      "pred_args": {
+        "device": "方向盘",
+        "feature": "助力",
+        "action": "关闭"
+      },
+      "pred_raw": "Action: SteeringwheelControl\nAction Input: {\"action\": \"关闭\", \"device\": \"方向盘\", \"feature\": \"制热\"}",
+      "difficulty": "hard",
+      "category": "方向盘控制"
+    },
+    {
+      "id": "steering_057",
+      "file": "steering_test.json",
+      "err_type": "args-err",
+      "query": "方向盘助力调到轻盈模式，音量也调小一点",
+      "expected_type": "Action",
+      "gt_tool": "SteeringwheelControl",
+      "gt_args": {
+        "action": "调到",
+        "device": "方向盘",
+        "feature": "助力",
+        "value": "轻盈模式"
+      },
+      "pred_type": "Action",
+      "pred_tool": "SteeringwheelControl",
+      "pred_args": {
+        "device": "方向盘",
+        "feature": "助力",
+        "action": "调到",
+        "value": "一点"
+      },
+      "pred_raw": "Action: SteeringwheelControl\nAction Input: {\"action\": \"调到\", \"device\": \"方向盘\", \"feature\": \"助力\", \"value\": \"轻盈模式\"}",
+      "difficulty": "hard",
+      "category": "方向盘控制"
+    },
+    {
+      "id": "steering_058",
+      "file": "steering_test.json",
+      "err_type": "args-err",
+      "query": "方向盘加热开到最大，把大灯也打开",
+      "expected_type": "Action",
+      "gt_tool": "SteeringwheelControl",
+      "gt_args": {
+        "action": "调到",
+        "device": "方向盘",
+        "feature": "制热",
+        "value": "最大"
+      },
+      "pred_type": "Action",
+      "pred_tool": "SteeringwheelControl",
+      "pred_args": {
+        "device": "方向盘",
+        "feature": "制热",
+        "action": "打开",
+        "value": "最大"
+      },
+      "pred_raw": "Action: SteeringwheelControl\nAction Input: {\"action\": \"调到\", \"device\": \"方向盘\", \"feature\": \"制热\", \"value\": \"最大\"}",
+      "difficulty": "hard",
+      "category": "方向盘控制"
+    },
+    {
+      "id": "steering_060",
+      "file": "steering_test.json",
+      "err_type": "args-err",
+      "query": "方向盘助力切稳重模式，仪表亮度调大一点",
+      "expected_type": "Action",
+      "gt_tool": "SteeringwheelControl",
+      "gt_args": {
+        "action": "调到",
+        "device": "方向盘",
+        "feature": "助力",
+        "value": "稳重模式"
+      },
+      "pred_type": "Action",
+      "pred_tool": "SteeringwheelControl",
+      "pred_args": {
+        "device": "方向盘",
+        "feature": "助力",
+        "action": "调到",
+        "value": "一点"
+      },
+      "pred_raw": "Action: SteeringwheelControl\nAction Input: {\"action\": \"调到\", \"device\": \"方向盘\", \"feature\": \"助力\", \"value\": \"稳重模式\"}",
+      "difficulty": "hard",
+      "category": "方向盘控制"
+    },
+    {
+      "id": "voice_008",
+      "file": "voice_test.json",
+      "err_type": "args-err",
+      "query": "音量调到五",
+      "expected_type": "Action",
+      "gt_tool": "VoiceControl",
+      "gt_args": {
+        "action": "调到",
+        "feature": "音量",
+        "value": "5"
+      },
+      "pred_type": "Action",
+      "pred_tool": "VoiceControl",
+      "pred_args": {
+        "action": "调到",
+        "feature": "音量"
+      },
+      "pred_raw": "Action: VoiceControl\nAction Input: {\"action\": \"调到\", \"feature\": \"音量\", \"value\": \"5\"}",
+      "difficulty": "medium",
+      "category": "音量控制"
+    },
+    {
+      "id": "voice_046",
+      "file": "voice_test.json",
+      "err_type": "args-err",
+      "query": "副驾那边太吵了，给她那边音量降低",
+      "expected_type": "Action",
+      "gt_tool": "VoiceControl",
+      "gt_args": {
+        "action": "调小",
+        "feature": "音量",
+        "position": "副驾"
+      },
+      "pred_type": "Action",
+      "pred_tool": "VoiceControl",
+      "pred_args": {
+        "action": "调小",
+        "feature": "通话音量"
+      },
+      "pred_raw": "Action: VoiceControl\nAction Input: {\"action\": \"调小\", \"feature\": \"通话音量\", \"position\": \"副驾\"}",
+      "difficulty": "hard",
+      "category": "音量控制"
+    },
+    {
+      "id": "voice_051",
+      "file": "voice_test.json",
+      "err_type": "args-err",
+      "query": "全车安静，不要任何声音",
+      "expected_type": "Action",
+      "gt_tool": "VoiceControl",
+      "gt_args": {
+        "action": "关闭",
+        "feature": "声音"
+      },
+      "pred_type": "Action",
+      "pred_tool": "VoiceControl",
+      "pred_args": {
+        "action": "关闭",
+        "feature": "音量",
+        "position": "全部"
+      },
+      "pred_raw": "Action: VoiceControl\nAction Input: {\"action\": \"关闭\", \"feature\": \"声音\"}",
+      "difficulty": "medium",
+      "category": "音量控制"
+    },
+    {
+      "id": "window_003",
+      "file": "window_test.json",
+      "err_type": "args-err",
+      "query": "把左边车窗打开",
+      "expected_type": "Action",
+      "gt_tool": "WindowControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "车窗",
+        "position": "左侧"
+      },
+      "pred_type": "Action",
+      "pred_tool": "WindowControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "车窗"
+      },
+      "pred_raw": "Action: WindowControl\nAction Input: {\"action\": \"打开\", \"device\": \"车窗\", \"position\": \"左侧\"}",
+      "difficulty": "easy",
+      "category": "车窗"
+    },
+    {
+      "id": "window_023",
+      "file": "window_test.json",
+      "err_type": "tool-err",
+      "query": "有点吵，隔绝一下外面的声音",
+      "expected_type": "Action",
+      "gt_tool": "WindowControl",
+      "gt_args": {
+        "action": "关闭",
+        "device": "车窗"
+      },
+      "pred_type": "Action",
+      "pred_tool": "VoiceControl",
+      "pred_args": {
+        "action": "打开",
+        "feature": "音量"
+      },
+      "pred_raw": "Action: VoiceControl\nAction Input: {\"action\": \"打开\", \"feature\": \"音量\"}",
+      "difficulty": "hard",
+      "category": "车窗"
+    },
+    {
+      "id": "window_027",
+      "file": "window_test.json",
+      "err_type": "tool-err",
+      "query": "别开那么大，有点冷",
+      "expected_type": "Action",
+      "gt_tool": "WindowControl",
+      "gt_args": {
+        "action": "再关",
+        "device": "车窗",
+        "value": "一点"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ClimateControl",
+      "pred_args": {
+        "action": "调小",
+        "device": "空调",
+        "feature": "温度",
+        "value": "一点"
+      },
+      "pred_raw": "Action: ClimateControl\nAction Input: {\"action\": \"调小\", \"device\": \"空调\", \"feature\": \"温度\", \"value\": \"一点\"}",
+      "difficulty": "hard",
+      "category": "车窗"
+    },
+    {
+      "id": "window_031",
+      "file": "window_test.json",
+      "err_type": "args-err",
+      "query": "天黑了，不需要遮阳了",
+      "expected_type": "Action",
+      "gt_tool": "WindowControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "遮阳帘"
+      },
+      "pred_type": "Action",
+      "pred_tool": "WindowControl",
+      "pred_args": {
+        "action": "关闭",
+        "device": "遮阳帘"
+      },
+      "pred_raw": "Action: WindowControl\nAction Input: {\"action\": \"关闭\", \"device\": \"遮阳帘\"}",
+      "difficulty": "hard",
+      "category": "车窗"
+    },
+    {
+      "id": "window_038",
+      "file": "window_test.json",
+      "err_type": "tool-err",
+      "query": "车里有味道，换换空气",
+      "expected_type": "Action",
+      "gt_tool": "WindowControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "车窗"
+      },
+      "pred_type": "Action",
+      "pred_tool": "ClimateControl",
+      "pred_args": {
+        "action": "打开",
+        "device": "空调",
+        "value": "通风"
+      },
+      "pred_raw": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"空调\", \"value\": \"通风\"}",
+      "difficulty": "hard",
+      "category": "车窗"
+    },
+    {
+      "id": "window_042",
+      "file": "window_test.json",
+      "err_type": "args-err",
+      "query": "把我这边的窗打开",
+      "expected_type": "Action",
+      "gt_tool": "WindowControl",
+      "gt_args": {
+        "action": "打开",
+        "device": "车窗",
+        "position": "主驾"
+      },
+      "pred_type": "Action",
+      "pred_tool": "WindowControl",
+      "pred_args": {
+        "action": "开到",
+        "device": "车窗",
+        "value": "50%"
+      },
+      "pred_raw": "Action: WindowControl\nAction Input: {\"action\": \"打开\", \"device\": \"车窗\", \"position\": \"主驾\"}",
+      "difficulty": "medium",
+      "category": "车窗"
+    },
+    {
+      "id": "window_043",
+      "file": "window_test.json",
+      "err_type": "args-err",
+      "query": "不用全遮住，挡一半就行",
+      "expected_type": "Action",
+      "gt_tool": "WindowControl",
+      "gt_args": {
+        "action": "关到",
+        "device": "遮阳帘",
+        "value": "50%"
+      },
+      "pred_type": "Action",
+      "pred_tool": "WindowControl",
+      "pred_args": {
+        "action": "关闭",
+        "device": "遮阳帘",
+        "value": "50%"
+      },
+      "pred_raw": "Action: WindowControl\nAction Input: {\"action\": \"打开\", \"device\": \"遮阳帘\", \"value\": \"50%\"}",
+      "difficulty": "hard",
+      "category": "车窗"
+    },
+    {
+      "id": "window_047",
+      "file": "window_test.json",
+      "err_type": "args-err",
+      "query": "关上后排车窗然后锁住",
+      "expected_type": "Action",
+      "gt_tool": "WindowControl",
+      "gt_args": {
+        "action": "关闭",
+        "device": "车窗",
+        "position": "第二排"
+      },
+      "pred_type": "Action",
+      "pred_tool": "WindowControl",
+      "pred_args": {
+        "action": "关闭",
+        "device": "车窗"
+      },
+      "pred_raw": "Action: WindowControl\nAction Input: {\"action\": \"关闭\", \"device\": \"车窗\", \"position\": \"第二排\"}",
+      "difficulty": "hard",
+      "category": "车窗"
+    },
+    {
+      "id": "window_051",
+      "file": "window_test.json",
+      "err_type": "args-err",
+      "query": "左边的车窗关上，右边的开一点",
+      "expected_type": "Action",
+      "gt_tool": "WindowControl",
+      "gt_args": {
+        "action": "关闭",
+        "device": "车窗",
+        "position": "左侧"
+      },
+      "pred_type": "Action",
+      "pred_tool": "WindowControl",
+      "pred_args": {
+        "action": "关闭",
+        "device": "车窗"
+      },
+      "pred_raw": "Action: WindowControl\nAction Input: {\"action\": \"关闭\", \"device\": \"车窗\", \"position\": \"左侧\"}",
+      "difficulty": "hard",
+      "category": "车窗"
+    },
+    {
+      "id": "window_055",
+      "file": "window_test.json",
+      "err_type": "tool-err",
+      "query": "后面有小孩，把后排窗户关了锁上别让他们乱动",
+      "expected_type": "Action",
+      "gt_tool": "WindowControl",
+      "gt_args": {
+        "action": "关闭",
+        "device": "车窗",
+        "position": "第二排"
+      },
+      "pred_type": "Action",
+      "pred_tool": "LockControl",
+      "pred_args": {
+        "action": "关闭",
+        "device": "儿童锁",
+        "position": "第二排"
+      },
+      "pred_raw": "Action: LockControl\nAction Input: {\"action\": \"打开\", \"device\": \"车窗锁\", \"position\": \"第二排\"}",
+      "difficulty": "hard",
+      "category": "车窗"
+    },
+    {
+      "id": "window_056",
+      "file": "window_test.json",
+      "err_type": "tool-err",
+      "query": "准备睡一会儿，窗户关上遮阳帘也拉好",
+      "expected_type": "Action",
+      "gt_tool": "WindowControl",
+      "gt_args": {
+        "action": "关闭",
+        "device": "车窗",
+        "position": "全部"
+      },
+      "pred_type": "Action",
+      "pred_tool": "GeneralSelect",
+      "pred_args": {
+        "action": "confirm",
+        "mode": "phone"
+      },
+      "pred_raw": "Action: GeneralSelect\nAction Input: {\"action\": \"confirm\", \"mode\": \"phone\"}",
+      "difficulty": "hard",
+      "category": "车窗"
+    },
+    {
+      "id": "window_057",
+      "file": "window_test.json",
+      "err_type": "args-err",
+      "query": "我这边开一半，老婆那边关了吧",
+      "expected_type": "Action",
+      "gt_tool": "WindowControl",
+      "gt_args": {
+        "action": "开到",
+        "device": "车窗",
+        "position": "主驾",
+        "value": "50%"
+      },
+      "pred_type": "Action",
+      "pred_tool": "WindowControl",
+      "pred_args": {
+        "action": "开到",
+        "device": "车窗",
+        "value": "50%"
+      },
+      "pred_raw": "Action: WindowControl\nAction Input: {\"action\": \"再开\", \"device\": \"车窗\", \"position\": \"第二排\"}",
+      "difficulty": "hard",
+      "category": "车窗"
+    }
+  ],
+  "evaluation_mode": "postprocessed_model_output",
+  "postprocess_applied": true,
+  "postprocess_note": "Historical eval report generated before 2026-05-06 eval.py change; parsed tool names/args were corrected by tool_postprocess.py, so metrics reflect model + postprocess fallback rather than raw model capability."
+}

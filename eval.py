@@ -31,8 +31,6 @@ from peft import PeftModel
 from qwen_omni_utils import process_mm_info
 from transformers import Qwen2_5OmniForConditionalGeneration, Qwen2_5OmniProcessor
 
-from tool_postprocess import postprocess_action_call
-
 # Suppress the per-sample "System prompt modified" warning from Qwen2.5-Omni;
 # it fires once per inference call when using a custom system prompt and is expected.
 logging.getLogger().addFilter(
@@ -43,6 +41,8 @@ logging.getLogger().addFilter(
 
 ACTION_RE = re.compile(r"Action:\s*([A-Za-z0-9_]+)")
 ACTION_INPUT_RE = re.compile(r"Action Input:\s*(\{[\s\S]*\})")
+EVALUATION_MODE = "raw_model_output"
+POSTPROCESS_APPLIED = False
 
 # Resolve default SP path relative to script location (works from any cwd).
 _PROJECT_DIR = Path(__file__).resolve().parent
@@ -358,7 +358,6 @@ def eval_file(
             idx = batch_start + i
             pred = preds[i]
             pred_tool, pred_args, pred_type = parse_action(pred)
-            pred_tool, pred_args = postprocess_action_call(query, pred_tool, pred_args)
 
             # Per-sample result
             type_ok = "✓" if pred_type == expected_type else "✗"
@@ -524,6 +523,9 @@ def run_batch(args, model, processor, system_prompt: str) -> None:
 
     report = {
         "timestamp": datetime.now().isoformat(),
+        "evaluation_mode": EVALUATION_MODE,
+        "postprocess_applied": POSTPROCESS_APPLIED,
+        "postprocess_note": "eval.py reports raw model tool names and args; serve.py may still apply runtime postprocess fallback.",
         "model_dir": args.model_dir,
         "lora_dir": args.lora_dir or None,
         "eval_dir": args.eval_dir,
@@ -558,7 +560,6 @@ def run_single(args, model, processor, system_prompt: str) -> None:
         audio_path=audio_path,
     )
     tool, tool_args, pred_type = parse_action(pred)
-    tool, tool_args = postprocess_action_call(args.prompt, tool, tool_args)
     print(f"[type] {pred_type}")
     if pred_type == "Action":
         print(f"[tool] {tool}")
