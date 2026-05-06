@@ -181,6 +181,8 @@ def _safe_b64decode(data: str) -> bytes:
     """Decode base64 (standard or URL-safe), tolerating whitespace, missing padding,
     and the 'mod-4 == 1' corruption case (drop one char to make it decodable).
     """
+    if data.startswith("data:") and "," in data:
+        data = data.split(",", 1)[1]
     # Normalize URL-safe chars
     data = data.replace('-', '+').replace('_', '/')
     # Strip all non-base64 chars

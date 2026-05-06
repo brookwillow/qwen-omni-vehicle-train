@@ -168,7 +168,7 @@ curl http://localhost:8000/v1/chat/completions \
   }'
 ```
 
-**音频请求（base64 编码 WAV）**
+**音频请求（base64 编码音频）**
 ```bash
 curl http://localhost:8000/v1/chat/completions \
   -H "Content-Type: application/json" \
@@ -182,6 +182,8 @@ curl http://localhost:8000/v1/chat/completions \
     "temperature": 0
   }'
 ```
+
+`input_audio.data` 支持纯 base64，也支持 `data:audio/<fmt>;base64,` 前缀的 data URL。服务端会先解码音频，再用 `ffmpeg` 统一转为 16kHz mono WAV 交给 Qwen Omni processor；裸 PCM 建议传 `format: "pcm"`，并带上 `sample_rate: 16000`、`channels: 1`。
 
 **Python 客户端（openai SDK）**
 ```python
