@@ -699,7 +699,12 @@ def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] |
                     fixed["action"] = "开到"
                 elif fixed.get("device") == "遮阳帘":
                     fixed["action"] = "关到"
-        if fixed.get("position") and not _mentions_seat_position(first_part) and fixed.get("position") != "全部":
+        if (
+            first_part
+            and fixed.get("position")
+            and not _mentions_seat_position(first_part)
+            and fixed.get("position") != "全部"
+        ):
             fixed.pop("position", None)
         if any(term in first_part for term in ("进高速", "关上窗")) and fixed.get("device") == "车窗":
             fixed["position"] = "全部"

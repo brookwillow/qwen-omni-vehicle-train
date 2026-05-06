@@ -937,6 +937,17 @@ def test_fixes_window_delta_percent_and_precise_position():
     )
 
 
+def test_preserves_model_window_position_when_query_is_unavailable():
+    assert postprocess_action_call(
+        "",
+        "WindowControl",
+        {"action": "打开", "device": "车窗", "position": "主驾"},
+    ) == (
+        "WindowControl",
+        {"action": "打开", "device": "车窗", "position": "主驾"},
+    )
+
+
 def test_fixes_lock_first_command_without_later_window_pollution():
     assert postprocess_action_call(
         "打开儿童锁，再把车窗也关上",
