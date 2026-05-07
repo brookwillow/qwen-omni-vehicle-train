@@ -735,9 +735,13 @@ def run_inference(
         content = qwen_messages[0].get("content") or []
         if content and isinstance(content[0], dict):
             system_prompt = content[0].get("text", "")
-    # Disable KV cache when audio is present but process_mm_info dropped it (mismatch).
+    # KV cache covers the text-only system-prompt prefix.
+    # Audio requests cannot reuse it: audio features are expanded and inserted
+    # into the token sequence by the processor, shifting every position relative
+    # to the text-only prefix the cache was built from. Using the cache with
+    # audio input causes position misalignment and garbled output.
     audio_ok = (audio_placeholder_count == len(audios or []))
-    cache_hit = prompt_cache.match(text, system_prompt) if (prompt_cache and audio_ok) else None
+    cache_hit = prompt_cache.match(text, system_prompt) if (prompt_cache and not audios and audio_ok) else None
 
     processor_start = time.perf_counter()
     processor_text = cache_hit.suffix_text if cache_hit else text
