@@ -105,21 +105,21 @@ class _KvPromptCacheHit:
 
 
 def _clone_past_key_values(value: Any) -> Any:
-    """Deep-clone past_key_values so each request gets an isolated copy.
+    """Clone past_key_values into raw tensor lists stored independently of any cache object.
 
-    model.generate() mutates the cache in-place (appending new KV pairs via
-    cache.update()), so we must produce a fully independent copy before each
-    inference call, otherwise the stored prefix cache gets corrupted after the
-    first request and all subsequent requests receive stale/extended KV data.
-
-    For DynamicCache-style objects we use deepcopy to capture every internal
-    attribute (key_cache, value_cache, _seen_tokens, etc.).
-    For plain tensors and legacy tuple caches we clone tensors explicitly.
+    We intentionally avoid storing a DynamicCache instance because model.generate()
+    mutates it in-place (cache.update(), _seen_tokens, etc.). Instead we extract
+    the key/value tensors and store them as plain Python lists of cloned tensors.
+    A fresh DynamicCache is reconstructed from these tensors on every request via
+    _build_dynamic_cache(), guaranteeing zero cross-request contamination.
     """
-    import copy
-    # DynamicCache-style objects: deepcopy preserves type and all internal state.
+    # DynamicCache-style: extract raw tensor lists
     if hasattr(value, "key_cache") and hasattr(value, "value_cache"):
-        return copy.deepcopy(value)
+        return {
+            "__dynamic_cache__": True,
+            "key_cache": [t.detach().clone() for t in value.key_cache],
+            "value_cache": [t.detach().clone() for t in value.value_cache],
+        }
     if torch.is_tensor(value):
         return value.detach().clone()
     if isinstance(value, tuple):
@@ -131,6 +131,30 @@ def _clone_past_key_values(value: Any) -> Any:
     if hasattr(value, "to_legacy_cache"):
         return _clone_past_key_values(value.to_legacy_cache())
     return value
+
+
+def _build_dynamic_cache(stored: Any) -> Any:
+    """Reconstruct a fresh DynamicCache from the stored raw tensor dict.
+
+    Each call produces a brand-new cache object populated with cloned tensors,
+    so generate() can mutate it freely without touching the stored prefix data.
+    """
+    if not (isinstance(stored, dict) and stored.get("__dynamic_cache__")):
+        # Legacy tuple cache or plain tensors: clone recursively
+        return _clone_past_key_values(stored)
+    try:
+        from transformers import DynamicCache
+        cache = DynamicCache()
+        cache.key_cache = [t.detach().clone() for t in stored["key_cache"]]
+        cache.value_cache = [t.detach().clone() for t in stored["value_cache"]]
+        cache._seen_tokens = sum(t.shape[-2] for t in cache.key_cache[:1]) if cache.key_cache else 0
+        return cache
+    except Exception as exc:
+        logger.warning("[PROMPT_CACHE] _build_dynamic_cache failed (%s); falling back to tensor clone", exc)
+        return (
+            tuple(t.detach().clone() for t in stored["key_cache"]),
+            tuple(t.detach().clone() for t in stored["value_cache"]),
+        )
 
 
 class _KvPromptCache:
@@ -201,7 +225,7 @@ class _KvPromptCache:
         return _KvPromptCacheHit(
             suffix_text=full_text[len(self.prefix_text):],
             prefix_tokens=self.prefix_tokens,
-            past_key_values=_clone_past_key_values(self.past_key_values),
+            past_key_values=_build_dynamic_cache(self.past_key_values),
         )
 
 
