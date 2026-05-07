@@ -1,0 +1,21 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.15",
+  "base_commit_sha": "dcd959764232a42ea0e17a30307b4028290ac0b0",
+  "prompts": {
+    "b35f4c4896380cc7": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "92eede5f-35da-4169-ba83-ae67ecd1df2a",
+        "model": "copilot/claude-opus-4.6"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 12,
+      "total_deletions": 0,
+      "accepted_lines": 12,
+      "overriden_lines": 0
+    }
+  }
+}
