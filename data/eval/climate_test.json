@@ -104,10 +104,9 @@
       {
         "name": "ClimateControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "device": "空调",
-          "feature": "温度",
-          "value": "一点"
+          "feature": "温度"
         }
       }
     ],
@@ -124,10 +123,9 @@
       {
         "name": "ClimateControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "空调",
-          "feature": "温度",
-          "value": "一点"
+          "feature": "温度"
         }
       }
     ],
@@ -189,7 +187,7 @@
           "action": "调到",
           "device": "空调",
           "feature": "温度",
-          "value": "最大"
+          "value": "最高"
         }
       }
     ],
@@ -209,7 +207,7 @@
           "action": "调到",
           "device": "空调",
           "feature": "温度",
-          "value": "最小"
+          "value": "最低"
         }
       }
     ],
@@ -246,10 +244,9 @@
       {
         "name": "ClimateControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "device": "空调",
-          "feature": "风",
-          "value": "一点"
+          "feature": "风"
         }
       }
     ],
@@ -266,10 +263,9 @@
       {
         "name": "ClimateControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "空调",
-          "feature": "风",
-          "value": "一点"
+          "feature": "风"
         }
       }
     ],
@@ -289,7 +285,7 @@
           "action": "调到",
           "device": "空调",
           "feature": "风",
-          "value": "最大"
+          "value": "最高"
         }
       }
     ],
@@ -309,7 +305,7 @@
           "action": "调到",
           "device": "空调",
           "feature": "风",
-          "value": "最小"
+          "value": "最低"
         }
       }
     ],
@@ -521,8 +517,7 @@
         "arguments": {
           "action": "打开",
           "device": "出风口",
-          "feature": "风",
-          "position": "中间"
+          "feature": "风"
         }
       }
     ],
@@ -988,10 +983,9 @@
       {
         "name": "ClimateControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "空调",
-          "feature": "温度",
-          "value": "一点"
+          "feature": "温度"
         }
       }
     ],
@@ -1008,10 +1002,9 @@
       {
         "name": "ClimateControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "device": "空调",
-          "feature": "温度",
-          "value": "一点"
+          "feature": "温度"
         }
       }
     ],
@@ -1047,10 +1040,9 @@
       {
         "name": "ClimateControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "空调",
-          "feature": "风",
-          "value": "一点"
+          "feature": "风"
         }
       }
     ],
@@ -1067,10 +1059,9 @@
       {
         "name": "ClimateControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "device": "空调",
-          "feature": "风",
-          "value": "一点"
+          "feature": "风"
         }
       }
     ],
@@ -1218,11 +1209,10 @@
       {
         "name": "ClimateControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "device": "空调",
           "feature": "温度",
-          "position": "副驾",
-          "value": "一点"
+          "position": "副驾"
         }
       }
     ],
@@ -1431,7 +1421,7 @@
           "action": "调到",
           "device": "空调",
           "feature": "风",
-          "value": "较大"
+          "value": "较高"
         }
       }
     ],
@@ -1451,7 +1441,7 @@
           "action": "调到",
           "device": "空调",
           "feature": "风",
-          "value": "较小"
+          "value": "较低"
         }
       }
     ],
@@ -1477,10 +1467,9 @@
       {
         "name": "ClimateControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "device": "空调",
-          "feature": "风",
-          "value": "一点"
+          "feature": "风"
         }
       }
     ],
@@ -1598,7 +1587,7 @@
       {
         "name": "ClimateControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "空调",
           "feature": "温度",
           "value": "2"
@@ -1663,10 +1652,9 @@
       {
         "name": "ClimateControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "空调",
-          "feature": "风",
-          "value": "一点"
+          "feature": "风"
         }
       }
     ],
@@ -1831,7 +1819,7 @@
           "action": "调到",
           "device": "空调",
           "feature": "温度",
-          "value": "最大"
+          "value": "最高"
         }
       },
       {
@@ -1856,19 +1844,17 @@
       {
         "name": "ClimateControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "空调",
-          "feature": "风",
-          "value": "一点"
+          "feature": "风"
         }
       },
       {
         "name": "ClimateControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "device": "空调",
-          "feature": "温度",
-          "value": "一点"
+          "feature": "温度"
         }
       }
     ],

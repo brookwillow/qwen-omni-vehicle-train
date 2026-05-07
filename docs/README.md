@@ -38,25 +38,27 @@ data/splits/{action,clarify,multiturn,reject}.jsonl  (已拆分好的数据，�
 
 | 文件 | 说明 |
 |------|------|
-| `data/system-prompt.txt` | 紧凑版 System Prompt（~12K chars，~5K tokens） |
-| `data/tools.json` | 33 个车载工具定义 |
+| `data/system-prompt.txt` | 紧凑版 System Prompt（~16.6K chars，基于当前工具白名单生成） |
+| `data/tools.json` | 38 个车载工具定义（新版 `inputSchema` 格式） |
 | `data/splits/` | 按类型拆分的训练数据（无 SP） |
 | `data/splits/blackbox_priority_aug.jsonl` | 基于 `eval_report_0505_2` 的高优先级 schema 合法增强样本 |
 | `data/splits/multiturn.jsonl` | 多轮上下文继承与 Tool Result/Final Answer 训练样本 |
+| `data/splits/new_tools_aug.jsonl` | 新增工具独立增强样本，重点覆盖 `CarUsageSearch.query` 枚举 |
 | `data/train_final.jsonl` | 最终训练数据（含 SP） |
-| `data/eval/` | 评测数据集（18 个场景 + 音频） |
+| `data/eval/` | 评测数据集（当前工具 schema 已清洗，媒体类无新版等价工具样本已置空/移除） |
 
 ### 数据分布（当前）
 
 | 类型 | 数量 | 说明 |
 |------|------|------|
-| Action | 4062 | 2 轮：Action → FinalAnswer；已补充工具混淆对比、参数精确、颜色枚举和车窗锁样本 |
-| Blackbox priority aug | 83 | 针对 raw eval 中 Climate、Profile/Seat、Window、Light、Media/App 高频非争议错误的补充 Action 样本 |
+| Action | 3567 | 2 轮：Action → FinalAnswer；已按当前 38 个工具清理旧工具样本 |
+| Blackbox priority aug | 80 | 针对 raw eval 中 Climate、Profile/Seat、Window、Light、App 高频非争议错误的补充 Action 样本 |
 | Clarify | 177 | 2 轮：Clarify → FinalAnswer；仅保留缺少必需信息或目标不明确的追问 |
-| Multiturn | 43 | 8 轮：上下文继承、目标修正、参数延续、Tool Result → FinalAnswer |
-| Reject | 1208 | 单轮 + 多轮硬负例（已合并） |
+| Multiturn | 32 | 8 轮：上下文继承、目标修正、参数延续、Tool Result → FinalAnswer |
+| New tools aug | 249 | 新增工具独立增强集；`CarUsageSearch` 覆盖 60 个 `query` 枚举，每个 2 条 |
+| Reject | 1207 | 单轮 + 多轮硬负例（已合并） |
 
-`build_train_data.py` 默认合并全部 split，当前最终训练集为 5573 条。统计时多轮样本按最后一个有效决策标签计入对应类别。
+`build_train_data.py` 默认合并全部 split，当前最终训练集为 5312 条。统计时多轮样本按最后一个有效决策标签计入对应类别。
 
 ## 训练配置
 

@@ -17,15 +17,19 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 
+NUMERIC_VALUE_RE = re.compile(r"^\d+(\.\d+)?%?$")
+
+
 def load_schema(tools_path: str = "data/tools.json") -> dict:
     with open(tools_path) as f:
         tools = json.load(f)
     schema = {}
     for t in tools:
-        fn = t["function"]
+        fn = t.get("function", t)
         name = fn["name"]
-        props = fn.get("parameters", {}).get("properties", {})
-        required = fn.get("parameters", {}).get("required", [])
+        params = fn.get("parameters") or fn.get("inputSchema") or {}
+        props = params.get("properties", {})
+        required = params.get("required", [])
         schema[name] = {"props": props, "required": required}
     return schema
 
@@ -40,6 +44,11 @@ def parse_action(content: str):
     except json.JSONDecodeError:
         return tool_name, None
     return tool_name, args
+
+
+def allows_free_numeric(param: str, prop_def: dict) -> bool:
+    desc = prop_def.get("description", "")
+    return "numeric" in desc or "percentage" in desc or param == "value"
 
 
 def validate_sample(sample: dict, source: str, schema: dict) -> list[dict]:
@@ -80,14 +89,13 @@ def validate_sample(sample: dict, source: str, schema: dict) -> list[dict]:
                 continue
             prop_def = props[param]
             if "enum" in prop_def and isinstance(val, str):
-                desc = prop_def.get("description", "")
-                allows_free = "numeric" in desc or "percentage" in desc
+                allows_free = allows_free_numeric(param, prop_def)
                 if val not in prop_def["enum"]:
                     if not allows_free:
                         issues.append({"type": "INVALID_ENUM", "source": source, "tool": tool_name,
                                        "param": param, "val": val,
                                        "allowed": prop_def["enum"], "args": args})
-                    elif not re.match(r"^\d+(\.\d+)?%?$", val):
+                    elif not NUMERIC_VALUE_RE.match(val):
                         issues.append({"type": "INVALID_ENUM_FREE", "source": source, "tool": tool_name,
                                        "param": param, "val": val, "args": args})
     return issues

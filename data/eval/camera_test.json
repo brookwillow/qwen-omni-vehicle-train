@@ -123,8 +123,7 @@
         "name": "CameraControl",
         "arguments": {
           "action": "打开",
-          "device": "摄像头",
-          "position": "全部"
+          "device": "摄像头"
         }
       }
     ],
@@ -218,8 +217,7 @@
         "name": "CameraControl",
         "arguments": {
           "action": "关闭",
-          "device": "摄像头",
-          "position": "全部"
+          "device": "摄像头"
         }
       }
     ],
@@ -388,8 +386,7 @@
         "name": "CameraControl",
         "arguments": {
           "action": "打开",
-          "device": "摄像头",
-          "position": "全部"
+          "device": "摄像头"
         }
       }
     ],
@@ -407,8 +404,7 @@
         "name": "CameraControl",
         "arguments": {
           "action": "打开",
-          "device": "摄像头",
-          "position": "全部"
+          "device": "摄像头"
         }
       }
     ],
@@ -578,8 +574,7 @@
         "name": "CameraControl",
         "arguments": {
           "action": "关闭",
-          "device": "摄像头",
-          "position": "全部"
+          "device": "摄像头"
         }
       }
     ],

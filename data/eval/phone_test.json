@@ -10,8 +10,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "张三"
+          "action": "拨打",
+          "contact": "张三"
         }
       }
     ],
@@ -28,8 +28,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "李四"
+          "action": "拨打",
+          "contact": "李四"
         }
       }
     ],
@@ -46,8 +46,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "王经理"
+          "action": "拨打",
+          "contact": "王经理"
         }
       }
     ],
@@ -64,8 +64,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "telephone": "13800138000"
+          "action": "拨打",
+          "phone": "13800138000"
         }
       }
     ],
@@ -82,8 +82,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "telephone": "15912345678"
+          "action": "拨打",
+          "phone": "15912345678"
         }
       }
     ],
@@ -100,8 +100,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "妈妈"
+          "action": "拨打",
+          "contact": "妈妈"
         }
       }
     ],
@@ -118,8 +118,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "爸爸"
+          "action": "拨打",
+          "contact": "爸爸"
         }
       }
     ],
@@ -136,8 +136,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "老婆"
+          "action": "拨打",
+          "contact": "老婆"
         }
       }
     ],
@@ -222,8 +222,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "陈总"
+          "action": "拨打",
+          "contact": "陈总"
         }
       }
     ],
@@ -240,8 +240,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "小明"
+          "action": "拨打",
+          "contact": "小明"
         }
       }
     ],
@@ -258,8 +258,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "telephone": "18688886666"
+          "action": "拨打",
+          "phone": "18688886666"
         }
       }
     ],
@@ -310,8 +310,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "刘老师"
+          "action": "拨打",
+          "contact": "刘老师"
         }
       }
     ],
@@ -328,8 +328,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "赵医生"
+          "action": "拨打",
+          "contact": "赵医生"
         }
       }
     ],
@@ -346,8 +346,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "telephone": "010-88889999"
+          "action": "拨打",
+          "phone": "010-88889999"
         }
       }
     ],
@@ -364,8 +364,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "张三"
+          "action": "拨打",
+          "contact": "张三"
         }
       }
     ],
@@ -382,8 +382,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "李总"
+          "action": "拨打",
+          "contact": "李总"
         }
       }
     ],
@@ -400,8 +400,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "老婆"
+          "action": "拨打",
+          "contact": "老婆"
         }
       }
     ],
@@ -520,8 +520,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "周"
+          "action": "拨打",
+          "contact": "周"
         }
       }
     ],
@@ -538,8 +538,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "telephone": "139"
+          "action": "拨打",
+          "phone": "139"
         }
       }
     ],
@@ -556,8 +556,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "小王"
+          "action": "拨打",
+          "contact": "小王"
         }
       }
     ],
@@ -591,8 +591,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "前台"
+          "action": "拨打",
+          "contact": "前台"
         }
       }
     ],
@@ -626,8 +626,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "外卖店"
+          "action": "拨打",
+          "contact": "外卖店"
         }
       }
     ],
@@ -644,8 +644,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "弟弟"
+          "action": "拨打",
+          "contact": "弟弟"
         }
       }
     ],
@@ -662,8 +662,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "telephone": "8888"
+          "action": "拨打",
+          "phone": "8888"
         }
       }
     ],
@@ -697,8 +697,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "孙师傅"
+          "action": "拨打",
+          "contact": "孙师傅"
         }
       }
     ],
@@ -715,43 +715,19 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "妈妈"
+          "action": "拨打",
+          "contact": "妈妈"
         }
       },
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "feature": "通话音量"
         }
       }
     ],
     "query_audio": "audio/phone/phone_041.wav"
-  },
-  {
-    "id": "phone_042",
-    "category": "电话+媒体",
-    "sub_category": "多意图组合",
-    "intent": "多意图",
-    "difficulty": "hard",
-    "query": "先把音乐暂停然后回拨刚才的电话",
-    "expected_tool_calls": [
-      {
-        "name": "MediaControl",
-        "arguments": {
-          "media_category": "歌",
-          "media_control_action": "暂停"
-        }
-      },
-      {
-        "name": "PhoneControl",
-        "arguments": {
-          "action": "回拨"
-        }
-      }
-    ],
-    "query_audio": "audio/phone/phone_042.wav"
   },
   {
     "id": "phone_043",
@@ -771,8 +747,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "李四"
+          "action": "拨打",
+          "contact": "李四"
         }
       }
     ],
@@ -791,7 +767,7 @@
         "arguments": {
           "action": "调到",
           "feature": "通话音量",
-          "value": "最大"
+          "value": "最高"
         }
       },
       {
@@ -814,8 +790,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "王总"
+          "action": "拨打",
+          "contact": "王总"
         }
       },
       {
@@ -827,30 +803,6 @@
       }
     ],
     "query_audio": "audio/phone/phone_045.wav"
-  },
-  {
-    "id": "phone_046",
-    "category": "电话+媒体",
-    "sub_category": "多意图组合",
-    "intent": "多意图",
-    "difficulty": "hard",
-    "query": "暂停播放的读物然后回拨那个未接来电",
-    "expected_tool_calls": [
-      {
-        "name": "MediaControl",
-        "arguments": {
-          "media_category": "读物",
-          "media_control_action": "暂停"
-        }
-      },
-      {
-        "name": "PhoneControl",
-        "arguments": {
-          "action": "回拨"
-        }
-      }
-    ],
-    "query_audio": "audio/phone/phone_046.wav"
   },
   {
     "id": "phone_047",
@@ -870,45 +822,19 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调小",
-          "feature": "音量"
+          "action": "调低",
+          "feature": "声音"
         }
       },
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "老板"
+          "action": "拨打",
+          "contact": "老板"
         }
       }
     ],
     "query_audio": "audio/phone/phone_047.wav"
-  },
-  {
-    "id": "phone_048",
-    "category": "电话+导航",
-    "sub_category": "多意图组合",
-    "intent": "多意图",
-    "difficulty": "hard",
-    "query": "搜索张师傅的电话然后导航去公司",
-    "expected_tool_calls": [
-      {
-        "name": "PhoneControl",
-        "arguments": {
-          "action": "搜索",
-          "person": "张师傅"
-        }
-      },
-      {
-        "name": "Navigation",
-        "arguments": {
-          "action": "开始",
-          "category": "公司",
-          "value": "公司"
-        }
-      }
-    ],
-    "query_audio": "audio/phone/phone_048.wav"
   },
   {
     "id": "phone_049",
@@ -921,7 +847,7 @@
       {
         "name": "ScreenControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "device": "屏幕",
           "feature": "亮度"
         }
@@ -929,8 +855,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "telephone": "18600001111"
+          "action": "拨打",
+          "phone": "18600001111"
         }
       }
     ],
@@ -954,8 +880,8 @@
       {
         "name": "PhoneControl",
         "arguments": {
-          "action": "搜索",
-          "person": "赵哥"
+          "action": "拨打",
+          "contact": "赵哥"
         }
       }
     ],

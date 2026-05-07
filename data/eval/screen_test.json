@@ -138,8 +138,7 @@
         "name": "ScreenControl",
         "arguments": {
           "action": "关闭",
-          "device": "屏幕",
-          "position": "第二排左侧"
+          "device": "屏幕"
         }
       }
     ],
@@ -194,7 +193,7 @@
       {
         "name": "ScreenControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "device": "屏幕",
           "feature": "亮度"
         }
@@ -213,7 +212,7 @@
       {
         "name": "ScreenControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "屏幕",
           "feature": "亮度"
         }
@@ -235,7 +234,7 @@
           "action": "调到",
           "device": "仪表",
           "feature": "亮度",
-          "value": "最大"
+          "value": "最高"
         }
       }
     ],
@@ -255,7 +254,7 @@
           "action": "调到",
           "device": "屏幕",
           "feature": "亮度",
-          "value": "最小"
+          "value": "最低"
         }
       }
     ],
@@ -292,11 +291,10 @@
       {
         "name": "ScreenControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "device": "屏幕",
           "feature": "亮度",
-          "position": "主驾",
-          "value": "一点"
+          "position": "主驾"
         }
       }
     ],
@@ -391,7 +389,7 @@
         "arguments": {
           "action": "调到",
           "device": "屏幕",
-          "value": "自动模式"
+          "value": "自动"
         }
       }
     ],
@@ -428,8 +426,7 @@
         "name": "ScreenControl",
         "arguments": {
           "action": "打开",
-          "device": "娱乐屏",
-          "position": "第二排右侧"
+          "device": "娱乐屏"
         }
       }
     ],
@@ -446,11 +443,10 @@
       {
         "name": "ScreenControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "屏幕",
           "feature": "亮度",
-          "position": "第二排",
-          "value": "一点"
+          "position": "第二排"
         }
       }
     ],
@@ -637,7 +633,7 @@
       {
         "name": "ScreenControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "device": "屏幕",
           "feature": "亮度"
         }
@@ -656,7 +652,7 @@
       {
         "name": "ScreenControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "屏幕",
           "feature": "亮度"
         }
@@ -675,7 +671,7 @@
       {
         "name": "ScreenControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "device": "仪表",
           "feature": "亮度"
         }
@@ -694,7 +690,7 @@
       {
         "name": "ScreenControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "屏幕",
           "feature": "亮度"
         }
@@ -716,7 +712,7 @@
           "action": "调到",
           "device": "娱乐屏",
           "feature": "亮度",
-          "value": "最大"
+          "value": "最高"
         }
       }
     ],
@@ -736,7 +732,7 @@
           "action": "调到",
           "device": "屏幕",
           "feature": "亮度",
-          "value": "最小"
+          "value": "最低"
         }
       }
     ],
@@ -753,7 +749,7 @@
       {
         "name": "ScreenControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "device": "屏幕",
           "feature": "亮度"
         }
@@ -772,7 +768,7 @@
       {
         "name": "ScreenControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "屏幕",
           "feature": "亮度",
           "position": "第二排"
@@ -870,7 +866,7 @@
         "arguments": {
           "action": "调到",
           "device": "屏幕",
-          "value": "自动模式"
+          "value": "自动"
         }
       }
     ],
@@ -944,7 +940,7 @@
       {
         "name": "ScreenControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "device": "屏幕",
           "feature": "亮度",
           "position": "主驾"
@@ -974,7 +970,7 @@
           "action": "调到",
           "device": "娱乐屏",
           "feature": "亮度",
-          "value": "最大"
+          "value": "最高"
         }
       }
     ],
@@ -1017,16 +1013,15 @@
       {
         "name": "ScreenControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "屏幕",
-          "feature": "亮度",
-          "value": "一点"
+          "feature": "亮度"
         }
       },
       {
         "name": "ClimateControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "空调",
           "feature": "温度"
         }
@@ -1100,15 +1095,14 @@
           "action": "调到",
           "device": "屏幕",
           "feature": "亮度",
-          "value": "最小"
+          "value": "最低"
         }
       },
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调小",
-          "feature": "音量",
-          "value": "一点"
+          "action": "调低",
+          "feature": "声音"
         }
       }
     ],
@@ -1182,7 +1176,7 @@
           "action": "调到",
           "device": "仪表",
           "feature": "亮度",
-          "value": "最大"
+          "value": "最高"
         }
       },
       {
@@ -1208,8 +1202,7 @@
         "name": "ScreenControl",
         "arguments": {
           "action": "展开",
-          "device": "屏幕",
-          "position": "第二排左侧"
+          "device": "屏幕"
         }
       },
       {
@@ -1218,7 +1211,6 @@
           "action": "调到",
           "device": "屏幕",
           "feature": "亮度",
-          "position": "第二排左侧",
           "value": "60%"
         }
       }

@@ -118,7 +118,7 @@
       {
         "name": "PowerControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "feature": "能量回收"
         }
       }
@@ -136,7 +136,7 @@
       {
         "name": "PowerControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "feature": "能量回收"
         }
       }
@@ -156,7 +156,7 @@
         "arguments": {
           "action": "调到",
           "feature": "能量回收",
-          "value": "最大"
+          "value": "最高"
         }
       }
     ],
@@ -175,7 +175,7 @@
         "arguments": {
           "action": "调到",
           "feature": "能量回收",
-          "value": "最小"
+          "value": "最低"
         }
       }
     ],
@@ -211,9 +211,8 @@
       {
         "name": "PowerControl",
         "arguments": {
-          "action": "调大",
-          "feature": "能量回收",
-          "value": "一点"
+          "action": "调高",
+          "feature": "能量回收"
         }
       }
     ],
@@ -230,9 +229,8 @@
       {
         "name": "PowerControl",
         "arguments": {
-          "action": "调小",
-          "feature": "能量回收",
-          "value": "一点"
+          "action": "调低",
+          "feature": "能量回收"
         }
       }
     ],
@@ -441,7 +439,7 @@
         "arguments": {
           "action": "调到",
           "feature": "能量回收",
-          "value": "大"
+          "value": "高"
         }
       }
     ],
@@ -460,7 +458,7 @@
         "arguments": {
           "action": "调到",
           "feature": "能量回收",
-          "value": "小"
+          "value": "低"
         }
       }
     ],
@@ -606,7 +604,7 @@
       {
         "name": "PowerControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "feature": "能量回收"
         }
       }
@@ -624,7 +622,7 @@
       {
         "name": "PowerControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "feature": "能量回收"
         }
       }
@@ -642,9 +640,8 @@
       {
         "name": "PowerControl",
         "arguments": {
-          "action": "调小",
-          "feature": "能量回收",
-          "value": "一点"
+          "action": "调低",
+          "feature": "能量回收"
         }
       }
     ],
@@ -663,7 +660,7 @@
         "arguments": {
           "action": "调到",
           "feature": "能量回收",
-          "value": "最大"
+          "value": "最高"
         }
       }
     ],
@@ -795,7 +792,7 @@
         "arguments": {
           "action": "调到",
           "feature": "能量回收",
-          "value": "最小"
+          "value": "最低"
         }
       }
     ],
@@ -852,7 +849,7 @@
         "arguments": {
           "action": "调到",
           "feature": "能量回收",
-          "value": "最大"
+          "value": "最高"
         }
       },
       {
@@ -961,8 +958,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调小",
-          "feature": "音量"
+          "action": "调低",
+          "feature": "声音"
         }
       }
     ],
@@ -1013,7 +1010,7 @@
       {
         "name": "ScreenControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "屏幕",
           "feature": "亮度"
         }
@@ -1069,7 +1066,7 @@
         "arguments": {
           "action": "调到",
           "feature": "能量回收",
-          "value": "最大"
+          "value": "最高"
         }
       },
       {

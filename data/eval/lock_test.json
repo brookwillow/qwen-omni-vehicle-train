@@ -1067,30 +1067,6 @@
     "query_audio": "audio/lock/lock_055.wav"
   },
   {
-    "id": "lock_056",
-    "category": "锁控",
-    "sub_category": "多意图",
-    "intent": "多意图",
-    "difficulty": "hard",
-    "query": "孩子上车了，开儿童锁，放个儿歌",
-    "expected_tool_calls": [
-      {
-        "name": "LockControl",
-        "arguments": {
-          "action": "打开",
-          "device": "儿童锁"
-        }
-      },
-      {
-        "name": "MediaPlay",
-        "arguments": {
-          "media_category": "歌"
-        }
-      }
-    ],
-    "query_audio": "audio/lock/lock_056.wav"
-  },
-  {
     "id": "lock_057",
     "category": "锁控",
     "sub_category": "多意图",
@@ -1136,9 +1112,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调小",
-          "feature": "音量",
-          "value": "一点"
+          "action": "调低",
+          "feature": "声音"
         }
       }
     ],

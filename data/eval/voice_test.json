@@ -10,8 +10,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调大",
-          "feature": "音量"
+          "action": "调高",
+          "feature": "声音"
         }
       }
     ],
@@ -28,8 +28,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调小",
-          "feature": "音量"
+          "action": "调低",
+          "feature": "声音"
         }
       }
     ],
@@ -47,8 +47,8 @@
         "name": "VoiceControl",
         "arguments": {
           "action": "调到",
-          "feature": "音量",
-          "value": "最大"
+          "feature": "声音",
+          "value": "最高"
         }
       }
     ],
@@ -66,8 +66,8 @@
         "name": "VoiceControl",
         "arguments": {
           "action": "调到",
-          "feature": "音量",
-          "value": "最小"
+          "feature": "声音",
+          "value": "最低"
         }
       }
     ],
@@ -84,9 +84,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调大",
-          "feature": "音量",
-          "value": "一点"
+          "action": "调高",
+          "feature": "声音"
         }
       }
     ],
@@ -103,9 +102,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调小",
-          "feature": "音量",
-          "value": "一点"
+          "action": "调低",
+          "feature": "声音"
         }
       }
     ],
@@ -123,7 +121,7 @@
         "name": "VoiceControl",
         "arguments": {
           "action": "调到",
-          "feature": "音量",
+          "feature": "声音",
           "value": "50%"
         }
       }
@@ -142,7 +140,7 @@
         "name": "VoiceControl",
         "arguments": {
           "action": "调到",
-          "feature": "音量",
+          "feature": "声音",
           "value": "5"
         }
       }
@@ -161,7 +159,7 @@
         "name": "VoiceControl",
         "arguments": {
           "action": "调到",
-          "feature": "音量",
+          "feature": "声音",
           "value": "中"
         }
       }
@@ -197,7 +195,7 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "关闭",
+          "action": "静音",
           "feature": "声音"
         }
       }
@@ -215,7 +213,7 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "feature": "导航音量"
         }
       }
@@ -233,7 +231,7 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "feature": "导航音量"
         }
       }
@@ -253,7 +251,7 @@
         "arguments": {
           "action": "调到",
           "feature": "导航音量",
-          "value": "最大"
+          "value": "最高"
         }
       }
     ],
@@ -270,7 +268,7 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "关闭",
+          "action": "静音",
           "feature": "导航音量"
         }
       }
@@ -288,7 +286,7 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "feature": "语音音量"
         }
       }
@@ -308,7 +306,7 @@
         "arguments": {
           "action": "调到",
           "feature": "语音音量",
-          "value": "最小"
+          "value": "最低"
         }
       }
     ],
@@ -325,7 +323,7 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "feature": "通话音量"
         }
       }
@@ -343,7 +341,7 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "feature": "通话音量"
         }
       }
@@ -363,7 +361,7 @@
         "arguments": {
           "action": "调到",
           "feature": "通话音量",
-          "value": "最大"
+          "value": "最高"
         }
       }
     ],
@@ -380,8 +378,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调大",
-          "feature": "音量",
+          "action": "调高",
+          "feature": "声音",
           "position": "主驾"
         }
       }
@@ -399,10 +397,9 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调小",
-          "feature": "音量",
-          "position": "副驾",
-          "value": "一点"
+          "action": "调低",
+          "feature": "声音",
+          "position": "副驾"
         }
       }
     ],
@@ -420,9 +417,9 @@
         "name": "VoiceControl",
         "arguments": {
           "action": "调到",
-          "feature": "音量",
+          "feature": "声音",
           "position": "第二排",
-          "value": "最大"
+          "value": "最高"
         }
       }
     ],
@@ -439,8 +436,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "关闭",
-          "feature": "音量",
+          "action": "静音",
+          "feature": "声音",
           "position": "车外"
         }
       }
@@ -459,7 +456,7 @@
         "name": "VoiceControl",
         "arguments": {
           "action": "调到",
-          "feature": "音量",
+          "feature": "声音",
           "position": "全部",
           "value": "30%"
         }
@@ -478,7 +475,7 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "关闭",
+          "action": "静音",
           "feature": "声音"
         }
       }
@@ -496,9 +493,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调大",
-          "feature": "导航音量",
-          "value": "一点"
+          "action": "调高",
+          "feature": "导航音量"
         }
       }
     ],
@@ -515,9 +511,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调小",
-          "feature": "语音音量",
-          "value": "一点"
+          "action": "调低",
+          "feature": "语音音量"
         }
       }
     ],
@@ -534,8 +529,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调大",
-          "feature": "音量",
+          "action": "调高",
+          "feature": "声音",
           "position": "车顶"
         }
       }
@@ -554,9 +549,9 @@
         "name": "VoiceControl",
         "arguments": {
           "action": "调到",
-          "feature": "音量",
+          "feature": "声音",
           "position": "第三排",
-          "value": "最小"
+          "value": "最低"
         }
       }
     ],
@@ -573,8 +568,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调大",
-          "feature": "音量"
+          "action": "调高",
+          "feature": "声音"
         }
       }
     ],
@@ -591,8 +586,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调小",
-          "feature": "音量"
+          "action": "调低",
+          "feature": "声音"
         }
       }
     ],
@@ -609,8 +604,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调小",
-          "feature": "音量"
+          "action": "调低",
+          "feature": "声音"
         }
       }
     ],
@@ -628,8 +623,8 @@
         "name": "VoiceControl",
         "arguments": {
           "action": "调到",
-          "feature": "音量",
-          "value": "最大"
+          "feature": "声音",
+          "value": "最高"
         }
       }
     ],
@@ -646,7 +641,7 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "关闭",
+          "action": "静音",
           "feature": "声音"
         }
       }
@@ -682,7 +677,7 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "feature": "导航音量"
         }
       }
@@ -700,7 +695,7 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "关闭",
+          "action": "静音",
           "feature": "导航音量"
         }
       }
@@ -720,7 +715,7 @@
         "arguments": {
           "action": "调到",
           "feature": "导航音量",
-          "value": "最大"
+          "value": "最高"
         }
       }
     ],
@@ -737,7 +732,7 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "feature": "通话音量"
         }
       }
@@ -755,7 +750,7 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "feature": "通话音量"
         }
       }
@@ -773,7 +768,7 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "feature": "语音音量"
         }
       }
@@ -791,7 +786,7 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "feature": "语音音量"
         }
       }
@@ -809,8 +804,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "关闭",
-          "feature": "音量",
+          "action": "静音",
+          "feature": "声音",
           "position": "第二排"
         }
       }
@@ -828,8 +823,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调大",
-          "feature": "音量",
+          "action": "调高",
+          "feature": "声音",
           "position": "主驾"
         }
       }
@@ -847,8 +842,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调小",
-          "feature": "音量",
+          "action": "调低",
+          "feature": "声音",
           "position": "副驾"
         }
       }
@@ -866,8 +861,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调大",
-          "feature": "音量"
+          "action": "调高",
+          "feature": "声音"
         }
       }
     ],
@@ -884,8 +879,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调小",
-          "feature": "音量"
+          "action": "调低",
+          "feature": "声音"
         }
       }
     ],
@@ -903,7 +898,7 @@
         "name": "VoiceControl",
         "arguments": {
           "action": "调到",
-          "feature": "音量",
+          "feature": "声音",
           "value": "中"
         }
       }
@@ -921,8 +916,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "关闭",
-          "feature": "音量",
+          "action": "静音",
+          "feature": "声音",
           "position": "车外"
         }
       }
@@ -940,7 +935,7 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "关闭",
+          "action": "静音",
           "feature": "声音"
         }
       }
@@ -960,7 +955,7 @@
         "arguments": {
           "action": "调到",
           "feature": "通话音量",
-          "value": "最大"
+          "value": "最高"
         }
       }
     ],
@@ -977,8 +972,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调大",
-          "feature": "音量",
+          "action": "调高",
+          "feature": "声音",
           "position": "第三排"
         }
       }
@@ -996,7 +991,7 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "feature": "导航音量"
         }
       }
@@ -1015,8 +1010,8 @@
         "name": "VoiceControl",
         "arguments": {
           "action": "调到",
-          "feature": "音量",
-          "value": "最大"
+          "feature": "声音",
+          "value": "最高"
         }
       }
     ],
@@ -1033,15 +1028,14 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调小",
-          "feature": "音量",
-          "value": "一点"
+          "action": "调低",
+          "feature": "声音"
         }
       },
       {
         "name": "ClimateControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "空调",
           "feature": "温度"
         }
@@ -1060,7 +1054,7 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "关闭",
+          "action": "静音",
           "feature": "声音"
         }
       },
@@ -1086,15 +1080,14 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调大",
-          "feature": "导航音量",
-          "value": "一点"
+          "action": "调高",
+          "feature": "导航音量"
         }
       },
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "feature": "通话音量"
         }
       }
@@ -1113,8 +1106,8 @@
         "name": "VoiceControl",
         "arguments": {
           "action": "调到",
-          "feature": "音量",
-          "value": "最大"
+          "feature": "声音",
+          "value": "最高"
         }
       },
       {
@@ -1138,17 +1131,16 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调小",
-          "feature": "音量"
+          "action": "调低",
+          "feature": "声音"
         }
       },
       {
         "name": "ScreenControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "屏幕",
-          "feature": "亮度",
-          "value": "一点"
+          "feature": "亮度"
         }
       }
     ],
@@ -1166,7 +1158,7 @@
         "name": "VoiceControl",
         "arguments": {
           "action": "调到",
-          "feature": "音量",
+          "feature": "声音",
           "value": "20%"
         }
       },
@@ -1194,8 +1186,8 @@
         "name": "VoiceControl",
         "arguments": {
           "action": "调到",
-          "feature": "音量",
-          "value": "最小"
+          "feature": "声音",
+          "value": "最低"
         }
       },
       {
@@ -1220,8 +1212,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调大",
-          "feature": "音量",
+          "action": "调高",
+          "feature": "声音",
           "position": "主驾"
         }
       },
@@ -1229,9 +1221,9 @@
         "name": "VoiceControl",
         "arguments": {
           "action": "调到",
-          "feature": "音量",
+          "feature": "声音",
           "position": "第二排",
-          "value": "最小"
+          "value": "最低"
         }
       }
     ],
@@ -1249,8 +1241,8 @@
         "name": "VoiceControl",
         "arguments": {
           "action": "调到",
-          "feature": "音量",
-          "value": "最大"
+          "feature": "声音",
+          "value": "最高"
         }
       },
       {
@@ -1276,7 +1268,7 @@
         "name": "VoiceControl",
         "arguments": {
           "action": "调到",
-          "feature": "音量",
+          "feature": "声音",
           "value": "中"
         }
       },
@@ -1285,7 +1277,7 @@
         "arguments": {
           "action": "调到",
           "feature": "导航音量",
-          "value": "最大"
+          "value": "最高"
         }
       }
     ],

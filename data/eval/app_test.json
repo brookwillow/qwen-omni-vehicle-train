@@ -1123,7 +1123,7 @@
         "name": "VoiceControl",
         "arguments": {
           "action": "调到",
-          "feature": "音量",
+          "feature": "声音",
           "value": "5"
         }
       }
@@ -1299,7 +1299,7 @@
       {
         "name": "ScreenControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "device": "屏幕",
           "feature": "亮度"
         }

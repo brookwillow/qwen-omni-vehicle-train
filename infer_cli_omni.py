@@ -27,6 +27,7 @@ _DEFAULT_SP_FILE = _PROJECT_DIR / "data" / "system-prompt.txt"
 
 ACTION_RE = re.compile(r"Action:\s*([A-Za-z0-9_]+)")
 ACTION_INPUT_RE = re.compile(r"Action Input:\s*(\{[\s\S]*\})")
+NUMERIC_VALUE_RE = re.compile(r"^\d+(\.\d+)?%?$")
 
 
 def parse_args() -> argparse.Namespace:
@@ -66,7 +67,7 @@ def load_tools(path: str) -> Dict[str, Dict[str, Any]]:
     data = json.loads(p.read_text(encoding="utf-8"))
     tool_map = {}
     for item in data:
-        fn = item.get("function", {})
+        fn = item.get("function", item)
         name = fn.get("name")
         if name:
             tool_map[name] = fn
@@ -94,7 +95,7 @@ def validate_action(tool_map: Dict[str, Dict[str, Any]], tool: str, args: Dict[s
     fn = tool_map.get(tool)
     if not fn:
         return False
-    params = fn.get("parameters", {})
+    params = fn.get("parameters") or fn.get("inputSchema") or {}
     props = params.get("properties", {})
     required = params.get("required", [])
     for k in required:
@@ -105,7 +106,10 @@ def validate_action(tool_map: Dict[str, Dict[str, Any]], tool: str, args: Dict[s
             continue
         spec = props[k]
         if "enum" in spec and v not in spec["enum"]:
-            return False
+            desc = spec.get("description", "")
+            allows_free = k == "value" or "numeric" in desc or "percentage" in desc
+            if not (allows_free and isinstance(v, str) and NUMERIC_VALUE_RE.match(v)):
+                return False
     return True
 
 

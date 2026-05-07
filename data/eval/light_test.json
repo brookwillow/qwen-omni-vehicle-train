@@ -398,7 +398,7 @@
           "action": "调到",
           "device": "氛围灯",
           "feature": "颜色",
-          "value": "红色"
+          "value": "其他"
         }
       }
     ],
@@ -418,7 +418,7 @@
           "action": "调到",
           "device": "氛围灯",
           "feature": "颜色",
-          "value": "蓝色"
+          "value": "其他"
         }
       }
     ],
@@ -438,7 +438,7 @@
           "action": "调到",
           "device": "氛围灯",
           "feature": "颜色",
-          "value": "紫色"
+          "value": "其他"
         }
       }
     ],
@@ -458,7 +458,7 @@
           "action": "调到",
           "device": "氛围灯",
           "feature": "颜色",
-          "value": "绿色"
+          "value": "其他"
         }
       }
     ],
@@ -478,7 +478,7 @@
           "action": "调到",
           "device": "氛围灯",
           "feature": "颜色",
-          "value": "白色"
+          "value": "其他"
         }
       }
     ],
@@ -495,7 +495,7 @@
       {
         "name": "LightControl",
         "arguments": {
-          "action": "切换",
+          "action": "调到",
           "device": "氛围灯",
           "feature": "颜色",
           "value": "下一个"
@@ -534,7 +534,7 @@
       {
         "name": "LightControl",
         "arguments": {
-          "action": "切换",
+          "action": "调到",
           "device": "大灯"
         }
       }
@@ -619,7 +619,7 @@
           "device": "氛围灯",
           "feature": "颜色",
           "position": "前排",
-          "value": "橙色"
+          "value": "其他"
         }
       }
     ],
@@ -659,7 +659,7 @@
           "device": "氛围灯",
           "feature": "颜色",
           "position": "第二排",
-          "value": "暖黄色"
+          "value": "其他"
         }
       }
     ],
@@ -823,7 +823,7 @@
           "action": "调到",
           "device": "氛围灯",
           "feature": "颜色",
-          "value": "紫色"
+          "value": "其他"
         }
       }
     ],
@@ -840,7 +840,7 @@
       {
         "name": "LightControl",
         "arguments": {
-          "action": "切换",
+          "action": "调到",
           "device": "氛围灯",
           "feature": "颜色",
           "value": "下一个"
@@ -1018,7 +1018,7 @@
           "action": "调到",
           "device": "氛围灯",
           "feature": "颜色",
-          "value": "橙色"
+          "value": "其他"
         }
       }
     ],
@@ -1113,7 +1113,7 @@
           "action": "调到",
           "device": "氛围灯",
           "feature": "颜色",
-          "value": "蓝色"
+          "value": "其他"
         }
       }
     ],
@@ -1316,7 +1316,7 @@
           "action": "调到",
           "device": "氛围灯",
           "feature": "颜色",
-          "value": "红色"
+          "value": "其他"
         }
       },
       {
@@ -1385,7 +1385,7 @@
           "action": "调到",
           "device": "氛围灯",
           "feature": "颜色",
-          "value": "橙色"
+          "value": "其他"
         }
       }
     ],
@@ -1572,7 +1572,7 @@
           "action": "调到",
           "device": "氛围灯",
           "feature": "颜色",
-          "value": "蓝色"
+          "value": "其他"
         }
       }
     ],

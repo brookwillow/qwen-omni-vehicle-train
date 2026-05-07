@@ -123,8 +123,7 @@
         "name": "WindowControl",
         "arguments": {
           "action": "再开",
-          "device": "车窗",
-          "value": "一点"
+          "device": "车窗"
         }
       }
     ],
@@ -142,8 +141,7 @@
         "name": "WindowControl",
         "arguments": {
           "action": "再关",
-          "device": "车窗",
-          "value": "一点"
+          "device": "车窗"
         }
       }
     ],
@@ -255,8 +253,7 @@
         "name": "WindowControl",
         "arguments": {
           "action": "再关",
-          "device": "遮阳帘",
-          "value": "一点"
+          "device": "遮阳帘"
         }
       }
     ],
@@ -438,8 +435,7 @@
         "name": "WindowControl",
         "arguments": {
           "action": "再关",
-          "device": "车窗",
-          "value": "一点"
+          "device": "车窗"
         }
       }
     ],
@@ -495,8 +491,7 @@
         "name": "WindowControl",
         "arguments": {
           "action": "再关",
-          "device": "车窗",
-          "value": "一点"
+          "device": "车窗"
         }
       }
     ],
@@ -587,8 +582,7 @@
         "name": "WindowControl",
         "arguments": {
           "action": "再开",
-          "device": "遮阳帘",
-          "value": "一点"
+          "device": "遮阳帘"
         }
       }
     ],
@@ -809,8 +803,7 @@
         "arguments": {
           "action": "再开",
           "device": "车窗",
-          "position": "副驾",
-          "value": "一点"
+          "position": "副驾"
         }
       }
     ],
@@ -987,8 +980,7 @@
         "arguments": {
           "action": "再开",
           "device": "车窗",
-          "position": "右侧",
-          "value": "一点"
+          "position": "右侧"
         }
       }
     ],

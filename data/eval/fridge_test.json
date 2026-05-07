@@ -83,8 +83,7 @@
         "name": "FridgeControl",
         "arguments": {
           "action": "打开",
-          "device": "冰箱",
-          "position": "第二排"
+          "device": "冰箱"
         }
       }
     ],
@@ -102,8 +101,7 @@
         "name": "FridgeControl",
         "arguments": {
           "action": "关闭",
-          "device": "冰箱",
-          "position": "第二排"
+          "device": "冰箱"
         }
       }
     ],
@@ -193,8 +191,7 @@
         "name": "FridgeControl",
         "arguments": {
           "action": "打开",
-          "device": "冰箱",
-          "position": "第二排"
+          "device": "冰箱"
         }
       }
     ],
@@ -212,8 +209,7 @@
         "name": "FridgeControl",
         "arguments": {
           "action": "关闭",
-          "device": "冰箱",
-          "position": "第二排"
+          "device": "冰箱"
         }
       }
     ],
@@ -249,8 +245,7 @@
         "name": "FridgeControl",
         "arguments": {
           "action": "打开",
-          "device": "冰箱",
-          "position": "第二排"
+          "device": "冰箱"
         }
       }
     ],
@@ -466,8 +461,7 @@
         "name": "FridgeControl",
         "arguments": {
           "action": "打开",
-          "device": "冰箱",
-          "position": "第二排"
+          "device": "冰箱"
         }
       }
     ],
@@ -485,8 +479,7 @@
         "name": "FridgeControl",
         "arguments": {
           "action": "关闭",
-          "device": "冰箱",
-          "position": "第二排"
+          "device": "冰箱"
         }
       }
     ],
@@ -564,7 +557,7 @@
       {
         "name": "ClimateControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "空调",
           "feature": "温度"
         }
@@ -647,30 +640,6 @@
       }
     ],
     "query_audio": "audio/fridge/fridge_034.wav"
-  },
-  {
-    "id": "fridge_035",
-    "category": "冰箱",
-    "sub_category": "多意图",
-    "intent": "多意图",
-    "difficulty": "hard",
-    "query": "打开冰箱，再帮我放首歌",
-    "expected_tool_calls": [
-      {
-        "name": "FridgeControl",
-        "arguments": {
-          "action": "打开",
-          "device": "冰箱"
-        }
-      },
-      {
-        "name": "MediaPlay",
-        "arguments": {
-          "media_category": "歌"
-        }
-      }
-    ],
-    "query_audio": "audio/fridge/fridge_035.wav"
   },
   {
     "id": "fridge_036",
@@ -760,8 +729,7 @@
         "name": "FridgeControl",
         "arguments": {
           "action": "打开",
-          "device": "冰箱",
-          "position": "第二排"
+          "device": "冰箱"
         }
       },
       {
@@ -793,9 +761,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调小",
-          "feature": "音量",
-          "value": "一点"
+          "action": "调低",
+          "feature": "声音"
         }
       }
     ],

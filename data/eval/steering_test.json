@@ -67,7 +67,7 @@
       {
         "name": "SteeringwheelControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "device": "方向盘",
           "feature": "制热"
         }
@@ -86,7 +86,7 @@
       {
         "name": "SteeringwheelControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "方向盘",
           "feature": "制热"
         }
@@ -108,7 +108,7 @@
           "action": "调到",
           "device": "方向盘",
           "feature": "制热",
-          "value": "最大"
+          "value": "最高"
         }
       }
     ],
@@ -128,7 +128,7 @@
           "action": "调到",
           "device": "方向盘",
           "feature": "制热",
-          "value": "最小"
+          "value": "最低"
         }
       }
     ],
@@ -165,10 +165,9 @@
       {
         "name": "SteeringwheelControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "device": "方向盘",
-          "feature": "制热",
-          "value": "一点"
+          "feature": "制热"
         }
       }
     ],
@@ -363,7 +362,7 @@
       {
         "name": "SteeringwheelControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "device": "方向盘",
           "feature": "助力"
         }
@@ -382,7 +381,7 @@
       {
         "name": "SteeringwheelControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "方向盘",
           "feature": "助力"
         }
@@ -404,7 +403,7 @@
           "action": "调到",
           "device": "方向盘",
           "feature": "助力",
-          "value": "最大"
+          "value": "最高"
         }
       }
     ],
@@ -424,7 +423,7 @@
           "action": "调到",
           "device": "方向盘",
           "feature": "助力",
-          "value": "最小"
+          "value": "最低"
         }
       }
     ],
@@ -441,10 +440,9 @@
       {
         "name": "SteeringwheelControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "方向盘",
-          "feature": "助力",
-          "value": "一点"
+          "feature": "助力"
         }
       }
     ],
@@ -464,7 +462,7 @@
           "action": "调到",
           "device": "方向盘",
           "feature": "制热",
-          "value": "大"
+          "value": "高"
         }
       }
     ],
@@ -481,10 +479,9 @@
       {
         "name": "SteeringwheelControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "方向盘",
-          "feature": "制热",
-          "value": "一点"
+          "feature": "制热"
         }
       }
     ],
@@ -596,10 +593,9 @@
       {
         "name": "SteeringwheelControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "device": "方向盘",
-          "feature": "制热",
-          "value": "一点"
+          "feature": "制热"
         }
       }
     ],
@@ -616,7 +612,7 @@
       {
         "name": "SteeringwheelControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "方向盘",
           "feature": "制热"
         }
@@ -638,7 +634,7 @@
           "action": "调到",
           "device": "方向盘",
           "feature": "制热",
-          "value": "最大"
+          "value": "最高"
         }
       }
     ],
@@ -658,7 +654,7 @@
           "action": "调到",
           "device": "方向盘",
           "feature": "制热",
-          "value": "最小"
+          "value": "最低"
         }
       }
     ],
@@ -794,7 +790,7 @@
       {
         "name": "SteeringwheelControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "device": "方向盘",
           "feature": "助力"
         }
@@ -813,7 +809,7 @@
       {
         "name": "SteeringwheelControl",
         "arguments": {
-          "action": "调小",
+          "action": "调低",
           "device": "方向盘",
           "feature": "助力"
         }
@@ -914,7 +910,7 @@
           "action": "调到",
           "device": "方向盘",
           "feature": "助力",
-          "value": "最大"
+          "value": "最高"
         }
       }
     ],
@@ -954,7 +950,7 @@
           "action": "调到",
           "device": "方向盘",
           "feature": "助力",
-          "value": "最小"
+          "value": "最低"
         }
       }
     ],
@@ -1082,7 +1078,7 @@
       {
         "name": "ClimateControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "device": "空调",
           "feature": "温度"
         }
@@ -1165,9 +1161,8 @@
       {
         "name": "VoiceControl",
         "arguments": {
-          "action": "调小",
-          "feature": "音量",
-          "value": "一点"
+          "action": "调低",
+          "feature": "声音"
         }
       }
     ],
@@ -1187,7 +1182,7 @@
           "action": "调到",
           "device": "方向盘",
           "feature": "制热",
-          "value": "最大"
+          "value": "最高"
         }
       },
       {
@@ -1248,10 +1243,9 @@
       {
         "name": "ScreenControl",
         "arguments": {
-          "action": "调大",
+          "action": "调高",
           "device": "仪表",
-          "feature": "亮度",
-          "value": "一点"
+          "feature": "亮度"
         }
       }
     ],

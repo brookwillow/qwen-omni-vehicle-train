@@ -17,41 +17,6 @@
     "query_audio": "black-box/sample_audios/ngp_complex_s190_t1_9a12ec4e08e4.wav"
   },
   {
-    "id": "black_box_002",
-    "category": "控车",
-    "sub_category": "LaneChangeControl",
-    "intent": "隐含意图",
-    "difficulty": "hard",
-    "query": "这大货车一辆接一辆的，开得也太慢了，跟在后面太耽误事了，咱们想办法超过去吧。",
-    "expected_tool_calls": [
-      {
-        "name": "LaneChangeControl",
-        "arguments": {
-          "action": "超车"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/ngp_complex_s330_t1_c1489cf0492c.wav"
-  },
-  {
-    "id": "black_box_003",
-    "category": "控车",
-    "sub_category": "LaneChangeControl",
-    "intent": "隐含意图",
-    "difficulty": "medium",
-    "query": "前面这段路先别变道了，施工区电动车又多，怕不安全。",
-    "expected_tool_calls": [
-      {
-        "name": "LaneChangeControl",
-        "arguments": {
-          "action": "抑制变道",
-          "suppression_type": "本段路"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/ngp_complex_s298_t1_a489f10625cb.wav"
-  },
-  {
     "id": "black_box_004",
     "category": "控车",
     "sub_category": "PullOverControl",
@@ -84,40 +49,6 @@
       }
     ],
     "query_audio": "black-box/sample_audios/ngp_complex_s55_t1_e80717d8da14.wav"
-  },
-  {
-    "id": "black_box_006",
-    "category": "控车",
-    "sub_category": "LaneChangeControl",
-    "intent": "隐含意图",
-    "difficulty": "medium",
-    "query": "先别并线，保持现在这条车道就好。",
-    "expected_tool_calls": [
-      {
-        "name": "LaneChangeControl",
-        "arguments": {
-          "action": "取消变道"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/ngp_complex_s53_t1_b5f2e0883998.wav"
-  },
-  {
-    "id": "black_box_007",
-    "category": "控车",
-    "sub_category": "LaneChangeControl",
-    "intent": "明确指令",
-    "difficulty": "hard",
-    "query": "前面那车太磨蹭了，抓紧超过去，虽然这车库出口地方是窄了点，但再晚面试真要赶不上了！先超车再说！赶紧的。",
-    "expected_tool_calls": [
-      {
-        "name": "LaneChangeControl",
-        "arguments": {
-          "action": "超车"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/ngp_complex_s270_t1_b1072f2b69b8.wav"
   },
   {
     "id": "black_box_008",
@@ -239,24 +170,6 @@
     "query_audio": "black-box/sample_audios/ngp_complex_s118_t1_6aeb1ccd3946.wav"
   },
   {
-    "id": "black_box_015",
-    "category": "控车",
-    "sub_category": "LaneChangeControl",
-    "intent": "隐含意图",
-    "difficulty": "hard",
-    "query": "这段路先别变道了，施工区本来就乱，电动车窜来窜去的，别凑那个热闹。",
-    "expected_tool_calls": [
-      {
-        "name": "LaneChangeControl",
-        "arguments": {
-          "action": "抑制变道",
-          "suppression_type": "本段路"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/ngp_complex_s301_t1_48a936e29953.wav"
-  },
-  {
     "id": "black_box_016",
     "category": "控车",
     "sub_category": "PullOverControl",
@@ -272,41 +185,6 @@
       }
     ],
     "query_audio": "black-box/sample_audios/ngp_complex_s44_t1_847e95ec260b.wav"
-  },
-  {
-    "id": "black_box_017",
-    "category": "控车",
-    "sub_category": "LaneChangeControl",
-    "intent": "隐含意图",
-    "difficulty": "medium",
-    "query": "现在往右变道，但小心点啊，那边好多电动车，可别撞上了。",
-    "expected_tool_calls": [
-      {
-        "name": "LaneChangeControl",
-        "arguments": {
-          "action": "向右变道"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/ngp_complex_s66_t1_2b383bc7fef4.wav"
-  },
-  {
-    "id": "black_box_018",
-    "category": "控车",
-    "sub_category": "LaneChangeControl",
-    "intent": "隐含意图",
-    "difficulty": "medium",
-    "query": "这辅路封了，隧道里先别变道，走中间这条就行。",
-    "expected_tool_calls": [
-      {
-        "name": "LaneChangeControl",
-        "arguments": {
-          "action": "抑制变道",
-          "suppression_type": "隧道内"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/ngp_complex_s146_t1_269f5f428f50.wav"
   },
   {
     "id": "black_box_019",
@@ -341,59 +219,6 @@
       }
     ],
     "query_audio": "black-box/sample_audios/ngp_complex_s216_t1_28ce4e07b6a3.wav"
-  },
-  {
-    "id": "black_box_021",
-    "category": "控车",
-    "sub_category": "LaneChangeControl",
-    "intent": "明确指令",
-    "difficulty": "medium",
-    "query": "我们向左变道，记得稳一点，别太急。",
-    "expected_tool_calls": [
-      {
-        "name": "LaneChangeControl",
-        "arguments": {
-          "action": "向左变道"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/ngp_complex_s277_t1_f25ab6dce5e8.wav"
-  },
-  {
-    "id": "black_box_022",
-    "category": "控车",
-    "sub_category": "LaneChangeControl",
-    "intent": "隐含意图",
-    "difficulty": "hard",
-    "query": "这施工占道真是麻烦，前面又堵，咱们这车就先别变道了，就顺着这条道开过去吧，变来变去更慢。",
-    "expected_tool_calls": [
-      {
-        "name": "LaneChangeControl",
-        "arguments": {
-          "action": "抑制变道",
-          "suppression_type": "本段路"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/ngp_complex_s365_t1_1747fc55542a.wav"
-  },
-  {
-    "id": "black_box_023",
-    "category": "控车",
-    "sub_category": "LaneChangeControl",
-    "intent": "隐含意图",
-    "difficulty": "medium",
-    "query": "前面施工，这段路先别给我自动变道。",
-    "expected_tool_calls": [
-      {
-        "name": "LaneChangeControl",
-        "arguments": {
-          "action": "抑制变道",
-          "suppression_type": "本段路"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/ngp_complex_s229_t1_70698836747d.wav"
   },
   {
     "id": "black_box_024",
@@ -855,7 +680,6 @@
         "arguments": {
           "action": "调到",
           "device": "悬架",
-          "feature": "高度",
           "value": "最高"
         }
       }
@@ -2276,25 +2100,6 @@
     "query_audio": "black-box/sample_audios/2c4306ba-2c3a-43ac-bf0e-a8f5aec642d9_打开副驾小憩模式.wav"
   },
   {
-    "id": "black_box_123",
-    "category": "车控",
-    "sub_category": "DrivingControl",
-    "intent": "明确指令",
-    "difficulty": "easy",
-    "query": "打开车手模式",
-    "expected_tool_calls": [
-      {
-        "name": "DrivingControl",
-        "arguments": {
-          "action": "打开",
-          "feature": "驾驶模式",
-          "value": "车手模式"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/2cdac79b792cceff.wav"
-  },
-  {
     "id": "black_box_124",
     "category": "车控",
     "sub_category": "ClimateControl",
@@ -2463,25 +2268,6 @@
     "query_audio": "black-box/sample_audios/899bea4c019b0aa5.wav"
   },
   {
-    "id": "black_box_133",
-    "category": "车控",
-    "sub_category": "DrivingControl",
-    "intent": "明确指令",
-    "difficulty": "easy",
-    "query": "打开雪地模式",
-    "expected_tool_calls": [
-      {
-        "name": "DrivingControl",
-        "arguments": {
-          "action": "打开",
-          "feature": "驾驶模式",
-          "value": "雪地模式"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/8f8435618211abd3.wav"
-  },
-  {
     "id": "black_box_134",
     "category": "车控",
     "sub_category": "ClimateControl",
@@ -2592,25 +2378,6 @@
       }
     ],
     "query_audio": "black-box/sample_audios/1b71614fb0b213ba.wav"
-  },
-  {
-    "id": "black_box_140",
-    "category": "车控",
-    "sub_category": "DrivingControl",
-    "intent": "明确指令",
-    "difficulty": "easy",
-    "query": "关闭雪地驾驶模式",
-    "expected_tool_calls": [
-      {
-        "name": "DrivingControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "驾驶模式",
-          "value": "雪地模式"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/eb940fc4a285f3d5.wav"
   },
   {
     "id": "black_box_141",
@@ -3485,8 +3252,7 @@
           "action": "调到",
           "device": "座椅",
           "feature": "习惯",
-          "position": "主驾",
-          "value": "老板"
+          "position": "主驾"
         }
       }
     ],
@@ -3787,8 +3553,7 @@
         "arguments": {
           "action": "调到",
           "feature": "习惯",
-          "position": "主驾",
-          "value": "开车"
+          "position": "主驾"
         }
       }
     ],
@@ -3909,25 +3674,6 @@
       }
     ],
     "query_audio": "black-box/sample_audios/b0de4af50f0ee8e.wav"
-  },
-  {
-    "id": "black_box_209",
-    "category": "车控",
-    "sub_category": "SuspensionControl",
-    "intent": "明确指令",
-    "difficulty": "easy",
-    "query": "调高悬架高度",
-    "expected_tool_calls": [
-      {
-        "name": "SuspensionControl",
-        "arguments": {
-          "action": "调高",
-          "device": "悬架",
-          "feature": "高度"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/b81e465592354593.wav"
   },
   {
     "id": "black_box_210",
@@ -4119,25 +3865,6 @@
     "query_audio": "black-box/sample_audios/dd4201f512310f32.wav"
   },
   {
-    "id": "black_box_220",
-    "category": "车控",
-    "sub_category": "DrivingControl",
-    "intent": "明确指令",
-    "difficulty": "easy",
-    "query": "关闭车手模式",
-    "expected_tool_calls": [
-      {
-        "name": "DrivingControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "驾驶模式",
-          "value": "车手模式"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/b9eaa01eee80f02c.wav"
-  },
-  {
     "id": "black_box_221",
     "category": "车控",
     "sub_category": "SeatControl",
@@ -4174,25 +3901,6 @@
       }
     ],
     "query_audio": "black-box/sample_audios/c6a7bac8622d6b82.wav"
-  },
-  {
-    "id": "black_box_223",
-    "category": "车控",
-    "sub_category": "DrivingControl",
-    "intent": "明确指令",
-    "difficulty": "easy",
-    "query": "关闭湿地模式",
-    "expected_tool_calls": [
-      {
-        "name": "DrivingControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "驾驶模式",
-          "value": "湿地模式"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/6537993c08c9fe68.wav"
   },
   {
     "id": "black_box_224",
@@ -4346,24 +4054,6 @@
     "query_audio": "black-box/sample_audios/db9caa51564df74.wav"
   },
   {
-    "id": "black_box_232",
-    "category": "车控",
-    "sub_category": "WiperControl",
-    "intent": "明确指令",
-    "difficulty": "easy",
-    "query": "雨刮打开",
-    "expected_tool_calls": [
-      {
-        "name": "WiperControl",
-        "arguments": {
-          "action": "打开",
-          "device": "雨刮"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/df6f89ab48e58bef.wav"
-  },
-  {
     "id": "black_box_233",
     "category": "车控",
     "sub_category": "AppControl",
@@ -4380,26 +4070,6 @@
       }
     ],
     "query_audio": "black-box/sample_audios/app-2203.wav"
-  },
-  {
-    "id": "black_box_234",
-    "category": "车控",
-    "sub_category": "FridgeControl",
-    "intent": "明确指令",
-    "difficulty": "easy",
-    "query": "冰箱温度调到四度",
-    "expected_tool_calls": [
-      {
-        "name": "FridgeControl",
-        "arguments": {
-          "action": "调到",
-          "device": "冰箱",
-          "feature": "温度",
-          "value": "4"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/fa288fa4ac2496a8.wav"
   },
   {
     "id": "black_box_235",
@@ -4667,24 +4337,6 @@
     "query_audio": "black-box/sample_audios/3027641a450596e2.wav"
   },
   {
-    "id": "black_box_249",
-    "category": "车控",
-    "sub_category": "GateControl",
-    "intent": "明确指令",
-    "difficulty": "easy",
-    "query": "关闭前备箱",
-    "expected_tool_calls": [
-      {
-        "name": "GateControl",
-        "arguments": {
-          "action": "关闭",
-          "device": "前备箱"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/43642296187bd549.wav"
-  },
-  {
     "id": "black_box_250",
     "category": "车控",
     "sub_category": "PowerControl",
@@ -4774,7 +4426,6 @@
         "arguments": {
           "action": "调到",
           "device": "悬架",
-          "feature": "高度",
           "value": "最高"
         }
       }
@@ -5834,7 +5485,6 @@
         "arguments": {
           "action": "调到",
           "device": "悬架",
-          "feature": "高度",
           "value": "最高"
         }
       }
@@ -5938,24 +5588,6 @@
       }
     ],
     "query_audio": "black-box/sample_audios/7f01c7ebebf45235.wav"
-  },
-  {
-    "id": "black_box_315",
-    "category": "车控",
-    "sub_category": "WiperControl",
-    "intent": "明确指令",
-    "difficulty": "easy",
-    "query": "雨刮打开",
-    "expected_tool_calls": [
-      {
-        "name": "WiperControl",
-        "arguments": {
-          "action": "打开",
-          "device": "雨刮"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/5fff5fe588b1812.wav"
   },
   {
     "id": "black_box_316",
@@ -6091,26 +5723,6 @@
       }
     ],
     "query_audio": "black-box/sample_audios/cb722678d228d1a3.wav"
-  },
-  {
-    "id": "black_box_323",
-    "category": "车控",
-    "sub_category": "FridgeControl",
-    "intent": "明确指令",
-    "difficulty": "easy",
-    "query": "冰箱温度调到二十度",
-    "expected_tool_calls": [
-      {
-        "name": "FridgeControl",
-        "arguments": {
-          "action": "调到",
-          "device": "冰箱",
-          "feature": "温度",
-          "value": "20"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/33d646524c8a4b70.wav"
   },
   {
     "id": "black_box_324",
@@ -7229,8 +6841,7 @@
         "name": "FridgeControl",
         "arguments": {
           "action": "打开",
-          "device": "冰箱",
-          "value": "制冷"
+          "device": "冰箱"
         }
       }
     ],
@@ -7310,26 +6921,6 @@
       }
     ],
     "query_audio": "black-box/sample_audios/9b53034eee02b90f.wav"
-  },
-  {
-    "id": "black_box_387",
-    "category": "车控",
-    "sub_category": "FridgeControl",
-    "intent": "明确指令",
-    "difficulty": "easy",
-    "query": "冰箱温度调到十度",
-    "expected_tool_calls": [
-      {
-        "name": "FridgeControl",
-        "arguments": {
-          "action": "调到",
-          "device": "冰箱",
-          "feature": "温度",
-          "value": "10"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/8eb19a23a37ee037.wav"
   },
   {
     "id": "black_box_388",
@@ -7505,25 +7096,6 @@
       }
     ],
     "query_audio": "black-box/sample_audios/8c4c7002-23e8-49f7-81a9-60af325311fb_主驾调为小憩模式.wav"
-  },
-  {
-    "id": "black_box_397",
-    "category": "车控",
-    "sub_category": "DrivingControl",
-    "intent": "明确指令",
-    "difficulty": "easy",
-    "query": "打开湿地模式",
-    "expected_tool_calls": [
-      {
-        "name": "DrivingControl",
-        "arguments": {
-          "action": "打开",
-          "feature": "驾驶模式",
-          "value": "湿地模式"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/ab2df7997bdc4bb1.wav"
   },
   {
     "id": "black_box_398",
@@ -7787,7 +7359,6 @@
         "arguments": {
           "action": "调到",
           "device": "悬架",
-          "feature": "高度",
           "value": "中"
         }
       }
@@ -8218,8 +7789,7 @@
         "name": "ProfileControl",
         "arguments": {
           "action": "打开",
-          "feature": "习惯",
-          "value": "休息"
+          "feature": "习惯"
         }
       }
     ],
@@ -8430,8 +8000,7 @@
         "name": "RearviewControl",
         "arguments": {
           "action": "关闭",
-          "device": "后视镜",
-          "feature": "除雾"
+          "device": "后视镜"
         }
       }
     ],
@@ -8916,24 +8485,6 @@
     "query_audio": "black-box/sample_audios/9fd5e1556ac2c470.wav"
   },
   {
-    "id": "black_box_470",
-    "category": "车控",
-    "sub_category": "WiperControl",
-    "intent": "明确指令",
-    "difficulty": "easy",
-    "query": "打开雨刮小P",
-    "expected_tool_calls": [
-      {
-        "name": "WiperControl",
-        "arguments": {
-          "action": "打开",
-          "device": "雨刮"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/aadc0592a001828.wav"
-  },
-  {
     "id": "black_box_471",
     "category": "车控",
     "sub_category": "ClimateControl",
@@ -9195,7 +8746,6 @@
         "arguments": {
           "action": "调到",
           "device": "悬架",
-          "feature": "高度",
           "value": "较高"
         }
       }
@@ -9691,8 +9241,7 @@
         "name": "RearviewControl",
         "arguments": {
           "action": "打开",
-          "device": "后视镜",
-          "feature": "除雾"
+          "device": "后视镜"
         }
       }
     ],
@@ -9774,25 +9323,6 @@
       }
     ],
     "query_audio": "black-box/sample_audios/18e0b76ee46a7482.wav"
-  },
-  {
-    "id": "black_box_515",
-    "category": "车控",
-    "sub_category": "LightControl",
-    "intent": "明确指令",
-    "difficulty": "easy",
-    "query": "大灯高度调低",
-    "expected_tool_calls": [
-      {
-        "name": "LightControl",
-        "arguments": {
-          "action": "调低",
-          "device": "大灯",
-          "feature": "高度"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/72c64bb2d16857d6.wav"
   },
   {
     "id": "black_box_516",
@@ -10002,8 +9532,7 @@
         "name": "ClimateControl",
         "arguments": {
           "action": "打开",
-          "device": "空调",
-          "value": "智能风"
+          "device": "空调"
         }
       }
     ],
@@ -10387,8 +9916,7 @@
         "name": "RearviewControl",
         "arguments": {
           "action": "打开",
-          "device": "后视镜",
-          "feature": "除雾"
+          "device": "后视镜"
         }
       }
     ],
@@ -10480,7 +10008,6 @@
       {
         "name": "WindowControl",
         "arguments": {
-          "value": "一点",
           "action": "开到",
           "device": "车窗"
         }
@@ -11642,7 +11169,6 @@
         "arguments": {
           "action": "调到",
           "device": "悬架",
-          "feature": "高度",
           "value": "最高"
         }
       }
@@ -12629,26 +12155,6 @@
     "query_audio": "black-box/sample_audios/f874fe06f1e16cf9.wav"
   },
   {
-    "id": "black_box_664",
-    "category": "车控",
-    "sub_category": "FridgeControl",
-    "intent": "明确指令",
-    "difficulty": "easy",
-    "query": "冰箱温度调到五度",
-    "expected_tool_calls": [
-      {
-        "name": "FridgeControl",
-        "arguments": {
-          "action": "调到",
-          "device": "冰箱",
-          "feature": "温度",
-          "value": "5"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/115c1fd4c72db038.wav"
-  },
-  {
     "id": "black_box_665",
     "category": "车控",
     "sub_category": "ProfileControl",
@@ -12767,24 +12273,6 @@
       }
     ],
     "query_audio": "black-box/sample_audios/540d02777f277b5b.wav"
-  },
-  {
-    "id": "black_box_671",
-    "category": "车控",
-    "sub_category": "GateControl",
-    "intent": "明确指令",
-    "difficulty": "easy",
-    "query": "关闭油箱盖",
-    "expected_tool_calls": [
-      {
-        "name": "GateControl",
-        "arguments": {
-          "action": "关闭",
-          "device": "油箱盖"
-        }
-      }
-    ],
-    "query_audio": "black-box/sample_audios/121921028c31c4c8.wav"
   },
   {
     "id": "black_box_672",

@@ -1,83 +1,80 @@
-{"messages":[{"role":"user","content":"空调打开暖气。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"打开\",\"device\":\"空调\",\"value\":\"制热\"}"}]}
-{"messages":[{"role":"user","content":"小P空调加热。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"打开\",\"device\":\"空调\",\"value\":\"制热\"}"}]}
-{"messages":[{"role":"user","content":"车里太冷了，开暖风。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"打开\",\"device\":\"空调\",\"value\":\"制热\"}"}]}
-{"messages":[{"role":"user","content":"帮我把空调切到制热。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"打开\",\"device\":\"空调\",\"value\":\"制热\"}"}]}
-{"messages":[{"role":"user","content":"车内太热了，快速降温。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"打开\",\"device\":\"空调\",\"value\":\"极速降温\"}"}]}
-{"messages":[{"role":"user","content":"热死了，把温度调低一点。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"调小\",\"device\":\"空调\",\"feature\":\"温度\",\"value\":\"一点\"}"}]}
-{"messages":[{"role":"user","content":"太冷了，温度调高一点。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"调大\",\"device\":\"空调\",\"feature\":\"温度\",\"value\":\"一点\"}"}]}
-{"messages":[{"role":"user","content":"空调温度调高一点小P。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"调大\",\"device\":\"空调\",\"feature\":\"温度\",\"value\":\"一点\"}"}]}
-{"messages":[{"role":"user","content":"风小一点。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"调小\",\"device\":\"空调\",\"feature\":\"风\",\"value\":\"一点\"}"}]}
-{"messages":[{"role":"user","content":"调高风量。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"调大\",\"device\":\"空调\",\"feature\":\"风\"}"}]}
-{"messages":[{"role":"user","content":"风量调大一点。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"调大\",\"device\":\"空调\",\"feature\":\"风\",\"value\":\"一点\"}"}]}
-{"messages":[{"role":"user","content":"风力三级。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"调到\",\"device\":\"空调\",\"feature\":\"风\",\"value\":\"3\"}"}]}
-{"messages":[{"role":"user","content":"小P风量调为二档。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"调到\",\"device\":\"空调\",\"feature\":\"风\",\"value\":\"2\"}"}]}
-{"messages":[{"role":"user","content":"空调风速调到二档。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"调到\",\"device\":\"空调\",\"feature\":\"风\",\"value\":\"2\"}"}]}
-{"messages":[{"role":"user","content":"空调风量调到一。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"调到\",\"device\":\"空调\",\"feature\":\"风\",\"value\":\"1\"}"}]}
-{"messages":[{"role":"user","content":"最大风。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"调到\",\"device\":\"空调\",\"feature\":\"风\",\"value\":\"最大\"}"}]}
-{"messages":[{"role":"user","content":"把风调到最小。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"调到\",\"device\":\"空调\",\"feature\":\"风\",\"value\":\"最小\"}"}]}
-{"messages":[{"role":"user","content":"风量对着我吹。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"打开\",\"device\":\"空调\",\"feature\":\"风\",\"value\":\"对人\"}"}]}
-{"messages":[{"role":"user","content":"小P风不要对我吹。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"关闭\",\"device\":\"空调\",\"feature\":\"风\",\"value\":\"对人\"}"}]}
-{"messages":[{"role":"user","content":"外面空气不好，别让外面的风进来。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"打开\",\"device\":\"空调\",\"value\":\"内循环\"}"}]}
-{"messages":[{"role":"user","content":"打开智能除味小P。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"打开\",\"device\":\"空调\",\"value\":\"智能除味\"}"}]}
-{"messages":[{"role":"user","content":"小孩在车里，空调别停。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"打开\",\"device\":\"空调\",\"value\":\"守护模式\"}"}]}
-{"messages":[{"role":"user","content":"狗在车里，帮我看着空调别关。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"打开\",\"device\":\"空调\",\"value\":\"宠物模式\"}"}]}
-{"messages":[{"role":"user","content":"关闭室内空调。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"关闭\",\"device\":\"空调\",\"position\":\"全部\"}"}]}
-{"messages":[{"role":"user","content":"小P全车空调开到二十四度。"},{"role":"assistant","content":"Action: ClimateControl\nAction Input: {\"action\":\"调到\",\"device\":\"空调\",\"feature\":\"温度\",\"position\":\"全部\",\"value\":\"24\"}"}]}
-{"messages":[{"role":"user","content":"座椅模式调到习惯二。"},{"role":"assistant","content":"Action: ProfileControl\nAction Input: {\"action\":\"调到\",\"feature\":\"习惯\",\"value\":\"2\"}"}]}
-{"messages":[{"role":"user","content":"恢复成习惯一。"},{"role":"assistant","content":"Action: ProfileControl\nAction Input: {\"action\":\"复位\",\"feature\":\"习惯\",\"value\":\"1\"}"}]}
-{"messages":[{"role":"user","content":"用车习惯二小P。"},{"role":"assistant","content":"Action: ProfileControl\nAction Input: {\"action\":\"复位\",\"feature\":\"习惯\",\"value\":\"2\"}"}]}
-{"messages":[{"role":"user","content":"主驾座椅恢复到用车习惯一。"},{"role":"assistant","content":"Action: ProfileControl\nAction Input: {\"action\":\"复位\",\"feature\":\"习惯\",\"position\":\"主驾\",\"value\":\"1\"}"}]}
-{"messages":[{"role":"user","content":"主驾座椅恢复标准模式。"},{"role":"assistant","content":"Action: ProfileControl\nAction Input: {\"action\":\"复位\",\"feature\":\"习惯\",\"position\":\"主驾\",\"value\":\"标准模式\"}"}]}
-{"messages":[{"role":"user","content":"座椅回到用车习惯一。"},{"role":"assistant","content":"Action: ProfileControl\nAction Input: {\"action\":\"复位\",\"feature\":\"习惯\",\"value\":\"1\"}"}]}
-{"messages":[{"role":"user","content":"主驾座椅放松模式小P。"},{"role":"assistant","content":"Action: ProfileControl\nAction Input: {\"action\":\"调到\",\"feature\":\"习惯\",\"position\":\"主驾\",\"value\":\"放松模式\"}"}]}
-{"messages":[{"role":"user","content":"小P主驾座椅调整到标准模式。"},{"role":"assistant","content":"Action: ProfileControl\nAction Input: {\"action\":\"调到\",\"feature\":\"习惯\",\"position\":\"主驾\",\"value\":\"标准模式\"}"}]}
-{"messages":[{"role":"user","content":"座椅标准模式。"},{"role":"assistant","content":"Action: ProfileControl\nAction Input: {\"action\":\"调到\",\"feature\":\"习惯\",\"value\":\"标准模式\"}"}]}
-{"messages":[{"role":"user","content":"副驾座椅打开标准模式。"},{"role":"assistant","content":"Action: ProfileControl\nAction Input: {\"action\":\"打开\",\"feature\":\"习惯\",\"position\":\"副驾\",\"value\":\"标准模式\"}"}]}
-{"messages":[{"role":"user","content":"小P副驾座椅调为标准模式。"},{"role":"assistant","content":"Action: ProfileControl\nAction Input: {\"action\":\"调到\",\"feature\":\"习惯\",\"position\":\"副驾\",\"value\":\"标准模式\"}"}]}
-{"messages":[{"role":"user","content":"右后座椅小憩模式小P。"},{"role":"assistant","content":"Action: ProfileControl\nAction Input: {\"action\":\"调到\",\"feature\":\"习惯\",\"position\":\"第二排右侧\",\"value\":\"小憩模式\"}"}]}
-{"messages":[{"role":"user","content":"把右后座椅调成小憩模式。"},{"role":"assistant","content":"Action: ProfileControl\nAction Input: {\"action\":\"调到\",\"feature\":\"习惯\",\"position\":\"第二排右侧\",\"value\":\"小憩模式\"}"}]}
-{"messages":[{"role":"user","content":"打开副驾小憩模式。"},{"role":"assistant","content":"Action: ProfileControl\nAction Input: {\"action\":\"打开\",\"feature\":\"习惯\",\"position\":\"副驾\",\"value\":\"小憩模式\"}"}]}
-{"messages":[{"role":"user","content":"小P打开驾驶习惯一。"},{"role":"assistant","content":"Action: ProfileControl\nAction Input: {\"action\":\"打开\",\"feature\":\"习惯\",\"value\":\"1\"}"}]}
-{"messages":[{"role":"user","content":"保存当前主驾座椅习惯。"},{"role":"assistant","content":"Action: ProfileControl\nAction Input: {\"action\":\"保存\",\"feature\":\"习惯\",\"position\":\"主驾\"}"}]}
-{"messages":[{"role":"user","content":"打开主驾用车习惯。"},{"role":"assistant","content":"Action: ProfileControl\nAction Input: {\"action\":\"打开\",\"feature\":\"习惯\",\"position\":\"主驾\"}"}]}
-{"messages":[{"role":"user","content":"切换到下一个座椅习惯。"},{"role":"assistant","content":"Action: ProfileControl\nAction Input: {\"action\":\"切换\",\"feature\":\"习惯\",\"value\":\"下一个\"}"}]}
-{"messages":[{"role":"user","content":"左后座椅习惯切到下一个。"},{"role":"assistant","content":"Action: ProfileControl\nAction Input: {\"action\":\"切换\",\"feature\":\"习惯\",\"position\":\"第二排左侧\",\"value\":\"下一个\"}"}]}
-{"messages":[{"role":"user","content":"关闭左后车窗。"},{"role":"assistant","content":"Action: WindowControl\nAction Input: {\"action\":\"关闭\",\"device\":\"车窗\",\"position\":\"第二排左侧\"}"}]}
-{"messages":[{"role":"user","content":"小P关闭左后车窗。"},{"role":"assistant","content":"Action: WindowControl\nAction Input: {\"action\":\"关闭\",\"device\":\"车窗\",\"position\":\"第二排左侧\"}"}]}
-{"messages":[{"role":"user","content":"关闭右后方车窗。"},{"role":"assistant","content":"Action: WindowControl\nAction Input: {\"action\":\"关闭\",\"device\":\"车窗\",\"position\":\"第二排右侧\"}"}]}
-{"messages":[{"role":"user","content":"右后窗户关上。"},{"role":"assistant","content":"Action: WindowControl\nAction Input: {\"action\":\"关闭\",\"device\":\"车窗\",\"position\":\"第二排右侧\"}"}]}
-{"messages":[{"role":"user","content":"打开两个前车窗。"},{"role":"assistant","content":"Action: WindowControl\nAction Input: {\"action\":\"打开\",\"device\":\"车窗\",\"position\":\"前排\"}"}]}
-{"messages":[{"role":"user","content":"打开两个前排车窗。"},{"role":"assistant","content":"Action: WindowControl\nAction Input: {\"action\":\"打开\",\"device\":\"车窗\",\"position\":\"前排\"}"}]}
-{"messages":[{"role":"user","content":"打开主副驾车窗玻璃。"},{"role":"assistant","content":"Action: WindowControl\nAction Input: {\"action\":\"打开\",\"device\":\"车窗\",\"position\":\"前排\"}"}]}
-{"messages":[{"role":"user","content":"所有车窗开到一半。"},{"role":"assistant","content":"Action: WindowControl\nAction Input: {\"action\":\"开到\",\"device\":\"车窗\",\"position\":\"全部\",\"value\":\"50%\"}"}]}
-{"messages":[{"role":"user","content":"全车车窗开一点。"},{"role":"assistant","content":"Action: WindowControl\nAction Input: {\"action\":\"再开\",\"device\":\"车窗\",\"position\":\"全部\",\"value\":\"一点\"}"}]}
-{"messages":[{"role":"user","content":"前排车窗打开百分之十。"},{"role":"assistant","content":"Action: WindowControl\nAction Input: {\"action\":\"开到\",\"device\":\"车窗\",\"position\":\"前排\",\"value\":\"10%\"}"}]}
-{"messages":[{"role":"user","content":"前排车窗打开三分之一。"},{"role":"assistant","content":"Action: WindowControl\nAction Input: {\"action\":\"开到\",\"device\":\"车窗\",\"position\":\"前排\",\"value\":\"33%\"}"}]}
-{"messages":[{"role":"user","content":"所有车窗打开四分之一。"},{"role":"assistant","content":"Action: WindowControl\nAction Input: {\"action\":\"开到\",\"device\":\"车窗\",\"position\":\"全部\",\"value\":\"25%\"}"}]}
-{"messages":[{"role":"user","content":"前排车窗下降。"},{"role":"assistant","content":"Action: WindowControl\nAction Input: {\"action\":\"再开\",\"device\":\"车窗\",\"position\":\"前排\"}"}]}
-{"messages":[{"role":"user","content":"升起全车车窗。"},{"role":"assistant","content":"Action: WindowControl\nAction Input: {\"action\":\"再关\",\"device\":\"车窗\",\"position\":\"全部\"}"}]}
-{"messages":[{"role":"user","content":"升起车窗小P。"},{"role":"assistant","content":"Action: WindowControl\nAction Input: {\"action\":\"再关\",\"device\":\"车窗\"}"}]}
-{"messages":[{"role":"user","content":"打开车窗通风。"},{"role":"assistant","content":"Action: WindowControl\nAction Input: {\"action\":\"打开\",\"device\":\"车窗\"}"}]}
-{"messages":[{"role":"user","content":"关掉天窗。"},{"role":"assistant","content":"Action: WindowControl\nAction Input: {\"action\":\"关闭\",\"device\":\"遮阳帘\"}"}]}
-{"messages":[{"role":"user","content":"关闭幕布。"},{"role":"assistant","content":"Action: WindowControl\nAction Input: {\"action\":\"关闭\",\"device\":\"遮阳帘\"}"}]}
-{"messages":[{"role":"user","content":"开天窗。"},{"role":"assistant","content":"Action: WindowControl\nAction Input: {\"action\":\"打开\",\"device\":\"遮阳帘\"}"}]}
-{"messages":[{"role":"user","content":"氛围灯设成白色。"},{"role":"assistant","content":"Action: LightControl\nAction Input: {\"action\":\"调到\",\"device\":\"氛围灯\",\"feature\":\"颜色\",\"value\":\"白色\"}"}]}
-{"messages":[{"role":"user","content":"氛围灯调成红色。"},{"role":"assistant","content":"Action: LightControl\nAction Input: {\"action\":\"调到\",\"device\":\"氛围灯\",\"feature\":\"颜色\",\"value\":\"红色\"}"}]}
-{"messages":[{"role":"user","content":"把氛围灯颜色改成蓝色。"},{"role":"assistant","content":"Action: LightControl\nAction Input: {\"action\":\"调到\",\"device\":\"氛围灯\",\"feature\":\"颜色\",\"value\":\"蓝色\"}"}]}
-{"messages":[{"role":"user","content":"氛围灯开光剑模式。"},{"role":"assistant","content":"Action: LightControl\nAction Input: {\"action\":\"调到\",\"device\":\"氛围灯\",\"value\":\"光剑\"}"}]}
-{"messages":[{"role":"user","content":"把氛围灯调成光剑。"},{"role":"assistant","content":"Action: LightControl\nAction Input: {\"action\":\"调到\",\"device\":\"氛围灯\",\"value\":\"光剑\"}"}]}
-{"messages":[{"role":"user","content":"大灯切换到自动模式。"},{"role":"assistant","content":"Action: LightControl\nAction Input: {\"action\":\"调到\",\"device\":\"大灯\",\"value\":\"自动\"}"}]}
-{"messages":[{"role":"user","content":"切换大灯模式。"},{"role":"assistant","content":"Action: LightControl\nAction Input: {\"action\":\"切换\",\"device\":\"大灯\",\"value\":\"下一个\"}"}]}
-{"messages":[{"role":"user","content":"关闭智能远光灯。"},{"role":"assistant","content":"Action: LightControl\nAction Input: {\"action\":\"关闭\",\"device\":\"远光灯\",\"value\":\"智能\"}"}]}
-{"messages":[{"role":"user","content":"前雾灯打开。"},{"role":"assistant","content":"Action: LightControl\nAction Input: {\"action\":\"打开\",\"device\":\"前雾灯\"}"}]}
-{"messages":[{"role":"user","content":"后雾灯打开。"},{"role":"assistant","content":"Action: LightControl\nAction Input: {\"action\":\"打开\",\"device\":\"后雾灯\"}"}]}
-{"messages":[{"role":"user","content":"主驾阅读灯打开。"},{"role":"assistant","content":"Action: LightControl\nAction Input: {\"action\":\"打开\",\"device\":\"阅读灯\",\"position\":\"主驾\"}"}]}
-{"messages":[{"role":"user","content":"副驾阅读灯关掉。"},{"role":"assistant","content":"Action: LightControl\nAction Input: {\"action\":\"关闭\",\"device\":\"阅读灯\",\"position\":\"副驾\"}"}]}
-{"messages":[{"role":"user","content":"我想听歌。"},{"role":"assistant","content":"Action: AppControl\nAction Input: {\"action\":\"打开\",\"feature\":\"音乐应用\"}"}]}
-{"messages":[{"role":"user","content":"开车无聊，来点音乐吧。"},{"role":"assistant","content":"Action: AppControl\nAction Input: {\"action\":\"打开\",\"feature\":\"音乐应用\"}"}]}
-{"messages":[{"role":"user","content":"不听歌了，关掉音乐。"},{"role":"assistant","content":"Action: MediaControl\nAction Input: {\"media_category\":\"歌\",\"media_control_action\":\"关闭\"}"}]}
-{"messages":[{"role":"user","content":"暂停音乐。"},{"role":"assistant","content":"Action: MediaControl\nAction Input: {\"media_category\":\"歌\",\"media_control_action\":\"暂停\"}"}]}
-{"messages":[{"role":"user","content":"继续播放有声书。"},{"role":"assistant","content":"Action: MediaControl\nAction Input: {\"media_category\":\"读物\",\"media_control_action\":\"继续\"}"}]}
-{"messages":[{"role":"user","content":"我想调一下空调参数，把面板打开。"},{"role":"assistant","content":"Action: AppControl\nAction Input: {\"action\":\"打开\",\"feature\":\"空调\"}"}]}
-{"messages":[{"role":"user","content":"我想看看车辆状态。"},{"role":"assistant","content":"Action: AppControl\nAction Input: {\"action\":\"打开\",\"feature\":\"车控\"}"}]}
-{"messages":[{"role":"user","content":"帮我调出行车记录的影像回放。"},{"role":"assistant","content":"Action: AppControl\nAction Input: {\"action\":\"打开\",\"feature\":\"智能影像\"}"}]}
+{"messages": [{"role": "user", "content": "空调打开暖气。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"空调\", \"value\": \"制热\"}"}]}
+{"messages": [{"role": "user", "content": "小P空调加热。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"空调\", \"value\": \"制热\"}"}]}
+{"messages": [{"role": "user", "content": "车里太冷了，开暖风。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"空调\", \"value\": \"制热\"}"}]}
+{"messages": [{"role": "user", "content": "帮我把空调切到制热。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"空调\", \"value\": \"制热\"}"}]}
+{"messages": [{"role": "user", "content": "车内太热了，快速降温。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"空调\", \"value\": \"极速降温\"}"}]}
+{"messages": [{"role": "user", "content": "热死了，把温度调低一点。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"调低\", \"device\": \"空调\", \"feature\": \"温度\"}"}]}
+{"messages": [{"role": "user", "content": "太冷了，温度调高一点。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"调高\", \"device\": \"空调\", \"feature\": \"温度\"}"}]}
+{"messages": [{"role": "user", "content": "空调温度调高一点小P。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"调高\", \"device\": \"空调\", \"feature\": \"温度\"}"}]}
+{"messages": [{"role": "user", "content": "风小一点。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"调低\", \"device\": \"空调\", \"feature\": \"风\"}"}]}
+{"messages": [{"role": "user", "content": "调高风量。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"调高\", \"device\": \"空调\", \"feature\": \"风\"}"}]}
+{"messages": [{"role": "user", "content": "风量调大一点。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"调高\", \"device\": \"空调\", \"feature\": \"风\"}"}]}
+{"messages": [{"role": "user", "content": "风力三级。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"调到\", \"device\": \"空调\", \"feature\": \"风\", \"value\": \"3\"}"}]}
+{"messages": [{"role": "user", "content": "小P风量调为二档。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"调到\", \"device\": \"空调\", \"feature\": \"风\", \"value\": \"2\"}"}]}
+{"messages": [{"role": "user", "content": "空调风速调到二档。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"调到\", \"device\": \"空调\", \"feature\": \"风\", \"value\": \"2\"}"}]}
+{"messages": [{"role": "user", "content": "空调风量调到一。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"调到\", \"device\": \"空调\", \"feature\": \"风\", \"value\": \"1\"}"}]}
+{"messages": [{"role": "user", "content": "最大风。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"调到\", \"device\": \"空调\", \"feature\": \"风\", \"value\": \"最高\"}"}]}
+{"messages": [{"role": "user", "content": "把风调到最小。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"调到\", \"device\": \"空调\", \"feature\": \"风\", \"value\": \"最低\"}"}]}
+{"messages": [{"role": "user", "content": "风量对着我吹。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"空调\", \"feature\": \"风\", \"value\": \"对人\"}"}]}
+{"messages": [{"role": "user", "content": "小P风不要对我吹。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"关闭\", \"device\": \"空调\", \"feature\": \"风\", \"value\": \"对人\"}"}]}
+{"messages": [{"role": "user", "content": "外面空气不好，别让外面的风进来。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"空调\", \"value\": \"内循环\"}"}]}
+{"messages": [{"role": "user", "content": "打开智能除味小P。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"空调\", \"value\": \"智能除味\"}"}]}
+{"messages": [{"role": "user", "content": "小孩在车里，空调别停。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"空调\", \"value\": \"守护模式\"}"}]}
+{"messages": [{"role": "user", "content": "狗在车里，帮我看着空调别关。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"打开\", \"device\": \"空调\", \"value\": \"宠物模式\"}"}]}
+{"messages": [{"role": "user", "content": "关闭室内空调。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"关闭\", \"device\": \"空调\", \"position\": \"全部\"}"}]}
+{"messages": [{"role": "user", "content": "小P全车空调开到二十四度。"}, {"role": "assistant", "content": "Action: ClimateControl\nAction Input: {\"action\": \"调到\", \"device\": \"空调\", \"feature\": \"温度\", \"position\": \"全部\", \"value\": \"24\"}"}]}
+{"messages": [{"role": "user", "content": "座椅模式调到习惯二。"}, {"role": "assistant", "content": "Action: ProfileControl\nAction Input: {\"action\": \"调到\", \"feature\": \"习惯\", \"value\": \"2\"}"}]}
+{"messages": [{"role": "user", "content": "恢复成习惯一。"}, {"role": "assistant", "content": "Action: ProfileControl\nAction Input: {\"action\": \"复位\", \"feature\": \"习惯\", \"value\": \"1\"}"}]}
+{"messages": [{"role": "user", "content": "用车习惯二小P。"}, {"role": "assistant", "content": "Action: ProfileControl\nAction Input: {\"action\": \"复位\", \"feature\": \"习惯\", \"value\": \"2\"}"}]}
+{"messages": [{"role": "user", "content": "主驾座椅恢复到用车习惯一。"}, {"role": "assistant", "content": "Action: ProfileControl\nAction Input: {\"action\": \"复位\", \"feature\": \"习惯\", \"position\": \"主驾\", \"value\": \"1\"}"}]}
+{"messages": [{"role": "user", "content": "主驾座椅恢复标准模式。"}, {"role": "assistant", "content": "Action: ProfileControl\nAction Input: {\"action\": \"复位\", \"feature\": \"习惯\", \"position\": \"主驾\", \"value\": \"标准模式\"}"}]}
+{"messages": [{"role": "user", "content": "座椅回到用车习惯一。"}, {"role": "assistant", "content": "Action: ProfileControl\nAction Input: {\"action\": \"复位\", \"feature\": \"习惯\", \"value\": \"1\"}"}]}
+{"messages": [{"role": "user", "content": "主驾座椅放松模式小P。"}, {"role": "assistant", "content": "Action: ProfileControl\nAction Input: {\"action\": \"调到\", \"feature\": \"习惯\", \"position\": \"主驾\", \"value\": \"放松模式\"}"}]}
+{"messages": [{"role": "user", "content": "小P主驾座椅调整到标准模式。"}, {"role": "assistant", "content": "Action: ProfileControl\nAction Input: {\"action\": \"调到\", \"feature\": \"习惯\", \"position\": \"主驾\", \"value\": \"标准模式\"}"}]}
+{"messages": [{"role": "user", "content": "座椅标准模式。"}, {"role": "assistant", "content": "Action: ProfileControl\nAction Input: {\"action\": \"调到\", \"feature\": \"习惯\", \"value\": \"标准模式\"}"}]}
+{"messages": [{"role": "user", "content": "副驾座椅打开标准模式。"}, {"role": "assistant", "content": "Action: ProfileControl\nAction Input: {\"action\": \"打开\", \"feature\": \"习惯\", \"position\": \"副驾\", \"value\": \"标准模式\"}"}]}
+{"messages": [{"role": "user", "content": "小P副驾座椅调为标准模式。"}, {"role": "assistant", "content": "Action: ProfileControl\nAction Input: {\"action\": \"调到\", \"feature\": \"习惯\", \"position\": \"副驾\", \"value\": \"标准模式\"}"}]}
+{"messages": [{"role": "user", "content": "右后座椅小憩模式小P。"}, {"role": "assistant", "content": "Action: ProfileControl\nAction Input: {\"action\": \"调到\", \"feature\": \"习惯\", \"position\": \"第二排右侧\", \"value\": \"小憩模式\"}"}]}
+{"messages": [{"role": "user", "content": "把右后座椅调成小憩模式。"}, {"role": "assistant", "content": "Action: ProfileControl\nAction Input: {\"action\": \"调到\", \"feature\": \"习惯\", \"position\": \"第二排右侧\", \"value\": \"小憩模式\"}"}]}
+{"messages": [{"role": "user", "content": "打开副驾小憩模式。"}, {"role": "assistant", "content": "Action: ProfileControl\nAction Input: {\"action\": \"打开\", \"feature\": \"习惯\", \"position\": \"副驾\", \"value\": \"小憩模式\"}"}]}
+{"messages": [{"role": "user", "content": "小P打开驾驶习惯一。"}, {"role": "assistant", "content": "Action: ProfileControl\nAction Input: {\"action\": \"打开\", \"feature\": \"习惯\", \"value\": \"1\"}"}]}
+{"messages": [{"role": "user", "content": "保存当前主驾座椅习惯。"}, {"role": "assistant", "content": "Action: ProfileControl\nAction Input: {\"action\": \"保存\", \"feature\": \"习惯\", \"position\": \"主驾\"}"}]}
+{"messages": [{"role": "user", "content": "打开主驾用车习惯。"}, {"role": "assistant", "content": "Action: ProfileControl\nAction Input: {\"action\": \"打开\", \"feature\": \"习惯\", \"position\": \"主驾\"}"}]}
+{"messages": [{"role": "user", "content": "切换到下一个座椅习惯。"}, {"role": "assistant", "content": "Action: ProfileControl\nAction Input: {\"action\": \"调到\", \"feature\": \"习惯\", \"value\": \"下一个\"}"}]}
+{"messages": [{"role": "user", "content": "左后座椅习惯切到下一个。"}, {"role": "assistant", "content": "Action: ProfileControl\nAction Input: {\"action\": \"调到\", \"feature\": \"习惯\", \"position\": \"第二排左侧\", \"value\": \"下一个\"}"}]}
+{"messages": [{"role": "user", "content": "关闭左后车窗。"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"关闭\", \"device\": \"车窗\", \"position\": \"第二排左侧\"}"}]}
+{"messages": [{"role": "user", "content": "小P关闭左后车窗。"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"关闭\", \"device\": \"车窗\", \"position\": \"第二排左侧\"}"}]}
+{"messages": [{"role": "user", "content": "关闭右后方车窗。"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"关闭\", \"device\": \"车窗\", \"position\": \"第二排右侧\"}"}]}
+{"messages": [{"role": "user", "content": "右后窗户关上。"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"关闭\", \"device\": \"车窗\", \"position\": \"第二排右侧\"}"}]}
+{"messages": [{"role": "user", "content": "打开两个前车窗。"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"打开\", \"device\": \"车窗\", \"position\": \"前排\"}"}]}
+{"messages": [{"role": "user", "content": "打开两个前排车窗。"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"打开\", \"device\": \"车窗\", \"position\": \"前排\"}"}]}
+{"messages": [{"role": "user", "content": "打开主副驾车窗玻璃。"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"打开\", \"device\": \"车窗\", \"position\": \"前排\"}"}]}
+{"messages": [{"role": "user", "content": "所有车窗开到一半。"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"开到\", \"device\": \"车窗\", \"position\": \"全部\", \"value\": \"50%\"}"}]}
+{"messages": [{"role": "user", "content": "全车车窗开一点。"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"再开\", \"device\": \"车窗\", \"position\": \"全部\"}"}]}
+{"messages": [{"role": "user", "content": "前排车窗打开百分之十。"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"开到\", \"device\": \"车窗\", \"position\": \"前排\", \"value\": \"10%\"}"}]}
+{"messages": [{"role": "user", "content": "前排车窗打开三分之一。"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"开到\", \"device\": \"车窗\", \"position\": \"前排\", \"value\": \"33%\"}"}]}
+{"messages": [{"role": "user", "content": "所有车窗打开四分之一。"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"开到\", \"device\": \"车窗\", \"position\": \"全部\", \"value\": \"25%\"}"}]}
+{"messages": [{"role": "user", "content": "前排车窗下降。"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"再开\", \"device\": \"车窗\", \"position\": \"前排\"}"}]}
+{"messages": [{"role": "user", "content": "升起全车车窗。"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"再关\", \"device\": \"车窗\", \"position\": \"全部\"}"}]}
+{"messages": [{"role": "user", "content": "升起车窗小P。"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"再关\", \"device\": \"车窗\"}"}]}
+{"messages": [{"role": "user", "content": "打开车窗通风。"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"打开\", \"device\": \"车窗\"}"}]}
+{"messages": [{"role": "user", "content": "关掉天窗。"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"关闭\", \"device\": \"遮阳帘\"}"}]}
+{"messages": [{"role": "user", "content": "关闭幕布。"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"关闭\", \"device\": \"遮阳帘\"}"}]}
+{"messages": [{"role": "user", "content": "开天窗。"}, {"role": "assistant", "content": "Action: WindowControl\nAction Input: {\"action\": \"打开\", \"device\": \"遮阳帘\"}"}]}
+{"messages": [{"role": "user", "content": "氛围灯设成白色。"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"调到\", \"device\": \"氛围灯\", \"feature\": \"颜色\", \"value\": \"其他\"}"}]}
+{"messages": [{"role": "user", "content": "氛围灯调成红色。"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"调到\", \"device\": \"氛围灯\", \"feature\": \"颜色\", \"value\": \"其他\"}"}]}
+{"messages": [{"role": "user", "content": "把氛围灯颜色改成蓝色。"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"调到\", \"device\": \"氛围灯\", \"feature\": \"颜色\", \"value\": \"其他\"}"}]}
+{"messages": [{"role": "user", "content": "氛围灯开光剑模式。"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"调到\", \"device\": \"氛围灯\", \"value\": \"光剑\"}"}]}
+{"messages": [{"role": "user", "content": "把氛围灯调成光剑。"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"调到\", \"device\": \"氛围灯\", \"value\": \"光剑\"}"}]}
+{"messages": [{"role": "user", "content": "大灯切换到自动模式。"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"调到\", \"device\": \"大灯\", \"value\": \"自动\"}"}]}
+{"messages": [{"role": "user", "content": "切换大灯模式。"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"调到\", \"device\": \"大灯\", \"value\": \"下一个\"}"}]}
+{"messages": [{"role": "user", "content": "关闭智能远光灯。"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"关闭\", \"device\": \"远光灯\", \"value\": \"智能\"}"}]}
+{"messages": [{"role": "user", "content": "前雾灯打开。"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"打开\", \"device\": \"前雾灯\"}"}]}
+{"messages": [{"role": "user", "content": "后雾灯打开。"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"打开\", \"device\": \"后雾灯\"}"}]}
+{"messages": [{"role": "user", "content": "主驾阅读灯打开。"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"打开\", \"device\": \"阅读灯\", \"position\": \"主驾\"}"}]}
+{"messages": [{"role": "user", "content": "副驾阅读灯关掉。"}, {"role": "assistant", "content": "Action: LightControl\nAction Input: {\"action\": \"关闭\", \"device\": \"阅读灯\", \"position\": \"副驾\"}"}]}
+{"messages": [{"role": "user", "content": "我想听歌。"}, {"role": "assistant", "content": "Action: AppControl\nAction Input: {\"action\": \"打开\", \"feature\": \"音乐应用\"}"}]}
+{"messages": [{"role": "user", "content": "开车无聊，来点音乐吧。"}, {"role": "assistant", "content": "Action: AppControl\nAction Input: {\"action\": \"打开\", \"feature\": \"音乐应用\"}"}]}
+{"messages": [{"role": "user", "content": "我想调一下空调参数，把面板打开。"}, {"role": "assistant", "content": "Action: AppControl\nAction Input: {\"action\": \"打开\", \"feature\": \"空调\"}"}]}
+{"messages": [{"role": "user", "content": "我想看看车辆状态。"}, {"role": "assistant", "content": "Action: AppControl\nAction Input: {\"action\": \"打开\", \"feature\": \"车控\"}"}]}
+{"messages": [{"role": "user", "content": "帮我调出行车记录的影像回放。"}, {"role": "assistant", "content": "Action: AppControl\nAction Input: {\"action\": \"打开\", \"feature\": \"智能影像\"}"}]}
