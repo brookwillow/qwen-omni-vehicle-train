@@ -113,6 +113,18 @@ def _clone_past_key_values(value: Any) -> Any:
         return [_clone_past_key_values(item) for item in value]
     if isinstance(value, dict):
         return {key: _clone_past_key_values(item) for key, item in value.items()}
+    # DynamicCache / SinkCache etc.: clone in-place without converting to legacy tuple.
+    # Converting via to_legacy_cache() produces a raw tuple that newer transformers
+    # generate() won't recognise correctly, causing layer-index misalignment → garbled output.
+    if hasattr(value, "key_cache") and hasattr(value, "value_cache"):
+        try:
+            import copy
+            new_cache = copy.copy(value)  # shallow-copy the cache object (preserves type)
+            new_cache.key_cache = [t.detach().clone() for t in value.key_cache]
+            new_cache.value_cache = [t.detach().clone() for t in value.value_cache]
+            return new_cache
+        except Exception:
+            pass
     if hasattr(value, "to_legacy_cache"):
         return _clone_past_key_values(value.to_legacy_cache())
     return value
@@ -682,7 +694,7 @@ def run_inference(
             system_prompt = content[0].get("text", "")
     # Audio inputs expand into extra tokens that shift sequence positions,
     # making the pre-warmed KV cache misaligned. Disable cache when audio present.
-    cache_hit = prompt_cache.match(text, system_prompt) if (prompt_cache and not audios) else None
+    cache_hit = prompt_cache.match(text, system_prompt) if prompt_cache else None
 
     processor_start = time.perf_counter()
     processor_text = cache_hit.suffix_text if cache_hit else text
