@@ -105,6 +105,21 @@ class _KvPromptCacheHit:
 
 
 def _clone_past_key_values(value: Any) -> Any:
+    """Deep-clone past_key_values so each request gets an isolated copy.
+
+    model.generate() mutates the cache in-place (appending new KV pairs via
+    cache.update()), so we must produce a fully independent copy before each
+    inference call, otherwise the stored prefix cache gets corrupted after the
+    first request and all subsequent requests receive stale/extended KV data.
+
+    For DynamicCache-style objects we use deepcopy to capture every internal
+    attribute (key_cache, value_cache, _seen_tokens, etc.).
+    For plain tensors and legacy tuple caches we clone tensors explicitly.
+    """
+    import copy
+    # DynamicCache-style objects: deepcopy preserves type and all internal state.
+    if hasattr(value, "key_cache") and hasattr(value, "value_cache"):
+        return copy.deepcopy(value)
     if torch.is_tensor(value):
         return value.detach().clone()
     if isinstance(value, tuple):
@@ -113,18 +128,6 @@ def _clone_past_key_values(value: Any) -> Any:
         return [_clone_past_key_values(item) for item in value]
     if isinstance(value, dict):
         return {key: _clone_past_key_values(item) for key, item in value.items()}
-    # DynamicCache / SinkCache etc.: clone in-place without converting to legacy tuple.
-    # Converting via to_legacy_cache() produces a raw tuple that newer transformers
-    # generate() won't recognise correctly, causing layer-index misalignment → garbled output.
-    if hasattr(value, "key_cache") and hasattr(value, "value_cache"):
-        try:
-            import copy
-            new_cache = copy.copy(value)  # shallow-copy the cache object (preserves type)
-            new_cache.key_cache = [t.detach().clone() for t in value.key_cache]
-            new_cache.value_cache = [t.detach().clone() for t in value.value_cache]
-            return new_cache
-        except Exception:
-            pass
     if hasattr(value, "to_legacy_cache"):
         return _clone_past_key_values(value.to_legacy_cache())
     return value
