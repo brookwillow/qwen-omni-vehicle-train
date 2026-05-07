@@ -35,6 +35,7 @@ from __future__ import annotations
 
 import argparse
 import base64
+import hashlib
 import json
 import logging
 import os
@@ -92,6 +93,10 @@ def _log_perf_average(name: str, count: int, averages: dict[str, float], ordered
     logger.info("[PERF_AVG] %s n=%d %s", name, count, fields)
 
 
+def _short_hash(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()[:12]
+
+
 @dataclass(frozen=True)
 class _KvPromptCacheHit:
     suffix_text: str
@@ -121,6 +126,7 @@ class _KvPromptCache:
         self.prefix_text = ""
         self.prefix_tokens = 0
         self.past_key_values: Any = None
+        self.last_miss_reason = ""
 
     def prepare(self, model, processor, system_prompt: str) -> bool:
         start = time.perf_counter()
@@ -157,9 +163,25 @@ class _KvPromptCache:
         return True
 
     def match(self, full_text: str, system_prompt: str) -> Optional[_KvPromptCacheHit]:
-        if not self.past_key_values or system_prompt != self.system_prompt:
+        self.last_miss_reason = ""
+        if not self.past_key_values:
+            self.last_miss_reason = "cache_empty"
+            return None
+        if system_prompt != self.system_prompt:
+            self.last_miss_reason = (
+                "system_prompt_mismatch "
+                f"cached_chars={len(self.system_prompt)} request_chars={len(system_prompt)} "
+                f"cached_hash={_short_hash(self.system_prompt)} request_hash={_short_hash(system_prompt)}"
+            )
             return None
         if not full_text.startswith(self.prefix_text):
+            full_prefix = full_text[:len(self.prefix_text)]
+            self.last_miss_reason = (
+                "prefix_text_mismatch "
+                f"cached_prefix_chars={len(self.prefix_text)} full_chars={len(full_text)} "
+                f"cached_prefix_hash={_short_hash(self.prefix_text)} "
+                f"full_prefix_hash={_short_hash(full_prefix)}"
+            )
             return None
         return _KvPromptCacheHit(
             suffix_text=full_text[len(self.prefix_text):],
@@ -712,7 +734,7 @@ def run_inference(
     logger.info(
         "[PERF] inference chat_template=%.1fms mm=%.1fms processor=%.1fms "
         "to_device=%.1fms generate=%.1fms decode=%.1fms total=%.1fms "
-        "prompt_cache=%s cache_prefix_tokens=%d",
+        "prompt_cache=%s cache_prefix_tokens=%d cache_miss_reason=%s",
         chat_template_ms,
         mm_ms,
         processor_ms,
@@ -722,6 +744,7 @@ def run_inference(
         total_ms,
         "hit" if cache_hit else ("miss" if prompt_cache else "off"),
         cache_hit.prefix_tokens if cache_hit else 0,
+        "-" if cache_hit or not prompt_cache else (prompt_cache.last_miss_reason or "unknown"),
     )
     inference_keys = ["chat_template", "mm", "processor", "to_device", "generate", "decode", "total"]
     count, averages = _inference_perf_averages.record(

@@ -121,6 +121,18 @@ def test_kv_prompt_cache_matches_system_prompt_prefix():
     assert hit.suffix_text == "<user>打开车窗</user>"
     assert hit.prefix_tokens == 3
     assert miss is None
+    assert cache.last_miss_reason.startswith("system_prompt_mismatch")
+
+
+def test_kv_prompt_cache_records_prefix_mismatch_reason():
+    cache = serve._KvPromptCache()
+    cache.system_prompt = "系统提示"
+    cache.prefix_text = "<system>系统提示</system>\n"
+    cache.prefix_tokens = 3
+    cache.past_key_values = ((torch.tensor([[[[1.0]]]]), torch.tensor([[[[2.0]]]])),)
+
+    assert cache.match("<different>系统提示</different>\n<user>打开车窗</user>", "系统提示") is None
+    assert cache.last_miss_reason.startswith("prefix_text_mismatch")
 
 
 def test_clone_past_key_values_does_not_share_tensor_storage():
