@@ -1,0 +1,23 @@
+serve.py
+  fde7cdd18c104cfb 108,110-114,116,118-122,136-157,228
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.15",
+  "base_commit_sha": "7deca9f47c5cb3f4076a4df6350dc43df0b2ce6b",
+  "prompts": {
+    "fde7cdd18c104cfb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "88e19f2f-4520-432e-b5ba-e562dedfb45a",
+        "model": "claude-sonnet-4.6"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 38,
+      "total_deletions": 14,
+      "accepted_lines": 38,
+      "overriden_lines": 0
+    }
+  }
+}
