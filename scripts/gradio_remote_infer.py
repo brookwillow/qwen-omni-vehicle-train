@@ -25,6 +25,18 @@ from record_remote_infer import (
 MIN_AUDIO_RMS = 5
 
 
+def _is_16k_mono_pcm16_wav(path: Path) -> bool:
+    try:
+        with wave.open(str(path), "rb") as wav:
+            return (
+                wav.getframerate() == 16000
+                and wav.getnchannels() == 1
+                and wav.getsampwidth() == 2
+            )
+    except (wave.Error, EOFError):
+        return False
+
+
 def _extract_result(resp: dict[str, Any]) -> tuple[str, str, str]:
     choice = (resp.get("choices") or [{}])[0]
     message = choice.get("message") or {}
@@ -61,6 +73,27 @@ def _convert_to_wav_for_analysis(path: Path) -> Path:
         detail = result.stderr.decode("utf-8", errors="replace")[-500:]
         raise RuntimeError(f"ffmpeg could not decode audio: {detail}")
     return wav_path
+
+
+def normalize_audio_for_payload(path: Path) -> tuple[Path, bool]:
+    """Return a 16kHz mono PCM16 WAV path for upload."""
+    if _is_16k_mono_pcm16_wav(path):
+        return path, False
+    if not shutil.which("ffmpeg"):
+        raise RuntimeError("ffmpeg is required to normalize audio before upload.")
+    fd, name = tempfile.mkstemp(prefix="qwen_omni_payload_", suffix=".wav")
+    os.close(fd)
+    wav_path = Path(name)
+    cmd = [
+        "ffmpeg", "-y", "-i", str(path),
+        "-ar", "16000", "-ac", "1", "-sample_fmt", "s16",
+        "-f", "wav", str(wav_path),
+    ]
+    result = subprocess.run(cmd, capture_output=True)
+    if result.returncode != 0:
+        detail = result.stderr.decode("utf-8", errors="replace")[-500:]
+        raise RuntimeError(f"ffmpeg could not normalize audio: {detail}")
+    return wav_path, True
 
 
 def analyze_audio_file(path: Path) -> dict[str, Any]:
@@ -114,8 +147,23 @@ def infer_audio(
     try:
         validate_audio_has_sound(path)
         url = f"{server.rstrip('/')}/v1/chat/completions"
-        payload = build_payload(path, model, int(max_tokens), float(temperature), hint_text.strip())
-        resp = post_json(url, payload, float(timeout))
+        payload_path, should_cleanup = normalize_audio_for_payload(path)
+        try:
+            payload = build_payload(
+                path,
+                model,
+                int(max_tokens),
+                float(temperature),
+                hint_text.strip(),
+                payload_audio_path=payload_path,
+            )
+            resp = post_json(url, payload, float(timeout))
+        finally:
+            if should_cleanup:
+                try:
+                    payload_path.unlink()
+                except OSError:
+                    pass
         return _extract_result(resp)
     except Exception as exc:
         return "Request Failed", str(exc), "{}"

@@ -43,6 +43,7 @@ import shutil
 import tempfile
 import time
 import uuid
+import wave
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -149,6 +150,7 @@ def load_model(model_dir: str, lora_dir: str, torch_dtype: str = "auto"):
         attn_impl = "flash_attention_2"
     except ImportError:
         attn_impl = "eager"
+    print(f"[model] attention implementation: {attn_impl}", flush=True)
 
     model = Qwen2_5OmniForConditionalGeneration.from_pretrained(
         model_dir,
@@ -221,6 +223,21 @@ def _detect_audio_fmt(data: bytes, declared_fmt: str) -> tuple[str, str]:
     return ("", "bin")
 
 
+def _is_wav_16k_mono_pcm16(data: bytes) -> bool:
+    if not (len(data) >= 12 and data[:4] == b'RIFF' and data[8:12] == b'WAVE'):
+        return False
+    try:
+        import io
+        with wave.open(io.BytesIO(data), "rb") as wav:
+            return (
+                wav.getframerate() == 16000
+                and wav.getnchannels() == 1
+                and wav.getsampwidth() == 2
+            )
+    except (EOFError, wave.Error):
+        return False
+
+
 def _run_ffmpeg(src_path: str, wav_path: str, fmt_flag: str = "", extra_input_args: list = None) -> bool:
     """Run ffmpeg to convert src_path -> wav_path (16kHz mono WAV). Returns True on success."""
     import subprocess
@@ -285,9 +302,9 @@ def _asr_transcribe_debug(wav_path: str) -> str | None:
 def _write_audio_tmp(raw_bytes: bytes, fmt: str, tmp_dir: str,
                       sample_rate: int | None = None, channels: int | None = None) -> str:
     """Write audio bytes to a temp WAV (16 kHz mono) that librosa can read."""
-    import subprocess
     import sys
 
+    start = time.perf_counter()
     # Log first bytes for debugging unknown formats
     hex_head = raw_bytes[:16].hex() if raw_bytes else ""
     print(f"[AUDIO] declared_fmt={fmt!r} size={len(raw_bytes)} head={hex_head}", flush=True, file=sys.stderr)
@@ -310,6 +327,21 @@ def _write_audio_tmp(raw_bytes: bytes, fmt: str, tmp_dir: str,
         f.write(raw_bytes)
 
     try:
+        if ffmpeg_fmt == "wav" and _is_wav_16k_mono_pcm16(raw_bytes):
+            elapsed_ms = (time.perf_counter() - start) * 1000
+            debug_wav = "/tmp/qwen_audio_converted_latest.wav"
+            try:
+                shutil.copy2(src_path, debug_wav)
+                print(f"[AUDIO] converted WAV saved → {debug_wav}", flush=True, file=sys.stderr)
+            except OSError as _e:
+                print(f"[AUDIO] could not save converted WAV: {_e}", flush=True, file=sys.stderr)
+            print(
+                f"[AUDIO] fast path: using existing 16kHz mono PCM16 WAV ({elapsed_ms:.1f} ms)",
+                flush=True,
+                file=sys.stderr,
+            )
+            return src_path
+
         ok = False
 
         if ffmpeg_fmt == "s16le":
@@ -318,7 +350,7 @@ def _write_audio_tmp(raw_bytes: bytes, fmt: str, tmp_dir: str,
                 print(f"[AUDIO] PCM direct decode sr={sample_rate} ch={channels}", flush=True, file=sys.stderr)
                 ok = _run_ffmpeg(src_path, wav_path,
                                  extra_input_args=["-f", "s16le", "-ar", str(sample_rate), "-ac", str(channels)])
-                if ok:
+                if ok and _debug_asr_enabled:
                     transcript = _asr_transcribe_debug(wav_path)
                     if transcript is not None:
                         print(f"[ASR] transcript: {transcript!r}", file=sys.stderr, flush=True)
@@ -346,7 +378,7 @@ def _write_audio_tmp(raw_bytes: bytes, fmt: str, tmp_dir: str,
                         except OSError:
                             pass
                         continue
-                    transcript = _asr_transcribe_debug(trial_wav)
+                    transcript = _asr_transcribe_debug(trial_wav) if _debug_asr_enabled else ""
                     print(f"[AUDIO] trial {pcm_fmt}/{sr}Hz/{ch}ch → ASR: {transcript!r}",
                           flush=True, file=sys.stderr)
                     if transcript and len(transcript) > len(best_transcript):
@@ -367,7 +399,6 @@ def _write_audio_tmp(raw_bytes: bytes, fmt: str, tmp_dir: str,
                             except OSError:
                                 pass
                 if best_wav:
-                    import shutil
                     shutil.move(best_wav, wav_path)
                     ok = True
                     print(f"[AUDIO] best PCM decode → ASR: {best_transcript!r}",
@@ -387,8 +418,8 @@ def _write_audio_tmp(raw_bytes: bytes, fmt: str, tmp_dir: str,
                 print("[AUDIO] fallback: treated as raw s16le 16kHz", flush=True, file=sys.stderr)
 
         if ok:
+            elapsed_ms = (time.perf_counter() - start) * 1000
             # Save converted WAV for listening
-            import shutil
             debug_wav = "/tmp/qwen_audio_converted_latest.wav"
             try:
                 shutil.copy2(wav_path, debug_wav)
@@ -396,7 +427,7 @@ def _write_audio_tmp(raw_bytes: bytes, fmt: str, tmp_dir: str,
             except OSError as _e:
                 print(f"[AUDIO] could not save converted WAV: {_e}", flush=True, file=sys.stderr)
             # Final ASR check (skip if already done in PCM trial)
-            if ffmpeg_fmt != "s16le":
+            if _debug_asr_enabled and ffmpeg_fmt != "s16le":
                 transcript = _asr_transcribe_debug(wav_path)
                 if transcript is not None:
                     print(f"[ASR] transcript: {transcript!r}", file=sys.stderr, flush=True)
@@ -404,6 +435,7 @@ def _write_audio_tmp(raw_bytes: bytes, fmt: str, tmp_dir: str,
                 os.remove(src_path)
             except OSError:
                 pass
+            print(f"[AUDIO] prepare elapsed={elapsed_ms:.1f} ms", flush=True, file=sys.stderr)
             return wav_path
         else:
             print(f"[WARN] all ffmpeg attempts failed for fmt={fmt!r}", flush=True, file=sys.stderr)
@@ -490,8 +522,13 @@ def run_inference(
     max_new_tokens: int,
     temperature: float,
 ) -> tuple[str, int, int]:
+    start = time.perf_counter()
     text = processor.apply_chat_template(qwen_messages, add_generation_prompt=True, tokenize=False)
+    chat_template_ms = (time.perf_counter() - start) * 1000
+    mm_start = time.perf_counter()
     audios, images, videos = process_mm_info(qwen_messages, use_audio_in_video=False)
+    mm_ms = (time.perf_counter() - mm_start) * 1000
+    processor_start = time.perf_counter()
     inputs = processor(
         text=text,
         audio=audios if audios else None,
@@ -501,10 +538,14 @@ def run_inference(
         padding=True,
         use_audio_in_video=False,
     )
+    processor_ms = (time.perf_counter() - processor_start) * 1000
+    move_start = time.perf_counter()
     inputs = inputs.to(model.device)
     if getattr(model, "dtype", None) is not None:
         inputs = inputs.to(model.dtype)
+    move_ms = (time.perf_counter() - move_start) * 1000
 
+    generate_start = time.perf_counter()
     with torch.inference_mode():
         out_ids = model.generate(
             **inputs,
@@ -513,10 +554,25 @@ def run_inference(
             do_sample=temperature > 0,
             return_audio=False,
         )
+    generate_ms = (time.perf_counter() - generate_start) * 1000
 
+    decode_start = time.perf_counter()
     prompt_len = inputs["input_ids"].shape[-1] if "input_ids" in inputs else 0
     gen_ids = out_ids[:, prompt_len:]
     decoded = processor.decode(gen_ids[0], skip_special_tokens=True, clean_up_tokenization_spaces=False)
+    decode_ms = (time.perf_counter() - decode_start) * 1000
+    total_ms = (time.perf_counter() - start) * 1000
+    logger.info(
+        "[PERF] inference chat_template=%.1fms mm=%.1fms processor=%.1fms "
+        "to_device=%.1fms generate=%.1fms decode=%.1fms total=%.1fms",
+        chat_template_ms,
+        mm_ms,
+        processor_ms,
+        move_ms,
+        generate_ms,
+        decode_ms,
+        total_ms,
+    )
     return decoded.strip(), int(prompt_len), int(gen_ids.shape[-1])
 
 
@@ -649,6 +705,7 @@ _processor = None
 _system_prompt = ""
 _model_name = "qwen2.5-omni"
 _tmp_dir = tempfile.mkdtemp(prefix="qwen_serve_")
+_debug_asr_enabled = False
 
 
 @app.get("/v1/models")
@@ -665,19 +722,24 @@ async def chat_completions(req: ChatRequest):
     if req.stream:
         raise HTTPException(status_code=400, detail="Streaming is not supported yet.")
 
+    request_start = time.perf_counter()
     try:
+        convert_start = time.perf_counter()
         qwen_msgs, tmp_files = _messages_to_qwen(req.messages, _system_prompt, _tmp_dir)
+        convert_ms = (time.perf_counter() - convert_start) * 1000
     except Exception as e:
         print(f"\n[ERROR] _messages_to_qwen failed: {e}", flush=True, file=sys.stderr)
         traceback.print_exc(file=sys.stderr)
         raise HTTPException(status_code=422, detail=f"Message conversion error: {e}") from e
 
     try:
+        inference_start = time.perf_counter()
         reply, prompt_tokens, gen_tokens = run_inference(
             _model, _processor, qwen_msgs,
             max_new_tokens=req.resolved_max_tokens(),
             temperature=req.temperature,
         )
+        inference_ms = (time.perf_counter() - inference_start) * 1000
     except Exception as e:
         print(f"\n[ERROR] run_inference failed: {e}", flush=True, file=sys.stderr)
         traceback.print_exc(file=sys.stderr)
@@ -689,7 +751,9 @@ async def chat_completions(req: ChatRequest):
         raise HTTPException(status_code=500, detail=f"Inference error: {e}") from e
 
     print(f"[MODEL_RAW] {repr(reply)}", flush=True, file=sys.stderr)
+    parse_start = time.perf_counter()
     parsed = parse_model_output(reply, _last_text_query(req.messages))
+    parse_ms = (time.perf_counter() - parse_start) * 1000
     if parsed[0] == "tool_call":
         _, tool_name, args_str = parsed
         choice = Choice(
@@ -724,7 +788,9 @@ async def chat_completions(req: ChatRequest):
     print(f"[RESPONSE] {resp.model_dump_json()}", file=sys.stderr, flush=True)
 
     # Persist audio + response for training data collection
+    save_start = time.perf_counter()
     _save_request_artifacts(resp.id, tmp_files, resp, req.messages)
+    save_ms = (time.perf_counter() - save_start) * 1000
 
     # Cleanup temp audio files
     for f in tmp_files:
@@ -732,6 +798,16 @@ async def chat_completions(req: ChatRequest):
             os.remove(f)
         except OSError:
             pass
+
+    total_ms = (time.perf_counter() - request_start) * 1000
+    logger.info(
+        "[PERF] request convert=%.1fms inference=%.1fms parse=%.1fms save=%.1fms total=%.1fms",
+        convert_ms,
+        inference_ms,
+        parse_ms,
+        save_ms,
+        total_ms,
+    )
 
     return resp
 
@@ -753,11 +829,12 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--port", type=int, default=8000)
     p.add_argument("--model-name", default="qwen2.5-omni", help="Model name returned in API responses")
     p.add_argument("--torch-dtype", default="auto", choices=["auto", "bfloat16", "float16", "float32"])
+    p.add_argument("--debug-asr", action="store_true", help="Run local Whisper ASR for audio debugging.")
     return p.parse_args()
 
 
 def main():
-    global _model, _processor, _system_prompt, _model_name
+    global _model, _processor, _system_prompt, _model_name, _debug_asr_enabled
 
     args = parse_args()
 
@@ -774,6 +851,8 @@ def main():
             print(f"[sp] using fallback ({len(_system_prompt)} chars)")
 
     _model_name = args.model_name
+    _debug_asr_enabled = args.debug_asr
+    print(f"[asr] debug_asr={_debug_asr_enabled}")
 
     print(f"[model] loading {args.model_dir} ...")
     _model, _processor = load_model(args.model_dir, args.lora_dir, args.torch_dtype)

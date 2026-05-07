@@ -154,6 +154,8 @@ python serve.py \
   --port 8000
 ```
 
+服务端启动时会打印实际 attention implementation；如果缺少 `flash_attn` 会回退到 `eager`。请求日志会输出 `[PERF]` 分段耗时，包含消息转换、音频处理、processor、generate、解析和保存耗时。默认不再运行本地 Whisper ASR 调试；需要额外转写排查音频时再加 `--debug-asr`。
+
 服务启动后监听 `http://<ip>:8000`，兼容 OpenAI Chat Completions API：
 
 **文本请求**
@@ -183,7 +185,7 @@ curl http://localhost:8000/v1/chat/completions \
   }'
 ```
 
-`input_audio.data` 支持纯 base64，也支持 `data:audio/<fmt>;base64,` 前缀的 data URL。服务端会先解码音频，再用 `ffmpeg` 统一转为 16kHz mono WAV 交给 Qwen Omni processor；裸 PCM 建议传 `format: "pcm"`，并带上 `sample_rate: 16000`、`channels: 1`。
+`input_audio.data` 支持纯 base64，也支持 `data:audio/<fmt>;base64,` 前缀的 data URL。服务端会先解码音频，再交给 Qwen Omni processor；如果上传内容已经是 16kHz mono PCM16 WAV，会跳过 `ffmpeg` 转码。其他 WAV/MP3/PCM 输入会用 `ffmpeg` 统一转为 16kHz mono WAV；裸 PCM 建议传 `format: "pcm"`，并带上 `sample_rate: 16000`、`channels: 1`。
 
 **Python 客户端（openai SDK）**
 ```python
@@ -211,7 +213,7 @@ python scripts/record_remote_infer.py \
   --audio data/eval/audio/window/window_001.wav
 ```
 
-`record_remote_infer.py` 会把本地 WAV 转成 OpenAI 兼容的 `input_audio` base64 请求，并打印返回的 `tool_call` 或文本结果。默认是纯音频端到端测试；如需调试服务端后处理，可额外传 `--hint-text "打开主驾车窗"`。
+`record_remote_infer.py` 会把本地 WAV 转成 OpenAI 兼容的 `data:audio/wav;base64,` 音频请求，并打印返回的 `tool_call` 或文本结果。默认是纯音频端到端测试；如需调试服务端后处理，可额外传 `--hint-text "打开主驾车窗"`。
 
 **Gradio 本地录音界面**
 ```bash
@@ -225,6 +227,7 @@ python scripts/gradio_remote_infer.py \
 打开 `http://127.0.0.1:7860` 后可直接录音或上传 WAV，页面会展示解析后的 `tool_call`、参数和完整响应。
 如果浏览器录音按钮没有录上声音，可以使用页面里的 `Backend Record` 或 `Backend Record + Send`，它会绕过浏览器录音，直接由本地 Python 进程调用系统录音工具生成 WAV。
 客户端会检查 WAV 的 RMS 和峰值，若录到静音文件会直接提示，不再把空音频发送到远端。
+Gradio 发送前会把浏览器录音或上传音频规范化为 16kHz mono PCM16 WAV，因此服务端可直接走音频快路径；若输入已经满足该格式，则不会额外转码。
 macOS 下如果存在系统 `afrecord` 会优先使用它；否则使用 Python 音频库时会检查输入设备，避免选错设备后录到静音。浏览器录音完成后页面也会自动显示 RMS/峰值诊断信息。
 Chrome 浏览器录音会保存为 `mp3`，避免当前前端 WAV 转换链路产生静音文件；发送到服务端后由 `serve.py` 自动识别并转码。
 

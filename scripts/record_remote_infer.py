@@ -178,8 +178,16 @@ def record_wav(path: Path, duration: float, sample_rate: int) -> None:
     )
 
 
-def build_payload(audio_path: Path, model: str, max_tokens: int, temperature: float, hint_text: str) -> dict[str, Any]:
-    audio_b64 = base64.b64encode(audio_path.read_bytes()).decode("ascii")
+def build_payload(
+    audio_path: Path,
+    model: str,
+    max_tokens: int,
+    temperature: float,
+    hint_text: str,
+    payload_audio_path: Path | None = None,
+) -> dict[str, Any]:
+    encoded_path = payload_audio_path or audio_path
+    audio_b64 = "data:audio/wav;base64," + base64.b64encode(encoded_path.read_bytes()).decode("ascii")
     content: list[dict[str, Any]] = []
     if hint_text:
         content.append({"type": "text", "text": hint_text})
