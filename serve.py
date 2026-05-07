@@ -748,11 +748,14 @@ def run_inference(
         content = qwen_messages[0].get("content") or []
         if content and isinstance(content[0], dict):
             system_prompt = content[0].get("text", "")
-    # SP tokens are a contiguous prefix; audio tokens land in the user turn after SP.
-    # The cache covers only SP tokens so position alignment is preserved for all requests.
-    # Only skip cache if process_mm_info dropped audio data (placeholder/array count mismatch).
+    # The KV cache is built via thinker.forward() on the text-only SP prefix.
+    # model.generate() wraps thinker internally and the past_key_values format
+    # is only guaranteed compatible when there is no audio input. With audio,
+    # the outer model pre-processes inputs differently before reaching thinker,
+    # causing the injected cache to misalign → garbled output.
+    # Text-only requests (no audios) reuse the cache safely.
     audio_ok = (audio_placeholder_count == len(audios or []))
-    cache_hit = prompt_cache.match(text, system_prompt) if (prompt_cache and audio_ok) else None
+    cache_hit = prompt_cache.match(text, system_prompt) if (prompt_cache and not audios and audio_ok) else None
 
     processor_start = time.perf_counter()
     processor_text = cache_hit.suffix_text if cache_hit else text
