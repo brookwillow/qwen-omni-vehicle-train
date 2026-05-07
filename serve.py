@@ -687,14 +687,30 @@ def run_inference(
     mm_start = time.perf_counter()
     audios, images, videos = process_mm_info(qwen_messages, use_audio_in_video=False)
     mm_ms = (time.perf_counter() - mm_start) * 1000
+    # Sanity-check: count audio placeholders in the template vs what process_mm_info returned.
+    # If they don't match, process_mm_info silently dropped audio data → model will misalign.
+    audio_placeholder_count = text.count("<|AUDIO|>")
+    logger.info(
+        "[MM] audio_placeholders=%d process_mm_info_returned=%d mm_ms=%.1f",
+        audio_placeholder_count,
+        len(audios or []),
+        mm_ms,
+    )
+    if audio_placeholder_count != len(audios or []):
+        logger.warning(
+            "[MM] audio mismatch: template has %d <|AUDIO|> placeholders but process_mm_info returned %d arrays; "
+            "disabling KV cache for this request to avoid misalignment",
+            audio_placeholder_count,
+            len(audios or []),
+        )
     system_prompt = ""
     if qwen_messages and qwen_messages[0].get("role") == "system":
         content = qwen_messages[0].get("content") or []
         if content and isinstance(content[0], dict):
             system_prompt = content[0].get("text", "")
-    # Audio inputs expand into extra tokens that shift sequence positions,
-    # making the pre-warmed KV cache misaligned. Disable cache when audio present.
-    cache_hit = prompt_cache.match(text, system_prompt) if prompt_cache else None
+    # Disable KV cache when audio is present but process_mm_info dropped it (mismatch).
+    audio_ok = (audio_placeholder_count == len(audios or []))
+    cache_hit = prompt_cache.match(text, system_prompt) if (prompt_cache and audio_ok) else None
 
     processor_start = time.perf_counter()
     processor_text = cache_hit.suffix_text if cache_hit else text
