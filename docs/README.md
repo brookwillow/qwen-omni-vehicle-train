@@ -154,7 +154,20 @@ python serve.py \
   --port 8000
 ```
 
-服务端启动时会打印实际 attention implementation；如果缺少 `flash_attn` 会回退到 `eager`。请求日志会输出 `[PERF]` 分段耗时，包含消息转换、音频处理、processor、generate、解析和保存耗时。默认不再运行本地 Whisper ASR 调试；需要额外转写排查音频时再加 `--debug-asr`。
+服务端启动时会打印实际 attention implementation；如果缺少 `flash_attn` 会回退到 PyTorch `sdpa`，避免继续显式使用 `eager`。请求日志会输出 `[PERF]` 单次分段耗时，并在每次成功请求后输出 `[PERF_AVG]` 进程内累计平均耗时，覆盖消息转换、音频/多模态处理、processor、generate、解析和保存等阶段。默认不再运行本地 Whisper ASR 调试；需要额外转写排查音频时再加 `--debug-asr`。
+
+可选开启实验性的 system prompt KV cache：
+
+```bash
+python serve.py \
+  --model-dir /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
+  --lora-dir lora_output \
+  --host 0.0.0.0 \
+  --port 8000 \
+  --prompt-cache kv
+```
+
+`--prompt-cache kv` 会在启动时预热固定 system prompt 的 KV，并在请求的 chat template 前缀严格匹配时复用。请求里自定义 system prompt 或 template 不匹配时会自动 miss 并走原始路径。该模式会在 `[PERF] inference` 中标记 `prompt_cache=hit|miss|off` 和 `cache_prefix_tokens=<命中 token 数>`，建议先用同一批 eval 对比 `none` 和 `kv` 的输出一致性后再长期启用。
 
 服务启动后监听 `http://<ip>:8000`，兼容 OpenAI Chat Completions API：
 

@@ -40,10 +40,12 @@ import logging
 import os
 import re
 import shutil
+import threading
 import tempfile
 import time
 import uuid
 import wave
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -66,6 +68,102 @@ from tool_postprocess import postprocess_action_call
 _PROJECT_DIR = Path(__file__).resolve().parent
 _DEFAULT_SP_FILE = _PROJECT_DIR / "data" / "system-prompt.txt"
 _SAVE_DIR = _PROJECT_DIR / "data" / "serve_logs"
+
+
+class _PerfAverages:
+    """Track running average latency per named stage."""
+
+    def __init__(self) -> None:
+        self._lock = threading.Lock()
+        self._count = 0
+        self._totals: dict[str, float] = {}
+
+    def record(self, stage_ms: dict[str, float]) -> tuple[int, dict[str, float]]:
+        with self._lock:
+            self._count += 1
+            for name, value in stage_ms.items():
+                self._totals[name] = self._totals.get(name, 0.0) + value
+            averages = {name: self._totals[name] / self._count for name in stage_ms}
+            return self._count, averages
+
+
+def _log_perf_average(name: str, count: int, averages: dict[str, float], ordered_keys: list[str]) -> None:
+    fields = " ".join(f"{key}={averages[key]:.1f}ms" for key in ordered_keys if key in averages)
+    logger.info("[PERF_AVG] %s n=%d %s", name, count, fields)
+
+
+@dataclass(frozen=True)
+class _KvPromptCacheHit:
+    suffix_text: str
+    prefix_tokens: int
+    past_key_values: Any
+
+
+def _clone_past_key_values(value: Any) -> Any:
+    if torch.is_tensor(value):
+        return value.detach().clone()
+    if isinstance(value, tuple):
+        return tuple(_clone_past_key_values(item) for item in value)
+    if isinstance(value, list):
+        return [_clone_past_key_values(item) for item in value]
+    if isinstance(value, dict):
+        return {key: _clone_past_key_values(item) for key, item in value.items()}
+    if hasattr(value, "to_legacy_cache"):
+        return _clone_past_key_values(value.to_legacy_cache())
+    return value
+
+
+class _KvPromptCache:
+    """Reusable KV cache for the fixed system prompt prefix."""
+
+    def __init__(self) -> None:
+        self.system_prompt = ""
+        self.prefix_text = ""
+        self.prefix_tokens = 0
+        self.past_key_values: Any = None
+
+    def prepare(self, model, processor, system_prompt: str) -> None:
+        start = time.perf_counter()
+        prefix_messages = [{"role": "system", "content": [{"type": "text", "text": system_prompt}]}]
+        prefix_text = processor.apply_chat_template(prefix_messages, add_generation_prompt=False, tokenize=False)
+        prefix_inputs = processor(
+            text=prefix_text,
+            return_tensors="pt",
+            padding=True,
+            use_audio_in_video=False,
+        )
+        prefix_inputs = _inputs_to_model_device(prefix_inputs, model)
+        with torch.inference_mode():
+            output = model(**prefix_inputs, use_cache=True, return_dict=True)
+
+        self.system_prompt = system_prompt
+        self.prefix_text = prefix_text
+        self.prefix_tokens = int(prefix_inputs["input_ids"].shape[-1])
+        self.past_key_values = _clone_past_key_values(output.past_key_values)
+        elapsed_ms = (time.perf_counter() - start) * 1000
+        logger.info(
+            "[PROMPT_CACHE] mode=kv prepared prefix_tokens=%d elapsed=%.1fms",
+            self.prefix_tokens,
+            elapsed_ms,
+        )
+
+    def match(self, full_text: str, system_prompt: str) -> Optional[_KvPromptCacheHit]:
+        if not self.past_key_values or system_prompt != self.system_prompt:
+            return None
+        if not full_text.startswith(self.prefix_text):
+            return None
+        return _KvPromptCacheHit(
+            suffix_text=full_text[len(self.prefix_text):],
+            prefix_tokens=self.prefix_tokens,
+            past_key_values=_clone_past_key_values(self.past_key_values),
+        )
+
+
+def _inputs_to_model_device(inputs, model):
+    inputs = inputs.to(model.device)
+    if getattr(model, "dtype", None) is not None:
+        inputs = inputs.to(model.dtype)
+    return inputs
 
 
 # ── Pydantic models (OpenAI schema subset) ───────────────────
@@ -149,7 +247,7 @@ def load_model(model_dir: str, lora_dir: str, torch_dtype: str = "auto"):
         import flash_attn  # noqa: F401
         attn_impl = "flash_attention_2"
     except ImportError:
-        attn_impl = "eager"
+        attn_impl = "sdpa"
     print(f"[model] attention implementation: {attn_impl}", flush=True)
 
     model = Qwen2_5OmniForConditionalGeneration.from_pretrained(
@@ -521,6 +619,7 @@ def run_inference(
     qwen_messages: list,
     max_new_tokens: int,
     temperature: float,
+    prompt_cache: Optional[_KvPromptCache] = None,
 ) -> tuple[str, int, int]:
     start = time.perf_counter()
     text = processor.apply_chat_template(qwen_messages, add_generation_prompt=True, tokenize=False)
@@ -528,9 +627,17 @@ def run_inference(
     mm_start = time.perf_counter()
     audios, images, videos = process_mm_info(qwen_messages, use_audio_in_video=False)
     mm_ms = (time.perf_counter() - mm_start) * 1000
+    system_prompt = ""
+    if qwen_messages and qwen_messages[0].get("role") == "system":
+        content = qwen_messages[0].get("content") or []
+        if content and isinstance(content[0], dict):
+            system_prompt = content[0].get("text", "")
+    cache_hit = prompt_cache.match(text, system_prompt) if prompt_cache else None
+
     processor_start = time.perf_counter()
+    processor_text = cache_hit.suffix_text if cache_hit else text
     inputs = processor(
-        text=text,
+        text=processor_text,
         audio=audios if audios else None,
         images=images if images else None,
         videos=videos if videos else None,
@@ -540,10 +647,20 @@ def run_inference(
     )
     processor_ms = (time.perf_counter() - processor_start) * 1000
     move_start = time.perf_counter()
-    inputs = inputs.to(model.device)
-    if getattr(model, "dtype", None) is not None:
-        inputs = inputs.to(model.dtype)
+    inputs = _inputs_to_model_device(inputs, model)
     move_ms = (time.perf_counter() - move_start) * 1000
+    suffix_prompt_len = inputs["input_ids"].shape[-1] if "input_ids" in inputs else 0
+    prompt_len = suffix_prompt_len
+    if cache_hit:
+        prompt_len += cache_hit.prefix_tokens
+        if "attention_mask" in inputs:
+            prefix_mask = torch.ones(
+                (inputs["attention_mask"].shape[0], cache_hit.prefix_tokens),
+                dtype=inputs["attention_mask"].dtype,
+                device=inputs["attention_mask"].device,
+            )
+            inputs["attention_mask"] = torch.cat([prefix_mask, inputs["attention_mask"]], dim=-1)
+        inputs["past_key_values"] = cache_hit.past_key_values
 
     generate_start = time.perf_counter()
     with torch.inference_mode():
@@ -557,14 +674,15 @@ def run_inference(
     generate_ms = (time.perf_counter() - generate_start) * 1000
 
     decode_start = time.perf_counter()
-    prompt_len = inputs["input_ids"].shape[-1] if "input_ids" in inputs else 0
-    gen_ids = out_ids[:, prompt_len:]
+    decode_prompt_len = suffix_prompt_len if cache_hit else prompt_len
+    gen_ids = out_ids[:, decode_prompt_len:]
     decoded = processor.decode(gen_ids[0], skip_special_tokens=True, clean_up_tokenization_spaces=False)
     decode_ms = (time.perf_counter() - decode_start) * 1000
     total_ms = (time.perf_counter() - start) * 1000
     logger.info(
         "[PERF] inference chat_template=%.1fms mm=%.1fms processor=%.1fms "
-        "to_device=%.1fms generate=%.1fms decode=%.1fms total=%.1fms",
+        "to_device=%.1fms generate=%.1fms decode=%.1fms total=%.1fms "
+        "prompt_cache=%s cache_prefix_tokens=%d",
         chat_template_ms,
         mm_ms,
         processor_ms,
@@ -572,7 +690,22 @@ def run_inference(
         generate_ms,
         decode_ms,
         total_ms,
+        "hit" if cache_hit else ("miss" if prompt_cache else "off"),
+        cache_hit.prefix_tokens if cache_hit else 0,
     )
+    inference_keys = ["chat_template", "mm", "processor", "to_device", "generate", "decode", "total"]
+    count, averages = _inference_perf_averages.record(
+        {
+            "chat_template": chat_template_ms,
+            "mm": mm_ms,
+            "processor": processor_ms,
+            "to_device": move_ms,
+            "generate": generate_ms,
+            "decode": decode_ms,
+            "total": total_ms,
+        }
+    )
+    _log_perf_average("inference", count, averages, inference_keys)
     return decoded.strip(), int(prompt_len), int(gen_ids.shape[-1])
 
 
@@ -706,6 +839,10 @@ _system_prompt = ""
 _model_name = "qwen2.5-omni"
 _tmp_dir = tempfile.mkdtemp(prefix="qwen_serve_")
 _debug_asr_enabled = False
+_inference_perf_averages = _PerfAverages()
+_request_perf_averages = _PerfAverages()
+_prompt_cache_mode = "none"
+_kv_prompt_cache: Optional[_KvPromptCache] = None
 
 
 @app.get("/v1/models")
@@ -738,6 +875,7 @@ async def chat_completions(req: ChatRequest):
             _model, _processor, qwen_msgs,
             max_new_tokens=req.resolved_max_tokens(),
             temperature=req.temperature,
+            prompt_cache=_kv_prompt_cache if _prompt_cache_mode == "kv" else None,
         )
         inference_ms = (time.perf_counter() - inference_start) * 1000
     except Exception as e:
@@ -808,6 +946,17 @@ async def chat_completions(req: ChatRequest):
         save_ms,
         total_ms,
     )
+    request_keys = ["convert", "inference", "parse", "save", "total"]
+    count, averages = _request_perf_averages.record(
+        {
+            "convert": convert_ms,
+            "inference": inference_ms,
+            "parse": parse_ms,
+            "save": save_ms,
+            "total": total_ms,
+        }
+    )
+    _log_perf_average("request", count, averages, request_keys)
 
     return resp
 
@@ -830,11 +979,17 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--model-name", default="qwen2.5-omni", help="Model name returned in API responses")
     p.add_argument("--torch-dtype", default="auto", choices=["auto", "bfloat16", "float16", "float32"])
     p.add_argument("--debug-asr", action="store_true", help="Run local Whisper ASR for audio debugging.")
+    p.add_argument(
+        "--prompt-cache",
+        default="none",
+        choices=["none", "kv"],
+        help="Prompt cache mode. 'kv' is experimental and caches the fixed system-prompt prefix.",
+    )
     return p.parse_args()
 
 
 def main():
-    global _model, _processor, _system_prompt, _model_name, _debug_asr_enabled
+    global _model, _processor, _system_prompt, _model_name, _debug_asr_enabled, _prompt_cache_mode, _kv_prompt_cache
 
     args = parse_args()
 
@@ -852,10 +1007,15 @@ def main():
 
     _model_name = args.model_name
     _debug_asr_enabled = args.debug_asr
+    _prompt_cache_mode = args.prompt_cache
     print(f"[asr] debug_asr={_debug_asr_enabled}")
+    print(f"[prompt_cache] mode={_prompt_cache_mode}")
 
     print(f"[model] loading {args.model_dir} ...")
     _model, _processor = load_model(args.model_dir, args.lora_dir, args.torch_dtype)
+    if _prompt_cache_mode == "kv":
+        _kv_prompt_cache = _KvPromptCache()
+        _kv_prompt_cache.prepare(_model, _processor, _system_prompt)
     print(f"[model] ready  lora={args.lora_dir or 'none'}")
     print(f"[server] starting on http://{args.host}:{args.port}")
 
