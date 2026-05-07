@@ -169,10 +169,6 @@ class _KvPromptCache:
 
     def prepare(self, model, processor, system_prompt: str) -> bool:
         start = time.perf_counter()
-        thinker = _get_thinker_model(model)
-        if thinker is None:
-            logger.warning("[PROMPT_CACHE] mode=kv disabled reason=thinker_not_found")
-            return False
         prefix_messages = [{"role": "system", "content": [{"type": "text", "text": system_prompt}]}]
         prefix_text = processor.apply_chat_template(prefix_messages, add_generation_prompt=False, tokenize=False)
         prefix_inputs = processor(
@@ -184,15 +180,32 @@ class _KvPromptCache:
         prefix_inputs = _inputs_to_model_device(prefix_inputs, model)
         try:
             with torch.inference_mode():
-                output = thinker(**prefix_inputs, use_cache=True, return_dict=True)
+                # Use the full model's forward pass (not the thinker sub-module directly)
+                # so that the returned past_key_values are in exactly the same format
+                # that model.generate() expects when we inject them later.
+                thinker = _get_thinker_model(model)
+                if thinker is None:
+                    logger.warning("[PROMPT_CACHE] mode=kv disabled reason=thinker_not_found")
+                    return False
+                # Filter inputs to only keys thinker accepts
+                thinker_keys = {"input_ids", "attention_mask", "position_ids",
+                                "inputs_embeds", "past_key_values", "use_cache",
+                                "output_attentions", "output_hidden_states", "return_dict"}
+                thinker_inputs = {k: v for k, v in prefix_inputs.items() if k in thinker_keys}
+                output = thinker(**thinker_inputs, use_cache=True, return_dict=True)
         except Exception as exc:
             logger.warning("[PROMPT_CACHE] mode=kv disabled reason=%s: %s", type(exc).__name__, exc)
             return False
 
+        pkv = output.past_key_values
+        logger.info(
+            "[PROMPT_CACHE] mode=kv pkv_type=%s",
+            type(pkv).__name__,
+        )
         self.system_prompt = system_prompt
         self.prefix_text = prefix_text
         self.prefix_tokens = int(prefix_inputs["input_ids"].shape[-1])
-        self.past_key_values = _clone_past_key_values(output.past_key_values)
+        self.past_key_values = _clone_past_key_values(pkv)
         elapsed_ms = (time.perf_counter() - start) * 1000
         logger.info(
             "[PROMPT_CACHE] mode=kv prepared prefix_tokens=%d elapsed=%.1fms",
@@ -735,13 +748,11 @@ def run_inference(
         content = qwen_messages[0].get("content") or []
         if content and isinstance(content[0], dict):
             system_prompt = content[0].get("text", "")
-    # KV cache covers the text-only system-prompt prefix.
-    # Audio requests cannot reuse it: audio features are expanded and inserted
-    # into the token sequence by the processor, shifting every position relative
-    # to the text-only prefix the cache was built from. Using the cache with
-    # audio input causes position misalignment and garbled output.
+    # SP tokens are a contiguous prefix; audio tokens land in the user turn after SP.
+    # The cache covers only SP tokens so position alignment is preserved for all requests.
+    # Only skip cache if process_mm_info dropped audio data (placeholder/array count mismatch).
     audio_ok = (audio_placeholder_count == len(audios or []))
-    cache_hit = prompt_cache.match(text, system_prompt) if (prompt_cache and not audios and audio_ok) else None
+    cache_hit = prompt_cache.match(text, system_prompt) if (prompt_cache and audio_ok) else None
 
     processor_start = time.perf_counter()
     processor_text = cache_hit.suffix_text if cache_hit else text
