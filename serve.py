@@ -680,7 +680,9 @@ def run_inference(
         content = qwen_messages[0].get("content") or []
         if content and isinstance(content[0], dict):
             system_prompt = content[0].get("text", "")
-    cache_hit = prompt_cache.match(text, system_prompt) if prompt_cache else None
+    # Audio inputs expand into extra tokens that shift sequence positions,
+    # making the pre-warmed KV cache misaligned. Disable cache when audio present.
+    cache_hit = prompt_cache.match(text, system_prompt) if (prompt_cache and not audios) else None
 
     processor_start = time.perf_counter()
     processor_text = cache_hit.suffix_text if cache_hit else text
