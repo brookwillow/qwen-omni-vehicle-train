@@ -614,12 +614,8 @@ def _messages_to_qwen(
     for msg in messages:
         role = msg.role
         if role == "system":
-            # Override the default system prompt
-            text = msg.content if isinstance(msg.content, str) else ""
-            for part in (msg.content if isinstance(msg.content, list) else []):
-                if isinstance(part, dict) and part.get("type") == "text":
-                    text = part["text"]
-            qwen_msgs[0] = {"role": "system", "content": [{"type": "text", "text": text}]}
+            # Server-side system prompt is authoritative; ignore client overrides
+            # so the pre-warmed KV prompt cache remains valid.
             continue
 
         # Convert content to Qwen format
