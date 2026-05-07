@@ -133,6 +133,43 @@ def test_clone_past_key_values_does_not_share_tensor_storage():
     assert cloned[0][0].item() == 11.0
 
 
+def test_get_thinker_model_unwraps_peft_base_model():
+    thinker = object()
+    wrapped = types.SimpleNamespace(base_model=types.SimpleNamespace(model=types.SimpleNamespace(thinker=thinker)))
+
+    assert serve._get_thinker_model(wrapped) is thinker
+
+
+def test_kv_prompt_cache_prepare_uses_thinker_forward():
+    captured = {}
+
+    class FakeInputs(dict):
+        def to(self, *args, **kwargs):
+            return self
+
+    class FakeProcessor:
+        def apply_chat_template(self, messages, add_generation_prompt, tokenize):
+            return "<system>系统提示</system>\n"
+
+        def __call__(self, **kwargs):
+            return FakeInputs({"input_ids": torch.tensor([[1, 2]]), "attention_mask": torch.tensor([[1, 1]])})
+
+    class FakeThinker:
+        def __call__(self, **kwargs):
+            captured.update(kwargs)
+            return types.SimpleNamespace(
+                past_key_values=((torch.tensor([[[[1.0]]]]), torch.tensor([[[[2.0]]]])),)
+            )
+
+    model = types.SimpleNamespace(device=torch.device("cpu"), dtype=None, thinker=FakeThinker())
+    cache = serve._KvPromptCache()
+
+    assert cache.prepare(model, FakeProcessor(), "系统提示")
+    assert captured["use_cache"] is True
+    assert captured["return_dict"] is True
+    assert cache.prefix_tokens == 2
+
+
 def test_run_inference_uses_kv_prompt_cache_on_prefix_hit(monkeypatch):
     captured = {}
 

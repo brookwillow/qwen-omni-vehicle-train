@@ -122,8 +122,12 @@ class _KvPromptCache:
         self.prefix_tokens = 0
         self.past_key_values: Any = None
 
-    def prepare(self, model, processor, system_prompt: str) -> None:
+    def prepare(self, model, processor, system_prompt: str) -> bool:
         start = time.perf_counter()
+        thinker = _get_thinker_model(model)
+        if thinker is None:
+            logger.warning("[PROMPT_CACHE] mode=kv disabled reason=thinker_not_found")
+            return False
         prefix_messages = [{"role": "system", "content": [{"type": "text", "text": system_prompt}]}]
         prefix_text = processor.apply_chat_template(prefix_messages, add_generation_prompt=False, tokenize=False)
         prefix_inputs = processor(
@@ -133,8 +137,12 @@ class _KvPromptCache:
             use_audio_in_video=False,
         )
         prefix_inputs = _inputs_to_model_device(prefix_inputs, model)
-        with torch.inference_mode():
-            output = model(**prefix_inputs, use_cache=True, return_dict=True)
+        try:
+            with torch.inference_mode():
+                output = thinker(**prefix_inputs, use_cache=True, return_dict=True)
+        except Exception as exc:
+            logger.warning("[PROMPT_CACHE] mode=kv disabled reason=%s: %s", type(exc).__name__, exc)
+            return False
 
         self.system_prompt = system_prompt
         self.prefix_text = prefix_text
@@ -146,6 +154,7 @@ class _KvPromptCache:
             self.prefix_tokens,
             elapsed_ms,
         )
+        return True
 
     def match(self, full_text: str, system_prompt: str) -> Optional[_KvPromptCacheHit]:
         if not self.past_key_values or system_prompt != self.system_prompt:
@@ -164,6 +173,27 @@ def _inputs_to_model_device(inputs, model):
     if getattr(model, "dtype", None) is not None:
         inputs = inputs.to(model.dtype)
     return inputs
+
+
+def _get_thinker_model(model):
+    candidates = [model]
+    get_base_model = getattr(model, "get_base_model", None)
+    if callable(get_base_model):
+        try:
+            candidates.append(get_base_model())
+        except Exception:
+            pass
+    base_model = getattr(model, "base_model", None)
+    if base_model is not None:
+        candidates.append(base_model)
+        nested = getattr(base_model, "model", None)
+        if nested is not None:
+            candidates.append(nested)
+    for candidate in candidates:
+        thinker = getattr(candidate, "thinker", None)
+        if thinker is not None:
+            return thinker
+    return None
 
 
 # ── Pydantic models (OpenAI schema subset) ───────────────────
@@ -1015,7 +1045,10 @@ def main():
     _model, _processor = load_model(args.model_dir, args.lora_dir, args.torch_dtype)
     if _prompt_cache_mode == "kv":
         _kv_prompt_cache = _KvPromptCache()
-        _kv_prompt_cache.prepare(_model, _processor, _system_prompt)
+        if not _kv_prompt_cache.prepare(_model, _processor, _system_prompt):
+            _kv_prompt_cache = None
+            _prompt_cache_mode = "none"
+            print("[prompt_cache] mode=kv disabled; falling back to none")
     print(f"[model] ready  lora={args.lora_dir or 'none'}")
     print(f"[server] starting on http://{args.host}:{args.port}")
 
