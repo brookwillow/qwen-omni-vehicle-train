@@ -1,0 +1,21 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.15",
+  "base_commit_sha": "f2c2afc4821ea773cd5baf8985ffcfeb682c9261",
+  "prompts": {
+    "b809ed72392304f4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "84bc2857-93b2-4ba2-ab33-7e529014f293",
+        "model": "claude-sonnet-4.6"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 365,
+      "total_deletions": 10,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    }
+  }
+}
