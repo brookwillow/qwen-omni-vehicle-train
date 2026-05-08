@@ -1,0 +1,21 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.15",
+  "base_commit_sha": "a712838908771a96edbf96566b7ccccb546011af",
+  "prompts": {
+    "e7b331d81c1b2d83": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e02da-a637-7bb0-8a13-9ec27afc0ed0",
+        "model": "gpt-5.5"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 3,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    }
+  }
+}
