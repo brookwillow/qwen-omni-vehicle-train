@@ -971,6 +971,17 @@ def test_preserves_model_window_action_when_query_conflicts_with_complete_call()
     )
 
 
+def test_preserves_valid_car_usage_search_for_window_status_query():
+    assert postprocess_action_call(
+        "主驾车窗状态",
+        "CarUsageSearch",
+        {"query": "主驾车窗"},
+    ) == (
+        "CarUsageSearch",
+        {"query": "主驾车窗"},
+    )
+
+
 def test_fixes_lock_first_command_without_later_window_pollution():
     assert postprocess_action_call(
         "打开儿童锁，再把车窗也关上",

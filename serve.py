@@ -41,6 +41,7 @@ import logging
 import os
 import re
 import shutil
+import sys
 import threading
 import tempfile
 import time
@@ -867,12 +868,15 @@ def parse_model_output(text: str, query: str = "") -> tuple:
 
     Returns:
         ("tool_call", tool_name: str, args_json: str)
+      | ("noise_do_not_act",)
       | ("text", content: str)
     """
     m = _ACTION_RE.search(text)
     if m:
         tool_name = m.group(1).strip()
         args_str = m.group(2).strip()
+        if tool_name == "NoiseDoNotAct":
+            return ("noise_do_not_act",)
         try:
             args = json.loads(args_str)
             tool_name, args = postprocess_action_call(query, tool_name, args)
@@ -887,6 +891,35 @@ def parse_model_output(text: str, query: str = "") -> tuple:
     else:
         content = text
     return ("text", content)
+
+
+def _choice_from_parsed_output(parsed: tuple) -> Choice:
+    if parsed[0] == "tool_call":
+        _, tool_name, args_str = parsed
+        return Choice(
+            message=AssistantMessage(
+                tool_calls=[
+                    ToolCall(
+                        id=f"call_{uuid.uuid4().hex[:22]}",
+                        function=ToolFunction(name=tool_name, arguments=args_str),
+                    )
+                ]
+            ),
+            finish_reason="tool_calls",
+        )
+
+    if parsed[0] == "noise_do_not_act":
+        print("[NOISE_DO_NOT_ACT] suppressed client tool output", flush=True, file=sys.stderr)
+        return Choice(
+            message=AssistantMessage(content=""),
+            finish_reason="stop",
+        )
+
+    _, content = parsed
+    return Choice(
+        message=AssistantMessage(content=content),
+        finish_reason="stop",
+    )
 
 
 # ── Request/Response persistence ──────────────────────────────
@@ -1037,25 +1070,7 @@ async def chat_completions(req: ChatRequest):
     parse_start = time.perf_counter()
     parsed = parse_model_output(reply, _last_text_query(req.messages))
     parse_ms = (time.perf_counter() - parse_start) * 1000
-    if parsed[0] == "tool_call":
-        _, tool_name, args_str = parsed
-        choice = Choice(
-            message=AssistantMessage(
-                tool_calls=[
-                    ToolCall(
-                        id=f"call_{uuid.uuid4().hex[:22]}",
-                        function=ToolFunction(name=tool_name, arguments=args_str),
-                    )
-                ]
-            ),
-            finish_reason="tool_calls",
-        )
-    else:
-        _, content = parsed
-        choice = Choice(
-            message=AssistantMessage(content=content),
-            finish_reason="stop",
-        )
+    choice = _choice_from_parsed_output(parsed)
 
     resp = build_chat_response(choice, prompt_tokens, gen_tokens)
     print(f"[RESPONSE] {resp.model_dump_json()}", file=sys.stderr, flush=True)

@@ -259,6 +259,8 @@ def postprocess_action_call(
     first_part = _first_command(query)
     fixed_tool = tool
     fixed_args = dict(args) if isinstance(args, dict) else args
+    if tool == "CarUsageSearch" and isinstance(fixed_args, dict) and fixed_args.get("query"):
+        return fixed_tool, fixed_args
     has_complete_window_args = (
         tool == "WindowControl"
         and isinstance(fixed_args, dict)
