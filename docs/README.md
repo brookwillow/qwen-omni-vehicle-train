@@ -1,6 +1,6 @@
 # 车载语音助手 LoRA 训练方案
 
-> 更新时间：2026-05-06
+> 更新时间：2026-05-10
 
 ## 项目概要
 
@@ -38,10 +38,11 @@ data/splits/{action,clarify,multiturn,reject}.jsonl  (已拆分好的数据，�
 
 | 文件 | 说明 |
 |------|------|
-| `data/system-prompt.txt` | 紧凑版 System Prompt（~16.6K chars，基于当前工具白名单生成） |
+| `data/system-prompt.txt` | 紧凑版 System Prompt（~7.0K chars，基于当前工具白名单生成） |
 | `data/tools.json` | 38 个车载工具定义（新版 `inputSchema` 格式） |
 | `data/splits/` | 按类型拆分的训练数据（无 SP） |
 | `data/splits/blackbox_priority_aug.jsonl` | 基于 `eval_report_0505_2` 的高优先级 schema 合法增强样本 |
+| `data/splits/context_boundary.jsonl` | 多轮上下文边界样本：当前轮无意义时拒识，仅在当前轮有省略/纠错/延续意图时继承历史 |
 | `data/splits/multiturn.jsonl` | 多轮上下文继承与 Tool Result/Final Answer 训练样本 |
 | `data/splits/new_tools_aug.jsonl` | 新增工具独立增强样本，重点覆盖 `CarUsageSearch.query` 枚举 |
 | `data/train_final.jsonl` | 最终训练数据（含 SP） |
@@ -54,11 +55,12 @@ data/splits/{action,clarify,multiturn,reject}.jsonl  (已拆分好的数据，�
 | Action | 3567 | 2 轮：Action → FinalAnswer；已按当前 38 个工具清理旧工具样本 |
 | Blackbox priority aug | 80 | 针对 raw eval 中 Climate、Profile/Seat、Window、Light、App 高频非争议错误的补充 Action 样本 |
 | Clarify | 177 | 2 轮：Clarify → FinalAnswer；仅保留缺少必需信息或目标不明确的追问 |
+| Context boundary | 60 | 多轮当前轮边界：无意义当前轮走 `NoiseDoNotAct`，省略/纠错/延续才用历史补全；补充查询状态 vs 打开/关闭控制，以及 popup/task 列表选择 `GeneralSelect` 的易混淆边界 |
 | Multiturn | 32 | 8 轮：上下文继承、目标修正、参数延续、Tool Result → FinalAnswer |
 | New tools aug | 249 | 新增工具独立增强集；`CarUsageSearch` 覆盖 60 个 `query` 枚举，每个 2 条 |
 | Reject | 1207 | 单轮 + 多轮硬负例（已合并） |
 
-`build_train_data.py` 默认合并全部 split，当前最终训练集为 5312 条。统计时多轮样本按最后一个有效决策标签计入对应类别。
+`build_train_data.py` 默认合并全部 split，当前最终训练集为 5372 条。统计时多轮样本按最后一个有效决策标签计入对应类别。
 
 ## 训练配置
 
@@ -331,18 +333,24 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 - 输入方式：有音频文件时自动用音频输入，无音频时回退到文本
 - 支持字段：`expected_type`（显式指定 Action/Clarify/Reject）
 
-## 脚本总览（4 个）
+## 脚本总览
 
 | 脚本 | 用途 |
 |------|------|
 | `build_train_data.py` | 合并 splits + 注入 SP → 训练集 |
-| `train_thinker_lora.py` | LoRA 训练（389 行） |
+| `train_thinker_lora.py` | LoRA 训练，含冻结审计 + 训练指标记录 |
 | `serve.py` | **OpenAI 兼容推理服务**（FastAPI，支持文本+音频） |
 | `infer_cli_omni.py` | 交互式 CLI 推理 |
 | `eval.py` | 统一评测（batch / single），音频输入 + 多维度统计，支持 `--batch-size` 批量推理 |
 | `tool_postprocess.py` | 服务端工具调用后处理兜底；训练、CLI 和评测路径不使用 |
 | `scripts/probe_asr_decoder.py` | Qwen 音频编码器 → Whisper 解码器 ASR 探测实验 |
 | `scripts/build_r5_augment.py` | R5 数据增强（position/anti-clarify/climate/light） |
+| `scripts/reorganize_splits.py` | 将 splits/ 按统一响应策略分类法重组 |
+| `scripts/reclassify_reject.py` | 对 reject.jsonl 重新分类（reject / noise / query / tool_call / clarify） |
+| `scripts/fix_clarify_position.py` | 修正 clarify 样本中错误反问 position 的情况（position 为可选时直接执行） |
+| `scripts/fix_reject_mislabeled.py` | 修正 reject 中有对应工具的误标样本 → 转为 tool_call |
+| `scripts/fix_reject_noise.py` | 将 reject 中的无意图噪声（问候/感叹/闲聊）→ 转为 noise |
+| `scripts/generate_train_report.py` | 从 `train_metrics.jsonl` 生成 HTML 训练可视化报告 |
 
 已归档至 `_archive/`：`split_data_by_type.py`、`augment_reject_samples.py`、`build_system_prompt.py`
 
@@ -366,11 +374,36 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 - [x] eval.py `--batch-size` 批量推理（单 GPU 利用率从 ~30% → ~75%）
 - [x] R5 数据增强（+164 条：position 字段覆盖、抗过度-Clarify、Climate/Light 多样性）
 - [x] R6 anti-Clarify 清理：位置缺失不追问，口语意图/信息查询/电话与 FM 搜索直接 Action
+- [x] 数据质量清洗脚本（2026-05-10）：
+  - `fix_clarify_position.py`：25 条 clarify 样本错误反问可选 position → 修正为 tool_call（无 position）；1 条导航超范围 → reject；出风口/屏幕设备歧义保留 clarify
+  - `fix_reject_mislabeled.py`：18 条 reject 误标样本（WiperControl/ParkingControl/DrivingControl/SuspensionControl/FridgeControl/GloveboxControl/PerfumeControl/NetworkControl）→ 修正为 tool_call
+  - `fix_reject_noise.py`：57 条无意图噪声（问候/感叹词/道别/闲聊等）从 reject → 迁移至 noise
+- [x] 训练过程指标持久化：`MetricsSaverCallback` 每隔 `--logging-steps` 步追加写入 `{output_dir}/train_metrics.jsonl`（含 step/epoch/loss/lr/grad_norm/eval_loss/eval_token_acc）
+- [x] HTML 训练报告生成：`scripts/generate_train_report.py` 从 `train_metrics.jsonl` 生成暗色主题交互式 HTML（Chart.js），包含 train loss、eval loss + token acc 双轴、学习率、grad norm 四图及关键统计卡片
+
+## 训练监控
+
+训练过程中自动记录指标到 `{output_dir}/train_metrics.jsonl`，每行一个 JSON：
+
+```json
+{"step": 10, "epoch": 0.05, "loss": 1.2345, "learning_rate": 1.23e-05, "grad_norm": 0.88}
+{"step": 100, "epoch": 0.50, "eval_loss": 0.98, "eval_token_acc": 0.72}
+```
+
+训练结束后生成 HTML 报告：
+
+```bash
+python scripts/generate_train_report.py --metrics lora_output/train_metrics.jsonl
+# → lora_output/train_report.html
+```
+
+报告包含：Train Loss、Eval Loss + Token Acc 双轴、Learning Rate、Grad Norm 四张交互图，以及总步数/最优 eval loss/最优 eval acc 等统计卡片。无额外 Python 依赖（Chart.js 通过 CDN 加载），浏览器直接打开。
 
 ## 下一步
 
-- [ ] 补充 Clarify 评测数据（当前 0 条，训练集有 177 条）
-- [ ] 补充 Reject 评测数据（当前 1 条，训练集有 ~1030 条）
+- [ ] 执行数据清洗脚本（fix_clarify_position / fix_reject_mislabeled / fix_reject_noise）并重新构建 train_final.jsonl
+- [ ] 补充 Clarify 评测数据（当前 0 条，训练集有 ~151 条）
+- [ ] 补充 Reject 评测数据（当前 1 条，训练集有 ~1132 条）
 - [ ] 补齐 9 个无覆盖工具的测试数据（GeneralBack/Exit/Select、NavigationControl 等）
 - [ ] 工具混淆问题（雨刮→ClimateControl、播放→MediaControl vs MusicSearchPlay）
 - [ ] 阶段 B：DPO/ORPO 定向提准

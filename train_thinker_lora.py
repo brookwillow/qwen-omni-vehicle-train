@@ -224,6 +224,39 @@ def summarize_trainable_params(
 
 # ── Trainer callback ─────────────────────────────────────────
 
+class MetricsSaverCallback(TrainerCallback):
+    """Append every logged metric step to {output_dir}/train_metrics.jsonl."""
+
+    def on_log(self, args, state, control, logs=None, **kwargs):
+        logs = logs or {}
+        record = {
+            "step": state.global_step,
+            "epoch": round(state.epoch, 4) if state.epoch is not None else None,
+        }
+        for k in ("loss", "learning_rate", "grad_norm", "token_acc",
+                  "eval_loss", "eval_token_acc"):
+            if k in logs:
+                record[k] = logs[k]
+        if len(record) > 2:  # more than just step/epoch
+            metrics_path = Path(args.output_dir) / "train_metrics.jsonl"
+            with metrics_path.open("a", encoding="utf-8") as f:
+                f.write(json.dumps(record, ensure_ascii=False) + "\n")
+
+    def on_evaluate(self, args, state, control, metrics=None, **kwargs):
+        metrics = metrics or {}
+        record = {
+            "step": state.global_step,
+            "epoch": round(state.epoch, 4) if state.epoch is not None else None,
+        }
+        for k in ("eval_loss", "eval_token_acc"):
+            if k in metrics:
+                record[k] = metrics[k]
+        if len(record) > 2:
+            metrics_path = Path(args.output_dir) / "train_metrics.jsonl"
+            with metrics_path.open("a", encoding="utf-8") as f:
+                f.write(json.dumps(record, ensure_ascii=False) + "\n")
+
+
 class ConsoleMetricsCallback(TrainerCallback):
     @staticmethod
     def _fmt_metric(key, value):
@@ -422,6 +455,7 @@ def main() -> None:
     if muted_callbacks:
         print(f"[log] Disabled default Trainer console callbacks: {', '.join(muted_callbacks)}")
     trainer.add_callback(ConsoleMetricsCallback)
+    trainer.add_callback(MetricsSaverCallback)
 
     # Freeze audit: ensure no audio/talker/vocoder params are trainable.
     forbidden_keywords = [x.strip().lower() for x in args.forbidden_trainable_keywords.split(",") if x.strip()]

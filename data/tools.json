@@ -691,7 +691,7 @@
       "properties": {
         "query": {
           "type": "string",
-          "description": "用户关于汽车相关的查询问题。结合完整对话历史改写用户当前问题。需将所有代词、省略成分和隐含指代显式补全，生成一个语义完整、脱离上下文仍可独立理解的查询语句。严格保留原始意图、关键约束，不添加新信息、不改变原问题边界。",
+          "description": "用户关于汽车相关的查询问题。必须先判断当前轮是否有有效查询意图；仅当当前轮存在代词、省略或隐含指代时，才结合对话历史补全缺失信息。当前轮无意义或不能形成请求时不得用历史替代。补全后生成语义完整、脱离上下文仍可独立理解的查询语句，严格保留原始意图、关键约束，不添加新信息、不改变原问题边界。",
           "enum": [
             "行驶总里程",
             "自启动后的行驶里程",
@@ -956,8 +956,8 @@
     }
   },
   {
-    "name": "NormalSelect",
-    "description": "Select an item from a list using an index.",
+    "name": "GeneralSelect",
+    "description": "Select an item from a popup/task list using its index. When the previous assistant message contains a list with index/name or index/label and the current user confirms, cancels, or selects an item, return the matched index string, including confirm/cancel items.",
     "inputSchema": {
       "type": "object",
       "properties": {
