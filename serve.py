@@ -290,7 +290,7 @@ class Message(BaseModel):
 class ChatRequest(BaseModel):
     model_config = ConfigDict(extra="ignore")
 
-    model: Optional[str] = "qwen2.5-omni"
+    model: Optional[str] = "qwen-omni-lora"
     messages: List[Message]
     max_tokens: Optional[int] = Field(default=None, ge=1, le=8192)
     max_completion_tokens: Optional[int] = Field(default=None, ge=1, le=8192)
@@ -342,6 +342,27 @@ class ChatResponse(BaseModel):
     choices: List[Choice]
     usage: Usage
     system_fingerprint: Optional[str] = None
+
+
+def build_chat_response(
+    choice: Choice,
+    prompt_tokens: int,
+    gen_tokens: int,
+    model_name: str | None = None,
+) -> ChatResponse:
+    """Build an OpenAI-compatible response using the served model identity."""
+    served_model = model_name or _model_name
+    return ChatResponse(
+        id=f"chatcmpl-{uuid.uuid4().hex}",
+        created=int(time.time()),
+        model=served_model,
+        choices=[choice],
+        usage=Usage(
+            prompt_tokens=prompt_tokens,
+            completion_tokens=gen_tokens,
+            total_tokens=prompt_tokens + gen_tokens,
+        ),
+    )
 
 
 # ── Model loading ─────────────────────────────────────────────
@@ -960,7 +981,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 _model = None
 _processor = None
 _system_prompt = ""
-_model_name = "qwen2.5-omni"
+_model_name = "qwen-omni-lora"
 _tmp_dir = tempfile.mkdtemp(prefix="qwen_serve_")
 _debug_asr_enabled = False
 _inference_perf_averages = _PerfAverages()
@@ -1036,17 +1057,7 @@ async def chat_completions(req: ChatRequest):
             finish_reason="stop",
         )
 
-    resp = ChatResponse(
-        id=f"chatcmpl-{uuid.uuid4().hex}",
-        created=int(time.time()),
-        model=req.model or _model_name,
-        choices=[choice],
-        usage=Usage(
-            prompt_tokens=prompt_tokens,
-            completion_tokens=gen_tokens,
-            total_tokens=prompt_tokens + gen_tokens,
-        ),
-    )
+    resp = build_chat_response(choice, prompt_tokens, gen_tokens)
     print(f"[RESPONSE] {resp.model_dump_json()}", file=sys.stderr, flush=True)
 
     # Persist audio + response for training data collection
@@ -1100,7 +1111,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--system-prompt", default="", help="Inline system prompt (overrides file)")
     p.add_argument("--host", default="0.0.0.0")
     p.add_argument("--port", type=int, default=8000)
-    p.add_argument("--model-name", default="qwen2.5-omni", help="Model name returned in API responses")
+    p.add_argument("--model-name", default="qwen-omni-lora", help="Model name returned in API responses")
     p.add_argument("--torch-dtype", default="auto", choices=["auto", "bfloat16", "float16", "float32"])
     p.add_argument("--debug-asr", action="store_true", help="Run local Whisper ASR for audio debugging.")
     p.add_argument(

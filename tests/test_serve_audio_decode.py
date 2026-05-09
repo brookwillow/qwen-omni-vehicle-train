@@ -236,3 +236,13 @@ def test_run_inference_uses_kv_prompt_cache_on_prefix_hit(monkeypatch):
     assert reply == "Action: WindowControl"
     assert prompt_tokens == 5
     assert gen_tokens == 1
+
+
+def test_chat_response_uses_server_model_name_by_default():
+    response = serve.build_chat_response(
+        choice=serve.Choice(message=serve.AssistantMessage(content="ok")),
+        prompt_tokens=10,
+        gen_tokens=2,
+    )
+
+    assert response.model == "qwen-omni-lora"

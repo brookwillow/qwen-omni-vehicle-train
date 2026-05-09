@@ -50,6 +50,7 @@ def test_keeps_non_seat_control_args_unchanged():
     assert fixed == {
         "action": "打开",
         "device": "车窗",
+        "position": "主驾",
     }
 
 
@@ -940,6 +941,28 @@ def test_fixes_window_delta_percent_and_precise_position():
 def test_preserves_model_window_position_when_query_is_unavailable():
     assert postprocess_action_call(
         "",
+        "WindowControl",
+        {"action": "打开", "device": "车窗", "position": "主驾"},
+    ) == (
+        "WindowControl",
+        {"action": "打开", "device": "车窗", "position": "主驾"},
+    )
+
+
+def test_preserves_complete_model_window_call_when_query_is_less_specific():
+    assert postprocess_action_call(
+        "关闭车窗",
+        "WindowControl",
+        {"action": "关闭", "device": "车窗", "position": "主驾"},
+    ) == (
+        "WindowControl",
+        {"action": "关闭", "device": "车窗", "position": "主驾"},
+    )
+
+
+def test_preserves_model_window_action_when_query_conflicts_with_complete_call():
+    assert postprocess_action_call(
+        "关闭主驾车窗",
         "WindowControl",
         {"action": "打开", "device": "车窗", "position": "主驾"},
     ) == (

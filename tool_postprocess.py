@@ -259,11 +259,17 @@ def postprocess_action_call(
     first_part = _first_command(query)
     fixed_tool = tool
     fixed_args = dict(args) if isinstance(args, dict) else args
+    has_complete_window_args = (
+        tool == "WindowControl"
+        and isinstance(fixed_args, dict)
+        and fixed_args.get("action")
+        and fixed_args.get("device")
+    )
 
     if any(term in first_part for term in ("车窗锁", "窗户锁", "乱按车窗", "窗户不要让孩子碰", "窗户锁上", "自己控制窗户")):
         fixed_tool = "LockControl"
         fixed_args = {"action": "关闭" if any(term in first_part for term in ("可以自己控制", "自己控制")) else "打开", "device": "车窗锁"}
-    elif "车窗" in first_part or "窗户" in first_part:
+    elif not has_complete_window_args and ("车窗" in first_part or "窗户" in first_part):
         fixed_tool = "WindowControl"
         if "暂停" in first_part:
             action = "暂停"
@@ -704,6 +710,7 @@ def postprocess_action_args(query: str, tool: str | None, args: dict[str, Any] |
             and fixed.get("position")
             and not _mentions_seat_position(first_part)
             and fixed.get("position") != "全部"
+            and "position" not in args
         ):
             fixed.pop("position", None)
         if any(term in first_part for term in ("进高速", "关上窗")) and fixed.get("device") == "车窗":
