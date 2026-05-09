@@ -1,0 +1,40 @@
+data/system-prompt.txt
+  e7b331d81c1b2d83 9-11,39,50
+data/tools.json
+  e7b331d81c1b2d83 694,959-960,981
+docs/README.md
+  e7b331d81c1b2d83 41,45,58,63
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.15",
+  "base_commit_sha": "3177b93a1ce858747b0d7abb405dc57d55ade617",
+  "prompts": {
+    "b35f4c4896380cc7": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "92eede5f-35da-4169-ba83-ae67ecd1df2a",
+        "model": "copilot/claude-opus-4.6"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 168,
+      "total_deletions": 10,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "e7b331d81c1b2d83": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e02da-a637-7bb0-8a13-9ec27afc0ed0",
+        "model": "gpt-5.5"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 97,
+      "total_deletions": 32,
+      "accepted_lines": 13,
+      "overriden_lines": 0
+    }
+  }
+}
