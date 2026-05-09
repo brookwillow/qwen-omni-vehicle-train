@@ -64,9 +64,6 @@ from pydantic import BaseModel, ConfigDict, Field
 from qwen_omni_utils import process_mm_info
 from transformers import Qwen2_5OmniForConditionalGeneration, Qwen2_5OmniProcessor
 
-from tool_postprocess import postprocess_action_call
-
-
 _PROJECT_DIR = Path(__file__).resolve().parent
 _DEFAULT_SP_FILE = _PROJECT_DIR / "data" / "system-prompt.txt"
 _SAVE_DIR = _PROJECT_DIR / "data" / "serve_logs"
@@ -863,7 +860,7 @@ _ACTION_RE = re.compile(
 )
 
 
-def parse_model_output(text: str, query: str = "") -> tuple:
+def parse_model_output(text: str) -> tuple:
     """Parse model text output into structured form.
 
     Returns:
@@ -879,7 +876,6 @@ def parse_model_output(text: str, query: str = "") -> tuple:
             return ("noise_do_not_act",)
         try:
             args = json.loads(args_str)
-            tool_name, args = postprocess_action_call(query, tool_name, args)
             args_str = json.dumps(args, ensure_ascii=False)
         except json.JSONDecodeError:
             pass  # still return as-is; caller receives raw string
@@ -1068,7 +1064,7 @@ async def chat_completions(req: ChatRequest):
 
     print(f"[MODEL_RAW] {repr(reply)}", flush=True, file=sys.stderr)
     parse_start = time.perf_counter()
-    parsed = parse_model_output(reply, _last_text_query(req.messages))
+    parsed = parse_model_output(reply)
     parse_ms = (time.perf_counter() - parse_start) * 1000
     choice = _choice_from_parsed_output(parsed)
 

@@ -249,7 +249,7 @@ def test_chat_response_uses_server_model_name_by_default():
 
 
 def test_noise_do_not_act_is_suppressed_from_client_tool_calls(capsys):
-    parsed = serve.parse_model_output("Action: NoiseDoNotAct\nAction Input: {}", "呲啦呲啦")
+    parsed = serve.parse_model_output("Action: NoiseDoNotAct\nAction Input: {}")
     choice = serve._choice_from_parsed_output(parsed)
 
     response = serve.build_chat_response(choice=choice, prompt_tokens=10, gen_tokens=4)
@@ -258,3 +258,18 @@ def test_noise_do_not_act_is_suppressed_from_client_tool_calls(capsys):
     assert response.choices[0].message.content == ""
     assert response.choices[0].message.tool_calls is None
     assert "[NOISE_DO_NOT_ACT]" in capsys.readouterr().err
+
+
+def test_parse_model_output_preserves_model_tool_call_arguments():
+    raw = (
+        "Action: SeatControl\n"
+        'Action Input: {"action": "关闭", "device": "座椅", "feature": "通风", "position": "主驾"}'
+    )
+
+    parsed = serve.parse_model_output(raw)
+
+    assert parsed == (
+        "tool_call",
+        "SeatControl",
+        '{"action": "关闭", "device": "座椅", "feature": "通风", "position": "主驾"}',
+    )
