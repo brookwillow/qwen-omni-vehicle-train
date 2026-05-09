@@ -1,6 +1,7 @@
 import base64
 import builtins
 import io
+import json
 import sys
 import types
 import wave
@@ -273,3 +274,34 @@ def test_parse_model_output_preserves_model_tool_call_arguments():
         "SeatControl",
         '{"action": "关闭", "device": "座椅", "feature": "通风", "position": "主驾"}',
     )
+
+
+def test_save_request_artifacts_writes_model_request(tmp_path, monkeypatch):
+    monkeypatch.setattr(serve, "_SAVE_DIR", tmp_path)
+    audio_path = tmp_path / "input.wav"
+    audio_path.write_bytes(_make_wav(16000, 1, 2))
+    response = serve.build_chat_response(
+        choice=serve.Choice(message=serve.AssistantMessage(content="ok")),
+        prompt_tokens=3,
+        gen_tokens=1,
+    )
+    model_messages = [
+        {"role": "system", "content": [{"type": "text", "text": "系统提示"}]},
+        {"role": "user", "content": [{"type": "audio", "audio": str(audio_path)}]},
+    ]
+
+    serve._save_request_artifacts(
+        response.id,
+        [str(audio_path)],
+        response,
+        [],
+        model_messages,
+    )
+
+    request_path = tmp_path / response.id / "model_request.json"
+    saved = json.loads(request_path.read_text(encoding="utf-8"))
+
+    assert saved["messages"] == model_messages
+    assert saved["audio_files"] == [{"source": str(audio_path), "saved": "audio_0.wav"}]
+    assert (tmp_path / response.id / "response.json").exists()
+    assert (tmp_path / response.id / "audio_0.wav").exists()

@@ -925,18 +925,22 @@ def _save_request_artifacts(
     tmp_files: list[str],
     response: "ChatResponse",
     messages: List[Message],
+    model_messages: list | None = None,
 ) -> None:
     """Save audio files and response for each request, keyed by request_id."""
     try:
         req_dir = _SAVE_DIR / request_id
         req_dir.mkdir(parents=True, exist_ok=True)
+        saved_audio_files: list[dict[str, str]] = []
 
         # Save audio wav files
         for i, fpath in enumerate(tmp_files):
             if os.path.exists(fpath):
                 suffix = Path(fpath).suffix or ".wav"
-                dst = req_dir / f"audio_{i}{suffix}"
+                saved_name = f"audio_{i}{suffix}"
+                dst = req_dir / saved_name
                 shutil.copy2(fpath, dst)
+                saved_audio_files.append({"source": fpath, "saved": saved_name})
 
         # Save the user text query (if any)
         text_query = _last_text_query(messages)
@@ -947,6 +951,16 @@ def _save_request_artifacts(
         (req_dir / "response.json").write_text(
             response.model_dump_json(indent=2), encoding="utf-8"
         )
+
+        if model_messages is not None:
+            (req_dir / "model_request.json").write_text(
+                json.dumps(
+                    {"messages": model_messages, "audio_files": saved_audio_files},
+                    ensure_ascii=False,
+                    indent=2,
+                ),
+                encoding="utf-8",
+            )
 
         logger.info(f"[SAVE] artifacts saved → {req_dir}")
     except Exception as e:
@@ -1073,7 +1087,7 @@ async def chat_completions(req: ChatRequest):
 
     # Persist audio + response for training data collection
     save_start = time.perf_counter()
-    _save_request_artifacts(resp.id, tmp_files, resp, req.messages)
+    _save_request_artifacts(resp.id, tmp_files, resp, req.messages, qwen_msgs)
     save_ms = (time.perf_counter() - save_start) * 1000
 
     # Cleanup temp audio files
