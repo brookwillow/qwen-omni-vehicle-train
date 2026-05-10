@@ -1,0 +1,64 @@
+data/splits/reject.jsonl
+  b35f4c4896380cc7 201-204
+scripts/merge_tool_call_splits.py
+  b35f4c4896380cc7 1-53
+scripts/extract_carusage_eta.py
+  b35f4c4896380cc7 1-53
+data/splits/by_tool/DoiSelectionControl.jsonl
+  b35f4c4896380cc7 5-18
+data/splits/by_tool/NGPActivateControl.jsonl
+  b35f4c4896380cc7 5-15
+scripts/augment_appcontrol_variations.py
+  b35f4c4896380cc7 1-125
+scripts/gradio_remote_infer.py
+  b35f4c4896380cc7 229-256,259-262,264-273,279-280,282,287,289-298,300-305,307-384
+scripts/validate_by_tool_schema.py
+  719770272c4435e9 1-139
+data/splits/by_tool/DressControl.jsonl
+  b35f4c4896380cc7 5-17
+data/splits/by_tool/DirectionControl.jsonl
+  b35f4c4896380cc7 9-34
+scripts/augment_cameracontrol_variations.py
+  b35f4c4896380cc7 1-119
+scripts/strip_final_punctuation.py
+  b35f4c4896380cc7 1-71
+scripts/clean_appcontrol.py
+  b35f4c4896380cc7 1-136
+data/splits/by_tool/GloveboxControl.jsonl
+  b35f4c4896380cc7 11-24
+scripts/split_tool_call_by_tool.py
+  b35f4c4896380cc7 1-104
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.17",
+  "base_commit_sha": "bdf0692ad162629c46a0b58db9c59baed4a719be",
+  "prompts": {
+    "719770272c4435e9": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "348cb1c8-0bfd-4de9-a22a-2ff69e5042e7",
+        "model": "copilot/claude-sonnet-4.6"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 1538,
+      "total_deletions": 48,
+      "accepted_lines": 139,
+      "overriden_lines": 0
+    },
+    "b35f4c4896380cc7": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "92eede5f-35da-4169-ba83-ae67ecd1df2a",
+        "model": "copilot/claude-opus-4.6"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 888,
+      "total_deletions": 51,
+      "accepted_lines": 888,
+      "overriden_lines": 0
+    }
+  }
+}
