@@ -226,68 +226,162 @@ def record_backend_and_infer(
     return audio_path, status, summary, parsed, raw
 
 
+def infer_messages(
+    messages_json: str,
+    server: str,
+    model: str,
+    max_tokens: int,
+    temperature: float,
+    timeout: float,
+) -> tuple[str, str, str]:
+    """Send a messages array (JSON) to the server and return results."""
+    try:
+        messages = json.loads(messages_json)
+    except json.JSONDecodeError as exc:
+        return "JSON Error", f"Invalid JSON: {exc}", "{}"
+    if not isinstance(messages, list) or not messages:
+        return "Format Error", "messages must be a non-empty JSON array.", "{}"
+
+    payload = {
+        "model": model,
+        "messages": messages,
+        "max_tokens": int(max_tokens),
+        "temperature": float(temperature),
+    }
+    try:
+        url = f"{server.rstrip('/')}/v1/chat/completions"
+        resp = post_json(url, payload, float(timeout))
+        return _extract_result(resp)
+    except Exception as exc:
+        return "Request Failed", str(exc), "{}"
+
+
+_MESSAGES_PLACEHOLDER = json.dumps(
+    [{"role": "user", "content": "帮我把主驾车窗打开"}],
+    ensure_ascii=False, indent=2,
+)
+
+_MULTITURN_EXAMPLE = json.dumps(
+    [
+        {"role": "user", "content": "帮我把空调打开"},
+        {"role": "assistant", "content": 'Action: ClimateControl\nAction Input: {"action": "打开", "device": "空调"}'},
+        {"role": "user", "content": "Tool Result: {\"status\": \"success\"}"},
+        {"role": "assistant", "content": "Final Answer: 好的，空调已为您打开。"},
+        {"role": "user", "content": "温度调到26度"},
+    ],
+    ensure_ascii=False, indent=2,
+)
+
+
 def build_app(default_server: str, default_model: str):
     import gradio as gr
 
-    with gr.Blocks(title="Qwen-Omni Remote Audio Test") as demo:
-        gr.Markdown("# Qwen-Omni Remote Audio Test")
-        gr.Markdown("Record or upload local audio, then send it to the remote `serve.py` endpoint.")
+    with gr.Blocks(title="Qwen-Omni Remote Inference") as demo:
+        gr.Markdown("# Qwen-Omni Remote Inference")
 
+        # Shared server settings at the top
         with gr.Row():
             server = gr.Textbox(label="Server", value=default_server)
             model = gr.Textbox(label="Model", value=default_model)
 
-        audio = gr.Audio(
-            label="Browser Audio",
-            sources=["microphone", "upload"],
-            type="filepath",
-            format="wav",
-        )
+        with gr.Tabs():
 
-        with gr.Row():
-            duration = gr.Number(label="Backend Record Seconds", value=4.0)
-            sample_rate = gr.Number(label="Sample Rate", value=16000, precision=0)
-            backend_record = gr.Button("Backend Record")
-            backend_record_send = gr.Button("Backend Record + Send", variant="secondary")
+            # ── Tab 1: Multi-turn Text ────────────────────────────
+            with gr.Tab("📝 多轮文本测试"):
+                gr.Markdown(
+                    "直接粘贴 `messages` JSON 数组进行测试，支持多轮上下文。\n\n"
+                    "格式：`[{\"role\": \"user\", \"content\": \"...\"}]`"
+                )
+                with gr.Row():
+                    txt_max_tokens = gr.Number(label="Max Tokens", value=128, precision=0)
+                    txt_temperature = gr.Number(label="Temperature", value=0.0)
+                    txt_timeout = gr.Number(label="Timeout Seconds", value=60)
 
-        record_status = gr.Textbox(label="Record Status", interactive=False)
+                messages_input = gr.Code(
+                    label="messages (JSON)",
+                    language="json",
+                    value=_MESSAGES_PLACEHOLDER,
+                    lines=12,
+                )
 
-        with gr.Row():
-            hint_text = gr.Textbox(
-                label="Hint Text",
-                value="",
-                placeholder="Optional. Leave empty for pure audio E2E.",
-            )
-            max_tokens = gr.Number(label="Max Tokens", value=128, precision=0)
-            temperature = gr.Number(label="Temperature", value=0.0)
-            timeout = gr.Number(label="Timeout Seconds", value=120)
+                with gr.Row():
+                    btn_send_text = gr.Button("Send Messages", variant="primary")
+                    btn_example_single = gr.Button("示例：单轮")
+                    btn_example_multi = gr.Button("示例：多轮续接")
 
-        submit = gr.Button("Send Audio", variant="primary")
+                txt_summary = gr.Markdown(label="Summary")
+                txt_parsed = gr.Code(label="Parsed Output", language="json")
+                txt_raw = gr.Code(label="Raw Response", language="json")
 
-        result_summary = gr.Markdown(label="Summary")
-        parsed_output = gr.Code(label="Parsed Output", language="json")
-        raw_response = gr.Code(label="Raw Response", language="json")
+                btn_send_text.click(
+                    infer_messages,
+                    inputs=[messages_input, server, model, txt_max_tokens, txt_temperature, txt_timeout],
+                    outputs=[txt_summary, txt_parsed, txt_raw],
+                )
+                btn_example_single.click(
+                    lambda: _MESSAGES_PLACEHOLDER,
+                    outputs=[messages_input],
+                )
+                btn_example_multi.click(
+                    lambda: _MULTITURN_EXAMPLE,
+                    outputs=[messages_input],
+                )
 
-        submit.click(
-            infer_audio,
-            inputs=[audio, server, model, hint_text, max_tokens, temperature, timeout],
-            outputs=[result_summary, parsed_output, raw_response],
-        )
-        audio.change(
-            analyze_audio_for_ui,
-            inputs=[audio],
-            outputs=[record_status],
-        )
-        backend_record.click(
-            record_backend,
-            inputs=[duration, sample_rate],
-            outputs=[audio, record_status],
-        )
-        backend_record_send.click(
-            record_backend_and_infer,
-            inputs=[duration, sample_rate, server, model, hint_text, max_tokens, temperature, timeout],
-            outputs=[audio, record_status, result_summary, parsed_output, raw_response],
-        )
+            # ── Tab 2: Audio ──────────────────────────────────────
+            with gr.Tab("🎙️ 音频测试"):
+                gr.Markdown("Record or upload local audio, then send it to the remote `serve.py` endpoint.")
+
+                audio = gr.Audio(
+                    label="Browser Audio",
+                    sources=["microphone", "upload"],
+                    type="filepath",
+                    format="wav",
+                )
+
+                with gr.Row():
+                    duration = gr.Number(label="Backend Record Seconds", value=4.0)
+                    sample_rate = gr.Number(label="Sample Rate", value=16000, precision=0)
+                    backend_record = gr.Button("Backend Record")
+                    backend_record_send = gr.Button("Backend Record + Send", variant="secondary")
+
+                record_status = gr.Textbox(label="Record Status", interactive=False)
+
+                with gr.Row():
+                    hint_text = gr.Textbox(
+                        label="Hint Text",
+                        value="",
+                        placeholder="Optional. Leave empty for pure audio E2E.",
+                    )
+                    max_tokens = gr.Number(label="Max Tokens", value=128, precision=0)
+                    temperature = gr.Number(label="Temperature", value=0.0)
+                    timeout = gr.Number(label="Timeout Seconds", value=120)
+
+                submit = gr.Button("Send Audio", variant="primary")
+
+                result_summary = gr.Markdown(label="Summary")
+                parsed_output = gr.Code(label="Parsed Output", language="json")
+                raw_response = gr.Code(label="Raw Response", language="json")
+
+                submit.click(
+                    infer_audio,
+                    inputs=[audio, server, model, hint_text, max_tokens, temperature, timeout],
+                    outputs=[result_summary, parsed_output, raw_response],
+                )
+                audio.change(
+                    analyze_audio_for_ui,
+                    inputs=[audio],
+                    outputs=[record_status],
+                )
+                backend_record.click(
+                    record_backend,
+                    inputs=[duration, sample_rate],
+                    outputs=[audio, record_status],
+                )
+                backend_record_send.click(
+                    record_backend_and_infer,
+                    inputs=[duration, sample_rate, server, model, hint_text, max_tokens, temperature, timeout],
+                    outputs=[audio, record_status, result_summary, parsed_output, raw_response],
+                )
 
     return demo
 
