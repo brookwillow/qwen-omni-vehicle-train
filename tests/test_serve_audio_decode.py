@@ -277,7 +277,7 @@ def test_chat_response_uses_server_model_name_by_default():
 
 
 def test_noise_do_not_act_is_suppressed_from_client_tool_calls(capsys):
-    parsed = serve.parse_model_output('{"name":"NoiseDoNotAct"}')
+    parsed = serve.parse_model_output('{"name":"NoiseDoNotAct","arguments":{}}')
     choice = serve._choice_from_parsed_output(parsed)
 
     response = serve.build_chat_response(choice=choice, prompt_tokens=10, gen_tokens=4)

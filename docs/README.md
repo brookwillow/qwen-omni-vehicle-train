@@ -40,7 +40,7 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 |------|------|
 | `data/system-prompt.txt` | 紧凑版 System Prompt（~7.0K chars，基于当前工具白名单生成） |
 | `data/tools.json` | 38 个车载工具定义（新版 `inputSchema` 格式） |
-| `data/splits/by_tool/*.jsonl` | 按工具拆分的训练数据；每个工具文件内已拆为 `user -> JSON tool call` 决策样本和独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本；其中 `NoiseDoNotAct.jsonl` 已扩充到 318 条，且可直接输出 `{\"name\":\"NoiseDoNotAct\"}` |
+| `data/splits/by_tool/*.jsonl` | 按工具拆分的训练数据；每个工具文件内已拆为 `user -> JSON tool call` 决策样本和独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本；其中 `NoiseDoNotAct.jsonl` 已扩充到 318 条 |
 | `data/splits/clarify.jsonl` | required 字段缺失后的自然语言追问样本 |
 | `data/splits/edge_case.jsonl` | 多轮上下文边界、易混淆与任务列表选择样本 |
 | `data/splits/multiturn.jsonl` | 最多三轮纯文本历史上下文样本；历史可来自导航/音乐/新闻/百科/AIGC/天气等外部域，当前轮覆盖工具调用、NoiseDoNotAct、Reject、自然语言追问/回复 |
