@@ -1,0 +1,103 @@
+data/splits/by_tool/GateControl.jsonl
+  e7b331d81c1b2d83 1-394
+data/splits/by_tool/GloveboxControl.jsonl
+  e7b331d81c1b2d83 1-37
+data/splits/by_tool/LightControl.jsonl
+  e7b331d81c1b2d83 1-695
+data/splits/by_tool/ParkingSpaceSelectionControl.jsonl
+  e7b331d81c1b2d83 1-21
+data/splits/by_tool/SpeedControl.jsonl
+  e7b331d81c1b2d83 1-16
+data/splits/by_tool/WindowControl.jsonl
+  e7b331d81c1b2d83 1-429
+data/splits/by_tool/SteeringwheelControl.jsonl
+  e7b331d81c1b2d83 1-257
+docs/README.md
+  e7b331d81c1b2d83 28,35,43-46,54,56-57,59
+data/splits/by_tool/PhoneControl.jsonl
+  e7b331d81c1b2d83 1-99
+data/splits/by_tool/VoiceControl.jsonl
+  e7b331d81c1b2d83 1-123
+data/splits/by_tool/PullOverControl.jsonl
+  e7b331d81c1b2d83 1-18
+data/splits/by_tool/PerfumeControl.jsonl
+  e7b331d81c1b2d83 1-17
+data/splits/by_tool/FridgeControl.jsonl
+  e7b331d81c1b2d83 1-91
+data/splits/by_tool/ParkingControl.jsonl
+  e7b331d81c1b2d83 1-17
+data/splits/by_tool/DrivingControl.jsonl
+  e7b331d81c1b2d83 1-323
+data/splits/by_tool/SeatControl.jsonl
+  e7b331d81c1b2d83 1-918
+data/splits/by_tool/LockControl.jsonl
+  e7b331d81c1b2d83 1-121
+data/splits/by_tool/GeneralSelect.jsonl
+  e7b331d81c1b2d83 1-42
+data/splits/by_tool/NetworkControl.jsonl
+  e7b331d81c1b2d83 1-97
+build_train_data.py
+  e7b331d81c1b2d83 5,38,44,120,195
+data/splits/by_tool/ClimateControl.jsonl
+  e7b331d81c1b2d83 1-727
+data/splits/by_tool/AppControl.jsonl
+  e7b331d81c1b2d83 1-156
+data/splits/by_tool/SpecialControl.jsonl
+  e7b331d81c1b2d83 1-92
+data/splits/by_tool/SuspensionControl.jsonl
+  e7b331d81c1b2d83 1-17
+data/splits/by_tool/CarUsageSearch.jsonl
+  e7b331d81c1b2d83 1-224
+data/splits/by_tool/RearviewControl.jsonl
+  e7b331d81c1b2d83 1-27
+data/splits/by_tool/WiperControl.jsonl
+  e7b331d81c1b2d83 1-17
+data/splits/by_tool/NGPActivateControl.jsonl
+  e7b331d81c1b2d83 1-27
+scripts/validate_by_tool_schema.py
+  e7b331d81c1b2d83 26-36,115-125
+data/splits/by_tool/PageAccess.jsonl
+  e7b331d81c1b2d83 1-46
+data/splits/by_tool/ProfileControl.jsonl
+  e7b331d81c1b2d83 1-36
+data/splits/by_tool/DoiSelectionControl.jsonl
+  e7b331d81c1b2d83 1-33
+data/splits/by_tool/ParkingSpaceNavigationControl.jsonl
+  e7b331d81c1b2d83 1-20
+data/splits/by_tool/NoiseDoNotAct.jsonl
+  e7b331d81c1b2d83 1-99
+data/splits/by_tool/DirectionControl.jsonl
+  e7b331d81c1b2d83 1-35
+data/splits/by_tool/ParkingNearbyControl.jsonl
+  e7b331d81c1b2d83 1-18
+data/splits/by_tool/ScreenControl.jsonl
+  e7b331d81c1b2d83 1-357
+data/splits/by_tool/DressControl.jsonl
+  e7b331d81c1b2d83 1-29
+data/splits/by_tool/CameraControl.jsonl
+  e7b331d81c1b2d83 1-129
+data/splits/by_tool/PowerControl.jsonl
+  e7b331d81c1b2d83 1-360
+data/splits/by_tool/TailControl.jsonl
+  e7b331d81c1b2d83 1-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.17",
+  "base_commit_sha": "fb68c32e394c3c8444ae7a3360db107f0c085aff",
+  "prompts": {
+    "e7b331d81c1b2d83": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e02da-a637-7bb0-8a13-9ec27afc0ed0",
+        "model": "gpt-5.5"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 6218,
+      "total_deletions": 4188,
+      "accepted_lines": 6218,
+      "overriden_lines": 0
+    }
+  }
+}
