@@ -1,0 +1,23 @@
+data/system-prompt.txt
+  e7b331d81c1b2d83 1,4-5,54-55,57,63,67,72,76,80,84
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.17",
+  "base_commit_sha": "7c22157636b4b019730d33247ed6a6373a642df6",
+  "prompts": {
+    "e7b331d81c1b2d83": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e02da-a637-7bb0-8a13-9ec27afc0ed0",
+        "model": "gpt-5.4-mini"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 8056,
+      "overriden_lines": 0
+    }
+  }
+}
