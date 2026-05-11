@@ -23,6 +23,17 @@ def extract_action_input(text: str) -> dict | None:
         return None
 
 
+def is_tool_result_msg(msg: dict) -> bool:
+    if msg.get("role") != "user":
+        return False
+    content = msg.get("content", "").strip()
+    return content.startswith("Tool Result:") or content.startswith('{"status"') or content.startswith('{"code"')
+
+
+def is_final_answer_msg(msg: dict) -> bool:
+    return msg.get("role") == "assistant" and msg.get("content", "").strip().startswith("Final Answer:")
+
+
 def _is_numeric_string(val) -> bool:
     """Return True if val is a string representing an integer or decimal number."""
     if not isinstance(val, str):
@@ -101,6 +112,17 @@ for jsonl_file in sorted(BY_TOOL_DIR.glob("*.jsonl")):
                 and msg_idx != len(msgs) - 1
             ):
                 file_errors.append(f"  Line {i}: NoiseDoNotAct must be the final message in the sample")
+            if (
+                msg["role"] == "assistant"
+                and msg["content"].startswith("Action:")
+                and msg_idx + 2 < len(msgs)
+                and is_tool_result_msg(msgs[msg_idx + 1])
+                and is_final_answer_msg(msgs[msg_idx + 2])
+                and msg_idx != 0
+            ):
+                file_errors.append(
+                    f"  Line {i}: Tool Result/Final Answer sequence must be a standalone result sample"
+                )
 
         # Validate all assistant messages whose action matches the file's tool name.
         # Multi-turn samples may start with a different tool, then call this tool later.

@@ -2,7 +2,7 @@
 """
 Build final training JSONL by merging split data files + injecting system prompt.
 
-Reads type-specific JSONL files from data/splits/, prepends the system prompt
+Reads JSONL files from data/splits/ recursively, prepends the system prompt
 from a single file, shuffles, and writes the final training dataset.
 
 Usage:
@@ -35,13 +35,13 @@ def parse_args():
     p.add_argument(
         "--splits-dir",
         default="data/splits",
-        help="Directory containing split JSONL files",
+        help="Directory containing split JSONL files. Defaults to recursive discovery.",
     )
     p.add_argument(
         "--splits",
         nargs="*",
         default=[],
-        help="Explicit list of split JSONL files. If empty, uses all *.jsonl in --splits-dir",
+        help="Explicit list of split JSONL files. If empty, uses all *.jsonl recursively in --splits-dir",
     )
     p.add_argument(
         "--sp-file",
@@ -117,7 +117,7 @@ def main():
                 f"Splits directory not found: {splits_dir}\n"
                 f"Run: python split_data_by_type.py"
             )
-        split_files = sorted(splits_dir.glob("*.jsonl"))
+        split_files = sorted(splits_dir.rglob("*.jsonl"))
 
     if not split_files:
         raise FileNotFoundError("No split files found")
@@ -181,7 +181,6 @@ def main():
     # Print distribution (classify by last assistant turn, not all turns)
     dist = {"Action": 0, "Clarify": 0, "Reject": 0, "FinalAnswer": 0}
     for s in final:
-        # Find the last assistant message that is Action/Clarify/Reject
         label = None
         for m in s["messages"]:
             if m["role"] == "assistant":
@@ -193,7 +192,7 @@ def main():
                 elif c.startswith("Reject"):
                     label = "Reject"
                 elif "Final Answer" in c:
-                    label = label or "FinalAnswer"
+                    label = "FinalAnswer"
         if label:
             dist[label] += 1
     print(f"\n[stats] Distribution ({len(final)} samples):")

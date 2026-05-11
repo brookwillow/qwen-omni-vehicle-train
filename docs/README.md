@@ -25,14 +25,14 @@ pip install fastapi uvicorn pydantic   # serve.py 推理服务依赖
 ## 数据流水线
 
 ```
-data/splits/{action,clarify,multiturn,reject}.jsonl  (已拆分好的数据，无 SP)
+data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具文件)
   │
   └─ build_train_data.py ──→ data/train_final.jsonl (注入 SP，打散，可过采样)
                                 │
                                 └─ train_thinker_lora.py ──→ lora_output/
 ```
 
-> 注：拆分/增强脚本已归档至 `_archive/`，产物 `data/splits/` 已就绪，日常只需运行 `build_train_data.py`。
+> 注：拆分/增强脚本已归档至 `_archive/`，产物 `data/splits/` 已就绪；`build_train_data.py` 默认递归合并 `data/splits/**/*.jsonl`。
 
 ### 关键文件
 
@@ -40,11 +40,10 @@ data/splits/{action,clarify,multiturn,reject}.jsonl  (已拆分好的数据，�
 |------|------|
 | `data/system-prompt.txt` | 紧凑版 System Prompt（~7.0K chars，基于当前工具白名单生成） |
 | `data/tools.json` | 38 个车载工具定义（新版 `inputSchema` 格式） |
-| `data/splits/` | 按类型拆分的训练数据（无 SP） |
-| `data/splits/blackbox_priority_aug.jsonl` | 基于 `eval_report_0505_2` 的高优先级 schema 合法增强样本 |
-| `data/splits/context_boundary.jsonl` | 多轮上下文边界样本：当前轮无意义时拒识，仅在当前轮有省略/纠错/延续意图时继承历史 |
-| `data/splits/multiturn.jsonl` | 多轮上下文继承与 Tool Result/Final Answer 训练样本 |
-| `data/splits/new_tools_aug.jsonl` | 新增工具独立增强样本，重点覆盖 `CarUsageSearch.query` 枚举 |
+| `data/splits/by_tool/*.jsonl` | 按工具拆分的训练数据；每个工具文件内已拆为 `user -> Action` 决策样本和独立 `Action -> Tool Result -> Final Answer` 回复样本 |
+| `data/splits/clarify.jsonl` | required 字段缺失澄清样本 |
+| `data/splits/edge_case.jsonl` | 多轮上下文边界、易混淆与任务列表选择样本 |
+| `data/splits/reject.jsonl` | 单轮 + 多轮硬负例 |
 | `data/train_final.jsonl` | 最终训练数据（含 SP） |
 | `data/eval/` | 评测数据集（当前工具 schema 已清洗，媒体类无新版等价工具样本已置空/移除） |
 
@@ -52,15 +51,12 @@ data/splits/{action,clarify,multiturn,reject}.jsonl  (已拆分好的数据，�
 
 | 类型 | 数量 | 说明 |
 |------|------|------|
-| Action | 3567 | 2 轮：Action → FinalAnswer；已按当前 38 个工具清理旧工具样本 |
-| Blackbox priority aug | 80 | 针对 raw eval 中 Climate、Profile/Seat、Window、Light、App 高频非争议错误的补充 Action 样本 |
+| By-tool | 6181 | 每个工具文件内混合：`user -> Action` 决策样本 3869 条，独立 `Action -> Tool Result -> Final Answer` 回复样本 2255 条，以及少量多轮决策上下文 |
 | Clarify | 99 | 4 轮：用户缺少工具 required 字段 → Clarify → 用户补齐 → Action；不包含 Tool Result 或 FinalAnswer |
-| Context boundary | 60 | 多轮当前轮边界：无意义当前轮走 `NoiseDoNotAct`，省略/纠错/延续才用历史补全；补充查询状态 vs 打开/关闭控制，以及 popup/task 列表选择 `GeneralSelect` 的易混淆边界 |
-| Multiturn | 32 | 8 轮：上下文继承、目标修正、参数延续、Tool Result → FinalAnswer |
-| New tools aug | 249 | 新增工具独立增强集；`CarUsageSearch` 覆盖 60 个 `query` 枚举，每个 2 条 |
-| Reject | 1207 | 单轮 + 多轮硬负例（已合并） |
+| Edge case | 102 | 多轮当前轮边界、查询 vs 控制、popup/task 列表 `GeneralSelect` 等易混淆样本 |
+| Reject | 1745 | 单轮 + 多轮硬负例（已合并） |
 
-`build_train_data.py` 默认合并全部 split，统计时多轮样本按最后一个有效决策标签计入对应类别。
+`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 8127 条；统计时多轮样本按最后一个有效决策标签计入对应类别。
 
 ## 训练配置
 
