@@ -13,25 +13,54 @@ tools = {t["name"]: t for t in json.loads(TOOLS_JSON.read_text())}
 ACTION_INPUT_RE = re.compile(r"Action Input:\s*(\{.*\})", re.DOTALL)
 
 
-def extract_action_input(text: str) -> dict | None:
+def parse_tool_call(text: str) -> tuple[str | None, dict | None]:
+    try:
+        data = json.loads(text.strip())
+    except json.JSONDecodeError:
+        data = None
+    if isinstance(data, dict) and isinstance(data.get("name"), str):
+        args = data.get("arguments")
+        return data["name"], args if isinstance(args, dict) else None
+
+    action_match = re.match(r"Action:\s*(\S+)", text)
+    if not action_match:
+        return None, None
+    tool_name = action_match.group(1)
     m = ACTION_INPUT_RE.search(text)
     if not m:
-        return None
+        return tool_name, None
     try:
-        return json.loads(m.group(1))
+        args = json.loads(m.group(1))
     except json.JSONDecodeError:
-        return None
+        return tool_name, None
+    return tool_name, args if isinstance(args, dict) else None
 
 
 def is_tool_result_msg(msg: dict) -> bool:
-    if msg.get("role") != "user":
+    if msg.get("role") != "tool":
         return False
     content = msg.get("content", "").strip()
-    return content.startswith("Tool Result:") or content.startswith('{"status"') or content.startswith('{"code"')
+    try:
+        json.loads(content)
+    except json.JSONDecodeError:
+        return False
+    return True
 
 
-def is_final_answer_msg(msg: dict) -> bool:
-    return msg.get("role") == "assistant" and msg.get("content", "").strip().startswith("Final Answer:")
+def is_tts_response_msg(msg: dict) -> bool:
+    if msg.get("role") != "assistant":
+        return False
+    content = msg.get("content", "").strip()
+    if not content or content.startswith("Reject"):
+        return False
+    return not is_action_msg(msg)
+
+
+def is_action_msg(msg: dict) -> bool:
+    if msg.get("role") != "assistant":
+        return False
+    tool_name, _ = parse_tool_call(msg.get("content", ""))
+    return tool_name is not None
 
 
 def _is_numeric_string(val) -> bool:
@@ -107,40 +136,37 @@ for jsonl_file in sorted(BY_TOOL_DIR.glob("*.jsonl")):
         msgs = sample["messages"]
         for msg_idx, msg in enumerate(msgs):
             if (
-                msg["role"] == "assistant"
-                and msg["content"].startswith("Action: NoiseDoNotAct")
+                is_action_msg(msg)
+                and parse_tool_call(msg["content"])[0] == "NoiseDoNotAct"
                 and msg_idx != len(msgs) - 1
             ):
                 file_errors.append(f"  Line {i}: NoiseDoNotAct must be the final message in the sample")
             if (
-                msg["role"] == "assistant"
-                and msg["content"].startswith("Action:")
+                is_action_msg(msg)
                 and msg_idx + 2 < len(msgs)
                 and is_tool_result_msg(msgs[msg_idx + 1])
-                and is_final_answer_msg(msgs[msg_idx + 2])
+                and is_tts_response_msg(msgs[msg_idx + 2])
                 and msg_idx != 0
             ):
                 file_errors.append(
-                    f"  Line {i}: Tool Result/Final Answer sequence must be a standalone result sample"
+                    f"  Line {i}: tool-role result/TTS response sequence must be a standalone result sample"
                 )
 
         # Validate all assistant messages whose action matches the file's tool name.
         # Multi-turn samples may start with a different tool, then call this tool later.
         found_tool = False
         for msg in msgs:
-            if msg["role"] != "assistant" or "Action:" not in msg["content"]:
+            if msg["role"] != "assistant":
                 continue
             content = msg["content"]
-            action_match = re.match(r"Action:\s*(\S+)", content)
-            if not action_match:
+            action_name, params = parse_tool_call(content)
+            if not action_name:
                 continue
-            action_name = action_match.group(1)
             if action_name != tool_name:
                 continue
 
             found_tool = True
 
-            params = extract_action_input(content)
             if params is None:
                 if tool_name == "NoiseDoNotAct":
                     continue

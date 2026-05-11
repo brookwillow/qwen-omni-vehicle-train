@@ -1,46 +1,46 @@
-{"messages": [{"role": "user", "content": "打开声音设置"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"声音\"}"}]}
-{"messages": [{"role": "user", "content": "进入蓝牙连接设置"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"蓝牙\"}"}]}
-{"messages": [{"role": "user", "content": "打开驾驶模式设置"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"驾驶模式\"}"}]}
-{"messages": [{"role": "user", "content": "进入无线网络设置"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"WIFI\"}"}]}
-{"messages": [{"role": "user", "content": "打开车辆设置"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"车辆\"}"}]}
-{"messages": [{"role": "user", "content": "进入显示设置"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"显示\"}"}]}
-{"messages": [{"role": "user", "content": "打开氛围灯设置"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"氛围灯\"}"}]}
-{"messages": [{"role": "user", "content": "打开智能语音设置"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"智能语音\"}"}]}
-{"messages": [{"role": "user", "content": "进入充电设置"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"充电\"}"}]}
-{"messages": [{"role": "user", "content": "打开辅助驾驶设置"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"辅助驾驶\"}"}]}
-{"messages": [{"role": "user", "content": "进入能量回收设置"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"能量回收\"}"}]}
-{"messages": [{"role": "user", "content": "打开抬头显示设置"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"HUD\"}"}]}
-{"messages": [{"role": "user", "content": "进入座椅通风加热设置"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"座椅通风加热\"}"}]}
-{"messages": [{"role": "user", "content": "打开门窗设置"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"门窗\"}"}]}
-{"messages": [{"role": "user", "content": "进入连接设置"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"连接\"}"}]}
-{"messages": [{"role": "user", "content": "打开后视镜调节"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"后视镜调节\"}"}]}
-{"messages": [{"role": "user", "content": "进入位置调节设置"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"座椅\"}"}]}
-{"messages": [{"role": "user", "content": "我想看车灯设置"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"车灯\"}"}]}
-{"messages": [{"role": "user", "content": "打开最近通话记录"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"最近通话\"}"}]}
-{"messages": [{"role": "user", "content": "进入联系人列表"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"联系人\"}"}]}
-{"messages": [{"role": "user", "content": "打开屏幕亮度设置页"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"屏幕亮度\"}"}]}
-{"messages": [{"role": "user", "content": "进入座椅设置"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"座椅\"}"}]}
-{"messages": [{"role": "user", "content": "帮我打开HUD设置"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"HUD\"}"}]}
-{"messages": [{"role": "user", "content": "去蓝牙设置页面"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"蓝牙\"}"}]}
-{"messages": [{"role": "user", "content": "进入辅助驾驶页面"}, {"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"辅助驾驶\"}"}]}
-{"messages": [{"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"声音\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已打开声音设置页面。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"蓝牙\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已打开蓝牙连接页面。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"驾驶模式\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已打开驾驶模式设置页面。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"WIFI\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已打开无线网络设置页面。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"车辆\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已打开车辆设置页面。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"显示\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已打开显示设置页面。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"氛围灯\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已打开氛围灯设置页面。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"智能语音\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已打开智能语音设置页面。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"充电\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已打开充电设置页面。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"辅助驾驶\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已打开辅助驾驶设置页面。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"能量回收\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已打开能量回收设置页面。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"HUD\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已打开抬头显示设置页面。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"座椅通风加热\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已打开座椅设置页面。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"门窗\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已打开门窗设置页面。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"连接\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已打开连接设置页面。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"后视镜调节\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已打开后视镜调节页面。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"座椅\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已打开位置调节设置。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"车灯\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已打开车灯设置页面。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"最近通话\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已打开最近通话记录。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"联系人\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已打开联系人列表。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PageAccess\nAction Input: {\"feature\": \"屏幕亮度\"}"}, {"role": "user", "content": "Tool Result: {\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已为您处理。"}]}
+{"messages":[{"role":"user","content":"打开声音设置"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"声音\"}}"}]}
+{"messages":[{"role":"user","content":"进入蓝牙连接设置"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"蓝牙\"}}"}]}
+{"messages":[{"role":"user","content":"打开驾驶模式设置"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"驾驶模式\"}}"}]}
+{"messages":[{"role":"user","content":"进入无线网络设置"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"WIFI\"}}"}]}
+{"messages":[{"role":"user","content":"打开车辆设置"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"车辆\"}}"}]}
+{"messages":[{"role":"user","content":"进入显示设置"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"显示\"}}"}]}
+{"messages":[{"role":"user","content":"打开氛围灯设置"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"氛围灯\"}}"}]}
+{"messages":[{"role":"user","content":"打开智能语音设置"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"智能语音\"}}"}]}
+{"messages":[{"role":"user","content":"进入充电设置"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"充电\"}}"}]}
+{"messages":[{"role":"user","content":"打开辅助驾驶设置"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"辅助驾驶\"}}"}]}
+{"messages":[{"role":"user","content":"进入能量回收设置"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"能量回收\"}}"}]}
+{"messages":[{"role":"user","content":"打开抬头显示设置"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"HUD\"}}"}]}
+{"messages":[{"role":"user","content":"进入座椅通风加热设置"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"座椅通风加热\"}}"}]}
+{"messages":[{"role":"user","content":"打开门窗设置"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"门窗\"}}"}]}
+{"messages":[{"role":"user","content":"进入连接设置"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"连接\"}}"}]}
+{"messages":[{"role":"user","content":"打开后视镜调节"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"后视镜调节\"}}"}]}
+{"messages":[{"role":"user","content":"进入位置调节设置"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"座椅\"}}"}]}
+{"messages":[{"role":"user","content":"我想看车灯设置"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"车灯\"}}"}]}
+{"messages":[{"role":"user","content":"打开最近通话记录"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"最近通话\"}}"}]}
+{"messages":[{"role":"user","content":"进入联系人列表"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"联系人\"}}"}]}
+{"messages":[{"role":"user","content":"打开屏幕亮度设置页"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"屏幕亮度\"}}"}]}
+{"messages":[{"role":"user","content":"进入座椅设置"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"座椅\"}}"}]}
+{"messages":[{"role":"user","content":"帮我打开HUD设置"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"HUD\"}}"}]}
+{"messages":[{"role":"user","content":"去蓝牙设置页面"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"蓝牙\"}}"}]}
+{"messages":[{"role":"user","content":"进入辅助驾驶页面"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"辅助驾驶\"}}"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"声音\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已打开声音设置页面。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"蓝牙\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已打开蓝牙连接页面。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"驾驶模式\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已打开驾驶模式设置页面。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"WIFI\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已打开无线网络设置页面。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"车辆\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已打开车辆设置页面。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"显示\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已打开显示设置页面。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"氛围灯\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已打开氛围灯设置页面。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"智能语音\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已打开智能语音设置页面。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"充电\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已打开充电设置页面。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"辅助驾驶\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已打开辅助驾驶设置页面。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"能量回收\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已打开能量回收设置页面。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"HUD\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已打开抬头显示设置页面。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"座椅通风加热\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已打开座椅设置页面。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"门窗\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已打开门窗设置页面。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"连接\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已打开连接设置页面。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"后视镜调节\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已打开后视镜调节页面。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"座椅\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已打开位置调节设置。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"车灯\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已打开车灯设置页面。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"最近通话\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已打开最近通话记录。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"联系人\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已打开联系人列表。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"屏幕亮度\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已为您处理。"}]}

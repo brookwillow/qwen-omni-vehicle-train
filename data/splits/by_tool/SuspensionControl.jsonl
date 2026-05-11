@@ -1,17 +1,17 @@
-{"messages": [{"role": "user", "content": "悬架调高"}, {"role": "assistant", "content": "Action: SuspensionControl\nAction Input: {\"action\": \"调高\", \"device\": \"悬架\", \"value\": \"较高\"}"}]}
-{"messages": [{"role": "user", "content": "把悬架升到最高"}, {"role": "assistant", "content": "Action: SuspensionControl\nAction Input: {\"action\": \"调到\", \"device\": \"悬架\", \"value\": \"最高\"}"}]}
-{"messages": [{"role": "user", "content": "悬架降低一点"}, {"role": "assistant", "content": "Action: SuspensionControl\nAction Input: {\"action\": \"调低\", \"device\": \"悬架\", \"value\": \"较低\"}"}]}
-{"messages": [{"role": "user", "content": "悬架调到最低"}, {"role": "assistant", "content": "Action: SuspensionControl\nAction Input: {\"action\": \"调到\", \"device\": \"悬架\", \"value\": \"最低\"}"}]}
-{"messages": [{"role": "user", "content": "悬架高度设为中"}, {"role": "assistant", "content": "Action: SuspensionControl\nAction Input: {\"action\": \"调到\", \"device\": \"悬架\", \"value\": \"中\"}"}]}
-{"messages": [{"role": "user", "content": "前面路况不好，把悬架调高"}, {"role": "assistant", "content": "Action: SuspensionControl\nAction Input: {\"action\": \"调高\", \"device\": \"悬架\", \"value\": \"较高\"}"}]}
-{"messages": [{"role": "user", "content": "进车库了，悬架调低"}, {"role": "assistant", "content": "Action: SuspensionControl\nAction Input: {\"action\": \"调低\", \"device\": \"悬架\", \"value\": \"较低\"}"}]}
-{"messages": [{"role": "user", "content": "把车身高度调到较高"}, {"role": "assistant", "content": "Action: SuspensionControl\nAction Input: {\"action\": \"调到\", \"device\": \"悬架\", \"value\": \"较高\"}"}]}
-{"messages": [{"role": "user", "content": "悬架降到最低"}, {"role": "assistant", "content": "Action: SuspensionControl\nAction Input: {\"action\": \"调到\", \"device\": \"悬架\", \"value\": \"最低\"}"}]}
-{"messages": [{"role": "user", "content": "把车身升高"}, {"role": "assistant", "content": "Action: SuspensionControl\nAction Input: {\"action\": \"调高\", \"device\": \"悬架\", \"value\": \"较高\"}"}]}
-{"messages": [{"role": "user", "content": "降低悬架高度"}, {"role": "assistant", "content": "Action: SuspensionControl\nAction Input: {\"action\": \"调低\", \"device\": \"悬架\", \"value\": \"较低\"}"}]}
-{"messages": [{"role": "user", "content": "悬架调到较低"}, {"role": "assistant", "content": "Action: SuspensionControl\nAction Input: {\"action\": \"调到\", \"device\": \"悬架\", \"value\": \"较低\"}"}]}
-{"messages": [{"role": "user", "content": "把悬架调到最高档"}, {"role": "assistant", "content": "Action: SuspensionControl\nAction Input: {\"action\": \"调到\", \"device\": \"悬架\", \"value\": \"最高\"}"}]}
-{"messages": [{"role": "user", "content": "路不好，把悬架升到最高"}, {"role": "assistant", "content": "Action: SuspensionControl\nAction Input: {\"action\": \"调到\", \"device\": \"悬架\", \"value\": \"最高\"}"}]}
-{"messages": [{"role": "user", "content": "把悬架降一档"}, {"role": "assistant", "content": "Action: SuspensionControl\nAction Input: {\"action\": \"调低\", \"device\": \"悬架\", \"value\": \"较低\"}"}]}
-{"messages": [{"role": "assistant", "content": "Action: SuspensionControl\nAction Input: {\"action\": \"调高\", \"device\": \"悬架\", \"value\": \"较高\"}"}, {"role": "user", "content": "Tool Result: {\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已为您处理。"}]}
-{"messages": [{"role": "assistant", "content": "Action: SuspensionControl\nAction Input: {\"action\": \"调到\", \"device\": \"悬架\", \"value\": \"最低\"}"}, {"role": "user", "content": "Tool Result: {\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 已为您处理。"}]}
+{"messages":[{"role":"user","content":"悬架调高"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"悬架\",\"value\":\"较高\"}}"}]}
+{"messages":[{"role":"user","content":"把悬架升到最高"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"悬架\",\"value\":\"最高\"}}"}]}
+{"messages":[{"role":"user","content":"悬架降低一点"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调低\",\"device\":\"悬架\",\"value\":\"较低\"}}"}]}
+{"messages":[{"role":"user","content":"悬架调到最低"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"悬架\",\"value\":\"最低\"}}"}]}
+{"messages":[{"role":"user","content":"悬架高度设为中"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"悬架\",\"value\":\"中\"}}"}]}
+{"messages":[{"role":"user","content":"前面路况不好，把悬架调高"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"悬架\",\"value\":\"较高\"}}"}]}
+{"messages":[{"role":"user","content":"进车库了，悬架调低"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调低\",\"device\":\"悬架\",\"value\":\"较低\"}}"}]}
+{"messages":[{"role":"user","content":"把车身高度调到较高"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"悬架\",\"value\":\"较高\"}}"}]}
+{"messages":[{"role":"user","content":"悬架降到最低"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"悬架\",\"value\":\"最低\"}}"}]}
+{"messages":[{"role":"user","content":"把车身升高"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"悬架\",\"value\":\"较高\"}}"}]}
+{"messages":[{"role":"user","content":"降低悬架高度"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调低\",\"device\":\"悬架\",\"value\":\"较低\"}}"}]}
+{"messages":[{"role":"user","content":"悬架调到较低"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"悬架\",\"value\":\"较低\"}}"}]}
+{"messages":[{"role":"user","content":"把悬架调到最高档"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"悬架\",\"value\":\"最高\"}}"}]}
+{"messages":[{"role":"user","content":"路不好，把悬架升到最高"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"悬架\",\"value\":\"最高\"}}"}]}
+{"messages":[{"role":"user","content":"把悬架降一档"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调低\",\"device\":\"悬架\",\"value\":\"较低\"}}"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"悬架\",\"value\":\"较高\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已为您处理。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"悬架\",\"value\":\"最低\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"已为您处理。"}]}

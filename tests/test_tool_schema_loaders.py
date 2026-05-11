@@ -31,7 +31,7 @@ def test_validate_splits_load_schema_supports_input_schema(tmp_path):
         "messages": [
             {
                 "role": "assistant",
-                "content": 'Action: ExampleControl\nAction Input: {"action": "打开", "device": "示例"}',
+                "content": '{"name":"ExampleControl","arguments":{"action":"打开","device":"示例"}}',
             }
         ]
     }
@@ -90,7 +90,7 @@ def test_value_parameters_allow_numeric_strings_outside_enum(tmp_path):
         "messages": [
             {
                 "role": "assistant",
-                "content": 'Action: ExampleControl\nAction Input: {"action": "调到", "value": "20.5"}',
+                "content": '{"name":"ExampleControl","arguments":{"action":"调到","value":"20.5"}}',
             }
         ]
     }

@@ -160,9 +160,18 @@ def parse_action(pred: str) -> Tuple[Optional[str], Optional[Dict[str, Any]], st
         return None, None, "Reject"
     if s.startswith("Clarify"):
         return None, None, "Clarify"
+    try:
+        data = json.loads(s)
+    except Exception:
+        data = None
+    if isinstance(data, dict) and isinstance(data.get("name"), str):
+        args = data.get("arguments", {})
+        return data["name"], args if isinstance(args, dict) else {}, "Action"
     m_tool = ACTION_RE.search(s)
     if not m_tool:
-        return None, None, "ParseFail"
+        # New protocol treats plain assistant text as the user-facing
+        # response/clarification instead of requiring a Clarify prefix.
+        return None, None, "Clarify" if s else "ParseFail"
     tool = m_tool.group(1).strip()
     m_args = ACTION_INPUT_RE.search(s)
     if not m_args:

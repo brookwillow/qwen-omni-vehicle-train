@@ -43,7 +43,7 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 | `data/splits/by_tool/*.jsonl` | 按工具拆分的训练数据；每个工具文件内已拆为 `user -> JSON tool call` 决策样本和独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 |
 | `data/splits/clarify.jsonl` | required 字段缺失后的自然语言追问样本 |
 | `data/splits/edge_case.jsonl` | 多轮上下文边界、易混淆与任务列表选择样本 |
-| `data/splits/text_context.jsonl` | 最多三轮纯文本历史上下文样本；历史可来自导航/音乐/新闻/百科/AIGC/天气等外部域，当前轮覆盖工具调用、NoiseDoNotAct、Reject、自然语言追问/回复 |
+| `data/splits/multiturn.jsonl` | 最多三轮纯文本历史上下文样本；历史可来自导航/音乐/新闻/百科/AIGC/天气等外部域，当前轮覆盖工具调用、NoiseDoNotAct、Reject、自然语言追问/回复 |
 | `data/splits/reject.jsonl` | 单轮 + 多轮硬负例 |
 | `data/train_final.jsonl` | 最终训练数据（含 SP） |
 | `data/eval/` | 评测数据集（当前工具 schema 已清洗，媒体类无新版等价工具样本已置空/移除） |
@@ -55,7 +55,7 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 | By-tool | 6181 | 每个工具文件内混合：`user -> JSON tool call` 决策样本 3869 条，独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 2255 条，以及少量多轮决策上下文 |
 | Clarify | 99 | 4 轮：用户缺少工具 required 字段 → 自然语言追问 → 用户补齐 → JSON tool call；不包含 tool-role result |
 | Edge case | 102 | 多轮当前轮边界、查询 vs 控制、popup/task 列表 `GeneralSelect` 等易混淆样本 |
-| Text context | 204 | 最多三轮纯文本历史；历史允许外部域文本；当前轮输出分布：工具 85 条、NoiseDoNotAct 13 条、Reject 48 条、自然语言 TTS 22 条 |
+| Multiturn | 204 | 最多三轮纯文本历史；历史允许外部域文本；当前轮输出分布：工具 85 条、NoiseDoNotAct 13 条、Reject 48 条、自然语言 TTS 22 条 |
 | Reject | 1745 | 单轮 + 多轮硬负例（已合并） |
 
 `build_train_data.py` 默认递归合并全部 split，当前最终训练集为 8331 条；统计时多轮样本按最后一个有效决策标签计入对应类别。

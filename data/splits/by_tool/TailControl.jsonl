@@ -1,17 +1,17 @@
-{"messages": [{"role": "user", "content": "打开尾翼"}, {"role": "assistant", "content": "Action: TailControl\nAction Input: {\"action\": \"打开\", \"device\": \"尾翼\"}"}]}
-{"messages": [{"role": "user", "content": "关闭尾翼"}, {"role": "assistant", "content": "Action: TailControl\nAction Input: {\"action\": \"关闭\", \"device\": \"尾翼\"}"}]}
-{"messages": [{"role": "user", "content": "尾翼调到自动"}, {"role": "assistant", "content": "Action: TailControl\nAction Input: {\"action\": \"调到\", \"device\": \"尾翼\", \"value\": \"自动\"}"}]}
-{"messages": [{"role": "user", "content": "把尾翼升到最高"}, {"role": "assistant", "content": "Action: TailControl\nAction Input: {\"action\": \"调到\", \"device\": \"尾翼\", \"value\": \"最高\"}"}]}
-{"messages": [{"role": "user", "content": "尾翼降到最低"}, {"role": "assistant", "content": "Action: TailControl\nAction Input: {\"action\": \"调到\", \"device\": \"尾翼\", \"value\": \"最低\"}"}]}
-{"messages": [{"role": "user", "content": "运动一下，打开尾翼"}, {"role": "assistant", "content": "Action: TailControl\nAction Input: {\"action\": \"打开\", \"device\": \"尾翼\"}"}]}
-{"messages": [{"role": "user", "content": "不用尾翼了，关掉"}, {"role": "assistant", "content": "Action: TailControl\nAction Input: {\"action\": \"关闭\", \"device\": \"尾翼\"}"}]}
-{"messages": [{"role": "user", "content": "帮我打开尾翼"}, {"role": "assistant", "content": "Action: TailControl\nAction Input: {\"action\": \"打开\", \"device\": \"尾翼\"}"}]}
-{"messages": [{"role": "user", "content": "把尾翼放下去"}, {"role": "assistant", "content": "Action: TailControl\nAction Input: {\"action\": \"关闭\", \"device\": \"尾翼\"}"}]}
-{"messages": [{"role": "user", "content": "尾翼设为自动模式"}, {"role": "assistant", "content": "Action: TailControl\nAction Input: {\"action\": \"调到\", \"device\": \"尾翼\", \"value\": \"自动\"}"}]}
-{"messages": [{"role": "user", "content": "尾翼升到最高位置"}, {"role": "assistant", "content": "Action: TailControl\nAction Input: {\"action\": \"调到\", \"device\": \"尾翼\", \"value\": \"最高\"}"}]}
-{"messages": [{"role": "user", "content": "展开尾翼"}, {"role": "assistant", "content": "Action: TailControl\nAction Input: {\"action\": \"打开\", \"device\": \"尾翼\"}"}]}
-{"messages": [{"role": "user", "content": "收起尾翼"}, {"role": "assistant", "content": "Action: TailControl\nAction Input: {\"action\": \"关闭\", \"device\": \"尾翼\"}"}]}
-{"messages": [{"role": "assistant", "content": "Action: TailControl\nAction Input: {\"action\": \"打开\", \"device\": \"尾翼\"}"}, {"role": "user", "content": "Tool Result: {\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已为您处理。"}]}
-{"messages": [{"role": "assistant", "content": "Action: TailControl\nAction Input: {\"action\": \"关闭\", \"device\": \"尾翼\"}"}, {"role": "user", "content": "Tool Result: {\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 已为您处理。"}]}
-{"messages": [{"role": "assistant", "content": "Action: TailControl\nAction Input: {\"action\": \"关闭\", \"device\": \"尾翼\"}"}, {"role": "user", "content": "Tool Result: {\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已关闭尾翼。"}]}
-{"messages": [{"role": "assistant", "content": "Action: TailControl\nAction Input: {\"action\": \"关闭\", \"device\": \"尾翼\"}"}, {"role": "user", "content": "Tool Result: {\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已收起尾翼。"}]}
+{"messages":[{"role":"user","content":"打开尾翼"},{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"尾翼\"}}"}]}
+{"messages":[{"role":"user","content":"关闭尾翼"},{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"尾翼\"}}"}]}
+{"messages":[{"role":"user","content":"尾翼调到自动"},{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"尾翼\",\"value\":\"自动\"}}"}]}
+{"messages":[{"role":"user","content":"把尾翼升到最高"},{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"尾翼\",\"value\":\"最高\"}}"}]}
+{"messages":[{"role":"user","content":"尾翼降到最低"},{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"尾翼\",\"value\":\"最低\"}}"}]}
+{"messages":[{"role":"user","content":"运动一下，打开尾翼"},{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"尾翼\"}}"}]}
+{"messages":[{"role":"user","content":"不用尾翼了，关掉"},{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"尾翼\"}}"}]}
+{"messages":[{"role":"user","content":"帮我打开尾翼"},{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"尾翼\"}}"}]}
+{"messages":[{"role":"user","content":"把尾翼放下去"},{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"尾翼\"}}"}]}
+{"messages":[{"role":"user","content":"尾翼设为自动模式"},{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"尾翼\",\"value\":\"自动\"}}"}]}
+{"messages":[{"role":"user","content":"尾翼升到最高位置"},{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"尾翼\",\"value\":\"最高\"}}"}]}
+{"messages":[{"role":"user","content":"展开尾翼"},{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"尾翼\"}}"}]}
+{"messages":[{"role":"user","content":"收起尾翼"},{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"尾翼\"}}"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"尾翼\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已为您处理。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"尾翼\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"已为您处理。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"尾翼\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已关闭尾翼。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"尾翼\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已收起尾翼。"}]}

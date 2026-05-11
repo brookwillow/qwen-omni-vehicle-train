@@ -1,99 +1,99 @@
-{"messages": [{"role": "user", "content": "帮我打电话给张三"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"张三\"}"}]}
-{"messages": [{"role": "user", "content": "拨打李四的电话"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"李四\"}"}]}
-{"messages": [{"role": "user", "content": "给王五打电话"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"王五\"}"}]}
-{"messages": [{"role": "user", "content": "搜索联系人赵六"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"赵六\"}"}]}
-{"messages": [{"role": "user", "content": "拨打138开头的号码"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"phone\": \"138\"}"}]}
-{"messages": [{"role": "user", "content": "帮我重拨上次的电话"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"重拨\"}"}]}
-{"messages": [{"role": "user", "content": "重拨"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"重拨\"}"}]}
-{"messages": [{"role": "user", "content": "回拨上次未接来电"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"回拨\"}"}]}
-{"messages": [{"role": "user", "content": "回拨"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"回拨\"}"}]}
-{"messages": [{"role": "user", "content": "打给妈妈"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"妈妈\"}"}]}
-{"messages": [{"role": "user", "content": "给老婆打电话"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"老婆\"}"}]}
-{"messages": [{"role": "user", "content": "打电话给13800138000"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"phone\": \"13800138000\"}"}]}
-{"messages": [{"role": "user", "content": "帮我联系一下老板"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"老板\"}"}]}
-{"messages": [{"role": "user", "content": "帮我搜索一下张三的联系方式"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"张三\"}"}]}
-{"messages": [{"role": "user", "content": "搜一下张三的电话"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"张三\"}"}]}
-{"messages": [{"role": "user", "content": "找一下张三的号码"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"张三\"}"}]}
-{"messages": [{"role": "user", "content": "帮我搜索一下李四的联系方式"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"李四\"}"}]}
-{"messages": [{"role": "user", "content": "搜一下李四的电话"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"李四\"}"}]}
-{"messages": [{"role": "user", "content": "找一下李四的号码"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"李四\"}"}]}
-{"messages": [{"role": "user", "content": "帮我搜索一下王五的联系方式"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"王五\"}"}]}
-{"messages": [{"role": "user", "content": "搜一下王五的电话"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"王五\"}"}]}
-{"messages": [{"role": "user", "content": "找一下王五的号码"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"王五\"}"}]}
-{"messages": [{"role": "user", "content": "帮我搜索一下妈妈的联系方式"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"妈妈\"}"}]}
-{"messages": [{"role": "user", "content": "搜一下妈妈的电话"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"妈妈\"}"}]}
-{"messages": [{"role": "user", "content": "找一下妈妈的号码"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"妈妈\"}"}]}
-{"messages": [{"role": "user", "content": "帮我搜索一下爸爸的联系方式"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"爸爸\"}"}]}
-{"messages": [{"role": "user", "content": "搜一下爸爸的电话"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"爸爸\"}"}]}
-{"messages": [{"role": "user", "content": "找一下爸爸的号码"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"爸爸\"}"}]}
-{"messages": [{"role": "user", "content": "帮我搜索一下老婆的联系方式"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"老婆\"}"}]}
-{"messages": [{"role": "user", "content": "搜一下老婆的电话"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"老婆\"}"}]}
-{"messages": [{"role": "user", "content": "找一下老婆的号码"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"老婆\"}"}]}
-{"messages": [{"role": "user", "content": "帮我搜索一下老公的联系方式"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"老公\"}"}]}
-{"messages": [{"role": "user", "content": "搜一下老公的电话"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"老公\"}"}]}
-{"messages": [{"role": "user", "content": "找一下老公的号码"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"老公\"}"}]}
-{"messages": [{"role": "user", "content": "帮我搜索一下小明的联系方式"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"小明\"}"}]}
-{"messages": [{"role": "user", "content": "搜一下小明的电话"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"小明\"}"}]}
-{"messages": [{"role": "user", "content": "找一下小明的号码"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"小明\"}"}]}
-{"messages": [{"role": "user", "content": "帮我搜索一下秘书的联系方式"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"秘书\"}"}]}
-{"messages": [{"role": "user", "content": "搜一下秘书的电话"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"秘书\"}"}]}
-{"messages": [{"role": "user", "content": "找一下秘书的号码"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"秘书\"}"}]}
-{"messages": [{"role": "user", "content": "帮我搜索一下老板的联系方式"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"老板\"}"}]}
-{"messages": [{"role": "user", "content": "搜一下老板的电话"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"老板\"}"}]}
-{"messages": [{"role": "user", "content": "找一下老板的号码"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"老板\"}"}]}
-{"messages": [{"role": "user", "content": "帮我搜索一下朋友小王的联系方式"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"朋友小王\"}"}]}
-{"messages": [{"role": "user", "content": "搜一下朋友小王的电话"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"朋友小王\"}"}]}
-{"messages": [{"role": "user", "content": "找一下朋友小王的号码"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"朋友小王\"}"}]}
-{"messages": [{"role": "user", "content": "帮我搜索一下同事李总的联系方式"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"同事李总\"}"}]}
-{"messages": [{"role": "user", "content": "搜一下同事李总的电话"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"同事李总\"}"}]}
-{"messages": [{"role": "user", "content": "找一下同事李总的号码"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"同事李总\"}"}]}
-{"messages": [{"role": "user", "content": "帮我搜索一下邻居的联系方式"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"邻居\"}"}]}
-{"messages": [{"role": "user", "content": "搜一下邻居的电话"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"邻居\"}"}]}
-{"messages": [{"role": "user", "content": "找一下邻居的号码"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"邻居\"}"}]}
-{"messages": [{"role": "user", "content": "帮我搜索电话138xxxx1234"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"phone\": \"138xxxx1234\"}"}]}
-{"messages": [{"role": "user", "content": "搜一下号码138xxxx1234"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"phone\": \"138xxxx1234\"}"}]}
-{"messages": [{"role": "user", "content": "帮我搜索电话186xxxx5678"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"phone\": \"186xxxx5678\"}"}]}
-{"messages": [{"role": "user", "content": "搜一下号码186xxxx5678"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"phone\": \"186xxxx5678\"}"}]}
-{"messages": [{"role": "user", "content": "帮我搜索电话021-12345678"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"phone\": \"021-12345678\"}"}]}
-{"messages": [{"role": "user", "content": "搜一下号码021-12345678"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"phone\": \"021-12345678\"}"}]}
-{"messages": [{"role": "user", "content": "帮我搜索电话133xxxx9999"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"phone\": \"133xxxx9999\"}"}]}
-{"messages": [{"role": "user", "content": "搜一下号码133xxxx9999"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"phone\": \"133xxxx9999\"}"}]}
-{"messages": [{"role": "user", "content": "帮我搜索电话130xxxx0001"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"phone\": \"130xxxx0001\"}"}]}
-{"messages": [{"role": "user", "content": "搜一下号码130xxxx0001"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"phone\": \"130xxxx0001\"}"}]}
-{"messages": [{"role": "user", "content": "帮我搜索电话158xxxx2345"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"phone\": \"158xxxx2345\"}"}]}
-{"messages": [{"role": "user", "content": "帮我找下139开头的那个号码"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"phone\": \"139\"}"}]}
-{"messages": [{"role": "user", "content": "搜一下138开头的电话"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"phone\": \"138\"}"}]}
-{"messages": [{"role": "user", "content": "帮我找186开头的手机号"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"phone\": \"186\"}"}]}
-{"messages": [{"role": "user", "content": "查一下李总的电话"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"李总\"}"}]}
-{"messages": [{"role": "user", "content": "找一下王经理号码"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"王经理\"}"}]}
-{"messages": [{"role": "user", "content": "帮我找一下张三的电话打给他"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"张三\"}"}]}
-{"messages": [{"role": "user", "content": "回拨上一个来电"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"回拨\"}"}]}
-{"messages": [{"role": "user", "content": "帮我查一下18688886666这个号码"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"phone\": \"18688886666\"}"}]}
-{"messages": [{"role": "user", "content": "把刚才的未接来电回拨过去"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"回拨\"}"}]}
-{"messages": [{"role": "user", "content": "他一直占线帮我再试一次"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"重拨\"}"}]}
-{"messages": [{"role": "user", "content": "对方没接到电话再拨一遍"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"重拨\"}"}]}
-{"messages": [{"role": "user", "content": "我记得通讯录里有个姓周的同事帮我查查"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"周\"}"}]}
-{"messages": [{"role": "user", "content": "有个朋友叫小王帮我搜一下"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"小王\"}"}]}
-{"messages": [{"role": "user", "content": "翻翻通讯录看看有没有外卖店的电话"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"外卖店\"}"}]}
-{"messages": [{"role": "user", "content": "搜一下我弟弟的电话号码"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"弟弟\"}"}]}
-{"messages": [{"role": "user", "content": "搜索王经理的电话"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"王经理\"}"}]}
-{"messages": [{"role": "user", "content": "帮我搜索妈妈的电话"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"妈妈\"}"}]}
-{"messages": [{"role": "user", "content": "搜索陈总的号码"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"陈总\"}"}]}
-{"messages": [{"role": "user", "content": "我想联系李总帮我找下他的号码"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"李总\"}"}]}
-{"messages": [{"role": "user", "content": "快到公司了找下前台小姐姐的电话说一声"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"前台\"}"}]}
-{"messages": [{"role": "user", "content": "约了修车师傅帮我找下他的电话叫孙师傅"}, {"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"孙师傅\"}"}]}
-{"messages": [{"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"张三\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，正在搜索张三的联系方式。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"李四\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，正在搜索李四。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"王五\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，正在拨打王五。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"赵六\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，正在搜索赵六。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"phone\": \"138\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，正在搜索该号码。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"重拨\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，正在重拨最近一次通话。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"重拨\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，正在重拨。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"回拨\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，正在回拨未接来电。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"回拨\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，正在回拨。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"妈妈\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，正在搜索妈妈的联系方式。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"老婆\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，正在拨打老婆的电话。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"phone\": \"13800138000\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，正在拨打该号码。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"老板\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，正在搜索老板的联系方式。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"contact\": \"张三\"}"}, {"role": "user", "content": "{\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已为您完成操作。"}]}
-{"messages": [{"role": "assistant", "content": "Action: PhoneControl\nAction Input: {\"action\": \"拨打\", \"phone\": \"139\"}"}, {"role": "user", "content": "Tool Result: {\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已完成。"}]}
+{"messages":[{"role":"user","content":"帮我打电话给张三"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"张三\"}}"}]}
+{"messages":[{"role":"user","content":"拨打李四的电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"李四\"}}"}]}
+{"messages":[{"role":"user","content":"给王五打电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"王五\"}}"}]}
+{"messages":[{"role":"user","content":"搜索联系人赵六"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"赵六\"}}"}]}
+{"messages":[{"role":"user","content":"拨打138开头的号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"138\"}}"}]}
+{"messages":[{"role":"user","content":"帮我重拨上次的电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"重拨\"}}"}]}
+{"messages":[{"role":"user","content":"重拨"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"重拨\"}}"}]}
+{"messages":[{"role":"user","content":"回拨上次未接来电"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"回拨\"}}"}]}
+{"messages":[{"role":"user","content":"回拨"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"回拨\"}}"}]}
+{"messages":[{"role":"user","content":"打给妈妈"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"妈妈\"}}"}]}
+{"messages":[{"role":"user","content":"给老婆打电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"老婆\"}}"}]}
+{"messages":[{"role":"user","content":"打电话给13800138000"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"13800138000\"}}"}]}
+{"messages":[{"role":"user","content":"帮我联系一下老板"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"老板\"}}"}]}
+{"messages":[{"role":"user","content":"帮我搜索一下张三的联系方式"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"张三\"}}"}]}
+{"messages":[{"role":"user","content":"搜一下张三的电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"张三\"}}"}]}
+{"messages":[{"role":"user","content":"找一下张三的号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"张三\"}}"}]}
+{"messages":[{"role":"user","content":"帮我搜索一下李四的联系方式"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"李四\"}}"}]}
+{"messages":[{"role":"user","content":"搜一下李四的电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"李四\"}}"}]}
+{"messages":[{"role":"user","content":"找一下李四的号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"李四\"}}"}]}
+{"messages":[{"role":"user","content":"帮我搜索一下王五的联系方式"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"王五\"}}"}]}
+{"messages":[{"role":"user","content":"搜一下王五的电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"王五\"}}"}]}
+{"messages":[{"role":"user","content":"找一下王五的号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"王五\"}}"}]}
+{"messages":[{"role":"user","content":"帮我搜索一下妈妈的联系方式"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"妈妈\"}}"}]}
+{"messages":[{"role":"user","content":"搜一下妈妈的电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"妈妈\"}}"}]}
+{"messages":[{"role":"user","content":"找一下妈妈的号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"妈妈\"}}"}]}
+{"messages":[{"role":"user","content":"帮我搜索一下爸爸的联系方式"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"爸爸\"}}"}]}
+{"messages":[{"role":"user","content":"搜一下爸爸的电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"爸爸\"}}"}]}
+{"messages":[{"role":"user","content":"找一下爸爸的号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"爸爸\"}}"}]}
+{"messages":[{"role":"user","content":"帮我搜索一下老婆的联系方式"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"老婆\"}}"}]}
+{"messages":[{"role":"user","content":"搜一下老婆的电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"老婆\"}}"}]}
+{"messages":[{"role":"user","content":"找一下老婆的号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"老婆\"}}"}]}
+{"messages":[{"role":"user","content":"帮我搜索一下老公的联系方式"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"老公\"}}"}]}
+{"messages":[{"role":"user","content":"搜一下老公的电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"老公\"}}"}]}
+{"messages":[{"role":"user","content":"找一下老公的号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"老公\"}}"}]}
+{"messages":[{"role":"user","content":"帮我搜索一下小明的联系方式"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"小明\"}}"}]}
+{"messages":[{"role":"user","content":"搜一下小明的电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"小明\"}}"}]}
+{"messages":[{"role":"user","content":"找一下小明的号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"小明\"}}"}]}
+{"messages":[{"role":"user","content":"帮我搜索一下秘书的联系方式"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"秘书\"}}"}]}
+{"messages":[{"role":"user","content":"搜一下秘书的电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"秘书\"}}"}]}
+{"messages":[{"role":"user","content":"找一下秘书的号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"秘书\"}}"}]}
+{"messages":[{"role":"user","content":"帮我搜索一下老板的联系方式"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"老板\"}}"}]}
+{"messages":[{"role":"user","content":"搜一下老板的电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"老板\"}}"}]}
+{"messages":[{"role":"user","content":"找一下老板的号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"老板\"}}"}]}
+{"messages":[{"role":"user","content":"帮我搜索一下朋友小王的联系方式"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"朋友小王\"}}"}]}
+{"messages":[{"role":"user","content":"搜一下朋友小王的电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"朋友小王\"}}"}]}
+{"messages":[{"role":"user","content":"找一下朋友小王的号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"朋友小王\"}}"}]}
+{"messages":[{"role":"user","content":"帮我搜索一下同事李总的联系方式"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"同事李总\"}}"}]}
+{"messages":[{"role":"user","content":"搜一下同事李总的电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"同事李总\"}}"}]}
+{"messages":[{"role":"user","content":"找一下同事李总的号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"同事李总\"}}"}]}
+{"messages":[{"role":"user","content":"帮我搜索一下邻居的联系方式"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"邻居\"}}"}]}
+{"messages":[{"role":"user","content":"搜一下邻居的电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"邻居\"}}"}]}
+{"messages":[{"role":"user","content":"找一下邻居的号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"邻居\"}}"}]}
+{"messages":[{"role":"user","content":"帮我搜索电话138xxxx1234"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"138xxxx1234\"}}"}]}
+{"messages":[{"role":"user","content":"搜一下号码138xxxx1234"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"138xxxx1234\"}}"}]}
+{"messages":[{"role":"user","content":"帮我搜索电话186xxxx5678"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"186xxxx5678\"}}"}]}
+{"messages":[{"role":"user","content":"搜一下号码186xxxx5678"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"186xxxx5678\"}}"}]}
+{"messages":[{"role":"user","content":"帮我搜索电话021-12345678"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"021-12345678\"}}"}]}
+{"messages":[{"role":"user","content":"搜一下号码021-12345678"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"021-12345678\"}}"}]}
+{"messages":[{"role":"user","content":"帮我搜索电话133xxxx9999"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"133xxxx9999\"}}"}]}
+{"messages":[{"role":"user","content":"搜一下号码133xxxx9999"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"133xxxx9999\"}}"}]}
+{"messages":[{"role":"user","content":"帮我搜索电话130xxxx0001"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"130xxxx0001\"}}"}]}
+{"messages":[{"role":"user","content":"搜一下号码130xxxx0001"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"130xxxx0001\"}}"}]}
+{"messages":[{"role":"user","content":"帮我搜索电话158xxxx2345"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"158xxxx2345\"}}"}]}
+{"messages":[{"role":"user","content":"帮我找下139开头的那个号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"139\"}}"}]}
+{"messages":[{"role":"user","content":"搜一下138开头的电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"138\"}}"}]}
+{"messages":[{"role":"user","content":"帮我找186开头的手机号"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"186\"}}"}]}
+{"messages":[{"role":"user","content":"查一下李总的电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"李总\"}}"}]}
+{"messages":[{"role":"user","content":"找一下王经理号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"王经理\"}}"}]}
+{"messages":[{"role":"user","content":"帮我找一下张三的电话打给他"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"张三\"}}"}]}
+{"messages":[{"role":"user","content":"回拨上一个来电"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"回拨\"}}"}]}
+{"messages":[{"role":"user","content":"帮我查一下18688886666这个号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"18688886666\"}}"}]}
+{"messages":[{"role":"user","content":"把刚才的未接来电回拨过去"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"回拨\"}}"}]}
+{"messages":[{"role":"user","content":"他一直占线帮我再试一次"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"重拨\"}}"}]}
+{"messages":[{"role":"user","content":"对方没接到电话再拨一遍"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"重拨\"}}"}]}
+{"messages":[{"role":"user","content":"我记得通讯录里有个姓周的同事帮我查查"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"周\"}}"}]}
+{"messages":[{"role":"user","content":"有个朋友叫小王帮我搜一下"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"小王\"}}"}]}
+{"messages":[{"role":"user","content":"翻翻通讯录看看有没有外卖店的电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"外卖店\"}}"}]}
+{"messages":[{"role":"user","content":"搜一下我弟弟的电话号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"弟弟\"}}"}]}
+{"messages":[{"role":"user","content":"搜索王经理的电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"王经理\"}}"}]}
+{"messages":[{"role":"user","content":"帮我搜索妈妈的电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"妈妈\"}}"}]}
+{"messages":[{"role":"user","content":"搜索陈总的号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"陈总\"}}"}]}
+{"messages":[{"role":"user","content":"我想联系李总帮我找下他的号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"李总\"}}"}]}
+{"messages":[{"role":"user","content":"快到公司了找下前台小姐姐的电话说一声"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"前台\"}}"}]}
+{"messages":[{"role":"user","content":"约了修车师傅帮我找下他的电话叫孙师傅"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"孙师傅\"}}"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"张三\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，正在搜索张三的联系方式。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"李四\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，正在搜索李四。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"王五\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，正在拨打王五。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"赵六\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，正在搜索赵六。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"138\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，正在搜索该号码。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"重拨\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，正在重拨最近一次通话。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"重拨\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，正在重拨。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"回拨\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，正在回拨未接来电。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"回拨\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，正在回拨。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"妈妈\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，正在搜索妈妈的联系方式。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"老婆\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，正在拨打老婆的电话。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"13800138000\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，正在拨打该号码。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"老板\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，正在搜索老板的联系方式。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"张三\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已为您完成操作。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"139\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已完成。"}]}

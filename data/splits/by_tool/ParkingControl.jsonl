@@ -1,17 +1,17 @@
-{"messages": [{"role": "user", "content": "开始泊入"}, {"role": "assistant", "content": "Action: ParkingControl\nAction Input: {\"action\": \"开始\", \"feature\": \"泊入\"}"}]}
-{"messages": [{"role": "user", "content": "暂停泊车"}, {"role": "assistant", "content": "Action: ParkingControl\nAction Input: {\"action\": \"暂停\", \"feature\": \"泊入\"}"}]}
-{"messages": [{"role": "user", "content": "取消泊入"}, {"role": "assistant", "content": "Action: ParkingControl\nAction Input: {\"action\": \"取消\", \"feature\": \"泊入\"}"}]}
-{"messages": [{"role": "user", "content": "开始泊出"}, {"role": "assistant", "content": "Action: ParkingControl\nAction Input: {\"action\": \"开始\", \"feature\": \"泊出\"}"}]}
-{"messages": [{"role": "user", "content": "取消泊出"}, {"role": "assistant", "content": "Action: ParkingControl\nAction Input: {\"action\": \"取消\", \"feature\": \"泊出\"}"}]}
-{"messages": [{"role": "user", "content": "开始自定义泊入，向左前"}, {"role": "assistant", "content": "Action: ParkingControl\nAction Input: {\"action\": \"开始\", \"feature\": \"自定义泊入\", \"value\": \"向左前\"}"}]}
-{"messages": [{"role": "user", "content": "自定义泊入向右"}, {"role": "assistant", "content": "Action: ParkingControl\nAction Input: {\"action\": \"开始\", \"feature\": \"自定义泊入\", \"value\": \"向右\"}"}]}
-{"messages": [{"role": "user", "content": "选择二号车位开始泊入"}, {"role": "assistant", "content": "Action: ParkingControl\nAction Input: {\"action\": \"开始\", \"feature\": \"泊入\", \"index\": \"2\"}"}]}
-{"messages": [{"role": "user", "content": "泊车时向中间对齐"}, {"role": "assistant", "content": "Action: ParkingControl\nAction Input: {\"action\": \"开始\", \"feature\": \"自定义泊入\", \"value\": \"向中间\"}"}]}
-{"messages": [{"role": "user", "content": "把车向用户这边泊入"}, {"role": "assistant", "content": "Action: ParkingControl\nAction Input: {\"action\": \"开始\", \"feature\": \"自定义泊入\", \"value\": \"向用户\"}"}]}
-{"messages": [{"role": "user", "content": "暂停泊出"}, {"role": "assistant", "content": "Action: ParkingControl\nAction Input: {\"action\": \"暂停\", \"feature\": \"泊出\"}"}]}
-{"messages": [{"role": "user", "content": "自定义泊入，向前"}, {"role": "assistant", "content": "Action: ParkingControl\nAction Input: {\"action\": \"开始\", \"feature\": \"自定义泊入\", \"value\": \"向前\"}"}]}
-{"messages": [{"role": "user", "content": "开始泊入3号车位"}, {"role": "assistant", "content": "Action: ParkingControl\nAction Input: {\"action\": \"开始\", \"feature\": \"泊入\", \"index\": \"3\"}"}]}
-{"messages": [{"role": "user", "content": "取消自定义泊入"}, {"role": "assistant", "content": "Action: ParkingControl\nAction Input: {\"action\": \"取消\", \"feature\": \"自定义泊入\"}"}]}
-{"messages": [{"role": "assistant", "content": "Action: ParkingControl\nAction Input: {\"action\": \"开始\", \"feature\": \"泊入\"}"}, {"role": "user", "content": "Tool Result: {\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已为您处理。"}]}
-{"messages": [{"role": "assistant", "content": "Action: ParkingControl\nAction Input: {\"action\": \"开始\", \"feature\": \"泊入\"}"}, {"role": "user", "content": "Tool Result: {\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 已为您处理。"}]}
-{"messages": [{"role": "assistant", "content": "Action: ParkingControl\nAction Input: {\"action\": \"取消\", \"feature\": \"自定义泊入\"}"}, {"role": "user", "content": "Tool Result: {\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已取消自定义泊入。"}]}
+{"messages":[{"role":"user","content":"开始泊入"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"开始\",\"feature\":\"泊入\"}}"}]}
+{"messages":[{"role":"user","content":"暂停泊车"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"暂停\",\"feature\":\"泊入\"}}"}]}
+{"messages":[{"role":"user","content":"取消泊入"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"取消\",\"feature\":\"泊入\"}}"}]}
+{"messages":[{"role":"user","content":"开始泊出"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"开始\",\"feature\":\"泊出\"}}"}]}
+{"messages":[{"role":"user","content":"取消泊出"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"取消\",\"feature\":\"泊出\"}}"}]}
+{"messages":[{"role":"user","content":"开始自定义泊入，向左前"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"开始\",\"feature\":\"自定义泊入\",\"value\":\"向左前\"}}"}]}
+{"messages":[{"role":"user","content":"自定义泊入向右"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"开始\",\"feature\":\"自定义泊入\",\"value\":\"向右\"}}"}]}
+{"messages":[{"role":"user","content":"选择二号车位开始泊入"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"开始\",\"feature\":\"泊入\",\"index\":\"2\"}}"}]}
+{"messages":[{"role":"user","content":"泊车时向中间对齐"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"开始\",\"feature\":\"自定义泊入\",\"value\":\"向中间\"}}"}]}
+{"messages":[{"role":"user","content":"把车向用户这边泊入"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"开始\",\"feature\":\"自定义泊入\",\"value\":\"向用户\"}}"}]}
+{"messages":[{"role":"user","content":"暂停泊出"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"暂停\",\"feature\":\"泊出\"}}"}]}
+{"messages":[{"role":"user","content":"自定义泊入，向前"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"开始\",\"feature\":\"自定义泊入\",\"value\":\"向前\"}}"}]}
+{"messages":[{"role":"user","content":"开始泊入3号车位"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"开始\",\"feature\":\"泊入\",\"index\":\"3\"}}"}]}
+{"messages":[{"role":"user","content":"取消自定义泊入"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"取消\",\"feature\":\"自定义泊入\"}}"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"开始\",\"feature\":\"泊入\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已为您处理。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"开始\",\"feature\":\"泊入\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"已为您处理。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"取消\",\"feature\":\"自定义泊入\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已取消自定义泊入。"}]}

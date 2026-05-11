@@ -96,6 +96,17 @@ def inject_sp(sample: dict, sp: str) -> dict:
     return {"messages": msgs}
 
 
+def is_tool_call_content(content: str) -> bool:
+    content = content.strip()
+    if content.startswith("Action:"):
+        return True
+    try:
+        data = json.loads(content)
+    except json.JSONDecodeError:
+        return False
+    return isinstance(data, dict) and isinstance(data.get("name"), str) and "arguments" in data
+
+
 def main():
     args = parse_args()
     rng = random.Random(args.seed)
@@ -179,20 +190,18 @@ def main():
     print(f"\n[out] {len(final)} samples → {out_path}")
 
     # Print distribution (classify by last assistant turn, not all turns)
-    dist = {"Action": 0, "Clarify": 0, "Reject": 0, "FinalAnswer": 0}
+    dist = {"Action": 0, "TTS": 0, "Reject": 0}
     for s in final:
         label = None
         for m in s["messages"]:
             if m["role"] == "assistant":
                 c = m["content"].strip()
-                if c.startswith("Action:"):
+                if is_tool_call_content(c):
                     label = "Action"
-                elif c.startswith("Clarify:"):
-                    label = "Clarify"
                 elif c.startswith("Reject"):
                     label = "Reject"
-                elif "Final Answer" in c:
-                    label = "FinalAnswer"
+                elif c:
+                    label = "TTS"
         if label:
             dist[label] += 1
     print(f"\n[stats] Distribution ({len(final)} samples):")

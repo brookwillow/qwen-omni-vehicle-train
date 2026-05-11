@@ -264,9 +264,9 @@ _MESSAGES_PLACEHOLDER = json.dumps(
 _MULTITURN_EXAMPLE = json.dumps(
     [
         {"role": "user", "content": "帮我把空调打开"},
-        {"role": "assistant", "content": 'Action: ClimateControl\nAction Input: {"action": "打开", "device": "空调"}'},
-        {"role": "user", "content": "Tool Result: {\"status\": \"success\"}"},
-        {"role": "assistant", "content": "Final Answer: 好的，空调已为您打开。"},
+        {"role": "assistant", "content": '{"name":"ClimateControl","arguments":{"action":"打开","device":"空调"}}'},
+        {"role": "tool", "content": "{\"status\":\"success\"}"},
+        {"role": "assistant", "content": "好的，空调已为您打开。"},
         {"role": "user", "content": "温度调到26度"},
     ],
     ensure_ascii=False, indent=2,

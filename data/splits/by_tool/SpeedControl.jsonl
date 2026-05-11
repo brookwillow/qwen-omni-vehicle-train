@@ -1,16 +1,16 @@
-{"messages": [{"role": "user", "content": "开快点"}, {"role": "assistant", "content": "Action: SpeedControl\nAction Input: {\"action\": \"开快点\"}"}]}
-{"messages": [{"role": "user", "content": "开慢点"}, {"role": "assistant", "content": "Action: SpeedControl\nAction Input: {\"action\": \"开慢点\"}"}]}
-{"messages": [{"role": "user", "content": "前方路口慢一点"}, {"role": "assistant", "content": "Action: SpeedControl\nAction Input: {\"action\": \"前方路口开慢点\"}"}]}
-{"messages": [{"role": "user", "content": "车速调高"}, {"role": "assistant", "content": "Action: SpeedControl\nAction Input: {\"action\": \"车速调高\"}"}]}
-{"messages": [{"role": "user", "content": "车速调低"}, {"role": "assistant", "content": "Action: SpeedControl\nAction Input: {\"action\": \"车速调低\"}"}]}
-{"messages": [{"role": "user", "content": "车速调到80"}, {"role": "assistant", "content": "Action: SpeedControl\nAction Input: {\"action\": \"车速调到\", \"value\": \"80\"}"}]}
-{"messages": [{"role": "user", "content": "速度设到60公里每小时"}, {"role": "assistant", "content": "Action: SpeedControl\nAction Input: {\"action\": \"车速调到\", \"value\": \"60\"}"}]}
-{"messages": [{"role": "user", "content": "稍微快一点"}, {"role": "assistant", "content": "Action: SpeedControl\nAction Input: {\"action\": \"开快点\"}"}]}
-{"messages": [{"role": "user", "content": "这段路慢一点开"}, {"role": "assistant", "content": "Action: SpeedControl\nAction Input: {\"action\": \"开慢点\"}"}]}
-{"messages": [{"role": "user", "content": "加速一点"}, {"role": "assistant", "content": "Action: SpeedControl\nAction Input: {\"action\": \"开快点\"}"}]}
-{"messages": [{"role": "user", "content": "减速"}, {"role": "assistant", "content": "Action: SpeedControl\nAction Input: {\"action\": \"开慢点\"}"}]}
-{"messages": [{"role": "user", "content": "前面路口慢下来"}, {"role": "assistant", "content": "Action: SpeedControl\nAction Input: {\"action\": \"前方路口开慢点\"}"}]}
-{"messages": [{"role": "user", "content": "速度往上调一点"}, {"role": "assistant", "content": "Action: SpeedControl\nAction Input: {\"action\": \"车速调高\"}"}]}
-{"messages": [{"role": "user", "content": "把速度设到100"}, {"role": "assistant", "content": "Action: SpeedControl\nAction Input: {\"action\": \"车速调到\", \"value\": \"100\"}"}]}
-{"messages": [{"role": "assistant", "content": "Action: SpeedControl\nAction Input: {\"action\": \"开快点\"}"}, {"role": "user", "content": "Tool Result: {\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 好的，已为您处理。"}]}
-{"messages": [{"role": "assistant", "content": "Action: SpeedControl\nAction Input: {\"action\": \"开快点\"}"}, {"role": "user", "content": "Tool Result: {\"status\": \"success\"}"}, {"role": "assistant", "content": "Final Answer: 已为您处理。"}]}
+{"messages":[{"role":"user","content":"开快点"},{"role":"assistant","content":"{\"name\":\"SpeedControl\",\"arguments\":{\"action\":\"开快点\"}}"}]}
+{"messages":[{"role":"user","content":"开慢点"},{"role":"assistant","content":"{\"name\":\"SpeedControl\",\"arguments\":{\"action\":\"开慢点\"}}"}]}
+{"messages":[{"role":"user","content":"前方路口慢一点"},{"role":"assistant","content":"{\"name\":\"SpeedControl\",\"arguments\":{\"action\":\"前方路口开慢点\"}}"}]}
+{"messages":[{"role":"user","content":"车速调高"},{"role":"assistant","content":"{\"name\":\"SpeedControl\",\"arguments\":{\"action\":\"车速调高\"}}"}]}
+{"messages":[{"role":"user","content":"车速调低"},{"role":"assistant","content":"{\"name\":\"SpeedControl\",\"arguments\":{\"action\":\"车速调低\"}}"}]}
+{"messages":[{"role":"user","content":"车速调到80"},{"role":"assistant","content":"{\"name\":\"SpeedControl\",\"arguments\":{\"action\":\"车速调到\",\"value\":\"80\"}}"}]}
+{"messages":[{"role":"user","content":"速度设到60公里每小时"},{"role":"assistant","content":"{\"name\":\"SpeedControl\",\"arguments\":{\"action\":\"车速调到\",\"value\":\"60\"}}"}]}
+{"messages":[{"role":"user","content":"稍微快一点"},{"role":"assistant","content":"{\"name\":\"SpeedControl\",\"arguments\":{\"action\":\"开快点\"}}"}]}
+{"messages":[{"role":"user","content":"这段路慢一点开"},{"role":"assistant","content":"{\"name\":\"SpeedControl\",\"arguments\":{\"action\":\"开慢点\"}}"}]}
+{"messages":[{"role":"user","content":"加速一点"},{"role":"assistant","content":"{\"name\":\"SpeedControl\",\"arguments\":{\"action\":\"开快点\"}}"}]}
+{"messages":[{"role":"user","content":"减速"},{"role":"assistant","content":"{\"name\":\"SpeedControl\",\"arguments\":{\"action\":\"开慢点\"}}"}]}
+{"messages":[{"role":"user","content":"前面路口慢下来"},{"role":"assistant","content":"{\"name\":\"SpeedControl\",\"arguments\":{\"action\":\"前方路口开慢点\"}}"}]}
+{"messages":[{"role":"user","content":"速度往上调一点"},{"role":"assistant","content":"{\"name\":\"SpeedControl\",\"arguments\":{\"action\":\"车速调高\"}}"}]}
+{"messages":[{"role":"user","content":"把速度设到100"},{"role":"assistant","content":"{\"name\":\"SpeedControl\",\"arguments\":{\"action\":\"车速调到\",\"value\":\"100\"}}"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"SpeedControl\",\"arguments\":{\"action\":\"开快点\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已为您处理。"}]}
+{"messages":[{"role":"assistant","content":"{\"name\":\"SpeedControl\",\"arguments\":{\"action\":\"开快点\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"已为您处理。"}]}

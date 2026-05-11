@@ -15,8 +15,8 @@ from qwen_omni_utils import process_mm_info
 from transformers import Qwen2_5OmniForConditionalGeneration, Qwen2_5OmniProcessor
 
 DEFAULT_SYSTEM_PROMPT_FALLBACK = (
-    "你是车载语音助手。你可以动态决策下一步是：Clarify 或 Action。"
-    "如果收到补充信息或 Tool Result，请输出 Final Answer。"
+    "你是车载语音助手。你可以动态决策下一步是自然语言回复或 JSON 工具调用。"
+    "如果需要追问或收到 tool role 工具结果，请直接输出自然语言文本。"
     "如果请求不在工具能力范围内，请直接输出 Reject。"
 )
 
@@ -75,6 +75,14 @@ def load_tools(path: str) -> Dict[str, Dict[str, Any]]:
 
 
 def parse_action(text: str) -> Tuple[str, Dict[str, Any]]:
+    try:
+        data = json.loads((text or "").strip())
+    except Exception:
+        data = None
+    if isinstance(data, dict) and isinstance(data.get("name"), str):
+        args = data.get("arguments", {})
+        return data["name"], args if isinstance(args, dict) else {}
+
     m_tool = ACTION_RE.search(text or "")
     if not m_tool:
         return "", {}

@@ -35,6 +35,14 @@ def load_schema(tools_path: str = "data/tools.json") -> dict:
 
 
 def parse_action(content: str):
+    try:
+        data = json.loads(content.strip())
+    except json.JSONDecodeError:
+        data = None
+    if isinstance(data, dict) and isinstance(data.get("name"), str):
+        args = data.get("arguments")
+        return data["name"], args if isinstance(args, dict) else None
+
     m = re.match(r"Action:\s*(\S+)\s*\nAction Input:\s*(\{.*\})", content, re.DOTALL)
     if not m:
         return None, None
@@ -60,7 +68,7 @@ def validate_sample(sample: dict, source: str, schema: dict) -> list[dict]:
         if msg["role"] != "assistant":
             continue
         content = msg["content"]
-        if not content.startswith("Action:"):
+        if not (content.startswith("Action:") or content.lstrip().startswith("{")):
             continue
 
         tool_name, args = parse_action(content)
@@ -113,7 +121,7 @@ def main():
     # {filepath: [bad line indices]}
     bad_lines: dict[str, list[int]] = defaultdict(list)
 
-    for split_file in sorted(Path(args.splits_dir).glob("*.jsonl")):
+    for split_file in sorted(Path(args.splits_dir).rglob("*.jsonl")):
         with open(split_file) as f:
             lines = f.readlines()
         for idx, line in enumerate(lines):
