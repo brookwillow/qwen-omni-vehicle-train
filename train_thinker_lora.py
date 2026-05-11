@@ -25,7 +25,7 @@ from typing import Any, Dict, Iterable, Tuple
 import torch
 from datasets import load_dataset as hf_load_dataset
 from peft import LoraConfig, get_peft_model
-from swift import get_model_processor, get_template
+from swift import EncodePreprocessor, get_model_processor, get_template
 from swift.trainers import Seq2SeqTrainer, Seq2SeqTrainingArguments
 from transformers import TrainerCallback
 
@@ -136,12 +136,19 @@ def build_last_assistant_labels(input_ids: list[int], target_ids: list[int]) -> 
     return labels, True
 
 
-def encode_dataset_with_last_assistant_labels(dataset_obj, template, tokenizer, split_name: str, num_proc: int):
-    """Encode samples and supervise only the final assistant message content."""
+class LastAssistantLabelEncodePreprocessor(EncodePreprocessor):
+    """Swift encoder that supervises only the final assistant message content."""
 
-    def _encode_and_label(row: dict):
+    def __init__(self, template, tokenizer):
+        super().__init__(template=template)
+        self.tokenizer = tokenizer
+
+    def preprocess(self, row: dict) -> dict | None:
         target = find_last_assistant_content(row.get("messages") or [])
-        encoded = template.encode(row, return_length=True)
+        encoded = super().preprocess(row)
+        if encoded is None:
+            return None
+
         input_ids = encoded.get("input_ids")
         if not isinstance(input_ids, list):
             return encoded
@@ -149,7 +156,7 @@ def encode_dataset_with_last_assistant_labels(dataset_obj, template, tokenizer, 
         labels = [-100] * len(input_ids)
         matched = False
         if target:
-            target_ids = encode_text(tokenizer, target)
+            target_ids = encode_text(self.tokenizer, target)
             if target_ids:
                 labels, matched = build_last_assistant_labels(input_ids, target_ids)
 
@@ -157,7 +164,11 @@ def encode_dataset_with_last_assistant_labels(dataset_obj, template, tokenizer, 
         encoded["label_matched"] = matched
         return encoded
 
-    encoded = dataset_obj.map(_encode_and_label, num_proc=num_proc)
+
+def encode_dataset_with_last_assistant_labels(dataset_obj, template, tokenizer, split_name: str, num_proc: int):
+    """Encode samples and supervise only the final assistant message content."""
+    encoder = LastAssistantLabelEncodePreprocessor(template=template, tokenizer=tokenizer)
+    encoded = encoder(dataset_obj, num_proc=num_proc)
     if "label_matched" in encoded.column_names:
         matched = sum(1 for value in encoded["label_matched"] if value)
         print(f"[labels] {split_name}: matched final assistant spans {matched}/{len(encoded)}")
