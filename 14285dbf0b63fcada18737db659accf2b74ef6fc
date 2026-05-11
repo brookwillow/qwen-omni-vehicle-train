@@ -1,0 +1,36 @@
+rewrite_text_context.py
+  b809ed72392304f4 1-144
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.17",
+  "base_commit_sha": "14285dbf0b63fcada18737db659accf2b74ef6fc",
+  "prompts": {
+    "b809ed72392304f4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "84bc2857-93b2-4ba2-ab33-7e529014f293",
+        "model": "claude-sonnet-4.6"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 148,
+      "total_deletions": 4,
+      "accepted_lines": 144,
+      "overriden_lines": 0
+    },
+    "e7b331d81c1b2d83": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e02da-a637-7bb0-8a13-9ec27afc0ed0",
+        "model": "gpt-5.4-mini"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 16961,
+      "total_deletions": 16886,
+      "accepted_lines": 8280,
+      "overriden_lines": 0
+    }
+  }
+}
