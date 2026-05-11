@@ -1,0 +1,25 @@
+data/splits/by_tool/NoiseDoNotAct.jsonl
+  e7b331d81c1b2d83 1-99
+scripts/validate_by_tool_schema.py
+  e7b331d81c1b2d83 97-104
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.17",
+  "base_commit_sha": "ccc61b79161f4668aa600092da551646846b2fc5",
+  "prompts": {
+    "e7b331d81c1b2d83": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e02da-a637-7bb0-8a13-9ec27afc0ed0",
+        "model": "gpt-5.5"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 107,
+      "total_deletions": 99,
+      "accepted_lines": 107,
+      "overriden_lines": 0
+    }
+  }
+}
