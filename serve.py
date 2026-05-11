@@ -936,8 +936,12 @@ def _parse_tool_call_json(text: str) -> tuple[str, dict] | None:
     if not isinstance(data, dict):
         return None
     tool_name = data.get("name")
+    if not isinstance(tool_name, str):
+        return None
+    if tool_name == "NoiseDoNotAct":
+        return tool_name, {}
     args = data.get("arguments", {})
-    if not isinstance(tool_name, str) or not isinstance(args, dict):
+    if not isinstance(args, dict):
         return None
     return tool_name, args
 

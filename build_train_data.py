@@ -104,7 +104,11 @@ def is_tool_call_content(content: str) -> bool:
         data = json.loads(content)
     except json.JSONDecodeError:
         return False
-    return isinstance(data, dict) and isinstance(data.get("name"), str) and "arguments" in data
+    if not isinstance(data, dict) or not isinstance(data.get("name"), str):
+        return False
+    if data["name"] == "NoiseDoNotAct":
+        return True
+    return "arguments" in data
 
 
 def main():
