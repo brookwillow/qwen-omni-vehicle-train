@@ -94,6 +94,14 @@ for jsonl_file in sorted(BY_TOOL_DIR.glob("*.jsonl")):
     for i, line in enumerate(lines, 1):
         sample = json.loads(line)
         msgs = sample["messages"]
+        for msg_idx, msg in enumerate(msgs):
+            if (
+                msg["role"] == "assistant"
+                and msg["content"].startswith("Action: NoiseDoNotAct")
+                and msg_idx != len(msgs) - 1
+            ):
+                file_errors.append(f"  Line {i}: NoiseDoNotAct must be the final message in the sample")
+
         # Validate all assistant messages whose action matches the file's tool name.
         # Multi-turn samples may start with a different tool, then call this tool later.
         found_tool = False

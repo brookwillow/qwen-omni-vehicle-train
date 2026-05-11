@@ -54,13 +54,13 @@ data/splits/{action,clarify,multiturn,reject}.jsonl  (已拆分好的数据，�
 |------|------|------|
 | Action | 3567 | 2 轮：Action → FinalAnswer；已按当前 38 个工具清理旧工具样本 |
 | Blackbox priority aug | 80 | 针对 raw eval 中 Climate、Profile/Seat、Window、Light、App 高频非争议错误的补充 Action 样本 |
-| Clarify | 177 | 2 轮：Clarify → FinalAnswer；仅保留缺少必需信息或目标不明确的追问 |
+| Clarify | 99 | 4 轮：用户缺少工具 required 字段 → Clarify → 用户补齐 → Action；不包含 Tool Result 或 FinalAnswer |
 | Context boundary | 60 | 多轮当前轮边界：无意义当前轮走 `NoiseDoNotAct`，省略/纠错/延续才用历史补全；补充查询状态 vs 打开/关闭控制，以及 popup/task 列表选择 `GeneralSelect` 的易混淆边界 |
 | Multiturn | 32 | 8 轮：上下文继承、目标修正、参数延续、Tool Result → FinalAnswer |
 | New tools aug | 249 | 新增工具独立增强集；`CarUsageSearch` 覆盖 60 个 `query` 枚举，每个 2 条 |
 | Reject | 1207 | 单轮 + 多轮硬负例（已合并） |
 
-`build_train_data.py` 默认合并全部 split，当前最终训练集为 5372 条。统计时多轮样本按最后一个有效决策标签计入对应类别。
+`build_train_data.py` 默认合并全部 split，统计时多轮样本按最后一个有效决策标签计入对应类别。
 
 ## 训练配置
 
