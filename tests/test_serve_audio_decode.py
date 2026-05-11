@@ -125,6 +125,33 @@ def test_kv_prompt_cache_matches_system_prompt_prefix():
     assert cache.last_miss_reason.startswith("system_prompt_mismatch")
 
 
+def test_strip_historical_tool_messages_keeps_only_latest_tool_chain():
+    messages = [
+        serve.Message(role="user", content="先查一下"),
+        serve.Message(
+            role="assistant",
+            content='{"name":"CarUsageSearch","arguments":{"query":"旧查询"}}',
+        ),
+        serve.Message(role="tool", content='{"status":"success","query":"旧查询"}'),
+        serve.Message(role="assistant", content="我查到了，继续说。"),
+        serve.Message(role="user", content="再帮我开窗"),
+        serve.Message(
+            role="assistant",
+            content='{"name":"WindowControl","arguments":{"action":"打开","device":"车窗"}}',
+        ),
+        serve.Message(role="tool", content='{"status":"success","action":"打开"}'),
+        serve.Message(role="assistant", content="已经帮您打开了。"),
+        serve.Message(role="user", content="谢谢"),
+    ]
+
+    filtered = serve._strip_historical_tool_messages(messages)
+
+    assert [msg.role for msg in filtered] == ["user", "assistant", "user", "assistant", "tool", "assistant", "user"]
+    assert filtered[1].tool_calls is None
+    assert filtered[3].tool_calls is not None
+    assert filtered[4].content == '{"status":"success","action":"打开"}'
+
+
 def test_kv_prompt_cache_records_prefix_mismatch_reason():
     cache = serve._KvPromptCache()
     cache.system_prompt = "系统提示"
@@ -250,7 +277,7 @@ def test_chat_response_uses_server_model_name_by_default():
 
 
 def test_noise_do_not_act_is_suppressed_from_client_tool_calls(capsys):
-    parsed = serve.parse_model_output("Action: NoiseDoNotAct\nAction Input: {}")
+    parsed = serve.parse_model_output('{"name":"NoiseDoNotAct","arguments":{}}')
     choice = serve._choice_from_parsed_output(parsed)
 
     response = serve.build_chat_response(choice=choice, prompt_tokens=10, gen_tokens=4)
@@ -262,17 +289,14 @@ def test_noise_do_not_act_is_suppressed_from_client_tool_calls(capsys):
 
 
 def test_parse_model_output_preserves_model_tool_call_arguments():
-    raw = (
-        "Action: SeatControl\n"
-        'Action Input: {"action": "关闭", "device": "座椅", "feature": "通风", "position": "主驾"}'
-    )
+    raw = '{"name":"SeatControl","arguments":{"action":"关闭","device":"座椅","feature":"通风","position":"主驾"}}'
 
     parsed = serve.parse_model_output(raw)
 
     assert parsed == (
         "tool_call",
         "SeatControl",
-        '{"action": "关闭", "device": "座椅", "feature": "通风", "position": "主驾"}',
+        '{"action":"关闭","device":"座椅","feature":"通风","position":"主驾"}',
     )
 
 

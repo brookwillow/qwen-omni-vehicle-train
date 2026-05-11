@@ -283,6 +283,7 @@ class Message(BaseModel):
 
     role: str
     content: Any  # str | list[ContentPart]
+    tool_calls: Optional[Any] = None
 
 
 class ChatRequest(BaseModel):
@@ -679,6 +680,7 @@ def _messages_to_qwen(
     """Convert OpenAI-format messages to Qwen format.
     Returns (qwen_messages, temp_files_to_cleanup).
     """
+    messages = _strip_historical_tool_messages(messages)
     qwen_msgs = [{"role": "system", "content": [{"type": "text", "text": system_prompt}]}]
     tmp_files: list[str] = []
 
@@ -728,6 +730,72 @@ def _messages_to_qwen(
         qwen_msgs.append({"role": role, "content": qwen_content})
 
     return qwen_msgs, tmp_files
+
+
+def _assistant_message_is_tool_turn(msg: Message) -> bool:
+    if msg.role != "assistant":
+        return False
+    if getattr(msg, "tool_calls", None):
+        return True
+    content = msg.content
+    if not isinstance(content, str):
+        return False
+    parsed = parse_model_output(content)
+    return parsed[0] in {"tool_call", "noise_do_not_act"}
+
+
+def _strip_historical_tool_messages(messages: List[Message]) -> List[Message]:
+    """Remove historical tool-call/tool-result turns before the most recent one.
+
+    We keep the most recent assistant tool-call message and the contiguous tool
+    results that immediately follow it. Older tool-related turns are stripped so
+    only the latest tool chain can influence inference.
+    """
+    if not messages:
+        return messages
+
+    last_tool_call_idx = -1
+    for idx in range(len(messages) - 1, -1, -1):
+        msg = messages[idx]
+        if _assistant_message_is_tool_turn(msg):
+            last_tool_call_idx = idx
+            break
+
+    if last_tool_call_idx < 0:
+        return messages
+
+    keep_indices = {last_tool_call_idx}
+    for idx in range(last_tool_call_idx + 1, len(messages)):
+        if messages[idx].role == "tool":
+            keep_indices.add(idx)
+            continue
+        break
+
+    filtered: list[Message] = []
+    dropped_tool_calls = 0
+    dropped_tool_results = 0
+
+    for idx, msg in enumerate(messages):
+        if idx in keep_indices:
+            filtered.append(msg)
+            continue
+        if msg.role == "tool":
+            dropped_tool_results += 1
+            continue
+        if _assistant_message_is_tool_turn(msg):
+            dropped_tool_calls += 1
+            continue
+        filtered.append(msg)
+
+    if dropped_tool_calls or dropped_tool_results:
+        logger.info(
+            "[HISTORY] stripped historical tool turns: assistant_tool_calls=%d tool_results=%d kept_last_tool_call_idx=%d",
+            dropped_tool_calls,
+            dropped_tool_results,
+            last_tool_call_idx,
+        )
+
+    return filtered
 
 
 # ── Inference ─────────────────────────────────────────────────
@@ -860,6 +928,20 @@ _ACTION_RE = re.compile(
 )
 
 
+def _parse_tool_call_json(text: str) -> tuple[str, dict] | None:
+    try:
+        data = json.loads(text.strip())
+    except json.JSONDecodeError:
+        return None
+    if not isinstance(data, dict):
+        return None
+    tool_name = data.get("name")
+    args = data.get("arguments", {})
+    if not isinstance(tool_name, str) or not isinstance(args, dict):
+        return None
+    return tool_name, args
+
+
 def parse_model_output(text: str) -> tuple:
     """Parse model text output into structured form.
 
@@ -868,6 +950,13 @@ def parse_model_output(text: str) -> tuple:
       | ("noise_do_not_act",)
       | ("text", content: str)
     """
+    tool_call = _parse_tool_call_json(text)
+    if tool_call is not None:
+        tool_name, args = tool_call
+        if tool_name == "NoiseDoNotAct":
+            return ("noise_do_not_act",)
+        return ("tool_call", tool_name, json.dumps(args, ensure_ascii=False, separators=(",", ":")))
+
     m = _ACTION_RE.search(text)
     if m:
         tool_name = m.group(1).strip()
@@ -876,14 +965,16 @@ def parse_model_output(text: str) -> tuple:
             return ("noise_do_not_act",)
         try:
             args = json.loads(args_str)
-            args_str = json.dumps(args, ensure_ascii=False)
+            args_str = json.dumps(args, ensure_ascii=False, separators=(",", ":"))
         except json.JSONDecodeError:
             pass  # still return as-is; caller receives raw string
         return ("tool_call", tool_name, args_str)
 
-    # Strip "Final Answer: " prefix if present
+    # Keep backward compatibility with older adapters trained with explicit text labels.
     if text.startswith("Final Answer:"):
         content = text[len("Final Answer:"):].strip()
+    elif text.startswith("Clarify:"):
+        content = text[len("Clarify:"):].strip()
     else:
         content = text
     return ("text", content)

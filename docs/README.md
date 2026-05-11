@@ -9,7 +9,7 @@
 - 基模型：`Qwen2.5-Omni-3B`（`max_position_embeddings=32768`）
 - 训练策略：LoRA (r=8, alpha=16)，仅训练 Thinker（语言路径）
 - 冻结模块：AUT + Talker + Vocoder（通过关键词审计强制保证）
-- 输出格式：`Action` / `Clarify` / `Reject` 三类决策
+- 输出格式：紧凑 JSON 工具调用 / 自然语言 TTS 文本 / `Reject` 三类决策
 
 ## 环境
 
@@ -40,9 +40,10 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 |------|------|
 | `data/system-prompt.txt` | 紧凑版 System Prompt（~7.0K chars，基于当前工具白名单生成） |
 | `data/tools.json` | 38 个车载工具定义（新版 `inputSchema` 格式） |
-| `data/splits/by_tool/*.jsonl` | 按工具拆分的训练数据；每个工具文件内已拆为 `user -> Action` 决策样本和独立 `Action -> Tool Result -> Final Answer` 回复样本 |
-| `data/splits/clarify.jsonl` | required 字段缺失澄清样本 |
+| `data/splits/by_tool/*.jsonl` | 按工具拆分的训练数据；每个工具文件内已拆为 `user -> JSON tool call` 决策样本和独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 |
+| `data/splits/clarify.jsonl` | required 字段缺失后的自然语言追问样本 |
 | `data/splits/edge_case.jsonl` | 多轮上下文边界、易混淆与任务列表选择样本 |
+| `data/splits/text_context.jsonl` | 最多三轮纯文本历史上下文样本；历史可来自导航/音乐/新闻/百科/AIGC/天气等外部域，当前轮覆盖工具调用、NoiseDoNotAct、Reject、自然语言追问/回复 |
 | `data/splits/reject.jsonl` | 单轮 + 多轮硬负例 |
 | `data/train_final.jsonl` | 最终训练数据（含 SP） |
 | `data/eval/` | 评测数据集（当前工具 schema 已清洗，媒体类无新版等价工具样本已置空/移除） |
@@ -51,12 +52,13 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 
 | 类型 | 数量 | 说明 |
 |------|------|------|
-| By-tool | 6181 | 每个工具文件内混合：`user -> Action` 决策样本 3869 条，独立 `Action -> Tool Result -> Final Answer` 回复样本 2255 条，以及少量多轮决策上下文 |
-| Clarify | 99 | 4 轮：用户缺少工具 required 字段 → Clarify → 用户补齐 → Action；不包含 Tool Result 或 FinalAnswer |
+| By-tool | 6181 | 每个工具文件内混合：`user -> JSON tool call` 决策样本 3869 条，独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 2255 条，以及少量多轮决策上下文 |
+| Clarify | 99 | 4 轮：用户缺少工具 required 字段 → 自然语言追问 → 用户补齐 → JSON tool call；不包含 tool-role result |
 | Edge case | 102 | 多轮当前轮边界、查询 vs 控制、popup/task 列表 `GeneralSelect` 等易混淆样本 |
+| Text context | 204 | 最多三轮纯文本历史；历史允许外部域文本；当前轮输出分布：工具 85 条、NoiseDoNotAct 13 条、Reject 48 条、自然语言 TTS 22 条 |
 | Reject | 1745 | 单轮 + 多轮硬负例（已合并） |
 
-`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 8127 条；统计时多轮样本按最后一个有效决策标签计入对应类别。
+`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 8331 条；统计时多轮样本按最后一个有效决策标签计入对应类别。
 
 ## 训练配置
 
@@ -155,6 +157,7 @@ python serve.py \
 ```
 
 服务端启动时会打印实际 attention implementation；如果缺少 `flash_attn` 会回退到 PyTorch `sdpa`，避免继续显式使用 `eager`。请求日志会输出 `[PERF]` 单次分段耗时，并在每次成功请求后输出 `[PERF_AVG]` 进程内累计平均耗时，覆盖消息转换、音频/多模态处理、processor、generate、解析和保存等阶段。默认不再运行本地 Whisper ASR 调试；需要额外转写排查音频时再加 `--debug-asr`。
+服务端在送模前会屏蔽历史轮次里的工具调用和 `tool` 结果，包括 `assistant.tool_calls` 以及历史里直接写成 JSON 工具调用的 `assistant.content`，只保留最后一轮工具链，避免旧工具上下文干扰当前推理。
 
 可选开启实验性的 system prompt KV cache：
 
