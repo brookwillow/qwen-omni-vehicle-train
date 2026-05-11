@@ -132,7 +132,7 @@ python train_thinker_lora.py \
 | gradient_checkpointing | True | 节省显存 |
 | metric_for_best_model | eval_token_acc | 自动选最优 checkpoint |
 
-编码后会过滤 `labels` 全为 `-100` 的空监督样本，避免空 label batch 让 `eval_loss` 变成 `nan`。
+训练脚本会在编码后按原始 `messages` 定位最后一个 assistant 回复，只对这段回复计算 loss。这样 `user -> tool_call` 和独立的 `tool_call -> tool-result -> TTS` 样本都能提供监督信号；若截断导致最后回复完全找不到，才会过滤 `labels` 全为 `-100` 的空监督样本。
 
 ### 冻结保障
 
@@ -358,7 +358,7 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 以下问题在历史迭代中已修复：
 
 - [x] max_length 1024 → 16384（防止样本截断）
-- [x] assistant-only loss masking（仅在 assistant 回复上计算 loss）
+- [x] last-assistant-only loss masking（仅监督每条样本最后一个 assistant 回复）
 - [x] SP 压缩 53%（26K → 12K chars）
 - [x] SP 统一管理（`data/system-prompt.txt`，训练/推理/评测共用）
 - [x] 训练数据不再内嵌 SP，由 build_train_data.py 构建时注入

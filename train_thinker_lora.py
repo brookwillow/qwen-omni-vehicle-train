@@ -20,12 +20,12 @@ import inspect
 import json
 import os
 from pathlib import Path
-from typing import Dict, Iterable, Tuple
+from typing import Any, Dict, Iterable, Tuple
 
 import torch
 from datasets import load_dataset as hf_load_dataset
 from peft import LoraConfig, get_peft_model
-from swift import EncodePreprocessor, get_model_processor, get_template
+from swift import get_model_processor, get_template
 from swift.trainers import Seq2SeqTrainer, Seq2SeqTrainingArguments
 from transformers import TrainerCallback
 
@@ -97,47 +97,71 @@ def split_train_eval(train_ds, val_ratio: float, seed: int):
     return split["train"], split["test"]
 
 
-def ensure_labels_column(dataset_obj, im_start_id: int = 151644, im_end_id: int = 151645):
-    """Build assistant-only loss mask from input_ids if labels column is missing."""
-    if "labels" in dataset_obj.column_names:
-        return dataset_obj
-    if "input_ids" not in dataset_obj.column_names:
-        raise ValueError(f"Dataset has no labels/input_ids. Columns: {dataset_obj.column_names}")
+def get_tokenizer(processor_or_tokenizer: Any):
+    return getattr(processor_or_tokenizer, "tokenizer", processor_or_tokenizer)
 
-    print("[warn] labels column missing; building assistant-only masked labels from input_ids.")
 
-    def _build_masked_labels(example):
-        input_ids = example["input_ids"]
+def find_last_assistant_content(messages: list[dict]) -> str:
+    for msg in reversed(messages):
+        if msg.get("role") == "assistant":
+            content = msg.get("content", "")
+            if isinstance(content, str):
+                return content
+    return ""
+
+
+def encode_text(tokenizer: Any, text: str) -> list[int]:
+    if hasattr(tokenizer, "encode"):
+        return tokenizer.encode(text, add_special_tokens=False)
+    encoded = tokenizer(text, add_special_tokens=False)
+    return encoded["input_ids"]
+
+
+def find_last_subsequence(haystack: list[int], needle: list[int]) -> int:
+    if not needle or len(needle) > len(haystack):
+        return -1
+    for idx in range(len(haystack) - len(needle), -1, -1):
+        if haystack[idx : idx + len(needle)] == needle:
+            return idx
+    return -1
+
+
+def build_last_assistant_labels(input_ids: list[int], target_ids: list[int]) -> tuple[list[int], bool]:
+    labels = [-100] * len(input_ids)
+    start = find_last_subsequence(input_ids, target_ids)
+    if start < 0:
+        return labels, False
+    end = start + len(target_ids)
+    labels[start:end] = input_ids[start:end]
+    return labels, True
+
+
+def encode_dataset_with_last_assistant_labels(dataset_obj, template, tokenizer, split_name: str, num_proc: int):
+    """Encode samples and supervise only the final assistant message content."""
+
+    def _encode_and_label(row: dict):
+        target = find_last_assistant_content(row.get("messages") or [])
+        encoded = template.encode(row, return_length=True)
+        input_ids = encoded.get("input_ids")
+        if not isinstance(input_ids, list):
+            return encoded
+
         labels = [-100] * len(input_ids)
-        n = len(input_ids)
-        i = 0
-        while i < n:
-            if input_ids[i] == im_start_id:
-                role_end = None
-                is_assistant = False
-                for j in range(i + 1, min(i + 7, n)):
-                    if input_ids[j] in (198, 271):  # '\n' tokens
-                        role_end = j
-                        break
-                if role_end is not None:
-                    if 77091 in input_ids[i + 1 : role_end]:  # 77091 == 'assistant'
-                        is_assistant = True
-                if is_assistant and role_end is not None:
-                    content_start = role_end + 1
-                    content_end = n
-                    for j in range(content_start, n):
-                        if input_ids[j] == im_end_id:
-                            content_end = j + 1
-                            break
-                    for j in range(content_start, content_end):
-                        labels[j] = input_ids[j]
-                    i = content_end
-                    continue
-            i += 1
-        example["labels"] = labels
-        return example
+        matched = False
+        if target:
+            target_ids = encode_text(tokenizer, target)
+            if target_ids:
+                labels, matched = build_last_assistant_labels(input_ids, target_ids)
 
-    return dataset_obj.map(_build_masked_labels)
+        encoded["labels"] = labels
+        encoded["label_matched"] = matched
+        return encoded
+
+    encoded = dataset_obj.map(_encode_and_label, num_proc=num_proc)
+    if "label_matched" in encoded.column_names:
+        matched = sum(1 for value in encoded["label_matched"] if value)
+        print(f"[labels] {split_name}: matched final assistant spans {matched}/{len(encoded)}")
+    return encoded
 
 
 def count_valid_label_tokens(example: dict) -> int:
@@ -333,6 +357,12 @@ def main() -> None:
         template = get_template(processor_or_tokenizer)
     except Exception:
         template = get_template(getattr(processor_or_tokenizer, "tokenizer", processor_or_tokenizer))
+    if hasattr(template, "set_mode"):
+        template.set_mode("train")
+        print("[patch] Set template mode=train")
+    if hasattr(template, "max_length"):
+        template.max_length = args.max_length
+        print(f"[patch] Set template.max_length={args.max_length}")
 
     # Patch broken _get_position_ids in some Swift versions (M-RoPE compat).
     if hasattr(template, "_get_position_ids"):
@@ -356,16 +386,13 @@ def main() -> None:
 
     # 3. Encode
     print("[3/6] Encoding dataset...")
-    encoder_sig = inspect.signature(EncodePreprocessor.__init__).parameters
-    if "max_length" in encoder_sig:
-        encoder = EncodePreprocessor(template=template, max_length=args.max_length)
-    else:
-        encoder = EncodePreprocessor(template=template)
-    train_dataset = encoder(train_dataset, num_proc=args.num_proc)
-    eval_dataset = encoder(eval_dataset, num_proc=args.num_proc)
-
-    train_dataset = ensure_labels_column(train_dataset)
-    eval_dataset = ensure_labels_column(eval_dataset)
+    tokenizer = get_tokenizer(processor_or_tokenizer)
+    train_dataset = encode_dataset_with_last_assistant_labels(
+        train_dataset, template, tokenizer, "train", args.num_proc
+    )
+    eval_dataset = encode_dataset_with_last_assistant_labels(
+        eval_dataset, template, tokenizer, "eval", args.num_proc
+    )
     train_dataset = filter_empty_label_examples(train_dataset, "train")
     eval_dataset = filter_empty_label_examples(eval_dataset, "eval")
 
