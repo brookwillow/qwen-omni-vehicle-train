@@ -813,6 +813,41 @@ def _strip_historical_tool_messages(messages: List[Message]) -> List[Message]:
     return filtered
 
 
+def _print_qwen_messages(qwen_messages: list) -> None:
+    """可视化打印最终送入模型的消息列表。"""
+    import sys
+    SEP = "─" * 60
+    ROLE_LABEL = {"system": "SYSTEM", "user": "USER  ", "assistant": "ASST  ", "tool": "TOOL  "}
+    print(f"\n{'═' * 60}", flush=True, file=sys.stderr)
+    print(f"  MODEL INPUT  ({len(qwen_messages)} turns)", flush=True, file=sys.stderr)
+    print(f"{'═' * 60}", flush=True, file=sys.stderr)
+    for i, msg in enumerate(qwen_messages):
+        role = msg.get("role", "?")
+        label = ROLE_LABEL.get(role, role.upper()[:6])
+        content = msg.get("content", "")
+        # 提取文本和音频信息
+        if isinstance(content, list):
+            parts = []
+            for p in content:
+                if isinstance(p, dict):
+                    if p.get("type") == "text":
+                        txt = p.get("text", "")
+                        # system prompt 只显示前100字
+                        if role == "system":
+                            parts.append(f"<text: {txt[:100]}... ({len(txt)} chars)>")
+                        else:
+                            parts.append(txt)
+                    elif p.get("type") == "audio":
+                        parts.append(f"<audio: {p.get('audio', '')}>")
+            text = " | ".join(parts)
+        else:
+            text = str(content)
+            if role == "system":
+                text = f"{text[:100]}... ({len(text)} chars)"
+        print(f"[{i}] {label} │ {text}", flush=True, file=sys.stderr)
+    print(f"{'═' * 60}\n", flush=True, file=sys.stderr)
+
+
 # ── Inference ─────────────────────────────────────────────────
 
 def run_inference(
@@ -824,20 +859,14 @@ def run_inference(
     prompt_cache: Optional[_KvPromptCache] = None,
 ) -> tuple[str, int, int]:
     start = time.perf_counter()
+    _print_qwen_messages(qwen_messages)
     text = processor.apply_chat_template(qwen_messages, add_generation_prompt=True, tokenize=False)
     chat_template_ms = (time.perf_counter() - start) * 1000
     mm_start = time.perf_counter()
     audios, images, videos = process_mm_info(qwen_messages, use_audio_in_video=False)
     mm_ms = (time.perf_counter() - mm_start) * 1000
     # Sanity-check: count audio placeholders in the template vs what process_mm_info returned.
-    # If they don't match, process_mm_info silently dropped audio data → model will misalign.
     audio_placeholder_count = text.count("<|AUDIO|>")
-    logger.info(
-        "[MM] audio_placeholders=%d process_mm_info_returned=%d mm_ms=%.1f",
-        audio_placeholder_count,
-        len(audios or []),
-        mm_ms,
-    )
     if audio_placeholder_count != len(audios or []):
         logger.warning(
             "[MM] audio mismatch: template has %d <|AUDIO|> placeholders but process_mm_info returned %d arrays; "
@@ -1107,37 +1136,10 @@ def _last_text_query(messages: List[Message]) -> str:
     return ""
 
 
-@app.middleware("http")
-async def log_requests(request: Request, call_next):
-    """Log every POST body before validation, so 422 source is always visible."""
-    import sys
-    if request.method == "POST":
-        try:
-            raw = await request.body()
-            body_str = raw.decode("utf-8", errors="replace")
-            truncated = body_str[:1000] + f"...(total {len(raw)} bytes)" if len(body_str) > 1000 else body_str
-            print(f"\n[REQUEST] POST {request.url.path}", flush=True, file=sys.stderr)
-            print(f"[REQUEST] Content-Type: {request.headers.get('content-type', 'N/A')}", flush=True, file=sys.stderr)
-            print(f"[REQUEST] Body: {truncated}\n", flush=True, file=sys.stderr)
-            # Save full raw request to /tmp for inspection
-            try:
-                with open("/tmp/qwen_last_request.json", "wb") as _rf:
-                    _rf.write(raw)
-                print(f"[REQUEST] Full body saved → /tmp/qwen_last_request.json ({len(raw)} bytes)", flush=True, file=sys.stderr)
-            except OSError:
-                pass
-        except Exception as e:
-            print(f"[REQUEST] Could not read body: {e}", flush=True, file=sys.stderr)
-    response = await call_next(request)
-    if response.status_code == 422:
-        print(f"[RESPONSE] 422 Unprocessable Entity for {request.url.path}", flush=True, file=sys.stderr)
-    return response
-
-
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
     import sys
-    print(f"[422 DETAIL] Validation errors: {exc.errors()}", flush=True, file=sys.stderr)
+    print(f"[422] Validation errors: {exc.errors()}", flush=True, file=sys.stderr)
     return JSONResponse(status_code=422, content={"detail": exc.errors()})
 
 
@@ -1197,14 +1199,13 @@ async def chat_completions(req: ChatRequest):
                 pass
         raise HTTPException(status_code=500, detail=f"Inference error: {e}") from e
 
-    print(f"[MODEL_RAW] {repr(reply)}", flush=True, file=sys.stderr)
+    print(f"[MODEL_OUT] {repr(reply)}", flush=True, file=sys.stderr)
     parse_start = time.perf_counter()
     parsed = parse_model_output(reply)
     parse_ms = (time.perf_counter() - parse_start) * 1000
     choice = _choice_from_parsed_output(parsed)
 
     resp = build_chat_response(choice, prompt_tokens, gen_tokens)
-    print(f"[RESPONSE] {resp.model_dump_json()}", file=sys.stderr, flush=True)
 
     # Persist audio + response for training data collection
     save_start = time.perf_counter()
