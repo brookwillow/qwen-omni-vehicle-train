@@ -125,7 +125,7 @@ def test_kv_prompt_cache_matches_system_prompt_prefix():
     assert cache.last_miss_reason.startswith("system_prompt_mismatch")
 
 
-def test_strip_historical_tool_messages_keeps_only_latest_tool_chain():
+def test_strip_historical_tool_messages_drops_tool_chains_before_latest_user():
     messages = [
         serve.Message(role="user", content="先查一下"),
         serve.Message(
@@ -146,10 +146,56 @@ def test_strip_historical_tool_messages_keeps_only_latest_tool_chain():
 
     filtered = serve._strip_historical_tool_messages(messages)
 
-    assert [msg.role for msg in filtered] == ["user", "assistant", "user", "assistant", "tool", "assistant", "user"]
+    assert [msg.role for msg in filtered] == ["user", "assistant", "user", "assistant", "user"]
     assert filtered[1].tool_calls is None
-    assert filtered[3].tool_calls is not None
-    assert filtered[4].content == '{"status":"success","action":"打开"}'
+    assert filtered[3].content == "已经帮您打开了。"
+
+
+def test_messages_to_qwen_compacts_kept_tool_call_and_tool_result(tmp_path):
+    messages = [
+        serve.Message(role="user", content="打开车窗"),
+        serve.Message(
+            role="assistant",
+            content="",
+            tool_calls=[
+                {
+                    "id": "1",
+                    "type": "function",
+                    "function": {
+                        "name": "WindowControl",
+                        "arguments": '{ "action": "打开", "device": "车窗" }',
+                    },
+                }
+            ],
+        ),
+        serve.Message(role="tool", content='{ "status": "success", "rawTTS": "车窗调好了" }'),
+    ]
+
+    qwen_messages, tmp_files = serve._messages_to_qwen(messages, "系统提示", str(tmp_path))
+
+    assert tmp_files == []
+    assert qwen_messages[1]["content"][0]["text"] == "打开车窗"
+    assert qwen_messages[2]["content"][0]["text"] == (
+        '{"name":"WindowControl","arguments":{"action":"打开","device":"车窗"}}'
+    )
+    assert qwen_messages[3]["content"][0]["text"] == '{"status":"success","rawTTS":"车窗调好了"}'
+
+
+def test_messages_to_qwen_compacts_action_style_assistant_text(tmp_path):
+    messages = [
+        serve.Message(role="user", content="打开车窗"),
+        serve.Message(
+            role="assistant",
+            content='Action: WindowControl\nAction Input: {"action": "打开", "device": "车窗"}',
+        ),
+        serve.Message(role="tool", content='{"status":"success"}'),
+    ]
+
+    qwen_messages, _ = serve._messages_to_qwen(messages, "系统提示", str(tmp_path))
+
+    assert qwen_messages[2]["content"][0]["text"] == (
+        '{"name":"WindowControl","arguments":{"action":"打开","device":"车窗"}}'
+    )
 
 
 def test_kv_prompt_cache_records_prefix_mismatch_reason():

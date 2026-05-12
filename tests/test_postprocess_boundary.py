@@ -32,8 +32,8 @@ def test_eval_and_cli_do_not_postprocess_model_outputs():
         assert not _calls_postprocess(tree)
 
 
-def test_serve_keeps_postprocess_for_runtime_tool_calls():
+def test_serve_does_not_postprocess_runtime_tool_calls():
     tree = _module_ast("serve.py")
 
-    assert _imports_postprocess_call(tree)
-    assert _calls_postprocess(tree)
+    assert not _imports_postprocess_call(tree)
+    assert not _calls_postprocess(tree)

@@ -15,3 +15,15 @@
 {"messages":[{"role":"user","content":"把悬架降一档"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调低\",\"device\":\"悬架\",\"value\":\"较低\"}}"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"悬架\",\"value\":\"较高\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已为您处理。"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"悬架\",\"value\":\"最低\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"已为您处理。"}]}
+{"messages":[{"role":"user","content":"悬架调到最低"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"悬架\",\"value\":\"最低\"}}"}]}
+{"messages":[{"role":"user","content":"悬架调到较低"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"悬架\",\"value\":\"较低\"}}"}]}
+{"messages":[{"role":"user","content":"悬架调到中"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"悬架\",\"value\":\"中\"}}"}]}
+{"messages":[{"role":"user","content":"悬架调到较高"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"悬架\",\"value\":\"较高\"}}"}]}
+{"messages":[{"role":"user","content":"悬架调到最高"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"悬架\",\"value\":\"最高\"}}"}]}
+{"messages":[{"role":"user","content":"悬架高度调高"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"悬架\",\"value\":\"较高\"}}"}]}
+{"messages":[{"role":"user","content":"悬架高度调低"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调低\",\"device\":\"悬架\",\"value\":\"较低\"}}"}]}
+{"messages":[{"role":"user","content":"底盘高度调到最低"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"悬架\",\"value\":\"最低\"}}"}]}
+{"messages":[{"role":"user","content":"底盘高度调到中"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"悬架\",\"value\":\"中\"}}"}]}
+{"messages":[{"role":"user","content":"底盘高度调到最高"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"悬架\",\"value\":\"最高\"}}"}]}
+{"messages":[{"role":"user","content":"空气悬架调到较低"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"悬架\",\"value\":\"较低\"}}"}]}
+{"messages":[{"role":"user","content":"空气悬架调到较高"},{"role":"assistant","content":"{\"name\":\"SuspensionControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"悬架\",\"value\":\"较高\"}}"}]}

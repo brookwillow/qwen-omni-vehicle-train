@@ -15,3 +15,13 @@
 {"messages":[{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"尾翼\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"已为您处理。"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"尾翼\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已关闭尾翼。"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"尾翼\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已收起尾翼。"}]}
+{"messages":[{"role":"user","content":"打开尾翼"},{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"尾翼\"}}"}]}
+{"messages":[{"role":"user","content":"关闭尾翼"},{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"尾翼\"}}"}]}
+{"messages":[{"role":"user","content":"尾翼调到自动"},{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"尾翼\",\"value\":\"自动\"}}"}]}
+{"messages":[{"role":"user","content":"尾翼调到最高"},{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"尾翼\",\"value\":\"最高\"}}"}]}
+{"messages":[{"role":"user","content":"尾翼调到最低"},{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"尾翼\",\"value\":\"最低\"}}"}]}
+{"messages":[{"role":"user","content":"把尾翼升到最高"},{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"尾翼\",\"value\":\"最高\"}}"}]}
+{"messages":[{"role":"user","content":"把尾翼降到最低"},{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"尾翼\",\"value\":\"最低\"}}"}]}
+{"messages":[{"role":"user","content":"尾翼自动模式"},{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"尾翼\",\"value\":\"自动\"}}"}]}
+{"messages":[{"role":"user","content":"升起尾翼"},{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"尾翼\"}}"}]}
+{"messages":[{"role":"user","content":"收回尾翼"},{"role":"assistant","content":"{\"name\":\"TailControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"尾翼\"}}"}]}

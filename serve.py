@@ -691,16 +691,21 @@ def _messages_to_qwen(
             # so the pre-warmed KV prompt cache remains valid.
             continue
 
+        compact_text = _message_compact_text_for_model(msg)
+        if compact_text is not None:
+            qwen_msgs.append({"role": role, "content": [{"type": "text", "text": compact_text}]})
+            continue
+
         # Convert content to Qwen format
         if isinstance(msg.content, str):
-            qwen_content = [{"type": "text", "text": msg.content}]
+            qwen_content = [{"type": "text", "text": _compact_json_text(msg.content)}]
         else:
             qwen_content = []
             for part in msg.content:
                 if isinstance(part, dict):
                     ptype = part.get("type", "")
                     if ptype == "text":
-                        qwen_content.append({"type": "text", "text": part.get("text", "")})
+                        qwen_content.append({"type": "text", "text": _compact_json_text(part.get("text", ""))})
                     elif ptype == "input_audio":
                         audio_info = part.get("input_audio", {})
                         b64data = audio_info.get("data", "")
@@ -715,7 +720,7 @@ def _messages_to_qwen(
                 else:
                     # Pydantic ContentPart
                     if part.type == "text" and part.text:
-                        qwen_content.append({"type": "text", "text": part.text})
+                        qwen_content.append({"type": "text", "text": _compact_json_text(part.text)})
                     elif part.type == "input_audio" and part.input_audio:
                         b64data = part.input_audio.get("data", "")
                         fmt = part.input_audio.get("format", "wav")
@@ -730,6 +735,67 @@ def _messages_to_qwen(
         qwen_msgs.append({"role": role, "content": qwen_content})
 
     return qwen_msgs, tmp_files
+
+
+def _compact_json_text(text: str) -> str:
+    stripped = text.strip()
+    if not stripped:
+        return stripped
+    try:
+        data = json.loads(stripped)
+    except json.JSONDecodeError:
+        return text
+    return json.dumps(data, ensure_ascii=False, separators=(",", ":"))
+
+
+def _tool_calls_to_compact_text(tool_calls: Any) -> str | None:
+    if not tool_calls:
+        return None
+    first = tool_calls[0] if isinstance(tool_calls, list) else tool_calls
+    function = None
+    if isinstance(first, dict):
+        function = first.get("function")
+    else:
+        function = getattr(first, "function", None)
+    if not function:
+        return None
+    if isinstance(function, dict):
+        name = function.get("name")
+        arguments = function.get("arguments", {})
+    else:
+        name = getattr(function, "name", None)
+        arguments = getattr(function, "arguments", {})
+    if not isinstance(name, str) or not name:
+        return None
+    if isinstance(arguments, str):
+        try:
+            arguments = json.loads(arguments.strip() or "{}")
+        except json.JSONDecodeError:
+            arguments = {}
+    if not isinstance(arguments, dict):
+        arguments = {}
+    return json.dumps({"name": name, "arguments": arguments}, ensure_ascii=False, separators=(",", ":"))
+
+
+def _message_compact_text_for_model(msg: Message) -> str | None:
+    if msg.role == "assistant":
+        tool_text = _tool_calls_to_compact_text(getattr(msg, "tool_calls", None))
+        if tool_text is not None:
+            return tool_text
+        if isinstance(msg.content, str):
+            parsed = parse_model_output(msg.content)
+            if parsed[0] == "tool_call":
+                _, tool_name, args_str = parsed
+                try:
+                    args = json.loads(args_str)
+                except json.JSONDecodeError:
+                    return msg.content
+                return json.dumps({"name": tool_name, "arguments": args}, ensure_ascii=False, separators=(",", ":"))
+            if parsed[0] == "noise_do_not_act":
+                return json.dumps({"name": "NoiseDoNotAct", "arguments": {}}, ensure_ascii=False, separators=(",", ":"))
+    if msg.role == "tool" and isinstance(msg.content, str):
+        return _compact_json_text(msg.content)
+    return None
 
 
 def _assistant_message_is_tool_turn(msg: Message) -> bool:

@@ -15,3 +15,13 @@
 {"messages":[{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"香氛\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已为您处理。"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"香氛\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"已为您处理。"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"香氛\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已关闭香氛。"}]}
+{"messages":[{"role":"user","content":"打开香氛"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"香氛\"}}"}]}
+{"messages":[{"role":"user","content":"关闭香氛"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"香氛\"}}"}]}
+{"messages":[{"role":"user","content":"香氛浓度调到最高"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"香氛\",\"feature\":\"浓度\",\"value\":\"最高\"}}"}]}
+{"messages":[{"role":"user","content":"香氛浓度调到最低"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"香氛\",\"feature\":\"浓度\",\"value\":\"最低\"}}"}]}
+{"messages":[{"role":"user","content":"香氛浓度调高"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"香氛\",\"feature\":\"浓度\",\"value\":\"最高\"}}"}]}
+{"messages":[{"role":"user","content":"香氛浓度调低"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"调低\",\"device\":\"香氛\",\"feature\":\"浓度\",\"value\":\"最低\"}}"}]}
+{"messages":[{"role":"user","content":"把香氛调浓一点"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"香氛\",\"feature\":\"浓度\",\"value\":\"最高\"}}"}]}
+{"messages":[{"role":"user","content":"把香氛调淡一点"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"调低\",\"device\":\"香氛\",\"feature\":\"浓度\",\"value\":\"最低\"}}"}]}
+{"messages":[{"role":"user","content":"香氛开到最低浓度"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"香氛\",\"feature\":\"浓度\",\"value\":\"最低\"}}"}]}
+{"messages":[{"role":"user","content":"香氛开到最高浓度"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"香氛\",\"feature\":\"浓度\",\"value\":\"最高\"}}"}]}

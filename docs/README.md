@@ -38,9 +38,9 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 
 | 文件 | 说明 |
 |------|------|
-| `data/system-prompt.txt` | 紧凑版 System Prompt（~7.0K chars，基于当前工具白名单生成） |
+| `data/system-prompt.txt` | 紧凑版 System Prompt（~5.5K chars，基于当前工具白名单生成） |
 | `data/tools.json` | 38 个车载工具定义（新版 `inputSchema` 格式） |
-| `data/splits/by_tool/*.jsonl` | 按工具拆分的训练数据；每个工具文件内已拆为 `user -> JSON tool call` 决策样本和独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本；其中 `NoiseDoNotAct.jsonl` 已扩充到 337 条 |
+| `data/splits/by_tool/*.jsonl` | 按工具拆分的训练数据；每个工具文件内已拆为 `user -> JSON tool call` 决策样本和独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本；其中 `NoiseDoNotAct.jsonl` 当前为 438 条 |
 | `data/splits/clarify.jsonl` | required 字段缺失后的自然语言追问样本 |
 | `data/splits/edge_case.jsonl` | 多轮上下文边界、易混淆与任务列表选择样本 |
 | `data/splits/multiturn.jsonl` | 最多三轮纯文本历史上下文样本；历史可来自导航/音乐/新闻/百科/AIGC/天气等外部域，当前轮覆盖工具调用、NoiseDoNotAct、Reject、自然语言追问/回复 |
@@ -52,13 +52,13 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 
 | 类型 | 数量 | 说明 |
 |------|------|------|
-| By-tool | 6427 | 每个工具文件内混合：`user -> JSON tool call` 决策样本 3966 条，独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 2255 条，以及少量多轮决策上下文 |
+| By-tool | 6972 | 每个工具文件内混合：`user -> JSON tool call` 决策样本 4687 条，独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 2285 条，以及少量多轮决策上下文 |
 | Clarify | 99 | 4 轮：用户缺少工具 required 字段 → 自然语言追问 → 用户补齐 → JSON tool call；不包含 tool-role result |
-| Edge case | 102 | 多轮当前轮边界、查询 vs 控制、popup/task 列表 `GeneralSelect` 等易混淆样本 |
-| Multiturn | 233 | 最多三轮纯文本历史；历史允许外部域文本；当前轮输出分布：工具 85 条、NoiseDoNotAct 13 条、Reject 48 条、自然语言 TTS 22 条 |
+| Edge case | 100 | 多轮当前轮边界、查询 vs 控制、popup/task 列表 `GeneralSelect` 等易混淆样本 |
+| Multiturn | 242 | 最多三轮纯文本历史；历史允许外部域文本；当前轮输出分布：工具 133 条、NoiseDoNotAct 61 条、Reject 36 条、自然语言 TTS 12 条 |
 | Reject | 1745 | 单轮 + 多轮硬负例（已合并） |
 
-`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 8875 条；统计时多轮样本按最后一个有效决策标签计入对应类别。
+`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 9158 条；统计时多轮样本按最后一个有效决策标签计入对应类别。
 
 ## 训练配置
 
@@ -73,16 +73,16 @@ python train_thinker_lora.py \
 
 训练脚本所有超参均可通过命令行覆盖。以下是针对 3090 的推荐配置：
 
-**标准配置（稳定，显存约 20GB）**
+**batch=2 试验配置（当前 SP 压缩后推荐先试）**
 ```bash
 python train_thinker_lora.py \
   --model /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
   --train-file data/train_final.jsonl \
   --output-dir ./lora_output \
   --torch-dtype bfloat16 \
-  --max-length 8192 \
-  --train-batch-size 1 \
-  --grad-accum 8 \
+  --max-length 4096 \
+  --train-batch-size 2 \
+  --grad-accum 4 \
   --lora-r 8 \
   --lora-alpha 16 \
   --epochs 3
@@ -103,15 +103,15 @@ python train_thinker_lora.py \
   --epochs 3
 ```
 
-> ⚠️ `--max-length` 不能低于 7168。系统提示约 5K tokens，加对话内容约需 7000+。设得过低会直接截断系统提示，导致训练数据损坏。
+> 当前 SP 约 3032 tokens；按 Qwen chat template 估算，当前训练集最长样本约 3246 tokens。建议 `--max-length 4096` 起步；如继续压到 3584 需要先重新统计长度，避免截断新增长样本。
 
 **关键参数说明**
 
 | 参数 | 省显存方向 | 说明 |
 |------|-----------|------|
-| `--max-length` | **不可低于 7168** | 系统提示 ~5K tokens，对话 ~1-2K，最低 7168 |
-| `--train-batch-size` | 保持 1 | 已是最小值，降不了 |
-| `--grad-accum` | ↑ 增大 | 等效 batch 不变，用时间换显存 |
+| `--max-length` | ↓ 降低 | 当前建议 4096；新增长样本后需重新统计 |
+| `--train-batch-size` | ↑ 尝试 2 | SP 压缩后可尝试 batch=2；如 OOM 回退 1 |
+| `--grad-accum` | 配合 batch 调整 | batch=2 时用 4 可保持等效 batch=8 |
 | `--lora-r` | ↓ 降低 | r=4 可节省约 10% 显存，精度略降 |
 | `--torch-dtype bfloat16` | 保持 | 3090 原生支持 bf16，不要用 fp32 |
 | `gradient_checkpointing` | 已内置 True | 以 30% 速度换显存，不需要手动开 |
@@ -157,7 +157,7 @@ python serve.py \
 ```
 
 服务端启动时会打印实际 attention implementation；如果缺少 `flash_attn` 会回退到 PyTorch `sdpa`，避免继续显式使用 `eager`。请求日志会输出 `[PERF]` 单次分段耗时，并在每次成功请求后输出 `[PERF_AVG]` 进程内累计平均耗时，覆盖消息转换、音频/多模态处理、processor、generate、解析和保存等阶段。默认不再运行本地 Whisper ASR 调试；需要额外转写排查音频时再加 `--debug-asr`。
-服务端在送模前会屏蔽历史轮次里的工具调用和 `tool` 结果，包括 `assistant.tool_calls` 以及历史里直接写成 JSON 工具调用的 `assistant.content`，只保留最后一轮工具链，避免旧工具上下文干扰当前推理。
+服务端在送模前会屏蔽历史轮次里的工具调用和 `tool` 结果，包括 `assistant.tool_calls` 以及历史里直接写成 JSON 工具调用的 `assistant.content`；仅当工具链出现在最新用户消息之后时才保留。保留的 `assistant.tool_calls`、旧 `Action:` 文本和 `tool` JSON 结果会统一压缩成训练数据使用的一行紧凑 JSON，避免推理格式与训练格式不一致。
 模型输出 `Reject` 或 `NoiseDoNotAct` 时，服务端只打印诊断日志，不向客户端返回文本或工具调用。
 
 可选开启实验性的 system prompt KV cache：
@@ -308,7 +308,7 @@ python eval.py single \
 | `parse_fail` | 输出格式解析失败数 |
 
 评测脚本支持少量业务等价答案：例如「车里太闷了」这类未明确指定车窗或空调的通风意图，`ClimateControl` 切外循环和 `WindowControl` 打开车窗都计为正确。
-评测不调用 `tool_postprocess.py` 修正预测工具或参数，指标反映模型原始输出；服务端运行时仍可使用后处理作为兜底。
+评测和服务端都不调用 `tool_postprocess.py` 修正预测工具或参数，指标与线上响应都反映模型原始输出。
 
 ### 评测维度
 
@@ -342,7 +342,7 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 | `serve.py` | **OpenAI 兼容推理服务**（FastAPI，支持文本+音频） |
 | `infer_cli_omni.py` | 交互式 CLI 推理 |
 | `eval.py` | 统一评测（batch / single），音频输入 + 多维度统计，支持 `--batch-size` 批量推理 |
-| `tool_postprocess.py` | 服务端工具调用后处理兜底；训练、CLI 和评测路径不使用 |
+| `tool_postprocess.py` | 历史后处理模块；当前训练、CLI、评测和服务端路径均不使用 |
 | `scripts/probe_asr_decoder.py` | Qwen 音频编码器 → Whisper 解码器 ASR 探测实验 |
 | `scripts/build_r5_augment.py` | R5 数据增强（position/anti-clarify/climate/light） |
 | `scripts/reorganize_splits.py` | 将 splits/ 按统一响应策略分类法重组 |
