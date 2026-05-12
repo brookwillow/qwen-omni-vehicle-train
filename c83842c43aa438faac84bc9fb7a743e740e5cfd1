@@ -1,0 +1,36 @@
+serve.py
+  b809ed72392304f4 741-744,747-749
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.17",
+  "base_commit_sha": "c83842c43aa438faac84bc9fb7a743e740e5cfd1",
+  "prompts": {
+    "b809ed72392304f4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "84bc2857-93b2-4ba2-ab33-7e529014f293",
+        "model": "claude-sonnet-4.6"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 7,
+      "total_deletions": 0,
+      "accepted_lines": 7,
+      "overriden_lines": 0
+    },
+    "e7b331d81c1b2d83": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e02da-a637-7bb0-8a13-9ec27afc0ed0",
+        "model": "gpt-5.5"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 506,
+      "overriden_lines": 0
+    }
+  }
+}
