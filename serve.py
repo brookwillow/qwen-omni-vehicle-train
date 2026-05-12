@@ -738,8 +738,15 @@ def _assistant_message_is_tool_turn(msg: Message) -> bool:
     if getattr(msg, "tool_calls", None):
         return True
     content = msg.content
+    # content 是 list[dict] 格式（多模态）时提取文本部分
+    if isinstance(content, list):
+        text_parts = [c.get("text", "") for c in content if isinstance(c, dict) and c.get("type") == "text"]
+        content = "".join(text_parts).strip()
     if not isinstance(content, str):
         return False
+    # 空 assistant turn 视为历史 tool turn 一并过滤
+    if not content:
+        return True
     parsed = parse_model_output(content)
     return parsed[0] in {"tool_call", "noise_do_not_act"}
 
@@ -748,11 +755,19 @@ def _strip_historical_tool_messages(messages: List[Message]) -> List[Message]:
     """Remove historical tool-call/tool-result turns before the most recent one.
 
     We keep the most recent assistant tool-call message and the contiguous tool
-    results that immediately follow it. Older tool-related turns are stripped so
-    only the latest tool chain can influence inference.
+    results that immediately follow it only when that tool chain belongs to the
+    current turn, i.e. the tool call appears after the latest user message. If a
+    new user message follows a tool chain, that chain is historical and is
+    stripped before inference.
     """
     if not messages:
         return messages
+
+    last_user_idx = -1
+    for idx in range(len(messages) - 1, -1, -1):
+        if messages[idx].role == "user":
+            last_user_idx = idx
+            break
 
     last_tool_call_idx = -1
     for idx in range(len(messages) - 1, -1, -1):
@@ -761,15 +776,14 @@ def _strip_historical_tool_messages(messages: List[Message]) -> List[Message]:
             last_tool_call_idx = idx
             break
 
-    if last_tool_call_idx < 0:
-        return messages
-
-    keep_indices = {last_tool_call_idx}
-    for idx in range(last_tool_call_idx + 1, len(messages)):
-        if messages[idx].role == "tool":
-            keep_indices.add(idx)
-            continue
-        break
+    keep_indices: set[int] = set()
+    if last_tool_call_idx > last_user_idx:
+        keep_indices.add(last_tool_call_idx)
+        for idx in range(last_tool_call_idx + 1, len(messages)):
+            if messages[idx].role == "tool":
+                keep_indices.add(idx)
+                continue
+            break
 
     filtered: list[Message] = []
     dropped_tool_calls = 0
@@ -789,10 +803,11 @@ def _strip_historical_tool_messages(messages: List[Message]) -> List[Message]:
 
     if dropped_tool_calls or dropped_tool_results:
         logger.info(
-            "[HISTORY] stripped historical tool turns: assistant_tool_calls=%d tool_results=%d kept_last_tool_call_idx=%d",
+            "[HISTORY] stripped historical tool turns: assistant_tool_calls=%d tool_results=%d kept_last_tool_call_idx=%d last_user_idx=%d",
             dropped_tool_calls,
             dropped_tool_results,
-            last_tool_call_idx,
+            last_tool_call_idx if keep_indices else -1,
+            last_user_idx,
         )
 
     return filtered
