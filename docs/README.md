@@ -158,6 +158,7 @@ python serve.py \
 
 服务端启动时会打印实际 attention implementation；如果缺少 `flash_attn` 会回退到 PyTorch `sdpa`，避免继续显式使用 `eager`。请求日志会输出 `[PERF]` 单次分段耗时，并在每次成功请求后输出 `[PERF_AVG]` 进程内累计平均耗时，覆盖消息转换、音频/多模态处理、processor、generate、解析和保存等阶段。默认不再运行本地 Whisper ASR 调试；需要额外转写排查音频时再加 `--debug-asr`。
 服务端在送模前会屏蔽历史轮次里的工具调用和 `tool` 结果，包括 `assistant.tool_calls` 以及历史里直接写成 JSON 工具调用的 `assistant.content`，只保留最后一轮工具链，避免旧工具上下文干扰当前推理。
+模型输出 `Reject` 或 `NoiseDoNotAct` 时，服务端只打印诊断日志，不向客户端返回文本或工具调用。
 
 可选开启实验性的 system prompt KV cache：
 

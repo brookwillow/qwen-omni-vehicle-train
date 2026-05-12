@@ -952,8 +952,12 @@ def parse_model_output(text: str) -> tuple:
     Returns:
         ("tool_call", tool_name: str, args_json: str)
       | ("noise_do_not_act",)
+      | ("reject",)
       | ("text", content: str)
     """
+    if text.strip() == "Reject":
+        return ("reject",)
+
     tool_call = _parse_tool_call_json(text)
     if tool_call is not None:
         tool_name, args = tool_call
@@ -1001,6 +1005,13 @@ def _choice_from_parsed_output(parsed: tuple) -> Choice:
 
     if parsed[0] == "noise_do_not_act":
         print("[NOISE_DO_NOT_ACT] suppressed client tool output", flush=True, file=sys.stderr)
+        return Choice(
+            message=AssistantMessage(content=""),
+            finish_reason="stop",
+        )
+
+    if parsed[0] == "reject":
+        print("[REJECT] suppressed client output", flush=True, file=sys.stderr)
         return Choice(
             message=AssistantMessage(content=""),
             finish_reason="stop",

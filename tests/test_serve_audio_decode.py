@@ -288,6 +288,18 @@ def test_noise_do_not_act_is_suppressed_from_client_tool_calls(capsys):
     assert "[NOISE_DO_NOT_ACT]" in capsys.readouterr().err
 
 
+def test_reject_is_suppressed_from_client_output(capsys):
+    parsed = serve.parse_model_output("Reject")
+    choice = serve._choice_from_parsed_output(parsed)
+
+    response = serve.build_chat_response(choice=choice, prompt_tokens=10, gen_tokens=1)
+
+    assert response.choices[0].finish_reason == "stop"
+    assert response.choices[0].message.content == ""
+    assert response.choices[0].message.tool_calls is None
+    assert "[REJECT]" in capsys.readouterr().err
+
+
 def test_parse_model_output_preserves_model_tool_call_arguments():
     raw = '{"name":"SeatControl","arguments":{"action":"关闭","device":"座椅","feature":"通风","position":"主驾"}}'
 
