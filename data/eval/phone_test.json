@@ -886,5 +886,56 @@
       }
     ],
     "query_audio": "audio/phone/phone_050.wav"
+  },
+  {
+    "id": "phone_051",
+    "category": "电话",
+    "sub_category": "官方默认联系人",
+    "intent": "工具调用",
+    "difficulty": "easy",
+    "query": "帮我打电话给小鹏客服",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "拨打",
+          "contact": "小鹏客服"
+        }
+      }
+    ]
+  },
+  {
+    "id": "phone_052",
+    "category": "电话",
+    "sub_category": "官方默认联系人",
+    "intent": "工具调用",
+    "difficulty": "easy",
+    "query": "拨打小鹏救援",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "拨打",
+          "contact": "小鹏救援"
+        }
+      }
+    ]
+  },
+  {
+    "id": "phone_053",
+    "category": "电话",
+    "sub_category": "官方默认联系人",
+    "intent": "工具调用",
+    "difficulty": "easy",
+    "query": "帮我联系儿童手表",
+    "expected_tool_calls": [
+      {
+        "name": "PhoneControl",
+        "arguments": {
+          "action": "拨打",
+          "contact": "儿童手表"
+        }
+      }
+    ]
   }
 ]

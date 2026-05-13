@@ -1,6 +1,6 @@
 # 车载语音助手 LoRA 训练方案
 
-> 更新时间：2026-05-10
+> 更新时间：2026-05-13
 
 ## 项目概要
 
@@ -40,7 +40,7 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 |------|------|
 | `data/system-prompt.txt` | 紧凑版 System Prompt（~5.5K chars，基于当前工具白名单生成） |
 | `data/tools.json` | 38 个车载工具定义（新版 `inputSchema` 格式） |
-| `data/splits/by_tool/*.jsonl` | 按工具拆分的训练数据；每个工具文件内已拆为 `user -> JSON tool call` 决策样本和独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本；其中 `NoiseDoNotAct.jsonl` 当前为 438 条 |
+| `data/splits/by_tool/*.jsonl` | 按工具拆分的训练数据；每个工具文件内已拆为 `user -> JSON tool call` 决策样本和独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本；`PhoneControl.jsonl` 包含小鹏客服、小鹏救援、儿童手表等官方默认联系人样本；其中 `NoiseDoNotAct.jsonl` 当前为 438 条 |
 | `data/splits/clarify.jsonl` | required 字段缺失后的自然语言追问样本 |
 | `data/splits/edge_case.jsonl` | 多轮上下文边界、易混淆与任务列表选择样本 |
 | `data/splits/multiturn.jsonl` | 最多三轮纯文本历史上下文样本；历史可来自导航/音乐/新闻/百科/AIGC/天气等外部域，当前轮覆盖工具调用、NoiseDoNotAct、Reject、自然语言追问/回复 |
@@ -52,13 +52,13 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 
 | 类型 | 数量 | 说明 |
 |------|------|------|
-| By-tool | 6972 | 每个工具文件内混合：`user -> JSON tool call` 决策样本 4687 条，独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 2285 条，以及少量多轮决策上下文 |
+| By-tool | 6987 | 每个工具文件内混合：`user -> JSON tool call` 决策样本 4702 条，独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 2285 条，以及少量多轮决策上下文 |
 | Clarify | 99 | 4 轮：用户缺少工具 required 字段 → 自然语言追问 → 用户补齐 → JSON tool call；不包含 tool-role result |
 | Edge case | 100 | 多轮当前轮边界、查询 vs 控制、popup/task 列表 `GeneralSelect` 等易混淆样本 |
 | Multiturn | 242 | 最多三轮纯文本历史；历史允许外部域文本；当前轮输出分布：工具 133 条、NoiseDoNotAct 61 条、Reject 36 条、自然语言 TTS 12 条 |
 | Reject | 1745 | 单轮 + 多轮硬负例（已合并） |
 
-`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 9158 条；统计时多轮样本按最后一个有效决策标签计入对应类别。
+`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 9173 条；统计时多轮样本按最后一个有效决策标签计入对应类别。
 
 ## 训练配置
 

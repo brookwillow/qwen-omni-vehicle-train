@@ -42,3 +42,22 @@ def test_by_tool_split_targets_known_error_clusters():
 
     for tool in ("ClimateControl", "ProfileControl", "WindowControl", "LightControl"):
         assert contents.count(f'"name":"{tool}"') >= 12
+
+
+def test_phone_split_includes_builtin_contacts():
+    phone_path = BY_TOOL_DIR / "PhoneControl.jsonl"
+    contacts = []
+    for line in phone_path.read_text(encoding="utf-8").splitlines():
+        sample = json.loads(line)
+        for message in sample["messages"]:
+            if message["role"] != "assistant":
+                continue
+            try:
+                tool_call = json.loads(message["content"])
+            except json.JSONDecodeError:
+                continue
+            if tool_call.get("name") == "PhoneControl":
+                contacts.append(tool_call.get("arguments", {}).get("contact"))
+
+    for contact in ("小鹏客服", "小鹏救援", "儿童手表"):
+        assert contacts.count(contact) >= 5
