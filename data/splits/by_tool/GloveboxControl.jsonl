@@ -35,3 +35,5 @@
 {"messages":[{"role":"assistant","content":"{\"name\":\"GloveboxControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"手套箱\",\"feature\":\"密码\",\"value\":\"6666\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"已设置密码。"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"GloveboxControl\",\"arguments\":{\"action\":\"密码找回\",\"device\":\"手套箱\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"密码找回已执行。"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"GloveboxControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"手套箱\",\"feature\":\"密码\",\"value\":\"2468\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"密码设置完成。"}]}
+{"messages":[{"role":"user","content":"帮我打开副驾的手套箱"},{"role":"assistant","content":"{\"name\":\"GloveboxControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"手套箱\"}}"}]}
+{"messages":[{"role":"user","content":"打开手套箱"},{"role":"assistant","content":"{\"name\":\"GloveboxControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"手套箱\"}}"}]}

@@ -40,10 +40,10 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 |------|------|
 | `data/system-prompt.txt` | 紧凑版 System Prompt（~5.5K chars，基于当前工具白名单生成） |
 | `data/tools.json` | 38 个车载工具定义（新版 `inputSchema` 格式） |
-| `data/splits/by_tool/*.jsonl` | 按工具拆分的训练数据；每个工具文件内已拆为 `user -> JSON tool call` 决策样本和独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本；`PhoneControl.jsonl` 包含小鹏客服、小鹏救援、儿童手表等官方默认联系人样本；其中 `NoiseDoNotAct.jsonl` 当前为 438 条 |
+| `data/splits/by_tool/*.jsonl` | 按工具拆分的训练数据；每个工具文件内已拆为 `user -> JSON tool call` 决策样本和独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本；`PhoneControl.jsonl` 包含小鹏客服、小鹏救援、儿童手表等官方默认联系人样本；其中 `NoiseDoNotAct.jsonl` 当前为 439 条 |
 | `data/splits/clarify.jsonl` | required 字段缺失后的自然语言追问样本 |
 | `data/splits/edge_case.jsonl` | 多轮上下文边界、易混淆与任务列表选择样本 |
-| `data/splits/multiturn.jsonl` | 最多三轮纯文本历史上下文样本；历史可来自导航/音乐/新闻/百科/AIGC/天气等外部域，当前轮覆盖工具调用、NoiseDoNotAct、Reject、自然语言追问/回复 |
+| `data/splits/multiturn.jsonl` | 最多三轮纯文本历史上下文样本；历史可来自导航/音乐/新闻/百科/AIGC/天气等外部域，当前轮优先，只有代词、省略、纠错、延续或查询缺槽时才参考历史补全 |
 | `data/splits/reject.jsonl` | 单轮 + 多轮硬负例 |
 | `data/train_final.jsonl` | 最终训练数据（含 SP） |
 | `data/eval/` | 评测数据集（当前工具 schema 已清洗，媒体类无新版等价工具样本已置空/移除） |
@@ -52,13 +52,13 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 
 | 类型 | 数量 | 说明 |
 |------|------|------|
-| By-tool | 6987 | 每个工具文件内混合：`user -> JSON tool call` 决策样本 4702 条，独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 2285 条，以及少量多轮决策上下文 |
+| By-tool | 6997 | 每个工具文件内混合：`user -> JSON tool call` 决策样本 4712 条，独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 2285 条 |
 | Clarify | 99 | 4 轮：用户缺少工具 required 字段 → 自然语言追问 → 用户补齐 → JSON tool call；不包含 tool-role result |
 | Edge case | 100 | 多轮当前轮边界、查询 vs 控制、popup/task 列表 `GeneralSelect` 等易混淆样本 |
-| Multiturn | 242 | 最多三轮纯文本历史；历史允许外部域文本；当前轮输出分布：工具 133 条、NoiseDoNotAct 61 条、Reject 36 条、自然语言 TTS 12 条 |
-| Reject | 1745 | 单轮 + 多轮硬负例（已合并） |
+| Multiturn | 321 | 最多三轮纯文本历史；历史允许外部域文本；当前轮输出分布：工具 194 条、NoiseDoNotAct 79 条、Reject 36 条、自然语言 TTS 12 条 |
+| Reject | 1127 | 单轮 + 多轮硬负例（已合并），最后一条 assistant 均为 `Reject`；已抽稀家居控制负例并移除高风险车控状态拒识 |
 
-`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 9173 条；统计时多轮样本按最后一个有效决策标签计入对应类别。
+`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 8644 条；统计时多轮样本按最后一个有效决策标签计入对应类别。
 
 ## 训练配置
 
@@ -134,6 +134,12 @@ python train_thinker_lora.py \
 
 训练脚本会在编码后按原始 `messages` 定位最后一个 assistant 回复，只对这段回复计算 loss。这样 `user -> tool_call` 和独立的 `tool_call -> tool-result -> TTS` 样本都能提供监督信号；若截断导致最后回复完全找不到，才会过滤 `labels` 全为 `-100` 的空监督样本。
 
+每次训练启动后会清空并重写 `output_dir/train_metrics.jsonl`，避免多次训练追加到同一个指标文件导致曲线抖动。训练过程的 stdout/stderr 会同时写入 `output_dir/train.log`，可用以下命令事后审阅或实时查看：
+
+```bash
+tail -f lora_output/train.log
+```
+
 ### 冻结保障
 
 训练脚本通过关键词 `audio,talker,vocoder,audio_decoder,speech_decoder` 自动冻结非 Thinker 参数，并输出审计文件：
@@ -153,10 +159,18 @@ python serve.py \
   --model-dir /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
   --lora-dir lora_output \
   --host 0.0.0.0 \
-  --port 8000
+  --port 8000 \
+  --log-file /tmp/qwen_omni_serve.log
 ```
 
 服务端启动时会打印实际 attention implementation；如果缺少 `flash_attn` 会回退到 PyTorch `sdpa`，避免继续显式使用 `eager`。请求日志会输出 `[PERF]` 单次分段耗时，并在每次成功请求后输出 `[PERF_AVG]` 进程内累计平均耗时，覆盖消息转换、音频/多模态处理、processor、generate、解析和保存等阶段。默认不再运行本地 Whisper ASR 调试；需要额外转写排查音频时再加 `--debug-asr`。
+`serve.py` 默认会把 stdout/stderr、`serve` logger 和 uvicorn 日志写到公共路径 `/tmp/qwen_omni_serve.log`，其他用户可直接查看：
+
+```bash
+tail -f /tmp/qwen_omni_serve.log
+```
+
+需要每次启动覆盖旧日志时加 `--log-file-mode w`；需要关闭文件日志时传 `--log-file ""`。
 服务端在送模前会屏蔽历史轮次里的工具调用和 `tool` 结果，包括 `assistant.tool_calls` 以及历史里直接写成 JSON 工具调用的 `assistant.content`；仅当工具链出现在最新用户消息之后时才保留。保留的 `assistant.tool_calls`、旧 `Action:` 文本和 `tool` JSON 结果会统一压缩成训练数据使用的一行紧凑 JSON，避免推理格式与训练格式不一致。
 模型输出 `Reject` 或 `NoiseDoNotAct` 时，服务端只打印诊断日志，不向客户端返回文本或工具调用。
 

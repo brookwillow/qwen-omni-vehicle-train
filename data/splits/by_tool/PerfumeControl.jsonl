@@ -25,3 +25,4 @@
 {"messages":[{"role":"user","content":"把香氛调淡一点"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"调低\",\"device\":\"香氛\",\"feature\":\"浓度\",\"value\":\"最低\"}}"}]}
 {"messages":[{"role":"user","content":"香氛开到最低浓度"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"香氛\",\"feature\":\"浓度\",\"value\":\"最低\"}}"}]}
 {"messages":[{"role":"user","content":"香氛开到最高浓度"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"香氛\",\"feature\":\"浓度\",\"value\":\"最高\"}}"}]}
+{"messages":[{"role":"user","content":"打开车里的香氛系统"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"香氛\"}}"}]}

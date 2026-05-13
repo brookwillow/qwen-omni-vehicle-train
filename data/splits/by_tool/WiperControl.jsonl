@@ -46,3 +46,10 @@
 {"messages":[{"role":"user","content":"雨刮灵敏度再调低"},{"role":"assistant","content":"{\"name\":\"WiperControl\",\"arguments\":{\"action\":\"调低\",\"device\":\"雨刮\",\"feature\":\"灵敏度\",\"value\":\"低\"}}"}]}
 {"messages":[{"role":"user","content":"后雨刮灵敏度调高"},{"role":"assistant","content":"{\"name\":\"WiperControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"后雨刮\",\"feature\":\"灵敏度\",\"value\":\"高\"}}"}]}
 {"messages":[{"role":"user","content":"后雨刮灵敏度调低"},{"role":"assistant","content":"{\"name\":\"WiperControl\",\"arguments\":{\"action\":\"调低\",\"device\":\"后雨刮\",\"feature\":\"灵敏度\",\"value\":\"低\"}}"}]}
+{"messages":[{"role":"user","content":"下雨了，帮我把雨刮器打开吧"},{"role":"assistant","content":"{\"name\":\"WiperControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"雨刮\",\"value\":\"自动\"}}"}]}
+{"messages":[{"role":"user","content":"帮我打开雨刮器"},{"role":"assistant","content":"{\"name\":\"WiperControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"雨刮\",\"value\":\"自动\"}}"}]}
+{"messages":[{"role":"user","content":"帮我打开雨刮器"},{"role":"assistant","content":"{\"name\":\"WiperControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"雨刮\",\"value\":\"自动\"}}"}]}
+{"messages":[{"role":"user","content":"帮我喷点玻璃水"},{"role":"assistant","content":"{\"name\":\"WiperControl\",\"arguments\":{\"action\":\"清洗\",\"device\":\"雨刮\",\"value\":\"自动\"}}"}]}
+{"messages":[{"role":"user","content":"帮我喷点玻璃水"},{"role":"assistant","content":"{\"name\":\"WiperControl\",\"arguments\":{\"action\":\"清洗\",\"device\":\"雨刮\",\"value\":\"自动\"}}"}]}
+{"messages":[{"role":"user","content":"帮我喷点玻璃水洗下前挡风"},{"role":"assistant","content":"{\"name\":\"WiperControl\",\"arguments\":{\"action\":\"清洗\",\"device\":\"雨刮\",\"value\":\"自动\"}}"}]}
+{"messages":[{"role":"user","content":"帮我把雨刮器打开"},{"role":"assistant","content":"{\"name\":\"WiperControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"雨刮\",\"value\":\"自动\"}}"}]}

@@ -19,8 +19,9 @@ import importlib.util as importlib_util
 import inspect
 import json
 import os
+import sys
 from pathlib import Path
-from typing import Any, Dict, Iterable, Tuple
+from typing import Any, Dict, Iterable, TextIO, Tuple
 
 import torch
 from datasets import load_dataset as hf_load_dataset
@@ -28,6 +29,44 @@ from peft import LoraConfig, get_peft_model
 from swift import EncodePreprocessor, get_model_processor, get_template
 from swift.trainers import Seq2SeqTrainer, Seq2SeqTrainingArguments
 from transformers import TrainerCallback
+
+
+class _TeeStream:
+    """Mirror stdout/stderr to both console and a log file."""
+
+    def __init__(self, primary: TextIO, secondary: TextIO) -> None:
+        self.primary = primary
+        self.secondary = secondary
+
+    def write(self, data: str) -> int:
+        self.primary.write(data)
+        self.secondary.write(data)
+        self.flush()
+        return len(data)
+
+    def flush(self) -> None:
+        self.primary.flush()
+        self.secondary.flush()
+
+    def isatty(self) -> bool:
+        return self.primary.isatty()
+
+    def __getattr__(self, name: str) -> Any:
+        return getattr(self.primary, name)
+
+
+def setup_run_logs(output_dir: Path) -> TextIO:
+    """Reset per-run logs and tee process output to train.log."""
+
+    metrics_path = output_dir / "train_metrics.jsonl"
+    train_log_path = output_dir / "train.log"
+    metrics_path.write_text("", encoding="utf-8")
+    train_log = train_log_path.open("w", encoding="utf-8", buffering=1)
+    sys.stdout = _TeeStream(sys.stdout, train_log)  # type: ignore[assignment]
+    sys.stderr = _TeeStream(sys.stderr, train_log)  # type: ignore[assignment]
+    print(f"[log] metrics reset: {metrics_path}")
+    print(f"[log] console log: {train_log_path}")
+    return train_log
 
 
 class SafeKeySeq2SeqTrainer(Seq2SeqTrainer):
@@ -262,6 +301,20 @@ def summarize_trainable_params(
 class MetricsSaverCallback(TrainerCallback):
     """Append every logged metric step to {output_dir}/train_metrics.jsonl."""
 
+    def __init__(self) -> None:
+        self._seen_records: set[tuple[Any, ...]] = set()
+
+    def _write_record(self, args, record: dict[str, Any]) -> None:
+        if len(record) <= 2:
+            return
+        key = tuple(sorted(record.items()))
+        if key in self._seen_records:
+            return
+        self._seen_records.add(key)
+        metrics_path = Path(args.output_dir) / "train_metrics.jsonl"
+        with metrics_path.open("a", encoding="utf-8") as f:
+            f.write(json.dumps(record, ensure_ascii=False) + "\n")
+
     def on_log(self, args, state, control, logs=None, **kwargs):
         logs = logs or {}
         record = {
@@ -272,10 +325,7 @@ class MetricsSaverCallback(TrainerCallback):
                   "eval_loss", "eval_token_acc"):
             if k in logs:
                 record[k] = logs[k]
-        if len(record) > 2:  # more than just step/epoch
-            metrics_path = Path(args.output_dir) / "train_metrics.jsonl"
-            with metrics_path.open("a", encoding="utf-8") as f:
-                f.write(json.dumps(record, ensure_ascii=False) + "\n")
+        self._write_record(args, record)
 
     def on_evaluate(self, args, state, control, metrics=None, **kwargs):
         metrics = metrics or {}
@@ -286,10 +336,7 @@ class MetricsSaverCallback(TrainerCallback):
         for k in ("eval_loss", "eval_token_acc"):
             if k in metrics:
                 record[k] = metrics[k]
-        if len(record) > 2:
-            metrics_path = Path(args.output_dir) / "train_metrics.jsonl"
-            with metrics_path.open("a", encoding="utf-8") as f:
-                f.write(json.dumps(record, ensure_ascii=False) + "\n")
+        self._write_record(args, record)
 
 
 class ConsoleMetricsCallback(TrainerCallback):
@@ -354,6 +401,7 @@ def main() -> None:
     dtype_map = {"bfloat16": torch.bfloat16, "float16": torch.float16, "float32": torch.float32}
     out_dir = Path(args.output_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
+    setup_run_logs(out_dir)
 
     # 1. Load model
     print("[1/6] Loading model...")

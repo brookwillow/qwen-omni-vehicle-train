@@ -29,7 +29,6 @@
 {"messages":[{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"媒体播放音量\"}}"},{"role":"tool","content":"{\"volume\": 40}"},{"role":"assistant","content":"当前媒体播放音量为40。"}]}
 {"messages":[{"role":"user","content":"香氛浓度是多少"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"香氛浓度\"}}"}]}
 {"messages":[{"role":"user","content":"查一下后雾灯状态"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"后雾灯\"}}"}]}
-{"messages":[{"role":"user","content":"打开大灯"},{"role":"assistant","content":"{\"name\": \"LightControl\", \"arguments\": {\"action\": \"打开\", \"device\": \"大灯\"}}"},{"role":"user","content":"灯光状态怎么样"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"灯光状态\"}}"}]}
 {"messages":[{"role":"user","content":"左后座椅通风状态"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"二排左座椅通风\"}}"}]}
 {"messages":[{"role":"user","content":"电池剩多少"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"电池电量\"}}"}]}
 {"messages":[{"role":"user","content":"空调温度同步开着吗"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"空调温度同步\"}}"}]}
@@ -96,7 +95,6 @@
 {"messages":[{"role":"user","content":"帮我看后排右侧车窗"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"后排右侧车窗\"}}"}]}
 {"messages":[{"role":"user","content":"小P声音音量是多少"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"小P语音音量\"}}"}]}
 {"messages":[{"role":"user","content":"查一下前排自动空调状态"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"前排自动空调\"}}"}]}
-{"messages":[{"role":"user","content":"打开后排空调"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"空调\",\"position\":\"第二排\"}}"},{"role":"user","content":"后排空调开了吗"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"后排空调\"}}"}]}
 {"messages":[{"role":"user","content":"二排右边座椅通风开了吗"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"二排右座椅通风\"}}"}]}
 {"messages":[{"role":"user","content":"通话音量是多少"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"蓝牙通话音量\"}}"}]}
 {"messages":[{"role":"user","content":"右后座加热状态"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"后排右座椅加热\"}}"}]}
@@ -104,7 +102,6 @@
 {"messages":[{"role":"user","content":"主驾座椅制热状态查一下"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"主驾座椅加热\"}}"}]}
 {"messages":[{"role":"user","content":"查一下车内空气质量"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"车内空气质量\"}}"}]}
 {"messages":[{"role":"user","content":"帮我看AC开关状态"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"AC\"}}"}]}
-{"messages":[{"role":"user","content":"打开主驾车窗"},{"role":"assistant","content":"{\"name\": \"WindowControl\", \"arguments\": {\"action\": \"打开\", \"device\": \"车窗\", \"position\": \"主驾\"}}"},{"role":"user","content":"现在是开着的吗"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"主驾车窗\"}}"}]}
 {"messages":[{"role":"user","content":"空调温度调了几度"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"用户空调温度\"}}"}]}
 {"messages":[{"role":"user","content":"车门左儿童锁是开着的吗"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"车门左儿童锁状态\"}}"}]}
 {"messages":[{"role":"user","content":"全部儿童锁状态"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"全车儿童锁\"}}"}]}
@@ -118,7 +115,6 @@
 {"messages":[{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"自启动后行驶里程\"}}"},{"role":"tool","content":"{\"mileage\": \"128公里\"}"},{"role":"assistant","content":"本次启动后已行驶128公里。"}]}
 {"messages":[{"role":"user","content":"左后车窗关好了吗"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"后排左侧车窗\"}}"}]}
 {"messages":[{"role":"user","content":"帮我看前除雾"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"前除雾\"}}"}]}
-{"messages":[{"role":"user","content":"把空调温度调到24度"},{"role":"assistant","content":"{\"name\": \"ClimateControl\", \"arguments\": {\"action\": \"调到\", \"device\": \"空调\", \"feature\": \"温度\", \"value\": \"24\"}}"},{"role":"user","content":"现在温度是多少"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"用户空调温度\"}}"}]}
 {"messages":[{"role":"user","content":"后排右边空调温度现在几度"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"后排右侧空调温度\"}}"}]}
 {"messages":[{"role":"user","content":"蓝牙通话音量是多少"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"蓝牙通话音量\"}}"}]}
 {"messages":[{"role":"user","content":"二排右边通风状态"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"二排右座椅通风\"}}"}]}
@@ -129,7 +125,6 @@
 {"messages":[{"role":"user","content":"我这边的自动空调状态"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"用户自动空调\"}}"}]}
 {"messages":[{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"综合续航里程\"}}"},{"role":"tool","content":"{\"result\": \"280公里\"}"},{"role":"assistant","content":"当前车辆综合续航里程还有280公里。"}]}
 {"messages":[{"role":"user","content":"循环模式是什么"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"空调循环\"}}"}]}
-{"messages":[{"role":"user","content":"关闭副驾座椅通风"},{"role":"assistant","content":"{\"name\": \"SeatControl\", \"arguments\": {\"action\": \"关闭\", \"device\": \"座椅\", \"feature\": \"通风\", \"position\": \"副驾\"}}"},{"role":"user","content":"查它现在的状态"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"副驾座椅通风\"}}"}]}
 {"messages":[{"role":"user","content":"本次启动跑了多少"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"自启动后行驶里程\"}}"}]}
 {"messages":[{"role":"user","content":"查一下各区域的温度设定"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"全车空调温度\"}}"}]}
 {"messages":[{"role":"user","content":"当前百公里能耗是多少"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"百公里平均能耗\"}}"}]}
@@ -170,7 +165,6 @@
 {"messages":[{"role":"user","content":"现在四个轮胎胎压正常吗"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"车辆胎压\"}}"}]}
 {"messages":[{"role":"user","content":"查一下前排风量"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"前排空调风量\"}}"}]}
 {"messages":[{"role":"user","content":"副驾侧的车窗是关着的吗"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"副驾车窗\"}}"}]}
-{"messages":[{"role":"user","content":"开启前除雾"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"前挡风\",\"feature\":\"除雾\"}}"},{"role":"user","content":"前除雾开好了吗"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"前除雾\"}}"}]}
 {"messages":[{"role":"user","content":"帮我看看在不在充电"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"当前充电状态\"}}"}]}
 {"messages":[{"role":"user","content":"帮我看副驾车窗"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"副驾车窗\"}}"}]}
 {"messages":[{"role":"user","content":"帮我看看主驾座椅加热开没开"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"主驾座椅加热\"}}"}]}
@@ -212,18 +206,15 @@
 {"messages":[{"role":"user","content":"我这边温度设置多少"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"用户空调温度\"}}"}]}
 {"messages":[{"role":"user","content":"查一下上次充电后的里程"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"上次充电后行驶里程\"}}"}]}
 {"messages":[{"role":"user","content":"充电还需要几分钟"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"充电剩余时间\"}}"}]}
-{"messages":[{"role":"user","content":"关上全车车窗"},{"role":"assistant","content":"{\"name\": \"WindowControl\", \"arguments\": {\"action\": \"关闭\", \"device\": \"车窗\"}}"},{"role":"user","content":"全部关好了吗"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"全车车窗\"}}"}]}
 {"messages":[{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"后排左座椅加热\"}}"},{"role":"tool","content":"{\"status\": \"on\", \"level\": 1}"},{"role":"assistant","content":"后排左座椅加热已开启，当前为1档。"}]}
 {"messages":[{"role":"user","content":"查一下后舱风量"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"后排空调风量\"}}"}]}
 {"messages":[{"role":"user","content":"充电充到多少了"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"充电电量\"}}"}]}
-{"messages":[{"role":"user","content":"打开空调"},{"role":"assistant","content":"{\"name\": \"ClimateControl\", \"arguments\": {\"action\": \"打开\", \"device\": \"空调\"}}"},{"role":"user","content":"空调开好了吗"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"前排空调\"}}"}]}
 {"messages":[{"role":"user","content":"我的儿童锁状态"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"用户儿童锁状态\"}}"}]}
 {"messages":[{"role":"user","content":"车辆灯光状态"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"灯光状态\"}}"}]}
 {"messages":[{"role":"user","content":"现在媒体音量是多少"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"媒体播放音量\"}}"}]}
 {"messages":[{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"用户空调温度\"}}"},{"role":"tool","content":"{\"temperature\": 26}"},{"role":"assistant","content":"您这边的空调温度当前设置为26摄氏度。"}]}
 {"messages":[{"role":"user","content":"空调内外循环状态"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"空调循环\"}}"}]}
 {"messages":[{"role":"user","content":"全车各区域温度"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"全车空调温度\"}}"}]}
-{"messages":[{"role":"user","content":"关上副驾车窗"},{"role":"assistant","content":"{\"name\": \"WindowControl\", \"arguments\": {\"action\": \"关闭\", \"device\": \"车窗\", \"position\": \"副驾\"}}"},{"role":"user","content":"查询一下车窗状态"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"副驾车窗\"}}"}]}
 {"messages":[{"role":"user","content":"帮我查充电电量"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"充电电量\"}}"}]}
 {"messages":[{"role":"user","content":"启动后行驶了多少公里"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"自启动后行驶里程\"}}"}]}
 {"messages":[{"role":"user","content":"主驾这边车窗状态"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"主驾车窗\"}}"}]}
@@ -360,7 +351,6 @@
 {"messages":[{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"前排空调\"}}"},{"role":"tool","content":"{\"status\": \"on\"}"},{"role":"assistant","content":"前排空调当前处于开启状态。"}]}
 {"messages":[{"role":"user","content":"全车车窗现在什么状态"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"全车车窗\"}}"}]}
 {"messages":[{"role":"user","content":"目前在充电吗"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"当前充电状态\"}}"}]}
-{"messages":[{"role":"user","content":"打开氛围灯"},{"role":"assistant","content":"{\"name\": \"LightControl\", \"arguments\": {\"action\": \"打开\", \"device\": \"氛围灯\"}}"},{"role":"user","content":"亮度现在多少"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"氛围灯亮度\"}}"}]}
 {"messages":[{"role":"user","content":"前挡风玻璃除雾状态"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"前除雾\"}}"}]}
 {"messages":[{"role":"user","content":"自动雨刮状态"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"自动雨刮\"}}"}]}
 {"messages":[{"role":"user","content":"车内空气质量如何"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"车内空气质量\"}}"}]}
@@ -368,7 +358,6 @@
 {"messages":[{"role":"user","content":"小P说话声音有多大"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"小P语音音量\"}}"}]}
 {"messages":[{"role":"user","content":"查一下后排右座椅加热状态"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"后排右座椅加热\"}}"}]}
 {"messages":[{"role":"user","content":"前后温度有没有同步"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"空调温度同步\"}}"}]}
-{"messages":[{"role":"user","content":"打开后视镜加热"},{"role":"assistant","content":"{\"name\": \"RearviewControl\", \"arguments\": {\"action\": \"打开\", \"device\": \"后视镜\", \"value\": \"制热\"}}"},{"role":"user","content":"后视镜加热开着吗"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"后视镜加热\"}}"}]}
 {"messages":[{"role":"user","content":"我的空调风量"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"用户空调风量\"}}"}]}
 {"messages":[{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"车内温度\"}}"},{"role":"tool","content":"{\"temperature\": 28}"},{"role":"assistant","content":"当前车内温度为28摄氏度，稍高，可适当调低空调温度。"}]}
 {"messages":[{"role":"user","content":"前舱自动空调状态"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"前排自动空调\"}}"}]}
@@ -400,7 +389,6 @@
 {"messages":[{"role":"user","content":"香氛浓度调了几档"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"香氛浓度\"}}"}]}
 {"messages":[{"role":"user","content":"查一下充电还需要多长时间"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"充电剩余时间\"}}"}]}
 {"messages":[{"role":"user","content":"综合续航是多少"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"综合续航里程\"}}"}]}
-{"messages":[{"role":"user","content":"打开主驾座椅加热"},{"role":"assistant","content":"{\"name\": \"SeatControl\", \"arguments\": {\"action\": \"打开\", \"device\": \"座椅\", \"feature\": \"制热\", \"position\": \"主驾\"}}"},{"role":"user","content":"主驾座椅加热开了吗"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"主驾座椅加热\"}}"}]}
 {"messages":[{"role":"user","content":"净化模式什么档"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"空气净化模式\"}}"}]}
 {"messages":[{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"车辆胎压\"}}"},{"role":"tool","content":"{\"front_left\": 2.3, \"front_right\": 2.3, \"rear_left\": 2.4, \"rear_right\": 2.4}"},{"role":"assistant","content":"前轮胎压2.3bar，后轮胎压2.4bar，均在正常范围内。"}]}
 {"messages":[{"role":"user","content":"综合续航还有多少"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"综合续航里程\"}}"}]}
@@ -417,7 +405,6 @@
 {"messages":[{"role":"user","content":"帮我查香氛浓度"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"香氛浓度\"}}"}]}
 {"messages":[{"role":"user","content":"查一下我这边的儿童锁状态"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"用户儿童锁状态\"}}"}]}
 {"messages":[{"role":"user","content":"AC状态怎么样"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"AC\"}}"}]}
-{"messages":[{"role":"user","content":"打开自动雨刮"},{"role":"assistant","content":"{\"name\": \"WiperControl\", \"arguments\": {\"action\": \"打开\", \"device\": \"雨刮\", \"value\": \"自动\"}}"},{"role":"user","content":"雨刮自动模式开没开"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"自动雨刮\"}}"}]}
 {"messages":[{"role":"user","content":"车厢里现在几度"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"车内温度\"}}"}]}
 {"messages":[{"role":"user","content":"上次充电后跑了多远"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"上次充电后行驶里程\"}}"}]}
 {"messages":[{"role":"user","content":"副驾加热开了没"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"副驾座椅加热\"}}"}]}
@@ -444,7 +431,6 @@
 {"messages":[{"role":"user","content":"WLTP模式还能开多远"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"WLTP模式可续航里程\"}}"}]}
 {"messages":[{"role":"user","content":"后排左侧空调温度是多少"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"后排左侧空调温度\"}}"}]}
 {"messages":[{"role":"user","content":"我的座椅加热开了吗"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"用户座椅加热\"}}"}]}
-{"messages":[{"role":"user","content":"把音量调高一点"},{"role":"assistant","content":"{\"name\": \"VoiceControl\", \"arguments\": {\"action\": \"调高\", \"feature\": \"声音\"}}"},{"role":"user","content":"现在音量是多少"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"媒体播放音量\"}}"}]}
 {"messages":[{"role":"user","content":"自动雨刮开着吗"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"自动雨刮\"}}"}]}
 {"messages":[{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"主驾座椅通风\"}}"},{"role":"tool","content":"{\"status\": \"on\", \"level\": 2}"},{"role":"assistant","content":"主驾座椅通风已开启，当前档位为2档。"}]}
 {"messages":[{"role":"user","content":"帮我看燃油续航"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"燃油续航里程\"}}"}]}
@@ -464,7 +450,6 @@
 {"messages":[{"role":"user","content":"查一下剩余电量百分比"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"剩余电量百分比\"}}"}]}
 {"messages":[{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"充电剩余时间\"}}"},{"role":"tool","content":"{\"remaining_minutes\": 45}"},{"role":"assistant","content":"预计还需45分钟充满电。"}]}
 {"messages":[{"role":"user","content":"香氛的开关状态"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"香氛开启\"}}"}]}
-{"messages":[{"role":"user","content":"打开主驾座椅通风"},{"role":"assistant","content":"{\"name\": \"SeatControl\", \"arguments\": {\"action\": \"打开\", \"device\": \"座椅\", \"feature\": \"通风\", \"position\": \"主驾\"}}"},{"role":"user","content":"查一下现在开着没"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"主驾座椅通风\"}}"}]}
 {"messages":[{"role":"user","content":"右后车窗关好了吗"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"后排右侧车窗\"}}"}]}
 {"messages":[{"role":"user","content":"左后车窗是开的吗"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"后排左侧车窗\"}}"}]}
 {"messages":[{"role":"user","content":"帮我查小P语音音量"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"小P语音音量\"}}"}]}
@@ -491,3 +476,11 @@
 {"messages":[{"role":"user","content":"后雾灯现在什么状态"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"后雾灯\"}}"}]}
 {"messages":[{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"当前充电状态\"}}"},{"role":"tool","content":"{\"charging\": false}"},{"role":"assistant","content":"当前车辆未在充电。"}]}
 {"messages":[{"role":"user","content":"帮我查近光灯"},{"role":"assistant","content":"{\"name\": \"CarUsageSearch\", \"arguments\": {\"query\": \"近光灯开关\"}}"}]}
+{"messages":[{"role":"user","content":"空调开着了吗"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"用户空调\"}}"}]}
+{"messages":[{"role":"user","content":"空调现在是开着的吗"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"用户空调\"}}"}]}
+{"messages":[{"role":"user","content":"车窗关好了吗"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"全车车窗\"}}"}]}
+{"messages":[{"role":"user","content":"电量还剩多少"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"电池电量\"}}"}]}
+{"messages":[{"role":"user","content":"现在温度是多少"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"用户空调温度\"}}"}]}
+{"messages":[{"role":"user","content":"空调温度设的是多少"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"用户空调温度\"}}"}]}
+{"messages":[{"role":"user","content":"音量调到多少了"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"媒体播放音量\"}}"}]}
+{"messages":[{"role":"user","content":"座椅加热开着吗"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"用户座椅加热\"}}"}]}

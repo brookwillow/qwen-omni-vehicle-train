@@ -49,7 +49,7 @@ import uuid
 import wave
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, TextIO
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger("serve")
@@ -67,6 +67,60 @@ from transformers import Qwen2_5OmniForConditionalGeneration, Qwen2_5OmniProcess
 _PROJECT_DIR = Path(__file__).resolve().parent
 _DEFAULT_SP_FILE = _PROJECT_DIR / "data" / "system-prompt.txt"
 _SAVE_DIR = _PROJECT_DIR / "data" / "serve_logs"
+_DEFAULT_LOG_FILE = Path("/tmp/qwen_omni_serve.log")
+
+
+class _TeeStream:
+    """Mirror stdout/stderr to both screen and a shared log file."""
+
+    def __init__(self, primary: TextIO, secondary: TextIO) -> None:
+        self.primary = primary
+        self.secondary = secondary
+
+    def write(self, data: str) -> int:
+        self.primary.write(data)
+        self.secondary.write(data)
+        self.flush()
+        return len(data)
+
+    def flush(self) -> None:
+        self.primary.flush()
+        self.secondary.flush()
+
+    def isatty(self) -> bool:
+        return self.primary.isatty()
+
+    def __getattr__(self, name: str) -> Any:
+        return getattr(self.primary, name)
+
+
+def setup_file_logging(log_file: str, mode: str = "a") -> TextIO | None:
+    """Write serve.py stdout/stderr and logging records to a shared file."""
+
+    if not log_file:
+        return None
+
+    path = Path(log_file).expanduser()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    log_handle = path.open(mode, encoding="utf-8", buffering=1)
+    sys.stdout = _TeeStream(sys.stdout, log_handle)  # type: ignore[assignment]
+    sys.stderr = _TeeStream(sys.stderr, log_handle)  # type: ignore[assignment]
+
+    formatter = logging.Formatter("%(asctime)s %(levelname)s %(name)s %(message)s")
+    file_handler = logging.FileHandler(path, mode="a", encoding="utf-8")
+    file_handler.setFormatter(formatter)
+    file_handler.setLevel(logging.INFO)
+    root_logger = logging.getLogger("")
+    root_logger.addHandler(file_handler)
+    root_logger.setLevel(logging.INFO)
+    for logger_name in ("uvicorn", "uvicorn.error", "uvicorn.access"):
+        target_logger = logging.getLogger(logger_name)
+        if not target_logger.propagate:
+            target_logger.addHandler(file_handler)
+        target_logger.setLevel(logging.INFO)
+
+    print(f"[log] serve log file: {path}")
+    return log_handle
 
 
 class _PerfAverages:
@@ -1333,6 +1387,20 @@ def parse_args() -> argparse.Namespace:
         choices=["none", "kv"],
         help="Prompt cache mode. 'kv' is experimental and caches the fixed system-prompt prefix.",
     )
+    p.add_argument(
+        "--log-file",
+        default=str(_DEFAULT_LOG_FILE),
+        help=(
+            "Shared inference log file for tail -f. "
+            "Set to an empty string to disable file logging."
+        ),
+    )
+    p.add_argument(
+        "--log-file-mode",
+        default="a",
+        choices=["a", "w"],
+        help="Open --log-file in append mode ('a') or overwrite mode ('w').",
+    )
     return p.parse_args()
 
 
@@ -1340,6 +1408,7 @@ def main():
     global _model, _processor, _system_prompt, _model_name, _debug_asr_enabled, _prompt_cache_mode, _kv_prompt_cache
 
     args = parse_args()
+    setup_file_logging(args.log_file, args.log_file_mode)
 
     # Resolve system prompt
     if args.system_prompt:

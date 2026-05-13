@@ -436,3 +436,4 @@
 {"messages":[{"role":"user","content":"一二三四五六七八九十"},{"role":"assistant","content":"{\"name\":\"NoiseDoNotAct\",\"arguments\":{}}"}]}
 {"messages":[{"role":"user","content":"今天明天后天大后天"},{"role":"assistant","content":"{\"name\":\"NoiseDoNotAct\",\"arguments\":{}}"}]}
 {"messages":[{"role":"user","content":"北京上海广州深圳"},{"role":"assistant","content":"{\"name\":\"NoiseDoNotAct\",\"arguments\":{}}"}]}
+{"messages":[{"role":"user","content":"你好"},{"role":"assistant","content":"{\"name\":\"NoiseDoNotAct\",\"arguments\":{}}"}]}
