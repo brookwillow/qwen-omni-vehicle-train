@@ -1,0 +1,29 @@
+tests/test_priority_augmentation_split.py
+  9dec22358ecde48e 45-63
+data/eval/phone_test.json
+  9dec22358ecde48e 889-939
+data/splits/by_tool/PhoneControl.jsonl
+  9dec22358ecde48e 85-99
+docs/README.md
+  9dec22358ecde48e 3,43,55,61
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.17",
+  "base_commit_sha": "d9465078424aa86f24285879d3770244cb0c4a2c",
+  "prompts": {
+    "9dec22358ecde48e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e1f62-2202-7870-af16-54e6c4691c4d",
+        "model": "gpt-5.5"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 92,
+      "total_deletions": 7,
+      "accepted_lines": 89,
+      "overriden_lines": 0
+    }
+  }
+}
