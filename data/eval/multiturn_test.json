@@ -364,14 +364,14 @@
     "sub_category": "灯光-TTS历史",
     "intent": "多轮",
     "difficulty": "hard",
-    "note": "历史轮助手均为TTS回复，测试多轮灯光操作后的指代消解",
+    "note": "历史轮助手均为TTS回复，测试多轮灯光操作后的省略指代消解",
     "history": [
       {"role": "user", "content": "把氛围灯打开"},
       {"role": "assistant", "content": "好的，氛围灯已打开"},
       {"role": "user", "content": "换个颜色"},
       {"role": "assistant", "content": "好的，已切换颜色"},
-      {"role": "user", "content": "亮度调高一点"},
-      {"role": "assistant", "content": "好的，已调高亮度"}
+      {"role": "user", "content": "再换一个"},
+      {"role": "assistant", "content": "好的，已再次切换颜色"}
     ],
     "query": "关掉吧",
     "expected_tool_calls": [
@@ -417,14 +417,14 @@
     "sub_category": "空调-TTS历史",
     "intent": "多轮",
     "difficulty": "hard",
-    "note": "历史轮助手均为TTS回复，测试多位置空调操作后的省略指代",
+    "note": "历史轮助手均为TTS回复，测试多位置空调操作后的省略指代；后排位置明确为第二排",
     "history": [
       {"role": "user", "content": "主驾空调温度调到24度"},
       {"role": "assistant", "content": "好的，已将主驾空调温度调到24度"},
       {"role": "user", "content": "副驾也调到24度"},
       {"role": "assistant", "content": "好的，副驾空调温度也已调到24度"}
     ],
-    "query": "后排的也调一下",
+    "query": "第二排也调到24度",
     "expected_tool_calls": [
       {
         "name": "ClimateControl",
