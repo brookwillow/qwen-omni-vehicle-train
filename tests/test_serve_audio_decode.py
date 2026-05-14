@@ -113,13 +113,18 @@ def test_kv_prompt_cache_matches_system_prompt_prefix():
     cache.system_prompt = "系统提示"
     cache.prefix_text = "<system>系统提示</system>\n"
     cache.prefix_tokens = 3
+    cache.prefix_input_ids = torch.tensor([[1, 2, 3]])
     cache.past_key_values = ((torch.tensor([[[[1.0]]]]), torch.tensor([[[[2.0]]]])),)
 
-    hit = cache.match("<system>系统提示</system>\n<user>打开车窗</user>", "系统提示")
-    miss = cache.match("<system>其他</system>\n<user>打开车窗</user>", "其他")
+    full_inputs = {"input_ids": torch.tensor([[1, 2, 3, 4, 5]]), "attention_mask": torch.ones(1, 5)}
+
+    hit = cache.match("<system>系统提示</system>\n<user>打开车窗</user>", "系统提示", full_inputs)
+    miss = cache.match("<system>其他</system>\n<user>打开车窗</user>", "其他", full_inputs)
 
     assert hit is not None
     assert hit.suffix_text == "<user>打开车窗</user>"
+    assert hit.suffix_input_ids.tolist() == [[4, 5]]
+    assert hit.attention_mask.tolist() == [[1, 1, 1, 1, 1]]
     assert hit.prefix_tokens == 3
     assert miss is None
     assert cache.last_miss_reason.startswith("system_prompt_mismatch")
@@ -203,10 +208,26 @@ def test_kv_prompt_cache_records_prefix_mismatch_reason():
     cache.system_prompt = "系统提示"
     cache.prefix_text = "<system>系统提示</system>\n"
     cache.prefix_tokens = 3
+    cache.prefix_input_ids = torch.tensor([[1, 2, 3]])
     cache.past_key_values = ((torch.tensor([[[[1.0]]]]), torch.tensor([[[[2.0]]]])),)
 
-    assert cache.match("<different>系统提示</different>\n<user>打开车窗</user>", "系统提示") is None
+    full_inputs = {"input_ids": torch.tensor([[9, 2, 3, 4]]), "attention_mask": torch.ones(1, 4)}
+
+    assert cache.match("<different>系统提示</different>\n<user>打开车窗</user>", "系统提示", full_inputs) is None
     assert cache.last_miss_reason.startswith("prefix_text_mismatch")
+
+
+def test_kv_prompt_cache_rejects_token_prefix_mismatch():
+    cache = serve._KvPromptCache()
+    cache.system_prompt = "系统提示"
+    cache.prefix_text = "<system>系统提示</system>\n"
+    cache.prefix_tokens = 3
+    cache.prefix_input_ids = torch.tensor([[1, 2, 3]])
+    cache.past_key_values = ((torch.tensor([[[[1.0]]]]), torch.tensor([[[[2.0]]]])),)
+    full_inputs = {"input_ids": torch.tensor([[1, 20, 3, 4]]), "attention_mask": torch.ones(1, 4)}
+
+    assert cache.match("<system>系统提示</system>\n<user>打开车窗</user>", "系统提示", full_inputs) is None
+    assert cache.last_miss_reason.startswith("prefix_token_mismatch")
 
 
 def test_clone_past_key_values_does_not_share_tensor_storage():
@@ -244,7 +265,8 @@ def test_kv_prompt_cache_prepare_uses_thinker_forward():
         def __call__(self, **kwargs):
             captured.update(kwargs)
             return types.SimpleNamespace(
-                past_key_values=((torch.tensor([[[[1.0]]]]), torch.tensor([[[[2.0]]]])),)
+                past_key_values=((torch.tensor([[[[1.0]]]]), torch.tensor([[[[2.0]]]])),),
+                rope_deltas=torch.tensor([[0]]),
             )
 
     model = types.SimpleNamespace(device=torch.device("cpu"), dtype=None, thinker=FakeThinker())
@@ -254,6 +276,8 @@ def test_kv_prompt_cache_prepare_uses_thinker_forward():
     assert captured["use_cache"] is True
     assert captured["return_dict"] is True
     assert cache.prefix_tokens == 2
+    assert cache.prefix_input_ids.tolist() == [[1, 2]]
+    assert cache.rope_deltas.tolist() == [[0]]
 
 
 def test_run_inference_uses_kv_prompt_cache_on_prefix_hit(monkeypatch):
@@ -271,8 +295,8 @@ def test_run_inference_uses_kv_prompt_cache_on_prefix_hit(monkeypatch):
             captured["processor_text"] = kwargs["text"]
             return FakeInputs(
                 {
-                    "input_ids": torch.tensor([[10, 11, 12]]),
-                    "attention_mask": torch.tensor([[1, 1, 1]]),
+                    "input_ids": torch.tensor([[1, 2, 10, 11, 12]]),
+                    "attention_mask": torch.tensor([[1, 1, 1, 1, 1]]),
                 }
             )
 
@@ -282,21 +306,27 @@ def test_run_inference_uses_kv_prompt_cache_on_prefix_hit(monkeypatch):
     class FakeModel:
         device = torch.device("cpu")
         dtype = None
+        thinker = types.SimpleNamespace(rope_deltas=torch.tensor([[99]]))
 
         def generate(self, **kwargs):
             captured["generate_kwargs"] = kwargs
+            assert self.thinker.rope_deltas.tolist() == [[0]]
+            self.thinker.rope_deltas = torch.tensor([[123]])
             return torch.tensor([[10, 11, 12, 99]])
 
     cache = serve._KvPromptCache()
     cache.system_prompt = "系统提示"
     cache.prefix_text = "<system>系统提示</system>\n"
     cache.prefix_tokens = 2
+    cache.prefix_input_ids = torch.tensor([[1, 2]])
     cache.past_key_values = ((torch.tensor([[[[1.0]]]]), torch.tensor([[[[2.0]]]])),)
+    cache.rope_deltas = torch.tensor([[0]])
 
     messages = [{"role": "system", "content": [{"type": "text", "text": "系统提示"}]}]
+    model = FakeModel()
 
     reply, prompt_tokens, gen_tokens = serve.run_inference(
-        FakeModel(),
+        model,
         FakeProcessor(),
         messages,
         max_new_tokens=1,
@@ -304,12 +334,54 @@ def test_run_inference_uses_kv_prompt_cache_on_prefix_hit(monkeypatch):
         prompt_cache=cache,
     )
 
-    assert captured["processor_text"] == "<user>打开车窗</user><assistant>"
+    assert captured["processor_text"] == "<system>系统提示</system>\n<user>打开车窗</user><assistant>"
+    assert captured["generate_kwargs"]["input_ids"].tolist() == [[10, 11, 12]]
     assert "past_key_values" in captured["generate_kwargs"]
     assert captured["generate_kwargs"]["attention_mask"].tolist() == [[1, 1, 1, 1, 1]]
+    assert captured["generate_kwargs"]["thinker_max_new_tokens"] == 1
+    assert "max_new_tokens" not in captured["generate_kwargs"]
     assert reply == "Action: WindowControl"
     assert prompt_tokens == 5
     assert gen_tokens == 1
+    assert model.thinker.rope_deltas.tolist() == [[99]]
+
+
+def test_run_inference_passes_thinker_max_new_tokens_without_cache():
+    captured = {}
+
+    class FakeInputs(dict):
+        def to(self, *args, **kwargs):
+            return self
+
+    class FakeProcessor:
+        def apply_chat_template(self, messages, add_generation_prompt, tokenize):
+            return "<system>系统提示</system>\n<user>打开车窗</user><assistant>"
+
+        def __call__(self, **kwargs):
+            return FakeInputs({"input_ids": torch.tensor([[1, 2, 3]]), "attention_mask": torch.ones(1, 3)})
+
+        def decode(self, ids, **kwargs):
+            return "ok"
+
+    class FakeModel:
+        device = torch.device("cpu")
+        dtype = None
+
+        def generate(self, **kwargs):
+            captured.update(kwargs)
+            return torch.tensor([[1, 2, 3, 4]])
+
+    serve.run_inference(
+        FakeModel(),
+        FakeProcessor(),
+        [{"role": "system", "content": [{"type": "text", "text": "系统提示"}]}],
+        max_new_tokens=7,
+        temperature=0,
+        prompt_cache=None,
+    )
+
+    assert captured["thinker_max_new_tokens"] == 7
+    assert "max_new_tokens" not in captured
 
 
 def test_chat_response_uses_server_model_name_by_default():

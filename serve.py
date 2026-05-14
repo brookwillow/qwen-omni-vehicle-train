@@ -154,17 +154,20 @@ class _KvPromptCacheHit:
     suffix_text: str
     prefix_tokens: int
     past_key_values: Any
+    suffix_input_ids: torch.Tensor
+    attention_mask: torch.Tensor
+    rope_deltas: Any = None
 
 
 def _clone_past_key_values(value: Any) -> Any:
-    """Clone past_key_values into raw tensor lists stored independently of any cache object.
+    """Clone past_key_values into request-independent tensors.
 
-    We intentionally avoid storing a DynamicCache instance because model.generate()
-    mutates it in-place (cache.update(), _seen_tokens, etc.). Instead we extract
-    the key/value tensors and store them as plain Python lists of cloned tensors.
-    A fresh DynamicCache is reconstructed from these tensors on every request via
-    _build_dynamic_cache(), guaranteeing zero cross-request contamination.
+    DynamicCache objects are converted to their public legacy tuple form before
+    cloning. A fresh cache can then be reconstructed per request without sharing
+    mutable cache state across generations.
     """
+    if hasattr(value, "to_legacy_cache"):
+        return _clone_past_key_values(value.to_legacy_cache())
     # DynamicCache-style: extract raw tensor lists
     if hasattr(value, "key_cache") and hasattr(value, "value_cache"):
         return {
@@ -180,8 +183,6 @@ def _clone_past_key_values(value: Any) -> Any:
         return [_clone_past_key_values(item) for item in value]
     if isinstance(value, dict):
         return {key: _clone_past_key_values(item) for key, item in value.items()}
-    if hasattr(value, "to_legacy_cache"):
-        return _clone_past_key_values(value.to_legacy_cache())
     return value
 
 
@@ -192,8 +193,14 @@ def _build_dynamic_cache(stored: Any) -> Any:
     so generate() can mutate it freely without touching the stored prefix data.
     """
     if not (isinstance(stored, dict) and stored.get("__dynamic_cache__")):
-        # Legacy tuple cache or plain tensors: clone recursively
-        return _clone_past_key_values(stored)
+        cloned = _clone_past_key_values(stored)
+        try:
+            from transformers import DynamicCache
+            if isinstance(cloned, tuple) and hasattr(DynamicCache, "from_legacy_cache"):
+                return DynamicCache.from_legacy_cache(cloned)
+        except Exception:
+            pass
+        return cloned
     try:
         from transformers import DynamicCache
         cache = DynamicCache()
@@ -216,7 +223,10 @@ class _KvPromptCache:
         self.system_prompt = ""
         self.prefix_text = ""
         self.prefix_tokens = 0
+        self.prefix_input_ids: Optional[torch.Tensor] = None
+        self.prefix_attention_mask: Optional[torch.Tensor] = None
         self.past_key_values: Any = None
+        self.rope_deltas: Any = None
         self.last_miss_reason = ""
 
     def prepare(self, model, processor, system_prompt: str) -> bool:
@@ -257,7 +267,12 @@ class _KvPromptCache:
         self.system_prompt = system_prompt
         self.prefix_text = prefix_text
         self.prefix_tokens = int(prefix_inputs["input_ids"].shape[-1])
+        self.prefix_input_ids = prefix_inputs["input_ids"].detach().clone()
+        self.prefix_attention_mask = prefix_inputs.get("attention_mask")
+        if self.prefix_attention_mask is not None:
+            self.prefix_attention_mask = self.prefix_attention_mask.detach().clone()
         self.past_key_values = _clone_past_key_values(pkv)
+        self.rope_deltas = _clone_past_key_values(getattr(output, "rope_deltas", None))
         elapsed_ms = (time.perf_counter() - start) * 1000
         logger.info(
             "[PROMPT_CACHE] mode=kv prepared prefix_tokens=%d elapsed=%.1fms",
@@ -266,7 +281,7 @@ class _KvPromptCache:
         )
         return True
 
-    def match(self, full_text: str, system_prompt: str) -> Optional[_KvPromptCacheHit]:
+    def match(self, full_text: str, system_prompt: str, full_inputs: Dict[str, Any]) -> Optional[_KvPromptCacheHit]:
         self.last_miss_reason = ""
         if not self.past_key_values:
             self.last_miss_reason = "cache_empty"
@@ -287,10 +302,37 @@ class _KvPromptCache:
                 f"full_prefix_hash={_short_hash(full_prefix)}"
             )
             return None
+        if self.prefix_input_ids is None:
+            self.last_miss_reason = "prefix_input_ids_empty"
+            return None
+        full_input_ids = full_inputs.get("input_ids")
+        if full_input_ids is None:
+            self.last_miss_reason = "full_input_ids_empty"
+            return None
+        if full_input_ids.shape[-1] < self.prefix_tokens:
+            self.last_miss_reason = (
+                "full_tokens_shorter_than_prefix "
+                f"prefix_tokens={self.prefix_tokens} full_tokens={full_input_ids.shape[-1]}"
+            )
+            return None
+        cached_prefix_ids = self.prefix_input_ids.to(device=full_input_ids.device)
+        full_prefix_ids = full_input_ids[:, : self.prefix_tokens]
+        if not torch.equal(full_prefix_ids, cached_prefix_ids):
+            self.last_miss_reason = (
+                "prefix_token_mismatch "
+                f"prefix_tokens={self.prefix_tokens} full_tokens={full_input_ids.shape[-1]}"
+            )
+            return None
+        attention_mask = full_inputs.get("attention_mask")
+        if attention_mask is None:
+            attention_mask = torch.ones_like(full_input_ids)
         return _KvPromptCacheHit(
             suffix_text=full_text[len(self.prefix_text):],
             prefix_tokens=self.prefix_tokens,
             past_key_values=_build_dynamic_cache(self.past_key_values),
+            suffix_input_ids=full_input_ids[:, self.prefix_tokens :].detach().clone(),
+            attention_mask=attention_mask.detach().clone(),
+            rope_deltas=_clone_past_key_values(self.rope_deltas),
         )
 
 
@@ -999,19 +1041,9 @@ def run_inference(
         content = qwen_messages[0].get("content") or []
         if content and isinstance(content[0], dict):
             system_prompt = content[0].get("text", "")
-    # The KV cache is built via thinker.forward() on the text-only SP prefix.
-    # model.generate() wraps thinker internally and the past_key_values format
-    # is only guaranteed compatible when there is no audio input. With audio,
-    # the outer model pre-processes inputs differently before reaching thinker,
-    # causing the injected cache to misalign → garbled output.
-    # Text-only requests (no audios) reuse the cache safely.
-    audio_ok = (audio_placeholder_count == len(audios or []))
-    cache_hit = prompt_cache.match(text, system_prompt) if (prompt_cache and not audios and audio_ok) else None
-
     processor_start = time.perf_counter()
-    processor_text = cache_hit.suffix_text if cache_hit else text
     inputs = processor(
-        text=processor_text,
+        text=text,
         audio=audios if audios else None,
         images=images if images else None,
         videos=videos if videos else None,
@@ -1023,28 +1055,44 @@ def run_inference(
     move_start = time.perf_counter()
     inputs = _inputs_to_model_device(inputs, model)
     move_ms = (time.perf_counter() - move_start) * 1000
+
+    # The KV cache is built via thinker.forward() on the text-only SP prefix.
+    # A cache hit is only safe when the full tokenized request has exactly the
+    # cached token prefix. String prefix equality is not enough because tokenizer
+    # merges can change at the prefix/suffix boundary.
+    audio_ok = (audio_placeholder_count == len(audios or []))
+    cache_hit = (
+        prompt_cache.match(text, system_prompt, inputs)
+        if (prompt_cache and not audios and not images and not videos and audio_ok)
+        else None
+    )
+
     suffix_prompt_len = inputs["input_ids"].shape[-1] if "input_ids" in inputs else 0
     prompt_len = suffix_prompt_len
     if cache_hit:
-        prompt_len += cache_hit.prefix_tokens
-        if "attention_mask" in inputs:
-            prefix_mask = torch.ones(
-                (inputs["attention_mask"].shape[0], cache_hit.prefix_tokens),
-                dtype=inputs["attention_mask"].dtype,
-                device=inputs["attention_mask"].device,
-            )
-            inputs["attention_mask"] = torch.cat([prefix_mask, inputs["attention_mask"]], dim=-1)
+        suffix_prompt_len = int(cache_hit.suffix_input_ids.shape[-1])
+        prompt_len = cache_hit.prefix_tokens + suffix_prompt_len
+        inputs["input_ids"] = cache_hit.suffix_input_ids
+        inputs["attention_mask"] = cache_hit.attention_mask
         inputs["past_key_values"] = cache_hit.past_key_values
 
     generate_start = time.perf_counter()
-    with torch.inference_mode():
-        out_ids = model.generate(
-            **inputs,
-            max_new_tokens=max_new_tokens,
-            temperature=temperature,
-            do_sample=temperature > 0,
-            return_audio=False,
-        )
+    thinker = _get_thinker_model(model) if cache_hit else None
+    old_rope_deltas = getattr(thinker, "rope_deltas", None) if thinker is not None else None
+    try:
+        if cache_hit and thinker is not None:
+            thinker.rope_deltas = _clone_past_key_values(cache_hit.rope_deltas)
+        with torch.inference_mode():
+            out_ids = model.generate(
+                **inputs,
+                thinker_max_new_tokens=max_new_tokens,
+                temperature=temperature,
+                do_sample=temperature > 0,
+                return_audio=False,
+            )
+    finally:
+        if cache_hit and thinker is not None:
+            thinker.rope_deltas = old_rope_deltas
     generate_ms = (time.perf_counter() - generate_start) * 1000
 
     decode_start = time.perf_counter()

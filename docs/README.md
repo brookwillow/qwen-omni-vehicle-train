@@ -185,7 +185,7 @@ python serve.py \
   --prompt-cache kv
 ```
 
-`--prompt-cache kv` 会在启动时预热固定 system prompt 的 KV，并在请求的 chat template 前缀严格匹配时复用。请求里自定义 system prompt 或 template 不匹配时会自动 miss 并走原始路径。如果当前模型封装不支持 KV 预热，服务会打印禁用原因并自动回退到 `none`，避免启动失败。该模式会在 `[PERF] inference` 中标记 `prompt_cache=hit|miss|off`、`cache_prefix_tokens=<命中 token 数>` 和 `cache_miss_reason=<原因>`，建议先用同一批 eval 对比 `none` 和 `kv` 的输出一致性后再长期启用。
+`--prompt-cache kv` 会在启动时预热固定 system prompt 的 KV，并仅在 text-only 请求的 chat template 前缀和 token 前缀都严格匹配时复用；音频、图片、视频请求会自动 miss 并走原始路径。cache hit 时服务会从完整 tokenized input 中切出 suffix token，避免字符串切分导致 tokenizer 边界错位，并临时恢复预热时记录的 `rope_deltas`，请求结束后再还原模型状态。如果当前模型封装不支持 KV 预热，服务会打印禁用原因并自动回退到 `none`，避免启动失败。该模式会在 `[PERF] inference` 中标记 `prompt_cache=hit|miss|off`、`cache_prefix_tokens=<命中 token 数>` 和 `cache_miss_reason=<原因>`，建议先用同一批 eval 对比 `none` 和 `kv` 的输出一致性后再长期启用。
 
 服务启动后监听 `http://<ip>:8000`，兼容 OpenAI Chat Completions API：
 
