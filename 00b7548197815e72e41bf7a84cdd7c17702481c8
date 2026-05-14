@@ -1,0 +1,93 @@
+data/eval/doi_select_test.json
+  9dec22358ecde48e 1-66
+data/eval/speed_test.json
+  9dec22358ecde48e 1-164
+data/eval/window_test.json
+  9dec22358ecde48e 107,161,180,234,452,470,780,887,913,1129,1215,1222
+data/eval/wiper_test.json
+  9dec22358ecde48e 1-219
+data/eval/voice_test.json
+  9dec22358ecde48e 125,144,461,1162
+data/eval/screen_test.json
+  9dec22358ecde48e 277,470,1214
+data/eval/dress_test.json
+  9dec22358ecde48e 1-110
+data/eval/multiturn_test.json
+  41a75b136c6a5b0d 282-490
+  9dec22358ecde48e 1-281,491-492
+data/eval/steering_test.json
+  9dec22358ecde48e 190
+data/eval/power_test.json
+  9dec22358ecde48e 385,404,719,757,1007
+data/eval/direction_test.json
+  9dec22358ecde48e 1-162
+data/eval/general_select_test.json
+  9dec22358ecde48e 1-130
+data/eval/parking_test.json
+  9dec22358ecde48e 1-209
+data/eval/tail_test.json
+  9dec22358ecde48e 1-143
+data/eval/ngp_test.json
+  9dec22358ecde48e 1-98
+data/eval/reject_test.json
+  9dec22358ecde48e 1-152
+data/eval/media_test.json
+  9dec22358ecde48e 1-101
+data/eval/info_test.json
+  9dec22358ecde48e 13,30,47,64,81,98,115,132,149,166,183,200,217,234,251,268,285,302,319,336,353,370,387,404,410,427,451,476,482
+data/splits/multiturn.jsonl
+  9dec22358ecde48e 322-329
+data/eval/parking_space_select_test.json
+  9dec22358ecde48e 1-82
+data/eval/parking_space_nav_test.json
+  9dec22358ecde48e 1-82
+data/eval/noise_test.json
+  9dec22358ecde48e 1-142
+data/eval/app_test.json
+  9dec22358ecde48e 1127
+data/eval/perfume_test.json
+  9dec22358ecde48e 1-180
+tests/test_priority_augmentation_split.py
+  9dec22358ecde48e 270-325
+data/eval/clarify_test.json
+  9dec22358ecde48e 1-82
+data/eval/parking_nearby_test.json
+  9dec22358ecde48e 1-82
+data/eval/black_box_test.json
+  9dec22358ecde48e 340,512,1228,1284,1784,2161,2331,2634,2784,2976,3128,3279,3771,3975,4201,4828,5719,5870,6226,6305,6664,7351,7603,7622,7700,7738,8044,8062,8822,9221,9259,10233,11047,11330,11829,12159,12237,12275
+docs/README.md
+  9dec22358ecde48e 58,61
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.17",
+  "base_commit_sha": "00b7548197815e72e41bf7a84cdd7c17702481c8",
+  "prompts": {
+    "41a75b136c6a5b0d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "388839dd-c13b-4565-b1c0-ea622a896365",
+        "model": "claude-sonnet-4.6"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 209,
+      "total_deletions": 0,
+      "accepted_lines": 209,
+      "overriden_lines": 0
+    },
+    "9dec22358ecde48e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e1f62-2202-7870-af16-54e6c4691c4d",
+        "model": "gpt-5.5"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 2655,
+      "total_deletions": 169,
+      "accepted_lines": 2646,
+      "overriden_lines": 0
+    }
+  }
+}
