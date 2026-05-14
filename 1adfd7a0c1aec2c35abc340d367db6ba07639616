@@ -1,0 +1,27 @@
+docs/README.md
+  9dec22358ecde48e 58,61
+data/splits/multiturn.jsonl
+  9dec22358ecde48e 330-353
+tests/test_priority_augmentation_split.py
+  9dec22358ecde48e 326-437
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.18",
+  "base_commit_sha": "1adfd7a0c1aec2c35abc340d367db6ba07639616",
+  "prompts": {
+    "9dec22358ecde48e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e1f62-2202-7870-af16-54e6c4691c4d",
+        "model": "gpt-5.5"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 154,
+      "total_deletions": 18,
+      "accepted_lines": 138,
+      "overriden_lines": 0
+    }
+  }
+}
