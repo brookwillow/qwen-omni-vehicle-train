@@ -323,6 +323,118 @@ def test_multiturn_generic_done_history_still_uses_tool_for_current_control():
     assert observed == expected_final_calls
 
 
+def test_multiturn_ellipsis_inherits_nearest_prior_control_intent():
+    expected_final_calls = {
+        ("打开车窗", "打开大灯", "关闭吧"): {
+            "name": "LightControl",
+            "arguments": {"action": "关闭", "device": "大灯"},
+        },
+        ("打开大灯", "打开车窗", "关掉吧"): {
+            "name": "WindowControl",
+            "arguments": {"action": "关闭", "device": "车窗"},
+        },
+        ("把空调打开", "打开香氛", "关了吧"): {
+            "name": "PerfumeControl",
+            "arguments": {"action": "关闭", "device": "香氛"},
+        },
+        ("打开香氛", "打开空气净化器", "关闭吧"): {
+            "name": "ClimateControl",
+            "arguments": {"action": "关闭", "device": "空气净化器"},
+        },
+        ("打开副驾座椅通风", "打开主驾按摩", "关掉吧"): {
+            "name": "SeatControl",
+            "arguments": {"action": "关闭", "device": "座椅", "feature": "按摩", "position": "主驾"},
+        },
+        ("打开主驾按摩", "打开副驾座椅通风", "关闭吧"): {
+            "name": "SeatControl",
+            "arguments": {"action": "关闭", "device": "座椅", "feature": "通风", "position": "副驾"},
+        },
+        ("打开右侧儿童锁", "打开左侧侧滑门", "关上吧"): {
+            "name": "GateControl",
+            "arguments": {"action": "关闭", "device": "侧滑门", "position": "左侧"},
+        },
+        ("打开左侧侧滑门", "打开右侧儿童锁", "关掉吧"): {
+            "name": "LockControl",
+            "arguments": {"action": "关闭", "device": "儿童锁", "position": "右侧"},
+        },
+        ("打开雨刮", "打开娱乐屏", "关掉吧"): {
+            "name": "ScreenControl",
+            "arguments": {"action": "关闭", "device": "娱乐屏"},
+        },
+        ("打开娱乐屏", "打开雨刮", "关掉吧"): {
+            "name": "WiperControl",
+            "arguments": {"action": "关闭", "device": "雨刮", "value": "自动"},
+        },
+        ("导航声音调高", "媒体声音调高", "调低一点"): {
+            "name": "VoiceControl",
+            "arguments": {"action": "调低", "feature": "声音"},
+        },
+        ("媒体声音调高", "导航声音调高", "调低一点"): {
+            "name": "VoiceControl",
+            "arguments": {"action": "调低", "feature": "导航音量"},
+        },
+        ("打开车窗", "打开大灯", "导航声音调高", "再低一点"): {
+            "name": "VoiceControl",
+            "arguments": {"action": "调低", "feature": "导航音量"},
+        },
+        ("主驾座椅加热打开", "副驾座椅通风打开", "主驾按摩打开", "调成波浪模式"): {
+            "name": "SeatControl",
+            "arguments": {"action": "调到", "device": "座椅", "feature": "按摩", "position": "主驾", "value": "波浪"},
+        },
+        ("空调温度调到二十四度", "媒体声音调高", "副驾屏幕亮度调高", "再暗一点"): {
+            "name": "ScreenControl",
+            "arguments": {"action": "调低", "device": "娱乐屏", "feature": "亮度", "position": "副驾"},
+        },
+        ("香氛浓度调高", "雨刮速度调高", "后雨刮灵敏度调高", "再低一点"): {
+            "name": "WiperControl",
+            "arguments": {"action": "调低", "device": "后雨刮", "feature": "灵敏度", "value": "低"},
+        },
+        ("导航声音调高", "空调风量调高", "香氛浓度调高", "再淡一点"): {
+            "name": "PerfumeControl",
+            "arguments": {"action": "调低", "device": "香氛", "feature": "浓度"},
+        },
+        ("氛围灯调成光剑", "屏幕调到黑夜模式", "娱乐屏调到白天模式", "切到黑夜模式"): {
+            "name": "ScreenControl",
+            "arguments": {"action": "调到", "device": "娱乐屏", "value": "黑夜模式"},
+        },
+        ("前排空调风量调高", "后排空调温度调到二十六度", "第三排空调打开", "温度调低一点"): {
+            "name": "ClimateControl",
+            "arguments": {"action": "调低", "device": "空调", "feature": "温度", "position": "第三排"},
+        },
+        ("主驾车窗打开一点", "副驾车窗打开一点", "第二排右侧车窗打开一点", "再开一点"): {
+            "name": "WindowControl",
+            "arguments": {"action": "再开", "device": "车窗", "position": "第二排右侧"},
+        },
+        ("左侧侧滑门打开", "右侧鹏翼门打开", "后备箱打开", "暂停一下"): {
+            "name": "GateControl",
+            "arguments": {"action": "暂停", "device": "后备箱"},
+        },
+        ("自动雨刮打开", "后雨刮打开", "雨刮速度调到中档", "调到最高"): {
+            "name": "WiperControl",
+            "arguments": {"action": "调到", "device": "雨刮", "feature": "速度", "value": "最高"},
+        },
+        ("媒体声音调低", "导航声音调低", "语音音量调低", "再大一点"): {
+            "name": "VoiceControl",
+            "arguments": {"action": "调高", "feature": "语音音量"},
+        },
+        ("打开空气净化器", "打开外循环", "打开前挡风除雾", "关掉吧"): {
+            "name": "ClimateControl",
+            "arguments": {"action": "关闭", "device": "前挡风", "feature": "除雾"},
+        },
+    }
+    observed = {}
+
+    for line in MULTITURN_PATH.read_text(encoding="utf-8").splitlines():
+        sample = json.loads(line)
+        users = [message["content"].strip() for message in sample["messages"] if message["role"] == "user"]
+        for expected_users in expected_final_calls:
+            if tuple(users[-len(expected_users) :]) != expected_users:
+                continue
+            observed[expected_users] = json.loads(sample["messages"][-1]["content"])
+
+    assert observed == expected_final_calls
+
+
 def test_multiturn_current_query_overrides_similar_history():
     expected_final_queries = {
         "那主驾车窗呢": "主驾车窗",
