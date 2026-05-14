@@ -1,0 +1,82 @@
+[
+  {
+    "id": "psn_001",
+    "category": "收藏车位导航",
+    "sub_category": "执行",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "导航到我的收藏车位",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingSpaceNavigationControl",
+        "arguments": {
+          "action": "执行收藏车位导航"
+        }
+      }
+    ]
+  },
+  {
+    "id": "psn_002",
+    "category": "收藏车位导航",
+    "sub_category": "执行",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "去我常停的那个车位",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingSpaceNavigationControl",
+        "arguments": {
+          "action": "执行收藏车位导航"
+        }
+      }
+    ]
+  },
+  {
+    "id": "psn_003",
+    "category": "收藏车位导航",
+    "sub_category": "取消",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "取消车位导航",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingSpaceNavigationControl",
+        "arguments": {
+          "action": "取消收藏车位导航"
+        }
+      }
+    ]
+  },
+  {
+    "id": "psn_004",
+    "category": "收藏车位导航",
+    "sub_category": "执行",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "帮我找到之前保存的停车位",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingSpaceNavigationControl",
+        "arguments": {
+          "action": "执行收藏车位导航"
+        }
+      }
+    ]
+  },
+  {
+    "id": "psn_005",
+    "category": "收藏车位导航",
+    "sub_category": "取消",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "先不去那个车位了",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingSpaceNavigationControl",
+        "arguments": {
+          "action": "取消收藏车位导航"
+        }
+      }
+    ]
+  }
+]

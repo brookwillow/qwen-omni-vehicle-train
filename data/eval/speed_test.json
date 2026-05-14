@@ -1,0 +1,164 @@
+[
+  {
+    "id": "speed_001",
+    "category": "速度控制",
+    "sub_category": "加速",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "开快一点",
+    "expected_tool_calls": [
+      {
+        "name": "SpeedControl",
+        "arguments": {
+          "action": "开快点"
+        }
+      }
+    ]
+  },
+  {
+    "id": "speed_002",
+    "category": "速度控制",
+    "sub_category": "减速",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "开慢一点",
+    "expected_tool_calls": [
+      {
+        "name": "SpeedControl",
+        "arguments": {
+          "action": "开慢点"
+        }
+      }
+    ]
+  },
+  {
+    "id": "speed_003",
+    "category": "速度控制",
+    "sub_category": "速度调高",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "车速调高",
+    "expected_tool_calls": [
+      {
+        "name": "SpeedControl",
+        "arguments": {
+          "action": "车速调高"
+        }
+      }
+    ]
+  },
+  {
+    "id": "speed_004",
+    "category": "速度控制",
+    "sub_category": "速度调低",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "车速调低",
+    "expected_tool_calls": [
+      {
+        "name": "SpeedControl",
+        "arguments": {
+          "action": "车速调低"
+        }
+      }
+    ]
+  },
+  {
+    "id": "speed_005",
+    "category": "速度控制",
+    "sub_category": "速度调到",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "车速调到100",
+    "expected_tool_calls": [
+      {
+        "name": "SpeedControl",
+        "arguments": {
+          "action": "车速调到",
+          "value": "100"
+        }
+      }
+    ]
+  },
+  {
+    "id": "speed_006",
+    "category": "速度控制",
+    "sub_category": "减速",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "前方路口减速",
+    "expected_tool_calls": [
+      {
+        "name": "SpeedControl",
+        "arguments": {
+          "action": "前方路口开慢点"
+        }
+      }
+    ]
+  },
+  {
+    "id": "speed_007",
+    "category": "速度控制",
+    "sub_category": "加速",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "这路这么直，跑快一点吧",
+    "expected_tool_calls": [
+      {
+        "name": "SpeedControl",
+        "arguments": {
+          "action": "开快点"
+        }
+      }
+    ]
+  },
+  {
+    "id": "speed_008",
+    "category": "速度控制",
+    "sub_category": "减速",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "前面有个弯道，慢一点",
+    "expected_tool_calls": [
+      {
+        "name": "SpeedControl",
+        "arguments": {
+          "action": "开慢点"
+        }
+      }
+    ]
+  },
+  {
+    "id": "speed_009",
+    "category": "速度控制",
+    "sub_category": "速度调到",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "时速保持80公里",
+    "expected_tool_calls": [
+      {
+        "name": "SpeedControl",
+        "arguments": {
+          "action": "车速调到",
+          "value": "80"
+        }
+      }
+    ]
+  },
+  {
+    "id": "speed_010",
+    "category": "速度控制",
+    "sub_category": "减速",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "前面有孩子在路边玩，小心一点",
+    "expected_tool_calls": [
+      {
+        "name": "SpeedControl",
+        "arguments": {
+          "action": "前方路口开慢点"
+        }
+      }
+    ]
+  }
+]

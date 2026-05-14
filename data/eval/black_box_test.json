@@ -337,8 +337,7 @@
         "name": "ProfileControl",
         "arguments": {
           "action": "复位",
-          "feature": "习惯",
-          "value": "1"
+          "feature": "习惯"
         }
       }
     ],
@@ -510,8 +509,7 @@
           "action": "复位",
           "device": "座椅",
           "feature": "习惯",
-          "position": "主驾",
-          "value": "1"
+          "position": "主驾"
         }
       }
     ],
@@ -716,7 +714,6 @@
         "name": "WindowControl",
         "arguments": {
           "position": "前排",
-          "value": "33%",
           "action": "再开",
           "device": "车窗"
         }
@@ -944,7 +941,6 @@
       {
         "name": "WindowControl",
         "arguments": {
-          "value": "100",
           "action": "再关",
           "device": "车窗"
         }
@@ -1229,7 +1225,7 @@
         "arguments": {
           "action": "调到",
           "feature": "语音音量",
-          "value": "15"
+          "value": "中"
         }
       }
     ],
@@ -1285,8 +1281,7 @@
         "arguments": {
           "action": "调到",
           "device": "座椅",
-          "feature": "习惯",
-          "value": "2"
+          "feature": "习惯"
         }
       }
     ],
@@ -1361,7 +1356,6 @@
         "name": "WindowControl",
         "arguments": {
           "position": "前排",
-          "value": "100",
           "action": "再开",
           "device": "车窗"
         }
@@ -1401,7 +1395,6 @@
         "name": "WindowControl",
         "arguments": {
           "position": "全部",
-          "value": "50%",
           "action": "开到",
           "device": "车窗"
         }
@@ -1788,8 +1781,7 @@
         "name": "ProfileControl",
         "arguments": {
           "action": "复位",
-          "feature": "习惯",
-          "value": "2"
+          "feature": "习惯"
         }
       }
     ],
@@ -1919,7 +1911,6 @@
         "name": "WindowControl",
         "arguments": {
           "position": "前排",
-          "value": "10%",
           "action": "再开",
           "device": "车窗"
         }
@@ -2167,8 +2158,7 @@
         "name": "ProfileControl",
         "arguments": {
           "action": "打开",
-          "feature": "习惯",
-          "value": "1"
+          "feature": "习惯"
         }
       }
     ],
@@ -2338,7 +2328,7 @@
           "action": "调到",
           "device": "座椅",
           "feature": "通风",
-          "value": "2"
+          "value": "中"
         }
       }
     ],
@@ -2602,7 +2592,6 @@
         "name": "WindowControl",
         "arguments": {
           "position": "前排",
-          "value": "50%",
           "action": "再开",
           "device": "车窗"
         }
@@ -2642,7 +2631,7 @@
         "arguments": {
           "action": "调到",
           "feature": "导航音量",
-          "value": "15"
+          "value": "中"
         }
       }
     ],
@@ -2792,8 +2781,7 @@
         "arguments": {
           "action": "复位",
           "feature": "习惯",
-          "position": "副驾",
-          "value": "1"
+          "position": "副驾"
         }
       }
     ],
@@ -2985,8 +2973,7 @@
         "name": "ProfileControl",
         "arguments": {
           "action": "调到",
-          "feature": "习惯",
-          "value": "4"
+          "feature": "习惯"
         }
       }
     ],
@@ -3138,8 +3125,7 @@
           "action": "调到",
           "device": "座椅",
           "feature": "习惯",
-          "position": "副驾",
-          "value": "2"
+          "position": "副驾"
         }
       }
     ],
@@ -3290,8 +3276,7 @@
         "arguments": {
           "action": "调到",
           "device": "座椅",
-          "feature": "习惯",
-          "value": "4"
+          "feature": "习惯"
         }
       }
     ],
@@ -3783,8 +3768,7 @@
           "action": "调到",
           "device": "座椅",
           "feature": "习惯",
-          "position": "副驾",
-          "value": "3"
+          "position": "副驾"
         }
       }
     ],
@@ -3988,8 +3972,7 @@
         "name": "ProfileControl",
         "arguments": {
           "action": "打开",
-          "feature": "习惯",
-          "value": "1"
+          "feature": "习惯"
         }
       }
     ],
@@ -4100,7 +4083,6 @@
       {
         "name": "WindowControl",
         "arguments": {
-          "value": "10%",
           "action": "再开",
           "device": "车窗"
         }
@@ -4216,7 +4198,7 @@
           "action": "调到",
           "device": "方向盘",
           "feature": "制热",
-          "value": "2"
+          "value": "中"
         }
       }
     ],
@@ -4786,7 +4768,6 @@
         "name": "WindowControl",
         "arguments": {
           "position": "全部",
-          "value": "50%",
           "action": "再开",
           "device": "车窗"
         }
@@ -4844,8 +4825,7 @@
         "name": "ProfileControl",
         "arguments": {
           "action": "调到",
-          "feature": "习惯",
-          "value": "4"
+          "feature": "习惯"
         }
       }
     ],
@@ -4937,7 +4917,6 @@
       {
         "name": "WindowControl",
         "arguments": {
-          "value": "50%",
           "action": "再开",
           "device": "车窗"
         }
@@ -5581,7 +5560,6 @@
         "name": "WindowControl",
         "arguments": {
           "position": "全部",
-          "value": "100",
           "action": "再关",
           "device": "车窗"
         }
@@ -5738,8 +5716,7 @@
           "action": "复位",
           "device": "座椅",
           "feature": "习惯",
-          "position": "主驾",
-          "value": "1"
+          "position": "主驾"
         }
       }
     ],
@@ -5793,7 +5770,6 @@
         "name": "WindowControl",
         "arguments": {
           "position": "前排",
-          "value": "20%",
           "action": "再开",
           "device": "车窗"
         }
@@ -5891,8 +5867,7 @@
         "arguments": {
           "action": "保存",
           "device": "座椅",
-          "feature": "习惯",
-          "value": "1"
+          "feature": "习惯"
         }
       }
     ],
@@ -6248,8 +6223,7 @@
         "name": "ProfileControl",
         "arguments": {
           "action": "打开",
-          "feature": "习惯",
-          "value": "4"
+          "feature": "习惯"
         }
       }
     ],
@@ -6287,7 +6261,6 @@
         "name": "WindowControl",
         "arguments": {
           "position": "全部",
-          "value": "25%",
           "action": "再开",
           "device": "车窗"
         }
@@ -6329,8 +6302,7 @@
         "arguments": {
           "action": "复位",
           "device": "座椅",
-          "feature": "习惯",
-          "value": "1"
+          "feature": "习惯"
         }
       }
     ],
@@ -6460,7 +6432,6 @@
         "name": "WindowControl",
         "arguments": {
           "position": "副驾",
-          "value": "25%",
           "action": "再开",
           "device": "车窗"
         }
@@ -6690,8 +6661,7 @@
         "arguments": {
           "action": "调到",
           "feature": "习惯",
-          "position": "副驾",
-          "value": "1"
+          "position": "副驾"
         }
       }
     ],
@@ -7338,7 +7308,6 @@
       {
         "name": "WindowControl",
         "arguments": {
-          "value": "50%",
           "action": "再关",
           "device": "车窗"
         }
@@ -7379,7 +7348,7 @@
           "action": "调到",
           "device": "方向盘",
           "feature": "制热",
-          "value": "1"
+          "value": "低"
         }
       }
     ],
@@ -7416,7 +7385,6 @@
         "name": "WindowControl",
         "arguments": {
           "position": "全部",
-          "value": "10%",
           "action": "再开",
           "device": "车窗"
         }
@@ -7632,8 +7600,7 @@
         "arguments": {
           "action": "复位",
           "device": "座椅",
-          "feature": "习惯",
-          "value": "1"
+          "feature": "习惯"
         }
       }
     ],
@@ -7652,8 +7619,7 @@
         "arguments": {
           "action": "打开",
           "device": "座椅",
-          "feature": "习惯",
-          "value": "2"
+          "feature": "习惯"
         }
       }
     ],
@@ -7731,8 +7697,7 @@
           "action": "调到",
           "device": "座椅",
           "feature": "习惯",
-          "position": "主驾",
-          "value": "4"
+          "position": "主驾"
         }
       }
     ],
@@ -7770,8 +7735,7 @@
         "arguments": {
           "action": "调到",
           "device": "座椅",
-          "feature": "习惯",
-          "value": "3"
+          "feature": "习惯"
         }
       }
     ],
@@ -8077,8 +8041,7 @@
         "arguments": {
           "action": "复位",
           "feature": "习惯",
-          "position": "副驾",
-          "value": "2"
+          "position": "副驾"
         }
       }
     ],
@@ -8096,8 +8059,7 @@
         "name": "ProfileControl",
         "arguments": {
           "action": "复位",
-          "feature": "习惯",
-          "value": "1"
+          "feature": "习惯"
         }
       }
     ],
@@ -8438,7 +8400,6 @@
       {
         "name": "WindowControl",
         "arguments": {
-          "value": "50%",
           "action": "再开",
           "device": "车窗"
         }
@@ -8858,8 +8819,7 @@
           "action": "调到",
           "device": "座椅",
           "feature": "习惯",
-          "position": "主驾",
-          "value": "2"
+          "position": "主驾"
         }
       }
     ],
@@ -8974,7 +8934,6 @@
       {
         "name": "WindowControl",
         "arguments": {
-          "value": "50%",
           "action": "再开",
           "device": "车窗"
         }
@@ -9259,8 +9218,7 @@
         "name": "ProfileControl",
         "arguments": {
           "action": "打开",
-          "feature": "习惯",
-          "value": "2"
+          "feature": "习惯"
         }
       }
     ],
@@ -9298,8 +9256,7 @@
         "arguments": {
           "action": "打开",
           "device": "座椅",
-          "feature": "习惯",
-          "value": "2"
+          "feature": "习惯"
         }
       }
     ],
@@ -9512,7 +9469,6 @@
         "name": "WindowControl",
         "arguments": {
           "position": "前排",
-          "value": "20%",
           "action": "再开",
           "device": "车窗"
         }
@@ -9627,7 +9583,6 @@
         "name": "WindowControl",
         "arguments": {
           "position": "全部",
-          "value": "100",
           "action": "再开",
           "device": "车窗"
         }
@@ -10275,7 +10230,7 @@
           "action": "调到",
           "device": "座椅",
           "feature": "通风",
-          "value": "3"
+          "value": "中"
         }
       }
     ],
@@ -10331,7 +10286,6 @@
         "name": "WindowControl",
         "arguments": {
           "position": "全部",
-          "value": "100",
           "action": "再关",
           "device": "车窗"
         }
@@ -10886,7 +10840,6 @@
       {
         "name": "WindowControl",
         "arguments": {
-          "value": "33%",
           "action": "再开",
           "device": "车窗"
         }
@@ -11091,8 +11044,7 @@
         "name": "ProfileControl",
         "arguments": {
           "action": "调到",
-          "feature": "习惯",
-          "value": "1"
+          "feature": "习惯"
         }
       }
     ],
@@ -11244,7 +11196,6 @@
       {
         "name": "WindowControl",
         "arguments": {
-          "value": "50%",
           "action": "开到",
           "device": "车窗"
         }
@@ -11376,8 +11327,7 @@
         "arguments": {
           "action": "调到",
           "feature": "习惯",
-          "position": "副驾",
-          "value": "1"
+          "position": "副驾"
         }
       }
     ],
@@ -11876,8 +11826,7 @@
         "arguments": {
           "action": "打开",
           "device": "座椅",
-          "feature": "习惯",
-          "value": "3"
+          "feature": "习惯"
         }
       }
     ],
@@ -12207,8 +12156,7 @@
         "arguments": {
           "action": "复位",
           "device": "座椅",
-          "feature": "习惯",
-          "value": "2"
+          "feature": "习惯"
         }
       }
     ],
@@ -12286,8 +12234,7 @@
         "name": "ProfileControl",
         "arguments": {
           "action": "调到",
-          "feature": "习惯",
-          "value": "3"
+          "feature": "习惯"
         }
       }
     ],
@@ -12325,7 +12272,7 @@
           "action": "调到",
           "device": "方向盘",
           "feature": "制热",
-          "value": "1"
+          "value": "低"
         }
       }
     ],

@@ -10,7 +10,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "续航"
+          "query": "综合续航里程"
         }
       }
     ],
@@ -27,7 +27,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "百公里能耗"
+          "query": "百公里平均能耗"
         }
       }
     ],
@@ -44,7 +44,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "胎压"
+          "query": "车辆胎压"
         }
       }
     ],
@@ -61,7 +61,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "行驶总里程"
+          "query": "驾驶总里程"
         }
       }
     ],
@@ -78,7 +78,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "续航"
+          "query": "综合续航里程"
         }
       }
     ],
@@ -95,7 +95,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "百公里能耗"
+          "query": "百公里平均能耗"
         }
       }
     ],
@@ -112,7 +112,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "胎压"
+          "query": "车辆胎压"
         }
       }
     ],
@@ -129,7 +129,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "行驶总里程"
+          "query": "驾驶总里程"
         }
       }
     ],
@@ -146,7 +146,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "续航"
+          "query": "综合续航里程"
         }
       }
     ],
@@ -163,7 +163,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "续航"
+          "query": "综合续航里程"
         }
       }
     ],
@@ -180,7 +180,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "续航"
+          "query": "综合续航里程"
         }
       }
     ],
@@ -197,7 +197,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "续航"
+          "query": "综合续航里程"
         }
       }
     ],
@@ -214,7 +214,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "百公里能耗"
+          "query": "百公里平均能耗"
         }
       }
     ],
@@ -231,7 +231,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "百公里能耗"
+          "query": "百公里平均能耗"
         }
       }
     ],
@@ -248,7 +248,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "百公里能耗"
+          "query": "百公里平均能耗"
         }
       }
     ],
@@ -265,7 +265,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "胎压"
+          "query": "车辆胎压"
         }
       }
     ],
@@ -282,7 +282,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "胎压"
+          "query": "车辆胎压"
         }
       }
     ],
@@ -299,7 +299,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "胎压"
+          "query": "车辆胎压"
         }
       }
     ],
@@ -316,7 +316,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "行驶总里程"
+          "query": "驾驶总里程"
         }
       }
     ],
@@ -333,7 +333,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "行驶总里程"
+          "query": "驾驶总里程"
         }
       }
     ],
@@ -350,7 +350,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "行驶总里程"
+          "query": "驾驶总里程"
         }
       }
     ],
@@ -367,7 +367,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "百公里能耗"
+          "query": "百公里平均能耗"
         }
       }
     ],
@@ -384,7 +384,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "胎压"
+          "query": "车辆胎压"
         }
       }
     ],
@@ -401,13 +401,13 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "胎压"
+          "query": "车辆胎压"
         }
       },
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "行驶总里程"
+          "query": "驾驶总里程"
         }
       }
     ],
@@ -424,7 +424,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "胎压"
+          "query": "车辆胎压"
         }
       },
       {
@@ -448,7 +448,7 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "百公里能耗"
+          "query": "百公里平均能耗"
         }
       },
       {
@@ -473,13 +473,13 @@
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "百公里能耗"
+          "query": "百公里平均能耗"
         }
       },
       {
         "name": "CarUsageSearch",
         "arguments": {
-          "query": "行驶总里程"
+          "query": "驾驶总里程"
         }
       }
     ],

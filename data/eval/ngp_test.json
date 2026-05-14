@@ -1,0 +1,98 @@
+[
+  {
+    "id": "ngp_001",
+    "category": "辅助驾驶",
+    "sub_category": "NGP激活",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "激活NGP",
+    "expected_tool_calls": [
+      {
+        "name": "NGPActivateControl",
+        "arguments": {
+          "action": "执行激活NGP"
+        }
+      }
+    ]
+  },
+  {
+    "id": "ngp_002",
+    "category": "辅助驾驶",
+    "sub_category": "NGP激活",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "开启NGP辅助驾驶",
+    "expected_tool_calls": [
+      {
+        "name": "NGPActivateControl",
+        "arguments": {
+          "action": "执行激活NGP"
+        }
+      }
+    ]
+  },
+  {
+    "id": "ngp_003",
+    "category": "辅助驾驶",
+    "sub_category": "NGP激活",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "帮我打开NGP",
+    "expected_tool_calls": [
+      {
+        "name": "NGPActivateControl",
+        "arguments": {
+          "action": "执行激活NGP"
+        }
+      }
+    ]
+  },
+  {
+    "id": "ngp_004",
+    "category": "辅助驾驶",
+    "sub_category": "NGP激活",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "高速上帮我开下辅助驾驶",
+    "expected_tool_calls": [
+      {
+        "name": "NGPActivateControl",
+        "arguments": {
+          "action": "执行激活NGP"
+        }
+      }
+    ]
+  },
+  {
+    "id": "ngp_005",
+    "category": "辅助驾驶",
+    "sub_category": "NGP激活",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我有点累了，NGP帮我开一段",
+    "expected_tool_calls": [
+      {
+        "name": "NGPActivateControl",
+        "arguments": {
+          "action": "执行激活NGP"
+        }
+      }
+    ]
+  },
+  {
+    "id": "ngp_006",
+    "category": "辅助驾驶",
+    "sub_category": "NGP激活",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "长途有点疲惫，开启导航辅助驾驶吧",
+    "expected_tool_calls": [
+      {
+        "name": "NGPActivateControl",
+        "arguments": {
+          "action": "执行激活NGP"
+        }
+      }
+    ]
+  }
+]

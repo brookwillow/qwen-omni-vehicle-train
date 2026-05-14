@@ -1,0 +1,492 @@
+[
+  {
+    "id": "multiturn_001",
+    "category": "多轮对话",
+    "sub_category": "空调",
+    "intent": "多轮",
+    "difficulty": "easy",
+    "history": [
+      {
+        "role": "user",
+        "content": "车里有点热"
+      },
+      {
+        "role": "assistant",
+        "content": "帮您调低空调温度。"
+      }
+    ],
+    "query": "调低一点",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调低",
+          "device": "空调",
+          "feature": "温度"
+        }
+      }
+    ]
+  },
+  {
+    "id": "multiturn_002",
+    "category": "多轮对话",
+    "sub_category": "空调",
+    "intent": "多轮",
+    "difficulty": "easy",
+    "history": [
+      {
+        "role": "user",
+        "content": "刚才风有点小"
+      },
+      {
+        "role": "assistant",
+        "content": "帮您调大风量。"
+      }
+    ],
+    "query": "再大一点吧",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调高",
+          "device": "空调",
+          "feature": "风"
+        }
+      }
+    ]
+  },
+  {
+    "id": "multiturn_003",
+    "category": "多轮对话",
+    "sub_category": "空调",
+    "intent": "多轮",
+    "difficulty": "medium",
+    "history": [
+      {
+        "role": "user",
+        "content": "我这边有点冷"
+      },
+      {
+        "role": "assistant",
+        "content": "帮您把空调温度调高。"
+      }
+    ],
+    "query": "调到二十五度",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "温度",
+          "value": "25"
+        }
+      }
+    ]
+  },
+  {
+    "id": "multiturn_004",
+    "category": "多轮对话",
+    "sub_category": "车窗",
+    "intent": "多轮",
+    "difficulty": "medium",
+    "history": [
+      {
+        "role": "user",
+        "content": "把主驾车窗打开一些"
+      },
+      {
+        "role": "assistant",
+        "content": "已为您打开主驾车窗。"
+      }
+    ],
+    "query": "副驾也开一下",
+    "expected_tool_calls": [
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "打开",
+          "device": "车窗",
+          "position": "副驾"
+        }
+      }
+    ]
+  },
+  {
+    "id": "multiturn_005",
+    "category": "多轮对话",
+    "sub_category": "座椅",
+    "intent": "多轮",
+    "difficulty": "medium",
+    "history": [
+      {
+        "role": "user",
+        "content": "帮我打开主驾座椅制热"
+      },
+      {
+        "role": "assistant",
+        "content": "已为您打开主驾座椅制热。"
+      }
+    ],
+    "query": "调到高档",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "调到",
+          "device": "座椅",
+          "feature": "制热",
+          "position": "主驾",
+          "value": "高"
+        }
+      }
+    ]
+  },
+  {
+    "id": "multiturn_006",
+    "category": "多轮对话",
+    "sub_category": "灯光",
+    "intent": "多轮",
+    "difficulty": "medium",
+    "history": [
+      {
+        "role": "user",
+        "content": "帮我把主驾的阅读灯打开"
+      },
+      {
+        "role": "assistant",
+        "content": "已为您打开主驾阅读灯。"
+      }
+    ],
+    "query": "副驾的也打开",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "打开",
+          "device": "阅读灯",
+          "position": "副驾"
+        }
+      }
+    ]
+  },
+  {
+    "id": "multiturn_007",
+    "category": "多轮对话",
+    "sub_category": "空调",
+    "intent": "多轮",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "空调温度不太合适"
+      },
+      {
+        "role": "assistant",
+        "content": "请问您需要调高还是调低空调温度？"
+      }
+    ],
+    "query": "调低一点",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调低",
+          "device": "空调",
+          "feature": "温度"
+        }
+      }
+    ]
+  },
+  {
+    "id": "multiturn_008",
+    "category": "多轮对话",
+    "sub_category": "音量",
+    "intent": "多轮",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "帮我调一下音量"
+      },
+      {
+        "role": "assistant",
+        "content": "请问您想调高还是调低？"
+      }
+    ],
+    "query": "调高",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调高",
+          "feature": "声音"
+        }
+      }
+    ]
+  },
+  {
+    "id": "multiturn_009",
+    "category": "多轮对话",
+    "sub_category": "多指令",
+    "intent": "多轮",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "把空调打开"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"空调\"}}"
+      }
+    ],
+    "query": "顺便把车窗也关上",
+    "expected_tool_calls": [
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "车窗"
+        }
+      }
+    ]
+  },
+  {
+    "id": "multiturn_010",
+    "category": "多轮对话",
+    "sub_category": "纠错",
+    "intent": "多轮",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "把主驾车窗关上"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗\",\"position\":\"主驾\"}}"
+      }
+    ],
+    "query": "我说的是副驾，不是主驾",
+    "expected_tool_calls": [
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "车窗",
+          "position": "副驾"
+        }
+      }
+    ]
+  },
+  {
+    "id": "multiturn_011",
+    "category": "多轮对话",
+    "sub_category": "车窗-TTS历史",
+    "intent": "多轮",
+    "difficulty": "medium",
+    "note": "历史轮助手均为TTS回复（无工具JSON），测试模型在不完整历史下的指代消解能力",
+    "history": [
+      {"role": "user", "content": "帮我把主驾车窗打开"},
+      {"role": "assistant", "content": "好的，已经搞定了"},
+      {"role": "user", "content": "关上吧"},
+      {"role": "assistant", "content": "好的，搞定了"},
+      {"role": "user", "content": "后排的关上吧"},
+      {"role": "assistant", "content": "好的，已经关上了"}
+    ],
+    "query": "副驾的窗户也关上吧",
+    "expected_tool_calls": [
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "车窗",
+          "position": "副驾"
+        }
+      }
+    ]
+  },
+  {
+    "id": "multiturn_012",
+    "category": "多轮对话",
+    "sub_category": "空调-TTS历史",
+    "intent": "多轮",
+    "difficulty": "medium",
+    "note": "历史轮助手均为TTS回复，测试温度指代追踪",
+    "history": [
+      {"role": "user", "content": "把空调打开"},
+      {"role": "assistant", "content": "好的，空调已为您打开"},
+      {"role": "user", "content": "温度调高一点"},
+      {"role": "assistant", "content": "好的，已调高温度"}
+    ],
+    "query": "再高一点",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调高",
+          "device": "空调",
+          "feature": "温度"
+        }
+      }
+    ]
+  },
+  {
+    "id": "multiturn_013",
+    "category": "多轮对话",
+    "sub_category": "座椅-TTS历史",
+    "intent": "多轮",
+    "difficulty": "medium",
+    "note": "历史轮助手均为TTS回复，测试座位指代延续",
+    "history": [
+      {"role": "user", "content": "帮我开主驾座椅通风"},
+      {"role": "assistant", "content": "已为您打开主驾座椅通风"},
+      {"role": "user", "content": "调高一档"},
+      {"role": "assistant", "content": "好的，已调高"}
+    ],
+    "query": "副驾的也开一下",
+    "expected_tool_calls": [
+      {
+        "name": "SeatControl",
+        "arguments": {
+          "action": "打开",
+          "device": "座椅",
+          "feature": "通风",
+          "position": "副驾"
+        }
+      }
+    ]
+  },
+  {
+    "id": "multiturn_014",
+    "category": "多轮对话",
+    "sub_category": "灯光-TTS历史",
+    "intent": "多轮",
+    "difficulty": "hard",
+    "note": "历史轮助手均为TTS回复，测试多轮灯光操作后的指代消解",
+    "history": [
+      {"role": "user", "content": "把氛围灯打开"},
+      {"role": "assistant", "content": "好的，氛围灯已打开"},
+      {"role": "user", "content": "换个颜色"},
+      {"role": "assistant", "content": "好的，已切换颜色"},
+      {"role": "user", "content": "亮度调高一点"},
+      {"role": "assistant", "content": "好的，已调高亮度"}
+    ],
+    "query": "关掉吧",
+    "expected_tool_calls": [
+      {
+        "name": "LightControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "氛围灯"
+        }
+      }
+    ]
+  },
+  {
+    "id": "multiturn_015",
+    "category": "多轮对话",
+    "sub_category": "车窗-TTS历史",
+    "intent": "多轮",
+    "difficulty": "hard",
+    "note": "历史轮助手均为TTS回复，多次操作不同位置车窗后的指代消解",
+    "history": [
+      {"role": "user", "content": "把左边车窗开一下"},
+      {"role": "assistant", "content": "好的，已为您打开左侧车窗"},
+      {"role": "user", "content": "右边也开一下"},
+      {"role": "assistant", "content": "好的，已为您打开右侧车窗"},
+      {"role": "user", "content": "左边关上吧，风有点大"},
+      {"role": "assistant", "content": "好的，已关上左侧车窗"}
+    ],
+    "query": "右边也关上",
+    "expected_tool_calls": [
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "车窗",
+          "position": "右侧"
+        }
+      }
+    ]
+  },
+  {
+    "id": "multiturn_016",
+    "category": "多轮对话",
+    "sub_category": "空调-TTS历史",
+    "intent": "多轮",
+    "difficulty": "hard",
+    "note": "历史轮助手均为TTS回复，测试多位置空调操作后的省略指代",
+    "history": [
+      {"role": "user", "content": "主驾空调温度调到24度"},
+      {"role": "assistant", "content": "好的，已将主驾空调温度调到24度"},
+      {"role": "user", "content": "副驾也调到24度"},
+      {"role": "assistant", "content": "好的，副驾空调温度也已调到24度"}
+    ],
+    "query": "后排的也调一下",
+    "expected_tool_calls": [
+      {
+        "name": "ClimateControl",
+        "arguments": {
+          "action": "调到",
+          "device": "空调",
+          "feature": "温度",
+          "position": "第二排",
+          "value": "24"
+        }
+      }
+    ]
+  },
+  {
+    "id": "multiturn_017",
+    "category": "多轮对话",
+    "sub_category": "遮阳帘-TTS历史",
+    "intent": "多轮",
+    "difficulty": "hard",
+    "note": "历史轮助手均为TTS回复，测试设备类型的指代延续",
+    "history": [
+      {"role": "user", "content": "帮我把遮阳帘拉上"},
+      {"role": "assistant", "content": "好的，遮阳帘已关闭"},
+      {"role": "user", "content": "天窗也关一下"},
+      {"role": "assistant", "content": "好的，天窗已关闭"}
+    ],
+    "query": "车窗也都关上吧",
+    "expected_tool_calls": [
+      {
+        "name": "WindowControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "车窗",
+          "position": "全部"
+        }
+      }
+    ]
+  },
+  {
+    "id": "multiturn_018",
+    "category": "多轮对话",
+    "sub_category": "音量-TTS历史",
+    "intent": "多轮",
+    "difficulty": "hard",
+    "note": "历史轮助手均为TTS回复，测试渐进式音量调节指代",
+    "history": [
+      {"role": "user", "content": "音量调大一点"},
+      {"role": "assistant", "content": "好的，已为您调大音量"},
+      {"role": "user", "content": "再大一点"},
+      {"role": "assistant", "content": "好的，已再次调大"},
+      {"role": "user", "content": "还是有点小"},
+      {"role": "assistant", "content": "好的，已继续调大"}
+    ],
+    "query": "好了好了，这样就行，导航音量单独调低一点",
+    "expected_tool_calls": [
+      {
+        "name": "VoiceControl",
+        "arguments": {
+          "action": "调低",
+          "feature": "导航音量"
+        }
+      }
+    ]
+  }
+]

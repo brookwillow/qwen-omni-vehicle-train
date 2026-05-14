@@ -1,0 +1,180 @@
+[
+  {
+    "id": "perfume_001",
+    "category": "香氛",
+    "sub_category": "开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开香氛",
+    "expected_tool_calls": [
+      {
+        "name": "PerfumeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "香氛"
+        }
+      }
+    ]
+  },
+  {
+    "id": "perfume_002",
+    "category": "香氛",
+    "sub_category": "开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭香氛",
+    "expected_tool_calls": [
+      {
+        "name": "PerfumeControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "香氛"
+        }
+      }
+    ]
+  },
+  {
+    "id": "perfume_003",
+    "category": "香氛",
+    "sub_category": "浓度调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "香氛浓度调高一点",
+    "expected_tool_calls": [
+      {
+        "name": "PerfumeControl",
+        "arguments": {
+          "action": "调高",
+          "device": "香氛",
+          "feature": "浓度"
+        }
+      }
+    ]
+  },
+  {
+    "id": "perfume_004",
+    "category": "香氛",
+    "sub_category": "浓度调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "香氛浓度调低一点",
+    "expected_tool_calls": [
+      {
+        "name": "PerfumeControl",
+        "arguments": {
+          "action": "调低",
+          "device": "香氛",
+          "feature": "浓度"
+        }
+      }
+    ]
+  },
+  {
+    "id": "perfume_005",
+    "category": "香氛",
+    "sub_category": "浓度调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "香氛浓度调到最高",
+    "expected_tool_calls": [
+      {
+        "name": "PerfumeControl",
+        "arguments": {
+          "action": "调到",
+          "device": "香氛",
+          "feature": "浓度",
+          "value": "最高"
+        }
+      }
+    ]
+  },
+  {
+    "id": "perfume_006",
+    "category": "香氛",
+    "sub_category": "浓度调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "香氛浓度调到最低",
+    "expected_tool_calls": [
+      {
+        "name": "PerfumeControl",
+        "arguments": {
+          "action": "调到",
+          "device": "香氛",
+          "feature": "浓度",
+          "value": "最低"
+        }
+      }
+    ]
+  },
+  {
+    "id": "perfume_007",
+    "category": "香氛",
+    "sub_category": "开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "车里有点闷，开一下香氛吧",
+    "expected_tool_calls": [
+      {
+        "name": "PerfumeControl",
+        "arguments": {
+          "action": "打开",
+          "device": "香氛"
+        }
+      }
+    ]
+  },
+  {
+    "id": "perfume_008",
+    "category": "香氛",
+    "sub_category": "浓度调节",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "香氛味道太淡了，加重一点",
+    "expected_tool_calls": [
+      {
+        "name": "PerfumeControl",
+        "arguments": {
+          "action": "调高",
+          "device": "香氛",
+          "feature": "浓度"
+        }
+      }
+    ]
+  },
+  {
+    "id": "perfume_009",
+    "category": "香氛",
+    "sub_category": "开关",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "香水味太重了，先关掉吧",
+    "expected_tool_calls": [
+      {
+        "name": "PerfumeControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "香氛"
+        }
+      }
+    ]
+  },
+  {
+    "id": "perfume_010",
+    "category": "香氛",
+    "sub_category": "浓度调节",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "有点晕车，香气浓度轻一点",
+    "expected_tool_calls": [
+      {
+        "name": "PerfumeControl",
+        "arguments": {
+          "action": "调低",
+          "device": "香氛",
+          "feature": "浓度"
+        }
+      }
+    ]
+  }
+]

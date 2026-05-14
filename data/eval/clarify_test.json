@@ -1,0 +1,82 @@
+[
+  {
+    "id": "clarify_001",
+    "category": "澄清",
+    "sub_category": "空调",
+    "intent": "模糊",
+    "difficulty": "medium",
+    "query": "帮我调一下空调温度",
+    "expected_tool_calls": [],
+    "expected_type": "Clarify"
+  },
+  {
+    "id": "clarify_002",
+    "category": "澄清",
+    "sub_category": "空调",
+    "intent": "模糊",
+    "difficulty": "medium",
+    "query": "空调温度不太合适",
+    "expected_tool_calls": [],
+    "expected_type": "Clarify"
+  },
+  {
+    "id": "clarify_003",
+    "category": "澄清",
+    "sub_category": "音量",
+    "intent": "模糊",
+    "difficulty": "medium",
+    "query": "帮我调一下音量",
+    "expected_tool_calls": [],
+    "expected_type": "Clarify"
+  },
+  {
+    "id": "clarify_004",
+    "category": "澄清",
+    "sub_category": "车窗",
+    "intent": "模糊",
+    "difficulty": "medium",
+    "query": "你帮我处理一下车窗",
+    "expected_tool_calls": [],
+    "expected_type": "Clarify"
+  },
+  {
+    "id": "clarify_005",
+    "category": "澄清",
+    "sub_category": "座椅",
+    "intent": "模糊",
+    "difficulty": "medium",
+    "query": "调一下座椅",
+    "expected_tool_calls": [],
+    "expected_type": "Clarify"
+  },
+  {
+    "id": "clarify_006",
+    "category": "澄清",
+    "sub_category": "灯光",
+    "intent": "模糊",
+    "difficulty": "hard",
+    "query": "灯的设置帮我改一改",
+    "expected_tool_calls": [],
+    "expected_type": "Clarify"
+  },
+  {
+    "id": "clarify_007",
+    "category": "澄清",
+    "sub_category": "屏幕",
+    "intent": "模糊",
+    "difficulty": "hard",
+    "query": "屏幕这边麻烦你处理一下",
+    "expected_tool_calls": [],
+    "expected_type": "Clarify"
+  },
+  {
+    "id": "clarify_008",
+    "category": "澄清",
+    "sub_category": "空调",
+    "intent": "模糊",
+    "difficulty": "hard",
+    "query": "我想调整一下环境",
+    "expected_tool_calls": [],
+    "expected_type": "Clarify"
+  }
+]

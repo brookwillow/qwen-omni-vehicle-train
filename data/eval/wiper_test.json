@@ -1,0 +1,219 @@
+[
+  {
+    "id": "wiper_001",
+    "category": "雨刮",
+    "sub_category": "开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开雨刮",
+    "expected_tool_calls": [
+      {
+        "name": "WiperControl",
+        "arguments": {
+          "action": "打开",
+          "device": "雨刮",
+          "value": "自动"
+        }
+      }
+    ]
+  },
+  {
+    "id": "wiper_002",
+    "category": "雨刮",
+    "sub_category": "开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭雨刮",
+    "expected_tool_calls": [
+      {
+        "name": "WiperControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "雨刮",
+          "value": "自动"
+        }
+      }
+    ]
+  },
+  {
+    "id": "wiper_003",
+    "category": "雨刮",
+    "sub_category": "速度调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "雨刮速度调高一档",
+    "expected_tool_calls": [
+      {
+        "name": "WiperControl",
+        "arguments": {
+          "action": "调高",
+          "device": "雨刮",
+          "value": "高"
+        }
+      }
+    ]
+  },
+  {
+    "id": "wiper_004",
+    "category": "雨刮",
+    "sub_category": "速度调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "雨刮调到最快",
+    "expected_tool_calls": [
+      {
+        "name": "WiperControl",
+        "arguments": {
+          "action": "调到",
+          "device": "雨刮",
+          "value": "最高"
+        }
+      }
+    ]
+  },
+  {
+    "id": "wiper_005",
+    "category": "雨刮",
+    "sub_category": "速度调节",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "雨刮速度调低",
+    "expected_tool_calls": [
+      {
+        "name": "WiperControl",
+        "arguments": {
+          "action": "调低",
+          "device": "雨刮",
+          "value": "低"
+        }
+      }
+    ]
+  },
+  {
+    "id": "wiper_006",
+    "category": "雨刮",
+    "sub_category": "自动",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "开启自动雨刮",
+    "expected_tool_calls": [
+      {
+        "name": "WiperControl",
+        "arguments": {
+          "action": "打开",
+          "device": "雨刮",
+          "value": "自动"
+        }
+      }
+    ]
+  },
+  {
+    "id": "wiper_007",
+    "category": "雨刮",
+    "sub_category": "清洗",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "帮我清洗一下挡风玻璃",
+    "expected_tool_calls": [
+      {
+        "name": "WiperControl",
+        "arguments": {
+          "action": "清洗",
+          "device": "雨刮",
+          "value": "自动"
+        }
+      }
+    ]
+  },
+  {
+    "id": "wiper_008",
+    "category": "雨刮",
+    "sub_category": "后雨刮",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开后雨刮",
+    "expected_tool_calls": [
+      {
+        "name": "WiperControl",
+        "arguments": {
+          "action": "打开",
+          "device": "后雨刮",
+          "value": "自动"
+        }
+      }
+    ]
+  },
+  {
+    "id": "wiper_009",
+    "category": "雨刮",
+    "sub_category": "灵敏度",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "雨刮灵敏度调高",
+    "expected_tool_calls": [
+      {
+        "name": "WiperControl",
+        "arguments": {
+          "action": "调高",
+          "device": "雨刮",
+          "feature": "灵敏度",
+          "value": "高"
+        }
+      }
+    ]
+  },
+  {
+    "id": "wiper_010",
+    "category": "雨刮",
+    "sub_category": "维修",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "雨刮切换到维修模式",
+    "expected_tool_calls": [
+      {
+        "name": "WiperControl",
+        "arguments": {
+          "action": "调到",
+          "device": "雨刮",
+          "value": "维修"
+        }
+      }
+    ]
+  },
+  {
+    "id": "wiper_011",
+    "category": "雨刮",
+    "sub_category": "开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "下雨了，把雨刮开一下",
+    "expected_tool_calls": [
+      {
+        "name": "WiperControl",
+        "arguments": {
+          "action": "打开",
+          "device": "雨刮",
+          "value": "自动"
+        }
+      }
+    ]
+  },
+  {
+    "id": "wiper_012",
+    "category": "雨刮",
+    "sub_category": "速度调节",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "雨下得很大，雨刮太慢了",
+    "expected_tool_calls": [
+      {
+        "name": "WiperControl",
+        "arguments": {
+          "action": "调高",
+          "device": "雨刮",
+          "value": "高"
+        }
+      }
+    ]
+  }
+]

@@ -1,1 +1,102 @@
-[]
+[
+  {
+    "id": "media_rej_001",
+    "category": "媒体",
+    "sub_category": "播放音乐",
+    "intent": "范围外",
+    "difficulty": "easy",
+    "query": "播放一首周杰伦的歌",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "media_rej_002",
+    "category": "媒体",
+    "sub_category": "播放音乐",
+    "intent": "范围外",
+    "difficulty": "easy",
+    "query": "放点轻音乐",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "media_rej_003",
+    "category": "媒体",
+    "sub_category": "媒体控制",
+    "intent": "范围外",
+    "difficulty": "easy",
+    "query": "暂停音乐",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "media_rej_004",
+    "category": "媒体",
+    "sub_category": "媒体控制",
+    "intent": "范围外",
+    "difficulty": "easy",
+    "query": "播放下一首",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "media_rej_005",
+    "category": "媒体",
+    "sub_category": "收音机",
+    "intent": "范围外",
+    "difficulty": "easy",
+    "query": "打开FM广播",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "media_rej_006",
+    "category": "媒体",
+    "sub_category": "收音机",
+    "intent": "范围外",
+    "difficulty": "easy",
+    "query": "收音机换个台",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "media_rej_007",
+    "category": "媒体",
+    "sub_category": "播客",
+    "intent": "范围外",
+    "difficulty": "easy",
+    "query": "播放喜马拉雅上的节目",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "media_rej_008",
+    "category": "媒体",
+    "sub_category": "媒体控制",
+    "intent": "范围外",
+    "difficulty": "medium",
+    "query": "随机播放音乐",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "media_rej_009",
+    "category": "媒体",
+    "sub_category": "播放音乐",
+    "intent": "范围外",
+    "difficulty": "medium",
+    "query": "搜索一下最近很火的歌放来听听",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "media_rej_010",
+    "category": "媒体",
+    "sub_category": "媒体控制",
+    "intent": "范围外",
+    "difficulty": "hard",
+    "query": "我在高速上，给我放点节奏感强的歌",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  }
+]

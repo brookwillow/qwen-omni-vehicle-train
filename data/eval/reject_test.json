@@ -1,0 +1,152 @@
+[
+  {
+    "id": "reject_001",
+    "category": "范围外",
+    "sub_category": "家电控制",
+    "intent": "范围外",
+    "difficulty": "easy",
+    "query": "帮我把家里的空调打开",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "reject_002",
+    "category": "范围外",
+    "sub_category": "家电控制",
+    "intent": "范围外",
+    "difficulty": "easy",
+    "query": "帮我把热水器打开",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "reject_003",
+    "category": "范围外",
+    "sub_category": "外卖",
+    "intent": "范围外",
+    "difficulty": "easy",
+    "query": "帮我点一份麦当劳外卖",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "reject_004",
+    "category": "范围外",
+    "sub_category": "外卖",
+    "intent": "范围外",
+    "difficulty": "easy",
+    "query": "我有点饿了，帮我订个外卖",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "reject_005",
+    "category": "范围外",
+    "sub_category": "生活助手",
+    "intent": "范围外",
+    "difficulty": "easy",
+    "query": "今天天气怎么样",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "reject_006",
+    "category": "范围外",
+    "sub_category": "生活助手",
+    "intent": "范围外",
+    "difficulty": "easy",
+    "query": "帮我设个明天早上七点的闹钟",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "reject_007",
+    "category": "范围外",
+    "sub_category": "购物",
+    "intent": "范围外",
+    "difficulty": "easy",
+    "query": "帮我在淘宝上买双鞋",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "reject_008",
+    "category": "范围外",
+    "sub_category": "聊天",
+    "intent": "范围外",
+    "difficulty": "medium",
+    "query": "你最近在忙什么",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "reject_009",
+    "category": "范围外",
+    "sub_category": "家电控制",
+    "intent": "范围外",
+    "difficulty": "medium",
+    "query": "快到家了，帮我把家里的扫地机器人打开",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "reject_010",
+    "category": "范围外",
+    "sub_category": "导航",
+    "intent": "范围外",
+    "difficulty": "medium",
+    "query": "帮我规划一条去上海的路线",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "reject_011",
+    "category": "范围外",
+    "sub_category": "导航",
+    "intent": "范围外",
+    "difficulty": "medium",
+    "query": "导航到最近的加油站",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "reject_012",
+    "category": "范围外",
+    "sub_category": "生活助手",
+    "intent": "范围外",
+    "difficulty": "hard",
+    "query": "我想了解一下最近的新闻",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "reject_013",
+    "category": "范围外",
+    "sub_category": "聊天",
+    "intent": "范围外",
+    "difficulty": "hard",
+    "query": "小P，你觉得人工智能会替代人类吗",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "reject_014",
+    "category": "范围外",
+    "sub_category": "购物",
+    "intent": "范围外",
+    "difficulty": "hard",
+    "query": "帮我比较一下这两款手机哪个好",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "reject_015",
+    "category": "范围外",
+    "sub_category": "家电控制",
+    "intent": "范围外",
+    "difficulty": "easy",
+    "query": "把客厅灯打开",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  }
+]

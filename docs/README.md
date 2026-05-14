@@ -55,10 +55,10 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 | By-tool | 6997 | 每个工具文件内混合：`user -> JSON tool call` 决策样本 4712 条，独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 2285 条 |
 | Clarify | 99 | 4 轮：用户缺少工具 required 字段 → 自然语言追问 → 用户补齐 → JSON tool call；不包含 tool-role result |
 | Edge case | 100 | 多轮当前轮边界、查询 vs 控制、popup/task 列表 `GeneralSelect` 等易混淆样本 |
-| Multiturn | 321 | 最多三轮纯文本历史；历史允许外部域文本；当前轮输出分布：工具 194 条、NoiseDoNotAct 79 条、Reject 36 条、自然语言 TTS 12 条 |
+| Multiturn | 329 | 最多三轮纯文本历史；历史允许外部域文本；当前轮输出分布：工具 202 条、NoiseDoNotAct 79 条、Reject 36 条、自然语言 TTS 12 条 |
 | Reject | 1127 | 单轮 + 多轮硬负例（已合并），最后一条 assistant 均为 `Reject`；已抽稀家居控制负例并移除高风险车控状态拒识 |
 
-`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 8644 条；统计时多轮样本按最后一个有效决策标签计入对应类别。
+`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 8652 条；统计时多轮样本按最后一个有效决策标签计入对应类别。
 
 ## 训练配置
 

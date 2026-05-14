@@ -1,0 +1,130 @@
+[
+  {
+    "id": "gsel_001",
+    "category": "列表选择",
+    "sub_category": "选择",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "选第一个",
+    "expected_tool_calls": [
+      {
+        "name": "GeneralSelect",
+        "arguments": {
+          "index": "1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "gsel_002",
+    "category": "列表选择",
+    "sub_category": "选择",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "选第二个",
+    "expected_tool_calls": [
+      {
+        "name": "GeneralSelect",
+        "arguments": {
+          "index": "2"
+        }
+      }
+    ]
+  },
+  {
+    "id": "gsel_003",
+    "category": "列表选择",
+    "sub_category": "选择",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "选第三个",
+    "expected_tool_calls": [
+      {
+        "name": "GeneralSelect",
+        "arguments": {
+          "index": "3"
+        }
+      }
+    ]
+  },
+  {
+    "id": "gsel_004",
+    "category": "列表选择",
+    "sub_category": "选择",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "就选最后一个吧",
+    "expected_tool_calls": [
+      {
+        "name": "GeneralSelect",
+        "arguments": {
+          "index": "-1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "gsel_005",
+    "category": "列表选择",
+    "sub_category": "选择",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "第一个就行",
+    "expected_tool_calls": [
+      {
+        "name": "GeneralSelect",
+        "arguments": {
+          "index": "1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "gsel_006",
+    "category": "列表选择",
+    "sub_category": "选择",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "选1号",
+    "expected_tool_calls": [
+      {
+        "name": "GeneralSelect",
+        "arguments": {
+          "index": "1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "gsel_007",
+    "category": "列表选择",
+    "sub_category": "选择",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "就要第二个那个",
+    "expected_tool_calls": [
+      {
+        "name": "GeneralSelect",
+        "arguments": {
+          "index": "2"
+        }
+      }
+    ]
+  },
+  {
+    "id": "gsel_008",
+    "category": "列表选择",
+    "sub_category": "选择",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "中间那个，第三项",
+    "expected_tool_calls": [
+      {
+        "name": "GeneralSelect",
+        "arguments": {
+          "index": "3"
+        }
+      }
+    ]
+  }
+]

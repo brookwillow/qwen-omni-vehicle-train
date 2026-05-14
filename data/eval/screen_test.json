@@ -274,7 +274,7 @@
           "action": "调到",
           "device": "娱乐屏",
           "feature": "亮度",
-          "value": "50%"
+          "value": "中"
         }
       }
     ],
@@ -467,7 +467,7 @@
           "device": "娱乐屏",
           "feature": "亮度",
           "position": "副驾",
-          "value": "80%"
+          "value": "高"
         }
       }
     ],
@@ -1211,7 +1211,7 @@
           "action": "调到",
           "device": "屏幕",
           "feature": "亮度",
-          "value": "60%"
+          "value": "中"
         }
       }
     ],

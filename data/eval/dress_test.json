@@ -1,0 +1,110 @@
+[
+  {
+    "id": "dress_001",
+    "category": "换装",
+    "sub_category": "服装切换",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "切换下一套服装",
+    "expected_tool_calls": [
+      {
+        "name": "DressControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "服装",
+          "value": "下一个"
+        }
+      }
+    ]
+  },
+  {
+    "id": "dress_002",
+    "category": "换装",
+    "sub_category": "主题切换",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "切换下一个主题",
+    "expected_tool_calls": [
+      {
+        "name": "DressControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "主题",
+          "value": "下一个"
+        }
+      }
+    ]
+  },
+  {
+    "id": "dress_003",
+    "category": "换装",
+    "sub_category": "服装切换",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "给小P换一套衣服",
+    "expected_tool_calls": [
+      {
+        "name": "DressControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "服装",
+          "value": "下一个"
+        }
+      }
+    ]
+  },
+  {
+    "id": "dress_004",
+    "category": "换装",
+    "sub_category": "主题切换",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "换个车内主题风格",
+    "expected_tool_calls": [
+      {
+        "name": "DressControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "主题",
+          "value": "下一个"
+        }
+      }
+    ]
+  },
+  {
+    "id": "dress_005",
+    "category": "换装",
+    "sub_category": "服装切换",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "这套衣服不好看，换一套",
+    "expected_tool_calls": [
+      {
+        "name": "DressControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "服装",
+          "value": "下一个"
+        }
+      }
+    ]
+  },
+  {
+    "id": "dress_006",
+    "category": "换装",
+    "sub_category": "主题切换",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "节日快到了，换个应景的界面主题",
+    "expected_tool_calls": [
+      {
+        "name": "DressControl",
+        "arguments": {
+          "action": "调到",
+          "feature": "主题",
+          "value": "下一个"
+        }
+      }
+    ]
+  }
+]

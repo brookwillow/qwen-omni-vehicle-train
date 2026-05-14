@@ -1,0 +1,162 @@
+[
+  {
+    "id": "direction_001",
+    "category": "方向控制",
+    "sub_category": "左转",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "前方路口左转",
+    "expected_tool_calls": [
+      {
+        "name": "DirectionControl",
+        "arguments": {
+          "action": "前面路口左转"
+        }
+      }
+    ]
+  },
+  {
+    "id": "direction_002",
+    "category": "方向控制",
+    "sub_category": "右转",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "前方路口右转",
+    "expected_tool_calls": [
+      {
+        "name": "DirectionControl",
+        "arguments": {
+          "action": "前面路口右转"
+        }
+      }
+    ]
+  },
+  {
+    "id": "direction_003",
+    "category": "方向控制",
+    "sub_category": "直行",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "前方路口直行",
+    "expected_tool_calls": [
+      {
+        "name": "DirectionControl",
+        "arguments": {
+          "action": "前面路口直行"
+        }
+      }
+    ]
+  },
+  {
+    "id": "direction_004",
+    "category": "方向控制",
+    "sub_category": "掉头",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "前方路口掉头",
+    "expected_tool_calls": [
+      {
+        "name": "DirectionControl",
+        "arguments": {
+          "action": "前面路口掉头"
+        }
+      }
+    ]
+  },
+  {
+    "id": "direction_005",
+    "category": "方向控制",
+    "sub_category": "左转",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "往左拐",
+    "expected_tool_calls": [
+      {
+        "name": "DirectionControl",
+        "arguments": {
+          "action": "前面路口左转"
+        }
+      }
+    ]
+  },
+  {
+    "id": "direction_006",
+    "category": "方向控制",
+    "sub_category": "右转",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "前面那个路口向右",
+    "expected_tool_calls": [
+      {
+        "name": "DirectionControl",
+        "arguments": {
+          "action": "前面路口右转"
+        }
+      }
+    ]
+  },
+  {
+    "id": "direction_007",
+    "category": "方向控制",
+    "sub_category": "掉头",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "走错了，回头吧",
+    "expected_tool_calls": [
+      {
+        "name": "DirectionControl",
+        "arguments": {
+          "action": "前面路口掉头"
+        }
+      }
+    ]
+  },
+  {
+    "id": "direction_008",
+    "category": "方向控制",
+    "sub_category": "直行",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "这条路直走",
+    "expected_tool_calls": [
+      {
+        "name": "DirectionControl",
+        "arguments": {
+          "action": "前面路口直行"
+        }
+      }
+    ]
+  },
+  {
+    "id": "direction_009",
+    "category": "方向控制",
+    "sub_category": "左转",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "导航说要左转，帮我执行",
+    "expected_tool_calls": [
+      {
+        "name": "DirectionControl",
+        "arguments": {
+          "action": "前面路口左转"
+        }
+      }
+    ]
+  },
+  {
+    "id": "direction_010",
+    "category": "方向控制",
+    "sub_category": "掉头",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "这条路走错了，原路返回",
+    "expected_tool_calls": [
+      {
+        "name": "DirectionControl",
+        "arguments": {
+          "action": "前面路口掉头"
+        }
+      }
+    ]
+  }
+]

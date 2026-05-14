@@ -1,0 +1,66 @@
+[
+  {
+    "id": "doi_001",
+    "category": "出口选择",
+    "sub_category": "执行",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "执行出口选择",
+    "expected_tool_calls": [
+      {
+        "name": "DoiSelectionControl",
+        "arguments": {
+          "action": "执行出口选择"
+        }
+      }
+    ]
+  },
+  {
+    "id": "doi_002",
+    "category": "出口选择",
+    "sub_category": "取消",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "取消出口选择",
+    "expected_tool_calls": [
+      {
+        "name": "DoiSelectionControl",
+        "arguments": {
+          "action": "取消出口选择"
+        }
+      }
+    ]
+  },
+  {
+    "id": "doi_003",
+    "category": "出口选择",
+    "sub_category": "执行",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "帮我选择停车场出口",
+    "expected_tool_calls": [
+      {
+        "name": "DoiSelectionControl",
+        "arguments": {
+          "action": "执行出口选择"
+        }
+      }
+    ]
+  },
+  {
+    "id": "doi_004",
+    "category": "出口选择",
+    "sub_category": "取消",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "不用了，我自己走出口",
+    "expected_tool_calls": [
+      {
+        "name": "DoiSelectionControl",
+        "arguments": {
+          "action": "取消出口选择"
+        }
+      }
+    ]
+  }
+]

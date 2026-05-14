@@ -122,7 +122,7 @@
         "arguments": {
           "action": "调到",
           "feature": "声音",
-          "value": "50%"
+          "value": "中"
         }
       }
     ],
@@ -141,7 +141,7 @@
         "arguments": {
           "action": "调到",
           "feature": "声音",
-          "value": "5"
+          "value": "中"
         }
       }
     ],
@@ -458,7 +458,7 @@
           "action": "调到",
           "feature": "声音",
           "position": "全部",
-          "value": "30%"
+          "value": "中"
         }
       }
     ],
@@ -1159,7 +1159,7 @@
         "arguments": {
           "action": "调到",
           "feature": "声音",
-          "value": "20%"
+          "value": "中"
         }
       },
       {

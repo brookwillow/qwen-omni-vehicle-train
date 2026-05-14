@@ -1,0 +1,143 @@
+[
+  {
+    "id": "tail_001",
+    "category": "尾翼",
+    "sub_category": "开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "打开尾翼",
+    "expected_tool_calls": [
+      {
+        "name": "TailControl",
+        "arguments": {
+          "action": "打开",
+          "device": "尾翼"
+        }
+      }
+    ]
+  },
+  {
+    "id": "tail_002",
+    "category": "尾翼",
+    "sub_category": "开关",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "关闭尾翼",
+    "expected_tool_calls": [
+      {
+        "name": "TailControl",
+        "arguments": {
+          "action": "关闭",
+          "device": "尾翼"
+        }
+      }
+    ]
+  },
+  {
+    "id": "tail_003",
+    "category": "尾翼",
+    "sub_category": "模式",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "尾翼设置为自动模式",
+    "expected_tool_calls": [
+      {
+        "name": "TailControl",
+        "arguments": {
+          "action": "调到",
+          "device": "尾翼",
+          "value": "自动"
+        }
+      }
+    ]
+  },
+  {
+    "id": "tail_004",
+    "category": "尾翼",
+    "sub_category": "高度",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "尾翼升到最高",
+    "expected_tool_calls": [
+      {
+        "name": "TailControl",
+        "arguments": {
+          "action": "调到",
+          "device": "尾翼",
+          "value": "最高"
+        }
+      }
+    ]
+  },
+  {
+    "id": "tail_005",
+    "category": "尾翼",
+    "sub_category": "高度",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "尾翼降到最低",
+    "expected_tool_calls": [
+      {
+        "name": "TailControl",
+        "arguments": {
+          "action": "调到",
+          "device": "尾翼",
+          "value": "最低"
+        }
+      }
+    ]
+  },
+  {
+    "id": "tail_006",
+    "category": "尾翼",
+    "sub_category": "开关",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "高速行驶，帮我把尾翼升起来",
+    "expected_tool_calls": [
+      {
+        "name": "TailControl",
+        "arguments": {
+          "action": "打开",
+          "device": "尾翼"
+        }
+      }
+    ]
+  },
+  {
+    "id": "tail_007",
+    "category": "尾翼",
+    "sub_category": "模式",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "尾翼让它自己控制吧",
+    "expected_tool_calls": [
+      {
+        "name": "TailControl",
+        "arguments": {
+          "action": "调到",
+          "device": "尾翼",
+          "value": "自动"
+        }
+      }
+    ]
+  },
+  {
+    "id": "tail_008",
+    "category": "尾翼",
+    "sub_category": "高度",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "速度这么快需要增加下压力，把尾翼升最高",
+    "expected_tool_calls": [
+      {
+        "name": "TailControl",
+        "arguments": {
+          "action": "调到",
+          "device": "尾翼",
+          "value": "最高"
+        }
+      }
+    ]
+  }
+]

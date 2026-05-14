@@ -1,0 +1,82 @@
+[
+  {
+    "id": "pss_001",
+    "category": "终点车位选择",
+    "sub_category": "执行",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "选择目的地停车位",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingSpaceSelectionControl",
+        "arguments": {
+          "action": "执行终点车位选择"
+        }
+      }
+    ]
+  },
+  {
+    "id": "pss_002",
+    "category": "终点车位选择",
+    "sub_category": "执行",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "执行车位选择",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingSpaceSelectionControl",
+        "arguments": {
+          "action": "执行终点车位选择"
+        }
+      }
+    ]
+  },
+  {
+    "id": "pss_003",
+    "category": "终点车位选择",
+    "sub_category": "暂停",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "暂停车位选择",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingSpaceSelectionControl",
+        "arguments": {
+          "action": "暂停终点车位选择"
+        }
+      }
+    ]
+  },
+  {
+    "id": "pss_004",
+    "category": "终点车位选择",
+    "sub_category": "取消",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "取消车位选择",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingSpaceSelectionControl",
+        "arguments": {
+          "action": "取消终点车位选择"
+        }
+      }
+    ]
+  },
+  {
+    "id": "pss_005",
+    "category": "终点车位选择",
+    "sub_category": "执行",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "帮我选一个终点的停车位",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingSpaceSelectionControl",
+        "arguments": {
+          "action": "执行终点车位选择"
+        }
+      }
+    ]
+  }
+]

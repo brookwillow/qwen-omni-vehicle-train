@@ -1,0 +1,142 @@
+[
+  {
+    "id": "noise_001",
+    "category": "噪声处理",
+    "sub_category": "NoiseDoNotAct",
+    "intent": "噪声",
+    "difficulty": "easy",
+    "query": "[噪声]嗯啊哦",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ]
+  },
+  {
+    "id": "noise_002",
+    "category": "噪声处理",
+    "sub_category": "NoiseDoNotAct",
+    "intent": "噪声",
+    "difficulty": "easy",
+    "query": "[噪声]嗯嗯",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ]
+  },
+  {
+    "id": "noise_003",
+    "category": "噪声处理",
+    "sub_category": "NoiseDoNotAct",
+    "intent": "噪声",
+    "difficulty": "easy",
+    "query": "咳咳咳",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ]
+  },
+  {
+    "id": "noise_004",
+    "category": "噪声处理",
+    "sub_category": "NoiseDoNotAct",
+    "intent": "噪声",
+    "difficulty": "easy",
+    "query": "嗯哼",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ]
+  },
+  {
+    "id": "noise_005",
+    "category": "噪声处理",
+    "sub_category": "NoiseDoNotAct",
+    "intent": "噪声",
+    "difficulty": "easy",
+    "query": "啊对对对",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ]
+  },
+  {
+    "id": "noise_006",
+    "category": "噪声处理",
+    "sub_category": "NoiseDoNotAct",
+    "intent": "噪声",
+    "difficulty": "medium",
+    "query": "嗯，就这样吧",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ]
+  },
+  {
+    "id": "noise_007",
+    "category": "噪声处理",
+    "sub_category": "NoiseDoNotAct",
+    "intent": "噪声",
+    "difficulty": "medium",
+    "query": "哦哦哦，好好好",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ]
+  },
+  {
+    "id": "noise_008",
+    "category": "噪声处理",
+    "sub_category": "NoiseDoNotAct",
+    "intent": "噪声",
+    "difficulty": "medium",
+    "query": "嗯...对，你说得对",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ]
+  },
+  {
+    "id": "noise_009",
+    "category": "噪声处理",
+    "sub_category": "NoiseDoNotAct",
+    "intent": "噪声",
+    "difficulty": "hard",
+    "query": "嗯，然后呢",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ]
+  },
+  {
+    "id": "noise_010",
+    "category": "噪声处理",
+    "sub_category": "NoiseDoNotAct",
+    "intent": "噪声",
+    "difficulty": "hard",
+    "query": "啊，那好吧",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ]
+  }
+]

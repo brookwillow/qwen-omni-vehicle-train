@@ -1,0 +1,209 @@
+[
+  {
+    "id": "parking_001",
+    "category": "泊车",
+    "sub_category": "泊入",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "帮我泊车",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingControl",
+        "arguments": {
+          "action": "开始",
+          "feature": "泊入"
+        }
+      }
+    ]
+  },
+  {
+    "id": "parking_002",
+    "category": "泊车",
+    "sub_category": "泊出",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "泊出车辆",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingControl",
+        "arguments": {
+          "action": "开始",
+          "feature": "泊出"
+        }
+      }
+    ]
+  },
+  {
+    "id": "parking_003",
+    "category": "泊车",
+    "sub_category": "泊入",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "开始自动泊车",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingControl",
+        "arguments": {
+          "action": "开始",
+          "feature": "泊入"
+        }
+      }
+    ]
+  },
+  {
+    "id": "parking_004",
+    "category": "泊车",
+    "sub_category": "泊入",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "停到第一个车位",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingControl",
+        "arguments": {
+          "action": "开始",
+          "feature": "泊入",
+          "index": "1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "parking_005",
+    "category": "泊车",
+    "sub_category": "泊入",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "泊入左侧车位",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingControl",
+        "arguments": {
+          "action": "开始",
+          "feature": "泊入",
+          "value": "向左"
+        }
+      }
+    ]
+  },
+  {
+    "id": "parking_006",
+    "category": "泊车",
+    "sub_category": "泊入",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "靠右泊车",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingControl",
+        "arguments": {
+          "action": "开始",
+          "feature": "泊入",
+          "value": "向右"
+        }
+      }
+    ]
+  },
+  {
+    "id": "parking_007",
+    "category": "泊车",
+    "sub_category": "暂停",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "暂停泊车",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingControl",
+        "arguments": {
+          "action": "暂停",
+          "feature": "泊入"
+        }
+      }
+    ]
+  },
+  {
+    "id": "parking_008",
+    "category": "泊车",
+    "sub_category": "取消",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "取消泊车",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingControl",
+        "arguments": {
+          "action": "取消",
+          "feature": "泊入"
+        }
+      }
+    ]
+  },
+  {
+    "id": "parking_009",
+    "category": "泊车",
+    "sub_category": "自定义泊入",
+    "intent": "明确指令",
+    "difficulty": "medium",
+    "query": "自定义泊入",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingControl",
+        "arguments": {
+          "action": "开始",
+          "feature": "自定义泊入"
+        }
+      }
+    ]
+  },
+  {
+    "id": "parking_010",
+    "category": "泊车",
+    "sub_category": "泊入",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "帮我把车停好",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingControl",
+        "arguments": {
+          "action": "开始",
+          "feature": "泊入"
+        }
+      }
+    ]
+  },
+  {
+    "id": "parking_011",
+    "category": "泊车",
+    "sub_category": "泊出",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "我要出发了，把车开出来",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingControl",
+        "arguments": {
+          "action": "开始",
+          "feature": "泊出"
+        }
+      }
+    ]
+  },
+  {
+    "id": "parking_012",
+    "category": "泊车",
+    "sub_category": "泊入",
+    "intent": "模糊语义",
+    "difficulty": "hard",
+    "query": "找个位置把车停一下",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingControl",
+        "arguments": {
+          "action": "开始",
+          "feature": "泊入"
+        }
+      }
+    ]
+  }
+]

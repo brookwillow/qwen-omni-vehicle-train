@@ -1,0 +1,82 @@
+[
+  {
+    "id": "parking_nearby_001",
+    "category": "就近泊车",
+    "sub_category": "执行",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "就近泊入",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingNearbyControl",
+        "arguments": {
+          "action": "执行就近泊入"
+        }
+      }
+    ]
+  },
+  {
+    "id": "parking_nearby_002",
+    "category": "就近泊车",
+    "sub_category": "执行",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "停到附近空位",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingNearbyControl",
+        "arguments": {
+          "action": "执行就近泊入"
+        }
+      }
+    ]
+  },
+  {
+    "id": "parking_nearby_003",
+    "category": "就近泊车",
+    "sub_category": "取消",
+    "intent": "明确指令",
+    "difficulty": "easy",
+    "query": "取消就近泊入",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingNearbyControl",
+        "arguments": {
+          "action": "取消就近泊入"
+        }
+      }
+    ]
+  },
+  {
+    "id": "parking_nearby_004",
+    "category": "就近泊车",
+    "sub_category": "执行",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "帮我找个最近的空车位停进去",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingNearbyControl",
+        "arguments": {
+          "action": "执行就近泊入"
+        }
+      }
+    ]
+  },
+  {
+    "id": "parking_nearby_005",
+    "category": "就近泊车",
+    "sub_category": "取消",
+    "intent": "模糊语义",
+    "difficulty": "medium",
+    "query": "不用停了，我再找找",
+    "expected_tool_calls": [
+      {
+        "name": "ParkingNearbyControl",
+        "arguments": {
+          "action": "取消就近泊入"
+        }
+      }
+    ]
+  }
+]

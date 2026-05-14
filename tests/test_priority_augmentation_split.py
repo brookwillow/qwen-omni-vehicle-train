@@ -267,6 +267,62 @@ def test_multiturn_current_turn_overrides_similar_history():
     assert observed == expected_final_calls
 
 
+def test_multiturn_generic_done_history_still_uses_tool_for_current_control():
+    expected_final_calls = {
+        "副驾的窗户也关上吧": {
+            "name": "WindowControl",
+            "arguments": {"action": "关闭", "device": "车窗", "position": "副驾"},
+        },
+        "主驾的也关上": {
+            "name": "WindowControl",
+            "arguments": {"action": "关闭", "device": "车窗", "position": "主驾"},
+        },
+        "副驾阅读灯打开": {
+            "name": "LightControl",
+            "arguments": {"action": "打开", "device": "阅读灯", "position": "副驾"},
+        },
+        "主驾座椅加热打开": {
+            "name": "SeatControl",
+            "arguments": {"action": "打开", "device": "座椅", "feature": "制热", "position": "主驾"},
+        },
+        "媒体声音调高一点": {
+            "name": "VoiceControl",
+            "arguments": {"action": "调高", "feature": "声音"},
+        },
+        "风量调高一点": {
+            "name": "ClimateControl",
+            "arguments": {"action": "调高", "device": "空调", "feature": "风"},
+        },
+        "打开右侧侧滑门": {
+            "name": "GateControl",
+            "arguments": {"action": "打开", "device": "侧滑门", "position": "右侧"},
+        },
+        "左侧儿童锁打开": {
+            "name": "LockControl",
+            "arguments": {"action": "打开", "device": "儿童锁", "position": "左侧"},
+        },
+    }
+    generic_done_phrases = ("搞定", "已处理", "处理好了", "关好了", "已经关上")
+    observed = {}
+
+    for line in MULTITURN_PATH.read_text(encoding="utf-8").splitlines():
+        sample = json.loads(line)
+        messages = sample["messages"]
+        users = [message["content"].strip() for message in messages if message["role"] == "user"]
+        final_user = users[-1]
+        if final_user not in expected_final_calls:
+            continue
+
+        history_assistant_text = "\n".join(
+            message["content"] for message in messages[:-1] if message["role"] == "assistant"
+        )
+        if not any(phrase in history_assistant_text for phrase in generic_done_phrases):
+            continue
+        observed[final_user] = json.loads(messages[-1]["content"])
+
+    assert observed == expected_final_calls
+
+
 def test_multiturn_current_query_overrides_similar_history():
     expected_final_queries = {
         "那主驾车窗呢": "主驾车窗",
