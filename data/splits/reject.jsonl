@@ -1125,14 +1125,3 @@
 {"messages":[{"role":"user","content":"找附近的便利店"},{"role":"assistant","content":"Reject"}]}
 {"messages":[{"role":"user","content":"在高德上收藏这个地址"},{"role":"assistant","content":"Reject"}]}
 {"messages":[{"role":"user","content":"查一下最近的比亚迪充电桩"},{"role":"assistant","content":"Reject"}]}
-{"messages":[{"role":"user","content":"帮我把主驾车窗打开"},{"role":"assistant","content":"好的，已为你打开主驾车窗。"},{"role":"user","content":"关了吧"},{"role":"assistant","content":"好的，已关闭主驾车窗。"},{"role":"user","content":" "},{"role":"assistant","content":"Reject"}]}
-{"messages":[{"role":"user","content":"空调温度调高一点"},{"role":"assistant","content":"好的，空调温度已调高。"},{"role":"user","content":"  "},{"role":"assistant","content":"Reject"}]}
-{"messages":[{"role":"user","content":"座椅按摩打开"},{"role":"assistant","content":"好的，座椅按摩已打开。"},{"role":"user","content":"   "},{"role":"assistant","content":"Reject"}]}
-{"messages":[{"role":"user","content":"氛围灯换个颜色"},{"role":"assistant","content":"好的，已切换氛围灯颜色。"},{"role":"user","content":""},{"role":"assistant","content":"Reject"}]}
-{"messages":[{"role":"user","content":"驾驶模式切到运动"},{"role":"assistant","content":"好的，已切换到运动模式。"},{"role":"user","content":"    "},{"role":"assistant","content":"Reject"}]}
-{"messages":[{"role":"user","content":"后备箱打开"},{"role":"assistant","content":"好的，后备箱已打开。"},{"role":"user","content":" "},{"role":"assistant","content":"Reject"}]}
-{"messages":[{"role":"user","content":"导航音量调低"},{"role":"assistant","content":"好的，导航音量已调低。"},{"role":"user","content":""},{"role":"assistant","content":"Reject"}]}
-{"messages":[{"role":"user","content":"主驾后视镜往左调"},{"role":"assistant","content":"好的，主驾后视镜已向左调整。"},{"role":"user","content":"  "},{"role":"assistant","content":"Reject"}]}
-{"messages":[{"role":"user","content":" "},{"role":"assistant","content":"Reject"}]}
-{"messages":[{"role":"user","content":""},{"role":"assistant","content":"Reject"}]}
-{"messages":[{"role":"user","content":"   "},{"role":"assistant","content":"Reject"}]}
