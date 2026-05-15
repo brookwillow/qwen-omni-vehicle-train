@@ -148,5 +148,73 @@
     "query": "把客厅灯打开",
     "expected_tool_calls": [],
     "expected_type": "Reject"
+  },
+  {
+    "id": "reject_016",
+    "category": "范围外",
+    "sub_category": "空输入",
+    "intent": "范围外",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "帮我把主驾车窗打开"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，已为你打开主驾车窗。"
+      },
+      {
+        "role": "user",
+        "content": "关了吧"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，已关闭主驾车窗。"
+      }
+    ],
+    "query": " ",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "reject_017",
+    "category": "范围外",
+    "sub_category": "空输入",
+    "intent": "范围外",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "空调温度调高一点"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，空调温度已调高。"
+      }
+    ],
+    "query": "  ",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "reject_018",
+    "category": "范围外",
+    "sub_category": "空输入",
+    "intent": "范围外",
+    "difficulty": "easy",
+    "query": " ",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
+  },
+  {
+    "id": "reject_019",
+    "category": "范围外",
+    "sub_category": "空输入",
+    "intent": "范围外",
+    "difficulty": "easy",
+    "query": "",
+    "expected_tool_calls": [],
+    "expected_type": "Reject"
   }
 ]
