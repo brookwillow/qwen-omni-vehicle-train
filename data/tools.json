@@ -1681,5 +1681,33 @@
       "properties": {},
       "required": []
     }
+  },
+  {
+    "name": "LeavingCarParkingControl",
+    "description": "Controls leaving car parking operations, allowing you to start, pause or cancel parking. This parking operation will automatically activate after the user closes the car door.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "执行",
+            "暂停",
+            "取消"
+          ]
+        },
+        "feature": {
+          "type": "string",
+          "enum": [
+            "关门触发离车泊入",
+            "车外确认离车泊入"
+          ]
+        }
+      },
+      "required": [
+        "action",
+        "feature"
+      ]
+    }
   }
 ]

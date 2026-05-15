@@ -41,3 +41,4 @@
 37.GeneralSelect(*index:string)//选择上轮列表项
 38.NoiseDoNotAct()//噪声/无意义不动作
 特殊规则:Climate简单开关仅action+device; 模式用device=空调+value,风向模式加feature=风; 温度/风量数值调节用device=空调+feature=温度/风+value; 出风口用device=出风口+position且无feature/value; 除雾用device=前挡风/后挡风+feature=除雾。CarUsageSearch.query必须取enum; 当前轮无意义时禁止用历史query替代。NoiseDoNotAct参数用空对象。
+39.LeavingCarParkingControl(*action:执行|暂停|取消,*feature:关门触发离车泊入|车外确认离车泊入)//离车泊入

@@ -205,5 +205,149 @@
         }
       }
     ]
+  },
+  {
+    "id": "parking_013",
+    "category": "泊车",
+    "sub_category": "离车泊入-关门触发",
+    "intent": "泊车",
+    "difficulty": "easy",
+    "query": "关门触发离车泊入",
+    "expected_tool_calls": [
+      {
+        "name": "LeavingCarParkingControl",
+        "arguments": {
+          "action": "执行",
+          "feature": "关门触发离车泊入"
+        }
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "parking_014",
+    "category": "泊车",
+    "sub_category": "离车泊入-关门触发",
+    "intent": "泊车",
+    "difficulty": "medium",
+    "query": "我要下车了，帮我开启关门触发泊车",
+    "expected_tool_calls": [
+      {
+        "name": "LeavingCarParkingControl",
+        "arguments": {
+          "action": "执行",
+          "feature": "关门触发离车泊入"
+        }
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "parking_015",
+    "category": "泊车",
+    "sub_category": "离车泊入-关门触发",
+    "intent": "泊车",
+    "difficulty": "medium",
+    "query": "我要离车了，关门自动泊进去",
+    "expected_tool_calls": [
+      {
+        "name": "LeavingCarParkingControl",
+        "arguments": {
+          "action": "执行",
+          "feature": "关门触发离车泊入"
+        }
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "parking_016",
+    "category": "泊车",
+    "sub_category": "离车泊入-车外确认",
+    "intent": "泊车",
+    "difficulty": "easy",
+    "query": "车外确认离车泊入",
+    "expected_tool_calls": [
+      {
+        "name": "LeavingCarParkingControl",
+        "arguments": {
+          "action": "执行",
+          "feature": "车外确认离车泊入"
+        }
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "parking_017",
+    "category": "泊车",
+    "sub_category": "离车泊入-车外确认",
+    "intent": "泊车",
+    "difficulty": "medium",
+    "query": "下车后在外面确认泊入",
+    "expected_tool_calls": [
+      {
+        "name": "LeavingCarParkingControl",
+        "arguments": {
+          "action": "执行",
+          "feature": "车外确认离车泊入"
+        }
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "parking_018",
+    "category": "泊车",
+    "sub_category": "离车泊入-暂停",
+    "intent": "泊车",
+    "difficulty": "easy",
+    "query": "暂停离车泊入",
+    "expected_tool_calls": [
+      {
+        "name": "LeavingCarParkingControl",
+        "arguments": {
+          "action": "暂停",
+          "feature": "关门触发离车泊入"
+        }
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "parking_019",
+    "category": "泊车",
+    "sub_category": "离车泊入-取消",
+    "intent": "泊车",
+    "difficulty": "easy",
+    "query": "取消离车泊入",
+    "expected_tool_calls": [
+      {
+        "name": "LeavingCarParkingControl",
+        "arguments": {
+          "action": "取消",
+          "feature": "关门触发离车泊入"
+        }
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "parking_020",
+    "category": "泊车",
+    "sub_category": "离车泊入-取消",
+    "intent": "泊车",
+    "difficulty": "easy",
+    "query": "取消车外确认离车泊入",
+    "expected_tool_calls": [
+      {
+        "name": "LeavingCarParkingControl",
+        "arguments": {
+          "action": "取消",
+          "feature": "车外确认离车泊入"
+        }
+      }
+    ],
+    "expected_type": "Action"
   }
 ]
