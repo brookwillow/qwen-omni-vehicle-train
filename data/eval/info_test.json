@@ -1,22 +1,5 @@
 [
   {
-    "id": "info_001",
-    "category": "信息查询",
-    "sub_category": "剩余距离",
-    "intent": "明确指令",
-    "difficulty": "easy",
-    "query": "查询剩余距离",
-    "expected_tool_calls": [
-      {
-        "name": "CarUsageSearch",
-        "arguments": {
-          "query": "综合续航里程"
-        }
-      }
-    ],
-    "query_audio": "audio/info/info_001.wav"
-  },
-  {
     "id": "info_004",
     "category": "信息查询",
     "sub_category": "百公里能耗",
@@ -68,23 +51,6 @@
     "query_audio": "audio/info/info_006.wav"
   },
   {
-    "id": "info_008",
-    "category": "信息查询",
-    "sub_category": "剩余距离",
-    "intent": "明确指令",
-    "difficulty": "easy",
-    "query": "还有多远到目的地",
-    "expected_tool_calls": [
-      {
-        "name": "CarUsageSearch",
-        "arguments": {
-          "query": "综合续航里程"
-        }
-      }
-    ],
-    "query_audio": "audio/info/info_008.wav"
-  },
-  {
     "id": "info_011",
     "category": "信息查询",
     "sub_category": "百公里能耗",
@@ -134,74 +100,6 @@
       }
     ],
     "query_audio": "audio/info/info_013.wav"
-  },
-  {
-    "id": "info_015",
-    "category": "信息查询",
-    "sub_category": "剩余距离",
-    "intent": "明确指令",
-    "difficulty": "easy",
-    "query": "距离目的地还剩多少公里",
-    "expected_tool_calls": [
-      {
-        "name": "CarUsageSearch",
-        "arguments": {
-          "query": "综合续航里程"
-        }
-      }
-    ],
-    "query_audio": "audio/info/info_015.wav"
-  },
-  {
-    "id": "info_016",
-    "category": "信息查询",
-    "sub_category": "剩余距离",
-    "intent": "模糊语义",
-    "difficulty": "medium",
-    "query": "快到了吗，还有多少路要走",
-    "expected_tool_calls": [
-      {
-        "name": "CarUsageSearch",
-        "arguments": {
-          "query": "综合续航里程"
-        }
-      }
-    ],
-    "query_audio": "audio/info/info_016.wav"
-  },
-  {
-    "id": "info_017",
-    "category": "信息查询",
-    "sub_category": "剩余距离",
-    "intent": "模糊语义",
-    "difficulty": "hard",
-    "query": "孩子一直问还有多久到，帮我看看还有多远",
-    "expected_tool_calls": [
-      {
-        "name": "CarUsageSearch",
-        "arguments": {
-          "query": "综合续航里程"
-        }
-      }
-    ],
-    "query_audio": "audio/info/info_017.wav"
-  },
-  {
-    "id": "info_018",
-    "category": "信息查询",
-    "sub_category": "剩余距离",
-    "intent": "模糊语义",
-    "difficulty": "medium",
-    "query": "这段路还剩多少没走",
-    "expected_tool_calls": [
-      {
-        "name": "CarUsageSearch",
-        "arguments": {
-          "query": "综合续航里程"
-        }
-      }
-    ],
-    "query_audio": "audio/info/info_018.wav"
   },
   {
     "id": "info_024",
