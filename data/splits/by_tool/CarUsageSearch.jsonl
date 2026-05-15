@@ -484,11 +484,6 @@
 {"messages":[{"role":"user","content":"空调温度设的是多少"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"用户空调温度\"}}"}]}
 {"messages":[{"role":"user","content":"音量调到多少了"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"媒体播放音量\"}}"}]}
 {"messages":[{"role":"user","content":"座椅加热开着吗"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"用户座椅加热\"}}"}]}
-{"messages":[{"role":"user","content":"还有多远到目的地"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"剩余续航里程\"}}"}]}
-{"messages":[{"role":"user","content":"距离目的地还剩多少公里"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"剩余续航里程\"}}"}]}
-{"messages":[{"role":"user","content":"快到了吗，还有多少路要走"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"剩余续航里程\"}}"}]}
-{"messages":[{"role":"user","content":"这段路还剩多少没走"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"剩余续航里程\"}}"}]}
-{"messages":[{"role":"user","content":"孩子一直问还有多久到，帮我看看还有多远"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"剩余续航里程\"}}"}]}
 {"messages":[{"role":"user","content":"轮胎气压正常吗"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"车辆胎压\"}}"}]}
 {"messages":[{"role":"user","content":"四个轮胎的气压分别是多少"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"车辆胎压\"}}"}]}
 {"messages":[{"role":"user","content":"刚才压了个坑，检查下轮胎有没有问题"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"车辆胎压\"}}"}]}
@@ -498,7 +493,6 @@
 {"messages":[{"role":"user","content":"我这车费不费电"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"百公里平均能耗\"}}"}]}
 {"messages":[{"role":"user","content":"帮我查一下百公里能耗和总里程数"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"百公里平均能耗\"}}"}]}
 {"messages":[{"role":"user","content":"帮我看看胎压和总里程"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"车辆胎压\"}}"}]}
-{"messages":[{"role":"user","content":"查询剩余距离"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"剩余续航里程\"}}"}]}
 {"messages":[{"role":"user","content":"还有多少电"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"剩余电量百分比\"}}"}]}
 {"messages":[{"role":"user","content":"电还够吗，能到充电桩不"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"剩余电量百分比\"}}"}]}
 {"messages":[{"role":"user","content":"驾驶总里程多少了"},{"role":"assistant","content":"{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"驾驶总里程\"}}"}]}
