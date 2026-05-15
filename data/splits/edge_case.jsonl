@@ -67,7 +67,7 @@
 {"messages":[{"role":"user","content":"氛围灯开光剑模式"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"氛围灯\",\"value\":\"光剑\"}}"}]}
 {"messages":[{"role":"user","content":"把氛围灯调成光剑"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"氛围灯\",\"value\":\"光剑\"}}"}]}
 {"messages":[{"role":"user","content":"大灯切换到自动模式"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"大灯\",\"value\":\"自动\"}}"}]}
-{"messages":[{"role":"user","content":"切换大灯模式"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"大灯\",\"value\":\"下一个\"}}"}]}
+{"messages":[{"role":"user","content":"切换大灯模式"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"大灯\"}}"}]}
 {"messages":[{"role":"user","content":"关闭智能远光灯"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"远光灯\",\"value\":\"智能\"}}"}]}
 {"messages":[{"role":"user","content":"前雾灯打开"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"前雾灯\"}}"}]}
 {"messages":[{"role":"user","content":"后雾灯打开"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"后雾灯\"}}"}]}

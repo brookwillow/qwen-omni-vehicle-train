@@ -52,13 +52,13 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 
 | 类型 | 数量 | 说明 |
 |------|------|------|
-| By-tool | 6997 | 每个工具文件内混合：`user -> JSON tool call` 决策样本 4712 条，独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 2285 条 |
-| Clarify | 99 | 4 轮：用户缺少工具 required 字段 → 自然语言追问 → 用户补齐 → JSON tool call；不包含 tool-role result |
+| By-tool | 7233 | 每个工具文件内混合：`user -> JSON tool call` 决策样本 4906 条，独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 2327 条 |
+| Clarify | 101 | 4 轮：用户缺少工具 required 字段或意图范围歧义 → 自然语言追问 → 用户补齐 → JSON tool call；不包含 tool-role result |
 | Edge case | 100 | 多轮当前轮边界、查询 vs 控制、popup/task 列表 `GeneralSelect` 等易混淆样本 |
-| Multiturn | 353 | 最多三轮纯文本历史；历史允许外部域文本；当前轮输出分布：工具 226 条、NoiseDoNotAct 79 条、Reject 36 条、自然语言 TTS 12 条 |
+| Multiturn | 367 | 最多三轮纯文本历史；历史允许外部域文本；当前轮输出分布：工具 240 条、NoiseDoNotAct 79 条、Reject 36 条、自然语言 TTS 12 条 |
 | Reject | 1127 | 单轮 + 多轮硬负例（已合并），最后一条 assistant 均为 `Reject`；已抽稀家居控制负例并移除高风险车控状态拒识 |
 
-`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 8676 条；统计时多轮样本按最后一个有效决策标签计入对应类别。
+`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 8928 条；统计时多轮样本按最后一个有效决策标签计入对应类别。
 
 ## 训练配置
 
@@ -185,7 +185,7 @@ python serve.py \
   --prompt-cache kv
 ```
 
-`--prompt-cache kv` 会在启动时预热固定 system prompt 的 KV，并仅在 text-only 请求的 chat template 前缀和 token 前缀都严格匹配时复用；音频、图片、视频请求会自动 miss 并走原始路径。cache hit 时服务会从完整 tokenized input 中切出 suffix token，避免字符串切分导致 tokenizer 边界错位，并临时恢复预热时记录的 `rope_deltas`，请求结束后再还原模型状态。如果当前模型封装不支持 KV 预热，服务会打印禁用原因并自动回退到 `none`，避免启动失败。该模式会在 `[PERF] inference` 中标记 `prompt_cache=hit|miss|off`、`cache_prefix_tokens=<命中 token 数>` 和 `cache_miss_reason=<原因>`，建议先用同一批 eval 对比 `none` 和 `kv` 的输出一致性后再长期启用。
+`--prompt-cache kv` 会在启动时预热固定 system prompt 的 KV，并仅在 text-only 请求的 chat template 前缀和 token 前缀都严格匹配时复用；音频、图片、视频请求会自动 miss 并走原始路径。cache hit 时服务保留完整 tokenized input，让 HF generate 按 KV 长度在内部切出未处理的 suffix token，避免手工切 suffix 导致 `cache_position`/RoPE 错位，并临时恢复预热时记录的 `rope_deltas`，请求结束后再还原模型状态。如果当前模型封装不支持 KV 预热，服务会打印禁用原因并自动回退到 `none`，避免启动失败。该模式会在 `[PERF] inference` 中标记 `prompt_cache=hit|miss|off`、`cache_prefix_tokens=<命中 token 数>` 和 `cache_miss_reason=<原因>`，建议先用同一批 eval 对比 `none` 和 `kv` 的输出一致性后再长期启用。
 
 服务启动后监听 `http://<ip>:8000`，兼容 OpenAI Chat Completions API：
 

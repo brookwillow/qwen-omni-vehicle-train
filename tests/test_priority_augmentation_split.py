@@ -6,6 +6,7 @@ from scripts.validate_splits import load_schema, validate_sample
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+SPLITS_DIR = PROJECT_ROOT / "data" / "splits"
 BY_TOOL_DIR = PROJECT_ROOT / "data" / "splits" / "by_tool"
 REJECT_PATH = PROJECT_ROOT / "data" / "splits" / "reject.jsonl"
 MULTITURN_PATH = PROJECT_ROOT / "data" / "splits" / "multiturn.jsonl"
@@ -45,6 +46,100 @@ def test_by_tool_split_targets_known_error_clusters():
 
     for tool in ("ClimateControl", "ProfileControl", "WindowControl", "LightControl"):
         assert contents.count(f'"name":"{tool}"') >= 12
+
+
+def test_single_turn_tool_samples_do_not_conflict_by_query():
+    outputs_by_query: dict[str, set[str]] = {}
+    locations_by_query: dict[str, list[str]] = {}
+
+    for path in sorted(SPLITS_DIR.rglob("*.jsonl")):
+        for line_no, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
+            sample = json.loads(line)
+            messages = sample["messages"]
+            if len(messages) != 2:
+                continue
+            if messages[0]["role"] != "user" or messages[1]["role"] != "assistant":
+                continue
+            try:
+                tool_call = json.loads(messages[1]["content"])
+            except json.JSONDecodeError:
+                continue
+            if not isinstance(tool_call, dict) or "name" not in tool_call:
+                continue
+
+            query = messages[0]["content"]
+            canonical = json.dumps(tool_call, ensure_ascii=False, sort_keys=True)
+            outputs_by_query.setdefault(query, set()).add(canonical)
+            locations_by_query.setdefault(query, []).append(f"{path.relative_to(PROJECT_ROOT)}:{line_no}")
+
+    conflicts = {
+        query: locations_by_query[query]
+        for query, outputs in outputs_by_query.items()
+        if len(outputs) > 1
+    }
+
+    assert conflicts == {}
+
+
+def test_recent_data_review_conclusions_are_encoded():
+    expected_single_turn_calls = {
+        "车里太闷了": {
+            "name": "ClimateControl",
+            "arguments": {"action": "打开", "device": "空调", "value": "外循环"},
+        },
+        "切换到外循环": {
+            "name": "ClimateControl",
+            "arguments": {"action": "调到", "device": "空调", "value": "外循环"},
+        },
+        "切换大灯模式": {
+            "name": "LightControl",
+            "arguments": {"action": "调到", "device": "大灯"},
+        },
+        "香氛浓度调高": {
+            "name": "PerfumeControl",
+            "arguments": {"action": "调高", "device": "香氛", "feature": "浓度", "value": "最高"},
+        },
+        "帮我开一下座椅加热": {
+            "name": "SeatControl",
+            "arguments": {"action": "打开", "device": "座椅", "feature": "制热"},
+        },
+        "留个小口透气就行": {
+            "name": "WindowControl",
+            "arguments": {"action": "开到", "device": "车窗", "value": "10%"},
+        },
+        "别让小孩乱按车窗": {
+            "name": "LockControl",
+            "arguments": {"action": "打开", "device": "车窗锁"},
+        },
+        "帮我找下139开头的那个号码": {
+            "name": "PhoneControl",
+            "arguments": {"action": "拨打", "phone": "139"},
+        },
+        "靠背往后调一点": {
+            "name": "SeatControl",
+            "arguments": {"action": "调后", "device": "靠背"},
+        },
+    }
+    observed: dict[str, dict] = {}
+    clarify_prompts = []
+
+    for path in sorted(SPLITS_DIR.rglob("*.jsonl")):
+        for line in path.read_text(encoding="utf-8").splitlines():
+            sample = json.loads(line)
+            messages = sample["messages"]
+            if messages[0]["role"] == "user" and messages[0]["content"] == "切换到标准模式":
+                clarify_prompts.append(messages[1]["content"])
+            if len(messages) != 2 or messages[0]["role"] != "user" or messages[1]["role"] != "assistant":
+                continue
+            query = messages[0]["content"]
+            if query not in expected_single_turn_calls:
+                continue
+            observed[query] = json.loads(messages[1]["content"])
+
+    assert observed == expected_single_turn_calls
+    assert "切换到标准模式" not in observed
+    assert clarify_prompts
+    assert all("驾驶模式" in prompt and "座椅习惯" in prompt for prompt in clarify_prompts)
 
 
 def test_phone_split_includes_builtin_contacts():

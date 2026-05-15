@@ -326,7 +326,7 @@
 {"messages":[{"role":"user","content":"帮我开主驾活力唤醒按摩"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"按摩\",\"position\":\"主驾\",\"value\":\"活力唤醒\"}}"}]}
 {"messages":[{"role":"user","content":"第二排中间座椅通风加大"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"座椅\",\"feature\":\"通风\",\"position\":\"第二排中间\"}}"}]}
 {"messages":[{"role":"user","content":"把所有座椅的制热都关掉"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"座椅\",\"feature\":\"制热\",\"position\":\"全部\"}}"}]}
-{"messages":[{"role":"user","content":"帮我开一下座椅加热"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"position\":\"主驾\",\"feature\":\"制热\"}}"}]}
+{"messages":[{"role":"user","content":"帮我开一下座椅加热"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"制热\"}}"}]}
 {"messages":[{"role":"user","content":"后座左边靠背往后倒"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调后\",\"device\":\"靠背\",\"position\":\"第二排左侧\"}}"}]}
 {"messages":[{"role":"user","content":"副驾座椅加热打开"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"position\":\"副驾\",\"feature\":\"制热\"}}"}]}
 {"messages":[{"role":"user","content":"我这边的座椅往前移一下"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调前\",\"device\":\"座椅\",\"position\":\"主驾\"}}"}]}
@@ -371,7 +371,7 @@
 {"messages":[{"role":"user","content":"后排左侧椅背放平一点"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调后\",\"device\":\"靠背\",\"position\":\"第二排左侧\"}}"}]}
 {"messages":[{"role":"user","content":"我的椅背往后倒倒"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调后\",\"device\":\"靠背\",\"position\":\"主驾\"}}"}]}
 {"messages":[{"role":"user","content":"右边后座往后挪一下"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调后\",\"device\":\"座椅\",\"position\":\"第二排右侧\"}}"}]}
-{"messages":[{"role":"user","content":"靠背再直一点"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调前\",\"device\":\"靠背\",\"position\":\"主驾\"}}"}]}
+{"messages":[{"role":"user","content":"靠背再直一点"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调前\",\"device\":\"靠背\"}}"}]}
 {"messages":[{"role":"user","content":"把副驾的座椅调前一点"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调前\",\"device\":\"座椅\",\"position\":\"副驾\"}}"}]}
 {"messages":[{"role":"user","content":"所有座椅加热都打开"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"position\":\"全部\",\"feature\":\"制热\"}}"}]}
 {"messages":[{"role":"user","content":"座椅往前调一点"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调前\",\"device\":\"座椅\"}}"}]}
@@ -408,7 +408,7 @@
 {"messages":[{"role":"user","content":"帮我打开座椅按摩功能"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"按摩\"}}"}]}
 {"messages":[{"role":"user","content":"我觉得背有点酸，开一下按摩"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"按摩\"}}"}]}
 {"messages":[{"role":"user","content":"帮我开一下座椅通风"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"通风\"}}"}]}
-{"messages":[{"role":"user","content":"帮我把座椅靠背放平"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"放平\",\"device\":\"座椅\"}}"}]}
+{"messages":[{"role":"user","content":"帮我把座椅靠背放平"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"放平\",\"device\":\"靠背\"}}"}]}
 {"messages":[{"role":"user","content":"太热了，帮我开一下座椅通风"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"通风\"}}"}]}
 {"messages":[{"role":"user","content":"帮我开一下座椅通风吧"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"通风\"}}"}]}
 {"messages":[{"role":"user","content":"天气挺热的，帮我把座椅通风开一下"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"通风\"}}"}]}
@@ -435,7 +435,7 @@
 {"messages":[{"role":"user","content":"我想休息会儿，帮我把座椅放平"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"放平\",\"device\":\"座椅\"}}"}]}
 {"messages":[{"role":"user","content":"有点冷，帮我开一下座椅加热吧"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"制热\"}}"}]}
 {"messages":[{"role":"user","content":"帮我打开座椅按摩"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"按摩\"}}"}]}
-{"messages":[{"role":"user","content":"帮我把座椅靠背往后调一点"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调后\",\"device\":\"座椅\"}}"}]}
+{"messages":[{"role":"user","content":"帮我把座椅靠背往后调一点"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调后\",\"device\":\"靠背\"}}"}]}
 {"messages":[{"role":"user","content":"帮我开一下座椅加热吧"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"制热\"}}"}]}
 {"messages":[{"role":"user","content":"背有点酸，帮我把按摩功能打开吧"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"按摩\"}}"}]}
 {"messages":[{"role":"user","content":"麻烦帮我把座椅调热乎点"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"制热\"}}"}]}
@@ -549,14 +549,14 @@
 {"messages":[{"role":"user","content":"打开座椅按摩功能"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"按摩\"}}"}]}
 {"messages":[{"role":"user","content":"把座椅放平"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"放平\",\"device\":\"座椅\"}}"}]}
 {"messages":[{"role":"user","content":"帮我打开座椅加热"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"制热\"}}"}]}
-{"messages":[{"role":"user","content":"把座椅靠背放平"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"放平\",\"device\":\"座椅\"}}"}]}
+{"messages":[{"role":"user","content":"把座椅靠背放平"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"放平\",\"device\":\"靠背\"}}"}]}
 {"messages":[{"role":"user","content":"打开座椅加热"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"制热\"}}"}]}
 {"messages":[{"role":"user","content":"帮我开一下按摩吧"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"按摩\"}}"}]}
 {"messages":[{"role":"user","content":"把座椅往前调一点"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调前\",\"device\":\"座椅\"}}"}]}
-{"messages":[{"role":"user","content":"靠背往后调一点"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调后\",\"device\":\"座椅\"}}"}]}
+{"messages":[{"role":"user","content":"靠背往后调一点"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调后\",\"device\":\"靠背\"}}"}]}
 {"messages":[{"role":"user","content":"帮我开一下按摩功能"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"按摩\"}}"}]}
 {"messages":[{"role":"user","content":"帮我打开座椅通风功能"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"通风\"}}"}]}
-{"messages":[{"role":"user","content":"帮我把座椅靠背往后调"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调后\",\"device\":\"座椅\"}}"}]}
+{"messages":[{"role":"user","content":"帮我把座椅靠背往后调"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调后\",\"device\":\"靠背\"}}"}]}
 {"messages":[{"role":"user","content":"把座椅加热打开"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"制热\"}}"}]}
 {"messages":[{"role":"user","content":"帮我把座椅往后调一点"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调后\",\"device\":\"座椅\"}}"}]}
 {"messages":[{"role":"user","content":"把座椅往后调一点"},{"role":"assistant","content":"{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调后\",\"device\":\"座椅\"}}"}]}

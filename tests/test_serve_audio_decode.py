@@ -312,7 +312,7 @@ def test_run_inference_uses_kv_prompt_cache_on_prefix_hit(monkeypatch):
             captured["generate_kwargs"] = kwargs
             assert self.thinker.rope_deltas.tolist() == [[0]]
             self.thinker.rope_deltas = torch.tensor([[123]])
-            return torch.tensor([[10, 11, 12, 99]])
+            return torch.tensor([[1, 2, 10, 11, 12, 99]])
 
     cache = serve._KvPromptCache()
     cache.system_prompt = "系统提示"
@@ -335,9 +335,10 @@ def test_run_inference_uses_kv_prompt_cache_on_prefix_hit(monkeypatch):
     )
 
     assert captured["processor_text"] == "<system>系统提示</system>\n<user>打开车窗</user><assistant>"
-    assert captured["generate_kwargs"]["input_ids"].tolist() == [[10, 11, 12]]
+    assert captured["generate_kwargs"]["input_ids"].tolist() == [[1, 2, 10, 11, 12]]
     assert "past_key_values" in captured["generate_kwargs"]
     assert captured["generate_kwargs"]["attention_mask"].tolist() == [[1, 1, 1, 1, 1]]
+    assert "cache_position" not in captured["generate_kwargs"]
     assert captured["generate_kwargs"]["thinker_max_new_tokens"] == 1
     assert "max_new_tokens" not in captured["generate_kwargs"]
     assert reply == "Action: WindowControl"

@@ -173,7 +173,7 @@
 {"messages":[{"role":"user","content":"帮我关闭运动模式"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"驾驶模式\",\"value\":\"运动模式\"}}"}]}
 {"messages":[{"role":"user","content":"换到自定义驾驶模式"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"驾驶模式\",\"value\":\"自定义\"}}"}]}
 {"messages":[{"role":"user","content":"我想开单踏板模式"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"驾驶模式\",\"value\":\"单踏板\"}}"}]}
-{"messages":[{"role":"user","content":"切换到标准模式"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"驾驶模式\",\"value\":\"标准模式\"}}"}]}
+{"messages":[{"role":"user","content":"驾驶模式切换到标准模式"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"驾驶模式\",\"value\":\"标准模式\"}}"}]}
 {"messages":[{"role":"user","content":"关闭节能模式"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"驾驶模式\",\"value\":\"节能模式\"}}"}]}
 {"messages":[{"role":"user","content":"关闭弹射模式"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"驾驶模式\",\"value\":\"弹射模式\"}}"}]}
 {"messages":[{"role":"user","content":"关闭脱困模式"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"驾驶模式\",\"value\":\"脱困模式\"}}"}]}

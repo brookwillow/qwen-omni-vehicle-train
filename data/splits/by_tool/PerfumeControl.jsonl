@@ -1,6 +1,6 @@
 {"messages":[{"role":"user","content":"打开香氛"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"香氛\"}}"}]}
 {"messages":[{"role":"user","content":"关闭香氛"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"香氛\"}}"}]}
-{"messages":[{"role":"user","content":"香氛浓度调高"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"香氛\",\"feature\":\"浓度\"}}"}]}
+{"messages":[{"role":"user","content":"香氛浓度调高"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"香氛\",\"feature\":\"浓度\",\"value\":\"最高\"}}"}]}
 {"messages":[{"role":"user","content":"香氛浓度调低一点"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"调低\",\"device\":\"香氛\",\"feature\":\"浓度\"}}"}]}
 {"messages":[{"role":"user","content":"把香氛调到最高浓度"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"香氛\",\"feature\":\"浓度\",\"value\":\"最高\"}}"}]}
 {"messages":[{"role":"user","content":"香氛浓度设为最低"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"香氛\",\"feature\":\"浓度\",\"value\":\"最低\"}}"}]}

@@ -1072,7 +1072,10 @@ def run_inference(
     if cache_hit:
         suffix_prompt_len = int(cache_hit.suffix_input_ids.shape[-1])
         prompt_len = cache_hit.prefix_tokens + suffix_prompt_len
-        inputs["input_ids"] = cache_hit.suffix_input_ids
+        # Keep full input_ids here. GenerationMixin uses the full prompt length
+        # plus past_key_values length to derive cache_position, then slices
+        # unprocessed suffix tokens internally. Passing only suffix input_ids
+        # makes cache_position start at 0 or become empty, which misaligns RoPE.
         inputs["attention_mask"] = cache_hit.attention_mask
         inputs["past_key_values"] = cache_hit.past_key_values
 
@@ -1096,7 +1099,7 @@ def run_inference(
     generate_ms = (time.perf_counter() - generate_start) * 1000
 
     decode_start = time.perf_counter()
-    decode_prompt_len = suffix_prompt_len if cache_hit else prompt_len
+    decode_prompt_len = prompt_len
     gen_ids = out_ids[:, decode_prompt_len:]
     decoded = processor.decode(gen_ids[0], skip_special_tokens=True, clean_up_tokenization_spaces=False)
     decode_ms = (time.perf_counter() - decode_start) * 1000

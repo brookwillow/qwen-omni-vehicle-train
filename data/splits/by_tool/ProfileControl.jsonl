@@ -3,7 +3,7 @@
 {"messages":[{"role":"user","content":"我有点困了，帮我打开小憩模式休息一下吧"},{"role":"assistant","content":"{\"name\":\"ProfileControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"习惯\",\"value\":\"小憩模式\"}}"}]}
 {"messages":[{"role":"user","content":"我有点累了，帮我打开小憩模式"},{"role":"assistant","content":"{\"name\":\"ProfileControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"习惯\",\"value\":\"小憩模式\"}}"}]}
 {"messages":[{"role":"user","content":"切换到放松模式"},{"role":"assistant","content":"{\"name\":\"ProfileControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"习惯\",\"value\":\"放松模式\"}}"}]}
-{"messages":[{"role":"user","content":"切换到标准模式"},{"role":"assistant","content":"{\"name\":\"ProfileControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"习惯\",\"value\":\"标准模式\"}}"}]}
+{"messages":[{"role":"user","content":"座椅习惯切换到标准模式"},{"role":"assistant","content":"{\"name\":\"ProfileControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"习惯\",\"value\":\"标准模式\"}}"}]}
 {"messages":[{"role":"user","content":"切换到小憩模式"},{"role":"assistant","content":"{\"name\":\"ProfileControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"习惯\",\"value\":\"小憩模式\"}}"}]}
 {"messages":[{"role":"user","content":"帮我切换个人习惯到下一个"},{"role":"assistant","content":"{\"name\":\"ProfileControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"习惯\",\"value\":\"下一个\"}}"}]}
 {"messages":[{"role":"user","content":"切到上一个习惯"},{"role":"assistant","content":"{\"name\":\"ProfileControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"习惯\",\"value\":\"上一个\"}}"}]}

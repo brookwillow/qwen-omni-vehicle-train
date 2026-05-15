@@ -119,11 +119,11 @@
 {"messages":[{"role":"user","content":"开车的时候有个电话没接到，现在回给他"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"回拨\"}}"}]}
 {"messages":[{"role":"user","content":"回拨电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"回拨\"}}"}]}
 {"messages":[{"role":"user","content":"搜索王经理的电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"王经理\"}}"}]}
-{"messages":[{"role":"user","content":"搜索电话号码13800138000"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"13800138000\"}}"}]}
-{"messages":[{"role":"user","content":"查找号码15912345678"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"15912345678\"}}"}]}
-{"messages":[{"role":"user","content":"帮我查一下18688886666这个号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"18688886666\"}}"}]}
+{"messages":[{"role":"user","content":"搜索电话号码13800138000"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"13800138000\"}}"}]}
+{"messages":[{"role":"user","content":"查找号码15912345678"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"15912345678\"}}"}]}
+{"messages":[{"role":"user","content":"帮我查一下18688886666这个号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"18688886666\"}}"}]}
 {"messages":[{"role":"user","content":"帮我找一下张三的电话打给他"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"张三\"}}"}]}
-{"messages":[{"role":"user","content":"帮我找下139开头的那个号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"139\"}}"}]}
+{"messages":[{"role":"user","content":"帮我找下139开头的那个号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"139\"}}"}]}
 {"messages":[{"role":"user","content":"搜一下我弟弟的电话号码"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"弟弟\"}}"}]}
 {"messages":[{"role":"user","content":"我记得通讯录里有个姓周的同事，帮我查查"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"周\"}}"}]}
 {"messages":[{"role":"user","content":"找一下老婆的手机号"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"老婆\"}}"}]}

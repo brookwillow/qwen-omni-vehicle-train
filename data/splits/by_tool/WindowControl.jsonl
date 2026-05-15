@@ -427,12 +427,12 @@
 {"messages":[{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗\",\"position\":\"主驾\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已打开主驾车窗。"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗\",\"position\":\"全部\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，全部车窗已关闭。"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"开到\",\"device\":\"车窗\",\"value\":\"50%\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已完成。"}]}
-{"messages":[{"role":"user","content":"留个小口透气就行"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"开到\",\"device\":\"车窗\"}}"}]}
-{"messages":[{"role":"user","content":"开一条缝就行"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"开到\",\"device\":\"车窗\"}}"}]}
+{"messages":[{"role":"user","content":"留个小口透气就行"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"开到\",\"device\":\"车窗\",\"value\":\"10%\"}}"}]}
+{"messages":[{"role":"user","content":"开一条缝就行"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"开到\",\"device\":\"车窗\",\"value\":\"10%\"}}"}]}
 {"messages":[{"role":"user","content":"我想透透气"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗\"}}"}]}
 {"messages":[{"role":"user","content":"外面灰太大了，别让风进来"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗\"}}"}]}
 {"messages":[{"role":"user","content":"别开那么大，有点冷"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"再关\",\"device\":\"车窗\"}}"}]}
-{"messages":[{"role":"user","content":"车里太闷了"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗\"}}"}]}
+{"messages":[{"role":"user","content":"车里太闷了，开下车窗"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗\"}}"}]}
 {"messages":[{"role":"user","content":"有点吵，隔绝一下外面的声音"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗\"}}"}]}
 {"messages":[{"role":"user","content":"后排晒得慌"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"遮阳帘\",\"position\":\"第二排\"}}"}]}
 {"messages":[{"role":"user","content":"太晒了，帮我拉上遮阳帘"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"遮阳帘\"}}"}]}

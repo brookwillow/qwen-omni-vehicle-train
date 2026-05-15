@@ -199,7 +199,7 @@
 {"messages":[{"role":"user","content":"帮我打开后挡风除雾"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"后挡风\",\"feature\":\"除雾\"}}"}]}
 {"messages":[{"role":"user","content":"把空调风量调大一点"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"空调\",\"feature\":\"风\"}}"}]}
 {"messages":[{"role":"user","content":"帮我把空调风量调大点"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"空调\",\"feature\":\"风\"}}"}]}
-{"messages":[{"role":"user","content":"打开宠物模式"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"打开\",\"value\":\"宠物模式\"}}"}]}
+{"messages":[{"role":"user","content":"打开宠物模式"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"空调\",\"value\":\"宠物模式\"}}"}]}
 {"messages":[{"role":"user","content":"打开空调的宠物模式"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"空调\",\"value\":\"宠物模式\"}}"}]}
 {"messages":[{"role":"user","content":"副驾风量调大一点"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"调高\",\"feature\":\"风\",\"position\":\"副驾\"}}"}]}
 {"messages":[{"role":"user","content":"打开后挡风除雾"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"后挡风\",\"feature\":\"除雾\"}}"}]}
@@ -284,8 +284,8 @@
 {"messages":[{"role":"user","content":"把空气净化器打开吧"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"空气净化器\"}}"}]}
 {"messages":[{"role":"user","content":"打开空气净化器的智能除味"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"空气净化器\",\"value\":\"智能除味\"}}"}]}
 {"messages":[{"role":"user","content":"帮我把主驾温度调到22度"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"温度\",\"position\":\"主驾\",\"value\":\"22\"}}"}]}
-{"messages":[{"role":"user","content":"把副驾温度设置成24.5度"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"温度\",\"position\":\"副驾\",\"value\":\"24.5\"}}"}]}
-{"messages":[{"role":"user","content":"第二排温度降低一点"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"调低\",\"feature\":\"温度\",\"position\":\"第二排\"}}"}]}
+{"messages":[{"role":"user","content":"把副驾温度设置成24.5度"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"空调\",\"feature\":\"温度\",\"position\":\"副驾\",\"value\":\"24.5\"}}"}]}
+{"messages":[{"role":"user","content":"第二排温度降低一点"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"调低\",\"device\":\"空调\",\"feature\":\"温度\",\"position\":\"第二排\"}}"}]}
 {"messages":[{"role":"user","content":"帮我把第三排的空调风调大一档"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"调高\",\"feature\":\"风\",\"position\":\"第三排\"}}"}]}
 {"messages":[{"role":"user","content":"主驾左侧出风口调到对人模式"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"出风口\",\"position\":\"主驾左侧\",\"value\":\"对人\"}}"}]}
 {"messages":[{"role":"user","content":"副驾右侧出风口切换到避人模式"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"出风口\",\"position\":\"副驾右侧\",\"value\":\"避人\"}}"}]}
@@ -726,7 +726,7 @@
 {"messages":[{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"前挡风\",\"feature\":\"除雾\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已关闭前挡风除雾。"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"空调\",\"feature\":\"温度\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已完成。"}]}
 {"messages":[{"role":"user","content":"切换到自然风"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"空调\",\"value\":\"自然风\"}}"}]}
-{"messages":[{"role":"user","content":"切换到外循环"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"空调\",\"value\":\"外循环\"}}"}]}
+{"messages":[{"role":"user","content":"切换到外循环"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"空调\",\"value\":\"外循环\"}}"}]}
 {"messages":[{"role":"user","content":"打开外循环"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"空调\",\"value\":\"外循环\"}}"}]}
 {"messages":[{"role":"user","content":"关闭温度同步"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"空调\",\"value\":\"温度同步\"}}"}]}
 {"messages":[{"role":"user","content":"空调吹头"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"出风口\",\"feature\":\"风\"}}"}]}
