@@ -33,3 +33,10 @@
 {"messages":[{"role":"user","content":"泊入一号车位"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"开始\",\"feature\":\"泊入\",\"index\":\"1\"}}"}]}
 {"messages":[{"role":"user","content":"泊入二号车位"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"开始\",\"feature\":\"泊入\",\"index\":\"2\"}}"}]}
 {"messages":[{"role":"user","content":"泊入三号车位"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"开始\",\"feature\":\"泊入\",\"index\":\"3\"}}"}]}
+{"messages":[{"role":"user","content":"泊出车辆"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"开始\",\"feature\":\"泊出\"}}"}]}
+{"messages":[{"role":"user","content":"开始自动泊车"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"开始\",\"feature\":\"泊入\"}}"}]}
+{"messages":[{"role":"user","content":"靠右泊车"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"开始\",\"feature\":\"泊入\",\"value\":\"向右\"}}"}]}
+{"messages":[{"role":"user","content":"靠左边泊车"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"开始\",\"feature\":\"泊入\",\"value\":\"向左\"}}"}]}
+{"messages":[{"role":"user","content":"取消泊车"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"取消\",\"feature\":\"泊入\"}}"}]}
+{"messages":[{"role":"user","content":"我要出发了，把车开出来"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"开始\",\"feature\":\"泊出\"}}"}]}
+{"messages":[{"role":"user","content":"找个位置把车停一下"},{"role":"assistant","content":"{\"name\":\"ParkingControl\",\"arguments\":{\"action\":\"开始\",\"feature\":\"泊入\"}}"}]}

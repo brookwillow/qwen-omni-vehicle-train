@@ -49,3 +49,7 @@
 {"messages":[{"role":"user","content":"把后视镜调右一点"},{"role":"assistant","content":"{\"name\":\"RearviewControl\",\"arguments\":{\"action\":\"调右\",\"device\":\"后视镜\"}}"}]}
 {"messages":[{"role":"user","content":"把后视镜调前一点"},{"role":"assistant","content":"{\"name\":\"RearviewControl\",\"arguments\":{\"action\":\"调前\",\"device\":\"后视镜\"}}"}]}
 {"messages":[{"role":"user","content":"把后视镜调后一点"},{"role":"assistant","content":"{\"name\":\"RearviewControl\",\"arguments\":{\"action\":\"调后\",\"device\":\"后视镜\"}}"}]}
+{"messages":[{"role":"user","content":"打开后视镜加热"},{"role":"assistant","content":"{\"name\":\"RearviewControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"后视镜\",\"value\":\"制热\"}}"}]}
+{"messages":[{"role":"user","content":"关闭后视镜加热"},{"role":"assistant","content":"{\"name\":\"RearviewControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"后视镜\",\"value\":\"制热\"}}"}]}
+{"messages":[{"role":"user","content":"后视镜加热打开"},{"role":"assistant","content":"{\"name\":\"RearviewControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"后视镜\",\"value\":\"制热\"}}"}]}
+{"messages":[{"role":"user","content":"后视镜加热关掉"},{"role":"assistant","content":"{\"name\":\"RearviewControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"后视镜\",\"value\":\"制热\"}}"}]}

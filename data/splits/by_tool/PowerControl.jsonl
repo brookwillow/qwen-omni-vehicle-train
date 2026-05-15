@@ -358,3 +358,16 @@
 {"messages":[{"role":"assistant","content":"{\"name\":\"PowerControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"无线充电\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，无线充电已开启。"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"PowerControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"无线充电\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已为您关闭无线充电。"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"PowerControl\",\"arguments\":{\"action\":\"调高\",\"feature\":\"能量回收\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已完成。"}]}
+{"messages":[{"role":"user","content":"充电调到80%"},{"role":"assistant","content":"{\"name\":\"PowerControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"充电\",\"value\":\"高\"}}"}]}
+{"messages":[{"role":"user","content":"把充电上限设到八成"},{"role":"assistant","content":"{\"name\":\"PowerControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"充电\",\"value\":\"高\"}}"}]}
+{"messages":[{"role":"user","content":"电池别充太满了，设到80%就行"},{"role":"assistant","content":"{\"name\":\"PowerControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"充电\",\"value\":\"高\"}}"}]}
+{"messages":[{"role":"user","content":"明天跑长途，充电充满到100%"},{"role":"assistant","content":"{\"name\":\"PowerControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"充电\",\"value\":\"最高\"}}"}]}
+{"messages":[{"role":"user","content":"充好了，关掉充电"},{"role":"assistant","content":"{\"name\":\"PowerControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"充电\"}}"}]}
+{"messages":[{"role":"user","content":"充完了不用充了"},{"role":"assistant","content":"{\"name\":\"PowerControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"充电\"}}"}]}
+{"messages":[{"role":"user","content":"我这边手机要充电，帮我开一下无线充"},{"role":"assistant","content":"{\"name\":\"PowerControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"无线充电\",\"position\":\"主驾\"}}"}]}
+{"messages":[{"role":"user","content":"副驾那边的手机需要充一下电"},{"role":"assistant","content":"{\"name\":\"PowerControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"无线充电\",\"position\":\"副驾\"}}"}]}
+{"messages":[{"role":"user","content":"后排乘客手机没电了，帮他们开下无线充"},{"role":"assistant","content":"{\"name\":\"PowerControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"无线充电\",\"position\":\"第二排\"}}"}]}
+{"messages":[{"role":"user","content":"后排右边帮忙开一下无线充电"},{"role":"assistant","content":"{\"name\":\"PowerControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"无线充电\",\"position\":\"第二排右侧\"}}"}]}
+{"messages":[{"role":"user","content":"市区走走停停，开单踏板比较方便"},{"role":"assistant","content":"{\"name\":\"PowerControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"能量回收\",\"value\":\"单踏板\"}}"}]}
+{"messages":[{"role":"user","content":"高速上能量回收调到最低就行"},{"role":"assistant","content":"{\"name\":\"PowerControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"能量回收\",\"value\":\"最低\"}}"}]}
+{"messages":[{"role":"user","content":"后排左边那个无线充电关掉"},{"role":"assistant","content":"{\"name\":\"PowerControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"无线充电\",\"position\":\"第二排左侧\"}}"}]}

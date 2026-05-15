@@ -119,3 +119,10 @@
 {"messages":[{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"第二排右侧\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已经为您打开第二排右侧的儿童锁。"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"左侧\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已为您打开左侧儿童锁，请注意后排安全。"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"第二排\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已完成。"}]}
+{"messages":[{"role":"user","content":"别让小孩乱按车窗，锁上车窗"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗锁\"}}"}]}
+{"messages":[{"role":"user","content":"后排的窗户不要让孩子碰，锁窗"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗锁\"}}"}]}
+{"messages":[{"role":"user","content":"小朋友在后面，把车窗锁上"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗锁\"}}"}]}
+{"messages":[{"role":"user","content":"打开车窗锁"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗锁\"}}"}]}
+{"messages":[{"role":"user","content":"关闭车窗锁"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗锁\"}}"}]}
+{"messages":[{"role":"user","content":"车窗锁打开"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗锁\"}}"}]}
+{"messages":[{"role":"user","content":"孩子到站了，车窗锁解开"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗锁\"}}"}]}
