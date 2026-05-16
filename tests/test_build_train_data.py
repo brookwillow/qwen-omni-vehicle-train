@@ -2,7 +2,12 @@ import json
 import random
 from pathlib import Path
 
-from build_train_data import load_weighted_splits, match_weight_selector, parse_kv_args
+from build_train_data import (
+    load_weighted_splits,
+    match_weight_selector,
+    parse_kv_args,
+    validate_sample_schema,
+)
 
 
 def _write_jsonl(path: Path, queries: list[str]) -> None:
@@ -52,3 +57,77 @@ def test_load_weighted_splits_oversamples_matching_file(tmp_path):
 
 def test_parse_kv_args_preserves_string_selectors():
     assert parse_kv_args(["hard_cases/*.jsonl:2.5"]) == {"hard_cases/*.jsonl": 2.5}
+
+
+# ── Schema validation tests ──────────────────────────────────
+
+_SCHEMA = {
+    "WindowControl": {
+        "props": {
+            "action": {"type": "string", "enum": ["关闭", "打开", "开到", "关到", "再开", "再关", "暂停"]},
+            "device": {"type": "string", "enum": ["车窗", "遮阳帘", "顶遮阳帘", "侧遮阳帘", "天幕", "天窗"]},
+            "position": {"type": "string", "enum": ["主驾", "副驾", "全部"]},
+            "value": {"type": "string", "enum": ["通风"], "description": "numeric and percentage values alongside enums"},
+        },
+        "required": ["action", "device"],
+    },
+    "ClimateControl": {
+        "props": {
+            "action": {"type": "string", "enum": ["关闭", "打开", "调到", "调高", "调低"]},
+            "device": {"type": "string", "enum": ["空调", "空气净化器"]},
+            "feature": {"type": "string", "enum": ["温度", "除雾", "风"]},
+            "value": {"type": "string", "enum": ["制冷", "制热", "中"]},
+        },
+        "required": ["action"],
+    },
+    "NoiseDoNotAct": {
+        "props": {},
+        "required": [],
+    },
+}
+
+
+def _make_sample(tool_call_json: str) -> dict:
+    return {"messages": [
+        {"role": "user", "content": "test"},
+        {"role": "assistant", "content": tool_call_json},
+    ]}
+
+
+def test_validate_schema_valid_sample():
+    sample = _make_sample('{"name":"WindowControl","arguments":{"action":"打开","device":"车窗"}}')
+    assert validate_sample_schema(sample, _SCHEMA) == []
+
+
+def test_validate_schema_missing_required():
+    sample = _make_sample('{"name":"WindowControl","arguments":{"action":"打开"}}')
+    errs = validate_sample_schema(sample, _SCHEMA)
+    assert any("missing required field" in e for e in errs)
+
+
+def test_validate_schema_invalid_enum():
+    sample = _make_sample('{"name":"WindowControl","arguments":{"action":"飞行","device":"车窗"}}')
+    errs = validate_sample_schema(sample, _SCHEMA)
+    assert any("invalid enum" in e for e in errs)
+
+
+def test_validate_schema_unknown_tool():
+    sample = _make_sample('{"name":"FlyingControl","arguments":{"action":"fly"}}')
+    errs = validate_sample_schema(sample, _SCHEMA)
+    assert any("unknown tool" in e for e in errs)
+
+
+def test_validate_schema_numeric_value_allowed():
+    sample = _make_sample('{"name":"WindowControl","arguments":{"action":"开到","device":"车窗","value":"50%"}}')
+    assert validate_sample_schema(sample, _SCHEMA) == []
+
+
+def test_validate_schema_noise_always_valid():
+    sample = _make_sample('{"name":"NoiseDoNotAct","arguments":{}}')
+    assert validate_sample_schema(sample, _SCHEMA) == []
+
+
+def test_validate_schema_unknown_field():
+    sample = _make_sample('{"name":"WindowControl","arguments":{"action":"打开","device":"车窗","color":"red"}}')
+    errs = validate_sample_schema(sample, _SCHEMA)
+    assert any("unknown field" in e for e in errs)

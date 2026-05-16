@@ -149,6 +149,30 @@ def find_last_assistant_content(messages: list[dict]) -> str:
     return ""
 
 
+def find_assistant_contents_after_last_user(messages: list[dict]) -> list[str]:
+    """Return content strings for assistant turns after the last user message.
+
+    In multi-turn data the intermediate tool_call/tool_result have been
+    stripped, so earlier assistant messages are previous-turn TTS replies.
+    Supervising those would teach the model to emit TTS directly instead
+    of a tool call.  By anchoring on the last user message we only
+    supervise the current-turn decision chain (tool_call and/or TTS).
+    """
+    last_user_idx = -1
+    for i, msg in enumerate(messages):
+        if msg.get("role") == "user":
+            last_user_idx = i
+    if last_user_idx < 0:
+        return []
+    contents = []
+    for msg in messages[last_user_idx + 1 :]:
+        if msg.get("role") == "assistant":
+            content = msg.get("content", "")
+            if isinstance(content, str) and content.strip():
+                contents.append(content)
+    return contents
+
+
 def encode_text(tokenizer: Any, text: str) -> list[int]:
     if hasattr(tokenizer, "encode"):
         return tokenizer.encode(text, add_special_tokens=False)
@@ -165,6 +189,22 @@ def find_last_subsequence(haystack: list[int], needle: list[int]) -> int:
     return -1
 
 
+def find_all_subsequences(haystack: list[int], needle: list[int]) -> list[int]:
+    """Find all non-overlapping occurrences of needle in haystack (last-match greedy)."""
+    if not needle or len(needle) > len(haystack):
+        return []
+    positions = []
+    idx = len(haystack) - len(needle)
+    while idx >= 0:
+        if haystack[idx : idx + len(needle)] == needle:
+            positions.append(idx)
+            idx -= len(needle)  # skip past this match to avoid overlap
+        else:
+            idx -= 1
+    positions.reverse()
+    return positions
+
+
 def build_last_assistant_labels(input_ids: list[int], target_ids: list[int]) -> tuple[list[int], bool]:
     labels = [-100] * len(input_ids)
     start = find_last_subsequence(input_ids, target_ids)
@@ -175,15 +215,57 @@ def build_last_assistant_labels(input_ids: list[int], target_ids: list[int]) -> 
     return labels, True
 
 
+def build_all_assistant_labels(
+    input_ids: list[int], target_id_seqs: list[list[int]]
+) -> tuple[list[int], int]:
+    """Supervise ALL assistant turns by finding each target sequence in input_ids.
+
+    Returns (labels, matched_count).
+    """
+    labels = [-100] * len(input_ids)
+    matched = 0
+    # Track which positions are already labelled to avoid double-counting
+    used = set()
+
+    for target_ids in target_id_seqs:
+        if not target_ids:
+            continue
+        # Find all occurrences and pick the first unused one (greedy left-to-right)
+        positions = find_all_subsequences(input_ids, target_ids)
+        for pos in positions:
+            span = range(pos, pos + len(target_ids))
+            if any(p in used for p in span):
+                continue
+            for p in span:
+                labels[p] = input_ids[p]
+                used.add(p)
+            matched += 1
+            break
+    return labels, matched
+
+
 class LastAssistantLabelEncodePreprocessor(EncodePreprocessor):
-    """Swift encoder that supervises only the final assistant message content."""
+    """Swift encoder that supervises assistant turns after the last user message.
+
+    Multi-turn history has intermediate tool_call/tool_result stripped, so
+    earlier assistant messages are previous-turn TTS replies.  We only
+    supervise assistant turns that follow the final user message — i.e. the
+    current-turn tool-call decision *and* (if present) its TTS response.
+    """
 
     def __init__(self, template, tokenizer):
         super().__init__(template=template)
         self.tokenizer = tokenizer
 
     def preprocess(self, row: dict) -> dict | None:
-        target = find_last_assistant_content(row.get("messages") or [])
+        messages = row.get("messages") or []
+        targets = find_assistant_contents_after_last_user(messages)
+        # Fallback for standalone tool-result-response samples (no user message):
+        # supervise the last assistant turn (the TTS response).
+        if not targets:
+            last = find_last_assistant_content(messages)
+            if last:
+                targets = [last]
         encoded = super().preprocess(row)
         if encoded is None:
             return None
@@ -194,10 +276,13 @@ class LastAssistantLabelEncodePreprocessor(EncodePreprocessor):
 
         labels = [-100] * len(input_ids)
         matched = False
-        if target:
-            target_ids = encode_text(self.tokenizer, target)
-            if target_ids:
-                labels, matched = build_last_assistant_labels(input_ids, target_ids)
+
+        if targets:
+            target_id_seqs = [encode_text(self.tokenizer, t) for t in targets]
+            target_id_seqs = [t for t in target_id_seqs if t]
+            if target_id_seqs:
+                labels, matched_count = build_all_assistant_labels(input_ids, target_id_seqs)
+                matched = matched_count > 0
 
         encoded["labels"] = labels
         encoded["label_matched"] = matched
@@ -205,12 +290,12 @@ class LastAssistantLabelEncodePreprocessor(EncodePreprocessor):
 
 
 def encode_dataset_with_last_assistant_labels(dataset_obj, template, tokenizer, split_name: str, num_proc: int):
-    """Encode samples and supervise only the final assistant message content."""
+    """Encode samples and supervise assistant turns after the last user message."""
     encoder = LastAssistantLabelEncodePreprocessor(template=template, tokenizer=tokenizer)
     encoded = encoder(dataset_obj, num_proc=num_proc)
     if "label_matched" in encoded.column_names:
         matched = sum(1 for value in encoded["label_matched"] if value)
-        print(f"[labels] {split_name}: matched final assistant spans {matched}/{len(encoded)}")
+        print(f"[labels] {split_name}: matched assistant spans {matched}/{len(encoded)}")
     return encoded
 
 

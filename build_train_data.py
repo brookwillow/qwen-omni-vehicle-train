@@ -27,6 +27,8 @@ from __future__ import annotations
 import argparse
 import json
 import random
+import re
+import sys
 from pathlib import Path
 
 
@@ -76,6 +78,17 @@ def parse_args():
     )
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--val-ratio", type=float, default=0.0, help="If >0, also write a val split")
+    p.add_argument(
+        "--validate-schema",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Validate tool calls against tools.json schema (default: on)",
+    )
+    p.add_argument(
+        "--tools-file",
+        default="data/tools.json",
+        help="Tool schema file for validation",
+    )
     return p.parse_args()
 
 
@@ -183,6 +196,107 @@ def is_tool_call_content(content: str) -> bool:
     return "arguments" in data
 
 
+NUMERIC_VALUE_RE = re.compile(r"^\d+(\.\d+)?%?$")
+
+
+def load_tool_schema(tools_path: str) -> dict:
+    """Load tool schema from tools.json and return {name: {props, required}}."""
+    with open(tools_path, encoding="utf-8") as f:
+        tools = json.load(f)
+    schema = {}
+    for t in tools:
+        fn = t.get("function", t)
+        name = fn["name"]
+        params = fn.get("parameters") or fn.get("inputSchema") or {}
+        props = params.get("properties", {})
+        required = params.get("required", [])
+        schema[name] = {"props": props, "required": required}
+    return schema
+
+
+def _parse_tool_call(content: str):
+    """Parse tool call from assistant message, returns (tool_name, args_dict)."""
+    try:
+        data = json.loads(content.strip())
+    except json.JSONDecodeError:
+        data = None
+    if isinstance(data, dict) and isinstance(data.get("name"), str):
+        args = data.get("arguments")
+        return data["name"], args if isinstance(args, dict) else None
+    m = re.match(r"Action:\s*(\S+)\s*\nAction Input:\s*(\{.*\})", content, re.DOTALL)
+    if not m:
+        return None, None
+    tool_name = m.group(1).strip()
+    try:
+        args = json.loads(m.group(2))
+    except json.JSONDecodeError:
+        return tool_name, None
+    return tool_name, args
+
+
+def validate_sample_schema(sample: dict, schema: dict) -> list[str]:
+    """Validate all tool calls in a sample against the tool schema.
+
+    Returns a list of human-readable error strings (empty = valid).
+    """
+    errors: list[str] = []
+    for msg in sample.get("messages", []):
+        if msg.get("role") != "assistant":
+            continue
+        content = msg.get("content", "").strip()
+        if not (content.startswith("{") or content.startswith("Action:")):
+            continue
+        tool_name, args = _parse_tool_call(content)
+        if tool_name is None:
+            continue
+        if tool_name not in schema:
+            errors.append(f"unknown tool {tool_name!r}")
+            continue
+        if tool_name == "NoiseDoNotAct":
+            continue
+        if args is None:
+            errors.append(f"{tool_name}: failed to parse arguments")
+            continue
+        s = schema[tool_name]
+        for req in s["required"]:
+            if req not in args:
+                errors.append(f"{tool_name}: missing required field {req!r}")
+        for param, val in args.items():
+            if param not in s["props"]:
+                errors.append(f"{tool_name}: unknown field {param!r}")
+                continue
+            prop = s["props"][param]
+            if "enum" not in prop:
+                continue
+            if val in prop["enum"]:
+                continue
+            # Allow numeric/percentage strings for value-like fields
+            if param == "value" and NUMERIC_VALUE_RE.match(str(val)):
+                continue
+            desc = prop.get("description", "")
+            if ("numeric" in desc or "percentage" in desc) and NUMERIC_VALUE_RE.match(str(val)):
+                continue
+            errors.append(f"{tool_name}.{param}: invalid enum {val!r}")
+    return errors
+
+
+def validate_all_samples(
+    samples: list[dict], schema: dict, label: str
+) -> tuple[list[dict], int]:
+    """Validate samples against schema, print warnings, return (clean, n_bad)."""
+    clean = []
+    n_bad = 0
+    for i, sample in enumerate(samples):
+        errs = validate_sample_schema(sample, schema)
+        if errs:
+            n_bad += 1
+            for err in errs:
+                print(f"[schema-warn] {label} sample {i}: {err}", file=sys.stderr)
+        else:
+            clean.append(sample)
+    return clean, n_bad
+
+
 def main():
     args = parse_args()
     rng = random.Random(args.seed)
@@ -218,6 +332,18 @@ def main():
     all_samples, counts = load_weighted_splits(split_files, oversample, max_per_type, sample_weights, rng)
     for fpath in split_files:
         print(f"  {fpath.stem}: {counts[str(fpath)]} samples from {fpath}")
+
+    # Schema validation
+    if args.validate_schema:
+        tools_path = Path(args.tools_file)
+        if not tools_path.exists():
+            print(f"[warn] tools file not found: {tools_path}, skipping schema validation")
+        else:
+            schema = load_tool_schema(str(tools_path))
+            all_samples, n_bad = validate_all_samples(all_samples, schema, "merged")
+            if n_bad:
+                print(f"[schema] Removed {n_bad} samples with schema violations")
+            print(f"[schema] {len(all_samples)} samples passed validation")
 
     # Inject SP and shuffle
     final = [inject_sp(s, sp) for s in all_samples]

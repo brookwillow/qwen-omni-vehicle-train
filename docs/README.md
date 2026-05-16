@@ -1,6 +1,6 @@
 # 车载语音助手 LoRA 训练方案
 
-> 更新时间：2026-05-13
+> 更新时间：2026-05-16
 
 ## 项目概要
 
@@ -33,6 +33,8 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 ```
 
 > 注：拆分/增强脚本已归档至 `_archive/`，产物 `data/splits/` 已就绪；`build_train_data.py` 默认递归合并 `data/splits/**/*.jsonl`。
+>
+> `build_train_data.py` 默认开启 `--validate-schema`，合并后会对每条样本中的工具调用做 schema 校验（required 字段、enum 值、未知参数），不合格样本会被移除并在 stderr 打印详情。可用 `--no-validate-schema` 跳过校验。
 
 ### 关键文件
 
@@ -143,7 +145,7 @@ python train_thinker_lora.py \
 | gradient_checkpointing | True | 节省显存 |
 | metric_for_best_model | eval_token_acc | 自动选最优 checkpoint |
 
-训练脚本会在编码后按原始 `messages` 定位最后一个 assistant 回复，只对这段回复计算 loss。这样 `user -> tool_call` 和独立的 `tool_call -> tool-result -> TTS` 样本都能提供监督信号；若截断导致最后回复完全找不到，才会过滤 `labels` 全为 `-100` 的空监督样本。
+训练脚本会在编码后定位**最后一个 user 之后的所有** assistant 回复，对这些回复计算 loss。多轮历史中的 assistant TTS（前轮回复）不参与监督，避免模型学到"看见 query 直接出 TTS"的错误模式。对于当前轮 `user -> tool_call -> tool-result -> TTS` 的样本，tool_call 和 TTS 都会被监督。若截断导致所有回复都找不到，才会过滤 `labels` 全为 `-100` 的空监督样本。
 
 每次训练启动后会清空并重写 `output_dir/train_metrics.jsonl`，避免多次训练追加到同一个指标文件导致曲线抖动。训练过程的 stdout/stderr 会同时写入 `output_dir/train.log`，可用以下命令事后审阅或实时查看：
 
