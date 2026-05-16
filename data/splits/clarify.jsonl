@@ -1,8 +1,6 @@
 {"messages": [{"role": "user", "content": "帮我调一下空调温度"}, {"role": "assistant", "content": "请问您想调高、调低，还是调到具体多少度？"}]}
 {"messages": [{"role": "user", "content": "切换到标准模式"}, {"role": "assistant", "content": "请问您要切换驾驶模式的标准模式，还是座椅习惯的标准模式？"}]}
-{"messages": [{"role": "user", "content": "切换到标准模式"}, {"role": "assistant", "content": "请问您要切换驾驶模式的标准模式，还是座椅习惯的标准模式？"}]}
 {"messages": [{"role": "user", "content": "空调温度不太合适"}, {"role": "assistant", "content": "请问您需要调高还是调低空调温度？"}]}
-{"messages": [{"role": "user", "content": "车里有点闷，空调弄一下"}, {"role": "assistant", "content": "请问您需要打开空调，还是调节空调模式？"}]}
 {"messages": [{"role": "user", "content": "帮我处理一下车窗起雾"}, {"role": "assistant", "content": "请问您需要打开前挡风除雾还是后挡风除雾？"}]}
 {"messages": [{"role": "user", "content": "空调风不太合适"}, {"role": "assistant", "content": "请问您想把空调风调高还是调低？"}]}
 {"messages": [{"role": "user", "content": "车里空气不太好，处理一下"}, {"role": "assistant", "content": "请问您需要打开空气净化器，还是调整空调循环？"}]}
@@ -24,20 +22,16 @@
 {"messages": [{"role": "user", "content": "把后面的打开一下"}, {"role": "assistant", "content": "请问您要打开后备箱还是后排侧滑门？"}]}
 {"messages": [{"role": "user", "content": "充完电了，口关一下"}, {"role": "assistant", "content": "请问您要关闭交流充电口还是直流充电口？"}]}
 {"messages": [{"role": "user", "content": "右边那个门打开"}, {"role": "assistant", "content": "请问您要打开右侧侧滑门还是右侧鹏翼门？"}]}
-{"messages": [{"role": "user", "content": "有点闷，帮我弄一下窗户"}, {"role": "assistant", "content": "请问您要打开还是关闭车窗？"}]}
 {"messages": [{"role": "user", "content": "主驾这边风太大，处理一下车窗"}, {"role": "assistant", "content": "请问您要关闭主驾车窗吗？"}]}
-{"messages": [{"role": "user", "content": "太阳有点晒，帮我弄一下遮阳帘"}, {"role": "assistant", "content": "请问您要打开还是关闭遮阳帘？"}]}
 {"messages": [{"role": "user", "content": "天窗帮我处理一下"}, {"role": "assistant", "content": "请问您要打开、关闭还是暂停天窗？"}]}
 {"messages": [{"role": "user", "content": "车窗停一下"}, {"role": "assistant", "content": "请问您要暂停哪个车窗？"}]}
 {"messages": [{"role": "user", "content": "帮我把窗户再弄一点"}, {"role": "assistant", "content": "请问您要再打开一点还是再关闭一点车窗？"}]}
-{"messages": [{"role": "user", "content": "顶上太晒了"}, {"role": "assistant", "content": "请问您要打开还是关闭顶遮阳帘？"}]}
 {"messages": [{"role": "user", "content": "二排右边窗户处理下"}, {"role": "assistant", "content": "请问您要打开还是关闭第二排右侧车窗？"}]}
 {"messages": [{"role": "user", "content": "帮我把主驾调舒服一点"}, {"role": "assistant", "content": "请问您要调节座椅、坐垫还是靠背？"}]}
 {"messages": [{"role": "user", "content": "我想躺一会，帮我放平"}, {"role": "assistant", "content": "请问您要放平座椅还是靠背？"}]}
 {"messages": [{"role": "user", "content": "副驾有点热，打开通风"}, {"role": "assistant", "content": "请问您要打开副驾座椅通风吗？"}]}
 {"messages": [{"role": "user", "content": "第二排坐着不舒服，调一下"}, {"role": "assistant", "content": "请问您要调节第二排座椅、坐垫还是靠背？"}]}
 {"messages": [{"role": "user", "content": "帮我恢复一下主驾"}, {"role": "assistant", "content": "请问您要复位主驾座椅还是靠背？"}]}
-{"messages": [{"role": "user", "content": "坐垫有点低，帮我调一下"}, {"role": "assistant", "content": "请问您要把坐垫调高还是调低？"}]}
 {"messages": [{"role": "user", "content": "屏幕太亮了，帮我弄一下"}, {"role": "assistant", "content": "请问您要调节哪块屏幕？"}]}
 {"messages": [{"role": "user", "content": "帮我关一下屏幕"}, {"role": "assistant", "content": "请问您要关闭哪块屏幕？"}]}
 {"messages": [{"role": "user", "content": "副驾屏幕收一下"}, {"role": "assistant", "content": "请问您要收起副驾娱乐屏吗？"}]}
@@ -97,6 +91,7 @@
 {"messages": [{"role": "user", "content": "泊车路线处理一下"}, {"role": "assistant", "content": "请问您要执行收藏车位导航还是取消收藏车位导航？"}]}
 {"messages": [{"role": "user", "content": "车位选一下"}, {"role": "assistant", "content": "请问您要执行、暂停还是取消终点车位选择？"}]}
 {"messages": [{"role": "user", "content": "这个选择处理一下"}, {"role": "assistant", "content": "请问您要确认、取消还是选择某一项？"}]}
+{"messages": [{"role": "user", "content": "车里有点闷，空调弄一下"}, {"role": "assistant", "content": "请问您需要打开空调，还是调节空调模式？"}]}
 {"messages": [{"role": "user", "content": "帮我调一下空调温度"}, {"role": "assistant", "content": "请问您想调高、调低，还是调到具体多少度？"}, {"role": "user", "content": "调到24度"}, {"role": "assistant", "content": "{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"空调\",\"feature\":\"温度\",\"value\":\"24\"}}"}]}
 {"messages": [{"role": "user", "content": "切换到标准模式"}, {"role": "assistant", "content": "请问您要切换驾驶模式的标准模式，还是座椅习惯的标准模式？"}, {"role": "user", "content": "驾驶模式"}, {"role": "assistant", "content": "{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"驾驶模式\",\"value\":\"标准模式\"}}"}]}
 {"messages": [{"role": "user", "content": "切换到标准模式"}, {"role": "assistant", "content": "请问您要切换驾驶模式的标准模式，还是座椅习惯的标准模式？"}, {"role": "user", "content": "座椅习惯"}, {"role": "assistant", "content": "{\"name\":\"ProfileControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"习惯\",\"value\":\"标准模式\"}}"}]}
@@ -123,20 +118,16 @@
 {"messages": [{"role": "user", "content": "把后面的打开一下"}, {"role": "assistant", "content": "请问您要打开后备箱还是后排侧滑门？"}, {"role": "user", "content": "打开后备箱"}, {"role": "assistant", "content": "{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"后备箱\"}}"}]}
 {"messages": [{"role": "user", "content": "充完电了，口关一下"}, {"role": "assistant", "content": "请问您要关闭交流充电口还是直流充电口？"}, {"role": "user", "content": "关闭直流充电口"}, {"role": "assistant", "content": "{\"name\":\"GateControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"直流充电口\"}}"}]}
 {"messages": [{"role": "user", "content": "右边那个门打开"}, {"role": "assistant", "content": "请问您要打开右侧侧滑门还是右侧鹏翼门？"}, {"role": "user", "content": "右侧侧滑门"}, {"role": "assistant", "content": "{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"侧滑门\",\"position\":\"右侧\"}}"}]}
-{"messages": [{"role": "user", "content": "有点闷，帮我弄一下窗户"}, {"role": "assistant", "content": "请问您要打开还是关闭车窗？"}, {"role": "user", "content": "打开车窗"}, {"role": "assistant", "content": "{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗\"}}"}]}
 {"messages": [{"role": "user", "content": "主驾这边风太大，处理一下车窗"}, {"role": "assistant", "content": "请问您要关闭主驾车窗吗？"}, {"role": "user", "content": "关闭主驾车窗"}, {"role": "assistant", "content": "{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗\",\"position\":\"主驾\"}}"}]}
-{"messages": [{"role": "user", "content": "太阳有点晒，帮我弄一下遮阳帘"}, {"role": "assistant", "content": "请问您要打开还是关闭遮阳帘？"}, {"role": "user", "content": "关闭遮阳帘"}, {"role": "assistant", "content": "{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"遮阳帘\"}}"}]}
 {"messages": [{"role": "user", "content": "天窗帮我处理一下"}, {"role": "assistant", "content": "请问您要打开、关闭还是暂停天窗？"}, {"role": "user", "content": "打开天窗"}, {"role": "assistant", "content": "{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"天窗\"}}"}]}
 {"messages": [{"role": "user", "content": "车窗停一下"}, {"role": "assistant", "content": "请问您要暂停哪个车窗？"}, {"role": "user", "content": "暂停副驾车窗"}, {"role": "assistant", "content": "{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"暂停\",\"device\":\"车窗\",\"position\":\"副驾\"}}"}]}
 {"messages": [{"role": "user", "content": "帮我把窗户再弄一点"}, {"role": "assistant", "content": "请问您要再打开一点还是再关闭一点车窗？"}, {"role": "user", "content": "再开一点"}, {"role": "assistant", "content": "{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"再开\",\"device\":\"车窗\"}}"}]}
-{"messages": [{"role": "user", "content": "顶上太晒了"}, {"role": "assistant", "content": "请问您要打开还是关闭顶遮阳帘？"}, {"role": "user", "content": "关闭顶遮阳帘"}, {"role": "assistant", "content": "{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"顶遮阳帘\"}}"}]}
 {"messages": [{"role": "user", "content": "二排右边窗户处理下"}, {"role": "assistant", "content": "请问您要打开还是关闭第二排右侧车窗？"}, {"role": "user", "content": "关闭"}, {"role": "assistant", "content": "{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗\",\"position\":\"第二排右侧\"}}"}]}
 {"messages": [{"role": "user", "content": "帮我把主驾调舒服一点"}, {"role": "assistant", "content": "请问您要调节座椅、坐垫还是靠背？"}, {"role": "user", "content": "调节座椅往后一点"}, {"role": "assistant", "content": "{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调后\",\"device\":\"座椅\",\"position\":\"主驾\"}}"}]}
 {"messages": [{"role": "user", "content": "我想躺一会，帮我放平"}, {"role": "assistant", "content": "请问您要放平座椅还是靠背？"}, {"role": "user", "content": "放平主驾靠背"}, {"role": "assistant", "content": "{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"放平\",\"device\":\"靠背\",\"position\":\"主驾\"}}"}]}
 {"messages": [{"role": "user", "content": "副驾有点热，打开通风"}, {"role": "assistant", "content": "请问您要打开副驾座椅通风吗？"}, {"role": "user", "content": "对，打开副驾座椅通风"}, {"role": "assistant", "content": "{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"通风\",\"position\":\"副驾\"}}"}]}
 {"messages": [{"role": "user", "content": "第二排坐着不舒服，调一下"}, {"role": "assistant", "content": "请问您要调节第二排座椅、坐垫还是靠背？"}, {"role": "user", "content": "把第二排靠背往后调"}, {"role": "assistant", "content": "{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调后\",\"device\":\"靠背\",\"position\":\"第二排\"}}"}]}
 {"messages": [{"role": "user", "content": "帮我恢复一下主驾"}, {"role": "assistant", "content": "请问您要复位主驾座椅还是靠背？"}, {"role": "user", "content": "复位主驾座椅"}, {"role": "assistant", "content": "{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"复位\",\"device\":\"座椅\",\"position\":\"主驾\"}}"}]}
-{"messages": [{"role": "user", "content": "坐垫有点低，帮我调一下"}, {"role": "assistant", "content": "请问您要把坐垫调高还是调低？"}, {"role": "user", "content": "调高坐垫"}, {"role": "assistant", "content": "{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"坐垫\"}}"}]}
 {"messages": [{"role": "user", "content": "屏幕太亮了，帮我弄一下"}, {"role": "assistant", "content": "请问您要调节哪块屏幕？"}, {"role": "user", "content": "把娱乐屏亮度调低"}, {"role": "assistant", "content": "{\"name\":\"ScreenControl\",\"arguments\":{\"action\":\"调低\",\"device\":\"娱乐屏\",\"feature\":\"亮度\"}}"}]}
 {"messages": [{"role": "user", "content": "帮我关一下屏幕"}, {"role": "assistant", "content": "请问您要关闭哪块屏幕？"}, {"role": "user", "content": "关闭副驾娱乐屏"}, {"role": "assistant", "content": "{\"name\":\"ScreenControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"娱乐屏\",\"position\":\"副驾\"}}"}]}
 {"messages": [{"role": "user", "content": "副驾屏幕收一下"}, {"role": "assistant", "content": "请问您要收起副驾娱乐屏吗？"}, {"role": "user", "content": "对，收起副驾娱乐屏"}, {"role": "assistant", "content": "{\"name\":\"ScreenControl\",\"arguments\":{\"action\":\"收起\",\"device\":\"娱乐屏\",\"position\":\"副驾\"}}"}]}

@@ -55,12 +55,12 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 | 类型 | 数量 | 说明 |
 |------|------|------|
 | By-tool | 7306 | 每个工具文件内混合：`user -> JSON tool call` 决策样本 4979 条，独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 2327 条 |
-| Clarify | 198 | 已拆为两类样本：`user -> 追问 TTS`（99 条，教模型何时追问）+ 完整 4 轮 `user -> 追问 -> 用户补齐 -> tool call`（99 条，教模型追问后如何响应）；已移除纯位置追问（音区可自动判定位置）；配合 last-user-anchored 标签监督，两类样本均能被正确监督 |
+| Clarify | 189 | 已拆为两类样本：`user -> 追问 TTS`（94 条，教模型何时追问）+ 完整 4 轮 `user -> 追问 -> 用户补齐 -> tool call`（95 条，教模型追问后如何响应）；已移除纯位置追问（音区可自动判定位置）与意图明确的方向性追问（如"太晒→打开/关闭遮阳帘"）；配合 last-user-anchored 标签监督，两类样本均能被正确监督 |
 | Edge case | 100 | 多轮当前轮边界、查询 vs 控制、popup/task 列表 `GeneralSelect` 等易混淆样本 |
 | Multiturn | 367 | 最多三轮纯文本历史；历史允许外部域文本；当前轮输出分布：工具 240 条、NoiseDoNotAct 79 条、Reject 36 条、自然语言 TTS 12 条 |
 | Reject | 1127 | 单轮 + 多轮硬负例（已合并），最后一条 assistant 均为 `Reject`；已抽稀家居控制负例并移除高风险车控状态拒识 |
 
-`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 9098 条；统计时多轮样本按最后一个有效决策标签计入对应类别。
+`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 9089 条；统计时多轮样本按最后一个有效决策标签计入对应类别。
 
 ### Hard Case 加权
 
