@@ -89,3 +89,5 @@
 {"messages":[{"role":"assistant","content":"{\"name\":\"FridgeControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"冰箱\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已经为您打开冰箱。"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"FridgeControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"冰箱\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已经为您打开第二排的车载冰箱。"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"FridgeControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"冰箱\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已完成。"}]}
+{"messages":[{"role":"user","content":"把车载冰箱门关上"},{"role":"assistant","content":"{\"name\":\"FridgeControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"冰箱\"}}"}]}
+{"messages":[{"role":"user","content":"冰箱门帮我关一下"},{"role":"assistant","content":"{\"name\":\"FridgeControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"冰箱\"}}"}]}

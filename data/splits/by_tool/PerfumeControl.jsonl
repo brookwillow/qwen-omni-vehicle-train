@@ -26,3 +26,5 @@
 {"messages":[{"role":"user","content":"香氛开到最低浓度"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"香氛\",\"feature\":\"浓度\",\"value\":\"最低\"}}"}]}
 {"messages":[{"role":"user","content":"香氛开到最高浓度"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"香氛\",\"feature\":\"浓度\",\"value\":\"最高\"}}"}]}
 {"messages":[{"role":"user","content":"打开车里的香氛系统"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"香氛\"}}"}]}
+{"messages":[{"role":"user","content":"香味太重了，直接关香氛"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"香氛\"}}"}]}
+{"messages":[{"role":"user","content":"香氛味道太浓，关闭香氛"},{"role":"assistant","content":"{\"name\":\"PerfumeControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"香氛\"}}"}]}

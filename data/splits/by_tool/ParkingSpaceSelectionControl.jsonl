@@ -19,3 +19,7 @@
 {"messages":[{"role":"assistant","content":"{\"name\":\"ParkingSpaceSelectionControl\",\"arguments\":{\"action\":\"暂停终点车位选择\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已暂停。"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"ParkingSpaceSelectionControl\",\"arguments\":{\"action\":\"取消终点车位选择\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已取消。"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"ParkingSpaceSelectionControl\",\"arguments\":{\"action\":\"取消终点车位选择\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已停止终点车位选择。"}]}
+{"messages":[{"role":"user","content":"开始终点车位选择"},{"role":"assistant","content":"{\"name\":\"ParkingSpaceSelectionControl\",\"arguments\":{\"action\":\"执行终点车位选择\"}}"}]}
+{"messages":[{"role":"user","content":"继续执行终点车位选择"},{"role":"assistant","content":"{\"name\":\"ParkingSpaceSelectionControl\",\"arguments\":{\"action\":\"执行终点车位选择\"}}"}]}
+{"messages":[{"role":"user","content":"终点车位选择先暂停"},{"role":"assistant","content":"{\"name\":\"ParkingSpaceSelectionControl\",\"arguments\":{\"action\":\"暂停终点车位选择\"}}"}]}
+{"messages":[{"role":"user","content":"暂停终点停车位选择"},{"role":"assistant","content":"{\"name\":\"ParkingSpaceSelectionControl\",\"arguments\":{\"action\":\"暂停终点车位选择\"}}"}]}

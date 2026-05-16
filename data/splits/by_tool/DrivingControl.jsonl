@@ -332,3 +332,11 @@
 {"messages":[{"role":"user","content":"孩子在后面睡觉，开得平稳一点"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"驾驶模式\",\"value\":\"舒适模式\"}}"}]}
 {"messages":[{"role":"user","content":"还有三十公里才到充电桩，帮我省电"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"驾驶模式\",\"value\":\"节能模式\"}}"}]}
 {"messages":[{"role":"user","content":"切到我自己调的那个模式"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"驾驶模式\",\"value\":\"自定义\"}}"}]}
+{"messages":[{"role":"user","content":"弹射模式关掉"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"驾驶模式\",\"value\":\"弹射模式\"}}"}]}
+{"messages":[{"role":"user","content":"脱困模式关闭"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"驾驶模式\",\"value\":\"脱困模式\"}}"}]}
+{"messages":[{"role":"user","content":"打开单踏板驾驶模式"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"驾驶模式\",\"value\":\"单踏板\"}}"}]}
+{"messages":[{"role":"user","content":"我想用单踏板开车"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"驾驶模式\",\"value\":\"单踏板\"}}"}]}
+{"messages":[{"role":"user","content":"开稳一点照顾后排老人"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"驾驶模式\",\"value\":\"舒适模式\"}}"}]}
+{"messages":[{"role":"user","content":"切到自定义驾驶模式"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"驾驶模式\",\"value\":\"自定义\"}}"}]}
+{"messages":[{"role":"user","content":"来点推背感，切运动驾驶"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"驾驶模式\",\"value\":\"运动模式\"}}"}]}
+{"messages":[{"role":"user","content":"恢复正常驾驶模式"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"驾驶模式\",\"value\":\"标准模式\"}}"}]}

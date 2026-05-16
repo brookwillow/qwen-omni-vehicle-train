@@ -161,6 +161,11 @@
 {"messages":[{"role":"user","content":"后座窗户开一点"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"开到\",\"device\":\"车窗\",\"position\":\"第二排\"}}"}]}
 {"messages":[{"role":"user","content":"后左边窗关上"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗\",\"position\":\"第二排左侧\"}}"}]}
 {"messages":[{"role":"user","content":"所有车窗都关上"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗\",\"position\":\"全部\"}}"}]}
+{"messages":[{"role":"user","content":"主副驾窗户打开"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗\",\"position\":\"前排\"}}"}]}
+{"messages":[{"role":"user","content":"把前面两个车窗都降下来"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"再开\",\"device\":\"车窗\",\"position\":\"前排\"}}"}]}
+{"messages":[{"role":"user","content":"全车车窗升起来"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"再关\",\"device\":\"车窗\",\"position\":\"全部\"}}"}]}
+{"messages":[{"role":"user","content":"所有窗户留一半通风"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"开到\",\"device\":\"车窗\",\"position\":\"全部\",\"value\":\"50%\"}}"}]}
+{"messages":[{"role":"user","content":"副驾那扇窗稍微降一点"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"再开\",\"device\":\"车窗\",\"position\":\"副驾\"}}"}]}
 {"messages":[{"role":"user","content":"窗户开着呢，关上"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗\",\"position\":\"主驾\"}}"}]}
 {"messages":[{"role":"user","content":"前排车窗都打开"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗\",\"position\":\"前排\"}}"}]}
 {"messages":[{"role":"user","content":"后右边的车窗关一下"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗\",\"position\":\"第二排右侧\"}}"}]}

@@ -371,3 +371,6 @@
 {"messages":[{"role":"user","content":"副驾娱乐屏亮度调到百分之八十"},{"role":"assistant","content":"{\"name\":\"ScreenControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"娱乐屏\",\"feature\":\"亮度\",\"position\":\"副驾\",\"value\":\"高\"}}"}]}
 {"messages":[{"role":"user","content":"我想看看后排的娱乐系统"},{"role":"assistant","content":"{\"name\":\"ScreenControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"娱乐屏\",\"position\":\"第二排\"}}"}]}
 {"messages":[{"role":"user","content":"屏幕亮度拉到最低，音量也调小一点"},{"role":"assistant","content":"{\"name\":\"ScreenControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"屏幕\",\"feature\":\"亮度\",\"value\":\"最低\"}}"}]}
+{"messages":[{"role":"user","content":"仪表盘亮度拉到最高"},{"role":"assistant","content":"{\"name\":\"ScreenControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"仪表\",\"feature\":\"亮度\",\"value\":\"最高\"}}"}]}
+{"messages":[{"role":"user","content":"把娱乐屏调到最高亮度"},{"role":"assistant","content":"{\"name\":\"ScreenControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"娱乐屏\",\"feature\":\"亮度\",\"value\":\"最高\"}}"}]}
+{"messages":[{"role":"user","content":"进入屏幕清洁模式"},{"role":"assistant","content":"{\"name\":\"ScreenControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"屏幕\",\"value\":\"清洁模式\"}}"}]}

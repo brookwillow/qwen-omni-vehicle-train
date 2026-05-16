@@ -205,8 +205,6 @@ def _equivalent_action_candidates(query: str) -> List[Tuple[str, Dict[str, Any]]
     return [
         ("ClimateControl", {"action": "打开", "device": "空调", "value": "外循环"}),
         ("ClimateControl", {"action": "调到", "device": "空调", "value": "外循环"}),
-        ("WindowControl", {"action": "打开", "device": "车窗"}),
-        ("WindowControl", {"action": "打开", "device": "车窗", "position": "全部"}),
     ]
 
 
@@ -300,6 +298,13 @@ def get_expected_type(row: dict) -> str:
     return "Reject"
 
 
+def should_skip_eval_row(row: dict) -> bool:
+    """Skip cases that cannot be scored with the current single-tool metric."""
+    if row.get("intent") == "多意图" or row.get("sub_category") == "多意图":
+        return True
+    return len(row.get("expected_tool_calls", []) or []) > 1
+
+
 def eval_file(
     model, processor, system_prompt: str, file_path: str,
     max_new_tokens: int, temperature: float,
@@ -314,12 +319,13 @@ def eval_file(
         data = data[:max_per_file]
     metric = Metric()
     bad = 0
-    n_total = len(data)
     eval_dir = Path(file_path).parent
 
     # Pre-compute per-row metadata once
     rows_meta = []
     for row in data:
+        if should_skip_eval_row(row):
+            continue
         query = row.get("query", "")
         gt_calls = row.get("expected_tool_calls", []) or []
         gt_tool = gt_calls[0].get("name") if gt_calls else None
@@ -334,6 +340,7 @@ def eval_file(
             if ap.exists():
                 audio_path = str(ap)
         rows_meta.append((row, query, gt_tool, gt_args, expected_type, difficulty, category, audio_path))
+    n_total = len(rows_meta)
 
     # Process in mini-batches
     for batch_start in range(0, n_total, batch_size):
@@ -534,7 +541,7 @@ def run_batch(args, model, processor, system_prompt: str) -> None:
         "timestamp": datetime.now().isoformat(),
         "evaluation_mode": EVALUATION_MODE,
         "postprocess_applied": POSTPROCESS_APPLIED,
-        "postprocess_note": "eval.py reports raw model tool names and args; serve.py may still apply runtime postprocess fallback.",
+        "postprocess_note": "eval.py and serve.py both report raw model tool names and args without rule-based tool/argument postprocess.",
         "model_dir": args.model_dir,
         "lora_dir": args.lora_dir or None,
         "eval_dir": args.eval_dir,

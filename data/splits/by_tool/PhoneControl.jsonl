@@ -128,3 +128,8 @@
 {"messages":[{"role":"user","content":"我记得通讯录里有个姓周的同事，帮我查查"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"周\"}}"}]}
 {"messages":[{"role":"user","content":"找一下老婆的手机号"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"老婆\"}}"}]}
 {"messages":[{"role":"user","content":"约了修车师傅，帮我找下他的电话，叫孙师傅"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"孙师傅\"}}"}]}
+{"messages":[{"role":"user","content":"通讯录里姓刘的客户，帮我找电话打过去"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"刘\"}}"}]}
+{"messages":[{"role":"user","content":"前台同事的号码搜一下并拨过去"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"前台\"}}"}]}
+{"messages":[{"role":"user","content":"查一下尾号7777的号码并拨打"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"7777\"}}"}]}
+{"messages":[{"role":"user","content":"帮我拨一下13800138000这个电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"13800138000\"}}"}]}
+{"messages":[{"role":"user","content":"找下王经理电话，直接打给他"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"王经理\"}}"}]}

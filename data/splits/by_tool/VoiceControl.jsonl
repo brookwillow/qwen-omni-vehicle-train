@@ -147,3 +147,6 @@
 {"messages":[{"role":"user","content":"车外声音关掉"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"静音\",\"feature\":\"声音\",\"position\":\"车外\"}}"}]}
 {"messages":[{"role":"user","content":"关闭车外音量"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"静音\",\"feature\":\"声音\",\"position\":\"车外\"}}"}]}
 {"messages":[{"role":"user","content":"第三排要看视频，后面声音开大些"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调高\",\"feature\":\"声音\",\"position\":\"第三排\"}}"}]}
+{"messages":[{"role":"user","content":"把音量开到最大"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"value\":\"最高\"}}"}]}
+{"messages":[{"role":"user","content":"声音调到最大"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"value\":\"最高\"}}"}]}
+{"messages":[{"role":"user","content":"全车音量调到最高"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"position\":\"全部\",\"value\":\"最高\"}}"}]}

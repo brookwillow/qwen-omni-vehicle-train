@@ -65,6 +65,15 @@ def parse_args():
         default=[],
         help="Max samples per type, e.g. action:1000 reject:500",
     )
+    p.add_argument(
+        "--sample-weight",
+        nargs="*",
+        default=[],
+        help=(
+            "Oversample matching split files by stem/path/glob, e.g. "
+            "hard_cases/*.jsonl:3 WindowControl:1.5"
+        ),
+    )
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--val-ratio", type=float, default=0.0, help="If >0, also write a val split")
     return p.parse_args()
@@ -88,6 +97,69 @@ def load_split(path: str) -> list[dict]:
             if line:
                 samples.append(json.loads(line))
     return samples
+
+
+def match_weight_selector(path: Path, selector: str) -> bool:
+    """Return True when selector matches a split file by stem, path suffix, or glob."""
+    normalized = path.as_posix()
+    selector = selector.strip()
+    if not selector:
+        return False
+    if selector == path.stem:
+        return True
+    if normalized.endswith(selector):
+        return True
+    return path.match(selector) or Path(normalized).match(selector)
+
+
+def sample_weight_for_path(path: Path, sample_weights: dict[str, float]) -> float:
+    factor = 1.0
+    for selector, weight in sample_weights.items():
+        if match_weight_selector(path, selector):
+            factor = max(factor, weight)
+    return factor
+
+
+def expand_samples(samples: list[dict], factor: float, rng: random.Random) -> list[dict]:
+    """Apply deterministic fractional oversampling."""
+    if factor <= 1.0:
+        return samples
+    int_factor = int(factor)
+    frac = factor - int_factor
+    expanded = samples * int_factor
+    if frac > 0:
+        extra = int(len(samples) * frac)
+        shuffled = list(samples)
+        rng.shuffle(shuffled)
+        expanded += shuffled[:extra]
+    return expanded
+
+
+def load_weighted_splits(
+    split_files: list[Path],
+    oversample: dict[str, float],
+    max_per_type: dict[str, float],
+    sample_weights: dict[str, float],
+    rng: random.Random,
+) -> tuple[list[dict], dict[str, int]]:
+    all_samples = []
+    counts = {}
+    for fpath in split_files:
+        type_name = fpath.stem
+        samples = load_split(str(fpath))
+
+        if type_name in max_per_type:
+            limit = int(max_per_type[type_name])
+            if len(samples) > limit:
+                rng.shuffle(samples)
+                samples = samples[:limit]
+
+        factor = max(oversample.get(type_name, 1.0), sample_weight_for_path(fpath, sample_weights))
+        samples = expand_samples(samples, factor, rng)
+
+        counts[str(fpath)] = len(samples)
+        all_samples.extend(samples)
+    return all_samples, counts
 
 
 def inject_sp(sample: dict, sp: str) -> dict:
@@ -140,34 +212,12 @@ def main():
     # Parse oversampling and max-per-type
     oversample = parse_kv_args(args.oversample)
     max_per_type = parse_kv_args(args.max_per_type)
+    sample_weights = parse_kv_args(args.sample_weight)
 
     # Load and process splits
-    all_samples = []
+    all_samples, counts = load_weighted_splits(split_files, oversample, max_per_type, sample_weights, rng)
     for fpath in split_files:
-        type_name = fpath.stem  # e.g. "action", "reject"
-        samples = load_split(str(fpath))
-
-        # Apply max-per-type limit
-        if type_name in max_per_type:
-            limit = int(max_per_type[type_name])
-            if len(samples) > limit:
-                rng.shuffle(samples)
-                samples = samples[:limit]
-
-        # Apply oversampling
-        factor = oversample.get(type_name, 1.0)
-        if factor > 1.0:
-            int_factor = int(factor)
-            frac = factor - int_factor
-            expanded = samples * int_factor
-            if frac > 0:
-                extra = int(len(samples) * frac)
-                rng.shuffle(samples)
-                expanded += samples[:extra]
-            samples = expanded
-
-        print(f"  {type_name}: {len(samples)} samples from {fpath}")
-        all_samples.extend(samples)
+        print(f"  {fpath.stem}: {counts[str(fpath)]} samples from {fpath}")
 
     # Inject SP and shuffle
     final = [inject_sp(s, sp) for s in all_samples]

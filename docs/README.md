@@ -27,7 +27,7 @@ pip install fastapi uvicorn pydantic   # serve.py 推理服务依赖
 ```
 data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具文件)
   │
-  └─ build_train_data.py ──→ data/train_final.jsonl (注入 SP，打散，可过采样)
+  └─ build_train_data.py ──→ data/train_final.jsonl (注入 SP，打散，可按错误族加权)
                                 │
                                 └─ train_thinker_lora.py ──→ lora_output/
 ```
@@ -40,7 +40,7 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 |------|------|
 | `data/system-prompt.txt` | 紧凑版 System Prompt（~5.5K chars，基于当前工具白名单生成） |
 | `data/tools.json` | 38 个车载工具定义（新版 `inputSchema` 格式） |
-| `data/splits/by_tool/*.jsonl` | 按工具拆分的训练数据；每个工具文件内已拆为 `user -> JSON tool call` 决策样本和独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本；`PhoneControl.jsonl` 包含小鹏客服、小鹏救援、儿童手表等官方默认联系人样本；其中 `NoiseDoNotAct.jsonl` 当前为 439 条 |
+| `data/splits/by_tool/*.jsonl` | 按工具拆分的训练数据；每个工具文件内已拆为 `user -> JSON tool call` 决策样本和独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本；`PhoneControl.jsonl` 包含小鹏客服、小鹏救援、儿童手表等官方默认联系人样本；其中 `NoiseDoNotAct.jsonl` 当前为 450 条 |
 | `data/splits/clarify.jsonl` | required 字段缺失后的自然语言追问样本 |
 | `data/splits/edge_case.jsonl` | 多轮上下文边界、易混淆与任务列表选择样本 |
 | `data/splits/multiturn.jsonl` | 最多三轮纯文本历史上下文样本；历史可来自导航/音乐/新闻/百科/AIGC/天气等外部域，当前轮优先，只有代词、省略、纠错、延续或查询缺槽时才参考历史补全 |
@@ -52,13 +52,24 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 
 | 类型 | 数量 | 说明 |
 |------|------|------|
-| By-tool | 7233 | 每个工具文件内混合：`user -> JSON tool call` 决策样本 4906 条，独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 2327 条 |
+| By-tool | 7306 | 每个工具文件内混合：`user -> JSON tool call` 决策样本 4979 条，独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 2327 条 |
 | Clarify | 101 | 4 轮：用户缺少工具 required 字段或意图范围歧义 → 自然语言追问 → 用户补齐 → JSON tool call；不包含 tool-role result |
 | Edge case | 100 | 多轮当前轮边界、查询 vs 控制、popup/task 列表 `GeneralSelect` 等易混淆样本 |
 | Multiturn | 367 | 最多三轮纯文本历史；历史允许外部域文本；当前轮输出分布：工具 240 条、NoiseDoNotAct 79 条、Reject 36 条、自然语言 TTS 12 条 |
 | Reject | 1127 | 单轮 + 多轮硬负例（已合并），最后一条 assistant 均为 `Reject`；已抽稀家居控制负例并移除高风险车控状态拒识 |
 
-`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 8928 条；统计时多轮样本按最后一个有效决策标签计入对应类别。
+`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 9001 条；统计时多轮样本按最后一个有效决策标签计入对应类别。
+
+### Hard Case 加权
+
+`--oversample` 仍按文件 stem 加权；新增 `--sample-weight` 支持按 stem、路径后缀或 glob 给具体 split 文件加权，适合将评测错误族沉淀为独立 hard case 文件后提高采样占比。
+
+```bash
+python build_train_data.py \
+  --sample-weight 'hard_cases/*.jsonl:3' ProfileControl:2 WindowControl:1.5
+```
+
+推荐流程：先用 `scripts/analyze_eval_errors.py --backlog-md` 生成错误族补强清单，再为 P0/P1 错误族补充非评估原句 hard case；训练时对这些 hard case 文件做 2-4 倍采样，避免新增样本在 9K 级训练集中被稀释。
 
 ## 训练配置
 
@@ -267,16 +278,6 @@ API 端点：
 - `GET  /v1/models` – 列出模型
 - `GET  /health` – 健康检查
 
-### 交互式 CLI 推理
-
-```bash
-python infer_cli_omni.py \
-  --model-dir models/Qwen2.5-Omni-3B \
-  --lora-dir lora_output
-```
-
-CLI 推理直接展示模型解析出的原始工具名和参数，不经过 `tool_postprocess.py` 修正，便于检查训练后的真实输出能力。
-
 ### 评测
 
 ```bash
@@ -322,7 +323,7 @@ python eval.py single \
 | `parse_fail` | 输出格式解析失败数 |
 
 评测脚本支持少量业务等价答案：例如「车里太闷了」这类未明确指定车窗或空调的通风意图，`ClimateControl` 切外循环和 `WindowControl` 打开车窗都计为正确。
-评测和服务端都不调用 `tool_postprocess.py` 修正预测工具或参数，指标与线上响应都反映模型原始输出。
+评测和服务端都不做规则后处理修正预测工具或参数，指标与线上响应都反映模型原始输出。
 
 ### 评测维度
 
@@ -339,11 +340,12 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 - 所有错误样本（含 query、gt、pred、err_type）
 - 解析后的工具名和参数保持模型原始输出，不做规则后处理修正
 - `position` 为可选参数；用户未明确位置时不因缺少位置追问，直接省略 `position`，由工具侧按说话人位置补全
+- 多意图样本暂不计入单工具指标；`eval.py` 会跳过 `intent/sub_category=多意图` 或包含多个 `expected_tool_calls` 的样本
 
 ### 评测数据
 
-- 路径：`data/eval/*_test.json`（18 个文件，1109 条样本）
-- 音频：`data/eval/audio/`（1108 条有对应 wav 文件）
+- 路径：`data/eval/*_test.json`（36 个文件，1778 条样本；其中 169 条多意图/多工具样本被单工具评测 mask）
+- 音频：`data/eval/audio/`（1599 条有对应 wav 文件）
 - 输入方式：有音频文件时自动用音频输入，无音频时回退到文本
 - 支持字段：`expected_type`（显式指定 Action/Clarify/Reject）
 
@@ -354,19 +356,24 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 | `build_train_data.py` | 合并 splits + 注入 SP → 训练集 |
 | `train_thinker_lora.py` | LoRA 训练，含冻结审计 + 训练指标记录 |
 | `serve.py` | **OpenAI 兼容推理服务**（FastAPI，支持文本+音频） |
-| `infer_cli_omni.py` | 交互式 CLI 推理 |
 | `eval.py` | 统一评测（batch / single），音频输入 + 多维度统计，支持 `--batch-size` 批量推理 |
-| `tool_postprocess.py` | 历史后处理模块；当前训练、CLI、评测和服务端路径均不使用 |
-| `scripts/probe_asr_decoder.py` | Qwen 音频编码器 → Whisper 解码器 ASR 探测实验 |
-| `scripts/build_r5_augment.py` | R5 数据增强（position/anti-clarify/climate/light） |
-| `scripts/reorganize_splits.py` | 将 splits/ 按统一响应策略分类法重组 |
-| `scripts/reclassify_reject.py` | 对 reject.jsonl 重新分类（reject / noise / query / tool_call / clarify） |
-| `scripts/fix_clarify_position.py` | 修正 clarify 样本中错误反问 position 的情况（position 为可选时直接执行） |
-| `scripts/fix_reject_mislabeled.py` | 修正 reject 中有对应工具的误标样本 → 转为 tool_call |
-| `scripts/fix_reject_noise.py` | 将 reject 中的无意图噪声（问候/感叹/闲聊）→ 转为 noise |
+| `scripts/analyze_eval_errors.py` | 读取 `eval_report*.json`，按类型、工具、文件、类别聚类错误；可用 `--backlog-md` 输出训练补强任务清单 |
+| `scripts/validate_splits.py` | 校验 split 样本消息结构、工具调用和响应形态 |
+| `scripts/validate_by_tool_schema.py` | 校验 `data/splits/by_tool/*.jsonl` 是否符合 `data/tools.json` schema |
 | `scripts/generate_train_report.py` | 从 `train_metrics.jsonl` 生成 HTML 训练可视化报告 |
+| `scripts/record_remote_infer.py` | 录音或读取音频并请求远端 OpenAI 兼容推理服务 |
+| `scripts/gradio_remote_infer.py` | 远端推理服务的 Gradio 调试界面 |
 
 已归档至 `_archive/`：`split_data_by_type.py`、`augment_reject_samples.py`、`build_system_prompt.py`
+
+评测后的推荐排查顺序：
+
+```bash
+python scripts/analyze_eval_errors.py eval_report.json --limit 20
+python scripts/analyze_eval_errors.py eval_report.json --limit 20 --backlog-md docs/eval-error-training-backlog.md
+```
+
+该流程用于决定下一轮补数据方向；不通过规则后处理抬高线上或评测准确率。
 
 ## 已完成的优化
 
@@ -388,10 +395,7 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 - [x] eval.py `--batch-size` 批量推理（单 GPU 利用率从 ~30% → ~75%）
 - [x] R5 数据增强（+164 条：position 字段覆盖、抗过度-Clarify、Climate/Light 多样性）
 - [x] R6 anti-Clarify 清理：位置缺失不追问，口语意图/信息查询/电话与 FM 搜索直接 Action
-- [x] 数据质量清洗脚本（2026-05-10）：
-  - `fix_clarify_position.py`：25 条 clarify 样本错误反问可选 position → 修正为 tool_call（无 position）；1 条导航超范围 → reject；出风口/屏幕设备歧义保留 clarify
-  - `fix_reject_mislabeled.py`：18 条 reject 误标样本（WiperControl/ParkingControl/DrivingControl/SuspensionControl/FridgeControl/GloveboxControl/PerfumeControl/NetworkControl）→ 修正为 tool_call
-  - `fix_reject_noise.py`：57 条无意图噪声（问候/感叹词/道别/闲聊等）从 reject → 迁移至 noise
+- [x] 数据质量清洗（2026-05-10）：修正 clarify 中可选 position 误追问、reject 误标工具样本，并将问候/感叹词/道别/闲聊等无意图噪声迁移至 noise；一次性清洗脚本已删除，保留清洗后的 split 产物
 - [x] 训练过程指标持久化：`MetricsSaverCallback` 每隔 `--logging-steps` 步追加写入 `{output_dir}/train_metrics.jsonl`（含 step/epoch/loss/lr/grad_norm/eval_loss/eval_token_acc）
 - [x] HTML 训练报告生成：`scripts/generate_train_report.py` 从 `train_metrics.jsonl` 生成暗色主题交互式 HTML（Chart.js），包含 train loss、eval loss + token acc 双轴、学习率、grad norm 四图及关键统计卡片
 
@@ -415,7 +419,7 @@ python scripts/generate_train_report.py --metrics lora_output/train_metrics.json
 
 ## 下一步
 
-- [ ] 执行数据清洗脚本（fix_clarify_position / fix_reject_mislabeled / fix_reject_noise）并重新构建 train_final.jsonl
+- [ ] 按 `scripts/analyze_eval_errors.py --backlog-md` 的 P0/P1 错误族继续补充非评估原句 hard case，并用 `build_train_data.py --sample-weight` 加权训练
 - [ ] 补充 Clarify 评测数据（当前 0 条，训练集有 ~151 条）
 - [ ] 补充 Reject 评测数据（当前 1 条，训练集有 ~1132 条）
 - [ ] 补齐 9 个无覆盖工具的测试数据（GeneralBack/Exit/Select、NavigationControl 等）

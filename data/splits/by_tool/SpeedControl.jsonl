@@ -14,3 +14,5 @@
 {"messages":[{"role":"user","content":"把速度设到100"},{"role":"assistant","content":"{\"name\":\"SpeedControl\",\"arguments\":{\"action\":\"车速调到\",\"value\":\"100\"}}"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"SpeedControl\",\"arguments\":{\"action\":\"开快点\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已为您处理。"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"SpeedControl\",\"arguments\":{\"action\":\"开快点\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"已为您处理。"}]}
+{"messages":[{"role":"user","content":"车速保持在八十"},{"role":"assistant","content":"{\"name\":\"SpeedControl\",\"arguments\":{\"action\":\"车速调到\",\"value\":\"80\"}}"}]}
+{"messages":[{"role":"user","content":"速度保持到80"},{"role":"assistant","content":"{\"name\":\"SpeedControl\",\"arguments\":{\"action\":\"车速调到\",\"value\":\"80\"}}"}]}

@@ -357,7 +357,7 @@
     "sub_category": "车窗",
     "intent": "模糊语义",
     "difficulty": "hard",
-    "query": "车里太闷了",
+    "query": "车里太闷了，开下车窗",
     "expected_tool_calls": [
       {
         "name": "WindowControl",
@@ -367,7 +367,7 @@
         }
       }
     ],
-    "query_audio": "audio/window/window_020.wav"
+    "query_audio": ""
   },
   {
     "id": "window_021",

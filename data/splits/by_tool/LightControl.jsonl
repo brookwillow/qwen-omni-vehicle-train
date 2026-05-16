@@ -715,3 +715,13 @@
 {"messages":[{"role":"user","content":"大灯切换一下模式"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"大灯\"}}"}]}
 {"messages":[{"role":"user","content":"灯光模式调成自动"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"大灯\",\"value\":\"自动\"}}"}]}
 {"messages":[{"role":"user","content":"大灯切换到自动模式"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"大灯\",\"value\":\"自动\"}}"}]}
+{"messages":[{"role":"user","content":"氛围灯调成青色"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"氛围灯\",\"feature\":\"颜色\",\"value\":\"其他\"}}"}]}
+{"messages":[{"role":"user","content":"氛围灯换到下一个颜色"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"氛围灯\",\"feature\":\"颜色\",\"value\":\"下一个\"}}"}]}
+{"messages":[{"role":"user","content":"在车里看书，打开阅读灯"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"阅读灯\"}}"}]}
+{"messages":[{"role":"user","content":"进入隧道了，打开大灯"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"大灯\"}}"}]}
+{"messages":[{"role":"user","content":"开启智能远光灯"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"远光灯\",\"value\":\"智能\"}}"}]}
+{"messages":[{"role":"user","content":"氛围灯改成绿色"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"氛围灯\",\"feature\":\"颜色\",\"value\":\"其他\"}}"}]}
+{"messages":[{"role":"user","content":"氛围灯换成红色"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"氛围灯\",\"feature\":\"颜色\",\"value\":\"其他\"}}"}]}
+{"messages":[{"role":"user","content":"车里太暗了，开点氛围灯"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"氛围灯\"}}"}]}
+{"messages":[{"role":"user","content":"头顶阅读灯太影响视线，关掉"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"阅读灯\"}}"}]}
+{"messages":[{"role":"user","content":"氛围灯颜色调暖一点"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"氛围灯\",\"feature\":\"颜色\",\"value\":\"其他\"}}"}]}

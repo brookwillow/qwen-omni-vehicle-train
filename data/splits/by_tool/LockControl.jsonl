@@ -49,7 +49,7 @@
 {"messages":[{"role":"user","content":"关闭副驾儿童锁"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"儿童锁\",\"position\":\"副驾\"}}"}]}
 {"messages":[{"role":"user","content":"关闭第二排儿童锁"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"儿童锁\",\"position\":\"第二排\"}}"}]}
 {"messages":[{"role":"user","content":"孩子在后面坐着，别让他自己开门"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\"}}"}]}
-{"messages":[{"role":"user","content":"小孩坐右边，帮我锁一下右边的门"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"右侧\"}}"}]}
+{"messages":[{"role":"user","content":"小朋友坐右侧，把右边车门保护锁打开"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"右侧\"}}"}]}
 {"messages":[{"role":"user","content":"左后门那个小孩老是碰门把手，锁住"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"左侧\"}}"}]}
 {"messages":[{"role":"user","content":"第三排左边的小朋友下车了，解锁那边"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"儿童锁\",\"position\":\"第三排左侧\"}}"}]}
 {"messages":[{"role":"user","content":"第三排右边那个孩子要下车，把锁解了"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"儿童锁\",\"position\":\"第三排右侧\"}}"}]}
@@ -61,7 +61,7 @@
 {"messages":[{"role":"user","content":"孩子们可以自己控制窗户了"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗锁\"}}"}]}
 {"messages":[{"role":"user","content":"把所有门都用儿童保护锁住"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"全部\"}}"}]}
 {"messages":[{"role":"user","content":"到家了，把儿童保护都解除"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"儿童锁\",\"position\":\"全部\"}}"}]}
-{"messages":[{"role":"user","content":"宝宝太调皮了，帮我锁住车门"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\"}}"}]}
+{"messages":[{"role":"user","content":"宝宝在后排有点闹，帮我锁住车门"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\"}}"}]}
 {"messages":[{"role":"user","content":"打开车窗锁"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗锁\"}}"}]}
 {"messages":[{"role":"user","content":"关闭车窗锁"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗锁\"}}"}]}
 {"messages":[{"role":"user","content":"别让小孩乱按车窗"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗锁\"}}"}]}
@@ -126,3 +126,7 @@
 {"messages":[{"role":"user","content":"关闭车窗锁"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗锁\"}}"}]}
 {"messages":[{"role":"user","content":"车窗锁打开"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗锁\"}}"}]}
 {"messages":[{"role":"user","content":"孩子到站了，车窗锁解开"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗锁\"}}"}]}
+{"messages":[{"role":"user","content":"宝宝坐后面，把车门锁住"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\"}}"}]}
+{"messages":[{"role":"user","content":"小孩坐右侧，右边门锁上"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"右侧\"}}"}]}
+{"messages":[{"role":"user","content":"第二排右侧有小朋友，把门锁上"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"第二排右侧\"}}"}]}
+{"messages":[{"role":"user","content":"孩子在车上，打开儿童锁"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\"}}"}]}
