@@ -35,10 +35,8 @@
 {"messages": [{"role": "user", "content": "帮我把主驾调舒服一点"}, {"role": "assistant", "content": "请问您要调节座椅、坐垫还是靠背？"}]}
 {"messages": [{"role": "user", "content": "我想躺一会，帮我放平"}, {"role": "assistant", "content": "请问您要放平座椅还是靠背？"}]}
 {"messages": [{"role": "user", "content": "副驾有点热，打开通风"}, {"role": "assistant", "content": "请问您要打开副驾座椅通风吗？"}]}
-{"messages": [{"role": "user", "content": "帮我开下按摩"}, {"role": "assistant", "content": "请问您要打开哪个座位的座椅按摩？"}]}
 {"messages": [{"role": "user", "content": "第二排坐着不舒服，调一下"}, {"role": "assistant", "content": "请问您要调节第二排座椅、坐垫还是靠背？"}]}
 {"messages": [{"role": "user", "content": "帮我恢复一下主驾"}, {"role": "assistant", "content": "请问您要复位主驾座椅还是靠背？"}]}
-{"messages": [{"role": "user", "content": "太冷了，开一下加热"}, {"role": "assistant", "content": "请问您要打开哪个座位的座椅加热？"}]}
 {"messages": [{"role": "user", "content": "坐垫有点低，帮我调一下"}, {"role": "assistant", "content": "请问您要把坐垫调高还是调低？"}]}
 {"messages": [{"role": "user", "content": "屏幕太亮了，帮我弄一下"}, {"role": "assistant", "content": "请问您要调节哪块屏幕？"}]}
 {"messages": [{"role": "user", "content": "帮我关一下屏幕"}, {"role": "assistant", "content": "请问您要关闭哪块屏幕？"}]}
@@ -136,10 +134,8 @@
 {"messages": [{"role": "user", "content": "帮我把主驾调舒服一点"}, {"role": "assistant", "content": "请问您要调节座椅、坐垫还是靠背？"}, {"role": "user", "content": "调节座椅往后一点"}, {"role": "assistant", "content": "{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调后\",\"device\":\"座椅\",\"position\":\"主驾\"}}"}]}
 {"messages": [{"role": "user", "content": "我想躺一会，帮我放平"}, {"role": "assistant", "content": "请问您要放平座椅还是靠背？"}, {"role": "user", "content": "放平主驾靠背"}, {"role": "assistant", "content": "{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"放平\",\"device\":\"靠背\",\"position\":\"主驾\"}}"}]}
 {"messages": [{"role": "user", "content": "副驾有点热，打开通风"}, {"role": "assistant", "content": "请问您要打开副驾座椅通风吗？"}, {"role": "user", "content": "对，打开副驾座椅通风"}, {"role": "assistant", "content": "{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"通风\",\"position\":\"副驾\"}}"}]}
-{"messages": [{"role": "user", "content": "帮我开下按摩"}, {"role": "assistant", "content": "请问您要打开哪个座位的座椅按摩？"}, {"role": "user", "content": "打开主驾座椅按摩"}, {"role": "assistant", "content": "{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"按摩\",\"position\":\"主驾\"}}"}]}
 {"messages": [{"role": "user", "content": "第二排坐着不舒服，调一下"}, {"role": "assistant", "content": "请问您要调节第二排座椅、坐垫还是靠背？"}, {"role": "user", "content": "把第二排靠背往后调"}, {"role": "assistant", "content": "{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调后\",\"device\":\"靠背\",\"position\":\"第二排\"}}"}]}
 {"messages": [{"role": "user", "content": "帮我恢复一下主驾"}, {"role": "assistant", "content": "请问您要复位主驾座椅还是靠背？"}, {"role": "user", "content": "复位主驾座椅"}, {"role": "assistant", "content": "{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"复位\",\"device\":\"座椅\",\"position\":\"主驾\"}}"}]}
-{"messages": [{"role": "user", "content": "太冷了，开一下加热"}, {"role": "assistant", "content": "请问您要打开哪个座位的座椅加热？"}, {"role": "user", "content": "打开主驾座椅加热"}, {"role": "assistant", "content": "{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"制热\",\"position\":\"主驾\"}}"}]}
 {"messages": [{"role": "user", "content": "坐垫有点低，帮我调一下"}, {"role": "assistant", "content": "请问您要把坐垫调高还是调低？"}, {"role": "user", "content": "调高坐垫"}, {"role": "assistant", "content": "{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"坐垫\"}}"}]}
 {"messages": [{"role": "user", "content": "屏幕太亮了，帮我弄一下"}, {"role": "assistant", "content": "请问您要调节哪块屏幕？"}, {"role": "user", "content": "把娱乐屏亮度调低"}, {"role": "assistant", "content": "{\"name\":\"ScreenControl\",\"arguments\":{\"action\":\"调低\",\"device\":\"娱乐屏\",\"feature\":\"亮度\"}}"}]}
 {"messages": [{"role": "user", "content": "帮我关一下屏幕"}, {"role": "assistant", "content": "请问您要关闭哪块屏幕？"}, {"role": "user", "content": "关闭副驾娱乐屏"}, {"role": "assistant", "content": "{\"name\":\"ScreenControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"娱乐屏\",\"position\":\"副驾\"}}"}]}
