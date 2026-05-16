@@ -1,0 +1,49 @@
+tests/test_eval_equivalence.py
+  9dec22358ecde48e 30,41-42,45,51,80-108
+data/splits/by_tool/ClimateControl.jsonl
+  9dec22358ecde48e 748-767
+data/splits/by_tool/LightControl.jsonl
+  9dec22358ecde48e 718-727
+data/eval/window_test.json
+  9dec22358ecde48e 360,370,1237
+docs/README.md
+  9dec22358ecde48e 30,43,55,61,63-72,326,343,347-348,360-362,364-365,369-376,398,422
+data/splits/by_tool/VoiceControl.jsonl
+  9dec22358ecde48e 150-152
+data/splits/by_tool/PerfumeControl.jsonl
+  9dec22358ecde48e 29-30
+data/splits/by_tool/ScreenControl.jsonl
+  9dec22358ecde48e 374-376
+data/splits/by_tool/LockControl.jsonl
+  9dec22358ecde48e 52,64,129-132
+data/splits/by_tool/ParkingSpaceSelectionControl.jsonl
+  9dec22358ecde48e 22-25
+data/splits/by_tool/DrivingControl.jsonl
+  9dec22358ecde48e 335-342
+eval.py
+  9dec22358ecde48e 301-307,327-328,343,544
+data/splits/by_tool/FridgeControl.jsonl
+  9dec22358ecde48e 92-93
+data/splits/by_tool/SpeedControl.jsonl
+  9dec22358ecde48e 17-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.18",
+  "base_commit_sha": "e2f7a9867bc2174353782c6bd45e218aa47f4da4",
+  "prompts": {
+    "9dec22358ecde48e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e1f62-2202-7870-af16-54e6c4691c4d",
+        "model": "gpt-5.5"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 154,
+      "total_deletions": 56,
+      "accepted_lines": 144,
+      "overriden_lines": 0
+    }
+  }
+}
