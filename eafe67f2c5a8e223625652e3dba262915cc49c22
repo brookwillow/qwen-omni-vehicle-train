@@ -1,0 +1,31 @@
+train_thinker_lora.py
+  1b91d72b9bc21afb 152-175,192-207,218-244,248,250-254,261-268,279-285,293,298
+tests/test_build_train_data.py
+  1b91d72b9bc21afb 5-10,60-133
+docs/README.md
+  1b91d72b9bc21afb 3,36-37,148
+build_train_data.py
+  1b91d72b9bc21afb 30-31,81-91,199-299,336-347
+tests/test_label_supervision.py
+  1b91d72b9bc21afb 1-137
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.18",
+  "base_commit_sha": "eafe67f2c5a8e223625652e3dba262915cc49c22",
+  "prompts": {
+    "1b91d72b9bc21afb": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "a822eb7c-a4db-4e11-9c82-c2011f54c180",
+        "model": "copilot/claude-opus-4.6"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 458,
+      "total_deletions": 29,
+      "accepted_lines": 440,
+      "overriden_lines": 0
+    }
+  }
+}
