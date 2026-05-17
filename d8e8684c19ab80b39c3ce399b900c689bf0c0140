@@ -1,0 +1,27 @@
+train_thinker_lora.py
+  9dec22358ecde48e 153,157-160,168,172-173,203,206-209,237-239,247,252
+tests/test_label_supervision.py
+  9dec22358ecde48e 43,52,94-104
+docs/README.md
+  9dec22358ecde48e 45,57-58,60-61,63,148
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.19",
+  "base_commit_sha": "d8e8684c19ab80b39c3ce399b900c689bf0c0140",
+  "prompts": {
+    "9dec22358ecde48e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e1f62-2202-7870-af16-54e6c4691c4d",
+        "model": "gpt-5.5"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 38,
+      "total_deletions": 117,
+      "accepted_lines": 38,
+      "overriden_lines": 0
+    }
+  }
+}
