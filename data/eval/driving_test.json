@@ -1,21 +1,13 @@
 [
   {
     "id": "driving_001",
-    "category": "驾驶模式",
+    "category": "澄清",
     "sub_category": "标准模式",
-    "intent": "明确指令",
-    "difficulty": "easy",
+    "intent": "模糊",
+    "difficulty": "medium",
     "query": "切换到标准模式",
-    "expected_tool_calls": [
-      {
-        "name": "DrivingControl",
-        "arguments": {
-          "action": "打开",
-          "feature": "驾驶模式",
-          "value": "标准模式"
-        }
-      }
-    ],
+    "expected_tool_calls": [],
+    "expected_type": "Clarify",
     "query_audio": "audio/driving/driving_001.wav"
   },
   {

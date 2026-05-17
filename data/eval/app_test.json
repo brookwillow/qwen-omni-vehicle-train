@@ -24,16 +24,9 @@
     "intent": "明确指令",
     "difficulty": "easy",
     "query": "关闭导航地图",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "导航地图"
-        }
-      }
-    ],
-    "query_audio": "audio/app/app_002.wav"
+    "expected_tool_calls": [],
+    "query_audio": "audio/app/app_002.wav",
+    "expected_type": "Reject"
   },
   {
     "id": "app_003",
@@ -60,16 +53,9 @@
     "intent": "明确指令",
     "difficulty": "easy",
     "query": "关闭音乐应用",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "音乐应用"
-        }
-      }
-    ],
-    "query_audio": "audio/app/app_004.wav"
+    "expected_tool_calls": [],
+    "query_audio": "audio/app/app_004.wav",
+    "expected_type": "Reject"
   },
   {
     "id": "app_005",
@@ -96,16 +82,9 @@
     "intent": "明确指令",
     "difficulty": "easy",
     "query": "关闭空调应用",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "空调"
-        }
-      }
-    ],
-    "query_audio": "audio/app/app_006.wav"
+    "expected_tool_calls": [],
+    "query_audio": "audio/app/app_006.wav",
+    "expected_type": "Reject"
   },
   {
     "id": "app_007",
@@ -132,16 +111,9 @@
     "intent": "明确指令",
     "difficulty": "easy",
     "query": "关闭蓝牙电话",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "蓝牙电话"
-        }
-      }
-    ],
-    "query_audio": "audio/app/app_008.wav"
+    "expected_tool_calls": [],
+    "query_audio": "audio/app/app_008.wav",
+    "expected_type": "Reject"
   },
   {
     "id": "app_009",
@@ -168,16 +140,9 @@
     "intent": "明确指令",
     "difficulty": "easy",
     "query": "关闭车控",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "车控"
-        }
-      }
-    ],
-    "query_audio": "audio/app/app_010.wav"
+    "expected_tool_calls": [],
+    "query_audio": "audio/app/app_010.wav",
+    "expected_type": "Reject"
   },
   {
     "id": "app_011",
@@ -204,16 +169,9 @@
     "intent": "明确指令",
     "difficulty": "easy",
     "query": "关闭媒体",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "媒体"
-        }
-      }
-    ],
-    "query_audio": "audio/app/app_012.wav"
+    "expected_tool_calls": [],
+    "query_audio": "audio/app/app_012.wav",
+    "expected_type": "Reject"
   },
   {
     "id": "app_013",
@@ -240,16 +198,9 @@
     "intent": "明确指令",
     "difficulty": "easy",
     "query": "关闭智能影像",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "智能影像"
-        }
-      }
-    ],
-    "query_audio": "audio/app/app_014.wav"
+    "expected_tool_calls": [],
+    "query_audio": "audio/app/app_014.wav",
+    "expected_type": "Reject"
   },
   {
     "id": "app_015",
@@ -276,16 +227,9 @@
     "intent": "明确指令",
     "difficulty": "easy",
     "query": "关闭应用列表",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "应用列表"
-        }
-      }
-    ],
-    "query_audio": "audio/app/app_016.wav"
+    "expected_tool_calls": [],
+    "query_audio": "audio/app/app_016.wav",
+    "expected_type": "Reject"
   },
   {
     "id": "app_017",
@@ -312,16 +256,9 @@
     "intent": "明确指令",
     "difficulty": "easy",
     "query": "关闭投屏助手",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "投屏助手"
-        }
-      }
-    ],
-    "query_audio": "audio/app/app_018.wav"
+    "expected_tool_calls": [],
+    "query_audio": "audio/app/app_018.wav",
+    "expected_type": "Reject"
   },
   {
     "id": "app_019",
@@ -348,16 +285,9 @@
     "intent": "明确指令",
     "difficulty": "easy",
     "query": "关闭日历",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "日历"
-        }
-      }
-    ],
-    "query_audio": "audio/app/app_020.wav"
+    "expected_tool_calls": [],
+    "query_audio": "audio/app/app_020.wav",
+    "expected_type": "Reject"
   },
   {
     "id": "app_021",
@@ -384,16 +314,9 @@
     "intent": "明确指令",
     "difficulty": "easy",
     "query": "关闭用户手册",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "用户手册"
-        }
-      }
-    ],
-    "query_audio": "audio/app/app_022.wav"
+    "expected_tool_calls": [],
+    "query_audio": "audio/app/app_022.wav",
+    "expected_type": "Reject"
   },
   {
     "id": "app_023",
@@ -420,16 +343,9 @@
     "intent": "明确指令",
     "difficulty": "easy",
     "query": "关闭OTA",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "ota"
-        }
-      }
-    ],
-    "query_audio": "audio/app/app_024.wav"
+    "expected_tool_calls": [],
+    "query_audio": "audio/app/app_024.wav",
+    "expected_type": "Reject"
   },
   {
     "id": "app_025",
@@ -456,16 +372,9 @@
     "intent": "明确指令",
     "difficulty": "easy",
     "query": "关闭全域共驾",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "全域共驾"
-        }
-      }
-    ],
-    "query_audio": "audio/app/app_026.wav"
+    "expected_tool_calls": [],
+    "query_audio": "audio/app/app_026.wav",
+    "expected_type": "Reject"
   },
   {
     "id": "app_027",
@@ -600,15 +509,8 @@
     "intent": "模糊语义",
     "difficulty": "medium",
     "query": "我想听歌",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "打开",
-          "feature": "音乐应用"
-        }
-      }
-    ],
+    "expected_tool_calls": [],
+    "expected_type": "Reject",
     "query_audio": "audio/app/app_034.wav"
   },
   {
@@ -618,15 +520,8 @@
     "intent": "模糊语义",
     "difficulty": "hard",
     "query": "开车无聊，来点音乐吧",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "打开",
-          "feature": "音乐应用"
-        }
-      }
-    ],
+    "expected_tool_calls": [],
+    "expected_type": "Reject",
     "query_audio": "audio/app/app_035.wav"
   },
   {
@@ -636,15 +531,8 @@
     "intent": "模糊语义",
     "difficulty": "medium",
     "query": "不听歌了，关掉音乐",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "音乐应用"
-        }
-      }
-    ],
+    "expected_tool_calls": [],
+    "expected_type": "Reject",
     "query_audio": "audio/app/app_036.wav"
   },
   {
@@ -960,15 +848,8 @@
     "intent": "模糊语义",
     "difficulty": "hard",
     "query": "我想看点视频或者听点东西",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "打开",
-          "feature": "媒体"
-        }
-      }
-    ],
+    "expected_tool_calls": [],
+    "expected_type": "Reject",
     "query_audio": "audio/app/app_054.wav"
   },
   {
@@ -1032,16 +913,9 @@
     "intent": "模糊语义",
     "difficulty": "hard",
     "query": "不投屏了，关掉吧",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "投屏助手"
-        }
-      }
-    ],
-    "query_audio": "audio/app/app_058.wav"
+    "expected_tool_calls": [],
+    "query_audio": "audio/app/app_058.wav",
+    "expected_type": "Reject"
   },
   {
     "id": "app_059",
@@ -1050,16 +924,9 @@
     "intent": "模糊语义",
     "difficulty": "medium",
     "query": "到了，把导航关掉",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "导航地图"
-        }
-      }
-    ],
-    "query_audio": "audio/app/app_059.wav"
+    "expected_tool_calls": [],
+    "query_audio": "audio/app/app_059.wav",
+    "expected_type": "Reject"
   },
   {
     "id": "app_060",
@@ -1068,16 +935,9 @@
     "intent": "模糊语义",
     "difficulty": "hard",
     "query": "电话打完了，把通话界面关掉",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "蓝牙电话"
-        }
-      }
-    ],
-    "query_audio": "audio/app/app_060.wav"
+    "expected_tool_calls": [],
+    "query_audio": "audio/app/app_060.wav",
+    "expected_type": "Reject"
   },
   {
     "id": "app_061",
@@ -1137,23 +997,9 @@
     "intent": "多意图",
     "difficulty": "hard",
     "query": "关掉导航，打开音乐",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "导航地图"
-        }
-      },
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "打开",
-          "feature": "音乐应用"
-        }
-      }
-    ],
-    "query_audio": "audio/app/app_063.wav"
+    "expected_tool_calls": [],
+    "query_audio": "audio/app/app_063.wav",
+    "expected_type": "Reject"
   },
   {
     "id": "app_064",
@@ -1212,23 +1058,9 @@
     "intent": "多意图",
     "difficulty": "hard",
     "query": "关闭媒体和音乐应用",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "媒体"
-        }
-      },
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "音乐应用"
-        }
-      }
-    ],
-    "query_audio": "audio/app/app_066.wav"
+    "expected_tool_calls": [],
+    "query_audio": "audio/app/app_066.wav",
+    "expected_type": "Reject"
   },
   {
     "id": "app_067",

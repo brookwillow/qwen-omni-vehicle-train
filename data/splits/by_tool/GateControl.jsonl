@@ -189,6 +189,9 @@
 {"messages":[{"role":"user","content":"把主驾的鹏翼门打开"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"鹏翼门\",\"position\":\"主驾\"}}"}]}
 {"messages":[{"role":"user","content":"打开左侧的鹏翼门"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"鹏翼门\",\"position\":\"左侧\"}}"}]}
 {"messages":[{"role":"user","content":"帮我把鹏翼门关上"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"鹏翼门\"}}"}]}
+{"messages":[{"role":"user","content":"关闭鹏翼门"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"鹏翼门\"}}"}]}
+{"messages":[{"role":"user","content":"把鹏翼门关闭"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"鹏翼门\"}}"}]}
+{"messages":[{"role":"user","content":"鹏翼门关上"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"鹏翼门\"}}"}]}
 {"messages":[{"role":"user","content":"帮我把左边的侧滑门打开"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"侧滑门\",\"position\":\"左侧\"}}"}]}
 {"messages":[{"role":"user","content":"我要充电了，帮我打开交流充电口"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"交流充电口\"}}"}]}
 {"messages":[{"role":"user","content":"把所有的鹏翼门打开"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"鹏翼门\",\"position\":\"全部\"}}"}]}

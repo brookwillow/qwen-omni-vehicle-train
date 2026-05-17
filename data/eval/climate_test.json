@@ -908,7 +908,7 @@
         "name": "ClimateControl",
         "arguments": {
           "action": "打开",
-          "device": "空调",
+          "device": "空气净化器",
           "value": "智能除味"
         }
       }
@@ -927,7 +927,7 @@
         "name": "ClimateControl",
         "arguments": {
           "action": "关闭",
-          "device": "空调",
+          "device": "空气净化器",
           "value": "智能除味"
         }
       }

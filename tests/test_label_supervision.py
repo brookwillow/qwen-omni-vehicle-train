@@ -1,9 +1,7 @@
 """Tests for last-user-anchored assistant label supervision in train_thinker_lora.py."""
 
 from train_thinker_lora import (
-    build_all_assistant_labels,
     build_last_assistant_labels,
-    find_all_subsequences,
     find_assistant_contents_after_last_user,
     find_last_subsequence,
 )
@@ -21,48 +19,11 @@ def test_find_last_subsequence_not_found():
     assert find_last_subsequence([1, 2, 3], [4, 5]) == -1
 
 
-def test_find_all_subsequences_multiple():
-    result = find_all_subsequences([1, 2, 3, 1, 2, 4], [1, 2])
-    assert result == [0, 3]
-
-
-def test_find_all_subsequences_no_overlap():
-    result = find_all_subsequences([1, 1, 1, 1], [1, 1])
-    assert len(result) == 2
-    assert result == [0, 2]
-
-
 def test_build_last_assistant_labels_single():
     input_ids = [10, 20, 30, 40, 50]
     target_ids = [30, 40]
     labels, matched = build_last_assistant_labels(input_ids, target_ids)
     assert matched is True
-    assert labels == [-100, -100, 30, 40, -100]
-
-
-def test_build_all_assistant_labels_multi_turn():
-    # Simulate: [sys tokens] [user tokens] [tool_call tokens] [tool_result tokens] [tts tokens]
-    input_ids = [1, 2, 3, 10, 11, 4, 5, 6, 20, 21, 22]
-    tool_call = [10, 11]
-    tts_response = [20, 21, 22]
-    labels, matched = build_all_assistant_labels(input_ids, [tool_call, tts_response])
-    assert matched == 2
-    # Both spans should be supervised
-    assert labels[3] == 10
-    assert labels[4] == 11
-    assert labels[8] == 20
-    assert labels[9] == 21
-    assert labels[10] == 22
-    # Non-assistant tokens should be -100
-    assert labels[0] == -100
-    assert labels[5] == -100
-
-
-def test_build_all_assistant_labels_single_turn():
-    input_ids = [1, 2, 30, 40, 5]
-    target = [30, 40]
-    labels, matched = build_all_assistant_labels(input_ids, [target])
-    assert matched == 1
     assert labels == [-100, -100, 30, 40, -100]
 
 
@@ -79,7 +40,7 @@ def test_after_last_user_single_turn():
 
 
 def test_after_last_user_with_tool_result():
-    """user -> tool_call -> tool -> TTS — supervises both tool_call and TTS."""
+    """user -> tool_call -> tool -> TTS — supervises only the final assistant."""
     messages = [
         {"role": "system", "content": "system prompt"},
         {"role": "user", "content": "open window"},
@@ -88,9 +49,7 @@ def test_after_last_user_with_tool_result():
         {"role": "assistant", "content": "已打开车窗"},
     ]
     contents = find_assistant_contents_after_last_user(messages)
-    assert len(contents) == 2
-    assert "WindowControl" in contents[0]
-    assert "已打开车窗" in contents[1]
+    assert contents == ["已打开车窗"]
 
 
 def test_after_last_user_multiturn_history_excluded():
@@ -132,6 +91,14 @@ def test_after_last_user_skips_empty():
     ]
     contents = find_assistant_contents_after_last_user(messages)
     assert contents == ["hello"]
-    ]
-    contents = find_all_assistant_contents(messages)
-    assert contents == ["hello"]
+
+
+def test_build_last_assistant_labels_uses_final_reject_occurrence():
+    system_reject = [78413]
+    assistant_reject = [78413]
+    input_ids = [1, *system_reject, 2, 3, *assistant_reject, 4]
+
+    labels, matched = build_last_assistant_labels(input_ids, assistant_reject)
+
+    assert matched is True
+    assert labels == [-100, -100, -100, -100, 78413, -100]

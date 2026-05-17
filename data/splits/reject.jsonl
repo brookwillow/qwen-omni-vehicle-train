@@ -1125,3 +1125,11 @@
 {"messages":[{"role":"user","content":"找附近的便利店"},{"role":"assistant","content":"Reject"}]}
 {"messages":[{"role":"user","content":"在高德上收藏这个地址"},{"role":"assistant","content":"Reject"}]}
 {"messages":[{"role":"user","content":"查一下最近的比亚迪充电桩"},{"role":"assistant","content":"Reject"}]}
+{"messages":[{"role":"user","content":"路上有点无聊，放点歌吧"},{"role":"assistant","content":"Reject"}]}
+{"messages":[{"role":"user","content":"想听一首轻松的歌"},{"role":"assistant","content":"Reject"}]}
+{"messages":[{"role":"user","content":"想看点视频打发时间"},{"role":"assistant","content":"Reject"}]}
+{"messages":[{"role":"user","content":"放一下音乐吧"},{"role":"assistant","content":"Reject"}]}
+{"messages":[{"role":"user","content":"关闭音乐应用"},{"role":"assistant","content":"Reject"}]}
+{"messages":[{"role":"user","content":"把导航地图关掉"},{"role":"assistant","content":"Reject"}]}
+{"messages":[{"role":"user","content":"退出投屏助手"},{"role":"assistant","content":"Reject"}]}
+{"messages":[{"role":"user","content":"不用蓝牙电话界面了，关掉吧"},{"role":"assistant","content":"Reject"}]}

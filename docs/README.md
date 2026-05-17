@@ -42,7 +42,7 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 |------|------|
 | `data/system-prompt.txt` | 紧凑版 System Prompt（~5.5K chars，基于当前工具白名单生成） |
 | `data/tools.json` | 38 个车载工具定义（新版 `inputSchema` 格式） |
-| `data/splits/by_tool/*.jsonl` | 按工具拆分的训练数据；每个工具文件内已拆为 `user -> JSON tool call` 决策样本和独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本；`PhoneControl.jsonl` 包含小鹏客服、小鹏救援、儿童手表等官方默认联系人样本；其中 `NoiseDoNotAct.jsonl` 当前为 450 条 |
+| `data/splits/by_tool/*.jsonl` | 按工具拆分的训练数据；每个工具文件内已拆为 `user -> JSON tool call` 决策样本和独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本；`AppControl` 只覆盖明确打开应用的意图，播放内容/导航到目的地等应用内任务走 `Reject`；`PhoneControl.jsonl` 包含小鹏客服、小鹏救援、儿童手表等官方默认联系人样本；其中 `NoiseDoNotAct.jsonl` 当前为 450 条 |
 | `data/splits/clarify.jsonl` | required 字段缺失后的自然语言追问样本 |
 | `data/splits/edge_case.jsonl` | 多轮上下文边界、易混淆与任务列表选择样本 |
 | `data/splits/multiturn.jsonl` | 最多三轮纯文本历史上下文样本；历史可来自导航/音乐/新闻/百科/AIGC/天气等外部域，当前轮优先，只有代词、省略、纠错、延续或查询缺槽时才参考历史补全 |
@@ -54,13 +54,13 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 
 | 类型 | 数量 | 说明 |
 |------|------|------|
-| By-tool | 7306 | 每个工具文件内混合：`user -> JSON tool call` 决策样本 4979 条，独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 2327 条 |
-| Clarify | 189 | 已拆为两类样本：`user -> 追问 TTS`（94 条，教模型何时追问）+ 完整 4 轮 `user -> 追问 -> 用户补齐 -> tool call`（95 条，教模型追问后如何响应）；已移除纯位置追问（音区可自动判定位置）与意图明确的方向性追问（如"太晒→打开/关闭遮阳帘"）；配合 last-user-anchored 标签监督，两类样本均能被正确监督 |
+| By-tool | 7280 | 每个工具文件内混合：`user -> JSON tool call` 决策样本 4964 条，独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 2316 条 |
+| Clarify | 189 | 已拆为两类样本：`user -> 追问 TTS`（94 条，教模型何时追问）+ 完整 4 轮 `user -> 追问 -> 用户补齐 -> tool call`（95 条，教模型追问后如何响应）；已移除纯位置追问（音区可自动判定位置）与意图明确的方向性追问（如"太晒→打开/关闭遮阳帘"）；配合 final-assistant 标签监督，两类样本均能被正确监督 |
 | Edge case | 100 | 多轮当前轮边界、查询 vs 控制、popup/task 列表 `GeneralSelect` 等易混淆样本 |
-| Multiturn | 367 | 最多三轮纯文本历史；历史允许外部域文本；当前轮输出分布：工具 240 条、NoiseDoNotAct 79 条、Reject 36 条、自然语言 TTS 12 条 |
-| Reject | 1127 | 单轮 + 多轮硬负例（已合并），最后一条 assistant 均为 `Reject`；已抽稀家居控制负例并移除高风险车控状态拒识 |
+| Multiturn | 370 | 最多三轮纯文本历史；历史允许外部域文本；当前轮输出分布：工具 243 条、NoiseDoNotAct 79 条、Reject 36 条、自然语言 TTS 12 条 |
+| Reject | 1135 | 单轮 + 多轮硬负例（已合并），最后一条 assistant 均为 `Reject`；已抽稀家居控制负例并移除高风险车控状态拒识 |
 
-`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 9089 条；统计时多轮样本按最后一个有效决策标签计入对应类别。
+`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 9074 条；统计时多轮样本按最后一个有效决策标签计入对应类别。
 
 ### Hard Case 加权
 
@@ -145,7 +145,7 @@ python train_thinker_lora.py \
 | gradient_checkpointing | True | 节省显存 |
 | metric_for_best_model | eval_token_acc | 自动选最优 checkpoint |
 
-训练脚本会在编码后定位**最后一个 user 之后的所有** assistant 回复，对这些回复计算 loss。多轮历史中的 assistant TTS（前轮回复）不参与监督，避免模型学到"看见 query 直接出 TTS"的错误模式。对于当前轮 `user -> tool_call -> tool-result -> TTS` 的样本，tool_call 和 TTS 都会被监督。若截断导致所有回复都找不到，才会过滤 `labels` 全为 `-100` 的空监督样本。
+训练脚本会在编码后定位**最后一个 user 之后的最后一条** assistant 回复，并只对这一个 span 计算 loss。多轮历史中的 assistant TTS（前轮回复）不参与监督；当前轮 `user -> tool_call -> tool-result -> TTS` 的样本只监督最后一条 assistant 回复，避免短输出（如 `Reject`）被错误匹配到 system prompt 或历史文本。若截断导致该回复找不到，才会过滤 `labels` 全为 `-100` 的空监督样本。
 
 每次训练启动后会清空并重写 `output_dir/train_metrics.jsonl`，避免多次训练追加到同一个指标文件导致曲线抖动。训练过程的 stdout/stderr 会同时写入 `output_dir/train.log`，可用以下命令事后审阅或实时查看：
 
