@@ -395,3 +395,8 @@
 {"messages":[{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"鹏翼门\",\"position\":\"右侧\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已为您打开右侧鹏翼门。"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"鹏翼门\",\"position\":\"全部\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已为您打开所有的鹏翼门。"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"后备箱\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已完成。"}]}
+{"messages":[{"role":"user","content":"行李放好了，把后备箱合上"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"后备箱\"}}"}]}
+{"messages":[{"role":"user","content":"东西拿完了，后备箱关一下"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"后备箱\"}}"}]}
+{"messages":[{"role":"user","content":"乘客都上来了，把侧滑门关上"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"侧滑门\"}}"}]}
+{"messages":[{"role":"user","content":"左侧乘客上车了，左侧侧滑门关一下"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"侧滑门\",\"position\":\"左侧\"}}"}]}
+{"messages":[{"role":"user","content":"把两侧鹏翼门合上"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"鹏翼门\",\"position\":\"全部\"}}"}]}

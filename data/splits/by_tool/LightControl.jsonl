@@ -725,3 +725,6 @@
 {"messages":[{"role":"user","content":"车里太暗了，开点氛围灯"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"氛围灯\"}}"}]}
 {"messages":[{"role":"user","content":"头顶阅读灯太影响视线，关掉"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"阅读灯\"}}"}]}
 {"messages":[{"role":"user","content":"氛围灯颜色调暖一点"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"氛围灯\",\"feature\":\"颜色\",\"value\":\"其他\"}}"}]}
+{"messages":[{"role":"user","content":"把远光灯关闭一下"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"远光灯\"}}"}]}
+{"messages":[{"role":"user","content":"远光先关了"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"远光灯\"}}"}]}
+{"messages":[{"role":"user","content":"前面有车，关闭远光灯"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"远光灯\"}}"}]}

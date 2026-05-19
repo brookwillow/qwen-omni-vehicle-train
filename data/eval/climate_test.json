@@ -42,17 +42,9 @@
     "intent": "明确指令",
     "difficulty": "easy",
     "query": "空调切换到舒适模式",
-    "expected_tool_calls": [
-      {
-        "name": "ClimateControl",
-        "arguments": {
-          "action": "打开",
-          "device": "空调",
-          "value": "节能模式"
-        }
-      }
-    ],
-    "query_audio": "audio/climate/climate_003.wav"
+    "expected_tool_calls": [],
+    "query_audio": "audio/climate/climate_003.wav",
+    "expected_type": "Clarify"
   },
   {
     "id": "climate_004",
@@ -61,17 +53,9 @@
     "intent": "明确指令",
     "difficulty": "easy",
     "query": "开启节能模式",
-    "expected_tool_calls": [
-      {
-        "name": "ClimateControl",
-        "arguments": {
-          "action": "打开",
-          "device": "空调",
-          "value": "节能模式"
-        }
-      }
-    ],
-    "query_audio": "audio/climate/climate_004.wav"
+    "expected_tool_calls": [],
+    "query_audio": "audio/climate/climate_004.wav",
+    "expected_type": "Clarify"
   },
   {
     "id": "climate_005",
@@ -382,7 +366,7 @@
       {
         "name": "ClimateControl",
         "arguments": {
-          "action": "打开",
+          "action": "调到",
           "device": "空调",
           "value": "制冷"
         }
@@ -420,7 +404,7 @@
       {
         "name": "ClimateControl",
         "arguments": {
-          "action": "打开",
+          "action": "调到",
           "device": "空调",
           "value": "自然风"
         }
@@ -458,7 +442,7 @@
       {
         "name": "ClimateControl",
         "arguments": {
-          "action": "打开",
+          "action": "调到",
           "device": "空调",
           "value": "外循环"
         }
@@ -516,8 +500,8 @@
         "name": "ClimateControl",
         "arguments": {
           "action": "打开",
-          "device": "出风口",
-          "feature": "风"
+          "device": "空调",
+          "value": "吹头"
         }
       }
     ],
@@ -535,8 +519,8 @@
         "name": "ClimateControl",
         "arguments": {
           "action": "打开",
-          "device": "出风口",
-          "feature": "风"
+          "device": "空调",
+          "value": "吹脚"
         }
       }
     ],
@@ -1306,8 +1290,7 @@
         "name": "ClimateControl",
         "arguments": {
           "action": "打开",
-          "device": "空调",
-          "value": "智能除味"
+          "device": "空气净化器"
         }
       }
     ],
@@ -1363,7 +1346,8 @@
         "name": "RearviewControl",
         "arguments": {
           "action": "打开",
-          "device": "后视镜"
+          "device": "后视镜",
+          "value": "除雾"
         }
       }
     ],
@@ -1438,10 +1422,9 @@
       {
         "name": "ClimateControl",
         "arguments": {
-          "action": "调到",
+          "action": "调低",
           "device": "空调",
-          "feature": "风",
-          "value": "较低"
+          "feature": "风"
         }
       }
     ],

@@ -713,9 +713,10 @@
       {
         "name": "WindowControl",
         "arguments": {
+          "action": "开到",
+          "device": "车窗",
           "position": "前排",
-          "action": "再开",
-          "device": "车窗"
+          "value": "33%"
         }
       }
     ],
@@ -1169,7 +1170,7 @@
         "name": "WindowControl",
         "arguments": {
           "action": "关闭",
-          "device": "遮阳帘"
+          "device": "天窗"
         }
       }
     ],
@@ -1225,7 +1226,7 @@
         "arguments": {
           "action": "调到",
           "feature": "语音音量",
-          "value": "中"
+          "value": "低"
         }
       }
     ],
@@ -1394,9 +1395,10 @@
       {
         "name": "WindowControl",
         "arguments": {
-          "position": "全部",
           "action": "开到",
-          "device": "车窗"
+          "device": "车窗",
+          "position": "全部",
+          "value": "50%"
         }
       }
     ],
@@ -1910,9 +1912,10 @@
       {
         "name": "WindowControl",
         "arguments": {
+          "action": "开到",
+          "device": "车窗",
           "position": "前排",
-          "action": "再开",
-          "device": "车窗"
+          "value": "10%"
         }
       }
     ],
@@ -2591,9 +2594,10 @@
       {
         "name": "WindowControl",
         "arguments": {
+          "action": "开到",
+          "device": "车窗",
           "position": "前排",
-          "action": "再开",
-          "device": "车窗"
+          "value": "50%"
         }
       }
     ],
@@ -2631,7 +2635,7 @@
         "arguments": {
           "action": "调到",
           "feature": "导航音量",
-          "value": "中"
+          "value": "低"
         }
       }
     ],
@@ -3842,7 +3846,7 @@
         "name": "WindowControl",
         "arguments": {
           "action": "打开",
-          "device": "遮阳帘"
+          "device": "天窗"
         }
       }
     ],
@@ -4083,8 +4087,9 @@
       {
         "name": "WindowControl",
         "arguments": {
-          "action": "再开",
-          "device": "车窗"
+          "action": "开到",
+          "device": "车窗",
+          "value": "10%"
         }
       }
     ],
@@ -4767,9 +4772,10 @@
       {
         "name": "WindowControl",
         "arguments": {
+          "action": "开到",
+          "device": "车窗",
           "position": "全部",
-          "action": "再开",
-          "device": "车窗"
+          "value": "50%"
         }
       }
     ],

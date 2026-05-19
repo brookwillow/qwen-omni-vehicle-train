@@ -521,7 +521,7 @@
         "name": "PhoneControl",
         "arguments": {
           "action": "拨打",
-          "contact": "周"
+          "contact": "姓周的同事"
         }
       }
     ],

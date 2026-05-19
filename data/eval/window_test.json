@@ -453,7 +453,8 @@
         "name": "WindowControl",
         "arguments": {
           "action": "开到",
-          "device": "车窗"
+          "device": "车窗",
+          "value": "10%"
         }
       }
     ],
@@ -471,7 +472,8 @@
         "name": "WindowControl",
         "arguments": {
           "action": "开到",
-          "device": "车窗"
+          "device": "车窗",
+          "value": "10%"
         }
       }
     ],
@@ -524,7 +526,7 @@
       {
         "name": "WindowControl",
         "arguments": {
-          "action": "关闭",
+          "action": "打开",
           "device": "遮阳帘"
         }
       }
@@ -561,7 +563,7 @@
       {
         "name": "WindowControl",
         "arguments": {
-          "action": "打开",
+          "action": "关闭",
           "device": "遮阳帘"
         }
       }
@@ -616,7 +618,8 @@
         "name": "LockControl",
         "arguments": {
           "action": "打开",
-          "device": "车窗锁"
+          "device": "车窗锁",
+          "position": "第二排"
         }
       }
     ],
@@ -686,10 +689,10 @@
     "query": "车里有味道，换换空气",
     "expected_tool_calls": [
       {
-        "name": "WindowControl",
+        "name": "ClimateControl",
         "arguments": {
           "action": "打开",
-          "device": "车窗"
+          "device": "空气净化器"
         }
       }
     ],

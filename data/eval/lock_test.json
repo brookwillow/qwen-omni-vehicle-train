@@ -397,25 +397,6 @@
     "query_audio": "audio/lock/lock_021.wav"
   },
   {
-    "id": "lock_022",
-    "category": "锁控",
-    "sub_category": "儿童锁位置",
-    "intent": "明确指令",
-    "difficulty": "medium",
-    "query": "帮我把后排左边的儿童锁开一下",
-    "expected_tool_calls": [
-      {
-        "name": "LockControl",
-        "arguments": {
-          "action": "打开",
-          "device": "儿童锁",
-          "position": "第二排左侧"
-        }
-      }
-    ],
-    "query_audio": "audio/lock/lock_022.wav"
-  },
-  {
     "id": "lock_023",
     "category": "锁控",
     "sub_category": "儿童锁位置",

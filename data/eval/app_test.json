@@ -473,16 +473,9 @@
     "intent": "模糊语义",
     "difficulty": "medium",
     "query": "帮我导航一下",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "打开",
-          "feature": "导航地图"
-        }
-      }
-    ],
-    "query_audio": "audio/app/app_032.wav"
+    "expected_tool_calls": [],
+    "query_audio": "audio/app/app_032.wav",
+    "expected_type": "Reject"
   },
   {
     "id": "app_033",
@@ -544,10 +537,9 @@
     "query": "我要打电话",
     "expected_tool_calls": [
       {
-        "name": "AppControl",
+        "name": "PhoneControl",
         "arguments": {
-          "action": "打开",
-          "feature": "蓝牙电话"
+          "action": "拨打"
         }
       }
     ],
@@ -668,16 +660,9 @@
     "intent": "模糊语义",
     "difficulty": "hard",
     "query": "查一下我的日程表",
-    "expected_tool_calls": [
-      {
-        "name": "AppControl",
-        "arguments": {
-          "action": "打开",
-          "feature": "日历"
-        }
-      }
-    ],
-    "query_audio": "audio/app/app_044.wav"
+    "expected_tool_calls": [],
+    "query_audio": "audio/app/app_044.wav",
+    "expected_type": "Reject"
   },
   {
     "id": "app_045",
@@ -796,10 +781,9 @@
     "query": "我想看看车辆状态",
     "expected_tool_calls": [
       {
-        "name": "AppControl",
+        "name": "CarUsageSearch",
         "arguments": {
-          "action": "打开",
-          "feature": "车控"
+          "query": "车辆状态"
         }
       }
     ],

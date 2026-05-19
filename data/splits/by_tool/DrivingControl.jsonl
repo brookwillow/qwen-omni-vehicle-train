@@ -340,3 +340,6 @@
 {"messages":[{"role":"user","content":"切到自定义驾驶模式"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"驾驶模式\",\"value\":\"自定义\"}}"}]}
 {"messages":[{"role":"user","content":"来点推背感，切运动驾驶"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"驾驶模式\",\"value\":\"运动模式\"}}"}]}
 {"messages":[{"role":"user","content":"恢复正常驾驶模式"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"驾驶模式\",\"value\":\"标准模式\"}}"}]}
+{"messages":[{"role":"user","content":"把驾驶模式设成运动模式"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"驾驶模式\",\"value\":\"运动模式\"}}"}]}
+{"messages":[{"role":"user","content":"运动驾驶模式启用一下"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"驾驶模式\",\"value\":\"运动模式\"}}"}]}
+{"messages":[{"role":"user","content":"退出运动驾驶模式"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"驾驶模式\",\"value\":\"运动模式\"}}"}]}

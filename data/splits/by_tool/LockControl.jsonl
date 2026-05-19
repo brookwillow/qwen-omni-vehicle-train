@@ -130,3 +130,9 @@
 {"messages":[{"role":"user","content":"小孩坐右侧，右边门锁上"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"右侧\"}}"}]}
 {"messages":[{"role":"user","content":"第二排右侧有小朋友，把门锁上"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"第二排右侧\"}}"}]}
 {"messages":[{"role":"user","content":"孩子在车上，打开儿童锁"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\"}}"}]}
+{"messages":[{"role":"user","content":"启用儿童锁"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\"}}"}]}
+{"messages":[{"role":"user","content":"把第二排儿童锁启用"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"第二排\"}}"}]}
+{"messages":[{"role":"user","content":"后排左侧儿童锁启用一下"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"第二排左侧\"}}"}]}
+{"messages":[{"role":"user","content":"孩子坐左后，把左后门儿童锁启用"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"第二排左侧\"}}"}]}
+{"messages":[{"role":"user","content":"停用儿童锁"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"儿童锁\"}}"}]}
+{"messages":[{"role":"user","content":"把第二排儿童锁停用"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"儿童锁\",\"position\":\"第二排\"}}"}]}
