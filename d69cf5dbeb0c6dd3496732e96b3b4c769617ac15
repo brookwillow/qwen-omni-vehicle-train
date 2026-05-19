@@ -1,0 +1,35 @@
+data/eval/black_box_test.json
+  9dec22358ecde48e 716-717,719,1173,1229,1399-1401,1915-1916,1918,2597-2598,2600,2638,3849,4090-4092,4775-4776,4778,12424
+data/eval/power_test.json
+  9dec22358ecde48e 1108
+data/eval/phone_test.json
+  9dec22358ecde48e 524
+data/eval/voice_test.json
+  9dec22358ecde48e 461,1286
+data/eval/app_test.json
+  9dec22358ecde48e 476-478,540,542,663-665,784,786
+data/eval/climate_test.json
+  9dec22358ecde48e 45-47,56-58,369,407,445,503-504,522-523,1293,1349-1350,1425,1427
+data/eval/window_test.json
+  9dec22358ecde48e 456-457,475-476,529,566,621-622,692,695
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.19",
+  "base_commit_sha": "d69cf5dbeb0c6dd3496732e96b3b4c769617ac15",
+  "prompts": {
+    "9dec22358ecde48e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e1f62-2202-7870-af16-54e6c4691c4d",
+        "model": "gpt-5.5"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 65,
+      "total_deletions": 89,
+      "accepted_lines": 65,
+      "overriden_lines": 0
+    }
+  }
+}
