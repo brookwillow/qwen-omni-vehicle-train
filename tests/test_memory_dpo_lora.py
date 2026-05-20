@@ -4,6 +4,7 @@ import pytest
 
 from train_memory_dpo_lora import (
     expand_preference_files,
+    format_memory_messages,
     format_memory_prompt,
     load_peft_adapter,
     load_preference_rows,
@@ -35,6 +36,39 @@ def test_format_memory_prompt_uses_history_and_current_query():
     assert prompt.endswith("assistant:")
 
 
+def test_format_memory_messages_matches_chat_history_shape():
+    row = load_preference_rows_from_dict(
+        {
+            "history": [
+                {"role": "user", "content": "打开主驾车窗"},
+                {"role": "assistant", "content": "好的，已打开主驾车窗。"},
+            ],
+            "current_query": "关上吧",
+            "chosen": {"name": "WindowControl", "arguments": {"action": "关闭", "device": "车窗", "position": "主驾"}},
+            "rejected": {"name": "WindowControl", "arguments": {"action": "打开", "device": "车窗", "position": "主驾"}},
+        }
+    )
+
+    messages = format_memory_messages(row, "系统提示")
+
+    assert messages == [
+        {"role": "system", "content": "系统提示"},
+        {"role": "user", "content": "打开主驾车窗"},
+        {"role": "assistant", "content": "好的，已打开主驾车窗。"},
+        {"role": "user", "content": "关上吧"},
+    ]
+
+
+def load_preference_rows_from_dict(raw):
+    import tempfile
+    from pathlib import Path
+
+    with tempfile.TemporaryDirectory() as tmp:
+        path = Path(tmp) / "prefs.jsonl"
+        path.write_text(json.dumps(raw, ensure_ascii=False) + "\n", encoding="utf-8")
+        return load_preference_rows(path)[0]
+
+
 def test_load_preference_rows_supports_explicit_prompt(tmp_path):
     path = tmp_path / "prefs.jsonl"
     path.write_text(
@@ -56,6 +90,8 @@ def test_load_preference_rows_supports_explicit_prompt(tmp_path):
     assert rows[0].prompt == "p"
     assert rows[0].chosen == '{"memory_decision":"current_override"}'
     assert rows[0].rejected == '{"memory_decision":"use_recent_related"}'
+    assert rows[0].history == []
+    assert rows[0].current_query == ""
 
 
 def test_load_preference_rows_supports_memory_task_shape(tmp_path):
@@ -79,6 +115,8 @@ def test_load_preference_rows_supports_memory_task_shape(tmp_path):
     assert "关闭大灯" in rows[0].prompt
     assert "打开吧" in rows[0].prompt
     assert rows[0].chosen == '{"memory_decision":"use_recent_related"}'
+    assert rows[0].history == [{"role": "user", "content": "关闭大灯"}]
+    assert rows[0].current_query == "打开吧"
 
 
 def test_load_preference_rows_rejects_identical_pair(tmp_path):
@@ -110,7 +148,10 @@ def test_expand_preference_files_supports_globs(tmp_path):
 
 
 def test_split_train_eval_is_deterministic():
-    rows = [(str(i), str(i), str(i + 1)) for i in range(10)]
+    rows = [
+        load_preference_rows_from_dict({"prompt": str(i), "chosen": str(i), "rejected": str(i + 1)})
+        for i in range(10)
+    ]
 
     first = split_train_eval(rows, val_ratio=0.2, seed=3)
     second = split_train_eval(rows, val_ratio=0.2, seed=3)

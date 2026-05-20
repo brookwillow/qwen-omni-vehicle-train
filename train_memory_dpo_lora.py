@@ -31,6 +31,9 @@ class PreferenceRow:
     prompt: str
     chosen: str
     rejected: str
+    history: list[dict[str, str]]
+    current_query: str
+    task_type: str = ""
 
 
 class _TeeStream:
@@ -90,6 +93,18 @@ def format_memory_prompt(row: dict[str, Any]) -> str:
     )
 
 
+def format_memory_messages(row: PreferenceRow, system_prompt: str) -> list[dict[str, str]]:
+    messages = [{"role": "system", "content": system_prompt}]
+    for msg in row.history:
+        role = msg.get("role")
+        content = msg.get("content")
+        if role in {"user", "assistant"} and isinstance(content, str):
+            messages.append({"role": role, "content": content})
+    if row.current_query:
+        messages.append({"role": "user", "content": row.current_query})
+    return messages
+
+
 def load_preference_rows(path: str | Path, max_samples: int = 0) -> list[PreferenceRow]:
     rows: list[PreferenceRow] = []
     with Path(path).open(encoding="utf-8") as f:
@@ -112,6 +127,13 @@ def load_preference_rows(path: str | Path, max_samples: int = 0) -> list[Prefere
                     prompt=str(prompt).strip(),
                     chosen=chosen_text,
                     rejected=rejected_text,
+                    history=[
+                        {"role": str(msg.get("role", "")), "content": str(msg.get("content", ""))}
+                        for msg in raw.get("history", [])
+                        if isinstance(msg, dict)
+                    ],
+                    current_query=str(raw.get("current_query", raw.get("query", ""))),
+                    task_type=str(raw.get("task_type", "")),
                 )
             )
             if max_samples > 0 and len(rows) >= max_samples:
@@ -175,6 +197,8 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--torch-dtype", default="bfloat16", choices=["bfloat16", "float16", "float32"])
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--max-length", type=int, default=4096)
+    p.add_argument("--prompt-format", choices=["chat_template", "json_instruction"], default="chat_template")
+    p.add_argument("--system-prompt", default="data/system-prompt.txt")
     p.add_argument("--max-samples", type=int, default=0)
     p.add_argument("--val-ratio", type=float, default=0.05)
     p.add_argument("--epochs", type=int, default=1)
@@ -313,6 +337,13 @@ def main() -> None:
     if summary["total_trainable_params"] == 0:
         raise RuntimeError("No trainable LoRA parameters found. Check --init-lora-dir and PEFT loading.")
 
+    system_prompt = ""
+    if args.prompt_format == "chat_template":
+        system_prompt = Path(args.system_prompt).read_text(encoding="utf-8").strip()
+        print(f"[prompt] chat_template system_prompt={args.system_prompt} chars={len(system_prompt)}")
+    else:
+        print("[prompt] json_instruction compatibility mode")
+
     def model_device() -> Any:
         return next(model.parameters()).device
 
@@ -323,8 +354,21 @@ def main() -> None:
         def __len__(self) -> int:
             return len(self.items)
 
-        def _encode_pair(self, prompt: str, response: str) -> dict[str, list[int]]:
-            prompt_ids = tokenizer.encode(prompt, add_special_tokens=False)
+        def _prompt_ids(self, row: PreferenceRow) -> list[int]:
+            if args.prompt_format == "chat_template" and row.history and row.current_query:
+                messages = format_memory_messages(row, system_prompt)
+                ids = tokenizer.apply_chat_template(
+                    messages,
+                    tokenize=True,
+                    add_generation_prompt=True,
+                )
+                if hasattr(ids, "tolist"):
+                    ids = ids.tolist()
+                return list(ids)
+            return tokenizer.encode(row.prompt, add_special_tokens=False)
+
+        def _encode_pair(self, row: PreferenceRow, response: str) -> dict[str, list[int]]:
+            prompt_ids = self._prompt_ids(row)
             response_ids = tokenizer.encode(response, add_special_tokens=False)
             if eos_token_id is not None:
                 response_ids = response_ids + [eos_token_id]
@@ -336,8 +380,8 @@ def main() -> None:
         def __getitem__(self, idx: int) -> dict[str, Any]:
             row = self.items[idx]
             return {
-                "chosen": self._encode_pair(row.prompt, row.chosen),
-                "rejected": self._encode_pair(row.prompt, row.rejected),
+                "chosen": self._encode_pair(row, row.chosen),
+                "rejected": self._encode_pair(row, row.rejected),
             }
 
     def collate(items: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
