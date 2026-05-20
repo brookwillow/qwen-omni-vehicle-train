@@ -3,9 +3,11 @@ import json
 import pytest
 
 from train_memory_dpo_lora import (
+    expand_preference_files,
     format_memory_prompt,
     load_peft_adapter,
     load_preference_rows,
+    load_preference_rows_many,
     normalize_response,
     split_train_eval,
 )
@@ -85,6 +87,26 @@ def test_load_preference_rows_rejects_identical_pair(tmp_path):
 
     with pytest.raises(ValueError, match="identical"):
         load_preference_rows(path)
+
+
+def test_load_preference_rows_many_supports_comma_separated_files(tmp_path):
+    first = tmp_path / "first.jsonl"
+    second = tmp_path / "second.jsonl"
+    first.write_text('{"prompt":"p1","chosen":"a","rejected":"b"}\n', encoding="utf-8")
+    second.write_text('{"prompt":"p2","chosen":"c","rejected":"d"}\n', encoding="utf-8")
+
+    rows = load_preference_rows_many(f"{first},{second}")
+
+    assert [row.prompt for row in rows] == ["p1", "p2"]
+
+
+def test_expand_preference_files_supports_globs(tmp_path):
+    (tmp_path / "a.jsonl").write_text('{"prompt":"p","chosen":"a","rejected":"b"}\n', encoding="utf-8")
+    (tmp_path / "b.jsonl").write_text('{"prompt":"p","chosen":"a","rejected":"b"}\n', encoding="utf-8")
+
+    paths = expand_preference_files(str(tmp_path / "*.jsonl"))
+
+    assert [path.name for path in paths] == ["a.jsonl", "b.jsonl"]
 
 
 def test_split_train_eval_is_deterministic():

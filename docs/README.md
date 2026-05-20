@@ -51,6 +51,7 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 | `data/splits/reject.jsonl` | 单轮 + 多轮硬负例 |
 | `data/rl/memory_tasks.jsonl` | 记忆压缩/使用 RL MVP 种子数据（500 条，不参与默认 SFT 合并） |
 | `data/rl/memory_verifier_prompt.md` | LLM-as-Verifier 评分 prompt，用于从 memory task 候选输出构造偏好对 |
+| `data/rl/tool_tts_preferences.jsonl` | 工具调用 vs TTS 回复的输出契约偏好数据（工具 JSON chosen，执行完成话术 rejected） |
 | `data/train_final.jsonl` | 最终训练数据（含 SP） |
 | `data/eval/` | 评测数据集（当前工具 schema 已清洗，媒体类无新版等价工具样本已置空/移除） |
 
@@ -115,13 +116,19 @@ python scripts/build_memory_preferences.py \
   --model qwen3.6-plus \
   --workers 4
 
+# 3) 额外生成“工具 JSON chosen vs TTS rejected”的输出契约偏好对，
+#    用来强化该调用工具时不能只回复“好的，已完成”。
+python scripts/build_tool_tts_preferences.py \
+  --tasks data/rl/memory_tasks.jsonl \
+  --output data/rl/tool_tts_preferences.jsonl
+
 # 没有 SFT 服务时，也可以先用 synthetic 模式 bootstrapping：
 python scripts/build_memory_preferences.py \
   --tasks data/rl/memory_tasks.jsonl \
   --output data/rl/memory_preferences.jsonl
 ```
 
-`scripts/build_memory_preferences.py` 使用 OpenAI SDK 调用百炼/DashScope 兼容 `/chat/completions` 接口，默认 base URL 为 `https://dashscope.aliyuncs.com/compatible-mode/v1`，默认模型为 `qwen3.6-plus`，可通过 `--base-url` / `QWEN_PLUS_BASE_URL` 和 `--model` / `QWEN_PLUS_MODEL` 覆盖。API key 默认从 `QWEN_PLUS_API_KEY` 读取；凭证禁止写入仓库文件。输出的 `memory_preferences.jsonl` 可直接作为 `train_memory_dpo_lora.py --preference-file` 输入；`memory_preferences_audit.jsonl` 保留每个候选的 verifier 评分，并在顶层写出 `kept`、`skip_reason`、`best_score`、`worst_score` 和 `score_gap`，方便统计未保留原因。脚本还会做本地契约校验：当 `expected.target_tool_call` 非空时，非工具 JSON 的自然语言候选最高只能得 4 分，避免把“语义正确但没有工具调用”的 TTS 样本选为 chosen。
+`scripts/build_memory_preferences.py` 使用 OpenAI SDK 调用百炼/DashScope 兼容 `/chat/completions` 接口，默认 base URL 为 `https://dashscope.aliyuncs.com/compatible-mode/v1`，默认模型为 `qwen3.6-plus`，可通过 `--base-url` / `QWEN_PLUS_BASE_URL` 和 `--model` / `QWEN_PLUS_MODEL` 覆盖。API key 默认从 `QWEN_PLUS_API_KEY` 读取；凭证禁止写入仓库文件。输出的 `memory_preferences.jsonl` 可直接作为 `train_memory_dpo_lora.py --preference-file` 输入；`memory_preferences_audit.jsonl` 保留每个候选的 verifier 评分，并在顶层写出 `kept`、`skip_reason`、`best_score`、`worst_score` 和 `score_gap`，方便统计未保留原因。脚本还会做本地契约校验：当 `expected.target_tool_call` 非空时，非工具 JSON 的自然语言候选最高只能得 4 分，避免把“语义正确但没有工具调用”的 TTS 样本选为 chosen。`scripts/build_tool_tts_preferences.py` 会基于同一批 memory task 生成直接的输出契约偏好对，当前 500 条 task 可生成约 347 条工具 JSON chosen vs TTS rejected 样本。
 
 默认情况下，传入 `--candidate-file` 时也会为每条 task 额外混入一个 `synthetic_hard_negative`，避免模型采样候选过少时无法形成 chosen/rejected 对；synthetic chosen/rejected 均使用最终 assistant 输出形态，即工具 JSON、`Reject`、`NoiseDoNotAct` 或自然语言澄清，不再使用中间态 memory decision JSON。如果只想使用模型真实候选，可加 `--no-synthetic-negative`。`--output` 和 `--audit-output` 默认会覆盖旧文件，避免重复样本污染训练；确实需要追加时再显式传 `--append-output`。
 
@@ -131,7 +138,7 @@ python scripts/build_memory_preferences.py \
 python train_memory_dpo_lora.py \
   --model /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
   --init-lora-dir lora_output_sft_0520 \
-  --preference-file data/rl/memory_preferences.jsonl \
+  --preference-file data/rl/memory_preferences.jsonl,data/rl/tool_tts_preferences.jsonl \
   --output-dir lora_output_sft_dpo_memory_0520 \
   --lr 5e-6 \
   --beta 0.1 \
@@ -194,11 +201,17 @@ wc -l data/rl/memory_preferences.jsonl
 head -3 data/rl/memory_preferences.jsonl
 head -3 data/rl/memory_preferences_audit.jsonl
 
+# 7b. 生成并抽检工具调用 vs TTS 回复的输出契约偏好对
+python scripts/build_tool_tts_preferences.py \
+  --tasks data/rl/memory_tasks.jsonl \
+  --output data/rl/tool_tts_preferences.jsonl
+wc -l data/rl/tool_tts_preferences.jsonl
+
 # 8. 基于旧 SFT LoRA 继续 DPO-style 训练，输出新 LoRA
 python train_memory_dpo_lora.py \
   --model /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
   --init-lora-dir lora_output_sft_0520 \
-  --preference-file data/rl/memory_preferences.jsonl \
+  --preference-file data/rl/memory_preferences.jsonl,data/rl/tool_tts_preferences.jsonl \
   --output-dir lora_output_sft_dpo_memory_0520 \
   --lr 5e-6 \
   --beta 0.1 \
@@ -536,6 +549,7 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 | `eval.py` | 统一评测（batch / single），音频输入 + 多维度统计，支持 `--batch-size` 批量推理 |
 | `scripts/analyze_eval_errors.py` | 读取 `eval_report*.json`，按类型、工具、文件、类别聚类错误；可用 `--backlog-md` 输出训练补强任务清单 |
 | `scripts/build_memory_preferences.py` | 调用 Qwen Plus verifier 为 memory task/candidate 打分，生成 DPO chosen/rejected 偏好数据 |
+| `scripts/build_tool_tts_preferences.py` | 基于 memory task 生成“工具 JSON chosen vs TTS rejected”的输出契约偏好数据 |
 | `scripts/generate_memory_candidates.py` | 调用当前 SFT 推理服务，为 memory task 采样多个最终 assistant 候选输出 |
 | `scripts/generate_memory_rl_tasks.py` | 生成记忆压缩/使用 RL 种子任务，用于 LLM verifier 偏好数据构建 |
 | `scripts/validate_splits.py` | 校验 split 样本消息结构、工具调用和响应形态 |

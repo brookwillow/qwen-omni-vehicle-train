@@ -15,6 +15,7 @@ or a memory-task shape whose chosen/rejected values are final assistant outputs:
 from __future__ import annotations
 
 import argparse
+import glob
 import json
 import math
 import os
@@ -120,6 +121,34 @@ def load_preference_rows(path: str | Path, max_samples: int = 0) -> list[Prefere
     return rows
 
 
+def expand_preference_files(value: str) -> list[Path]:
+    paths: list[Path] = []
+    for part in value.split(","):
+        pattern = part.strip()
+        if not pattern:
+            continue
+        matches = sorted(glob.glob(pattern))
+        if matches:
+            paths.extend(Path(item) for item in matches)
+        else:
+            paths.append(Path(pattern))
+    if not paths:
+        raise ValueError("No preference files configured")
+    return paths
+
+
+def load_preference_rows_many(value: str, max_samples: int = 0) -> list[PreferenceRow]:
+    rows: list[PreferenceRow] = []
+    for path in expand_preference_files(value):
+        remaining = max_samples - len(rows) if max_samples > 0 else 0
+        if max_samples > 0 and remaining <= 0:
+            break
+        rows.extend(load_preference_rows(path, remaining))
+    if not rows:
+        raise ValueError(f"No preference rows loaded from {value}")
+    return rows
+
+
 def split_train_eval(rows: list[PreferenceRow], val_ratio: float, seed: int) -> tuple[list[PreferenceRow], list[PreferenceRow]]:
     rows = list(rows)
     rng = random.Random(seed)
@@ -136,7 +165,11 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--model-type", default="qwen2_5_omni", help="Swift model_type")
     p.add_argument("--init-lora-dir", required=True, help="Existing SFT LoRA adapter used as trainable initialization")
     p.add_argument("--reference-lora-dir", default="", help="Frozen reference adapter. Defaults to --init-lora-dir when --reference-mode=frozen_init")
-    p.add_argument("--preference-file", default="data/rl/memory_preferences.jsonl")
+    p.add_argument(
+        "--preference-file",
+        default="data/rl/memory_preferences.jsonl",
+        help="Preference JSONL file, comma-separated files, or glob pattern.",
+    )
     p.add_argument("--output-dir", default="./lora_output_dpo_memory")
     p.add_argument("--device-map", default="cuda:0")
     p.add_argument("--torch-dtype", default="bfloat16", choices=["bfloat16", "float16", "float32"])
@@ -232,7 +265,7 @@ def main() -> None:
     out_dir = Path(args.output_dir)
     setup_run_logs(out_dir)
 
-    rows = load_preference_rows(args.preference_file, args.max_samples)
+    rows = load_preference_rows_many(args.preference_file, args.max_samples)
     train_rows, eval_rows = split_train_eval(rows, args.val_ratio, args.seed)
     print(f"[data] preferences train={len(train_rows)} eval={len(eval_rows)} source={args.preference_file}")
 
