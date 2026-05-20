@@ -21,6 +21,7 @@ import math
 import os
 import random
 import sys
+from collections.abc import Mapping
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterable, TextIO
@@ -106,10 +107,12 @@ def format_memory_messages(row: PreferenceRow, system_prompt: str) -> list[dict[
 
 
 def normalize_token_ids(value: Any) -> list[int]:
-    if isinstance(value, dict):
+    if isinstance(value, Mapping):
         if "input_ids" not in value:
             raise ValueError(f"chat template output dict missing input_ids: {value.keys()}")
         value = value["input_ids"]
+    elif hasattr(value, "data") and isinstance(value.data, Mapping) and "input_ids" in value.data:
+        value = value.data["input_ids"]
     if hasattr(value, "tolist"):
         value = value.tolist()
     if isinstance(value, tuple):

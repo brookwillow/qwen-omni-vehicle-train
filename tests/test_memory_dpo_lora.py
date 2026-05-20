@@ -65,9 +65,14 @@ def test_normalize_token_ids_accepts_common_chat_template_shapes():
         def tolist(self):
             return [[1, 2, 3]]
 
+    class BatchEncodingLike:
+        def __init__(self):
+            self.data = {"input_ids": [[1, 2, 3]]}
+
     assert normalize_token_ids([1, 2, 3]) == [1, 2, 3]
     assert normalize_token_ids({"input_ids": [[1, 2, 3]]}) == [1, 2, 3]
     assert normalize_token_ids(TensorLike()) == [1, 2, 3]
+    assert normalize_token_ids(BatchEncodingLike()) == [1, 2, 3]
 
 
 def test_normalize_token_ids_rejects_string_keys_shape():
