@@ -202,6 +202,7 @@ def score_candidate(
             if not isinstance(score, (int, float)):
                 raise ValueError(f"verifier score is not numeric: {verdict}")
             verdict["score"] = float(score)
+            verdict = apply_schema_score_guard(task, candidate, verdict)
             return verdict
         except Exception as exc:  # noqa: BLE001 - retry wrapper should preserve final error
             last_error = exc
@@ -209,6 +210,30 @@ def score_candidate(
                 time.sleep(args.retry_sleep * (attempt + 1))
     assert last_error is not None
     raise last_error
+
+
+def is_tool_call_candidate(candidate: Any) -> bool:
+    return (
+        isinstance(candidate, dict)
+        and isinstance(candidate.get("name"), str)
+        and bool(candidate.get("name"))
+        and isinstance(candidate.get("arguments"), dict)
+    )
+
+
+def apply_schema_score_guard(task: dict[str, Any], candidate: Any, verdict: dict[str, Any]) -> dict[str, Any]:
+    """Keep verifier scores aligned with the final assistant output contract."""
+    target_tool = _target_tool(task)
+    guarded = dict(verdict)
+    if target_tool and not is_tool_call_candidate(candidate):
+        guarded["tool_or_response_correct"] = False
+        guarded["arguments_correct"] = False
+        guarded["score"] = min(float(guarded.get("score", 0.0)), 4.0)
+        reason = guarded.get("reason", "")
+        suffix = "本地约束：该样本期望工具 JSON，非工具输出最高 4 分。"
+        guarded["reason"] = f"{reason} {suffix}".strip()
+        guarded["local_score_guard"] = "expected_tool_requires_tool_json"
+    return guarded
 
 
 def _target_tool(task: dict[str, Any]) -> dict[str, Any] | None:

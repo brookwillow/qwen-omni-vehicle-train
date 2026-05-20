@@ -4,6 +4,7 @@ from scripts.build_memory_preferences import (
     DEFAULT_BASE_URL,
     DEFAULT_MODEL,
     append_jsonl,
+    apply_schema_score_guard,
     build_verifier_messages,
     candidate_items_for_task,
     candidate_items_from_synthetic,
@@ -18,6 +19,7 @@ from scripts.build_memory_preferences import (
     post_chat_completion,
     process_task,
     response_content,
+    is_tool_call_candidate,
     tool_from_intent_text,
     write_jsonl,
 )
@@ -114,6 +116,28 @@ def test_response_content_error_includes_preview():
         assert "InvalidRequest" in str(exc)
     else:
         raise AssertionError("expected ValueError")
+
+
+def test_schema_score_guard_caps_tts_when_tool_expected():
+    verdict = apply_schema_score_guard(
+        _task(),
+        "好的，已为您打开大灯。",
+        {"score": 10, "reason": "语义正确", "tool_or_response_correct": True, "arguments_correct": True},
+    )
+
+    assert verdict["score"] == 4
+    assert verdict["tool_or_response_correct"] is False
+    assert verdict["arguments_correct"] is False
+    assert verdict["local_score_guard"] == "expected_tool_requires_tool_json"
+
+
+def test_schema_score_guard_allows_tool_json_when_tool_expected():
+    candidate = {"name": "LightControl", "arguments": {"action": "打开", "device": "大灯"}}
+    verdict = apply_schema_score_guard(_task(), candidate, {"score": 10, "reason": "ok"})
+
+    assert verdict["score"] == 10
+    assert "local_score_guard" not in verdict
+    assert is_tool_call_candidate(candidate) is True
 
 
 def test_make_synthetic_rejected_for_action_flip_uses_wrong_history_action():

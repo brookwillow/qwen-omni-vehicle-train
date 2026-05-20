@@ -121,7 +121,7 @@ python scripts/build_memory_preferences.py \
   --output data/rl/memory_preferences.jsonl
 ```
 
-`scripts/build_memory_preferences.py` 使用 OpenAI SDK 调用百炼/DashScope 兼容 `/chat/completions` 接口，默认 base URL 为 `https://dashscope.aliyuncs.com/compatible-mode/v1`，默认模型为 `qwen3.6-plus`，可通过 `--base-url` / `QWEN_PLUS_BASE_URL` 和 `--model` / `QWEN_PLUS_MODEL` 覆盖。API key 默认从 `QWEN_PLUS_API_KEY` 读取；凭证禁止写入仓库文件。输出的 `memory_preferences.jsonl` 可直接作为 `train_memory_dpo_lora.py --preference-file` 输入；`memory_preferences_audit.jsonl` 保留每个候选的 verifier 评分，并在顶层写出 `kept`、`skip_reason`、`best_score`、`worst_score` 和 `score_gap`，方便统计未保留原因。
+`scripts/build_memory_preferences.py` 使用 OpenAI SDK 调用百炼/DashScope 兼容 `/chat/completions` 接口，默认 base URL 为 `https://dashscope.aliyuncs.com/compatible-mode/v1`，默认模型为 `qwen3.6-plus`，可通过 `--base-url` / `QWEN_PLUS_BASE_URL` 和 `--model` / `QWEN_PLUS_MODEL` 覆盖。API key 默认从 `QWEN_PLUS_API_KEY` 读取；凭证禁止写入仓库文件。输出的 `memory_preferences.jsonl` 可直接作为 `train_memory_dpo_lora.py --preference-file` 输入；`memory_preferences_audit.jsonl` 保留每个候选的 verifier 评分，并在顶层写出 `kept`、`skip_reason`、`best_score`、`worst_score` 和 `score_gap`，方便统计未保留原因。脚本还会做本地契约校验：当 `expected.target_tool_call` 非空时，非工具 JSON 的自然语言候选最高只能得 4 分，避免把“语义正确但没有工具调用”的 TTS 样本选为 chosen。
 
 默认情况下，传入 `--candidate-file` 时也会为每条 task 额外混入一个 `synthetic_hard_negative`，避免模型采样候选过少时无法形成 chosen/rejected 对；synthetic chosen/rejected 均使用最终 assistant 输出形态，即工具 JSON、`Reject`、`NoiseDoNotAct` 或自然语言澄清，不再使用中间态 memory decision JSON。如果只想使用模型真实候选，可加 `--no-synthetic-negative`。`--output` 和 `--audit-output` 默认会覆盖旧文件，避免重复样本污染训练；确实需要追加时再显式传 `--append-output`。
 

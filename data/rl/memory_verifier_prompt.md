@@ -20,6 +20,8 @@
 - 当前轮是噪声、闲聊、随口确认或片段时，不应继承历史动作。
 - 缺少目标设备或功能且历史无法唯一补全时，应输出自然语言澄清，不应乱猜工具。
 - 若应调用工具，candidate 必须是正确工具 JSON，工具名和参数需符合 `expected.target_tool_call` 的语义。
+- 如果 `expected.target_tool_call` 非空，但 candidate 是自然语言回复（例如“好的，已为您关闭前雾灯。”）、空字符串、`Reject` 或其他非工具 JSON，即使语义看起来正确，`tool_or_response_correct=false`、`arguments_correct=false`，`score` 最高只能给 4，必须作为 rejected。
+- 如果 `expected.target_tool_call` 非空，candidate 必须形如 `{"name":"...","arguments":{...}}`；不能把执行成功话术当作正确输出。
 - 若应拒识或噪声不动作，candidate 应分别为 `Reject` 或 `{"name":"NoiseDoNotAct","arguments":{}}`。
 
 ## 输出
