@@ -1,4 +1,6 @@
 import importlib
+import json
+from pathlib import Path
 import sys
 import types
 
@@ -166,3 +168,32 @@ def test_multi_tool_match_can_require_order(monkeypatch):
     ]
 
     assert eval_mod.are_action_calls_match("先打开车窗，再关闭阅读灯", pred, gt, ordered=True) == (False, False)
+
+
+def test_appcontrol_explicit_close_cases_are_actions():
+    rows = json.loads(Path("data/eval/app_test.json").read_text(encoding="utf-8"))
+    by_id = {row["id"]: row for row in rows}
+
+    for row_id, feature in {
+        "app_002": "导航地图",
+        "app_004": "音乐应用",
+        "app_036": "音乐应用",
+        "app_058": "投屏助手",
+        "app_059": "导航地图",
+        "app_060": "蓝牙电话",
+    }.items():
+        row = by_id[row_id]
+        assert row.get("expected_type") != "Reject"
+        assert row["expected_tool_calls"] == [
+            {"name": "AppControl", "arguments": {"action": "关闭", "feature": feature}}
+        ]
+
+
+def test_appcontrol_content_tasks_remain_reject():
+    rows = json.loads(Path("data/eval/app_test.json").read_text(encoding="utf-8"))
+    by_id = {row["id"]: row for row in rows}
+
+    for row_id in ["app_034", "app_035", "app_044", "app_054", "app_051"]:
+        row = by_id[row_id]
+        assert row["expected_type"] == "Reject"
+        assert row["expected_tool_calls"] == []
