@@ -168,6 +168,17 @@ def test_expand_preference_files_supports_globs(tmp_path):
     assert [path.name for path in paths] == ["a.jsonl", "b.jsonl"]
 
 
+def test_parse_args_defaults_to_gradient_checkpointing(monkeypatch):
+    monkeypatch.setattr("sys.argv", ["train_memory_dpo_lora.py", "--init-lora-dir", "adapter"])
+
+    from train_memory_dpo_lora import parse_args
+
+    args = parse_args()
+
+    assert args.gradient_checkpointing is True
+    assert args.empty_cache_between_pairs is True
+
+
 def test_split_train_eval_is_deterministic():
     rows = [
         load_preference_rows_from_dict({"prompt": str(i), "chosen": str(i), "rejected": str(i + 1)})

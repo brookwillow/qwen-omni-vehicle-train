@@ -233,6 +233,8 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--eval-steps", type=int, default=100)
     p.add_argument("--save-steps", type=int, default=0, help="0 = save only at end")
     p.add_argument("--reference-mode", choices=["reference_free", "frozen_init"], default="reference_free")
+    p.add_argument("--gradient-checkpointing", action=argparse.BooleanOptionalAction, default=True)
+    p.add_argument("--empty-cache-between-pairs", action=argparse.BooleanOptionalAction, default=True)
     p.add_argument("--forbidden-trainable-keywords", default="audio,talker,vocoder,audio_decoder,speech_decoder")
     return p.parse_args()
 
@@ -323,6 +325,13 @@ def main() -> None:
         trust_remote_code=True,
     )
     model = load_peft_adapter(PeftModel, model, args.init_lora_dir, trainable=True)
+    if args.gradient_checkpointing and hasattr(model, "gradient_checkpointing_enable"):
+        model.gradient_checkpointing_enable()
+        if hasattr(model, "enable_input_require_grads"):
+            model.enable_input_require_grads()
+        if hasattr(model, "config"):
+            model.config.use_cache = False
+        print("[memory] gradient_checkpointing enabled; use_cache disabled")
     tokenizer = get_tokenizer(processor_or_tokenizer)
     if getattr(tokenizer, "pad_token_id", None) is None and getattr(tokenizer, "eos_token", None):
         tokenizer.pad_token = tokenizer.eos_token
@@ -341,6 +350,8 @@ def main() -> None:
             trust_remote_code=True,
         )
         reference_model = load_peft_adapter(PeftModel, reference_model, ref_lora, trainable=False)
+        if hasattr(reference_model, "config"):
+            reference_model.config.use_cache = False
         reference_model.eval()
         for p in reference_model.parameters():
             p.requires_grad = False
@@ -440,12 +451,16 @@ def main() -> None:
 
     def dpo_step(batch: dict[str, dict[str, Any]], train: bool) -> dict[str, float]:
         policy_chosen, chosen_tokens = sequence_logps(batch["chosen"], model)
+        if args.empty_cache_between_pairs and torch.cuda.is_available():
+            torch.cuda.empty_cache()
         policy_rejected, _ = sequence_logps(batch["rejected"], model)
         policy_logratio = policy_chosen - policy_rejected
 
         if reference_model is not None:
             with torch.no_grad():
                 ref_chosen, _ = sequence_logps(batch["chosen"], reference_model)
+                if args.empty_cache_between_pairs and torch.cuda.is_available():
+                    torch.cuda.empty_cache()
                 ref_rejected, _ = sequence_logps(batch["rejected"], reference_model)
                 reference_logratio = ref_chosen - ref_rejected
         else:
