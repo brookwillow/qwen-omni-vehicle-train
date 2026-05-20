@@ -105,6 +105,24 @@ def format_memory_messages(row: PreferenceRow, system_prompt: str) -> list[dict[
     return messages
 
 
+def normalize_token_ids(value: Any) -> list[int]:
+    if isinstance(value, dict):
+        if "input_ids" not in value:
+            raise ValueError(f"chat template output dict missing input_ids: {value.keys()}")
+        value = value["input_ids"]
+    if hasattr(value, "tolist"):
+        value = value.tolist()
+    if isinstance(value, tuple):
+        value = list(value)
+    if isinstance(value, list) and value and isinstance(value[0], list):
+        if len(value) != 1:
+            raise ValueError(f"expected single chat template sequence, got batch size {len(value)}")
+        value = value[0]
+    if not isinstance(value, list) or any(not isinstance(token_id, int) for token_id in value):
+        raise ValueError(f"chat template output must resolve to list[int], got {type(value).__name__}")
+    return value
+
+
 def load_preference_rows(path: str | Path, max_samples: int = 0) -> list[PreferenceRow]:
     rows: list[PreferenceRow] = []
     with Path(path).open(encoding="utf-8") as f:
@@ -362,9 +380,7 @@ def main() -> None:
                     tokenize=True,
                     add_generation_prompt=True,
                 )
-                if hasattr(ids, "tolist"):
-                    ids = ids.tolist()
-                return list(ids)
+                return normalize_token_ids(ids)
             return tokenizer.encode(row.prompt, add_special_tokens=False)
 
         def _encode_pair(self, row: PreferenceRow, response: str) -> dict[str, list[int]]:

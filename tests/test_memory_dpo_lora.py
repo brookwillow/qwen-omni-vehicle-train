@@ -10,6 +10,7 @@ from train_memory_dpo_lora import (
     load_preference_rows,
     load_preference_rows_many,
     normalize_response,
+    normalize_token_ids,
     split_train_eval,
 )
 
@@ -57,6 +58,21 @@ def test_format_memory_messages_matches_chat_history_shape():
         {"role": "assistant", "content": "好的，已打开主驾车窗。"},
         {"role": "user", "content": "关上吧"},
     ]
+
+
+def test_normalize_token_ids_accepts_common_chat_template_shapes():
+    class TensorLike:
+        def tolist(self):
+            return [[1, 2, 3]]
+
+    assert normalize_token_ids([1, 2, 3]) == [1, 2, 3]
+    assert normalize_token_ids({"input_ids": [[1, 2, 3]]}) == [1, 2, 3]
+    assert normalize_token_ids(TensorLike()) == [1, 2, 3]
+
+
+def test_normalize_token_ids_rejects_string_keys_shape():
+    with pytest.raises(ValueError, match="list\\[int\\]"):
+        normalize_token_ids(["input_ids"])
 
 
 def load_preference_rows_from_dict(raw):
