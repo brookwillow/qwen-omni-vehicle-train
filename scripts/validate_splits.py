@@ -34,24 +34,36 @@ def load_schema(tools_path: str = "data/tools.json") -> dict:
     return schema
 
 
-def parse_action(content: str):
+def parse_actions(content: str):
     try:
         data = json.loads(content.strip())
     except json.JSONDecodeError:
         data = None
     if isinstance(data, dict) and isinstance(data.get("name"), str):
         args = data.get("arguments")
-        return data["name"], args if isinstance(args, dict) else None
+        return [(data["name"], args if isinstance(args, dict) else None)]
+    if isinstance(data, list):
+        actions = []
+        for item in data:
+            if (
+                not isinstance(item, dict)
+                or not isinstance(item.get("name"), str)
+                or "arguments" not in item
+            ):
+                return []
+            args = item.get("arguments")
+            actions.append((item["name"], args if isinstance(args, dict) else None))
+        return actions
 
     m = re.match(r"Action:\s*(\S+)\s*\nAction Input:\s*(\{.*\})", content, re.DOTALL)
     if not m:
-        return None, None
+        return []
     tool_name = m.group(1).strip()
     try:
         args = json.loads(m.group(2))
     except json.JSONDecodeError:
-        return tool_name, None
-    return tool_name, args
+        return [(tool_name, None)]
+    return [(tool_name, args)]
 
 
 def allows_free_numeric(param: str, prop_def: dict) -> bool:
@@ -68,44 +80,57 @@ def validate_sample(sample: dict, source: str, schema: dict) -> list[dict]:
         if msg["role"] != "assistant":
             continue
         content = msg["content"]
-        if not (content.startswith("Action:") or content.lstrip().startswith("{")):
+        if not (content.startswith("Action:") or content.lstrip().startswith(("{", "["))):
             continue
 
-        tool_name, args = parse_action(content)
+        actions = parse_actions(content)
 
-        if tool_name is None:
+        if not actions:
+            if content.lstrip().startswith("["):
+                try:
+                    data = json.loads(content.strip())
+                except json.JSONDecodeError:
+                    data = None
+                is_toolish_array = isinstance(data, list) and any(
+                    isinstance(item, dict)
+                    and (item.get("name") in tool_names or "arguments" in item)
+                    for item in data
+                )
+                if not is_toolish_array:
+                    continue
             issues.append({"type": "PARSE_FAIL", "source": source, "snippet": content[:100]})
             continue
-        if tool_name not in tool_names:
-            issues.append({"type": "UNKNOWN_TOOL", "source": source, "tool": tool_name, "snippet": content[:100]})
-            continue
-        if args is None:
-            issues.append({"type": "JSON_PARSE_FAIL", "source": source, "tool": tool_name, "snippet": content[:100]})
-            continue
-
-        s = schema[tool_name]
-        props = s["props"]
-        required = s["required"]
-
-        for req in required:
-            if req not in args:
-                issues.append({"type": "MISSING_REQUIRED", "source": source, "tool": tool_name, "param": req, "args": args})
-
-        for param, val in args.items():
-            if param not in props:
-                issues.append({"type": "UNKNOWN_PARAM", "source": source, "tool": tool_name, "param": param, "args": args})
+        for tool_name, args in actions:
+            if tool_name not in tool_names:
+                issues.append({"type": "UNKNOWN_TOOL", "source": source, "tool": tool_name, "snippet": content[:100]})
                 continue
-            prop_def = props[param]
-            if "enum" in prop_def and isinstance(val, str):
-                allows_free = allows_free_numeric(param, prop_def)
-                if val not in prop_def["enum"]:
-                    if not allows_free:
-                        issues.append({"type": "INVALID_ENUM", "source": source, "tool": tool_name,
-                                       "param": param, "val": val,
-                                       "allowed": prop_def["enum"], "args": args})
-                    elif not NUMERIC_VALUE_RE.match(val):
-                        issues.append({"type": "INVALID_ENUM_FREE", "source": source, "tool": tool_name,
-                                       "param": param, "val": val, "args": args})
+            if args is None:
+                issues.append({"type": "JSON_PARSE_FAIL", "source": source, "tool": tool_name, "snippet": content[:100]})
+                continue
+
+            s = schema[tool_name]
+            props = s["props"]
+            required = s["required"]
+
+            for req in required:
+                if req not in args:
+                    issues.append({"type": "MISSING_REQUIRED", "source": source, "tool": tool_name, "param": req, "args": args})
+
+            for param, val in args.items():
+                if param not in props:
+                    issues.append({"type": "UNKNOWN_PARAM", "source": source, "tool": tool_name, "param": param, "args": args})
+                    continue
+                prop_def = props[param]
+                if "enum" in prop_def and isinstance(val, str):
+                    allows_free = allows_free_numeric(param, prop_def)
+                    if val not in prop_def["enum"]:
+                        if not allows_free:
+                            issues.append({"type": "INVALID_ENUM", "source": source, "tool": tool_name,
+                                           "param": param, "val": val,
+                                           "allowed": prop_def["enum"], "args": args})
+                        elif not NUMERIC_VALUE_RE.match(val):
+                            issues.append({"type": "INVALID_ENUM_FREE", "source": source, "tool": tool_name,
+                                           "param": param, "val": val, "args": args})
     return issues
 
 

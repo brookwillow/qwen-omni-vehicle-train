@@ -1,0 +1,200 @@
+[
+  {
+    "id": "orch_001",
+    "category": "复杂任务编排",
+    "sub_category": "并行指令",
+    "intent": "多意图",
+    "difficulty": "medium",
+    "query": "打开主驾车窗，同时关闭阅读灯",
+    "expected_tool_calls": [
+      {"name": "WindowControl", "arguments": {"action": "打开", "device": "车窗", "position": "主驾"}},
+      {"name": "LightControl", "arguments": {"action": "关闭", "device": "阅读灯"}}
+    ]
+  },
+  {
+    "id": "orch_002",
+    "category": "复杂任务编排",
+    "sub_category": "并行指令",
+    "intent": "多意图",
+    "difficulty": "medium",
+    "query": "把空调打开，再把天窗关上",
+    "ordered_tool_calls": true,
+    "expected_tool_calls": [
+      {"name": "ClimateControl", "arguments": {"action": "打开", "device": "空调"}},
+      {"name": "WindowControl", "arguments": {"action": "关闭", "device": "天窗"}}
+    ]
+  },
+  {
+    "id": "orch_003",
+    "category": "复杂任务编排",
+    "sub_category": "并行指令",
+    "intent": "多意图",
+    "difficulty": "medium",
+    "query": "副驾座椅加热打开，导航音量调低一点",
+    "expected_tool_calls": [
+      {"name": "SeatControl", "arguments": {"action": "打开", "device": "座椅", "feature": "制热", "position": "副驾"}},
+      {"name": "VoiceControl", "arguments": {"action": "调低", "feature": "导航音量"}}
+    ]
+  },
+  {
+    "id": "orch_004",
+    "category": "复杂任务编排",
+    "sub_category": "显式多步",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "开启小憩模式，空调调成自动，阅读灯关掉",
+    "expected_tool_calls": [
+      {"name": "SpecialControl", "arguments": {"action": "打开", "feature": "小憩模式"}},
+      {"name": "ClimateControl", "arguments": {"action": "调到", "device": "空调", "value": "自动"}},
+      {"name": "LightControl", "arguments": {"action": "关闭", "device": "阅读灯"}}
+    ]
+  },
+  {
+    "id": "orch_005",
+    "category": "复杂任务编排",
+    "sub_category": "并行指令",
+    "intent": "多意图",
+    "difficulty": "medium",
+    "query": "车里空气不好，打开空气净化器并切到外循环",
+    "expected_tool_calls": [
+      {"name": "ClimateControl", "arguments": {"action": "打开", "device": "空气净化器"}},
+      {"name": "ClimateControl", "arguments": {"action": "调到", "device": "空调", "value": "外循环"}}
+    ]
+  },
+  {
+    "id": "orch_006",
+    "category": "复杂任务编排",
+    "sub_category": "并行指令",
+    "intent": "多意图",
+    "difficulty": "medium",
+    "query": "打开导航地图，同时打开蓝牙电话",
+    "expected_tool_calls": [
+      {"name": "AppControl", "arguments": {"action": "打开", "feature": "导航地图"}},
+      {"name": "AppControl", "arguments": {"action": "打开", "feature": "蓝牙电话"}}
+    ]
+  },
+  {
+    "id": "orch_007",
+    "category": "复杂任务编排",
+    "sub_category": "模糊导航",
+    "intent": "拒识",
+    "difficulty": "medium",
+    "query": "帮我找附近的咖啡店并导航过去",
+    "expected_type": "Reject",
+    "expected_tool_calls": []
+  },
+  {
+    "id": "orch_008",
+    "category": "复杂任务编排",
+    "sub_category": "模糊导航",
+    "intent": "拒识",
+    "difficulty": "medium",
+    "query": "导航到机场再播放音乐",
+    "expected_type": "Reject",
+    "expected_tool_calls": []
+  },
+  {
+    "id": "orch_009",
+    "category": "复杂任务编排",
+    "sub_category": "列表选择",
+    "intent": "多轮",
+    "difficulty": "medium",
+    "history": [
+      {"role": "user", "content": "系统列出了三个目的地停车位"},
+      {"role": "assistant", "content": "请问选择第几个？"}
+    ],
+    "query": "第二个",
+    "expected_tool_calls": [
+      {"name": "GeneralSelect", "arguments": {"index": "2"}}
+    ]
+  },
+  {
+    "id": "orch_010",
+    "category": "复杂任务编排",
+    "sub_category": "列表选择",
+    "intent": "多轮",
+    "difficulty": "medium",
+    "history": [
+      {"role": "user", "content": "地图里有多个充电站选项"},
+      {"role": "assistant", "content": "请问选择第几个？"}
+    ],
+    "query": "选第三个吧",
+    "expected_tool_calls": [
+      {"name": "GeneralSelect", "arguments": {"index": "3"}}
+    ]
+  },
+  {
+    "id": "orch_011",
+    "category": "复杂任务编排",
+    "sub_category": "最近意图继承",
+    "intent": "多轮",
+    "difficulty": "hard",
+    "history": [
+      {"role": "user", "content": "打开主驾车窗"},
+      {"role": "assistant", "content": "好的，已为您打开主驾车窗。"},
+      {"role": "user", "content": "关闭大灯"},
+      {"role": "assistant", "content": "好的，已为您关闭大灯。"}
+    ],
+    "query": "再打开吧",
+    "expected_tool_calls": [
+      {"name": "LightControl", "arguments": {"action": "打开", "device": "大灯"}}
+    ]
+  },
+  {
+    "id": "orch_012",
+    "category": "复杂任务编排",
+    "sub_category": "最近意图继承",
+    "intent": "多轮",
+    "difficulty": "hard",
+    "history": [
+      {"role": "user", "content": "把空调调到制冷"},
+      {"role": "assistant", "content": "好的，空调已调到制冷。"},
+      {"role": "user", "content": "关闭主驾车窗"},
+      {"role": "assistant", "content": "好的，主驾车窗已关闭。"}
+    ],
+    "query": "再开一点",
+    "expected_tool_calls": [
+      {"name": "WindowControl", "arguments": {"action": "再开", "device": "车窗", "position": "主驾"}}
+    ]
+  },
+  {
+    "id": "orch_013",
+    "category": "复杂任务编排",
+    "sub_category": "最近意图继承",
+    "intent": "多轮",
+    "difficulty": "hard",
+    "history": [
+      {"role": "user", "content": "关闭左侧侧滑门"},
+      {"role": "assistant", "content": "好的，左侧侧滑门已关闭。"}
+    ],
+    "query": "右侧也关一下",
+    "expected_tool_calls": [
+      {"name": "GateControl", "arguments": {"action": "关闭", "device": "侧滑门", "position": "右侧"}}
+    ]
+  },
+  {
+    "id": "orch_014",
+    "category": "复杂任务编排",
+    "sub_category": "显式多步",
+    "intent": "多意图",
+    "difficulty": "hard",
+    "query": "先关闭远光灯，再打开前雾灯",
+    "ordered_tool_calls": true,
+    "expected_tool_calls": [
+      {"name": "LightControl", "arguments": {"action": "关闭", "device": "远光灯"}},
+      {"name": "LightControl", "arguments": {"action": "打开", "device": "前雾灯"}}
+    ]
+  },
+  {
+    "id": "orch_015",
+    "category": "复杂任务编排",
+    "sub_category": "并行指令",
+    "intent": "多意图",
+    "difficulty": "medium",
+    "query": "打开投屏助手，同时把副驾娱乐屏全屏",
+    "expected_tool_calls": [
+      {"name": "AppControl", "arguments": {"action": "打开", "feature": "投屏助手"}},
+      {"name": "ScreenControl", "arguments": {"action": "全屏", "device": "娱乐屏", "position": "副驾"}}
+    ]
+  }
+]

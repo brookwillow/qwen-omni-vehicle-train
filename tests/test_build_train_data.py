@@ -8,6 +8,7 @@ from build_train_data import (
     parse_kv_args,
     validate_sample_schema,
 )
+from scripts.validate_splits import validate_sample
 
 
 def _write_jsonl(path: Path, queries: list[str]) -> None:
@@ -131,3 +132,51 @@ def test_validate_schema_unknown_field():
     sample = _make_sample('{"name":"WindowControl","arguments":{"action":"打开","device":"车窗","color":"red"}}')
     errs = validate_sample_schema(sample, _SCHEMA)
     assert any("unknown field" in e for e in errs)
+
+
+def test_validate_schema_accepts_multi_tool_array():
+    sample = _make_sample(
+        '[{"name":"WindowControl","arguments":{"action":"打开","device":"车窗"}},'
+        '{"name":"ClimateControl","arguments":{"action":"打开","device":"空调"}}]'
+    )
+
+    assert validate_sample_schema(sample, _SCHEMA) == []
+
+
+def test_validate_schema_reports_errors_inside_multi_tool_array():
+    sample = _make_sample(
+        '[{"name":"WindowControl","arguments":{"action":"打开","device":"车窗"}},'
+        '{"name":"ClimateControl","arguments":{"action":"飞行","device":"空调"}}]'
+    )
+
+    errs = validate_sample_schema(sample, _SCHEMA)
+    assert any("ClimateControl.action: invalid enum" in e for e in errs)
+
+
+def test_split_validator_ignores_popup_option_arrays():
+    sample = {
+        "messages": [
+            {
+                "role": "assistant",
+                "content": '[{"index": 1, "name": "舒适"}, {"index": 2, "name": "运动"}]',
+            }
+        ]
+    }
+
+    assert validate_sample(sample, "popup", _SCHEMA) == []
+
+
+def test_validate_schema_rejects_malformed_multi_tool_array():
+    sample = _make_sample(
+        '[{"name":"WindowControl","arguments":{"action":"打开","device":"车窗"}},'
+        '{"arguments":{"action":"打开","device":"空调"}}]'
+    )
+
+    errs = validate_sample_schema(sample, _SCHEMA)
+    assert any("failed to parse tool call content" in e for e in errs)
+
+
+def test_validate_schema_ignores_popup_choice_arrays():
+    sample = _make_sample('[{"index":1,"name":"舒适"},{"index":2,"name":"运动"}]')
+
+    assert validate_sample_schema(sample, _SCHEMA) == []

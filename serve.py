@@ -1161,17 +1161,51 @@ def _parse_tool_call_json(text: str) -> tuple[str, dict] | None:
     return tool_name, args
 
 
+def _parse_tool_call_json_array(text: str) -> list[tuple[str, dict]] | None:
+    try:
+        data = json.loads(text.strip())
+    except json.JSONDecodeError:
+        return None
+    if not isinstance(data, list) or not data:
+        return None
+    calls: list[tuple[str, dict]] = []
+    for item in data:
+        if not isinstance(item, dict):
+            return None
+        tool_name = item.get("name")
+        if not isinstance(tool_name, str) or "arguments" not in item:
+            return None
+        args = item.get("arguments", {})
+        if not isinstance(args, dict):
+            return None
+        calls.append((tool_name, args))
+    return calls
+
+
 def parse_model_output(text: str) -> tuple:
     """Parse model text output into structured form.
 
     Returns:
         ("tool_call", tool_name: str, args_json: str)
+      | ("tool_calls", list[(tool_name: str, args_json: str)])
       | ("noise_do_not_act",)
       | ("reject",)
       | ("text", content: str)
     """
     if text.strip() == "Reject":
         return ("reject",)
+
+    tool_calls = _parse_tool_call_json_array(text)
+    if tool_calls is not None:
+        if any(tool_name == "NoiseDoNotAct" for tool_name, _ in tool_calls):
+            return ("noise_do_not_act",)
+        return (
+            "tool_calls",
+            [
+                (tool_name, json.dumps(args, ensure_ascii=False, separators=(",", ":")))
+                for tool_name, args in tool_calls
+            ],
+        )
 
     tool_call = _parse_tool_call_json(text)
     if tool_call is not None:
@@ -1213,6 +1247,22 @@ def _choice_from_parsed_output(parsed: tuple) -> Choice:
                         id=f"call_{uuid.uuid4().hex[:22]}",
                         function=ToolFunction(name=tool_name, arguments=args_str),
                     )
+                ]
+            ),
+            finish_reason="tool_calls",
+        )
+
+    if parsed[0] == "tool_calls":
+        _, tool_calls = parsed
+        return Choice(
+            message=AssistantMessage(
+                tool_calls=[
+                    ToolCall(
+                        id=f"call_{uuid.uuid4().hex[:22]}",
+                        index=index,
+                        function=ToolFunction(name=tool_name, arguments=args_str),
+                    )
+                    for index, (tool_name, args_str) in enumerate(tool_calls)
                 ]
             ),
             finish_reason="tool_calls",

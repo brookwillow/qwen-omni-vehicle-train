@@ -82,6 +82,9 @@ def load_model(model_dir: str, lora_dir: str):
     return model, processor
 
 
+ToolCallTuple = Tuple[str, Dict[str, Any]]
+
+
 def generate_text(
     model, processor, system_prompt: str, user_query: str,
     max_new_tokens: int, temperature: float = 0.0,
@@ -97,24 +100,32 @@ def generate_batch(
     model, processor, system_prompt: str,
     user_queries: List[str], max_new_tokens: int, temperature: float = 0.0,
     audio_paths: Optional[List[Optional[str]]] = None,
+    histories: Optional[List[List[Dict[str, str]]]] = None,
 ) -> List[str]:
     """Run inference on multiple samples in one forward pass."""
     if audio_paths is None:
         audio_paths = [None] * len(user_queries)
+    if histories is None:
+        histories = [[] for _ in user_queries]
 
     all_texts: List[str] = []
     all_audios: list = []
     all_images: list = []
     all_videos: list = []
-    for query, audio_path in zip(user_queries, audio_paths):
+    for query, audio_path, history in zip(user_queries, audio_paths, histories):
         if audio_path:
             user_content = [{"type": "audio", "audio": audio_path}]
         else:
             user_content = [{"type": "text", "text": query}]
         messages = [
             {"role": "system", "content": [{"type": "text", "text": system_prompt}]},
-            {"role": "user", "content": user_content},
         ]
+        for msg in history or []:
+            role = msg.get("role")
+            content = msg.get("content", "")
+            if role in {"user", "assistant"} and isinstance(content, str):
+                messages.append({"role": role, "content": [{"type": "text", "text": content}]})
+        messages.append({"role": "user", "content": user_content})
         text = processor.apply_chat_template(messages, add_generation_prompt=True, tokenize=False)
         audios, images, videos = process_mm_info(messages, use_audio_in_video=False)
         all_texts.append(text)
@@ -150,37 +161,66 @@ def generate_batch(
 
 # ── Parsing helpers ──────────────────────────────────────────
 
-def parse_action(pred: str) -> Tuple[Optional[str], Optional[Dict[str, Any]], str]:
-    """Returns (tool_name, args, pred_type).
+def _coerce_tool_call(item: Any) -> Optional[ToolCallTuple]:
+    if not isinstance(item, dict) or not isinstance(item.get("name"), str):
+        return None
+    args = item.get("arguments", {})
+    return item["name"], args if isinstance(args, dict) else {}
+
+
+def parse_actions(pred: str) -> Tuple[List[ToolCallTuple], str]:
+    """Returns (tool_calls, pred_type).
 
     pred_type: 'Action' | 'Clarify' | 'Reject' | 'ParseFail'
     """
     s = (pred or "").strip()
     if s.startswith("Reject"):
-        return None, None, "Reject"
+        return [], "Reject"
     if s.startswith("Clarify"):
-        return None, None, "Clarify"
+        return [], "Clarify"
     try:
         data = json.loads(s)
     except Exception:
         data = None
-    if isinstance(data, dict) and isinstance(data.get("name"), str):
-        args = data.get("arguments", {})
-        return data["name"], args if isinstance(args, dict) else {}, "Action"
+    if isinstance(data, dict):
+        call = _coerce_tool_call(data)
+        if call:
+            return [call], "Action"
+    if isinstance(data, list):
+        calls = []
+        for item in data:
+            if not isinstance(item, dict) or "arguments" not in item:
+                return [], "ParseFail"
+            call = _coerce_tool_call(item)
+            if not call:
+                return [], "ParseFail"
+            calls.append(call)
+        return calls, "Action" if calls else "ParseFail"
     m_tool = ACTION_RE.search(s)
     if not m_tool:
         # New protocol treats plain assistant text as the user-facing
         # response/clarification instead of requiring a Clarify prefix.
-        return None, None, "Clarify" if s else "ParseFail"
+        return [], "Clarify" if s else "ParseFail"
     tool = m_tool.group(1).strip()
     m_args = ACTION_INPUT_RE.search(s)
     if not m_args:
-        return tool, {}, "Action"
+        return [(tool, {})], "Action"
     try:
         args = json.loads(m_args.group(1))
-        return tool, args if isinstance(args, dict) else {}, "Action"
+        return [(tool, args if isinstance(args, dict) else {})], "Action"
     except Exception:
-        return tool, {}, "Action"
+        return [(tool, {})], "Action"
+
+
+def parse_action(pred: str) -> Tuple[Optional[str], Optional[Dict[str, Any]], str]:
+    """Returns (tool_name, args, pred_type).
+
+    pred_type: 'Action' | 'Clarify' | 'Reject' | 'ParseFail'
+    """
+    calls, pred_type = parse_actions(pred)
+    if not calls:
+        return None, None, pred_type
+    return calls[0][0], calls[0][1], pred_type
 
 
 def normalize_args(d: Dict[str, Any]) -> Dict[str, Any]:
@@ -233,6 +273,45 @@ def is_action_match(
     return direct_tool_match, False
 
 
+def _normalize_call(call: ToolCallTuple) -> Tuple[str, str]:
+    tool, args = call
+    return tool, json.dumps(normalize_args(args), ensure_ascii=False, sort_keys=True)
+
+
+def _expected_calls(row: dict) -> List[ToolCallTuple]:
+    calls = []
+    for call in row.get("expected_tool_calls", []) or []:
+        coerced = _coerce_tool_call(call)
+        if coerced:
+            calls.append(coerced)
+    return calls
+
+
+def are_action_calls_match(
+    query: str,
+    pred_calls: List[ToolCallTuple],
+    gt_calls: List[ToolCallTuple],
+    ordered: bool = False,
+) -> Tuple[bool, bool]:
+    """Return (tool_match, args_match) for one or more expected actions."""
+    if len(gt_calls) == 1:
+        gt_tool, gt_args = gt_calls[0]
+        pred_tool, pred_args = pred_calls[0] if pred_calls else (None, None)
+        tool_match, args_match = is_action_match(query, pred_tool, pred_args, gt_tool, gt_args)
+        return tool_match and len(pred_calls) == 1, args_match and len(pred_calls) == 1
+    if len(pred_calls) != len(gt_calls):
+        return False, False
+    pred_tools = [tool for tool, _ in pred_calls]
+    gt_tools = [tool for tool, _ in gt_calls]
+    if ordered:
+        tool_match = pred_tools == gt_tools
+        args_match = tool_match and [_normalize_call(c) for c in pred_calls] == [_normalize_call(c) for c in gt_calls]
+        return tool_match, args_match
+    tool_match = sorted(pred_tools) == sorted(gt_tools)
+    args_match = tool_match and sorted(_normalize_call(c) for c in pred_calls) == sorted(_normalize_call(c) for c in gt_calls)
+    return tool_match, args_match
+
+
 # ── Metrics ──────────────────────────────────────────────────
 
 @dataclass
@@ -246,6 +325,8 @@ class Metric:
     clarify_pred: int = 0
     clarify_hit: int = 0
     parse_fail: int = 0
+    multi_tool_total: int = 0
+    multi_tool_args_em: int = 0
 
     def __iadd__(self, other: "Metric") -> "Metric":
         self.total += other.total
@@ -257,6 +338,8 @@ class Metric:
         self.clarify_pred += other.clarify_pred
         self.clarify_hit += other.clarify_hit
         self.parse_fail += other.parse_fail
+        self.multi_tool_total += other.multi_tool_total
+        self.multi_tool_args_em += other.multi_tool_args_em
         return self
 
 
@@ -279,6 +362,8 @@ def _metric_to_dict(m: Metric) -> Dict[str, Any]:
     d["clarify_pred"] = m.clarify_pred
     d["clarify_hit"] = m.clarify_hit
     d["parse_fail"] = m.parse_fail
+    d["multi_tool_total"] = m.multi_tool_total
+    d["multi_tool_args_em"] = m.multi_tool_args_em
     return d
 
 
@@ -298,8 +383,10 @@ def get_expected_type(row: dict) -> str:
     return "Reject"
 
 
-def should_skip_eval_row(row: dict) -> bool:
+def should_skip_eval_row(row: dict, include_multi_tool: bool = False) -> bool:
     """Skip cases that cannot be scored with the current single-tool metric."""
+    if include_multi_tool:
+        return False
     if row.get("intent") == "多意图" or row.get("sub_category") == "多意图":
         return True
     return len(row.get("expected_tool_calls", []) or []) > 1
@@ -313,6 +400,7 @@ def eval_file(
     by_category: Optional[Dict[str, Metric]] = None,
     errors: Optional[List[Dict[str, Any]]] = None,
     batch_size: int = 1,
+    include_multi_tool: bool = False,
 ) -> Metric:
     data = json.loads(Path(file_path).read_text(encoding="utf-8"))
     if max_per_file > 0:
@@ -324,32 +412,35 @@ def eval_file(
     # Pre-compute per-row metadata once
     rows_meta = []
     for row in data:
-        if should_skip_eval_row(row):
+        if should_skip_eval_row(row, include_multi_tool=include_multi_tool):
             continue
         query = row.get("query", "")
-        gt_calls = row.get("expected_tool_calls", []) or []
-        gt_tool = gt_calls[0].get("name") if gt_calls else None
-        gt_args = gt_calls[0].get("arguments", {}) if gt_calls else {}
+        gt_calls = _expected_calls(row)
+        gt_tool = gt_calls[0][0] if gt_calls else None
+        gt_args = gt_calls[0][1] if gt_calls else {}
         expected_type = get_expected_type(row)
         difficulty = row.get("difficulty", "unknown")
         category = row.get("category", "unknown")
+        ordered = bool(row.get("ordered_tool_calls"))
+        history = row.get("history", []) or []
         audio_path = None
         raw_audio = row.get("query_audio", "")
         if raw_audio:
             ap = eval_dir / raw_audio
             if ap.exists():
                 audio_path = str(ap)
-        rows_meta.append((row, query, gt_tool, gt_args, expected_type, difficulty, category, audio_path))
+        rows_meta.append((row, query, gt_calls, gt_tool, gt_args, expected_type, difficulty, category, audio_path, ordered, history))
     n_total = len(rows_meta)
 
     # Process in mini-batches
     for batch_start in range(0, n_total, batch_size):
         chunk = rows_meta[batch_start: batch_start + batch_size]
         b_queries  = [m[1] for m in chunk]
-        b_audios   = [m[7] for m in chunk]
+        b_audios   = [m[8] for m in chunk]
+        b_histories = [m[10] for m in chunk]
 
         # Print "processing" line(s) before the batch runs
-        for i, (row, query, gt_tool, gt_args, expected_type, difficulty, category, audio_path) in enumerate(chunk):
+        for i, (row, query, gt_calls, gt_tool, gt_args, expected_type, difficulty, category, audio_path, ordered, history) in enumerate(chunk):
             idx = batch_start + i
             if audio_path:
                 src = "[audio]"
@@ -367,13 +458,14 @@ def eval_file(
 
         preds = generate_batch(
             model, processor, system_prompt,
-            b_queries, max_new_tokens, temperature, b_audios,
+            b_queries, max_new_tokens, temperature, b_audios, b_histories,
         )
 
-        for i, (row, query, gt_tool, gt_args, expected_type, difficulty, category, audio_path) in enumerate(chunk):
+        for i, (row, query, gt_calls, gt_tool, gt_args, expected_type, difficulty, category, audio_path, ordered, history) in enumerate(chunk):
             idx = batch_start + i
             pred = preds[i]
-            pred_tool, pred_args, pred_type = parse_action(pred)
+            pred_calls, pred_type = parse_actions(pred)
+            pred_tool, pred_args = pred_calls[0] if pred_calls else (None, None)
 
             # Per-sample result
             type_ok = "✓" if pred_type == expected_type else "✗"
@@ -388,6 +480,7 @@ def eval_file(
             sm.clarify_pred = int(pred_type == "Clarify")
             sm.parse_fail = int(pred_type == "ParseFail")
             sm.type_correct = int(pred_type == expected_type)
+            sm.multi_tool_total = int(len(gt_calls) > 1)
 
             if expected_type == "Reject":
                 if pred_type == "Reject":
@@ -401,9 +494,10 @@ def eval_file(
                     sm.args_em = 1
             else:  # Action
                 if pred_type == "Action":
-                    tool_match, args_match = is_action_match(query, pred_tool, pred_args, gt_tool, gt_args)
+                    tool_match, args_match = are_action_calls_match(query, pred_calls, gt_calls, ordered=ordered)
                     sm.tool_hit = int(tool_match)
                     sm.args_em = int(args_match)
+                    sm.multi_tool_args_em = int(len(gt_calls) > 1 and args_match)
 
             # Collect & print errors
             err_type = None
@@ -427,9 +521,15 @@ def eval_file(
                         "expected_type": expected_type,
                         "gt_tool": gt_tool,
                         "gt_args": gt_args,
+                        "expected_tool_calls": [
+                            {"name": tool, "arguments": args} for tool, args in gt_calls
+                        ],
                         "pred_type": pred_type,
                         "pred_tool": pred_tool,
                         "pred_args": pred_args,
+                        "pred_tool_calls": [
+                            {"name": tool, "arguments": args} for tool, args in pred_calls
+                        ],
                         "pred_raw": pred[:300],
                         "difficulty": difficulty,
                         "category": category,
@@ -473,6 +573,8 @@ def _fmt_summary(m: Metric) -> str:
         parts.append(f"clarify={m.clarify_hit}/{m.clarify_pred}")
     if m.parse_fail:
         parts.append(f"parse_fail={m.parse_fail}")
+    if m.multi_tool_total:
+        parts.append(f"multi_tool_args_em={m.multi_tool_args_em}/{m.multi_tool_total}")
     return " | ".join(parts)
 
 
@@ -497,6 +599,7 @@ def run_batch(args, model, processor, system_prompt: str) -> None:
             args.max_per_file, args.show_errors,
             by_difficulty, by_category, errors,
             batch_size=args.batch_size,
+            include_multi_tool=args.include_multi_tool,
         )
         total += m
         per_file[fname] = m
@@ -608,6 +711,11 @@ def build_parser() -> argparse.ArgumentParser:
     b.add_argument("--batch-size", type=int, default=1,
                    help="Samples per forward pass (default 1). Try 4-8 to improve GPU utilization.")
     b.add_argument("--report", default="", help="Output JSON report path (default: eval_report_<ts>.json).")
+    b.add_argument(
+        "--include-multi-tool",
+        action="store_true",
+        help="Score rows with multiple expected_tool_calls instead of masking them from single-tool eval.",
+    )
 
     # single
     s = sub.add_parser("single", parents=[common], help="Single prompt inference.")

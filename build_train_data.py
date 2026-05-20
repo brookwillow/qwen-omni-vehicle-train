@@ -189,11 +189,16 @@ def is_tool_call_content(content: str) -> bool:
         data = json.loads(content)
     except json.JSONDecodeError:
         return False
-    if not isinstance(data, dict) or not isinstance(data.get("name"), str):
-        return False
-    if data["name"] == "NoiseDoNotAct":
-        return True
-    return "arguments" in data
+    if isinstance(data, dict) and isinstance(data.get("name"), str):
+        if data["name"] == "NoiseDoNotAct":
+            return True
+        return "arguments" in data
+    if isinstance(data, list):
+        return all(
+            isinstance(item, dict) and isinstance(item.get("name"), str) and "arguments" in item
+            for item in data
+        )
+    return False
 
 
 NUMERIC_VALUE_RE = re.compile(r"^\d+(\.\d+)?%?$")
@@ -214,24 +219,36 @@ def load_tool_schema(tools_path: str) -> dict:
     return schema
 
 
-def _parse_tool_call(content: str):
-    """Parse tool call from assistant message, returns (tool_name, args_dict)."""
+def _parse_tool_calls(content: str):
+    """Parse one or more tool calls from assistant content."""
     try:
         data = json.loads(content.strip())
     except json.JSONDecodeError:
         data = None
     if isinstance(data, dict) and isinstance(data.get("name"), str):
         args = data.get("arguments")
-        return data["name"], args if isinstance(args, dict) else None
+        return [(data["name"], args if isinstance(args, dict) else None)]
+    if isinstance(data, list):
+        calls = []
+        for item in data:
+            if (
+                not isinstance(item, dict)
+                or not isinstance(item.get("name"), str)
+                or "arguments" not in item
+            ):
+                return []
+            args = item.get("arguments")
+            calls.append((item["name"], args if isinstance(args, dict) else None))
+        return calls
     m = re.match(r"Action:\s*(\S+)\s*\nAction Input:\s*(\{.*\})", content, re.DOTALL)
     if not m:
-        return None, None
+        return []
     tool_name = m.group(1).strip()
     try:
         args = json.loads(m.group(2))
     except json.JSONDecodeError:
-        return tool_name, None
-    return tool_name, args
+        return [(tool_name, None)]
+    return [(tool_name, args)]
 
 
 def validate_sample_schema(sample: dict, schema: dict) -> list[str]:
@@ -244,39 +261,53 @@ def validate_sample_schema(sample: dict, schema: dict) -> list[str]:
         if msg.get("role") != "assistant":
             continue
         content = msg.get("content", "").strip()
-        if not (content.startswith("{") or content.startswith("Action:")):
+        if not (content.startswith(("{", "[")) or content.startswith("Action:")):
             continue
-        tool_name, args = _parse_tool_call(content)
-        if tool_name is None:
+        tool_calls = _parse_tool_calls(content)
+        if not tool_calls:
+            if content.startswith("["):
+                try:
+                    data = json.loads(content)
+                except json.JSONDecodeError:
+                    data = None
+                is_toolish_array = isinstance(data, list) and any(
+                    isinstance(item, dict)
+                    and (item.get("name") in schema or "arguments" in item)
+                    for item in data
+                )
+                if not is_toolish_array:
+                    continue
+            errors.append("failed to parse tool call content")
             continue
-        if tool_name not in schema:
-            errors.append(f"unknown tool {tool_name!r}")
-            continue
-        if tool_name == "NoiseDoNotAct":
-            continue
-        if args is None:
-            errors.append(f"{tool_name}: failed to parse arguments")
-            continue
-        s = schema[tool_name]
-        for req in s["required"]:
-            if req not in args:
-                errors.append(f"{tool_name}: missing required field {req!r}")
-        for param, val in args.items():
-            if param not in s["props"]:
-                errors.append(f"{tool_name}: unknown field {param!r}")
+        for tool_name, args in tool_calls:
+            if tool_name not in schema:
+                errors.append(f"unknown tool {tool_name!r}")
                 continue
-            prop = s["props"][param]
-            if "enum" not in prop:
+            if tool_name == "NoiseDoNotAct":
                 continue
-            if val in prop["enum"]:
+            if args is None:
+                errors.append(f"{tool_name}: failed to parse arguments")
                 continue
-            # Allow numeric/percentage strings for value-like fields
-            if param == "value" and NUMERIC_VALUE_RE.match(str(val)):
-                continue
-            desc = prop.get("description", "")
-            if ("numeric" in desc or "percentage" in desc) and NUMERIC_VALUE_RE.match(str(val)):
-                continue
-            errors.append(f"{tool_name}.{param}: invalid enum {val!r}")
+            s = schema[tool_name]
+            for req in s["required"]:
+                if req not in args:
+                    errors.append(f"{tool_name}: missing required field {req!r}")
+            for param, val in args.items():
+                if param not in s["props"]:
+                    errors.append(f"{tool_name}: unknown field {param!r}")
+                    continue
+                prop = s["props"][param]
+                if "enum" not in prop:
+                    continue
+                if val in prop["enum"]:
+                    continue
+                # Allow numeric/percentage strings for value-like fields
+                if param == "value" and NUMERIC_VALUE_RE.match(str(val)):
+                    continue
+                desc = prop.get("description", "")
+                if ("numeric" in desc or "percentage" in desc) and NUMERIC_VALUE_RE.match(str(val)):
+                    continue
+                errors.append(f"{tool_name}.{param}: invalid enum {val!r}")
     return errors
 
 

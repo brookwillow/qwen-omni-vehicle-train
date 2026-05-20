@@ -20,6 +20,7 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 pip install "ms-swift[all]" modelscope peft
 pip install "qwen-omni-utils[decord]" soundfile
 pip install fastapi uvicorn pydantic   # serve.py 推理服务依赖
+pip install openai                     # Qwen Plus verifier / AI Hub 调用依赖
 ```
 
 ## 数据流水线
@@ -40,13 +41,16 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 
 | 文件 | 说明 |
 |------|------|
-| `data/system-prompt.txt` | 紧凑版 System Prompt（~5.5K chars，基于当前工具白名单生成） |
-| `data/tools.json` | 38 个车载工具定义（新版 `inputSchema` 格式） |
+| `data/system-prompt.txt` | 紧凑版 System Prompt（~5.7K chars，基于当前工具白名单生成） |
+| `data/tools.json` | 39 个车载工具定义（新版 `inputSchema` 格式） |
 | `data/splits/by_tool/*.jsonl` | 按工具拆分的训练数据；每个工具文件内已拆为 `user -> JSON tool call` 决策样本和独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本；`AppControl` 只覆盖明确打开应用的意图，播放内容/导航到目的地等应用内任务走 `Reject`；`PhoneControl.jsonl` 包含小鹏客服、小鹏救援、儿童手表等官方默认联系人样本；其中 `NoiseDoNotAct.jsonl` 当前为 450 条 |
 | `data/splits/clarify.jsonl` | required 字段缺失后的自然语言追问样本 |
 | `data/splits/edge_case.jsonl` | 多轮上下文边界、易混淆与任务列表选择样本 |
 | `data/splits/multiturn.jsonl` | 最多三轮纯文本历史上下文样本；历史可来自导航/音乐/新闻/百科/AIGC/天气等外部域，当前轮优先，只有代词、省略、纠错、延续或查询缺槽时才参考历史补全 |
+| `data/splits/orchestration.jsonl` | feature 分支复杂任务编排样本：并行指令、多工具 JSON 数组、显式多步、最近意图继承、列表选择和模糊导航边界 |
 | `data/splits/reject.jsonl` | 单轮 + 多轮硬负例 |
+| `data/rl/memory_tasks.jsonl` | 记忆压缩/使用 RL MVP 种子数据（500 条，不参与默认 SFT 合并） |
+| `data/rl/memory_verifier_prompt.md` | LLM-as-Verifier 评分 prompt，用于从 memory task 候选输出构造偏好对 |
 | `data/train_final.jsonl` | 最终训练数据（含 SP） |
 | `data/eval/` | 评测数据集（当前工具 schema 已清洗，媒体类无新版等价工具样本已置空/移除） |
 
@@ -58,9 +62,10 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 | Clarify | 189 | 已拆为两类样本：`user -> 追问 TTS`（94 条，教模型何时追问）+ 完整 4 轮 `user -> 追问 -> 用户补齐 -> tool call`（95 条，教模型追问后如何响应）；已移除纯位置追问（音区可自动判定位置）与意图明确的方向性追问（如"太晒→打开/关闭遮阳帘"）；配合 final-assistant 标签监督，两类样本均能被正确监督 |
 | Edge case | 100 | 多轮当前轮边界、查询 vs 控制、popup/task 列表 `GeneralSelect` 等易混淆样本 |
 | Multiturn | 370 | 最多三轮纯文本历史；历史允许外部域文本；当前轮输出分布：工具 243 条、NoiseDoNotAct 79 条、Reject 36 条、自然语言 TTS 12 条 |
+| Orchestration | 30 | feature 分支复杂任务编排样本；包含多工具 JSON 数组输出、显式多步、最近意图继承、列表选择与模糊导航拒识 |
 | Reject | 1135 | 单轮 + 多轮硬负例（已合并），最后一条 assistant 均为 `Reject`；已抽稀家居控制负例并移除高风险车控状态拒识 |
 
-`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 9091 条；统计时多轮样本按最后一个有效决策标签计入对应类别。
+`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 9121 条；统计时多轮样本按最后一个有效决策标签计入对应类别。当前输出类型分布为 Action 5553、TTS 2394、Reject 1174。
 
 ### Hard Case 加权
 
@@ -72,6 +77,164 @@ python build_train_data.py \
 ```
 
 推荐流程：先用 `scripts/analyze_eval_errors.py --backlog-md` 生成错误族补强清单，再为 P0/P1 错误族补充非评估原句 hard case；训练时对这些 hard case 文件做 2-4 倍采样，避免新增样本在 9K 级训练集中被稀释。
+
+### 记忆 RL MVP 数据
+
+feature 分支新增独立的记忆压缩/使用 RL 种子数据，不进入默认 SFT 训练集：
+
+```bash
+python scripts/generate_memory_rl_tasks.py \
+  --output data/rl/memory_tasks.jsonl \
+  --count 500 \
+  --seed 42
+```
+
+`data/rl/memory_tasks.jsonl` 当前为 500 条，历史长度分布为：2-3 轮 150 条、4-6 轮 200 条、7-10 轮 100 条、11-12 轮 50 条。覆盖 `recent_related_inheritance`、`action_flip`、`position_override`、`current_override`、`cross_tool_interrupt`、`noise_no_inherit`、`clarify_missing` 七类核心场景。推荐后续链路是：基于每条 memory task 的 `history + current_query` 调用当前 SFT 推理服务采样多个最终 assistant 候选输出，用 `data/rl/memory_verifier_prompt.md` 调用 LLM verifier 打分，仅保留高置信 `score >= 8` vs `score <= 4` 的 chosen/rejected 偏好对，再进入 DPO/ORPO 训练。
+
+生成 DPO 偏好数据：
+
+```bash
+export QWEN_PLUS_API_KEY="<your-bailian-api-key>"
+
+# 1) 先调用当前 SFT 推理服务，为每条 memory task 采样多个候选。
+python scripts/generate_memory_candidates.py \
+  --tasks data/rl/memory_tasks.jsonl \
+  --server http://10.95.64.153:8000/v1 \
+  --model qwen-omni-lora \
+  --output data/rl/memory_candidates.jsonl \
+  --num-candidates 6 \
+  --temperature 0.7
+
+# 2) 再调用 qwen3.6-plus verifier 对候选打分，筛出 chosen/rejected。
+python scripts/build_memory_preferences.py \
+  --tasks data/rl/memory_tasks.jsonl \
+  --candidate-file data/rl/memory_candidates.jsonl \
+  --verifier-prompt data/rl/memory_verifier_prompt.md \
+  --output data/rl/memory_preferences.jsonl \
+  --audit-output data/rl/memory_preferences_audit.jsonl \
+  --model qwen3.6-plus \
+  --workers 4
+
+# 没有 SFT 服务时，也可以先用 synthetic 模式 bootstrapping：
+python scripts/build_memory_preferences.py \
+  --tasks data/rl/memory_tasks.jsonl \
+  --output data/rl/memory_preferences.jsonl
+```
+
+`scripts/build_memory_preferences.py` 使用 OpenAI SDK 调用百炼/DashScope 兼容 `/chat/completions` 接口，默认 base URL 为 `https://dashscope.aliyuncs.com/compatible-mode/v1`，默认模型为 `qwen3.6-plus`，可通过 `--base-url` / `QWEN_PLUS_BASE_URL` 和 `--model` / `QWEN_PLUS_MODEL` 覆盖。API key 默认从 `QWEN_PLUS_API_KEY` 读取；凭证禁止写入仓库文件。输出的 `memory_preferences.jsonl` 可直接作为 `train_memory_dpo_lora.py --preference-file` 输入；`memory_preferences_audit.jsonl` 保留每个候选的 verifier 评分，并在顶层写出 `kept`、`skip_reason`、`best_score`、`worst_score` 和 `score_gap`，方便统计未保留原因。
+
+默认情况下，传入 `--candidate-file` 时也会为每条 task 额外混入一个 `synthetic_hard_negative`，避免模型采样候选过少时无法形成 chosen/rejected 对；synthetic chosen/rejected 均使用最终 assistant 输出形态，即工具 JSON、`Reject`、`NoiseDoNotAct` 或自然语言澄清，不再使用中间态 memory decision JSON。如果只想使用模型真实候选，可加 `--no-synthetic-negative`。`--output` 和 `--audit-output` 默认会覆盖旧文件，避免重复样本污染训练；确实需要追加时再显式传 `--append-output`。
+
+偏好训练采用“方案 2”：从已有 SFT LoRA 初始化继续训练，原 SFT 产物不被覆盖，最终输出一个新的 DPO LoRA。线上只加载 `base model + 新 DPO LoRA`，不需要同时加载两个 LoRA。
+
+```bash
+python train_memory_dpo_lora.py \
+  --model /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
+  --init-lora-dir lora_output_sft_0520 \
+  --preference-file data/rl/memory_preferences.jsonl \
+  --output-dir lora_output_sft_dpo_memory_0520 \
+  --lr 5e-6 \
+  --beta 0.1 \
+  --epochs 1 \
+  --train-batch-size 1 \
+  --grad-accum 8 \
+  --reference-mode reference_free
+```
+
+`train_memory_dpo_lora.py` 默认使用 reference-free DPO-style loss，适合先在单卡上快速验证；服务器显存充足时可用 `--reference-mode frozen_init` 加载一份冻结的 `--init-lora-dir` 作为 reference，代价是显存约翻倍。DPO 阶段学习率和训练步数要保守，训练后必须同时回归原始 eval、multiturn、orchestration 和 memory 专项样本；若单工具指标回退，优先降低 `--lr`、减少 epochs，或提高 preference 置信阈值。
+
+### 记忆 RL 操作顺序
+
+后续按下面顺序逐步执行：
+
+```bash
+# 0. 进入环境
+conda activate qwen-omni
+
+# 1. 生成/刷新 memory task 种子数据（已有 data/rl/memory_tasks.jsonl 时可跳过）
+python scripts/generate_memory_rl_tasks.py \
+  --output data/rl/memory_tasks.jsonl \
+  --count 500 \
+  --seed 42
+
+# 2. 启动当前 SFT 推理服务，加载你要作为 DPO 起点的 SFT LoRA
+python serve.py \
+  --model-dir /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
+  --lora-dir lora_output_sft_0520 \
+  --host 0.0.0.0 \
+  --port 8000
+
+# 3. 从当前 SFT 服务采样候选 assistant 输出
+python scripts/generate_memory_candidates.py \
+  --tasks data/rl/memory_tasks.jsonl \
+  --server http://127.0.0.1:8000/v1 \
+  --model qwen-omni-lora \
+  --output data/rl/memory_candidates.jsonl \
+  --num-candidates 6 \
+  --temperature 0.7
+
+# 4. 抽检候选，确认 candidates 中既有正确工具调用，也有模型真实错误
+head -3 data/rl/memory_candidates.jsonl
+
+# 5. 配置 verifier 凭证
+export QWEN_PLUS_API_KEY="<your-bailian-api-key>"
+
+# 6. 用 qwen3.6-plus verifier 给候选打分并筛出偏好对
+python scripts/build_memory_preferences.py \
+  --tasks data/rl/memory_tasks.jsonl \
+  --candidate-file data/rl/memory_candidates.jsonl \
+  --verifier-prompt data/rl/memory_verifier_prompt.md \
+  --output data/rl/memory_preferences.jsonl \
+  --audit-output data/rl/memory_preferences_audit.jsonl \
+  --model qwen3.6-plus \
+  --workers 4
+
+# 7. 抽检 preference 和 audit
+wc -l data/rl/memory_preferences.jsonl
+head -3 data/rl/memory_preferences.jsonl
+head -3 data/rl/memory_preferences_audit.jsonl
+
+# 8. 基于旧 SFT LoRA 继续 DPO-style 训练，输出新 LoRA
+python train_memory_dpo_lora.py \
+  --model /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
+  --init-lora-dir lora_output_sft_0520 \
+  --preference-file data/rl/memory_preferences.jsonl \
+  --output-dir lora_output_sft_dpo_memory_0520 \
+  --lr 5e-6 \
+  --beta 0.1 \
+  --epochs 1 \
+  --train-batch-size 1 \
+  --grad-accum 8 \
+  --reference-mode reference_free
+
+# 9. 用新 LoRA 启服务做人工检查
+python serve.py \
+  --model-dir /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
+  --lora-dir lora_output_sft_dpo_memory_0520 \
+  --host 0.0.0.0 \
+  --port 8000
+
+# 10. 回归评估，至少跑全量 eval、多轮 eval、复杂编排 eval
+python eval.py batch \
+  --model-dir /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
+  --lora-dir lora_output_sft_dpo_memory_0520 \
+  --report eval_report_dpo_memory.json
+
+python eval.py batch \
+  --model-dir /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
+  --lora-dir lora_output_sft_dpo_memory_0520 \
+  --pattern multiturn_test.json \
+  --report eval_report_dpo_memory_multiturn.json
+
+python eval.py batch \
+  --model-dir /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
+  --lora-dir lora_output_sft_dpo_memory_0520 \
+  --pattern orchestration_test.json \
+  --include-multi-tool \
+  --report eval_report_dpo_memory_orchestration.json
+```
+
+判断是否继续扩大数据：如果第 10 步全量单工具指标没有明显回退，并且多轮/长历史错误下降，再把 `--count` 从 500 扩到 2000；如果单工具 args 或 tool_acc 回退，优先降低 DPO `--lr`、减少 epochs，或提高 `build_memory_preferences.py` 的 `--min-chosen-score` / `--min-gap`。
 
 ## 训练配置
 
@@ -186,6 +349,7 @@ tail -f /tmp/qwen_omni_serve.log
 需要每次启动覆盖旧日志时加 `--log-file-mode w`；需要关闭文件日志时传 `--log-file ""`。
 服务端在送模前会屏蔽历史轮次里的工具调用和 `tool` 结果，包括 `assistant.tool_calls` 以及历史里直接写成 JSON 工具调用的 `assistant.content`；仅当工具链出现在最新用户消息之后时才保留。保留的 `assistant.tool_calls`、旧 `Action:` 文本和 `tool` JSON 结果会统一压缩成训练数据使用的一行紧凑 JSON，避免推理格式与训练格式不一致。
 模型输出 `Reject` 或 `NoiseDoNotAct` 时，服务端只打印诊断日志，不向客户端返回文本或工具调用。
+feature 分支支持模型输出一行 JSON 数组来表达多个并行工具调用；`serve.py` 会转换为 OpenAI 兼容响应中的多个 `tool_calls`，并保留数组顺序作为 `tool_calls[].index`。
 
 可选开启实验性的 system prompt KV cache：
 
@@ -301,6 +465,14 @@ python eval.py batch \
   --batch-size 4 \
   --report eval_report.json
 
+# feature 分支复杂任务编排评测（计入多工具 JSON 数组）
+python eval.py batch \
+  --model-dir models/Qwen2.5-Omni-3B \
+  --lora-dir lora_output \
+  --pattern orchestration_test.json \
+  --include-multi-tool \
+  --report eval_orchestration_report.json
+
 # 单条测试（文本）
 python eval.py single \
   --model-dir models/Qwen2.5-Omni-3B \
@@ -320,12 +492,14 @@ python eval.py single \
 | `type_acc` | 响应类型准确率（Action/Clarify/Reject 是否选对） |
 | `tool_acc` | 工具名称准确率（Action 类型下工具名匹配） |
 | `args_em` | 参数精确匹配率（工具名 + 所有参数完全一致） |
+| `multi_tool_args_em` | 多工具样本中所有工具和参数完全匹配的数量（仅 `--include-multi-tool` 计入多工具行时有意义） |
 | `reject_hit` | Reject 命中数（正确拒绝 / 预测拒绝） |
 | `clarify_hit` | Clarify 命中数（正确追问 / 预测追问） |
 | `parse_fail` | 输出格式解析失败数 |
 
 评测脚本支持少量业务等价答案：例如「车里太闷了」这类未明确指定车窗或空调的通风意图，`ClimateControl` 切外循环和 `WindowControl` 打开车窗都计为正确。
 评测和服务端都不做规则后处理修正预测工具或参数，指标与线上响应都反映模型原始输出。
+默认单工具评测仍会 mask 多意图/多工具样本；feature 分支需要评估复杂任务编排时，增加 `--include-multi-tool`，此时 JSON 数组形式的多工具输出会按无序集合匹配，样本设置 `ordered_tool_calls: true` 时按顺序匹配。
 
 ### 评测维度
 
@@ -342,11 +516,11 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 - 所有错误样本（含 query、gt、pred、err_type）
 - 解析后的工具名和参数保持模型原始输出，不做规则后处理修正
 - `position` 为可选参数；用户未明确位置时不因缺少位置追问，直接省略 `position`，由工具侧按说话人位置补全
-- 多意图样本暂不计入单工具指标；`eval.py` 会跳过 `intent/sub_category=多意图` 或包含多个 `expected_tool_calls` 的样本
+- 多意图样本默认不计入单工具指标；`eval.py` 会跳过 `intent/sub_category=多意图` 或包含多个 `expected_tool_calls` 的样本；传入 `--include-multi-tool` 后会计入并解析 JSON 数组多工具输出
 
 ### 评测数据
 
-- 路径：`data/eval/*_test.json`（36 个文件，1778 条样本；其中 169 条多意图/多工具样本被单工具评测 mask）
+- 路径：`data/eval/*_test.json`（37 个文件，1792 条样本；其中 177 条多意图/多工具样本默认被单工具评测 mask）
 - 音频：`data/eval/audio/`（1599 条有对应 wav 文件）
 - 输入方式：有音频文件时自动用音频输入，无音频时回退到文本
 - 支持字段：`expected_type`（显式指定 Action/Clarify/Reject）
@@ -357,9 +531,13 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 |------|------|
 | `build_train_data.py` | 合并 splits + 注入 SP → 训练集 |
 | `train_thinker_lora.py` | LoRA 训练，含冻结审计 + 训练指标记录 |
+| `train_memory_dpo_lora.py` | 从已有 SFT LoRA 初始化，基于 memory chosen/rejected 偏好数据继续做 DPO-style LoRA 训练 |
 | `serve.py` | **OpenAI 兼容推理服务**（FastAPI，支持文本+音频） |
 | `eval.py` | 统一评测（batch / single），音频输入 + 多维度统计，支持 `--batch-size` 批量推理 |
 | `scripts/analyze_eval_errors.py` | 读取 `eval_report*.json`，按类型、工具、文件、类别聚类错误；可用 `--backlog-md` 输出训练补强任务清单 |
+| `scripts/build_memory_preferences.py` | 调用 Qwen Plus verifier 为 memory task/candidate 打分，生成 DPO chosen/rejected 偏好数据 |
+| `scripts/generate_memory_candidates.py` | 调用当前 SFT 推理服务，为 memory task 采样多个最终 assistant 候选输出 |
+| `scripts/generate_memory_rl_tasks.py` | 生成记忆压缩/使用 RL 种子任务，用于 LLM verifier 偏好数据构建 |
 | `scripts/validate_splits.py` | 校验 split 样本消息结构、工具调用和响应形态 |
 | `scripts/validate_by_tool_schema.py` | 校验 `data/splits/by_tool/*.jsonl` 是否符合 `data/tools.json` schema |
 | `scripts/generate_train_report.py` | 从 `train_metrics.jsonl` 生成 HTML 训练可视化报告 |

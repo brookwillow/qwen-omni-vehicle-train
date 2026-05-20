@@ -106,3 +106,63 @@ def test_eval_skips_multi_intent_rows(monkeypatch):
             ],
         }
     )
+
+
+def test_eval_can_include_multi_tool_rows(monkeypatch):
+    eval_mod = _load_eval_module(monkeypatch)
+
+    row = {
+        "intent": "多意图",
+        "expected_tool_calls": [
+            {"name": "WindowControl", "arguments": {}},
+            {"name": "LightControl", "arguments": {}},
+        ],
+    }
+
+    assert eval_mod.should_skip_eval_row(row)
+    assert not eval_mod.should_skip_eval_row(row, include_multi_tool=True)
+
+
+def test_parse_actions_accepts_json_array(monkeypatch):
+    eval_mod = _load_eval_module(monkeypatch)
+
+    calls, pred_type = eval_mod.parse_actions(
+        '[{"name":"WindowControl","arguments":{"action":"打开","device":"车窗"}},'
+        '{"name":"LightControl","arguments":{"action":"关闭","device":"阅读灯"}}]'
+    )
+
+    assert pred_type == "Action"
+    assert calls == [
+        ("WindowControl", {"action": "打开", "device": "车窗"}),
+        ("LightControl", {"action": "关闭", "device": "阅读灯"}),
+    ]
+
+
+def test_multi_tool_match_is_orderless_by_default(monkeypatch):
+    eval_mod = _load_eval_module(monkeypatch)
+
+    pred = [
+        ("LightControl", {"action": "关闭", "device": "阅读灯"}),
+        ("WindowControl", {"action": "打开", "device": "车窗"}),
+    ]
+    gt = [
+        ("WindowControl", {"action": "打开", "device": "车窗"}),
+        ("LightControl", {"action": "关闭", "device": "阅读灯"}),
+    ]
+
+    assert eval_mod.are_action_calls_match("打开车窗，关闭阅读灯", pred, gt) == (True, True)
+
+
+def test_multi_tool_match_can_require_order(monkeypatch):
+    eval_mod = _load_eval_module(monkeypatch)
+
+    pred = [
+        ("LightControl", {"action": "关闭", "device": "阅读灯"}),
+        ("WindowControl", {"action": "打开", "device": "车窗"}),
+    ]
+    gt = [
+        ("WindowControl", {"action": "打开", "device": "车窗"}),
+        ("LightControl", {"action": "关闭", "device": "阅读灯"}),
+    ]
+
+    assert eval_mod.are_action_calls_match("先打开车窗，再关闭阅读灯", pred, gt, ordered=True) == (False, False)

@@ -431,6 +431,30 @@ def test_parse_model_output_preserves_model_tool_call_arguments():
     )
 
 
+def test_parse_model_output_supports_multi_tool_json_array():
+    raw = (
+        '[{"name":"WindowControl","arguments":{"action":"打开","device":"车窗"}},'
+        '{"name":"LightControl","arguments":{"action":"关闭","device":"阅读灯"}}]'
+    )
+
+    parsed = serve.parse_model_output(raw)
+    choice = serve._choice_from_parsed_output(parsed)
+
+    assert parsed == (
+        "tool_calls",
+        [
+            ("WindowControl", '{"action":"打开","device":"车窗"}'),
+            ("LightControl", '{"action":"关闭","device":"阅读灯"}'),
+        ],
+    )
+    assert choice.finish_reason == "tool_calls"
+    assert [call.index for call in choice.message.tool_calls] == [0, 1]
+    assert [call.function.name for call in choice.message.tool_calls] == [
+        "WindowControl",
+        "LightControl",
+    ]
+
+
 def test_save_request_artifacts_writes_model_request(tmp_path, monkeypatch):
     monkeypatch.setattr(serve, "_SAVE_DIR", tmp_path)
     audio_path = tmp_path / "input.wav"
