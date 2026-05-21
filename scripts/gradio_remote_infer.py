@@ -4,25 +4,179 @@
 from __future__ import annotations
 
 import argparse
+import base64
 import json
 import os
+import platform
 import shutil
 import subprocess
 import tempfile
+import urllib.error
+import urllib.request
 import wave
 from pathlib import Path
 from typing import Any
 
-from record_remote_infer import (
-    DEFAULT_SERVER,
-    analyze_wav,
-    build_payload,
-    post_json,
-    record_wav,
-)
 
-
+DEFAULT_SERVER = os.environ.get("QWEN_OMNI_SERVER_URL", "http://10.95.64.153:8000")
 MIN_AUDIO_RMS = 5
+
+
+def analyze_wav(path: Path) -> dict[str, float | int]:
+    """Return simple PCM WAV stats used to catch empty/silent recordings."""
+    with wave.open(str(path), "rb") as wav:
+        channels = wav.getnchannels()
+        sample_width = wav.getsampwidth()
+        sample_rate = wav.getframerate()
+        frames = wav.getnframes()
+        raw = wav.readframes(frames)
+
+    stats: dict[str, float | int] = {
+        "channels": channels,
+        "sample_width": sample_width,
+        "sample_rate": sample_rate,
+        "frames": frames,
+        "duration_sec": round(frames / sample_rate, 3) if sample_rate else 0,
+        "size_bytes": path.stat().st_size,
+        "rms": 0,
+        "peak_abs": 0,
+    }
+    if not raw or sample_width != 2:
+        return stats
+
+    sample_count = len(raw) // 2
+    if sample_count <= 0:
+        return stats
+
+    sum_sq = 0
+    peak = 0
+    for i in range(0, len(raw), 2):
+        sample = int.from_bytes(raw[i:i + 2], byteorder="little", signed=True)
+        abs_sample = abs(sample)
+        peak = max(peak, abs_sample)
+        sum_sq += sample * sample
+    stats["rms"] = round((sum_sq / sample_count) ** 0.5, 2)
+    stats["peak_abs"] = peak
+    return stats
+
+
+def _run(cmd: list[str]) -> None:
+    try:
+        subprocess.run(cmd, check=True)
+    except FileNotFoundError as exc:
+        raise RuntimeError(f"recorder not found: {cmd[0]}") from exc
+    except subprocess.CalledProcessError as exc:
+        raise RuntimeError(f"recorder failed with exit code {exc.returncode}: {' '.join(cmd)}") from exc
+
+
+def _record_with_ffmpeg_avfoundation(path: Path, duration: float, sample_rate: int) -> bool:
+    if not shutil.which("ffmpeg"):
+        return False
+    cmd = [
+        "ffmpeg", "-y",
+        "-f", "avfoundation",
+        "-i", ":0",
+        "-ar", str(sample_rate),
+        "-ac", "1",
+        "-t", str(duration),
+        "-f", "wav",
+        str(path),
+    ]
+    try:
+        result = subprocess.run(cmd, capture_output=True, timeout=duration + 15)
+        return result.returncode == 0 and path.exists() and path.stat().st_size > 1024
+    except (FileNotFoundError, subprocess.TimeoutExpired):
+        return False
+
+
+def _record_with_sounddevice(path: Path, duration: float, sample_rate: int) -> bool:
+    try:
+        import sounddevice as sd
+        import soundfile as sf
+    except ImportError:
+        return False
+
+    devices = sd.query_devices()
+    input_devices = [
+        idx for idx, dev in enumerate(devices)
+        if int(dev.get("max_input_channels", 0)) > 0
+    ]
+    if not input_devices:
+        return False
+
+    default_input = sd.default.device[0] if isinstance(sd.default.device, (list, tuple)) else sd.default.device
+    device = default_input if isinstance(default_input, int) and default_input >= 0 else input_devices[0]
+
+    audio = sd.rec(int(duration * sample_rate), samplerate=sample_rate, channels=1, dtype="int16", device=device)
+    sd.wait()
+    sf.write(str(path), audio, sample_rate, subtype="PCM_16")
+    return True
+
+
+def record_wav(path: Path, duration: float, sample_rate: int) -> None:
+    system = platform.system().lower()
+    if system == "darwin":
+        if shutil.which("afrecord"):
+            _run(["afrecord", "-f", "WAVE", "-d", str(duration), "-r", str(sample_rate), "-c", "1", str(path)])
+            return
+        if _record_with_ffmpeg_avfoundation(path, duration, sample_rate):
+            return
+
+    if _record_with_sounddevice(path, duration, sample_rate):
+        return
+
+    if shutil.which("arecord"):
+        _run(["arecord", "-q", "-f", "S16_LE", "-r", str(sample_rate), "-c", "1", "-d", str(int(duration)), str(path)])
+        return
+
+    if shutil.which("rec"):
+        _run(["rec", "-q", "-r", str(sample_rate), "-c", "1", "-b", "16", str(path), "trim", "0", str(duration)])
+        return
+
+    raise RuntimeError(
+        "no local recorder available. Install sounddevice+soundfile, or use macOS afrecord, Linux arecord."
+    )
+
+
+def build_payload(
+    audio_path: Path,
+    model: str,
+    max_tokens: int,
+    temperature: float,
+    hint_text: str,
+    payload_audio_path: Path | None = None,
+) -> dict[str, Any]:
+    encoded_path = payload_audio_path or audio_path
+    audio_b64 = "data:audio/wav;base64," + base64.b64encode(encoded_path.read_bytes()).decode("ascii")
+    content: list[dict[str, Any]] = []
+    if hint_text:
+        content.append({"type": "text", "text": hint_text})
+    content.append({"type": "input_audio", "input_audio": {"data": audio_b64, "format": "wav"}})
+    return {
+        "model": model,
+        "messages": [{"role": "user", "content": content}],
+        "max_tokens": max_tokens,
+        "temperature": temperature,
+    }
+
+
+def post_json(url: str, payload: dict[str, Any], timeout: float) -> dict[str, Any]:
+    data = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+    req = urllib.request.Request(
+        url,
+        data=data,
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            body = resp.read().decode("utf-8")
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"HTTP {exc.code}: {detail}") from exc
+    except urllib.error.URLError as exc:
+        raise RuntimeError(f"request failed: {exc}") from exc
+    return json.loads(body)
 
 
 def _is_16k_mono_pcm16_wav(path: Path) -> bool:

@@ -7,9 +7,67 @@
 基于 Qwen2.5-Omni-3B 的 Thinker-only LoRA 微调，实现车载 ReAct 风格工具调用。
 
 - 基模型：`Qwen2.5-Omni-3B`（`max_position_embeddings=32768`）
-- 训练策略：LoRA (r=8, alpha=16)，仅训练 Thinker（语言路径）
-- 冻结模块：AUT + Talker + Vocoder（通过关键词审计强制保证）
+- 训练策略：LoRA (r=8, alpha=16)，仅保留 Thinker 内的可训练 LoRA；Talker/token2wav 和音频相关模块冻结
+- LoRA 挂载层：Attention 的 `q_proj/k_proj/v_proj/o_proj` + MLP 的 `gate_proj/up_proj/down_proj`
+- 冻结模块：Audio tower + Talker + token2wav/语音生成链路（通过关键词审计和 target module 匹配范围保证）
 - 输出格式：紧凑 JSON 工具调用 / 自然语言 TTS 文本 / `Reject` 三类决策
+
+### 模型结构与参数量简版
+
+以下统计来自直接加载 `Qwen2.5-Omni-3B` checkpoint 后读取模型模块和参数量。`Qwen2.5-Omni-3B` 的“3B”是模型命名口径；完整 Omni checkpoint 实际约 5.54B 参数，因为包含 Thinker 之外的 Talker 和 token2wav 音频生成链路。
+
+| 一级模块 | 类名 | 参数量 | 说明 |
+|---------|------|--------|------|
+| 全模型 | `Qwen2_5OmniForConditionalGeneration` | 5,537,120,640（约 5.537B） | 完整 Omni checkpoint |
+| `thinker` | `Qwen2_5OmniThinkerForConditionalGeneration` | 4,703,464,448（约 4.703B） | 多模态理解 + 文本推理 + LM head，当前 LoRA 可训练参数保留在该模块内 |
+| `talker` | `Qwen2_5OmniTalkerForConditionalGeneration` | 384,604,928（约 384.6M） | 语音生成前段，当前训练冻结 |
+| `token2wav` | `Qwen2_5OmniToken2WavModel` | 449,051,264（约 449.1M） | codec/token 到波形，当前训练冻结 |
+
+`thinker` 内部主要模块：
+
+| 模块路径 | 类名 | 层数/结构 | 参数量 |
+|---------|------|-----------|--------|
+| `thinker.audio_tower` | `Qwen2_5OmniAudioEncoder` | 32 层 audio encoder | 637,676,544（约 637.7M） |
+| `thinker.visual` | `Qwen2_5OmniVisionEncoder` | 32 个 vision blocks | 668,684,288（约 668.7M） |
+| `thinker.model` | `Qwen2_5OmniThinkerTextModel` | 36 层 text decoder | 3,085,938,688（约 3.086B） |
+| `thinker.lm_head` | `Linear` | vocab projection | 311,164,928（约 311.2M） |
+
+`thinker.model` 文本路径结构：
+
+| 模块路径 | 类名 | 参数量 |
+|---------|------|--------|
+| `thinker.model.embed_tokens` | `Embedding` | 311,164,928（约 311.2M） |
+| `thinker.model.layers` | `ModuleList[36]` | 2,774,771,712（约 2.775B） |
+| `thinker.model.norm` | `Qwen2RMSNorm` | 2,048 |
+
+单个 text decoder layer 约 77,076,992 参数，核心结构如下：
+
+| 单层模块 | LoRA 挂载 | 参数量 |
+|---------|-----------|--------|
+| `self_attn.q_proj` | 是 | 4,196,352（约 4.2M） |
+| `self_attn.k_proj` | 是 | 524,544（约 0.5M） |
+| `self_attn.v_proj` | 是 | 524,544（约 0.5M） |
+| `self_attn.o_proj` | 是 | 4,194,304（约 4.2M） |
+| `mlp.gate_proj` | 是 | 22,544,384（约 22.5M） |
+| `mlp.up_proj` | 是 | 22,544,384（约 22.5M） |
+| `mlp.down_proj` | 是 | 22,544,384（约 22.5M） |
+| `input_layernorm/post_attention_layernorm` | 否 | 各 2,048 |
+
+文本路径关键配置：`hidden_size=2048`，`intermediate_size=11008`，`num_hidden_layers=36`，`num_attention_heads=16`，`num_key_value_heads=2`，`max_position_embeddings=32768`，`vocab_size=151936`。
+
+当前 `target_modules=q_proj,k_proj,v_proj,o_proj,gate_proj,up_proj,down_proj` 是按模块名全局匹配。直接读取模型结构可见匹配范围为：`thinker.model` 252 个模块、`thinker.visual` 96 个模块、`thinker.audio_tower` 96 个模块、`talker.model` 168 个模块。训练脚本会通过 `audio,talker,vocoder,audio_decoder,speech_decoder` 关键词把 `thinker.audio_tower` 和 `talker` 相关 LoRA 参数自动冻结；因此最终可训练 LoRA 主要保留在 `thinker.model`，同时包含 `thinker.visual` 中匹配到的 LoRA 参数。当前车控训练以文本/音频指令为主，主要行为收益来自 `thinker.model` 文本 decoder。
+
+`talker` 和 `token2wav` 结构：
+
+| 模块路径 | 类名 | 层数/结构 | 参数量 |
+|---------|------|-----------|--------|
+| `talker.thinker_to_talker_proj` | `Linear` | Thinker hidden states 到 Talker 表示的投影 | 1,835,904（约 1.8M） |
+| `talker.model` | `Qwen2_5OmniTalkerModel` | 24 层 decoder，每层约 14.9M | 375,199,616（约 375.2M） |
+| `talker.codec_head` | `Linear` | codec token projection | 7,569,408（约 7.6M） |
+| `token2wav.code2wav_dit_model` | `Qwen2_5OmniToken2WavDiTModel` | DiT 声学生成模块 | 333,607,760（约 333.6M） |
+| `token2wav.code2wav_bigvgan_model` | `Qwen2_5OmniToken2WavBigVGANModel` | BigVGAN vocoder | 115,443,504（约 115.4M） |
+
+Thinker 到 Talker 之间不是简单传递普通文本字符串，而是经 `talker.thinker_to_talker_proj` 接收 Thinker 的高维 hidden states/语义表示。因此训练 Thinker LoRA 会影响工具 JSON 和文本决策，也可能改变 Talker 接收到的语义分布；冻结 Talker/token2wav 是为了避免语音生成链路被车控数据微调带偏。
 
 ## 环境
 
@@ -25,14 +83,34 @@ pip install fastapi uvicorn pydantic   # serve.py 推理服务依赖
 ## 数据流水线
 
 ```
+SFT 主线
 data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具文件)
   │
-  └─ build_train_data.py ──→ data/train_final.jsonl (注入 SP，打散，可按错误族加权)
+  └─ build_train_data.py ──→ data/train_final.jsonl (注入 SP，schema 校验，打散，可按错误族加权)
                                 │
-                                └─ train_thinker_lora.py ──→ lora_output/
+                                └─ train_thinker_lora.py ──→ lora_output_sft/
+                                                                  │
+                                                                  ├─ eval.py / serve.py
+                                                                  │
+                                                                  └─ scripts/analyze_eval_errors.py
+                                                                              │
+                                                                              └─ 回流修正 data/splits/
+
+可选 DPO 对齐阶段
+data/rl/*_preferences.jsonl  (chosen/rejected 偏好数据产物)
+  │
+  └─ train_memory_dpo_lora.py --init-lora-dir lora_output_sft/
+                                │
+                                └─ lora_output_sft_dpo/ ──→ eval.py / serve.py
 ```
 
-> 注：拆分/增强脚本已归档至 `_archive/`，产物 `data/splits/` 已就绪；`build_train_data.py` 默认递归合并 `data/splits/**/*.jsonl`。
+训练产物使用方式：
+
+- 只做 SFT：线上加载 `base model + lora_output_sft/`。
+- 做 DPO：DPO 从 `lora_output_sft/` 初始化继续训练，线上加载 `base model + lora_output_sft_dpo/`，不需要同时加载两个 LoRA。
+- 评测报告默认写入对应 LoRA 目录，便于把训练产物、评测结果和错误分析绑定在一起。
+
+> 注：阶段性拆分、增强和偏好构造脚本已清理，不再作为稳定入口保留；当前可直接使用的产物在 `data/splits/` 和 `data/rl/` 下。`build_train_data.py` 默认递归合并 `data/splits/**/*.jsonl`。
 >
 > `build_train_data.py` 默认开启 `--validate-schema`，合并后会对每条样本中的工具调用做 schema 校验（required 字段、enum 值、未知参数），不合格样本会被移除并在 stderr 打印详情。可用 `--no-validate-schema` 跳过校验。
 
@@ -48,6 +126,7 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 | `data/splits/multiturn.jsonl` | 最多三轮纯文本历史上下文样本；历史可来自导航/音乐/新闻/百科/AIGC/天气等外部域，当前轮优先，只有代词、省略、纠错、延续或查询缺槽时才参考历史补全 |
 | `data/splits/orchestration.jsonl` | feature 分支复杂任务编排样本：并行指令、多工具 JSON 数组、显式多步、最近意图继承、列表选择和模糊导航边界 |
 | `data/splits/reject.jsonl` | 单轮 + 多轮硬负例 |
+| `data/rl/memory_preferences.jsonl` | 记忆使用偏好数据（299 条），用于 DPO 阶段强化多轮上下文选择 |
 | `data/rl/memory_contrast_preferences.jsonl` | 正确工具 JSON vs 错误历史工具 JSON 的记忆强对比偏好数据 |
 | `data/rl/tool_tts_preferences.jsonl` | 工具调用 vs TTS 回复的输出契约偏好数据（工具 JSON chosen，执行完成话术 rejected） |
 | `data/train_final.jsonl` | 最终训练数据（含 SP） |
@@ -57,14 +136,14 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 
 | 类型 | 数量 | 说明 |
 |------|------|------|
-| By-tool | 7297 | 每个工具文件内混合：`user -> JSON tool call` 决策样本 4981 条，独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 2316 条 |
+| By-tool | 7297 | 每个工具文件内混合：Action JSON 4552 条、NoiseDoNotAct 457 条、独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 2288 条 |
 | Clarify | 189 | 已拆为两类样本：`user -> 追问 TTS`（94 条，教模型何时追问）+ 完整 4 轮 `user -> 追问 -> 用户补齐 -> tool call`（95 条，教模型追问后如何响应）；已移除纯位置追问（音区可自动判定位置）与意图明确的方向性追问（如"太晒→打开/关闭遮阳帘"）；配合 final-assistant 标签监督，两类样本均能被正确监督 |
 | Edge case | 100 | 多轮当前轮边界、查询 vs 控制、popup/task 列表 `GeneralSelect` 等易混淆样本 |
 | Multiturn | 370 | 最多三轮纯文本历史；历史允许外部域文本；当前轮输出分布：工具 243 条、NoiseDoNotAct 79 条、Reject 36 条、自然语言 TTS 12 条 |
 | Orchestration | 30 | feature 分支复杂任务编排样本；包含多工具 JSON 数组输出、显式多步、最近意图继承、列表选择与模糊导航拒识 |
 | Reject | 1135 | 单轮 + 多轮硬负例（已合并），最后一条 assistant 均为 `Reject`；已抽稀家居控制负例并移除高风险车控状态拒识 |
 
-`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 9121 条；统计时多轮样本按最后一个有效决策标签计入对应类别。当前输出类型分布为 Action 5553、TTS 2394、Reject 1174。
+`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 9121 条；统计时多轮样本按最后一个有效决策标签计入对应类别。当前输出类型分布为 Action JSON 4999、MultiAction JSON 数组 18、TTS 2394、NoiseDoNotAct 536、Reject 1174。
 
 ### Hard Case 加权
 
@@ -97,7 +176,7 @@ python train_memory_dpo_lora.py \
   --reference-mode reference_free
 ```
 
-`train_memory_dpo_lora.py` 默认使用 reference-free DPO-style loss，适合先在单卡上快速验证；服务器显存充足时可用 `--reference-mode frozen_init` 加载一份冻结的 `--init-lora-dir` 作为 reference，代价是显存约翻倍。DPO 默认 `--prompt-format chat_template`，会把 preference 行里的 `history + current_query` 按 `data/system-prompt.txt` 和 tokenizer chat template 组织成与 `serve.py` 一致的真实多轮输入；历史分布实验不要退回旧的 `json_instruction`，否则训练输入和线上输入不一致。为适配 24GB 显存，DPO 默认开启 `--gradient-checkpointing` 和 `--empty-cache-between-pairs`；如果仍 OOM，优先加 `--max-length 3584`，再降到 `3072`。DPO 阶段学习率和训练步数要保守，训练后必须同时回归原始 eval、multiturn 和 orchestration；若单工具指标回退，优先降低 `--lr` 或减少 epochs。
+`train_memory_dpo_lora.py` 默认使用 reference-free DPO-style loss，适合先在单卡上快速验证；服务器显存充足时可用 `--reference-mode frozen_init` 加载一份冻结的 `--init-lora-dir` 作为 reference，代价是显存约翻倍。DPO 不是重新选择 LoRA 挂载层，而是从已有 SFT LoRA adapter 初始化，继续训练其中已经存在的 `q_proj/k_proj/v_proj/o_proj/gate_proj/up_proj/down_proj` LoRA 参数。DPO 默认 `--prompt-format chat_template`，会把 preference 行里的 `history + current_query` 按 `data/system-prompt.txt` 和 tokenizer chat template 组织成与 `serve.py` 一致的真实多轮输入；历史分布实验不要退回旧的 `json_instruction`，否则训练输入和线上输入不一致。为适配 24GB 显存，DPO 默认开启 `--gradient-checkpointing` 和 `--empty-cache-between-pairs`；如果仍 OOM，优先加 `--max-length 3584`，再降到 `3072`。DPO 阶段学习率和训练步数要保守，训练后必须同时回归原始 eval、multiturn 和 orchestration；若单工具指标回退，优先降低 `--lr` 或减少 epochs。
 
 ## 训练配置
 
@@ -162,6 +241,7 @@ python train_thinker_lora.py \
 | max_length | 16384 | SP ~5K tokens + 对话，留足余量 |
 | lr | 2e-5 | 3B 小模型适用 |
 | lora_r / alpha | 8 / 16 | effective scaling = 2 |
+| target_modules | q/k/v/o + gate/up/down | Attention 投影层 + MLP 投影层 |
 | batch_size | 1 | RTX 3090 24GB 显存限制 |
 | grad_accum | 8 | 等效 batch=8 |
 | warmup_ratio | 0.05 | 前 5% steps 线性预热 |
@@ -173,6 +253,8 @@ python train_thinker_lora.py \
 
 训练脚本会在编码后定位**最后一个 user 之后的最后一条** assistant 回复，并只对这一个 span 计算 loss。多轮历史中的 assistant TTS（前轮回复）不参与监督；当前轮 `user -> tool_call -> tool-result -> TTS` 的样本只监督最后一条 assistant 回复，避免短输出（如 `Reject`）被错误匹配到 system prompt 或历史文本。若截断导致该回复找不到，才会过滤 `labels` 全为 `-100` 的空监督样本。
 
+LoRA 默认按模块名匹配 transformer 的 Attention 和 MLP 线性层：`q_proj,k_proj,v_proj,o_proj,gate_proj,up_proj,down_proj`。脚本仍会用冻结关键词做二次保护，确保 `audio/talker/vocoder/audio_decoder/speech_decoder` 等音频生成相关参数不可训练；因此实际可训练目标保留在 Thinker 内，主要是 `thinker.model` 文本 decoder，同时包括 `thinker.visual` 中匹配到的 LoRA 参数，而不是 Talker/token2wav。
+
 每次训练启动后会清空并重写 `output_dir/train_metrics.jsonl`，避免多次训练追加到同一个指标文件导致曲线抖动。训练过程的 stdout/stderr 会同时写入 `output_dir/train.log`，可用以下命令事后审阅或实时查看：
 
 ```bash
@@ -181,7 +263,7 @@ tail -f lora_output/train.log
 
 ### 冻结保障
 
-训练脚本通过关键词 `audio,talker,vocoder,audio_decoder,speech_decoder` 自动冻结非 Thinker 参数，并输出审计文件：
+训练脚本通过关键词 `audio,talker,vocoder,audio_decoder,speech_decoder` 自动冻结命中的音频/Talker/语音生成相关 LoRA 参数，并输出审计文件：
 - `lora_output/trainable_params.txt`
 - `lora_output/freeze_summary.json`
 
@@ -271,21 +353,6 @@ resp = client.chat.completions.create(
 print(resp.choices[0].message.content)
 ```
 
-**本地录音端到端测试**
-```bash
-# 本地录 4 秒音频，发送到远端 serve.py 服务
-python scripts/record_remote_infer.py \
-  --server http://10.95.64.153:8000 \
-  --duration 4
-
-# 使用已有 WAV 文件测试
-python scripts/record_remote_infer.py \
-  --server http://10.95.64.153:8000 \
-  --audio data/eval/audio/window/window_001.wav
-```
-
-`record_remote_infer.py` 会把本地 WAV 转成 OpenAI 兼容的 `data:audio/wav;base64,` 音频请求，并打印返回的 `tool_call` 或文本结果。默认是纯音频端到端测试；如需调试服务端后处理，可额外传 `--hint-text "打开主驾车窗"`。
-
 **Gradio 本地录音界面**
 ```bash
 pip install gradio   # 首次运行需安装
@@ -364,7 +431,7 @@ python eval.py single \
 
 ### 评测维度
 
-- **Per-file**：每个测试文件（18 个场景）独立统计
+- **Per-file**：每个测试文件（37 个场景）独立统计
 - **By Difficulty**：按 easy / medium / hard 分层
 - **By Category**：按 category 分组，展示最弱的 10 个
 
@@ -382,7 +449,7 @@ Batch 模式运行后自动输出 JSON 报告；默认有 `--lora-dir` 时写入
 ### 评测数据
 
 - 路径：`data/eval/*_test.json`（37 个文件，1792 条样本；其中 177 条多意图/多工具样本默认被单工具评测 mask）
-- 音频：`data/eval/audio/`（1599 条有对应 wav 文件）
+- 音频：1598 条样本带 `query_audio` 字段；当前仓库 `data/eval/audio/` 下包含 1093 个 wav 文件
 - 输入方式：有音频文件时自动用音频输入，无音频时回退到文本
 - 支持字段：`expected_type`（显式指定 Action/Clarify/Reject）
 
@@ -399,16 +466,13 @@ Batch 模式运行后自动输出 JSON 报告；默认有 `--lora-dir` 时写入
 | `scripts/validate_splits.py` | 校验 split 样本消息结构、工具调用和响应形态 |
 | `scripts/validate_by_tool_schema.py` | 校验 `data/splits/by_tool/*.jsonl` 是否符合 `data/tools.json` schema |
 | `scripts/generate_train_report.py` | 从 `train_metrics.jsonl` 生成 HTML 训练可视化报告 |
-| `scripts/record_remote_infer.py` | 录音或读取音频并请求远端 OpenAI 兼容推理服务 |
 | `scripts/gradio_remote_infer.py` | 远端推理服务的 Gradio 调试界面 |
-
-已归档至 `_archive/`：`split_data_by_type.py`、`augment_reject_samples.py`、`build_system_prompt.py`
 
 评测后的推荐排查顺序：
 
 ```bash
-python scripts/analyze_eval_errors.py eval_report.json --limit 20
-python scripts/analyze_eval_errors.py eval_report.json --limit 20 --backlog-md docs/eval-error-training-backlog.md
+python scripts/analyze_eval_errors.py lora_output/eval_report_<timestamp>.json --limit 20
+python scripts/analyze_eval_errors.py lora_output/eval_report_<timestamp>.json --limit 20 --backlog-md docs/eval-error-training-backlog.md
 ```
 
 该流程用于决定下一轮补数据方向；不通过规则后处理抬高线上或评测准确率。
@@ -419,7 +483,7 @@ python scripts/analyze_eval_errors.py eval_report.json --limit 20 --backlog-md d
 
 - [x] max_length 1024 → 16384（防止样本截断）
 - [x] last-assistant-only loss masking（仅监督每条样本最后一个 assistant 回复）
-- [x] SP 压缩 53%（26K → 12K chars）
+- [x] SP 压缩并统一到 `data/system-prompt.txt`（当前约 5.7K chars）
 - [x] SP 统一管理（`data/system-prompt.txt`，训练/推理/评测共用）
 - [x] 训练数据不再内嵌 SP，由 build_train_data.py 构建时注入
 - [x] lr 1e-4 → 2e-5，alpha 32 → 16，添加 warmup/weight_decay/grad_clip
