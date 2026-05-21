@@ -1,6 +1,6 @@
 # 车载语音助手 LoRA 训练方案
 
-> 更新时间：2026-05-16
+> 更新时间：2026-05-21
 
 ## 项目概要
 
@@ -20,7 +20,6 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 pip install "ms-swift[all]" modelscope peft
 pip install "qwen-omni-utils[decord]" soundfile
 pip install fastapi uvicorn pydantic   # serve.py 推理服务依赖
-pip install openai                     # Qwen Plus verifier / AI Hub 调用依赖
 ```
 
 ## 数据流水线
@@ -49,8 +48,6 @@ data/splits/**/*.jsonl  (已拆分好的数据，无 SP，包含 by_tool 工具�
 | `data/splits/multiturn.jsonl` | 最多三轮纯文本历史上下文样本；历史可来自导航/音乐/新闻/百科/AIGC/天气等外部域，当前轮优先，只有代词、省略、纠错、延续或查询缺槽时才参考历史补全 |
 | `data/splits/orchestration.jsonl` | feature 分支复杂任务编排样本：并行指令、多工具 JSON 数组、显式多步、最近意图继承、列表选择和模糊导航边界 |
 | `data/splits/reject.jsonl` | 单轮 + 多轮硬负例 |
-| `data/rl/memory_tasks.jsonl` | 记忆压缩/使用 RL MVP 种子数据（500 条，不参与默认 SFT 合并） |
-| `data/rl/memory_verifier_prompt.md` | LLM-as-Verifier 评分 prompt，用于从 memory task 候选输出构造偏好对 |
 | `data/rl/memory_contrast_preferences.jsonl` | 正确工具 JSON vs 错误历史工具 JSON 的记忆强对比偏好数据 |
 | `data/rl/tool_tts_preferences.jsonl` | 工具调用 vs TTS 回复的输出契约偏好数据（工具 JSON chosen，执行完成话术 rejected） |
 | `data/train_final.jsonl` | 最终训练数据（含 SP） |
@@ -80,66 +77,9 @@ python build_train_data.py \
 
 推荐流程：先用 `scripts/analyze_eval_errors.py --backlog-md` 生成错误族补强清单，再为 P0/P1 错误族补充非评估原句 hard case；训练时对这些 hard case 文件做 2-4 倍采样，避免新增样本在 9K 级训练集中被稀释。
 
-### 记忆 RL MVP 数据
+### DPO 偏好训练
 
-feature 分支新增独立的记忆压缩/使用 RL 种子数据，不进入默认 SFT 训练集：
-
-```bash
-python scripts/generate_memory_rl_tasks.py \
-  --output data/rl/memory_tasks.jsonl \
-  --count 500 \
-  --seed 42
-```
-
-`data/rl/memory_tasks.jsonl` 当前为 500 条，历史长度分布为：2-3 轮 150 条、4-6 轮 200 条、7-10 轮 100 条、11-12 轮 50 条。覆盖 `recent_related_inheritance`、`action_flip`、`position_override`、`current_override`、`cross_tool_interrupt`、`noise_no_inherit`、`clarify_missing` 七类核心场景。推荐后续链路是：基于每条 memory task 的 `history + current_query` 调用当前 SFT 推理服务采样多个最终 assistant 候选输出，用 `data/rl/memory_verifier_prompt.md` 调用 LLM verifier 打分，仅保留高置信 `score >= 8` vs `score <= 4` 的 chosen/rejected 偏好对，再进入 DPO/ORPO 训练。
-
-生成 DPO 偏好数据：
-
-```bash
-export QWEN_PLUS_API_KEY="<your-bailian-api-key>"
-
-# 1) 先调用当前 SFT 推理服务，为每条 memory task 采样多个候选。
-python scripts/generate_memory_candidates.py \
-  --tasks data/rl/memory_tasks.jsonl \
-  --server http://10.95.64.153:8000/v1 \
-  --model qwen-omni-lora \
-  --output data/rl/memory_candidates.jsonl \
-  --num-candidates 6 \
-  --temperature 0.7
-
-# 2) 再调用 qwen3.6-plus verifier 对候选打分，筛出 chosen/rejected。
-python scripts/build_memory_preferences.py \
-  --tasks data/rl/memory_tasks.jsonl \
-  --candidate-file data/rl/memory_candidates.jsonl \
-  --verifier-prompt data/rl/memory_verifier_prompt.md \
-  --output data/rl/memory_preferences.jsonl \
-  --audit-output data/rl/memory_preferences_audit.jsonl \
-  --model qwen3.6-plus \
-  --workers 4
-
-# 3) 额外生成“工具 JSON chosen vs TTS rejected”的输出契约偏好对，
-#    用来强化该调用工具时不能只回复“好的，已完成”。
-python scripts/build_tool_tts_preferences.py \
-  --tasks data/rl/memory_tasks.jsonl \
-  --output data/rl/tool_tts_preferences.jsonl
-
-# 4) 额外生成“正确工具 JSON chosen vs 错误历史工具 JSON rejected”的记忆强对比偏好对，
-#    用来强化最近相关历史优先、不要继承更早工具/位置/动作。
-python scripts/build_memory_contrast_preferences.py \
-  --tasks data/rl/memory_tasks.jsonl \
-  --output data/rl/memory_contrast_preferences.jsonl
-
-# 没有 SFT 服务时，也可以先用 synthetic 模式 bootstrapping：
-python scripts/build_memory_preferences.py \
-  --tasks data/rl/memory_tasks.jsonl \
-  --output data/rl/memory_preferences.jsonl
-```
-
-`scripts/build_memory_preferences.py` 使用 OpenAI SDK 调用百炼/DashScope 兼容 `/chat/completions` 接口，默认 base URL 为 `https://dashscope.aliyuncs.com/compatible-mode/v1`，默认模型为 `qwen3.6-plus`，可通过 `--base-url` / `QWEN_PLUS_BASE_URL` 和 `--model` / `QWEN_PLUS_MODEL` 覆盖。API key 默认从 `QWEN_PLUS_API_KEY` 读取；凭证禁止写入仓库文件。输出的 `memory_preferences.jsonl` 可直接作为 `train_memory_dpo_lora.py --preference-file` 输入；`memory_preferences_audit.jsonl` 保留每个候选的 verifier 评分，并在顶层写出 `kept`、`skip_reason`、`best_score`、`worst_score` 和 `score_gap`，方便统计未保留原因。脚本还会做本地契约校验：当 `expected.target_tool_call` 非空时，非工具 JSON 的自然语言候选最高只能得 4 分，避免把“语义正确但没有工具调用”的 TTS 样本选为 chosen。`scripts/build_tool_tts_preferences.py` 会基于同一批 memory task 生成直接的输出契约偏好对，当前 500 条 task 可生成约 347 条工具 JSON chosen vs TTS rejected 样本；`scripts/build_memory_contrast_preferences.py` 生成正确工具 JSON vs 错误历史工具 JSON 的强对比样本，当前约 404 条。
-
-默认情况下，传入 `--candidate-file` 时也会为每条 task 额外混入一个 `synthetic_hard_negative`，避免模型采样候选过少时无法形成 chosen/rejected 对；synthetic chosen/rejected 均使用最终 assistant 输出形态，即工具 JSON、`Reject`、`NoiseDoNotAct` 或自然语言澄清，不再使用中间态 memory decision JSON。如果只想使用模型真实候选，可加 `--no-synthetic-negative`。`--output` 和 `--audit-output` 默认会覆盖旧文件，避免重复样本污染训练；确实需要追加时再显式传 `--append-output`。
-
-偏好训练采用“方案 2”：从已有 SFT LoRA 初始化继续训练，原 SFT 产物不被覆盖，最终输出一个新的 DPO LoRA。线上只加载 `base model + 新 DPO LoRA`，不需要同时加载两个 LoRA。
+偏好数据构造脚本属于阶段性实验工具，已从稳定脚本入口中移除。仓库只保留可直接训练的偏好数据产物；DPO 训练采用“方案 2”：从已有 SFT LoRA 初始化继续训练，原 SFT 产物不被覆盖，最终输出一个新的 DPO LoRA。线上只加载 `base model + 新 DPO LoRA`，不需要同时加载两个 LoRA。
 
 ```bash
 python train_memory_dpo_lora.py \
@@ -157,114 +97,7 @@ python train_memory_dpo_lora.py \
   --reference-mode reference_free
 ```
 
-`train_memory_dpo_lora.py` 默认使用 reference-free DPO-style loss，适合先在单卡上快速验证；服务器显存充足时可用 `--reference-mode frozen_init` 加载一份冻结的 `--init-lora-dir` 作为 reference，代价是显存约翻倍。DPO 默认 `--prompt-format chat_template`，会把 preference 行里的 `history + current_query` 按 `data/system-prompt.txt` 和 tokenizer chat template 组织成与 `serve.py` 一致的真实多轮输入；历史分布实验不要退回旧的 `json_instruction`，否则训练输入和线上输入不一致。为适配 24GB 显存，DPO 默认开启 `--gradient-checkpointing` 和 `--empty-cache-between-pairs`；如果仍 OOM，优先加 `--max-length 3584`，再降到 `3072`。DPO 阶段学习率和训练步数要保守，训练后必须同时回归原始 eval、multiturn、orchestration 和 memory 专项样本；若单工具指标回退，优先降低 `--lr`、减少 epochs，或提高 preference 置信阈值。
-
-### 记忆 RL 操作顺序
-
-后续按下面顺序逐步执行：
-
-```bash
-# 0. 进入环境
-conda activate qwen-omni
-
-# 1. 生成/刷新 memory task 种子数据（已有 data/rl/memory_tasks.jsonl 时可跳过）
-python scripts/generate_memory_rl_tasks.py \
-  --output data/rl/memory_tasks.jsonl \
-  --count 500 \
-  --seed 42
-
-# 2. 启动当前 SFT 推理服务，加载你要作为 DPO 起点的 SFT LoRA
-python serve.py \
-  --model-dir /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
-  --lora-dir lora_output_sft_0520 \
-  --host 0.0.0.0 \
-  --port 8000
-
-# 3. 从当前 SFT 服务采样候选 assistant 输出
-python scripts/generate_memory_candidates.py \
-  --tasks data/rl/memory_tasks.jsonl \
-  --server http://127.0.0.1:8000/v1 \
-  --model qwen-omni-lora \
-  --output data/rl/memory_candidates.jsonl \
-  --num-candidates 6 \
-  --temperature 0.7
-
-# 4. 抽检候选，确认 candidates 中既有正确工具调用，也有模型真实错误
-head -3 data/rl/memory_candidates.jsonl
-
-# 5. 配置 verifier 凭证
-export QWEN_PLUS_API_KEY="<your-bailian-api-key>"
-
-# 6. 用 qwen3.6-plus verifier 给候选打分并筛出偏好对
-python scripts/build_memory_preferences.py \
-  --tasks data/rl/memory_tasks.jsonl \
-  --candidate-file data/rl/memory_candidates.jsonl \
-  --verifier-prompt data/rl/memory_verifier_prompt.md \
-  --output data/rl/memory_preferences.jsonl \
-  --audit-output data/rl/memory_preferences_audit.jsonl \
-  --model qwen3.6-plus \
-  --workers 4
-
-# 7. 抽检 preference 和 audit
-wc -l data/rl/memory_preferences.jsonl
-head -3 data/rl/memory_preferences.jsonl
-head -3 data/rl/memory_preferences_audit.jsonl
-
-# 7b. 生成并抽检工具调用 vs TTS 回复的输出契约偏好对
-python scripts/build_tool_tts_preferences.py \
-  --tasks data/rl/memory_tasks.jsonl \
-  --output data/rl/tool_tts_preferences.jsonl
-wc -l data/rl/tool_tts_preferences.jsonl
-
-# 7c. 生成并抽检正确工具 vs 错误历史工具的记忆强对比偏好对
-python scripts/build_memory_contrast_preferences.py \
-  --tasks data/rl/memory_tasks.jsonl \
-  --output data/rl/memory_contrast_preferences.jsonl
-wc -l data/rl/memory_contrast_preferences.jsonl
-
-# 8. 基于旧 SFT LoRA 继续 DPO-style 训练，输出新 LoRA
-python train_memory_dpo_lora.py \
-  --model /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
-  --init-lora-dir lora_output_sft_0520 \
-  --preference-file data/rl/memory_preferences.jsonl,data/rl/memory_contrast_preferences.jsonl,data/rl/tool_tts_preferences.jsonl \
-  --output-dir lora_output_sft_dpo_memory_0520 \
-  --prompt-format chat_template \
-  --system-prompt data/system-prompt.txt \
-  --lr 5e-6 \
-  --beta 0.1 \
-  --epochs 1 \
-  --train-batch-size 1 \
-  --grad-accum 8 \
-  --reference-mode reference_free
-
-# 9. 用新 LoRA 启服务做人工检查
-python serve.py \
-  --model-dir /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
-  --lora-dir lora_output_sft_dpo_memory_0520 \
-  --host 0.0.0.0 \
-  --port 8000
-
-# 10. 回归评估，至少跑全量 eval、多轮 eval、复杂编排 eval
-python eval.py batch \
-  --model-dir /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
-  --lora-dir lora_output_sft_dpo_memory_0520 \
-  --report eval_report_dpo_memory.json
-
-python eval.py batch \
-  --model-dir /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
-  --lora-dir lora_output_sft_dpo_memory_0520 \
-  --pattern multiturn_test.json \
-  --report eval_report_dpo_memory_multiturn.json
-
-python eval.py batch \
-  --model-dir /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
-  --lora-dir lora_output_sft_dpo_memory_0520 \
-  --pattern orchestration_test.json \
-  --include-multi-tool \
-  --report eval_report_dpo_memory_orchestration.json
-```
-
-判断是否继续扩大数据：如果第 10 步全量单工具指标没有明显回退，并且多轮/长历史错误下降，再把 `--count` 从 500 扩到 2000；如果单工具 args 或 tool_acc 回退，优先降低 DPO `--lr`、减少 epochs，或提高 `build_memory_preferences.py` 的 `--min-chosen-score` / `--min-gap`。
+`train_memory_dpo_lora.py` 默认使用 reference-free DPO-style loss，适合先在单卡上快速验证；服务器显存充足时可用 `--reference-mode frozen_init` 加载一份冻结的 `--init-lora-dir` 作为 reference，代价是显存约翻倍。DPO 默认 `--prompt-format chat_template`，会把 preference 行里的 `history + current_query` 按 `data/system-prompt.txt` 和 tokenizer chat template 组织成与 `serve.py` 一致的真实多轮输入；历史分布实验不要退回旧的 `json_instruction`，否则训练输入和线上输入不一致。为适配 24GB 显存，DPO 默认开启 `--gradient-checkpointing` 和 `--empty-cache-between-pairs`；如果仍 OOM，优先加 `--max-length 3584`，再降到 `3072`。DPO 阶段学习率和训练步数要保守，训练后必须同时回归原始 eval、multiturn 和 orchestration；若单工具指标回退，优先降低 `--lr` 或减少 epochs。
 
 ## 训练配置
 
@@ -482,26 +315,24 @@ python eval.py batch \
   --model-dir models/Qwen2.5-Omni-3B \
   --lora-dir lora_output
 
-# 指定报告输出路径
+# 指定报告输出路径；默认会写入 <lora-dir>/eval_report_<timestamp>.json
 python eval.py batch \
   --model-dir models/Qwen2.5-Omni-3B \
   --lora-dir lora_output \
-  --report eval_report.json
+  --report lora_output/eval_report.json
 
 # 提高 GPU 利用率（默认 batch_size=1，推荐 4-8，OOM 则减小）
 python eval.py batch \
   --model-dir models/Qwen2.5-Omni-3B \
   --lora-dir lora_output \
-  --batch-size 4 \
-  --report eval_report.json
+  --batch-size 4
 
 # feature 分支复杂任务编排评测（计入多工具 JSON 数组）
 python eval.py batch \
   --model-dir models/Qwen2.5-Omni-3B \
   --lora-dir lora_output \
   --pattern orchestration_test.json \
-  --include-multi-tool \
-  --report eval_orchestration_report.json
+  --include-multi-tool
 
 # 单条测试（文本）
 python eval.py single \
@@ -539,7 +370,7 @@ python eval.py single \
 
 ### 评测报告
 
-Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.json`），包含：
+Batch 模式运行后自动输出 JSON 报告；默认有 `--lora-dir` 时写入 `<lora-dir>/eval_report_<timestamp>.json`，没有 LoRA 时写入当前目录，包含：
 - 时间戳、模型路径、LoRA 路径
 - `evaluation_mode: raw_model_output` 和 `postprocess_applied: false`
 - 总体指标 + per-file / per-difficulty / per-category 明细
@@ -565,11 +396,6 @@ Batch 模式运行后自动输出 JSON 报告（默认 `eval_report_<timestamp>.
 | `serve.py` | **OpenAI 兼容推理服务**（FastAPI，支持文本+音频） |
 | `eval.py` | 统一评测（batch / single），音频输入 + 多维度统计，支持 `--batch-size` 批量推理 |
 | `scripts/analyze_eval_errors.py` | 读取 `eval_report*.json`，按类型、工具、文件、类别聚类错误；可用 `--backlog-md` 输出训练补强任务清单 |
-| `scripts/build_memory_preferences.py` | 调用 Qwen Plus verifier 为 memory task/candidate 打分，生成 DPO chosen/rejected 偏好数据 |
-| `scripts/build_memory_contrast_preferences.py` | 基于 memory task 生成“正确工具 JSON chosen vs 错误历史工具 JSON rejected”的记忆强对比偏好数据 |
-| `scripts/build_tool_tts_preferences.py` | 基于 memory task 生成“工具 JSON chosen vs TTS rejected”的输出契约偏好数据 |
-| `scripts/generate_memory_candidates.py` | 调用当前 SFT 推理服务，为 memory task 采样多个最终 assistant 候选输出 |
-| `scripts/generate_memory_rl_tasks.py` | 生成记忆压缩/使用 RL 种子任务，用于 LLM verifier 偏好数据构建 |
 | `scripts/validate_splits.py` | 校验 split 样本消息结构、工具调用和响应形态 |
 | `scripts/validate_by_tool_schema.py` | 校验 `data/splits/by_tool/*.jsonl` 是否符合 `data/tools.json` schema |
 | `scripts/generate_train_report.py` | 从 `train_metrics.jsonl` 生成 HTML 训练可视化报告 |

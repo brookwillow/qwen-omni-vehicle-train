@@ -49,6 +49,15 @@ _PROJECT_DIR = Path(__file__).resolve().parent
 DEFAULT_SP_PATH = str(_PROJECT_DIR / "data" / "system-prompt.txt")
 
 
+def default_report_path(lora_dir: str) -> str:
+    """Return the default eval report path for a run."""
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"eval_report_{ts}.json"
+    if lora_dir:
+        return str(Path(lora_dir) / filename)
+    return filename
+
+
 # ── Model loading ────────────────────────────────────────────
 
 def load_model(model_dir: str, lora_dir: str):
@@ -637,8 +646,7 @@ def run_batch(args, model, processor, system_prompt: str) -> None:
     # ── Write JSON report ──
     report_path = getattr(args, "report", "") or ""
     if not report_path:
-        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-        report_path = f"eval_report_{ts}.json"
+        report_path = default_report_path(args.lora_dir)
 
     report = {
         "timestamp": datetime.now().isoformat(),
@@ -660,6 +668,7 @@ def run_batch(args, model, processor, system_prompt: str) -> None:
         },
         "errors": errors,
     }
+    Path(report_path).parent.mkdir(parents=True, exist_ok=True)
     Path(report_path).write_text(
         json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8",
     )
@@ -710,7 +719,11 @@ def build_parser() -> argparse.ArgumentParser:
     b.add_argument("--show-errors", type=int, default=3)
     b.add_argument("--batch-size", type=int, default=1,
                    help="Samples per forward pass (default 1). Try 4-8 to improve GPU utilization.")
-    b.add_argument("--report", default="", help="Output JSON report path (default: eval_report_<ts>.json).")
+    b.add_argument(
+        "--report",
+        default="",
+        help="Output JSON report path (default: <lora-dir>/eval_report_<ts>.json when --lora-dir is set).",
+    )
     b.add_argument(
         "--include-multi-tool",
         action="store_true",

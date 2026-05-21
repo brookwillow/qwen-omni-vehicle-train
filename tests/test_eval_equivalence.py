@@ -81,6 +81,16 @@ def test_eval_reports_raw_model_output_mode(monkeypatch):
     assert eval_mod.POSTPROCESS_APPLIED is False
 
 
+def test_default_eval_report_goes_under_lora_dir(monkeypatch):
+    eval_mod = _load_eval_module(monkeypatch)
+
+    report_path = Path(eval_mod.default_report_path("lora_output_v2"))
+
+    assert report_path.parent == Path("lora_output_v2")
+    assert report_path.name.startswith("eval_report_")
+    assert report_path.suffix == ".json"
+
+
 def test_eval_skips_multi_intent_rows(monkeypatch):
     eval_mod = _load_eval_module(monkeypatch)
 
