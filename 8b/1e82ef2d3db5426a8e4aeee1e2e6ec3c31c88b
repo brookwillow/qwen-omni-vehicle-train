@@ -1,0 +1,25 @@
+docs/README.md
+  9dec22358ecde48e 10-12,15-71,86,89,91-104,107-111,113,129,139,146,179,244,256-257,266,434,452,474-475,486
+scripts/gradio_remote_infer.py
+  9dec22358ecde48e 7,10,14-15,21,25-179
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.20",
+  "base_commit_sha": "8b1e82ef2d3db5426a8e4aeee1e2e6ec3c31c88b",
+  "prompts": {
+    "9dec22358ecde48e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e1f62-2202-7870-af16-54e6c4691c4d",
+        "model": "gpt-5.5"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 576,
+      "total_deletions": 373,
+      "accepted_lines": 258,
+      "overriden_lines": 0
+    }
+  }
+}
