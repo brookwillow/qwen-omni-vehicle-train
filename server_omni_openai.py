@@ -741,36 +741,106 @@ def run_inference(
 
     # ── Block-level KV cache lookup ──────────────────────────────────────
     audio_ok = (audio_ph == len(audios or []))
-    use_cache = (kv_cache_manager is not None and not audios and not images and not videos and audio_ok)
+    has_media = bool(audios or images or videos)
+    can_cache = kv_cache_manager is not None and audio_ok
+
+    # text-only: cache full token prefix
+    # audio/media: cache system prompt prefix only (pure text, stable across requests)
+    use_full_cache = can_cache and not has_media
+    use_system_cache = can_cache and has_media and bool(
+        qwen_messages and qwen_messages[0].get("role") == "system"
+    )
 
     prompt_len = int(inputs["input_ids"].shape[-1])
     cached_length = 0
     token_list: list[int] = []
+    system_token_list: list[int] = []
 
-    if use_cache:
+    if use_full_cache:
         token_list = inputs["input_ids"][0].tolist()
+        t_lookup = time.perf_counter()
         kv_list, cached_length = kv_cache_manager.lookup_prefix(token_list)
+        lookup_ms = (time.perf_counter() - t_lookup) * 1000
         if cached_length > 0 and kv_list is not None:
-            # Inject cached KV states; keep full input_ids so generate() computes
-            # cache_position correctly and slices unprocessed tokens internally.
+            t_build = time.perf_counter()
+            # Keep full input_ids; generate() slices unprocessed tokens via cache_position.
             inputs["past_key_values"] = _build_dynamic_cache(kv_list)
             inputs["attention_mask"] = torch.ones(
                 1, prompt_len, dtype=torch.long, device=inputs["input_ids"].device
             )
-            logger.info("[KV_CACHE] hit: cached=%d total=%d", cached_length, prompt_len)
+            build_ms = (time.perf_counter() - t_build) * 1000
+            logger.info("[KV_CACHE] full hit: cached=%d total=%d lookup=%.1fms build_cache=%.1fms",
+                        cached_length, prompt_len, lookup_ms, build_ms)
         else:
-            logger.info("[KV_CACHE] miss (will prefill+store after generate)")
+            logger.info("[KV_CACHE] full miss lookup=%.1fms (will prefill+store after generate)",
+                        lookup_ms)
+
+    elif use_system_cache:
+        # Tokenize only the system message — its token IDs are identical in every request
+        # regardless of what audio/user content follows.
+        sys_content = qwen_messages[0]["content"]
+        system_text = (
+            sys_content[0].get("text", "") if isinstance(sys_content, list) and sys_content
+            else str(sys_content)
+        )
+        sys_only = [{"role": "system", "content": [{"type": "text", "text": system_text}]}]
+        t_sys_tok = time.perf_counter()
+        sys_fmt = processor.apply_chat_template(sys_only, add_generation_prompt=False, tokenize=False)
+        sys_enc = processor(text=sys_fmt, return_tensors="pt", padding=False, use_audio_in_video=False)
+        system_token_list = sys_enc["input_ids"][0].tolist()
+        sys_tok_ms = (time.perf_counter() - t_sys_tok) * 1000
+
+        t_lookup = time.perf_counter()
+        kv_list, cached_length = kv_cache_manager.lookup_prefix(system_token_list)
+        lookup_ms = (time.perf_counter() - t_lookup) * 1000
+        if cached_length > 0 and kv_list is not None:
+            t_build = time.perf_counter()
+            inputs["past_key_values"] = _build_dynamic_cache(kv_list)
+            inputs["attention_mask"] = torch.ones(
+                1, prompt_len, dtype=torch.long, device=inputs["input_ids"].device
+            )
+            build_ms = (time.perf_counter() - t_build) * 1000
+            logger.info("[KV_CACHE] system hit: cached=%d total=%d "
+                        "sys_tok=%.1fms lookup=%.1fms build_cache=%.1fms",
+                        cached_length, prompt_len, sys_tok_ms, lookup_ms, build_ms)
+        else:
+            logger.info("[KV_CACHE] system miss sys_tok=%.1fms lookup=%.1fms "
+                        "(will prefill+store system prompt)",
+                        sys_tok_ms, lookup_ms)
 
     # ── Generate ─────────────────────────────────────────────────────────
+    # On cache hit for text-only requests, bypass model.generate() (Omni wrapper) and
+    # call thinker.generate() directly.  thinker is a standard CausalLM whose
+    # prepare_inputs_for_generation() correctly slices input_ids to only the
+    # unprocessed suffix via past_key_values.get_seq_length(), giving real prefill
+    # savings.  model.generate() does not reliably honour externally injected
+    # past_key_values, so using it on cache hit adds cloning overhead without benefit.
     t4 = time.perf_counter()
-    with torch.inference_mode():
-        out_ids = model.generate(
-            **inputs,
-            thinker_max_new_tokens=max_new_tokens,
-            temperature=temperature,
-            do_sample=temperature > 0,
-            return_audio=False,
-        )
+    cache_active = cached_length > 0 and (use_full_cache or use_system_cache)
+    _thinker = _get_thinker_model(model) if (cache_active and not has_media) else None
+
+    if cache_active and _thinker is not None:
+        gen_kwargs: dict = {
+            "input_ids": inputs["input_ids"],
+            "past_key_values": inputs["past_key_values"],
+            "attention_mask": inputs["attention_mask"],
+            "max_new_tokens": max_new_tokens,
+            "do_sample": temperature > 0,
+            "use_cache": True,
+        }
+        if temperature > 0:
+            gen_kwargs["temperature"] = temperature
+        with torch.inference_mode():
+            out_ids = _thinker.generate(**gen_kwargs)
+    else:
+        with torch.inference_mode():
+            out_ids = model.generate(
+                **inputs,
+                thinker_max_new_tokens=max_new_tokens,
+                temperature=temperature,
+                do_sample=temperature > 0,
+                return_audio=False,
+            )
     generate_ms = (time.perf_counter() - t4) * 1000
 
     t5 = time.perf_counter()
@@ -779,18 +849,32 @@ def run_inference(
     decode_ms = (time.perf_counter() - t5) * 1000
 
     # ── Store KV cache on miss ────────────────────────────────────────────
-    if use_cache and cached_length == 0 and token_list:
+    store_ids: list[int] | None = None
+    store_label = ""
+    if use_full_cache and cached_length == 0 and token_list:
+        store_ids, store_label = token_list, "full"
+    elif use_system_cache and cached_length == 0 and system_token_list:
+        store_ids, store_label = system_token_list, "system"
+
+    if store_ids is not None:
         thinker = _get_thinker_model(model)
         if thinker is not None:
             try:
+                t_prefill = time.perf_counter()
                 with torch.no_grad():
-                    ids = torch.tensor([token_list], dtype=torch.long, device=inputs["input_ids"].device)
+                    ids = torch.tensor([store_ids], dtype=torch.long, device=inputs["input_ids"].device)
                     prefill_out = thinker(input_ids=ids, use_cache=True)
+                prefill_ms = (time.perf_counter() - t_prefill) * 1000
                 kv_list = _extract_kv_list(prefill_out.past_key_values)
                 if kv_list:
-                    kv_cache_manager.store(token_list, kv_list, offset=0)
-                    logger.info("[KV_CACHE] stored: tokens=%d blocks=%d",
-                                len(token_list), kv_cache_manager.stats["cached_blocks"])
+                    t_store = time.perf_counter()
+                    kv_cache_manager.store(store_ids, kv_list, offset=0)
+                    store_ms = (time.perf_counter() - t_store) * 1000
+                    logger.info("[KV_CACHE] stored %s: tokens=%d blocks=%d "
+                                "prefill=%.1fms store=%.1fms",
+                                store_label, len(store_ids),
+                                kv_cache_manager.stats["cached_blocks"],
+                                prefill_ms, store_ms)
             except Exception as exc:
                 import traceback
                 logger.warning("[KV_CACHE] store failed: %s", exc)
@@ -801,7 +885,7 @@ def run_inference(
         "[PERF] chat_template=%.1fms mm=%.1fms processor=%.1fms to_device=%.1fms "
         "generate=%.1fms decode=%.1fms total=%.1fms kv_cache=%s cached_tokens=%d",
         chat_template_ms, mm_ms, processor_ms, move_ms, generate_ms, decode_ms, total_ms,
-        "hit" if cached_length > 0 else ("miss" if use_cache else "off"),
+        "hit" if cached_length > 0 else ("miss" if (use_full_cache or use_system_cache) else "off"),
         cached_length,
     )
     count, avgs = _inference_perf_averages.record({
@@ -1136,3 +1220,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
