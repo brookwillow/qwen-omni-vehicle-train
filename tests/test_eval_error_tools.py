@@ -45,6 +45,51 @@ def test_classifies_over_reject():
     assert issue == "over_reject"
 
 
+def test_classifies_action_tts_contract_error():
+    issue = classify_error(
+        {
+            "err_type": "type-err",
+            "expected_type": "Action",
+            "pred_type": "Clarify",
+            "pred_raw": "好的，已为您关闭前雾灯。",
+        }
+    )
+
+    assert issue == "tool_vs_tts_contract"
+
+
+def test_summarize_report_adds_slot_and_confusion_counts(tmp_path):
+    tools = tmp_path / "tools.json"
+    tools.write_text(
+        json.dumps(
+            [
+                {
+                    "name": "WindowControl",
+                    "inputSchema": {"required": ["action", "device"]},
+                }
+            ]
+        ),
+        encoding="utf-8",
+    )
+    report = {
+        "overall": {"total": 1},
+        "errors": [
+            {
+                "err_type": "args-err",
+                "gt_tool": "WindowControl",
+                "gt_args": {"action": "关闭", "device": "车窗", "position": "主驾"},
+                "pred_args": {"action": "打开", "device": "车窗"},
+            }
+        ],
+    }
+
+    summary = summarize_report(report, tools)
+
+    assert summary["slot_counts"]["changed:WindowControl:action"] == 1
+    assert summary["slot_counts"]["missing:WindowControl:position"] == 1
+    assert summary["confusion_counts"]["WindowControl.action:关闭 -> 打开"] == 1
+
+
 def test_build_training_backlog_prioritizes_arg_errors():
     summary = {
         "issue_counts": {

@@ -1,0 +1,7 @@
+{"messages":[{"role":"user","content":"能量回收先关掉"},{"role":"assistant","content":"{\"name\":\"PowerControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"能量回收\"}}"}]}
+{"messages":[{"role":"user","content":"我不想要能量回收，关闭它"},{"role":"assistant","content":"{\"name\":\"PowerControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"能量回收\"}}"}]}
+{"messages":[{"role":"user","content":"全车无线充电都关掉"},{"role":"assistant","content":"{\"name\":\"PowerControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"无线充电\",\"position\":\"全部\"}}"}]}
+{"messages":[{"role":"user","content":"把所有位置的无线充电关闭"},{"role":"assistant","content":"{\"name\":\"PowerControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"无线充电\",\"position\":\"全部\"}}"}]}
+{"messages":[{"role":"user","content":"全车无线充电打开"},{"role":"assistant","content":"{\"name\":\"PowerControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"无线充电\",\"position\":\"全部\"}}"}]}
+{"messages":[{"role":"user","content":"把所有无线充电都开一下"},{"role":"assistant","content":"{\"name\":\"PowerControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"无线充电\",\"position\":\"全部\"}}"}]}
+{"messages":[{"role":"user","content":"能量回收调到15"},{"role":"assistant","content":"{\"name\":\"PowerControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"能量回收\",\"value\":\"15\"}}"}]}

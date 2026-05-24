@@ -1,0 +1,13 @@
+{"messages":[{"role":"user","content":"第三排儿童锁打开"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"第三排\"}}"}]}
+{"messages":[{"role":"user","content":"把第三排的儿童锁锁上"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"第三排\"}}"}]}
+{"messages":[{"role":"user","content":"第三排儿童锁关闭"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"儿童锁\",\"position\":\"第三排\"}}"}]}
+{"messages":[{"role":"user","content":"把第三排儿童锁解开"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"儿童锁\",\"position\":\"第三排\"}}"}]}
+{"messages":[{"role":"user","content":"第三排右侧儿童锁打开"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"第三排右侧\"}}"}]}
+{"messages":[{"role":"user","content":"把三排右边儿童锁锁上"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"第三排右侧\"}}"}]}
+{"messages":[{"role":"user","content":"第三排左侧儿童锁打开"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"第三排左侧\"}}"}]}
+{"messages":[{"role":"user","content":"把三排左边儿童锁打开"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"第三排左侧\"}}"}]}
+{"messages":[{"role":"user","content":"主驾儿童锁打开"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"主驾\"}}"}]}
+{"messages":[{"role":"user","content":"副驾儿童锁打开"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"副驾\"}}"}]}
+{"messages":[{"role":"user","content":"前排儿童锁打开"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"前排\"}}"}]}
+{"messages":[{"role":"user","content":"左侧儿童锁关闭"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"儿童锁\",\"position\":\"左侧\"}}"}]}
+{"messages":[{"role":"user","content":"前排儿童锁关掉"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"儿童锁\",\"position\":\"前排\"}}"}]}

@@ -177,10 +177,10 @@
 {"messages":[{"role":"user","content":"我的窗户有点进风，关下"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗\",\"position\":\"主驾\"}}"}]}
 {"messages":[{"role":"user","content":"所有窗户升上去"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗\",\"position\":\"全部\"}}"}]}
 {"messages":[{"role":"user","content":"车窗开到50%"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"开到\",\"device\":\"车窗\",\"value\":\"50%\"}}"}]}
-{"messages":[{"role":"user","content":"主驾车窗开一半，副驾的全部打开"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"开到\",\"device\":\"车窗\",\"position\":\"主驾\",\"value\":\"50%\"}}"}]}
-{"messages":[{"role":"user","content":"车窗开一条缝透气，遮阳帘拉上挡太阳"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"开到\",\"device\":\"车窗\",\"value\":\"10%\"}}"}]}
-{"messages":[{"role":"user","content":"所有窗户都关上，车窗锁也打开"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗\",\"position\":\"全部\"}}"}]}
-{"messages":[{"role":"user","content":"前排车窗关了，后排遮阳帘打开"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗\",\"position\":\"前排\"}}"}]}
+{"messages":[{"role":"user","content":"主驾车窗开一半"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"开到\",\"device\":\"车窗\",\"position\":\"主驾\",\"value\":\"50%\"}}"}]}
+{"messages":[{"role":"user","content":"车窗开一条缝透气"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"开到\",\"device\":\"车窗\",\"value\":\"10%\"}}"}]}
+{"messages":[{"role":"user","content":"所有窗户都关上"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗\",\"position\":\"全部\"}}"}]}
+{"messages":[{"role":"user","content":"前排车窗关了"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗\",\"position\":\"前排\"}}"}]}
 {"messages":[{"role":"user","content":"车窗关到30%"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关到\",\"device\":\"车窗\",\"value\":\"30%\"}}"}]}
 {"messages":[{"role":"user","content":"把副驾的车窗开一半"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"开到\",\"device\":\"车窗\",\"position\":\"副驾\",\"value\":\"50%\"}}"}]}
 {"messages":[{"role":"user","content":"关闭车窗"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗\"}}"}]}
@@ -296,7 +296,7 @@
 {"messages":[{"role":"user","content":"暂停车窗"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"暂停\",\"device\":\"车窗\"}}"}]}
 {"messages":[{"role":"user","content":"开一条缝就行"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"开到\",\"device\":\"车窗\",\"value\":\"10%\"}}"}]}
 {"messages":[{"role":"user","content":"进高速了，关上窗"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗\",\"position\":\"全部\"}}"}]}
-{"messages":[{"role":"user","content":"关上后排车窗然后锁住"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗\",\"position\":\"第二排\"}}"}]}
+{"messages":[{"role":"user","content":"关上后排车窗"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗\",\"position\":\"第二排\"}}"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗\",\"position\":\"副驾\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已经为您打开副驾车窗。"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"遮阳帘\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已经为您关上了遮阳帘。"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗\",\"position\":\"主驾\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已经为您把主驾车窗打开了一点，通通风。"}]}

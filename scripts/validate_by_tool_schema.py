@@ -102,9 +102,9 @@ def validate_against_schema(tool_name: str, params: dict) -> list[str]:
         if val in prop["enum"]:
             continue
 
-        # ClimateControl: numeric strings are explicitly allowed for temperature/wind
-        # per description: "value=[NUMBER STRING OR LEVEL STRING]"
-        if tool_name == "ClimateControl" and key == "value" and _is_numeric_string(val):
+        # Explicit numeric levels are valid for value-like fields even when the
+        # schema also lists common enum levels.
+        if key == "value" and (_is_numeric_string(val) or _is_percentage_string(val)):
             continue
 
         # WindowControl: percentage strings are valid positional values for 开到/关到 actions

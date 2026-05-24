@@ -1,0 +1,3 @@
+{"messages":[{"role":"user","content":"右侧后视镜关闭"},{"role":"assistant","content":"{\"name\":\"RearviewControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"后视镜\",\"position\":\"右侧\"}}"}]}
+{"messages":[{"role":"user","content":"副驾后视镜打开"},{"role":"assistant","content":"{\"name\":\"RearviewControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"后视镜\",\"position\":\"副驾\"}}"}]}
+{"messages":[{"role":"user","content":"主驾后视镜收起来"},{"role":"assistant","content":"{\"name\":\"RearviewControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"后视镜\",\"position\":\"主驾\"}}"}]}

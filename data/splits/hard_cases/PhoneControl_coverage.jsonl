@@ -1,0 +1,9 @@
+{"messages":[{"role":"user","content":"帮我拨个电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\"}}"}]}
+{"messages":[{"role":"user","content":"给刘老师打电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"刘老师\"}}"}]}
+{"messages":[{"role":"user","content":"拨一下赵医生"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"赵医生\"}}"}]}
+{"messages":[{"role":"user","content":"打给010-88889999"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"010-88889999\"}}"}]}
+{"messages":[{"role":"user","content":"拨8888"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"8888\"}}"}]}
+{"messages":[{"role":"user","content":"打给王总"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"王总\"}}"}]}
+{"messages":[{"role":"user","content":"拨18600001111"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"phone\":\"18600001111\"}}"}]}
+{"messages":[{"role":"user","content":"给赵哥去个电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"赵哥\"}}"}]}
+{"messages":[{"role":"user","content":"给姓周的同事打电话"},{"role":"assistant","content":"{\"name\":\"PhoneControl\",\"arguments\":{\"action\":\"拨打\",\"contact\":\"姓周的同事\"}}"}]}

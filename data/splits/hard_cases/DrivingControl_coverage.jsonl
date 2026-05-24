@@ -1,0 +1,6 @@
+{"messages":[{"role":"user","content":"舒适驾驶模式关掉"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"驾驶模式\",\"value\":\"舒适模式\"}}"}]}
+{"messages":[{"role":"user","content":"不要舒适模式了，关闭"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"驾驶模式\",\"value\":\"舒适模式\"}}"}]}
+{"messages":[{"role":"user","content":"关闭单踏板驾驶模式"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"驾驶模式\",\"value\":\"单踏板\"}}"}]}
+{"messages":[{"role":"user","content":"单踏板模式先关了"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"驾驶模式\",\"value\":\"单踏板\"}}"}]}
+{"messages":[{"role":"user","content":"自定义驾驶模式关闭"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"驾驶模式\",\"value\":\"自定义\"}}"}]}
+{"messages":[{"role":"user","content":"不要自定义驾驶模式了"},{"role":"assistant","content":"{\"name\":\"DrivingControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"驾驶模式\",\"value\":\"自定义\"}}"}]}

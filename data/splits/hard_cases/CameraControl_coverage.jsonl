@@ -1,0 +1,12 @@
+{"messages":[{"role":"user","content":"后方画面不用看了，关掉后侧摄像头"},{"role":"assistant","content":"{\"name\":\"CameraControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"摄像头\",\"position\":\"后侧\"}}"}]}
+{"messages":[{"role":"user","content":"把后面的摄像头画面关了"},{"role":"assistant","content":"{\"name\":\"CameraControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"摄像头\",\"position\":\"后侧\"}}"}]}
+{"messages":[{"role":"user","content":"左侧摄像头不用看了，关闭"},{"role":"assistant","content":"{\"name\":\"CameraControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"摄像头\",\"position\":\"左侧\"}}"}]}
+{"messages":[{"role":"user","content":"关掉左边摄像头画面"},{"role":"assistant","content":"{\"name\":\"CameraControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"摄像头\",\"position\":\"左侧\"}}"}]}
+{"messages":[{"role":"user","content":"前侧摄像头先关闭"},{"role":"assistant","content":"{\"name\":\"CameraControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"摄像头\",\"position\":\"前侧\"}}"}]}
+{"messages":[{"role":"user","content":"车头前面的画面关掉吧"},{"role":"assistant","content":"{\"name\":\"CameraControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"摄像头\",\"position\":\"前侧\"}}"}]}
+{"messages":[{"role":"user","content":"右侧摄像头先关了"},{"role":"assistant","content":"{\"name\":\"CameraControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"摄像头\",\"position\":\"右侧\"}}"}]}
+{"messages":[{"role":"user","content":"右边画面不用了，关掉摄像头"},{"role":"assistant","content":"{\"name\":\"CameraControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"摄像头\",\"position\":\"右侧\"}}"}]}
+{"messages":[{"role":"user","content":"打开行车记录仪"},{"role":"assistant","content":"{\"name\":\"CameraControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"行车记录仪\"}}"}]}
+{"messages":[{"role":"user","content":"关闭行车记录仪"},{"role":"assistant","content":"{\"name\":\"CameraControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"行车记录仪\"}}"}]}
+{"messages":[{"role":"user","content":"全车摄像头画面都打开"},{"role":"assistant","content":"{\"name\":\"CameraControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"摄像头\",\"position\":\"全部\"}}"}]}
+{"messages":[{"role":"user","content":"全车摄像头画面关掉"},{"role":"assistant","content":"{\"name\":\"CameraControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"摄像头\",\"position\":\"全部\"}}"}]}

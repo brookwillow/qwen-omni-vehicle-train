@@ -1,0 +1,3 @@
+{"messages":[{"role":"user","content":"虚拟形象服装换回上一个"},{"role":"assistant","content":"{\"name\":\"DressControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"服装\",\"value\":\"上一个\"}}"}]}
+{"messages":[{"role":"user","content":"主题切回上一个"},{"role":"assistant","content":"{\"name\":\"DressControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"主题\",\"value\":\"上一个\"}}"}]}
+{"messages":[{"role":"user","content":"把小P衣服切到上一套"},{"role":"assistant","content":"{\"name\":\"DressControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"服装\",\"value\":\"上一个\"}}"}]}

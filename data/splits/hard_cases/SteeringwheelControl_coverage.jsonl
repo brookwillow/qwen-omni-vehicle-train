@@ -1,0 +1,5 @@
+{"messages":[{"role":"user","content":"方向盘加热调低档"},{"role":"assistant","content":"{\"name\":\"SteeringwheelControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"方向盘\",\"feature\":\"制热\",\"value\":\"低\"}}"}]}
+{"messages":[{"role":"user","content":"打开方向盘助力"},{"role":"assistant","content":"{\"name\":\"SteeringwheelControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"方向盘\",\"feature\":\"助力\"}}"}]}
+{"messages":[{"role":"user","content":"方向盘助力调到最高"},{"role":"assistant","content":"{\"name\":\"SteeringwheelControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"方向盘\",\"feature\":\"助力\",\"value\":\"最高\"}}"}]}
+{"messages":[{"role":"user","content":"方向盘助力打开舒适模式"},{"role":"assistant","content":"{\"name\":\"SteeringwheelControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"方向盘\",\"feature\":\"助力\",\"value\":\"舒适模式\"}}"}]}
+{"messages":[{"role":"user","content":"关闭方向盘助力"},{"role":"assistant","content":"{\"name\":\"SteeringwheelControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"方向盘\",\"feature\":\"助力\"}}"}]}

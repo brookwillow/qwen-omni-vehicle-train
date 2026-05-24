@@ -1,0 +1,3 @@
+{"messages":[{"role":"user","content":"雨刮速度调高到高档"},{"role":"assistant","content":"{\"name\":\"WiperControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"雨刮\",\"value\":\"高\"}}"}]}
+{"messages":[{"role":"user","content":"雨刮调到最高"},{"role":"assistant","content":"{\"name\":\"WiperControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"雨刮\",\"value\":\"最高\"}}"}]}
+{"messages":[{"role":"user","content":"雨刮速度调低到低档"},{"role":"assistant","content":"{\"name\":\"WiperControl\",\"arguments\":{\"action\":\"调低\",\"device\":\"雨刮\",\"value\":\"低\"}}"}]}

@@ -25,6 +25,22 @@ def _required_fields_by_tool(tools_path: str | Path) -> dict[str, set[str]]:
     }
 
 
+def arg_delta(gt_args: dict[str, Any], pred_args: dict[str, Any]) -> dict[str, Any]:
+    """Return missing/extra/changed arg slots for one tool-call comparison."""
+    gt_keys = set(gt_args)
+    pred_keys = set(pred_args)
+    changed = {
+        key: {"gt": gt_args.get(key), "pred": pred_args.get(key)}
+        for key in sorted(gt_keys & pred_keys)
+        if gt_args.get(key) != pred_args.get(key)
+    }
+    return {
+        "missing": sorted(gt_keys - pred_keys),
+        "extra": sorted(pred_keys - gt_keys),
+        "changed": changed,
+    }
+
+
 def classify_error(error: dict[str, Any], required_by_tool: dict[str, set[str]] | None = None) -> str:
     """Return a stable issue label for one eval error."""
     required_by_tool = required_by_tool or {}
@@ -36,12 +52,17 @@ def classify_error(error: dict[str, Any], required_by_tool: dict[str, set[str]] 
     gt_args = error.get("gt_args") or {}
     pred_args = error.get("pred_args") or {}
     query = error.get("query") or ""
+    pred_raw = error.get("pred_raw") or ""
 
     if err_type == "type-err":
         if expected_type == "Action" and pred_type == "Reject":
             return "over_reject"
         if expected_type == "Action" and pred_type == "Clarify":
+            if pred_raw and not any(token in pred_raw for token in ("请问", "哪", "什么", "?","？")):
+                return "tool_vs_tts_contract"
             return "over_clarify"
+        if expected_type == "Action" and pred_type == "ParseFail":
+            return "parse_fail_action"
         if expected_type in {"Reject", "Clarify"} and pred_type == "Action":
             return "over_action"
         return "type_mismatch"
@@ -54,11 +75,10 @@ def classify_error(error: dict[str, Any], required_by_tool: dict[str, set[str]] 
         return f"tool_confusion:{pred_tool}->{gt_tool}"
 
     if err_type == "args-err" and isinstance(gt_args, dict) and isinstance(pred_args, dict):
-        gt_keys = set(gt_args)
-        pred_keys = set(pred_args)
-        missing = gt_keys - pred_keys
-        extra = pred_keys - gt_keys
-        changed = {key for key in gt_keys & pred_keys if gt_args.get(key) != pred_args.get(key)}
+        delta = arg_delta(gt_args, pred_args)
+        missing = set(delta["missing"])
+        extra = set(delta["extra"])
+        changed = set(delta["changed"])
         required_missing = missing & required_by_tool.get(gt_tool, set())
 
         if required_missing:
@@ -92,6 +112,8 @@ def summarize_report(report: dict[str, Any], tools_path: str | Path = "data/tool
     by_pred_tool: Counter[str] = Counter()
     by_file: Counter[str] = Counter()
     by_category: Counter[str] = Counter()
+    slot_counts: Counter[str] = Counter()
+    confusion_counts: Counter[str] = Counter()
     issue_examples: dict[str, list[dict[str, Any]]] = defaultdict(list)
 
     for error in errors:
@@ -101,6 +123,21 @@ def summarize_report(report: dict[str, Any], tools_path: str | Path = "data/tool
         by_pred_tool[str(error.get("pred_tool") or error.get("pred_type") or "-")] += 1
         by_file[str(error.get("file") or "-")] += 1
         by_category[str(error.get("category") or "-")] += 1
+        gt_args = error.get("gt_args") or {}
+        pred_args = error.get("pred_args") or {}
+        if isinstance(gt_args, dict) and isinstance(pred_args, dict):
+            delta = arg_delta(gt_args, pred_args)
+            for param in delta["missing"]:
+                slot_counts[f"missing:{error.get('gt_tool')}:{param}"] += 1
+            for param in delta["extra"]:
+                slot_counts[f"extra:{error.get('gt_tool')}:{param}"] += 1
+            for param, values in delta["changed"].items():
+                slot_counts[f"changed:{error.get('gt_tool')}:{param}"] += 1
+                confusion_counts[
+                    f"{error.get('gt_tool')}.{param}:{values['gt']} -> {values['pred']}"
+                ] += 1
+        if error.get("err_type") == "tool-err":
+            confusion_counts[f"tool:{error.get('gt_tool')} <- {error.get('pred_tool')}"] += 1
         if len(issue_examples[issue]) < 5:
             issue_examples[issue].append(
                 {
@@ -112,6 +149,7 @@ def summarize_report(report: dict[str, Any], tools_path: str | Path = "data/tool
                     "pred_type": error.get("pred_type"),
                     "pred_tool": error.get("pred_tool"),
                     "pred_args": error.get("pred_args"),
+                    "arg_delta": arg_delta(gt_args, pred_args) if isinstance(gt_args, dict) and isinstance(pred_args, dict) else {},
                 }
             )
 
@@ -123,11 +161,17 @@ def summarize_report(report: dict[str, Any], tools_path: str | Path = "data/tool
         "by_pred_tool": dict(by_pred_tool.most_common()),
         "by_file": dict(by_file.most_common()),
         "by_category": dict(by_category.most_common()),
+        "slot_counts": dict(slot_counts.most_common()),
+        "confusion_counts": dict(confusion_counts.most_common()),
         "examples": dict(issue_examples),
     }
 
 
 def _training_focus(issue: str) -> str:
+    if issue == "tool_vs_tts_contract":
+        return "工具调用与TTS输出契约"
+    if issue == "parse_fail_action":
+        return "JSON格式与输出稳定性"
     if issue.startswith("wrong_arg_value") or issue.startswith("mixed_arg_error"):
         return "参数值强对比"
     if issue.startswith("missing_") or issue.startswith("extra_args"):
@@ -145,6 +189,7 @@ def _priority(issue: str, count: int) -> str:
         or issue.startswith("mixed_arg_error")
         or issue.startswith("tool_confusion")
         or issue == "over_noise"
+        or issue == "tool_vs_tts_contract"
     ):
         return "P0"
     if count >= 10:
@@ -175,6 +220,10 @@ def build_training_backlog(summary: dict[str, Any], limit: int = 20) -> list[dic
 
 
 def _recommend_training_action(issue: str) -> str:
+    if issue == "tool_vs_tts_contract":
+        return "补充同 query 的工具 JSON chosen 与执行完成 TTS rejected 强对比偏好；SFT 中保持 user -> tool JSON 与 tool-result -> TTS 分离。"
+    if issue == "parse_fail_action":
+        return "补充紧凑 JSON 输出样本和非法格式 rejected 偏好，降低 markdown/解释文本/残缺 JSON。"
     if issue.startswith("wrong_arg_value:action"):
         return "为同一 query 槽位补充打开/关闭/调到/调高/调低/再开/再关/开到/关到的强对比样本。"
     if issue.startswith("wrong_arg_value:value"):
@@ -227,6 +276,8 @@ def print_summary(summary: dict[str, Any], limit: int) -> None:
     _print_counter("Pred Tool/Type", summary["by_pred_tool"], limit)
     _print_counter("Files", summary["by_file"], limit)
     _print_counter("Categories", summary["by_category"], limit)
+    _print_counter("Arg Slot Deltas", summary.get("slot_counts", {}), limit)
+    _print_counter("Confusions", summary.get("confusion_counts", {}), limit)
 
     print("\n## Examples")
     for issue, examples in list(summary["examples"].items())[:limit]:

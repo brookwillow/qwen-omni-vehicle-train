@@ -1,0 +1,14 @@
+{"messages":[{"role":"user","content":"车里有点闷，把车窗打开到通风模式"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗\",\"value\":\"通风\"}}"}]}
+{"messages":[{"role":"user","content":"开个车窗通风就行"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗\",\"value\":\"通风\"}}"}]}
+{"messages":[{"role":"user","content":"前排车窗开到一半"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"开到\",\"device\":\"车窗\",\"position\":\"前排\",\"value\":\"50%\"}}"}]}
+{"messages":[{"role":"user","content":"把前排窗户开到50%"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"开到\",\"device\":\"车窗\",\"position\":\"前排\",\"value\":\"50%\"}}"}]}
+{"messages":[{"role":"user","content":"主驾车窗开到三成"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"开到\",\"device\":\"车窗\",\"position\":\"主驾\",\"value\":\"30%\"}}"}]}
+{"messages":[{"role":"user","content":"驾驶位窗户开到30%"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"开到\",\"device\":\"车窗\",\"position\":\"主驾\",\"value\":\"30%\"}}"}]}
+{"messages":[{"role":"user","content":"右侧车窗全关上"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗\",\"position\":\"右侧\"}}"}]}
+{"messages":[{"role":"user","content":"把右边的窗户都关了"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗\",\"position\":\"右侧\"}}"}]}
+{"messages":[{"role":"user","content":"右边车窗再开一点"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"再开\",\"device\":\"车窗\",\"position\":\"右侧\"}}"}]}
+{"messages":[{"role":"user","content":"右侧窗户稍微再开些"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"再开\",\"device\":\"车窗\",\"position\":\"右侧\"}}"}]}
+{"messages":[{"role":"user","content":"遮阳帘关到一半"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关到\",\"device\":\"遮阳帘\",\"value\":\"50%\"}}"}]}
+{"messages":[{"role":"user","content":"把遮阳帘拉到50%"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关到\",\"device\":\"遮阳帘\",\"value\":\"50%\"}}"}]}
+{"messages":[{"role":"user","content":"车窗开到一点"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"开到\",\"device\":\"车窗\"}}"}]}
+{"messages":[{"role":"user","content":"遮阳帘关到一点"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关到\",\"device\":\"遮阳帘\"}}"}]}

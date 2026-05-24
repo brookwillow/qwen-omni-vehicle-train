@@ -9,6 +9,7 @@ from train_memory_dpo_lora import (
     load_peft_adapter,
     load_preference_rows,
     load_preference_rows_many,
+    parse_preference_weights,
     normalize_response,
     normalize_token_ids,
     split_train_eval,
@@ -157,6 +158,20 @@ def test_load_preference_rows_many_supports_comma_separated_files(tmp_path):
     rows = load_preference_rows_many(f"{first},{second}")
 
     assert [row.prompt for row in rows] == ["p1", "p2"]
+
+
+def test_load_preference_rows_many_supports_file_weights(tmp_path):
+    first = tmp_path / "memory.jsonl"
+    boundary = tmp_path / "tool_boundary_preferences.jsonl"
+    first.write_text('{"prompt":"p1","chosen":"a","rejected":"b"}\n', encoding="utf-8")
+    boundary.write_text('{"prompt":"p2","chosen":"c","rejected":"d"}\n', encoding="utf-8")
+
+    rows = load_preference_rows_many(
+        f"{first},{boundary}",
+        preference_weights=parse_preference_weights(["tool_boundary_preferences.jsonl:3"]),
+    )
+
+    assert [row.prompt for row in rows] == ["p1", "p2", "p2", "p2"]
 
 
 def test_expand_preference_files_supports_globs(tmp_path):

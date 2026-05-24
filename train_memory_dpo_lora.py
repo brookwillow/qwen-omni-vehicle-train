@@ -164,6 +164,22 @@ def load_preference_rows(path: str | Path, max_samples: int = 0) -> list[Prefere
     return rows
 
 
+def parse_preference_weights(items: list[str]) -> dict[str, float]:
+    weights: dict[str, float] = {}
+    for item in items:
+        if ":" not in item:
+            raise ValueError(f"Invalid preference weight {item!r}, expected selector:weight")
+        selector, raw_weight = item.split(":", 1)
+        selector = selector.strip()
+        if not selector:
+            raise ValueError(f"Invalid preference weight {item!r}, empty selector")
+        weight = float(raw_weight)
+        if weight <= 0:
+            raise ValueError(f"Invalid preference weight {item!r}, weight must be > 0")
+        weights[selector] = weight
+    return weights
+
+
 def expand_preference_files(value: str) -> list[Path]:
     paths: list[Path] = []
     for part in value.split(","):
@@ -180,13 +196,42 @@ def expand_preference_files(value: str) -> list[Path]:
     return paths
 
 
-def load_preference_rows_many(value: str, max_samples: int = 0) -> list[PreferenceRow]:
+def preference_weight_for_path(path: Path, weights: dict[str, float]) -> float:
+    normalized = path.as_posix()
+    factor = 1.0
+    for selector, weight in weights.items():
+        if selector == path.name or selector == path.stem or normalized.endswith(selector):
+            factor = max(factor, weight)
+            continue
+        if path.match(selector) or Path(normalized).match(selector):
+            factor = max(factor, weight)
+    return factor
+
+
+def expand_weighted_rows(rows: list[PreferenceRow], factor: float) -> list[PreferenceRow]:
+    if factor <= 1.0:
+        return rows
+    int_factor = int(factor)
+    frac = factor - int_factor
+    expanded = rows * int_factor
+    if frac > 0:
+        expanded += rows[: int(len(rows) * frac)]
+    return expanded
+
+
+def load_preference_rows_many(
+    value: str,
+    max_samples: int = 0,
+    preference_weights: dict[str, float] | None = None,
+) -> list[PreferenceRow]:
     rows: list[PreferenceRow] = []
+    preference_weights = preference_weights or {}
     for path in expand_preference_files(value):
-        remaining = max_samples - len(rows) if max_samples > 0 else 0
-        if max_samples > 0 and remaining <= 0:
+        file_rows = load_preference_rows(path)
+        rows.extend(expand_weighted_rows(file_rows, preference_weight_for_path(path, preference_weights)))
+        if max_samples > 0 and len(rows) >= max_samples:
+            rows = rows[:max_samples]
             break
-        rows.extend(load_preference_rows(path, remaining))
     if not rows:
         raise ValueError(f"No preference rows loaded from {value}")
     return rows
@@ -212,6 +257,12 @@ def parse_args() -> argparse.Namespace:
         "--preference-file",
         default="data/rl/memory_preferences.jsonl",
         help="Preference JSONL file, comma-separated files, or glob pattern.",
+    )
+    p.add_argument(
+        "--preference-weight",
+        nargs="*",
+        default=[],
+        help="Oversample preference files by selector, e.g. tool_boundary_preferences.jsonl:3",
     )
     p.add_argument("--output-dir", default="./lora_output_dpo_memory")
     p.add_argument("--device-map", default="cuda:0")
@@ -312,7 +363,8 @@ def main() -> None:
     out_dir = Path(args.output_dir)
     setup_run_logs(out_dir)
 
-    rows = load_preference_rows_many(args.preference_file, args.max_samples)
+    preference_weights = parse_preference_weights(args.preference_weight)
+    rows = load_preference_rows_many(args.preference_file, args.max_samples, preference_weights)
     train_rows, eval_rows = split_train_eval(rows, args.val_ratio, args.seed)
     print(f"[data] preferences train={len(train_rows)} eval={len(eval_rows)} source={args.preference_file}")
 

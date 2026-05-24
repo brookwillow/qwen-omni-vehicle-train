@@ -1,0 +1,14 @@
+{"messages":[{"role":"user","content":"把所有阅读灯关掉"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"阅读灯\",\"position\":\"全部\"}}"}]}
+{"messages":[{"role":"user","content":"车里的阅读灯全关了吧"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"阅读灯\",\"position\":\"全部\"}}"}]}
+{"messages":[{"role":"user","content":"示宽灯切到光剑模式"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"示宽灯\",\"value\":\"光剑\"}}"}]}
+{"messages":[{"role":"user","content":"把示宽灯调成光剑效果"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"示宽灯\",\"value\":\"光剑\"}}"}]}
+{"messages":[{"role":"user","content":"远光灯调成智能模式"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"远光灯\",\"value\":\"智能\"}}"}]}
+{"messages":[{"role":"user","content":"把远光灯切到智能"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"远光灯\",\"value\":\"智能\"}}"}]}
+{"messages":[{"role":"user","content":"大灯打开自动模式"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"大灯\",\"value\":\"自动\"}}"}]}
+{"messages":[{"role":"user","content":"把大灯自动模式打开"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"大灯\",\"value\":\"自动\"}}"}]}
+{"messages":[{"role":"user","content":"关闭大灯自动模式"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"大灯\",\"value\":\"自动\"}}"}]}
+{"messages":[{"role":"user","content":"大灯不要自动了，关掉自动模式"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"大灯\",\"value\":\"自动\"}}"}]}
+{"messages":[{"role":"user","content":"大灯调成标准模式"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"大灯\",\"value\":\"标准模式\"}}"}]}
+{"messages":[{"role":"user","content":"把前排阅读灯关了"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"阅读灯\",\"position\":\"前排\"}}"}]}
+{"messages":[{"role":"user","content":"第三排阅读灯打开"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"阅读灯\",\"position\":\"第三排\"}}"}]}
+{"messages":[{"role":"user","content":"主驾氛围灯打开"},{"role":"assistant","content":"{\"name\":\"LightControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"氛围灯\",\"position\":\"主驾\"}}"}]}

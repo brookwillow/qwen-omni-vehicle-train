@@ -1,0 +1,2 @@
+{"messages":[{"role":"user","content":"把车上的WIFI关了"},{"role":"assistant","content":"{\"name\":\"NetworkControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"WIFI\"}}"}]}
+{"messages":[{"role":"user","content":"关闭WIFI连接"},{"role":"assistant","content":"{\"name\":\"NetworkControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"WIFI\"}}"}]}

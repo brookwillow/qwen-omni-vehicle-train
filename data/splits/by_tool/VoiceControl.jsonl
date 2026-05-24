@@ -52,14 +52,14 @@
 {"messages":[{"role":"user","content":"帮我把导航音量调大点"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调高\",\"feature\":\"导航音量\"}}"}]}
 {"messages":[{"role":"user","content":"音量调大一点"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调高\",\"feature\":\"声音\"}}"}]}
 {"messages":[{"role":"user","content":"音量调小一点"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调低\",\"feature\":\"声音\"}}"}]}
-{"messages":[{"role":"user","content":"音量调到百分之五十"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"value\":\"中\"}}"}]}
+{"messages":[{"role":"user","content":"音量调到百分之五十"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"value\":\"50%\"}}"}]}
 {"messages":[{"role":"user","content":"副驾音量调小一点"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调低\",\"feature\":\"声音\",\"position\":\"副驾\"}}"}]}
 {"messages":[{"role":"user","content":"第二排音量调到最大"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"position\":\"第二排\",\"value\":\"最高\"}}"}]}
 {"messages":[{"role":"user","content":"关闭车外音量"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"静音\",\"feature\":\"声音\",\"position\":\"车外\"}}"}]}
 {"messages":[{"role":"user","content":"语音音量调小一点"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调低\",\"feature\":\"语音音量\"}}"}]}
 {"messages":[{"role":"user","content":"调大音量"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调高\",\"feature\":\"声音\"}}"}]}
 {"messages":[{"role":"user","content":"把音量调小"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调低\",\"feature\":\"声音\"}}"}]}
-{"messages":[{"role":"user","content":"音量调到50%"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"value\":\"中\"}}"}]}
+{"messages":[{"role":"user","content":"音量调到50%"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"value\":\"50%\"}}"}]}
 {"messages":[{"role":"user","content":"导航音量调小一点"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调低\",\"feature\":\"导航音量\"}}"}]}
 {"messages":[{"role":"user","content":"通话音量调大一点"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调高\",\"feature\":\"通话音量\"}}"}]}
 {"messages":[{"role":"user","content":"车外音量打开"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"声音\",\"position\":\"车外\"}}"}]}
@@ -75,7 +75,7 @@
 {"messages":[{"role":"user","content":"导航的声音吵到后排了，关掉导航声音"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"静音\",\"feature\":\"导航音量\"}}"}]}
 {"messages":[{"role":"user","content":"车外面的喇叭声音太大了扰民，关掉车外的"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"静音\",\"feature\":\"声音\",\"position\":\"车外\"}}"}]}
 {"messages":[{"role":"user","content":"音量调到最小"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"value\":\"最低\"}}"}]}
-{"messages":[{"role":"user","content":"音量调到五"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"value\":\"中\"}}"}]}
+{"messages":[{"role":"user","content":"音量调到五"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"value\":\"5\"}}"}]}
 {"messages":[{"role":"user","content":"关闭声音"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"静音\",\"feature\":\"声音\"}}"}]}
 {"messages":[{"role":"user","content":"声音太小了，听不清"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调高\",\"feature\":\"声音\"}}"}]}
 {"messages":[{"role":"user","content":"导航播报的声音太小了，大一点"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调高\",\"feature\":\"导航音量\"}}"}]}
@@ -141,8 +141,8 @@
 {"messages":[{"role":"user","content":"音量调大"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调高\",\"feature\":\"声音\"}}"}]}
 {"messages":[{"role":"user","content":"调大音量"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调高\",\"feature\":\"声音\"}}"}]}
 {"messages":[{"role":"user","content":"音量调到中等"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"value\":\"中\"}}"}]}
-{"messages":[{"role":"user","content":"音量调到百分之五十"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"value\":\"中\"}}"}]}
-{"messages":[{"role":"user","content":"音量调到五"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"value\":\"中\"}}"}]}
+{"messages":[{"role":"user","content":"音量调到百分之五十"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"value\":\"50%\"}}"}]}
+{"messages":[{"role":"user","content":"音量调到五"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"value\":\"5\"}}"}]}
 {"messages":[{"role":"user","content":"全车安静，不要任何声音"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"静音\",\"feature\":\"声音\"}}"}]}
 {"messages":[{"role":"user","content":"车外声音关掉"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"静音\",\"feature\":\"声音\",\"position\":\"车外\"}}"}]}
 {"messages":[{"role":"user","content":"关闭车外音量"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"静音\",\"feature\":\"声音\",\"position\":\"车外\"}}"}]}

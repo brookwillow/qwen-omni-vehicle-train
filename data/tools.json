@@ -9,7 +9,14 @@
           "type": "string",
           "enum": [
             "关闭",
-            "打开"
+            "打开",
+            "下载"
+          ]
+        },
+        "device": {
+          "type": "string",
+          "enum": [
+            "娱乐屏"
           ]
         },
         "feature": {
@@ -18,6 +25,7 @@
             "ota",
             "全域共驾",
             "媒体",
+            "音乐应用",
             "导航地图",
             "应用列表",
             "投屏助手",
@@ -27,7 +35,6 @@
             "空调",
             "蓝牙电话",
             "车控",
-            "音乐应用",
             "语音助手"
           ]
         }
@@ -55,7 +62,8 @@
           "type": "string",
           "enum": [
             "摄像头",
-            "舱内摄像头"
+            "舱内摄像头",
+            "行车记录仪"
           ]
         },
         "position": {
@@ -64,7 +72,8 @@
             "前侧",
             "右侧",
             "后侧",
-            "左侧"
+            "左侧",
+            "全部"
           ],
           "description": "ONLY set when user EXPLICITLY states seat location."
         },
@@ -269,6 +278,7 @@
             "侧滑门",
             "充电口",
             "后备箱",
+            "车门",
             "直流充电口",
             "鹏翼门"
           ]
@@ -571,7 +581,7 @@
   },
   {
     "name": "PowerControl",
-    "description": "Switches and modes for controlling energy-related functions such as charging, discharging, and energy recovery.",
+    "description": "Switches and modes for controlling energy-related functions such as charging, discharging, and energy recovery. For explicit numeric levels or percentages, keep value as the original numeric string (e.g. 15, 30, 20%). Use enum level words only when the user says a level such as highest/lowest/medium.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -607,6 +617,7 @@
         },
         "value": {
           "type": "string",
+          "description": "numeric and percentage values alongside enums, e.g. 15, 30, 20%",
           "enum": [
             "单踏板",
             "停止模式",
@@ -1084,7 +1095,7 @@
   },
   {
     "name": "VoiceControl",
-    "description": "Control vehicle audio volume settings.",
+    "description": "Control vehicle audio volume settings. For explicit numeric volume or percentage values, keep value as the original numeric string (e.g. 15, 30, 50%). Use enum level words only when the user says highest/lowest/medium or an audio mode.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1139,6 +1150,7 @@
         },
         "value": {
           "type": "string",
+          "description": "numeric and percentage values alongside enums, e.g. 15, 30, 50%",
           "enum": [
             "中",
             "最高",
@@ -1259,8 +1271,7 @@
       },
       "required": [
         "action",
-        "device",
-        "value"
+        "device"
       ]
     }
   },
@@ -1286,6 +1297,7 @@
         "value": {
           "type": "string",
           "enum": [
+            "上一个",
             "下一个"
           ]
         }
@@ -1702,6 +1714,34 @@
             "关门触发离车泊入",
             "车外确认离车泊入"
           ]
+        }
+      },
+      "required": [
+        "action",
+        "feature"
+      ]
+    }
+  },
+  {
+    "name": "IdentityControl",
+    "description": "Record FaceID identity information such as nickname.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "录入"
+          ]
+        },
+        "feature": {
+          "type": "string",
+          "enum": [
+            "昵称"
+          ]
+        },
+        "value": {
+          "type": "string"
         }
       },
       "required": [

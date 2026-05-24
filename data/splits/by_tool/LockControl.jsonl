@@ -69,7 +69,7 @@
 {"messages":[{"role":"user","content":"孩子们可以自己控制窗户了"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗锁\"}}"}]}
 {"messages":[{"role":"user","content":"帮我把后排左边的儿童锁开一下"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"第二排左侧\"}}"}]}
 {"messages":[{"role":"user","content":"把后排右边的儿童锁关了"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"儿童锁\",\"position\":\"第二排右侧\"}}"}]}
-{"messages":[{"role":"user","content":"打开儿童锁，再把车窗也关上"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\"}}"}]}
+{"messages":[{"role":"user","content":"打开儿童锁"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\"}}"}]}
 {"messages":[{"role":"user","content":"行驶途中不让后排乘客打开车门"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\"}}"}]}
 {"messages":[{"role":"user","content":"第二排左边的孩子到站了，解锁让他下车"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"儿童锁\",\"position\":\"第二排左侧\"}}"}]}
 {"messages":[{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"全部\"}}"},{"role":"tool","content":"{\"status\":\"success\"}"},{"role":"assistant","content":"好的，已经为您打开全部车门的儿童锁，保障小朋友的乘车安全。"}]}

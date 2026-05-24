@@ -1,0 +1,16 @@
+{"messages":[{"role":"user","content":"把所有侧滑门关上"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"侧滑门\",\"position\":\"全部\"}}"}]}
+{"messages":[{"role":"user","content":"全车侧滑门都关闭"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"侧滑门\",\"position\":\"全部\"}}"}]}
+{"messages":[{"role":"user","content":"鹏翼门暂停一下"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"暂停\",\"device\":\"鹏翼门\"}}"}]}
+{"messages":[{"role":"user","content":"先停住鹏翼门"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"暂停\",\"device\":\"鹏翼门\"}}"}]}
+{"messages":[{"role":"user","content":"右侧鹏翼门关上"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"鹏翼门\",\"position\":\"右侧\"}}"}]}
+{"messages":[{"role":"user","content":"把右边鹏翼门合上"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"鹏翼门\",\"position\":\"右侧\"}}"}]}
+{"messages":[{"role":"user","content":"副驾侧滑门打开"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"侧滑门\",\"position\":\"副驾\"}}"}]}
+{"messages":[{"role":"user","content":"打开副驾那边的侧滑门"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"侧滑门\",\"position\":\"副驾\"}}"}]}
+{"messages":[{"role":"user","content":"打开第二排右边侧滑门"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"侧滑门\",\"position\":\"第二排右侧\"}}"}]}
+{"messages":[{"role":"user","content":"第二排左侧侧滑门关一下"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"侧滑门\",\"position\":\"第二排左侧\"}}"}]}
+{"messages":[{"role":"user","content":"把第二排鹏翼门打开"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"鹏翼门\",\"position\":\"第二排\"}}"}]}
+{"messages":[{"role":"user","content":"打开左侧充电口"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"充电口\",\"position\":\"左侧\"}}"}]}
+{"messages":[{"role":"user","content":"右侧充电口弹开"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"充电口\",\"position\":\"右侧\"}}"}]}
+{"messages":[{"role":"user","content":"打开车门"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车门\"}}"}]}
+{"messages":[{"role":"user","content":"把车门关上"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车门\"}}"}]}
+{"messages":[{"role":"user","content":"右侧车门打开"},{"role":"assistant","content":"{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车门\",\"position\":\"右侧\"}}"}]}

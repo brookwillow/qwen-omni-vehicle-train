@@ -1,0 +1,3 @@
+{"messages":[{"role":"user","content":"关闭冥想空间"},{"role":"assistant","content":"{\"name\":\"SpecialControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"冥想空间\"}}"}]}
+{"messages":[{"role":"user","content":"前排冥想空间退出"},{"role":"assistant","content":"{\"name\":\"SpecialControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"冥想空间\",\"position\":\"前排\"}}"}]}
+{"messages":[{"role":"user","content":"副驾冥想空间关掉"},{"role":"assistant","content":"{\"name\":\"SpecialControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"冥想空间\",\"position\":\"副驾\"}}"}]}

@@ -1076,7 +1076,7 @@
         "name": "AppControl",
         "arguments": {
           "action": "打开",
-          "feature": "音乐应用"
+          "feature": "媒体"
         }
       }
     ],
@@ -1226,7 +1226,7 @@
         "arguments": {
           "action": "调到",
           "feature": "语音音量",
-          "value": "低"
+          "value": "15"
         }
       }
     ],
@@ -2008,7 +2008,7 @@
         "arguments": {
           "action": "调到",
           "feature": "能量回收",
-          "value": "最低"
+          "value": "15"
         }
       }
     ],
@@ -2635,7 +2635,7 @@
         "arguments": {
           "action": "调到",
           "feature": "导航音量",
-          "value": "低"
+          "value": "15"
         }
       }
     ],
@@ -4812,7 +4812,7 @@
         "name": "ClimateControl",
         "arguments": {
           "action": "打开",
-          "device": "空调",
+          "device": "空气净化器",
           "value": "智能除味"
         }
       }
@@ -8693,7 +8693,7 @@
         "name": "ClimateControl",
         "arguments": {
           "action": "打开",
-          "device": "空调",
+          "device": "空气净化器",
           "value": "智能除味"
         }
       }
@@ -8786,7 +8786,7 @@
         "name": "ClimateControl",
         "arguments": {
           "action": "打开",
-          "device": "空调",
+          "device": "空气净化器",
           "value": "智能除味"
         }
       }
@@ -9721,7 +9721,7 @@
         "arguments": {
           "position": "全部",
           "action": "打开",
-          "device": "空调",
+          "device": "空气净化器",
           "value": "智能除味"
         }
       }
@@ -9933,7 +9933,7 @@
         "name": "AppControl",
         "arguments": {
           "action": "关闭",
-          "feature": "音乐应用"
+          "feature": "媒体"
         }
       }
     ],
@@ -10922,7 +10922,7 @@
         "name": "AppControl",
         "arguments": {
           "action": "关闭",
-          "feature": "音乐应用"
+          "feature": "媒体"
         }
       }
     ],
@@ -10977,7 +10977,7 @@
         "name": "AppControl",
         "arguments": {
           "action": "打开",
-          "feature": "音乐应用"
+          "feature": "媒体"
         }
       }
     ],
@@ -11068,7 +11068,7 @@
         "name": "AppControl",
         "arguments": {
           "action": "关闭",
-          "feature": "音乐应用"
+          "feature": "媒体"
         }
       }
     ],

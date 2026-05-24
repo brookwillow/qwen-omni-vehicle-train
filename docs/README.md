@@ -118,9 +118,9 @@ data/rl/*_preferences.jsonl  (chosen/rejected 偏好数据产物)
 
 | 文件 | 说明 |
 |------|------|
-| `data/system-prompt.txt` | 紧凑版 System Prompt（~5.7K chars，基于当前工具白名单生成） |
-| `data/tools.json` | 39 个车载工具定义（新版 `inputSchema` 格式） |
-| `data/splits/by_tool/*.jsonl` | 按工具拆分的训练数据；每个工具文件内已拆为 `user -> JSON tool call` 决策样本和独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本；`AppControl` 只覆盖明确打开应用的意图，播放内容/导航到目的地等应用内任务走 `Reject`；`PhoneControl.jsonl` 包含小鹏客服、小鹏救援、儿童手表等官方默认联系人样本；其中 `NoiseDoNotAct.jsonl` 当前为 450 条 |
+| `data/system-prompt.txt` | 紧凑版 System Prompt（~5.8K chars，基于当前工具白名单生成） |
+| `data/tools.json` | 40 个车载工具定义（新版 `inputSchema` 格式，已包含 `IdentityControl`） |
+| `data/splits/by_tool/*.jsonl` | 按工具拆分的训练数据；每个工具文件内已拆为 `user -> JSON tool call` 决策样本和独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本；`AppControl` 覆盖明确打开/关闭/下载应用的意图，`音乐应用` 和 `媒体` 分别按 schema 保留，播放内容/导航到目的地等应用内任务走 `Reject`；`IdentityControl.jsonl` 覆盖 FaceID 昵称录入；`PhoneControl.jsonl` 包含小鹏客服、小鹏救援、儿童手表等官方默认联系人样本；其中 `NoiseDoNotAct.jsonl` 当前为 450 条 |
 | `data/splits/clarify.jsonl` | required 字段缺失后的自然语言追问样本 |
 | `data/splits/edge_case.jsonl` | 多轮上下文边界、易混淆与任务列表选择样本 |
 | `data/splits/multiturn.jsonl` | 最多三轮纯文本历史上下文样本；历史可来自导航/音乐/新闻/百科/AIGC/天气等外部域，当前轮优先，只有代词、省略、纠错、延续或查询缺槽时才参考历史补全 |
@@ -129,21 +129,24 @@ data/rl/*_preferences.jsonl  (chosen/rejected 偏好数据产物)
 | `data/rl/memory_preferences.jsonl` | 记忆使用偏好数据（299 条），用于 DPO 阶段强化多轮上下文选择 |
 | `data/rl/memory_contrast_preferences.jsonl` | 正确工具 JSON vs 错误历史工具 JSON 的记忆强对比偏好数据 |
 | `data/rl/tool_tts_preferences.jsonl` | 工具调用 vs TTS 回复的输出契约偏好数据（工具 JSON chosen，执行完成话术 rejected） |
+| `data/rl/tool_boundary_preferences.jsonl` | 边界偏好数据（36 条）：`Reject/NoiseDoNotAct/澄清TTS` chosen，错误工具调用 rejected，用于约束 DPO 过度工具化 |
 | `data/train_final.jsonl` | 最终训练数据（含 SP） |
-| `data/eval/` | 评测数据集（当前工具 schema 已清洗，媒体类无新版等价工具样本已置空/移除） |
+| `data/eval/` | 评测数据集（当前工具 schema 已清洗，`音乐应用` 和 `媒体` 按新版 schema 分开保留） |
+
+数值槽位口径：用户明确说具体数字或百分比时，`value` 保留原始数字字符串，例如音量 `15`、音量 `30`、车窗 `50%`；只有用户说“最高/最低/中等/某模式”时才映射为枚举档位。
 
 ### 数据分布（当前）
 
 | 类型 | 数量 | 说明 |
 |------|------|------|
-| By-tool | 7297 | 每个工具文件内混合：Action JSON 4552 条、NoiseDoNotAct 457 条、独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 2288 条 |
+| By-tool | 7315 | 每个工具文件内混合：Action JSON 4564 条、NoiseDoNotAct 457 条、独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 2294 条 |
 | Clarify | 189 | 已拆为两类样本：`user -> 追问 TTS`（94 条，教模型何时追问）+ 完整 4 轮 `user -> 追问 -> 用户补齐 -> tool call`（95 条，教模型追问后如何响应）；已移除纯位置追问（音区可自动判定位置）与意图明确的方向性追问（如"太晒→打开/关闭遮阳帘"）；配合 final-assistant 标签监督，两类样本均能被正确监督 |
 | Edge case | 100 | 多轮当前轮边界、查询 vs 控制、popup/task 列表 `GeneralSelect` 等易混淆样本 |
 | Multiturn | 370 | 最多三轮纯文本历史；历史允许外部域文本；当前轮输出分布：工具 243 条、NoiseDoNotAct 79 条、Reject 36 条、自然语言 TTS 12 条 |
 | Orchestration | 30 | feature 分支复杂任务编排样本；包含多工具 JSON 数组输出、显式多步、最近意图继承、列表选择与模糊导航拒识 |
 | Reject | 1135 | 单轮 + 多轮硬负例（已合并），最后一条 assistant 均为 `Reject`；已抽稀家居控制负例并移除高风险车控状态拒识 |
 
-`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 9121 条；统计时多轮样本按最后一个有效决策标签计入对应类别。当前输出类型分布为 Action JSON 4999、MultiAction JSON 数组 18、TTS 2394、NoiseDoNotAct 536、Reject 1174。
+`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 9409 条；统计时多轮样本按最后一个有效决策标签计入对应类别。当前输出类型分布为 Action JSON 5817、MultiAction JSON 数组 18、TTS 2400、Reject 1174；其中 `NoiseDoNotAct` 以工具 JSON 形式训练，语义上属于不执行动作边界。
 
 ### Hard Case 加权
 
@@ -164,7 +167,8 @@ python build_train_data.py \
 python train_memory_dpo_lora.py \
   --model /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
   --init-lora-dir lora_output_sft_0520 \
-  --preference-file data/rl/memory_preferences.jsonl,data/rl/memory_contrast_preferences.jsonl,data/rl/tool_tts_preferences.jsonl \
+  --preference-file data/rl/memory_preferences.jsonl,data/rl/memory_contrast_preferences.jsonl,data/rl/tool_tts_preferences.jsonl,data/rl/tool_boundary_preferences.jsonl \
+  --preference-weight tool_boundary_preferences.jsonl:3 \
   --output-dir lora_output_sft_dpo_memory_0520 \
   --prompt-format chat_template \
   --system-prompt data/system-prompt.txt \
@@ -176,7 +180,7 @@ python train_memory_dpo_lora.py \
   --reference-mode reference_free
 ```
 
-`train_memory_dpo_lora.py` 默认使用 reference-free DPO-style loss，适合先在单卡上快速验证；服务器显存充足时可用 `--reference-mode frozen_init` 加载一份冻结的 `--init-lora-dir` 作为 reference，代价是显存约翻倍。DPO 不是重新选择 LoRA 挂载层，而是从已有 SFT LoRA adapter 初始化，继续训练其中已经存在的 `q_proj/k_proj/v_proj/o_proj/gate_proj/up_proj/down_proj` LoRA 参数。DPO 默认 `--prompt-format chat_template`，会把 preference 行里的 `history + current_query` 按 `data/system-prompt.txt` 和 tokenizer chat template 组织成与 `serve.py` 一致的真实多轮输入；历史分布实验不要退回旧的 `json_instruction`，否则训练输入和线上输入不一致。为适配 24GB 显存，DPO 默认开启 `--gradient-checkpointing` 和 `--empty-cache-between-pairs`；如果仍 OOM，优先加 `--max-length 3584`，再降到 `3072`。DPO 阶段学习率和训练步数要保守，训练后必须同时回归原始 eval、multiturn 和 orchestration；若单工具指标回退，优先降低 `--lr` 或减少 epochs。
+`train_memory_dpo_lora.py` 默认使用 reference-free DPO-style loss，适合先在单卡上快速验证；服务器显存充足时可用 `--reference-mode frozen_init` 加载一份冻结的 `--init-lora-dir` 作为 reference，代价是显存约翻倍。DPO 不是重新选择 LoRA 挂载层，而是从已有 SFT LoRA adapter 初始化，继续训练其中已经存在的 `q_proj/k_proj/v_proj/o_proj/gate_proj/up_proj/down_proj` LoRA 参数。DPO 默认 `--prompt-format chat_template`，会把 preference 行里的 `history + current_query` 按 `data/system-prompt.txt` 和 tokenizer chat template 组织成与 `serve.py` 一致的真实多轮输入；历史分布实验不要退回旧的 `json_instruction`，否则训练输入和线上输入不一致。`--preference-weight` 可按文件名、stem、路径后缀或 glob 对偏好文件加权，当前建议将 `tool_boundary_preferences.jsonl` 放大到 3 倍，抵消 `tool_tts_preferences.jsonl` 对工具输出概率的单向推高。为适配 24GB 显存，DPO 默认开启 `--gradient-checkpointing` 和 `--empty-cache-between-pairs`；如果仍 OOM，优先加 `--max-length 3584`，再降到 `3072`。DPO 阶段学习率和训练步数要保守，训练后必须同时回归原始 eval、multiturn、orchestration 和 reject/noise 边界集；若单工具指标回退或 false-positive tool rate 上升，优先降低 `--lr`、减少 epochs，或提高 `tool_boundary_preferences.jsonl` 的采样占比。
 
 ## 训练配置
 
@@ -462,9 +466,11 @@ Batch 模式运行后自动输出 JSON 报告；默认有 `--lora-dir` 时写入
 | `train_memory_dpo_lora.py` | 从已有 SFT LoRA 初始化，基于 memory chosen/rejected 偏好数据继续做 DPO-style LoRA 训练 |
 | `serve.py` | **OpenAI 兼容推理服务**（FastAPI，支持文本+音频） |
 | `eval.py` | 统一评测（batch / single），音频输入 + 多维度统计，支持 `--batch-size` 批量推理 |
-| `scripts/analyze_eval_errors.py` | 读取 `eval_report*.json`，按类型、工具、文件、类别聚类错误；可用 `--backlog-md` 输出训练补强任务清单 |
+| `scripts/analyze_eval_errors.py` | 读取 `eval_report*.json`，按类型、工具、文件、类别、参数槽位变化和混淆对聚类错误；可用 `--backlog-md` 输出训练补强任务清单 |
+| `scripts/schema_coverage_report.py` | 统计 SFT / eval / RL 的工具调用、参数枚举和完整参数组合覆盖，定位 eval/RL 中有但 SFT 弱覆盖或缺失的 schema 组合 |
 | `scripts/validate_splits.py` | 校验 split 样本消息结构、工具调用和响应形态 |
 | `scripts/validate_by_tool_schema.py` | 校验 `data/splits/by_tool/*.jsonl` 是否符合 `data/tools.json` schema |
+| `scripts/validate_rl_schema.py` | 校验 `data/rl` 中稳定 RL 训练数据的 chosen/rejected/expected 工具调用是否符合当前 `data/tools.json` schema；候选和审计 artifact 可用 `--include-artifacts` 额外扫描 |
 | `scripts/generate_train_report.py` | 从 `train_metrics.jsonl` 生成 HTML 训练可视化报告 |
 | `scripts/gradio_remote_infer.py` | 远端推理服务的 Gradio 调试界面 |
 
@@ -473,6 +479,8 @@ Batch 模式运行后自动输出 JSON 报告；默认有 `--lora-dir` 时写入
 ```bash
 python scripts/analyze_eval_errors.py lora_output/eval_report_<timestamp>.json --limit 20
 python scripts/analyze_eval_errors.py lora_output/eval_report_<timestamp>.json --limit 20 --backlog-md docs/eval-error-training-backlog.md
+python scripts/schema_coverage_report.py --output-md docs/schema-coverage-report.md --limit 50
+python scripts/schema_coverage_report.py --backlog-md docs/schema-coverage-hardcase-backlog.md --limit 80
 ```
 
 该流程用于决定下一轮补数据方向；不通过规则后处理抬高线上或评测准确率。
@@ -483,7 +491,7 @@ python scripts/analyze_eval_errors.py lora_output/eval_report_<timestamp>.json -
 
 - [x] max_length 1024 → 16384（防止样本截断）
 - [x] last-assistant-only loss masking（仅监督每条样本最后一个 assistant 回复）
-- [x] SP 压缩并统一到 `data/system-prompt.txt`（当前约 5.7K chars）
+- [x] SP 压缩并统一到 `data/system-prompt.txt`（当前约 5.8K chars）
 - [x] SP 统一管理（`data/system-prompt.txt`，训练/推理/评测共用）
 - [x] 训练数据不再内嵌 SP，由 build_train_data.py 构建时注入
 - [x] lr 1e-4 → 2e-5，alpha 32 → 16，添加 warmup/weight_decay/grad_clip

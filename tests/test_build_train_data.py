@@ -123,6 +123,21 @@ def test_validate_schema_numeric_value_allowed():
     assert validate_sample_schema(sample, _SCHEMA) == []
 
 
+def test_validate_schema_numeric_value_allowed_for_volume_like_fields():
+    schema = {
+        "VoiceControl": {
+            "props": {
+                "action": {"type": "string", "enum": ["调到"]},
+                "feature": {"type": "string", "enum": ["声音"]},
+                "value": {"type": "string", "enum": ["最高", "最低"]},
+            },
+            "required": ["action", "feature"],
+        }
+    }
+    sample = _make_sample('{"name":"VoiceControl","arguments":{"action":"调到","feature":"声音","value":"30"}}')
+    assert validate_sample_schema(sample, schema) == []
+
+
 def test_validate_schema_noise_always_valid():
     sample = _make_sample('{"name":"NoiseDoNotAct","arguments":{}}')
     assert validate_sample_schema(sample, _SCHEMA) == []
