@@ -1,0 +1,33 @@
+data/splits/by_tool/AppControl.jsonl
+  9dec22358ecde48e 119
+data/system-prompt.txt
+  9dec22358ecde48e 5-6,10,26,28-29,44-45
+data/tools.json
+  9dec22358ecde48e 12-19,28,65-66,75-76,281,584,620,1098,1153,1274,1300,1724-1740,1742-1744,1753
+data/splits/by_tool/IdentityControl.jsonl
+  9dec22358ecde48e 1-18
+data/eval/black_box_test.json
+  9dec22358ecde48e 1079,1229,2011,2638,4815,8696,8789,9724,9936,10925,10980,11071
+docs/README.md
+  9dec22358ecde48e 121-123,132,134,136,142,149,170-171,183,469-470,473,482-483,494
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.20",
+  "base_commit_sha": "3a412a6a6ba457227d0144994297dd65f5313682",
+  "prompts": {
+    "9dec22358ecde48e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e1f62-2202-7870-af16-54e6c4691c4d",
+        "model": "gpt-5.5"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 142,
+      "total_deletions": 75,
+      "accepted_lines": 116,
+      "overriden_lines": 4
+    }
+  }
+}
