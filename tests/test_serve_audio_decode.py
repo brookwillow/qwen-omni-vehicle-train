@@ -1,5 +1,6 @@
 import base64
 import builtins
+import hashlib
 import io
 import json
 import sys
@@ -484,3 +485,48 @@ def test_save_request_artifacts_writes_model_request(tmp_path, monkeypatch):
     assert saved["audio_files"] == [{"source": str(audio_path), "saved": "audio_0.wav"}]
     assert (tmp_path / response.id / "response.json").exists()
     assert (tmp_path / response.id / "audio_0.wav").exists()
+
+
+def test_save_request_artifacts_writes_sanitized_raw_request(tmp_path, monkeypatch):
+    monkeypatch.setattr(serve, "_SAVE_DIR", tmp_path)
+    audio_b64 = base64.b64encode(_make_wav(16000, 1, 2)).decode("ascii")
+    response = serve.build_chat_response(
+        choice=serve.Choice(message=serve.AssistantMessage(content="ok")),
+        prompt_tokens=3,
+        gen_tokens=1,
+    )
+    raw_request = serve.ChatRequest(
+        model="qwen-omni-lora",
+        messages=[
+            serve.Message(
+                role="user",
+                content=[
+                    serve.ContentPart(
+                        type="input_audio",
+                        input_audio={"data": audio_b64, "format": "wav"},
+                    )
+                ],
+            )
+        ],
+        max_tokens=32,
+        temperature=0,
+    )
+
+    serve._save_request_artifacts(
+        response.id,
+        [],
+        response,
+        raw_request.messages,
+        raw_request=raw_request,
+    )
+
+    request_path = tmp_path / response.id / "raw_request.json"
+    saved = json.loads(request_path.read_text(encoding="utf-8"))
+    audio_data = saved["messages"][0]["content"][0]["input_audio"]["data"]
+
+    assert saved["model"] == "qwen-omni-lora"
+    assert saved["max_tokens"] == 32
+    assert audio_data["omitted"] is True
+    assert audio_data["base64_chars"] == len(audio_b64)
+    assert audio_data["sha256"] == hashlib.sha256(audio_b64.encode("utf-8")).hexdigest()
+    assert audio_b64 not in request_path.read_text(encoding="utf-8")

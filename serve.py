@@ -1010,6 +1010,29 @@ def _print_qwen_messages(qwen_messages: list) -> None:
     print(f"{'═' * 60}\n", flush=True, file=sys.stderr)
 
 
+def _sanitize_raw_request_value(value: Any) -> Any:
+    """Return a JSON-serializable request copy with large audio payloads summarized."""
+    if isinstance(value, dict):
+        sanitized: dict[str, Any] = {}
+        for key, item in value.items():
+            if key == "data" and isinstance(item, str) and "format" in value:
+                sanitized[key] = {
+                    "omitted": True,
+                    "base64_chars": len(item),
+                    "sha256": hashlib.sha256(item.encode("utf-8")).hexdigest(),
+                }
+            else:
+                sanitized[key] = _sanitize_raw_request_value(item)
+        return sanitized
+    if isinstance(value, list):
+        return [_sanitize_raw_request_value(item) for item in value]
+    return value
+
+
+def _sanitize_raw_request(req: ChatRequest) -> dict[str, Any]:
+    return _sanitize_raw_request_value(req.model_dump(mode="json"))
+
+
 # ── Inference ─────────────────────────────────────────────────
 
 def run_inference(
@@ -1297,6 +1320,7 @@ def _save_request_artifacts(
     response: "ChatResponse",
     messages: List[Message],
     model_messages: list | None = None,
+    raw_request: ChatRequest | None = None,
 ) -> None:
     """Save audio files and response for each request, keyed by request_id."""
     try:
@@ -1330,6 +1354,12 @@ def _save_request_artifacts(
                     ensure_ascii=False,
                     indent=2,
                 ),
+                encoding="utf-8",
+            )
+
+        if raw_request is not None:
+            (req_dir / "raw_request.json").write_text(
+                json.dumps(_sanitize_raw_request(raw_request), ensure_ascii=False, indent=2),
                 encoding="utf-8",
             )
 
@@ -1430,7 +1460,7 @@ async def chat_completions(req: ChatRequest):
 
     # Persist audio + response for training data collection
     save_start = time.perf_counter()
-    _save_request_artifacts(resp.id, tmp_files, resp, req.messages, qwen_msgs)
+    _save_request_artifacts(resp.id, tmp_files, resp, req.messages, qwen_msgs, raw_request=req)
     save_ms = (time.perf_counter() - save_start) * 1000
 
     # Cleanup temp audio files
