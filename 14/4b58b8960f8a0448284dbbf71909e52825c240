@@ -1,0 +1,25 @@
+serve.py
+  9dec22358ecde48e 1013-1035,1323,1360-1362,1463
+tests/test_serve_audio_decode.py
+  9dec22358ecde48e 3,488-532
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.20",
+  "base_commit_sha": "144b58b8960f8a0448284dbbf71909e52825c240",
+  "prompts": {
+    "9dec22358ecde48e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e1f62-2202-7870-af16-54e6c4691c4d",
+        "model": "gpt-5.5"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 77,
+      "total_deletions": 1,
+      "accepted_lines": 77,
+      "overriden_lines": 0
+    }
+  }
+}
