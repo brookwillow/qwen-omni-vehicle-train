@@ -464,6 +464,7 @@ Batch 模式运行后自动输出 JSON 报告；默认有 `--lora-dir` 时写入
 | `build_train_data.py` | 合并 splits + 注入 SP → 训练集 |
 | `train_thinker_lora.py` | LoRA 训练，含冻结审计 + 训练指标记录 |
 | `train_memory_dpo_lora.py` | 从已有 SFT LoRA 初始化，基于 memory chosen/rejected 偏好数据继续做 DPO-style LoRA 训练 |
+| `train_aut_asr_bridge.py` | 实验脚本：用 eval 音频训练 Qwen AUT/audio_tower hidden states 到 Whisper decoder 的轻量 ASR bridge，默认保留 10% 验证集 |
 | `serve.py` | **OpenAI 兼容推理服务**（FastAPI，支持文本+音频） |
 | `eval.py` | 统一评测（batch / single），音频输入 + 多维度统计，支持 `--batch-size` 批量推理 |
 | `scripts/analyze_eval_errors.py` | 读取 `eval_report*.json`，按类型、工具、文件、类别、参数槽位变化和混淆对聚类错误；可用 `--backlog-md` 输出训练补强任务清单 |
@@ -489,6 +490,19 @@ python scripts/probe_asr_decoder.py \
   --eval-file data/eval/window_test.json \
   --limit 20 \
   --output data/serve_logs/aut_asr_probe_window.jsonl
+```
+
+AUT ASR bridge 训练使用 eval 中带 `query_audio` 的音频样本构造 ASR 监督数据，默认按 seed 保留 10% validation，只训练 bridge，Qwen AUT 和 Whisper 均冻结：
+
+```bash
+python train_aut_asr_bridge.py \
+  --model-dir /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
+  --whisper-dir openai/whisper-large-v3 \
+  --eval-dir data/eval \
+  --output-dir aut_asr_bridge_output \
+  --epochs 3 \
+  --grad-accum 8 \
+  --bridge-dtype float32
 ```
 
 评测后的推荐排查顺序：
