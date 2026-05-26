@@ -475,6 +475,22 @@ Batch 模式运行后自动输出 JSON 报告；默认有 `--lora-dir` 时写入
 | `scripts/gradio_remote_infer.py` | 远端推理服务的 Gradio 调试界面 |
 | `scripts/probe_asr_decoder.py` | 实验脚本：hook Qwen2.5-Omni `thinker.audio_tower` hidden states，尝试交给 Whisper decoder 解码 ASR；用于验证 AUT 表征是否可直接转写，不是稳定线上入口 |
 
+AUT ASR probe 可单条音频运行，也可批量扫描 eval 文件并输出 JSONL：
+
+```bash
+python scripts/probe_asr_decoder.py \
+  --model-dir /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
+  --whisper-dir openai/whisper-large-v3 \
+  --audio data/eval/audio/window/window_001.wav
+
+python scripts/probe_asr_decoder.py \
+  --model-dir /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
+  --whisper-dir openai/whisper-large-v3 \
+  --eval-file data/eval/window_test.json \
+  --limit 20 \
+  --output data/serve_logs/aut_asr_probe_window.jsonl
+```
+
 评测后的推荐排查顺序：
 
 ```bash
