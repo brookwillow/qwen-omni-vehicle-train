@@ -596,17 +596,14 @@ def main() -> None:
     trainable = sum(p.numel() for p in bridge.parameters() if p.requires_grad)
     print(f"[bridge] trainable_params={trainable:,} repeat_factor={args.repeat_factor}")
 
-    train_dataset = HiddenDataset(train_rows, tokenizer.tokenizer, cache_dir, args.language)
-    train_loader = DataLoader(
-        train_dataset,
-        batch_size=args.train_batch_size,
-        shuffle=True,
-        collate_fn=collate_batch,
-        num_workers=args.num_workers,
-    )
-    optimizer = torch.optim.AdamW(bridge.parameters(), lr=args.lr, weight_decay=args.weight_decay)
-    total_steps = max(1, math.ceil(len(train_loader) * args.epochs / max(1, args.grad_accum)))
-    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=total_steps)
+    if args.skip_train:
+        ckpt_path = output_dir / "final" / "bridge.pt"
+        if ckpt_path.exists():
+            ckpt = torch.load(ckpt_path, map_location="cpu")
+            bridge.load_state_dict(ckpt["bridge_state_dict"])
+            print(f"[bridge] loaded checkpoint from {ckpt_path}")
+        else:
+            print(f"[bridge] WARNING: --skip-train but no checkpoint found at {ckpt_path}, using random weights")
 
     print("[5/5] start training")
     global_step = 0
@@ -614,6 +611,17 @@ def main() -> None:
         report = evaluate(bridge, whisper_model, tokenizer, val_rows, cache_dir, dtype, bridge_dtype, args, epoch=0)
         log_metrics(output_dir, report)
     if not args.skip_train:
+        train_dataset = HiddenDataset(train_rows, tokenizer.tokenizer, cache_dir, args.language)
+        train_loader = DataLoader(
+            train_dataset,
+            batch_size=args.train_batch_size,
+            shuffle=True,
+            collate_fn=collate_batch,
+            num_workers=args.num_workers,
+        )
+        optimizer = torch.optim.AdamW(bridge.parameters(), lr=args.lr, weight_decay=args.weight_decay)
+        total_steps = max(1, math.ceil(len(train_loader) * args.epochs / max(1, args.grad_accum)))
+        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=total_steps)
         bridge.train()
         for epoch in range(1, args.epochs + 1):
             running_loss = 0.0
