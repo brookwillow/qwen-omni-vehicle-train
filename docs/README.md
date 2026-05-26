@@ -288,7 +288,7 @@ python serve.py \
   --log-file /tmp/qwen_omni_serve.log
 ```
 
-服务端启动时会打印实际 attention implementation；如果缺少 `flash_attn` 会回退到 PyTorch `sdpa`，避免继续显式使用 `eager`。请求日志会输出 `[PERF]` 单次分段耗时，并在每次成功请求后输出 `[PERF_AVG]` 进程内累计平均耗时，覆盖消息转换、音频/多模态处理、processor、generate、解析和保存等阶段。默认不再运行本地 Whisper ASR 调试；需要额外转写排查音频时再加 `--debug-asr`。
+服务端启动时会打印实际 attention implementation；如果缺少 `flash_attn` 会回退到 PyTorch `sdpa`，避免继续显式使用 `eager`。请求日志会输出 `[PERF]` 单次分段耗时，并在每次成功请求后输出 `[PERF_AVG]` 进程内累计平均耗时，覆盖消息转换、音频/多模态处理、processor、generate、解析和保存等阶段。默认不再运行本地 Whisper ASR 调试；需要额外转写排查音频时再加 `--debug-asr`。AUT/audio_tower hidden states 直接接 Whisper decoder 的 ASR 路线仍处于实验探测阶段，可用 `scripts/probe_asr_decoder.py` 单独验证，不属于线上推理服务默认链路。
 `serve.py` 默认会把 stdout/stderr、`serve` logger 和 uvicorn 日志写到公共路径 `/tmp/qwen_omni_serve.log`，其他用户可直接查看：
 
 ```bash
@@ -473,6 +473,7 @@ Batch 模式运行后自动输出 JSON 报告；默认有 `--lora-dir` 时写入
 | `scripts/validate_rl_schema.py` | 校验 `data/rl` 中稳定 RL 训练数据的 chosen/rejected/expected 工具调用是否符合当前 `data/tools.json` schema；候选和审计 artifact 可用 `--include-artifacts` 额外扫描 |
 | `scripts/generate_train_report.py` | 从 `train_metrics.jsonl` 生成 HTML 训练可视化报告 |
 | `scripts/gradio_remote_infer.py` | 远端推理服务的 Gradio 调试界面 |
+| `scripts/probe_asr_decoder.py` | 实验脚本：hook Qwen2.5-Omni `thinker.audio_tower` hidden states，尝试交给 Whisper decoder 解码 ASR；用于验证 AUT 表征是否可直接转写，不是稳定线上入口 |
 
 评测后的推荐排查顺序：
 
