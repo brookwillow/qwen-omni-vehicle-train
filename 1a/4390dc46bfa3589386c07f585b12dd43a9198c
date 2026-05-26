@@ -1,0 +1,23 @@
+train_aut_asr_bridge.py
+  bab03f073fe5a897 213
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.20",
+  "base_commit_sha": "1a4390dc46bfa3589386c07f585b12dd43a9198c",
+  "prompts": {
+    "bab03f073fe5a897": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "560d428a-8a5a-414a-b19c-875e3ea39ba6",
+        "model": "claude-sonnet-4.6"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    }
+  }
+}
