@@ -210,7 +210,7 @@ def collect_eval_rows(eval_dir: Path, audio_root: Path, limit: int = 0) -> list[
             audio = Path(query_audio)
             if not audio.is_absolute():
                 audio = audio_root / audio
-            if not audio.exists():
+            if not audio.is_file():
                 continue
             rows.append(
                 AsrRow(
