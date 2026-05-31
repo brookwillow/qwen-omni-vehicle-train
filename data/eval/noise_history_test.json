@@ -1,0 +1,1742 @@
+[
+  {
+    "id": "current_noise_history_tool_01_01",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "帮我把主驾车窗打开"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗\",\"position\":\"主驾\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，已为您打开主驾车窗。"
+      }
+    ],
+    "query": "嗯",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_01_02",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "帮我把主驾车窗打开"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗\",\"position\":\"主驾\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，已为您打开主驾车窗。"
+      }
+    ],
+    "query": "好",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_01_03",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "帮我把主驾车窗打开"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗\",\"position\":\"主驾\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，已为您打开主驾车窗。"
+      }
+    ],
+    "query": "好的",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_01_04",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "帮我把主驾车窗打开"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗\",\"position\":\"主驾\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，已为您打开主驾车窗。"
+      }
+    ],
+    "query": "哦哦",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_01_05",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "帮我把主驾车窗打开"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗\",\"position\":\"主驾\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，已为您打开主驾车窗。"
+      }
+    ],
+    "query": "对对对",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_01_06",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "帮我把主驾车窗打开"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗\",\"position\":\"主驾\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，已为您打开主驾车窗。"
+      }
+    ],
+    "query": "先这样",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_02_01",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "把空调温度调到二十四度"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"空调\",\"feature\":\"温度\",\"value\":\"24\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，空调温度已调到二十四度。"
+      }
+    ],
+    "query": "嗯",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_02_02",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "把空调温度调到二十四度"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"空调\",\"feature\":\"温度\",\"value\":\"24\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，空调温度已调到二十四度。"
+      }
+    ],
+    "query": "好",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_02_03",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "把空调温度调到二十四度"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"空调\",\"feature\":\"温度\",\"value\":\"24\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，空调温度已调到二十四度。"
+      }
+    ],
+    "query": "好的",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_02_04",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "把空调温度调到二十四度"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"空调\",\"feature\":\"温度\",\"value\":\"24\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，空调温度已调到二十四度。"
+      }
+    ],
+    "query": "哦哦",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_02_05",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "把空调温度调到二十四度"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"空调\",\"feature\":\"温度\",\"value\":\"24\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，空调温度已调到二十四度。"
+      }
+    ],
+    "query": "对对对",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_02_06",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "把空调温度调到二十四度"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"空调\",\"feature\":\"温度\",\"value\":\"24\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，空调温度已调到二十四度。"
+      }
+    ],
+    "query": "先这样",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_03_01",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开副驾座椅加热"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"制热\",\"position\":\"副驾\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，副驾座椅加热已打开。"
+      }
+    ],
+    "query": "嗯",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_03_02",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开副驾座椅加热"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"制热\",\"position\":\"副驾\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，副驾座椅加热已打开。"
+      }
+    ],
+    "query": "好",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_03_03",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开副驾座椅加热"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"制热\",\"position\":\"副驾\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，副驾座椅加热已打开。"
+      }
+    ],
+    "query": "好的",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_03_04",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开副驾座椅加热"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"制热\",\"position\":\"副驾\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，副驾座椅加热已打开。"
+      }
+    ],
+    "query": "哦哦",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_03_05",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开副驾座椅加热"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"制热\",\"position\":\"副驾\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，副驾座椅加热已打开。"
+      }
+    ],
+    "query": "对对对",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_03_06",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开副驾座椅加热"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"SeatControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"制热\",\"position\":\"副驾\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，副驾座椅加热已打开。"
+      }
+    ],
+    "query": "先这样",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_04_01",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开主驾阅读灯"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"LightControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"阅读灯\",\"position\":\"主驾\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，主驾阅读灯已打开。"
+      }
+    ],
+    "query": "嗯",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_04_02",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开主驾阅读灯"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"LightControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"阅读灯\",\"position\":\"主驾\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，主驾阅读灯已打开。"
+      }
+    ],
+    "query": "好",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_04_03",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开主驾阅读灯"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"LightControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"阅读灯\",\"position\":\"主驾\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，主驾阅读灯已打开。"
+      }
+    ],
+    "query": "好的",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_04_04",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开主驾阅读灯"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"LightControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"阅读灯\",\"position\":\"主驾\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，主驾阅读灯已打开。"
+      }
+    ],
+    "query": "哦哦",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_04_05",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开主驾阅读灯"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"LightControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"阅读灯\",\"position\":\"主驾\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，主驾阅读灯已打开。"
+      }
+    ],
+    "query": "对对对",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_04_06",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开主驾阅读灯"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"LightControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"阅读灯\",\"position\":\"主驾\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，主驾阅读灯已打开。"
+      }
+    ],
+    "query": "先这样",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_05_01",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开后备箱"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"后备箱\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，后备箱已打开。"
+      }
+    ],
+    "query": "嗯",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_05_02",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开后备箱"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"后备箱\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，后备箱已打开。"
+      }
+    ],
+    "query": "好",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_05_03",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开后备箱"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"后备箱\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，后备箱已打开。"
+      }
+    ],
+    "query": "好的",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_05_04",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开后备箱"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"后备箱\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，后备箱已打开。"
+      }
+    ],
+    "query": "哦哦",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_05_05",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开后备箱"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"后备箱\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，后备箱已打开。"
+      }
+    ],
+    "query": "对对对",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_05_06",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开后备箱"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"GateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"后备箱\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，后备箱已打开。"
+      }
+    ],
+    "query": "先这样",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_06_01",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "把中控屏亮度调高"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"ScreenControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"屏幕\",\"feature\":\"亮度\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，屏幕亮度已调高。"
+      }
+    ],
+    "query": "嗯",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_06_02",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "把中控屏亮度调高"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"ScreenControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"屏幕\",\"feature\":\"亮度\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，屏幕亮度已调高。"
+      }
+    ],
+    "query": "好",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_06_03",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "把中控屏亮度调高"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"ScreenControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"屏幕\",\"feature\":\"亮度\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，屏幕亮度已调高。"
+      }
+    ],
+    "query": "好的",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_06_04",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "把中控屏亮度调高"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"ScreenControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"屏幕\",\"feature\":\"亮度\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，屏幕亮度已调高。"
+      }
+    ],
+    "query": "哦哦",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_06_05",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "把中控屏亮度调高"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"ScreenControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"屏幕\",\"feature\":\"亮度\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，屏幕亮度已调高。"
+      }
+    ],
+    "query": "对对对",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_06_06",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "把中控屏亮度调高"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"ScreenControl\",\"arguments\":{\"action\":\"调高\",\"device\":\"屏幕\",\"feature\":\"亮度\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，屏幕亮度已调高。"
+      }
+    ],
+    "query": "先这样",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_07_01",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "导航音量调到三十"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"导航音量\",\"value\":\"30\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，导航音量已调到三十。"
+      }
+    ],
+    "query": "嗯",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_07_02",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "导航音量调到三十"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"导航音量\",\"value\":\"30\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，导航音量已调到三十。"
+      }
+    ],
+    "query": "好",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_07_03",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "导航音量调到三十"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"导航音量\",\"value\":\"30\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，导航音量已调到三十。"
+      }
+    ],
+    "query": "好的",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_07_04",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "导航音量调到三十"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"导航音量\",\"value\":\"30\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，导航音量已调到三十。"
+      }
+    ],
+    "query": "哦哦",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_07_05",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "导航音量调到三十"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"导航音量\",\"value\":\"30\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，导航音量已调到三十。"
+      }
+    ],
+    "query": "对对对",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_07_06",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "导航音量调到三十"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"导航音量\",\"value\":\"30\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，导航音量已调到三十。"
+      }
+    ],
+    "query": "先这样",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_08_01",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开音乐应用"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"AppControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"音乐应用\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，音乐应用已打开。"
+      }
+    ],
+    "query": "嗯",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_08_02",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开音乐应用"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"AppControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"音乐应用\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，音乐应用已打开。"
+      }
+    ],
+    "query": "好",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_08_03",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开音乐应用"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"AppControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"音乐应用\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，音乐应用已打开。"
+      }
+    ],
+    "query": "好的",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_08_04",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开音乐应用"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"AppControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"音乐应用\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，音乐应用已打开。"
+      }
+    ],
+    "query": "哦哦",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_08_05",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开音乐应用"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"AppControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"音乐应用\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，音乐应用已打开。"
+      }
+    ],
+    "query": "对对对",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_08_06",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开音乐应用"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"AppControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"音乐应用\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，音乐应用已打开。"
+      }
+    ],
+    "query": "先这样",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_09_01",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "查一下剩余电量"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"剩余电量百分比\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "当前剩余电量为百分之七十。"
+      }
+    ],
+    "query": "嗯",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_09_02",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "查一下剩余电量"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"剩余电量百分比\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "当前剩余电量为百分之七十。"
+      }
+    ],
+    "query": "好",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_09_03",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "查一下剩余电量"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"剩余电量百分比\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "当前剩余电量为百分之七十。"
+      }
+    ],
+    "query": "好的",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_09_04",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "查一下剩余电量"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"剩余电量百分比\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "当前剩余电量为百分之七十。"
+      }
+    ],
+    "query": "哦哦",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_09_05",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "查一下剩余电量"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"剩余电量百分比\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "当前剩余电量为百分之七十。"
+      }
+    ],
+    "query": "对对对",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_09_06",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "查一下剩余电量"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"CarUsageSearch\",\"arguments\":{\"query\":\"剩余电量百分比\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "当前剩余电量为百分之七十。"
+      }
+    ],
+    "query": "先这样",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_10_01",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开任务列表"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"GeneralSelect\",\"arguments\":{\"index\":\"1\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，已选择第一项。"
+      }
+    ],
+    "query": "嗯",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_10_02",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开任务列表"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"GeneralSelect\",\"arguments\":{\"index\":\"1\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，已选择第一项。"
+      }
+    ],
+    "query": "好",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_10_03",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开任务列表"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"GeneralSelect\",\"arguments\":{\"index\":\"1\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，已选择第一项。"
+      }
+    ],
+    "query": "好的",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_10_04",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开任务列表"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"GeneralSelect\",\"arguments\":{\"index\":\"1\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，已选择第一项。"
+      }
+    ],
+    "query": "哦哦",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_10_05",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开任务列表"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"GeneralSelect\",\"arguments\":{\"index\":\"1\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，已选择第一项。"
+      }
+    ],
+    "query": "对对对",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  },
+  {
+    "id": "current_noise_history_tool_10_06",
+    "category": "多轮边界",
+    "sub_category": "历史工具后当前无意义",
+    "intent": "噪声不动作",
+    "difficulty": "hard",
+    "history": [
+      {
+        "role": "user",
+        "content": "打开任务列表"
+      },
+      {
+        "role": "assistant",
+        "content": "{\"name\":\"GeneralSelect\",\"arguments\":{\"index\":\"1\"}}"
+      },
+      {
+        "role": "assistant",
+        "content": "好的，已选择第一项。"
+      }
+    ],
+    "query": "先这样",
+    "expected_tool_calls": [
+      {
+        "name": "NoiseDoNotAct",
+        "arguments": {}
+      }
+    ],
+    "expected_type": "Action"
+  }
+]

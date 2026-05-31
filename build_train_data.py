@@ -401,13 +401,26 @@ def main():
     print(f"\n[out] {len(final)} samples → {out_path}")
 
     # Print distribution (classify by last assistant turn, not all turns)
-    dist = {"Action": 0, "TTS": 0, "Reject": 0}
+    dist = {"Action": 0, "MultiAction": 0, "Noise": 0, "TTS": 0, "Reject": 0}
     for s in final:
         label = None
         for m in s["messages"]:
             if m["role"] == "assistant":
                 c = m["content"].strip()
-                if is_tool_call_content(c):
+                if c.startswith("["):
+                    label = "MultiAction"
+                elif c.startswith("{"):
+                    try:
+                        data = json.loads(c)
+                    except json.JSONDecodeError:
+                        data = None
+                    if isinstance(data, dict) and data.get("name") == "NoiseDoNotAct":
+                        label = "Noise"
+                    elif is_tool_call_content(c):
+                        label = "Action"
+                    else:
+                        label = "TTS"
+                elif is_tool_call_content(c):
                     label = "Action"
                 elif c.startswith("Reject"):
                     label = "Reject"

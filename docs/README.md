@@ -130,6 +130,7 @@ data/rl/*_preferences.jsonl  (chosen/rejected 偏好数据产物)
 | `data/rl/memory_contrast_preferences.jsonl` | 正确工具 JSON vs 错误历史工具 JSON 的记忆强对比偏好数据 |
 | `data/rl/tool_tts_preferences.jsonl` | 工具调用 vs TTS 回复的输出契约偏好数据（工具 JSON chosen，执行完成话术 rejected） |
 | `data/rl/tool_boundary_preferences.jsonl` | 边界偏好数据（36 条）：`Reject/NoiseDoNotAct/澄清TTS` chosen，错误工具调用 rejected，用于约束 DPO 过度工具化 |
+| `data/rl/current_noise_boundary_preferences.jsonl` | 多轮边界偏好数据（200 条）：历史存在工具调用但当前轮为“嗯/好/先这样/空输入/不是那个”等无动作 query 时，`NoiseDoNotAct` chosen，错误继承历史工具 rejected |
 | `data/train_final.jsonl` | 最终训练数据（含 SP） |
 | `data/eval/` | 评测数据集（当前工具 schema 已清洗，`音乐应用` 和 `媒体` 按新版 schema 分开保留） |
 
@@ -142,11 +143,12 @@ data/rl/*_preferences.jsonl  (chosen/rejected 偏好数据产物)
 | By-tool | 7315 | 每个工具文件内混合：Action JSON 4564 条、NoiseDoNotAct 457 条、独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 2294 条 |
 | Clarify | 189 | 已拆为两类样本：`user -> 追问 TTS`（94 条，教模型何时追问）+ 完整 4 轮 `user -> 追问 -> 用户补齐 -> tool call`（95 条，教模型追问后如何响应）；已移除纯位置追问（音区可自动判定位置）与意图明确的方向性追问（如"太晒→打开/关闭遮阳帘"）；配合 final-assistant 标签监督，两类样本均能被正确监督 |
 | Edge case | 100 | 多轮当前轮边界、查询 vs 控制、popup/task 列表 `GeneralSelect` 等易混淆样本 |
+| Hard case: CurrentNoiseWithHistoryTool | 200 | 历史存在明确工具调用，当前轮为无意义/终止/闲聊/空输入时必须 `NoiseDoNotAct`，避免从历史轮次错误继承工具 |
 | Multiturn | 370 | 最多三轮纯文本历史；历史允许外部域文本；当前轮输出分布：工具 243 条、NoiseDoNotAct 79 条、Reject 36 条、自然语言 TTS 12 条 |
 | Orchestration | 30 | feature 分支复杂任务编排样本；包含多工具 JSON 数组输出、显式多步、最近意图继承、列表选择与模糊导航拒识 |
 | Reject | 1135 | 单轮 + 多轮硬负例（已合并），最后一条 assistant 均为 `Reject`；已抽稀家居控制负例并移除高风险车控状态拒识 |
 
-`build_train_data.py` 默认递归合并全部 split，当前最终训练集为 9409 条；统计时多轮样本按最后一个有效决策标签计入对应类别。当前输出类型分布为 Action JSON 5817、MultiAction JSON 数组 18、TTS 2400、Reject 1174；其中 `NoiseDoNotAct` 以工具 JSON 形式训练，语义上属于不执行动作边界。
+`build_train_data.py` 默认递归合并全部 split，当前最终训练集在重建后约 9609 条；统计时多轮样本按最后一个有效决策标签计入对应类别。当前输出类型约为 Action JSON 5284、MultiAction JSON 数组 18、NoiseDoNotAct 737、TTS 2400、Reject 1170。`NoiseDoNotAct` 以工具 JSON 形式训练，但语义上属于不执行动作边界，训练日志会单独统计 `Noise`，避免和普通 Action 混在一起误判工具化倾向。
 
 ### Hard Case 加权
 
@@ -167,8 +169,8 @@ python build_train_data.py \
 python train_memory_dpo_lora.py \
   --model /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
   --init-lora-dir lora_output_sft_0520 \
-  --preference-file data/rl/memory_preferences.jsonl,data/rl/memory_contrast_preferences.jsonl,data/rl/tool_tts_preferences.jsonl,data/rl/tool_boundary_preferences.jsonl \
-  --preference-weight tool_boundary_preferences.jsonl:3 \
+  --preference-file data/rl/memory_preferences.jsonl,data/rl/memory_contrast_preferences.jsonl,data/rl/tool_tts_preferences.jsonl,data/rl/tool_boundary_preferences.jsonl,data/rl/current_noise_boundary_preferences.jsonl \
+  --preference-weight tool_boundary_preferences.jsonl:3 current_noise_boundary_preferences.jsonl:5 \
   --output-dir lora_output_sft_dpo_memory_0520 \
   --prompt-format chat_template \
   --system-prompt data/system-prompt.txt \
@@ -180,7 +182,7 @@ python train_memory_dpo_lora.py \
   --reference-mode reference_free
 ```
 
-`train_memory_dpo_lora.py` 默认使用 reference-free DPO-style loss，适合先在单卡上快速验证；服务器显存充足时可用 `--reference-mode frozen_init` 加载一份冻结的 `--init-lora-dir` 作为 reference，代价是显存约翻倍。DPO 不是重新选择 LoRA 挂载层，而是从已有 SFT LoRA adapter 初始化，继续训练其中已经存在的 `q_proj/k_proj/v_proj/o_proj/gate_proj/up_proj/down_proj` LoRA 参数。DPO 默认 `--prompt-format chat_template`，会把 preference 行里的 `history + current_query` 按 `data/system-prompt.txt` 和 tokenizer chat template 组织成与 `serve.py` 一致的真实多轮输入；历史分布实验不要退回旧的 `json_instruction`，否则训练输入和线上输入不一致。`--preference-weight` 可按文件名、stem、路径后缀或 glob 对偏好文件加权，当前建议将 `tool_boundary_preferences.jsonl` 放大到 3 倍，抵消 `tool_tts_preferences.jsonl` 对工具输出概率的单向推高。为适配 24GB 显存，DPO 默认开启 `--gradient-checkpointing` 和 `--empty-cache-between-pairs`；如果仍 OOM，优先加 `--max-length 3584`，再降到 `3072`。DPO 阶段学习率和训练步数要保守，训练后必须同时回归原始 eval、multiturn、orchestration 和 reject/noise 边界集；若单工具指标回退或 false-positive tool rate 上升，优先降低 `--lr`、减少 epochs，或提高 `tool_boundary_preferences.jsonl` 的采样占比。
+`train_memory_dpo_lora.py` 默认使用 reference-free DPO-style loss，适合先在单卡上快速验证；服务器显存充足时可用 `--reference-mode frozen_init` 加载一份冻结的 `--init-lora-dir` 作为 reference，代价是显存约翻倍。DPO 不是重新选择 LoRA 挂载层，而是从已有 SFT LoRA adapter 初始化，继续训练其中已经存在的 `q_proj/k_proj/v_proj/o_proj/gate_proj/up_proj/down_proj` LoRA 参数。DPO 默认 `--prompt-format chat_template`，会把 preference 行里的 `history + current_query` 按 `data/system-prompt.txt` 和 tokenizer chat template 组织成与 `serve.py` 一致的真实多轮输入；历史分布实验不要退回旧的 `json_instruction`，否则训练输入和线上输入不一致。`--preference-weight` 可按文件名、stem、路径后缀或 glob 对偏好文件加权，当前建议将 `tool_boundary_preferences.jsonl` 放大到 3 倍，并将 `current_noise_boundary_preferences.jsonl` 放大到 5 倍，专门抵消“多轮无意义 query 错误继承历史工具”和 `tool_tts_preferences.jsonl` 对工具输出概率的单向推高。为适配 24GB 显存，DPO 默认开启 `--gradient-checkpointing` 和 `--empty-cache-between-pairs`；如果仍 OOM，优先加 `--max-length 3584`，再降到 `3072`。DPO 阶段学习率和训练步数要保守，训练后必须同时回归原始 eval、multiturn、orchestration、reject/noise 边界集和 `noise_history_test.json`；若单工具指标回退或 false-positive tool rate 上升，优先降低 `--lr`、减少 epochs，或提高边界偏好数据的采样占比。
 
 ## 训练配置
 
@@ -452,7 +454,7 @@ Batch 模式运行后自动输出 JSON 报告；默认有 `--lora-dir` 时写入
 
 ### 评测数据
 
-- 路径：`data/eval/*_test.json`（37 个文件，1792 条样本；其中 177 条多意图/多工具样本默认被单工具评测 mask）
+- 路径：`data/eval/*_test.json`（包含 `noise_history_test.json` 多轮无意义 query 边界专项集；多意图/多工具样本默认被单工具评测 mask）
 - 音频：1598 条样本带 `query_audio` 字段；当前仓库 `data/eval/audio/` 下包含 1093 个 wav 文件
 - 输入方式：有音频文件时自动用音频输入，无音频时回退到文本
 - 支持字段：`expected_type`（显式指定 Action/Clarify/Reject）
