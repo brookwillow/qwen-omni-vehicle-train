@@ -411,8 +411,9 @@ class ToolCall(BaseModel):
 
 class AssistantMessage(BaseModel):
     role: str = "assistant"
-    content: Any = ""
+    content: str = ""
     reasoning_content: str = ""
+    supported: Optional[bool] = Field(default=None, exclude_if=lambda value: value is None)
     tool_calls: Optional[List[ToolCall]] = None
 
 
@@ -1260,7 +1261,7 @@ def parse_model_output(text: str) -> tuple:
     return ("text", content)
 
 
-def _choice_from_parsed_output(parsed: tuple, expose_boundary_outputs: bool = False) -> Choice:
+def _choice_from_parsed_output(parsed: tuple) -> Choice:
     if parsed[0] == "tool_call":
         _, tool_name, args_str = parsed
         return Choice(
@@ -1292,33 +1293,21 @@ def _choice_from_parsed_output(parsed: tuple, expose_boundary_outputs: bool = Fa
         )
 
     if parsed[0] == "noise_do_not_act":
-        if expose_boundary_outputs:
-            return Choice(
-                message=AssistantMessage(
-                    tool_calls=[
-                        ToolCall(
-                            id=f"call_{uuid.uuid4().hex[:22]}",
-                            function=ToolFunction(name="NoiseDoNotAct", arguments="{}"),
-                        )
-                    ]
-                ),
-                finish_reason="tool_calls",
-            )
-        print("[NOISE_DO_NOT_ACT] suppressed client tool output", flush=True, file=sys.stderr)
         return Choice(
-            message=AssistantMessage(content=""),
-            finish_reason="stop",
+            message=AssistantMessage(
+                tool_calls=[
+                    ToolCall(
+                        id=f"call_{uuid.uuid4().hex[:22]}",
+                        function=ToolFunction(name="NoiseDoNotAct", arguments="{}"),
+                    )
+                ]
+            ),
+            finish_reason="tool_calls",
         )
 
     if parsed[0] == "reject":
-        if expose_boundary_outputs:
-            return Choice(
-                message=AssistantMessage(content="false"),
-                finish_reason="stop",
-            )
-        print("[REJECT] suppressed client output", flush=True, file=sys.stderr)
         return Choice(
-            message=AssistantMessage(content=""),
+            message=AssistantMessage(content="", supported=False),
             finish_reason="stop",
         )
 
@@ -1418,7 +1407,6 @@ _system_prompt = ""
 _model_name = "qwen-omni-lora"
 _tmp_dir = tempfile.mkdtemp(prefix="qwen_serve_")
 _debug_asr_enabled = False
-_expose_boundary_outputs = False
 _inference_perf_averages = _PerfAverages()
 _request_perf_averages = _PerfAverages()
 _prompt_cache_mode = "none"
@@ -1472,7 +1460,7 @@ async def chat_completions(req: ChatRequest):
     parse_start = time.perf_counter()
     parsed = parse_model_output(reply)
     parse_ms = (time.perf_counter() - parse_start) * 1000
-    choice = _choice_from_parsed_output(parsed, expose_boundary_outputs=_expose_boundary_outputs)
+    choice = _choice_from_parsed_output(parsed)
 
     resp = build_chat_response(choice, prompt_tokens, gen_tokens)
 
@@ -1531,11 +1519,6 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--torch-dtype", default="auto", choices=["auto", "bfloat16", "float16", "float32"])
     p.add_argument("--debug-asr", action="store_true", help="Run local Whisper ASR for audio debugging.")
     p.add_argument(
-        "--expose-boundary-outputs",
-        action="store_true",
-        help="Expose Reject and NoiseDoNotAct to clients. Reject returns content='false'; NoiseDoNotAct returns a tool call.",
-    )
-    p.add_argument(
         "--prompt-cache",
         default="none",
         choices=["none", "kv"],
@@ -1559,8 +1542,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def main():
-    global _model, _processor, _system_prompt, _model_name, _debug_asr_enabled, _expose_boundary_outputs
-    global _prompt_cache_mode, _kv_prompt_cache
+    global _model, _processor, _system_prompt, _model_name, _debug_asr_enabled, _prompt_cache_mode, _kv_prompt_cache
 
     args = parse_args()
     setup_file_logging(args.log_file, args.log_file_mode)
@@ -1579,10 +1561,8 @@ def main():
 
     _model_name = args.model_name
     _debug_asr_enabled = args.debug_asr
-    _expose_boundary_outputs = args.expose_boundary_outputs
     _prompt_cache_mode = args.prompt_cache
     print(f"[asr] debug_asr={_debug_asr_enabled}")
-    print(f"[boundary] expose_outputs={_expose_boundary_outputs}")
     print(f"[prompt_cache] mode={_prompt_cache_mode}")
 
     print(f"[model] loading {args.model_dir} ...")
