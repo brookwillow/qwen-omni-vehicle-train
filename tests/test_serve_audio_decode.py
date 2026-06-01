@@ -403,6 +403,7 @@ def test_noise_do_not_act_is_returned_as_client_tool_call():
     response = serve.build_chat_response(choice=choice, prompt_tokens=10, gen_tokens=4)
 
     assert response.choices[0].finish_reason == "tool_calls"
+    assert response.choices[0].supported is True
     assert response.choices[0].message.content == ""
     assert response.choices[0].message.tool_calls is not None
     tool_call = response.choices[0].message.tool_calls[0]
@@ -417,10 +418,21 @@ def test_reject_is_returned_as_unsupported_boundary():
     response = serve.build_chat_response(choice=choice, prompt_tokens=10, gen_tokens=1)
 
     assert response.choices[0].finish_reason == "stop"
+    assert response.choices[0].supported is False
     assert response.choices[0].message.content == ""
-    assert response.choices[0].message.supported is False
     assert response.choices[0].message.tool_calls is None
     assert '"supported":false' in response.model_dump_json()
+
+
+def test_text_response_is_returned_as_supported_choice():
+    choice = serve._choice_from_parsed_output(("text", "好的"))
+
+    response = serve.build_chat_response(choice=choice, prompt_tokens=10, gen_tokens=2)
+
+    assert response.choices[0].finish_reason == "stop"
+    assert response.choices[0].supported is True
+    assert response.choices[0].message.content == "好的"
+    assert '"supported":true' in response.model_dump_json()
 
 
 def test_reject_parser_accepts_terminal_punctuation():

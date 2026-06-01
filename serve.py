@@ -413,13 +413,13 @@ class AssistantMessage(BaseModel):
     role: str = "assistant"
     content: str = ""
     reasoning_content: str = ""
-    supported: Optional[bool] = Field(default=None, exclude_if=lambda value: value is None)
     tool_calls: Optional[List[ToolCall]] = None
 
 
 class Choice(BaseModel):
     index: int = 0
     message: AssistantMessage
+    supported: bool = True
     finish_reason: str = "stop"
     logprobs: Optional[Any] = None
 
@@ -1312,7 +1312,8 @@ def _choice_from_parsed_output(parsed: tuple) -> Choice:
 
     if parsed[0] == "reject":
         return Choice(
-            message=AssistantMessage(content="", supported=False),
+            message=AssistantMessage(content=""),
+            supported=False,
             finish_reason="stop",
         )
 
