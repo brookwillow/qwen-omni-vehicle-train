@@ -25,6 +25,7 @@ DEFAULT_RL_DATASETS = (
     "tool_tts_preferences.jsonl",
     "tool_boundary_preferences.jsonl",
     "current_noise_boundary_preferences.jsonl",
+    "noise_false_positive_preferences.jsonl",
 )
 
 

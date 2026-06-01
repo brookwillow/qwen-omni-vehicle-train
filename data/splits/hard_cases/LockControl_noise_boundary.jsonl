@@ -1,0 +1,10 @@
+{"messages":[{"role":"user","content":"打开左后儿童锁"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"第二排左侧\"}}"}]}
+{"messages":[{"role":"user","content":"关闭左后儿童锁"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"儿童锁\",\"position\":\"第二排左侧\"}}"}]}
+{"messages":[{"role":"user","content":"打开右后儿童锁"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"第二排右侧\"}}"}]}
+{"messages":[{"role":"user","content":"关闭右后儿童锁"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"儿童锁\",\"position\":\"第二排右侧\"}}"}]}
+{"messages":[{"role":"user","content":"打开全部儿童锁"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\",\"position\":\"全部\"}}"}]}
+{"messages":[{"role":"user","content":"关闭全部儿童锁"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"儿童锁\",\"position\":\"全部\"}}"}]}
+{"messages":[{"role":"user","content":"车上有小孩，帮我把儿童锁开了"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"儿童锁\"}}"}]}
+{"messages":[{"role":"user","content":"到家了，把儿童保护都解除"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"儿童锁\",\"position\":\"全部\"}}"}]}
+{"messages":[{"role":"user","content":"孩子们可以自己控制窗户了"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"车窗锁\"}}"}]}
+{"messages":[{"role":"user","content":"别让小孩乱按车窗"},{"role":"assistant","content":"{\"name\":\"LockControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗锁\"}}"}]}

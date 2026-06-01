@@ -1,0 +1,13 @@
+{"messages":[{"role":"user","content":"用车习惯二"},{"role":"assistant","content":"{\"name\":\"ProfileControl\",\"arguments\":{\"action\":\"复位\",\"feature\":\"习惯\",\"value\":\"下一个\"}}"}]}
+{"messages":[{"role":"user","content":"座椅标准模式"},{"role":"assistant","content":"{\"name\":\"ProfileControl\",\"arguments\":{\"action\":\"调到\",\"device\":\"座椅\",\"feature\":\"习惯\",\"value\":\"标准模式\"}}"}]}
+{"messages":[{"role":"user","content":"打开副驾的小憩模式"},{"role":"assistant","content":"{\"name\":\"ProfileControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"座椅\",\"feature\":\"习惯\",\"position\":\"副驾\",\"value\":\"小憩模式\"}}"}]}
+{"messages":[{"role":"user","content":"小P关闭小憩模式恢复主驾座椅"},{"role":"assistant","content":"{\"name\":\"ProfileControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"座椅\",\"feature\":\"习惯\",\"position\":\"主驾\",\"value\":\"小憩模式\"}}"}]}
+{"messages":[{"role":"user","content":"打开座椅设置页"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"座椅\"}}"}]}
+{"messages":[{"role":"user","content":"进入大灯控制页面"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"大灯控制\"}}"}]}
+{"messages":[{"role":"user","content":"打开驾驶模式页面"},{"role":"assistant","content":"{\"name\":\"PageAccess\",\"arguments\":{\"feature\":\"驾驶模式\"}}"}]}
+{"messages":[{"role":"user","content":"打开音乐应用"},{"role":"assistant","content":"{\"name\":\"AppControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"音乐应用\"}}"}]}
+{"messages":[{"role":"user","content":"关闭音乐应用"},{"role":"assistant","content":"{\"name\":\"AppControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"音乐应用\"}}"}]}
+{"messages":[{"role":"user","content":"看看有没有系统更新"},{"role":"assistant","content":"{\"name\":\"AppControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"ota\"}}"}]}
+{"messages":[{"role":"user","content":"车机有新版本了吗，帮我检查一下"},{"role":"assistant","content":"{\"name\":\"AppControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"ota\"}}"}]}
+{"messages":[{"role":"user","content":"打开小憩模式"},{"role":"assistant","content":"{\"name\":\"SpecialControl\",\"arguments\":{\"action\":\"打开\",\"feature\":\"小憩模式\"}}"}]}
+{"messages":[{"role":"user","content":"关闭小憩模式"},{"role":"assistant","content":"{\"name\":\"SpecialControl\",\"arguments\":{\"action\":\"关闭\",\"feature\":\"小憩模式\"}}"}]}

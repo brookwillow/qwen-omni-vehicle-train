@@ -1,0 +1,12 @@
+{"messages":[{"role":"user","content":"音量调到十五"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"value\":\"15\"}}"}]}
+{"messages":[{"role":"user","content":"音量调到15"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"value\":\"15\"}}"}]}
+{"messages":[{"role":"user","content":"音量调到三十"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"value\":\"30\"}}"}]}
+{"messages":[{"role":"user","content":"音量调到30"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"value\":\"30\"}}"}]}
+{"messages":[{"role":"user","content":"音量调到百分之三十"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"value\":\"30\"}}"}]}
+{"messages":[{"role":"user","content":"全部音量调到百分之三十"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"position\":\"全部\",\"value\":\"30\"}}"}]}
+{"messages":[{"role":"user","content":"音量调到百分之五十"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"value\":\"50\"}}"}]}
+{"messages":[{"role":"user","content":"导航音量调到百分之二十"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"导航音量\",\"value\":\"20\"}}"}]}
+{"messages":[{"role":"user","content":"通话音量调到四十"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"通话音量\",\"value\":\"40\"}}"}]}
+{"messages":[{"role":"user","content":"音量调到最小"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"value\":\"最低\"}}"}]}
+{"messages":[{"role":"user","content":"音量拉满吧"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"调到\",\"feature\":\"声音\",\"value\":\"最高\"}}"}]}
+{"messages":[{"role":"user","content":"关闭导航音量"},{"role":"assistant","content":"{\"name\":\"VoiceControl\",\"arguments\":{\"action\":\"静音\",\"feature\":\"导航音量\"}}"}]}

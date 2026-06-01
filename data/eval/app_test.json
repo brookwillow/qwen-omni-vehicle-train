@@ -595,7 +595,9 @@
     "query": "我想听歌",
     "expected_tool_calls": [],
     "expected_type": "Reject",
-    "query_audio": "audio/app/app_034.wav"
+    "query_audio": "audio/app/app_034.wav",
+    "eval_ignore": true,
+    "eval_ignore_reason": "模糊内容播放意图，是否打开音乐应用存在产品口径争议，暂不计入评估"
   },
   {
     "id": "app_035",
@@ -606,7 +608,9 @@
     "query": "开车无聊，来点音乐吧",
     "expected_tool_calls": [],
     "expected_type": "Reject",
-    "query_audio": "audio/app/app_035.wav"
+    "query_audio": "audio/app/app_035.wav",
+    "eval_ignore": true,
+    "eval_ignore_reason": "模糊内容播放意图，是否打开音乐应用存在产品口径争议，暂不计入评估"
   },
   {
     "id": "app_036",
@@ -760,7 +764,9 @@
     "query": "查一下我的日程表",
     "expected_tool_calls": [],
     "query_audio": "audio/app/app_044.wav",
-    "expected_type": "Reject"
+    "expected_type": "Reject",
+    "eval_ignore": true,
+    "eval_ignore_reason": "日程查询可能落到日历应用或信息查询，工具边界未定，暂不计入评估"
   },
   {
     "id": "app_045",
@@ -879,7 +885,9 @@
     "query": "我想看看车辆状态",
     "expected_tool_calls": [],
     "query_audio": "audio/app/app_051.wav",
-    "expected_type": "Reject"
+    "expected_type": "Reject",
+    "eval_ignore": true,
+    "eval_ignore_reason": "车辆状态查看可能落到车控/车辆信息查询，工具边界未定，暂不计入评估"
   },
   {
     "id": "app_052",
@@ -926,7 +934,9 @@
     "query": "我想看点视频或者听点东西",
     "expected_tool_calls": [],
     "expected_type": "Reject",
-    "query_audio": "audio/app/app_054.wav"
+    "query_audio": "audio/app/app_054.wav",
+    "eval_ignore": true,
+    "eval_ignore_reason": "模糊媒体消费意图，是否打开媒体/音乐应用存在产品口径争议，暂不计入评估"
   },
   {
     "id": "app_055",

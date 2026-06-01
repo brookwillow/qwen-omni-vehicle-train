@@ -199,11 +199,14 @@ def test_appcontrol_explicit_close_cases_are_actions():
         ]
 
 
-def test_appcontrol_content_tasks_remain_reject():
+def test_appcontrol_ambiguous_content_tasks_are_ignored_by_eval(monkeypatch):
+    eval_mod = _load_eval_module(monkeypatch)
     rows = json.loads(Path("data/eval/app_test.json").read_text(encoding="utf-8"))
     by_id = {row["id"]: row for row in rows}
 
     for row_id in ["app_034", "app_035", "app_044", "app_054", "app_051"]:
         row = by_id[row_id]
-        assert row["expected_type"] == "Reject"
+        assert row["eval_ignore"] is True
+        assert row["eval_ignore_reason"]
+        assert eval_mod.should_skip_eval_row(row)
         assert row["expected_tool_calls"] == []

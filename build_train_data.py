@@ -126,16 +126,36 @@ def match_weight_selector(path: Path, selector: str) -> bool:
 
 
 def sample_weight_for_path(path: Path, sample_weights: dict[str, float]) -> float:
-    factor = 1.0
+    downsample_factor = 1.0
+    oversample_factor = 1.0
     for selector, weight in sample_weights.items():
         if match_weight_selector(path, selector):
-            factor = max(factor, weight)
-    return factor
+            if weight < 1.0:
+                downsample_factor = min(downsample_factor, weight)
+            else:
+                oversample_factor = max(oversample_factor, weight)
+    if downsample_factor < 1.0:
+        return downsample_factor
+    return oversample_factor
 
 
 def expand_samples(samples: list[dict], factor: float, rng: random.Random) -> list[dict]:
-    """Apply deterministic fractional oversampling."""
-    if factor <= 1.0:
+    """Apply deterministic fractional sampling.
+
+    ``factor > 1`` oversamples. ``0 < factor < 1`` downsamples without
+    replacement, which is useful for overrepresented boundary classes such as
+    current-turn noise.
+    """
+    if factor <= 0:
+        return []
+    if factor < 1.0:
+        keep = int(len(samples) * factor)
+        if len(samples) and keep == 0:
+            keep = 1
+        shuffled = list(samples)
+        rng.shuffle(shuffled)
+        return shuffled[:keep]
+    if factor == 1.0:
         return samples
     int_factor = int(factor)
     frac = factor - int_factor
@@ -167,7 +187,9 @@ def load_weighted_splits(
                 rng.shuffle(samples)
                 samples = samples[:limit]
 
-        factor = max(oversample.get(type_name, 1.0), sample_weight_for_path(fpath, sample_weights))
+        oversample_factor = oversample.get(type_name, 1.0)
+        path_factor = sample_weight_for_path(fpath, sample_weights)
+        factor = min(oversample_factor, path_factor) if path_factor < 1.0 else max(oversample_factor, path_factor)
         samples = expand_samples(samples, factor, rng)
 
         counts[str(fpath)] = len(samples)

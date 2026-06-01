@@ -56,6 +56,22 @@ def test_load_weighted_splits_oversamples_matching_file(tmp_path):
     assert counts[str(hard)] == 3
 
 
+def test_load_weighted_splits_downsamples_matching_file(tmp_path):
+    noise = tmp_path / "NoiseDoNotAct.jsonl"
+    _write_jsonl(noise, [f"噪声{i}" for i in range(10)])
+
+    samples, counts = load_weighted_splits(
+        [noise],
+        oversample={},
+        max_per_type={},
+        sample_weights={"NoiseDoNotAct": 0.5},
+        rng=random.Random(7),
+    )
+
+    assert len(samples) == 5
+    assert counts[str(noise)] == 5
+
+
 def test_parse_kv_args_preserves_string_selectors():
     assert parse_kv_args(["hard_cases/*.jsonl:2.5"]) == {"hard_cases/*.jsonl": 2.5}
 

@@ -131,6 +131,7 @@ data/rl/*_preferences.jsonl  (chosen/rejected 偏好数据产物)
 | `data/rl/tool_tts_preferences.jsonl` | 工具调用 vs TTS 回复的输出契约偏好数据（工具 JSON chosen，执行完成话术 rejected） |
 | `data/rl/tool_boundary_preferences.jsonl` | 边界偏好数据（36 条）：`Reject/NoiseDoNotAct/澄清TTS` chosen，错误工具调用 rejected，用于约束 DPO 过度工具化 |
 | `data/rl/current_noise_boundary_preferences.jsonl` | 多轮边界偏好数据（200 条）：历史存在工具调用但当前轮为“嗯/好/先这样/空输入/不是那个”等无动作 query 时，`NoiseDoNotAct` chosen，错误继承历史工具 rejected |
+| `data/rl/noise_false_positive_preferences.jsonl` | 有效短指令被误判为 `NoiseDoNotAct` 的反向偏好数据（70 条）：正确工具 chosen，`NoiseDoNotAct` rejected，覆盖 CarUsageSearch、Voice/Light/Lock/Window/Climate 等高误拒域 |
 | `data/train_final.jsonl` | 最终训练数据（含 SP） |
 | `data/eval/` | 评测数据集（当前工具 schema 已清洗，`音乐应用` 和 `媒体` 按新版 schema 分开保留） |
 
@@ -143,20 +144,21 @@ data/rl/*_preferences.jsonl  (chosen/rejected 偏好数据产物)
 | By-tool | 7315 | 每个工具文件内混合：Action JSON 4564 条、NoiseDoNotAct 457 条、独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本 2294 条 |
 | Clarify | 189 | 已拆为两类样本：`user -> 追问 TTS`（94 条，教模型何时追问）+ 完整 4 轮 `user -> 追问 -> 用户补齐 -> tool call`（95 条，教模型追问后如何响应）；已移除纯位置追问（音区可自动判定位置）与意图明确的方向性追问（如"太晒→打开/关闭遮阳帘"）；配合 final-assistant 标签监督，两类样本均能被正确监督 |
 | Edge case | 100 | 多轮当前轮边界、查询 vs 控制、popup/task 列表 `GeneralSelect` 等易混淆样本 |
-| Hard case: CurrentNoiseWithHistoryTool | 200 | 历史存在明确工具调用，当前轮为无意义/终止/闲聊/空输入时必须 `NoiseDoNotAct`，避免从历史轮次错误继承工具 |
+| Hard case: CurrentNoiseWithHistoryTool | 200 | 历史存在明确工具调用，当前轮为无意义/终止/闲聊/空输入时必须 `NoiseDoNotAct`，避免从历史轮次错误继承工具；当前推荐训练时下采样到 0.5 倍 |
+| Hard case: 0601 weak-domain fixes | 105 | 新增 CarUsageSearch 短查询/状态查询边界、Voice 数值槽位归一化、Light/Lock/Window/Climate 有效短指令反例，以及 Profile/PageAccess/AppControl/SpecialControl 边界对比 |
 | Multiturn | 370 | 最多三轮纯文本历史；历史允许外部域文本；当前轮输出分布：工具 243 条、NoiseDoNotAct 79 条、Reject 36 条、自然语言 TTS 12 条 |
 | Orchestration | 30 | feature 分支复杂任务编排样本；包含多工具 JSON 数组输出、显式多步、最近意图继承、列表选择与模糊导航拒识 |
 | Reject | 1135 | 单轮 + 多轮硬负例（已合并），最后一条 assistant 均为 `Reject`；已抽稀家居控制负例并移除高风险车控状态拒识 |
 
-`build_train_data.py` 默认递归合并全部 split，当前最终训练集在重建后约 9609 条；统计时多轮样本按最后一个有效决策标签计入对应类别。当前输出类型约为 Action JSON 5284、MultiAction JSON 数组 18、NoiseDoNotAct 737、TTS 2400、Reject 1170。`NoiseDoNotAct` 以工具 JSON 形式训练，但语义上属于不执行动作边界，训练日志会单独统计 `Noise`，避免和普通 Action 混在一起误判工具化倾向。
+`build_train_data.py` 默认递归合并全部 split，当前默认重建后约 9714 条；统计时多轮样本按最后一个有效决策标签计入对应类别。默认输出类型约为 Action JSON 5389、MultiAction JSON 数组 18、NoiseDoNotAct 737、TTS 2400、Reject 1170。针对 2026-06-01 评估中 `NoiseDoNotAct` 误杀有效短指令的问题，当前推荐训练集构建命令会将 `NoiseDoNotAct` 和 `CurrentNoiseWithHistoryTool` 下采样到 0.5 倍，同时把 hard case 放大到 2 倍；推荐构建后约 9768 条，其中 Noise 约 413 条。`NoiseDoNotAct` 以工具 JSON 形式训练，但语义上属于不执行动作边界，训练日志会单独统计 `Noise`，避免和普通 Action 混在一起误判工具化倾向。
 
 ### Hard Case 加权
 
-`--oversample` 仍按文件 stem 加权；新增 `--sample-weight` 支持按 stem、路径后缀或 glob 给具体 split 文件加权，适合将评测错误族沉淀为独立 hard case 文件后提高采样占比。
+`--oversample` 仍按文件 stem 加权；`--sample-weight` 支持按 stem、路径后缀或 glob 给具体 split 文件加权，支持 `>1` 上采样和 `0-1` 下采样。若某个文件同时命中下采样和宽泛上采样规则，下采样优先，避免 `hard_cases/*.jsonl:2` 重新放大噪声边界文件。
 
 ```bash
 python build_train_data.py \
-  --sample-weight 'hard_cases/*.jsonl:3' ProfileControl:2 WindowControl:1.5
+  --sample-weight NoiseDoNotAct:0.5 CurrentNoiseWithHistoryTool:0.5 'hard_cases/*.jsonl:2'
 ```
 
 推荐流程：先用 `scripts/analyze_eval_errors.py --backlog-md` 生成错误族补强清单，再为 P0/P1 错误族补充非评估原句 hard case；训练时对这些 hard case 文件做 2-4 倍采样，避免新增样本在 9K 级训练集中被稀释。
@@ -169,8 +171,8 @@ python build_train_data.py \
 python train_memory_dpo_lora.py \
   --model /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
   --init-lora-dir lora_output_sft_0520 \
-  --preference-file data/rl/memory_preferences.jsonl,data/rl/memory_contrast_preferences.jsonl,data/rl/tool_tts_preferences.jsonl,data/rl/tool_boundary_preferences.jsonl,data/rl/current_noise_boundary_preferences.jsonl \
-  --preference-weight tool_boundary_preferences.jsonl:3 current_noise_boundary_preferences.jsonl:5 \
+  --preference-file data/rl/memory_preferences.jsonl,data/rl/memory_contrast_preferences.jsonl,data/rl/tool_tts_preferences.jsonl,data/rl/tool_boundary_preferences.jsonl,data/rl/current_noise_boundary_preferences.jsonl,data/rl/noise_false_positive_preferences.jsonl \
+  --preference-weight tool_boundary_preferences.jsonl:3 current_noise_boundary_preferences.jsonl:3 noise_false_positive_preferences.jsonl:5 \
   --output-dir lora_output_sft_dpo_memory_0520 \
   --prompt-format chat_template \
   --system-prompt data/system-prompt.txt \
@@ -182,7 +184,7 @@ python train_memory_dpo_lora.py \
   --reference-mode reference_free
 ```
 
-`train_memory_dpo_lora.py` 默认使用 reference-free DPO-style loss，适合先在单卡上快速验证；服务器显存充足时可用 `--reference-mode frozen_init` 加载一份冻结的 `--init-lora-dir` 作为 reference，代价是显存约翻倍。DPO 不是重新选择 LoRA 挂载层，而是从已有 SFT LoRA adapter 初始化，继续训练其中已经存在的 `q_proj/k_proj/v_proj/o_proj/gate_proj/up_proj/down_proj` LoRA 参数。DPO 默认 `--prompt-format chat_template`，会把 preference 行里的 `history + current_query` 按 `data/system-prompt.txt` 和 tokenizer chat template 组织成与 `serve.py` 一致的真实多轮输入；历史分布实验不要退回旧的 `json_instruction`，否则训练输入和线上输入不一致。`--preference-weight` 可按文件名、stem、路径后缀或 glob 对偏好文件加权，当前建议将 `tool_boundary_preferences.jsonl` 放大到 3 倍，并将 `current_noise_boundary_preferences.jsonl` 放大到 5 倍，专门抵消“多轮无意义 query 错误继承历史工具”和 `tool_tts_preferences.jsonl` 对工具输出概率的单向推高。为适配 24GB 显存，DPO 默认开启 `--gradient-checkpointing` 和 `--empty-cache-between-pairs`；如果仍 OOM，优先加 `--max-length 3584`，再降到 `3072`。DPO 阶段学习率和训练步数要保守，训练后必须同时回归原始 eval、multiturn、orchestration、reject/noise 边界集和 `noise_history_test.json`；若单工具指标回退或 false-positive tool rate 上升，优先降低 `--lr`、减少 epochs，或提高边界偏好数据的采样占比。
+`train_memory_dpo_lora.py` 默认使用 reference-free DPO-style loss，适合先在单卡上快速验证；服务器显存充足时可用 `--reference-mode frozen_init` 加载一份冻结的 `--init-lora-dir` 作为 reference，代价是显存约翻倍。DPO 不是重新选择 LoRA 挂载层，而是从已有 SFT LoRA adapter 初始化，继续训练其中已经存在的 `q_proj/k_proj/v_proj/o_proj/gate_proj/up_proj/down_proj` LoRA 参数。DPO 默认 `--prompt-format chat_template`，会把 preference 行里的 `history + current_query` 按 `data/system-prompt.txt` 和 tokenizer chat template 组织成与 `serve.py` 一致的真实多轮输入；历史分布实验不要退回旧的 `json_instruction`，否则训练输入和线上输入不一致。`--preference-weight` 可按文件名、stem、路径后缀或 glob 对偏好文件加权，当前建议将 `tool_boundary_preferences.jsonl` 和 `current_noise_boundary_preferences.jsonl` 放大到 3 倍，并将 `noise_false_positive_preferences.jsonl` 放大到 5 倍；前两者约束多轮无意义 query 错误继承历史工具，后者专门压制有效短指令被误拒为 `NoiseDoNotAct`。为适配 24GB 显存，DPO 默认开启 `--gradient-checkpointing` 和 `--empty-cache-between-pairs`；如果仍 OOM，优先加 `--max-length 3584`，再降到 `3072`。DPO 阶段学习率和训练步数要保守，训练后必须同时回归原始 eval、multiturn、orchestration、reject/noise 边界集和 `noise_history_test.json`；若单工具指标回退或 false-positive tool rate 上升，优先降低 `--lr`、减少 epochs，或提高边界偏好数据的采样占比。
 
 ## 训练配置
 
@@ -191,6 +193,15 @@ python train_thinker_lora.py \
   --model models/Qwen2.5-Omni-3B \
   --train-file data/train_final.jsonl \
   --output-dir ./lora_output
+```
+
+
+生成 SFT 训练集时先使用当前推荐的采样权重，降低噪声边界过强带来的误拒风险：
+
+```bash
+python build_train_data.py \
+  --sample-weight NoiseDoNotAct:0.5 CurrentNoiseWithHistoryTool:0.5 'hard_cases/*.jsonl:2' \
+  --output data/train_final.jsonl
 ```
 
 ### RTX 3090 (24GB) 显存控制
@@ -433,7 +444,7 @@ python eval.py single \
 
 评测脚本支持少量业务等价答案：例如「车里太闷了」这类未明确指定车窗或空调的通风意图，`ClimateControl` 切外循环和 `WindowControl` 打开车窗都计为正确。
 评测和服务端都不做规则后处理修正预测工具或参数，指标与线上响应都反映模型原始输出。
-默认单工具评测仍会 mask 多意图/多工具样本；feature 分支需要评估复杂任务编排时，增加 `--include-multi-tool`，此时 JSON 数组形式的多工具输出会按无序集合匹配，样本设置 `ordered_tool_calls: true` 时按顺序匹配。
+默认单工具评测仍会 mask 多意图/多工具样本；`eval_ignore: true` 的样本也会跳过，用于产品口径未定或语义上存在多种合理工具解释的评测项，避免把争议标签作为回归标准。feature 分支需要评估复杂任务编排时，增加 `--include-multi-tool`，此时 JSON 数组形式的多工具输出会按无序集合匹配，样本设置 `ordered_tool_calls: true` 时按顺序匹配。
 
 ### 评测维度
 
@@ -450,14 +461,14 @@ Batch 模式运行后自动输出 JSON 报告；默认有 `--lora-dir` 时写入
 - 所有错误样本（含 query、gt、pred、err_type）
 - 解析后的工具名和参数保持模型原始输出，不做规则后处理修正
 - `position` 为可选参数；用户未明确位置时不因缺少位置追问，直接省略 `position`，由工具侧按说话人位置补全
-- 多意图样本默认不计入单工具指标；`eval.py` 会跳过 `intent/sub_category=多意图` 或包含多个 `expected_tool_calls` 的样本；传入 `--include-multi-tool` 后会计入并解析 JSON 数组多工具输出
+- 多意图样本默认不计入单工具指标；`eval.py` 会跳过 `eval_ignore: true`、`intent/sub_category=多意图` 或包含多个 `expected_tool_calls` 的样本；传入 `--include-multi-tool` 后会计入多工具样本并解析 JSON 数组多工具输出
 
 ### 评测数据
 
 - 路径：`data/eval/*_test.json`（包含 `noise_history_test.json` 多轮无意义 query 边界专项集；多意图/多工具样本默认被单工具评测 mask）
 - 音频：1598 条样本带 `query_audio` 字段；当前仓库 `data/eval/audio/` 下包含 1093 个 wav 文件
 - 输入方式：有音频文件时自动用音频输入，无音频时回退到文本
-- 支持字段：`expected_type`（显式指定 Action/Clarify/Reject）
+- 支持字段：`expected_type`（显式指定 Action/Clarify/Reject）、`eval_ignore` / `eval_ignore_reason`（保留样本但不计入评测）
 
 ## 脚本总览
 

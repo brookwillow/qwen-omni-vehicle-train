@@ -1,0 +1,10 @@
+{"messages":[{"role":"user","content":"关掉天窗"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"天窗\"}}"}]}
+{"messages":[{"role":"user","content":"打开天窗"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"天窗\"}}"}]}
+{"messages":[{"role":"user","content":"升起车窗"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"再关\",\"device\":\"车窗\"}}"}]}
+{"messages":[{"role":"user","content":"前排车窗下降"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"再开\",\"device\":\"车窗\",\"position\":\"前排\"}}"}]}
+{"messages":[{"role":"user","content":"打开前窗"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗\",\"position\":\"前排\"}}"}]}
+{"messages":[{"role":"user","content":"打开主副驾车窗玻璃"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗\",\"position\":\"前排\"}}"}]}
+{"messages":[{"role":"user","content":"车窗通风"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗\",\"value\":\"通风\"}}"}]}
+{"messages":[{"role":"user","content":"打开车窗通风"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"车窗\",\"value\":\"通风\"}}"}]}
+{"messages":[{"role":"user","content":"小P前排车窗打开百分之十"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"开到\",\"device\":\"车窗\",\"position\":\"前排\",\"value\":\"10%\"}}"}]}
+{"messages":[{"role":"user","content":"副驾车窗打开一点点"},{"role":"assistant","content":"{\"name\":\"WindowControl\",\"arguments\":{\"action\":\"再开\",\"device\":\"车窗\",\"position\":\"副驾\"}}"}]}

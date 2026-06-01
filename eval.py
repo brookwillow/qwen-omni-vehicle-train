@@ -394,6 +394,8 @@ def get_expected_type(row: dict) -> str:
 
 def should_skip_eval_row(row: dict, include_multi_tool: bool = False) -> bool:
     """Skip cases that cannot be scored with the current single-tool metric."""
+    if row.get("eval_ignore"):
+        return True
     if include_multi_tool:
         return False
     if row.get("intent") == "多意图" or row.get("sub_category") == "多意图":
