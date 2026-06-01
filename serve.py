@@ -1206,6 +1206,11 @@ def _parse_tool_call_json_array(text: str) -> list[tuple[str, dict]] | None:
     return calls
 
 
+def _is_reject_output(text: str) -> bool:
+    normalized = text.strip().strip("。.!！")
+    return normalized.lower() == "reject"
+
+
 def parse_model_output(text: str) -> tuple:
     """Parse model text output into structured form.
 
@@ -1216,7 +1221,7 @@ def parse_model_output(text: str) -> tuple:
       | ("reject",)
       | ("text", content: str)
     """
-    if text.strip() == "Reject":
+    if _is_reject_output(text):
         return ("reject",)
 
     tool_calls = _parse_tool_call_json_array(text)

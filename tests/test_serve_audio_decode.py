@@ -423,6 +423,11 @@ def test_reject_is_returned_as_unsupported_boundary():
     assert '"supported":false' in response.model_dump_json()
 
 
+def test_reject_parser_accepts_terminal_punctuation():
+    assert serve.parse_model_output("Reject。") == ("reject",)
+    assert serve.parse_model_output("reject.") == ("reject",)
+
+
 def test_parse_model_output_preserves_model_tool_call_arguments():
     raw = '{"name":"SeatControl","arguments":{"action":"关闭","device":"座椅","feature":"通风","position":"主驾"}}'
 
