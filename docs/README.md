@@ -310,7 +310,7 @@ tail -f /tmp/qwen_omni_serve.log
 
 需要每次启动覆盖旧日志时加 `--log-file-mode w`；需要关闭文件日志时传 `--log-file ""`。
 服务端在送模前会屏蔽历史轮次里的工具调用和 `tool` 结果，包括 `assistant.tool_calls` 以及历史里直接写成 JSON 工具调用的 `assistant.content`；仅当工具链出现在最新用户消息之后时才保留。保留的 `assistant.tool_calls`、旧 `Action:` 文本和 `tool` JSON 结果会统一压缩成训练数据使用的一行紧凑 JSON，避免推理格式与训练格式不一致。
-模型输出 `Reject` 或 `NoiseDoNotAct` 时，默认只打印诊断日志，不向客户端返回文本或工具调用。需要把边界决策透传给客户端时，启动服务加 `--expose-boundary-outputs`：`Reject` 会返回 `content: false`，`NoiseDoNotAct` 会按普通工具调用返回给客户端，工具名为 `NoiseDoNotAct`，参数为 `{}`。
+模型输出 `Reject` 或 `NoiseDoNotAct` 时，默认只打印诊断日志，不向客户端返回文本或工具调用。需要把边界决策透传给客户端时，启动服务加 `--expose-boundary-outputs`：`Reject` 会返回文本 `false`，`NoiseDoNotAct` 会按普通工具调用返回给客户端，工具名为 `NoiseDoNotAct`，参数为 `{}`。
 feature 分支支持模型输出一行 JSON 数组来表达多个并行工具调用；`serve.py` 会转换为 OpenAI 兼容响应中的多个 `tool_calls`，并保留数组顺序作为 `tool_calls[].index`。
 
 可选开启实验性的 system prompt KV cache：

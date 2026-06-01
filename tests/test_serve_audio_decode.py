@@ -441,7 +441,7 @@ def test_reject_can_be_returned_as_false_content():
     response = serve.build_chat_response(choice=choice, prompt_tokens=10, gen_tokens=1)
 
     assert response.choices[0].finish_reason == "stop"
-    assert response.choices[0].message.content is False
+    assert response.choices[0].message.content == "false"
     assert response.choices[0].message.tool_calls is None
 
 

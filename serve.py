@@ -1313,7 +1313,7 @@ def _choice_from_parsed_output(parsed: tuple, expose_boundary_outputs: bool = Fa
     if parsed[0] == "reject":
         if expose_boundary_outputs:
             return Choice(
-                message=AssistantMessage(content=False),
+                message=AssistantMessage(content="false"),
                 finish_reason="stop",
             )
         print("[REJECT] suppressed client output", flush=True, file=sys.stderr)
@@ -1533,7 +1533,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument(
         "--expose-boundary-outputs",
         action="store_true",
-        help="Expose Reject and NoiseDoNotAct to clients. Reject returns content=false; NoiseDoNotAct returns a tool call.",
+        help="Expose Reject and NoiseDoNotAct to clients. Reject returns content='false'; NoiseDoNotAct returns a tool call.",
     )
     p.add_argument(
         "--prompt-cache",
