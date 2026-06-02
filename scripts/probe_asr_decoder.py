@@ -82,6 +82,25 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Print top-level model module structure and exit.",
     )
+    parser.add_argument(
+        "--print-audio-shapes",
+        action="store_true",
+        help=(
+            "Run one audio sample through Qwen and print audio_tower module output "
+            "tensor shapes. This does not load Whisper or decode ASR."
+        ),
+    )
+    parser.add_argument(
+        "--shape-min-rank",
+        type=int,
+        default=3,
+        help="Minimum tensor rank to print in --print-audio-shapes mode.",
+    )
+    parser.add_argument(
+        "--shape-name-filter",
+        default="",
+        help="Optional substring filter for module names in --print-audio-shapes mode.",
+    )
     return parser.parse_args()
 
 
@@ -137,6 +156,89 @@ def print_structure(model: torch.nn.Module) -> None:
         if name.count(".") <= 2:
             indent = "  " * name.count(".")
             print(f"{indent}{name or '<root>'}: {type(module).__name__}")
+
+
+def first_tensor(value: Any) -> torch.Tensor | None:
+    if torch.is_tensor(value):
+        return value
+    if hasattr(value, "last_hidden_state") and torch.is_tensor(value.last_hidden_state):
+        return value.last_hidden_state
+    if isinstance(value, (tuple, list)):
+        for item in value:
+            tensor = first_tensor(item)
+            if tensor is not None:
+                return tensor
+    if isinstance(value, dict):
+        for item in value.values():
+            tensor = first_tensor(item)
+            if tensor is not None:
+                return tensor
+    return None
+
+
+def print_audio_tower_shapes(
+    qwen_model: Qwen2_5OmniForConditionalGeneration,
+    qwen_processor: Qwen2_5OmniProcessor,
+    audio_tower: torch.nn.Module,
+    audio_path: str,
+    dtype: torch.dtype,
+    min_rank: int,
+    name_filter: str,
+) -> None:
+    qwen_device = first_param_device(qwen_model)
+    inputs = build_qwen_inputs(qwen_processor, audio_path, qwen_device, dtype)
+    print(f"[shape] audio={audio_path}")
+    if "input_features" in inputs:
+        print(f"[shape] input_features={tuple(inputs['input_features'].shape)}")
+    if "feature_attention_mask" in inputs:
+        print(f"[shape] feature_attention_mask={tuple(inputs['feature_attention_mask'].shape)}")
+
+    records: list[dict[str, Any]] = []
+    handles = []
+
+    def make_hook(module_name: str, module_type: str):
+        def hook(_module: torch.nn.Module, _inputs: tuple[Any, ...], output: Any) -> None:
+            tensor = first_tensor(output)
+            if tensor is None or tensor.ndim < min_rank:
+                return
+            records.append(
+                {
+                    "name": module_name,
+                    "type": module_type,
+                    "shape": tuple(tensor.shape),
+                    "dtype": str(tensor.dtype).replace("torch.", ""),
+                    "device": str(tensor.device),
+                }
+            )
+
+        return hook
+
+    for name, module in audio_tower.named_modules():
+        module_name = f"audio_tower.{name}" if name else "audio_tower"
+        if name_filter and name_filter not in module_name:
+            continue
+        handles.append(module.register_forward_hook(make_hook(module_name, type(module).__name__)))
+
+    try:
+        with torch.inference_mode():
+            qwen_model.thinker(
+                **{key: value for key, value in inputs.items() if key != "labels"},
+                output_hidden_states=False,
+            )
+    finally:
+        for handle in handles:
+            handle.remove()
+
+    if not records:
+        print("[shape] no matching tensor outputs captured")
+        return
+
+    print("\n[shape] captured audio_tower outputs")
+    print(f"{'name':72} {'type':34} {'shape':22} {'dtype':10} device")
+    print("-" * 150)
+    for row in records:
+        shape = "[" + ",".join(str(part) for part in row["shape"]) + "]"
+        print(f"{row['name'][:72]:72} {row['type'][:34]:34} {shape:22} {row['dtype']:10} {row['device']}")
 
 
 def select_hook_target(audio_tower: torch.nn.Module, hook_layer: str) -> torch.nn.Module:
@@ -464,6 +566,20 @@ def main() -> None:
         raise ValueError("No audio items found.")
 
     audio_tower = find_audio_tower(qwen_model)
+    if args.print_audio_shapes:
+        if not args.audio:
+            raise ValueError("--print-audio-shapes requires --audio")
+        print_audio_tower_shapes(
+            qwen_model=qwen_model,
+            qwen_processor=qwen_processor,
+            audio_tower=audio_tower,
+            audio_path=str(Path(args.audio).expanduser().resolve()),
+            dtype=dtype,
+            min_rank=args.shape_min_rank,
+            name_filter=args.shape_name_filter,
+        )
+        return
+
     hook_target = select_hook_target(audio_tower, args.hook_layer)
     whisper_model, whisper_processor = load_whisper(args.whisper_dir, dtype, args.device_map)
 

@@ -505,6 +505,17 @@ python scripts/probe_asr_decoder.py \
   --output data/serve_logs/aut_asr_probe_window.jsonl
 ```
 
+若要比较 AUT/audio_tower 不同层的时间步和维度，可先只打印单条音频的候选层 shape，不加载 Whisper：
+
+```bash
+python scripts/probe_asr_decoder.py \
+  --model-dir /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
+  --audio data/eval/audio/window/window_001.wav \
+  --print-audio-shapes
+```
+
+输出中重点看 `[B,T,D]` 的 `T` 是否接近 Whisper encoder 时间步，`D` 不一致时后续可用 bridge layer 映射到 Whisper decoder 的 `d_model`。
+
 AUT ASR bridge 训练使用 eval 中带 `query_audio` 的音频样本构造 ASR 监督数据，默认按 seed 保留 10% validation，只训练 bridge，Qwen AUT 和 Whisper 均冻结：
 
 ```bash
