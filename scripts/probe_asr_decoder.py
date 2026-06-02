@@ -67,6 +67,14 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument(
+        "--hook-module",
+        default="",
+        help=(
+            "Specific audio_tower module name to hook, e.g. "
+            "'audio_tower.layers.31' or 'layers.31'. Overrides --hook-layer."
+        ),
+    )
+    parser.add_argument(
         "--dtype",
         default="float16",
         choices=["float16", "bfloat16", "float32"],
@@ -250,6 +258,27 @@ def select_hook_target(audio_tower: torch.nn.Module, hook_layer: str) -> torch.n
         return audio_tower.avg_pooler
     print("[probe] hook target: full audio_tower, often dim=2048")
     return audio_tower
+
+
+def select_hook_module(audio_tower: torch.nn.Module, hook_module: str) -> torch.nn.Module:
+    normalized = hook_module.strip()
+    if normalized.startswith("audio_tower."):
+        normalized = normalized[len("audio_tower."):]
+    if normalized in {"", "audio_tower"}:
+        print("[probe] hook target: full audio_tower")
+        return audio_tower
+    modules = dict(audio_tower.named_modules())
+    target = modules.get(normalized)
+    if target is None:
+        available = sorted(
+            f"audio_tower.{name}" for name in modules if name and name.startswith("layers.")
+        )
+        preview = ", ".join(available[:8])
+        if len(available) > 8:
+            preview += ", ..."
+        raise ValueError(f"Unknown --hook-module {hook_module!r}. Layer examples: {preview}")
+    print(f"[probe] hook target: audio_tower.{normalized}")
+    return target
 
 
 def resolve_whisper_dir(whisper_dir: str) -> str:
@@ -580,7 +609,11 @@ def main() -> None:
         )
         return
 
-    hook_target = select_hook_target(audio_tower, args.hook_layer)
+    hook_target = (
+        select_hook_module(audio_tower, args.hook_module)
+        if args.hook_module
+        else select_hook_target(audio_tower, args.hook_layer)
+    )
     whisper_model, whisper_processor = load_whisper(args.whisper_dir, dtype, args.device_map)
 
     output_f = None

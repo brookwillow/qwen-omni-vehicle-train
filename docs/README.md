@@ -516,6 +516,16 @@ python scripts/probe_asr_decoder.py \
 
 输出中重点看 `[B,T,D]` 的 `T` 是否接近 Whisper encoder 时间步，`D` 不一致时后续可用 bridge layer 映射到 Whisper decoder 的 `d_model`。
 
+确定候选层后，可用 `--hook-module` 指定具体 audio_tower 模块解码，例如跳过 `avg_pooler/ln_post` 的 36 帧输出，直接测试 transformer encoder 第 31 层的 72 帧输出：
+
+```bash
+python scripts/probe_asr_decoder.py \
+  --model-dir /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
+  --whisper-dir openai/whisper-large-v3 \
+  --audio data/eval/audio/window/window_001.wav \
+  --hook-module audio_tower.layers.31
+```
+
 AUT ASR bridge 训练使用 eval 中带 `query_audio` 的音频样本构造 ASR 监督数据，默认按 seed 保留 10% validation，只训练 bridge，Qwen AUT 和 Whisper 均冻结：
 
 ```bash
