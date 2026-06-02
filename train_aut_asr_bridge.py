@@ -128,6 +128,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--limit", type=int, default=0, help="Limit samples for smoke runs; 0 means all.")
     parser.add_argument("--language", default="zh")
     parser.add_argument("--hook-layer", default="ln_post", choices=["ln_post", "avg_pooler", "full"])
+    parser.add_argument(
+        "--hook-module",
+        default="",
+        help=(
+            "Specific audio_tower module name to hook, e.g. "
+            "'audio_tower.layers.31' or 'layers.31'. Overrides --hook-layer."
+        ),
+    )
     parser.add_argument("--torch-dtype", default="float16", choices=["float16", "bfloat16", "float32"])
     parser.add_argument("--bridge-dtype", default="float32", choices=["float32", "float16", "bfloat16", "model"])
     parser.add_argument("--device", default="cuda:0")
@@ -303,6 +311,34 @@ def select_hook_target(audio_tower: nn.Module, hook_layer: str) -> nn.Module:
         return audio_tower.avg_pooler
     print("[qwen] hook target: full audio_tower")
     return audio_tower
+
+
+def select_hook_module(audio_tower: nn.Module, hook_module: str) -> nn.Module:
+    normalized = hook_module.strip()
+    if normalized.startswith("audio_tower."):
+        normalized = normalized[len("audio_tower."):]
+    if normalized in {"", "audio_tower"}:
+        print("[qwen] hook target: full audio_tower")
+        return audio_tower
+    modules = dict(audio_tower.named_modules())
+    target = modules.get(normalized)
+    if target is None:
+        available = sorted(
+            f"audio_tower.{name}" for name in modules if name and name.startswith("layers.")
+        )
+        preview = ", ".join(available[:8])
+        if len(available) > 8:
+            preview += ", ..."
+        raise ValueError(f"Unknown --hook-module {hook_module!r}. Layer examples: {preview}")
+    print(f"[qwen] hook target: audio_tower.{normalized}")
+    return target
+
+
+def hook_cache_name(args: argparse.Namespace) -> str:
+    name = args.hook_module.strip() if args.hook_module else args.hook_layer
+    if name.startswith("audio_tower."):
+        name = name[len("audio_tower."):]
+    return name.replace("/", "_").replace(".", "_") or "audio_tower"
 
 
 def capture_audio_hidden(model: Any, hook_target: nn.Module, inputs: dict[str, Any]) -> torch.Tensor:
@@ -561,10 +597,14 @@ def main() -> None:
     qwen_processor = Qwen2_5OmniProcessor.from_pretrained(args.model_dir)
     freeze_model(qwen_model)
     audio_tower = find_audio_tower(qwen_model)
-    hook_target = select_hook_target(audio_tower, args.hook_layer)
+    hook_target = (
+        select_hook_module(audio_tower, args.hook_module)
+        if args.hook_module
+        else select_hook_target(audio_tower, args.hook_layer)
+    )
 
     print(f"[2/5] preparing AUT hidden cache")
-    cache_dir = output_dir / "cache"
+    cache_dir = output_dir / "cache" / hook_cache_name(args)
     ensure_hidden_cache(rows, cache_dir, qwen_model, qwen_processor, hook_target, dtype, args.rebuild_cache)
     del qwen_model
     if torch.cuda.is_available():

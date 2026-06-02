@@ -539,6 +539,19 @@ python train_aut_asr_bridge.py \
   --bridge-dtype float32
 ```
 
+若改用 `audio_tower.layers.31` 等 72 帧 encoder 层作为 bridge 输入，需显式指定 `--hook-module`，并把 `--repeat-factor` 设为 `1`，避免继续对时间维做重复补帧：
+
+```bash
+python train_aut_asr_bridge.py \
+  --model-dir /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
+  --whisper-dir openai/whisper-large-v3 \
+  --eval-dir data/eval \
+  --output-dir aut_asr_bridge_layers31 \
+  --hook-module audio_tower.layers.31 \
+  --repeat-factor 1 \
+  --epochs 3
+```
+
 评测后的推荐排查顺序：
 
 ```bash
