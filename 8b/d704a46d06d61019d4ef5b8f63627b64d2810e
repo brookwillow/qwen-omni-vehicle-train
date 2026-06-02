@@ -1,0 +1,25 @@
+docs/README.md
+  9dec22358ecde48e 519-528
+scripts/probe_asr_decoder.py
+  9dec22358ecde48e 70-76,263-281,283,612-616
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.22",
+  "base_commit_sha": "8bd704a46d06d61019d4ef5b8f63627b64d2810e",
+  "prompts": {
+    "9dec22358ecde48e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e1f62-2202-7870-af16-54e6c4691c4d",
+        "model": "gpt-5.5"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 44,
+      "total_deletions": 1,
+      "accepted_lines": 44,
+      "overriden_lines": 0
+    }
+  }
+}
