@@ -552,6 +552,18 @@ python train_aut_asr_bridge.py \
   --epochs 3
 ```
 
+训练完成后可用 `--skip-train` 只加载 `final/bridge.pt` 做少量样本转写评估；脚本会从 checkpoint 的 `config` 自动恢复 `hook_module/hook_layer/repeat_factor/bridge_hidden_dim/bridge_dropout`，避免测试命令和训练结构不一致：
+
+```bash
+python train_aut_asr_bridge.py \
+  --model-dir /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
+  --whisper-dir openai/whisper-large-v3 \
+  --eval-dir data/eval \
+  --output-dir aut_asr_bridge_layers31 \
+  --skip-train \
+  --eval-samples 2
+```
+
 评测后的推荐排查顺序：
 
 ```bash

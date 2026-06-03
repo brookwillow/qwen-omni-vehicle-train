@@ -565,6 +565,18 @@ def main() -> None:
 
     output_dir = Path(args.output_dir)
     setup_run_logs(output_dir)
+    loaded_checkpoint: dict[str, Any] | None = None
+    ckpt_path = output_dir / "final" / "bridge.pt"
+    if args.skip_train and ckpt_path.exists():
+        loaded_checkpoint = torch.load(ckpt_path, map_location="cpu")
+        ckpt_config = loaded_checkpoint.get("config", {})
+        restored_keys = []
+        for key in ("hook_layer", "hook_module", "bridge_hidden_dim", "bridge_dropout", "repeat_factor"):
+            if key in ckpt_config:
+                setattr(args, key, ckpt_config[key])
+                restored_keys.append(key)
+        if restored_keys:
+            print(f"[bridge] restored config from checkpoint: {', '.join(restored_keys)}")
     config = vars(args).copy()
     (output_dir / "run_config.json").write_text(json.dumps(config, ensure_ascii=False, indent=2), encoding="utf-8")
 
@@ -637,9 +649,8 @@ def main() -> None:
     print(f"[bridge] trainable_params={trainable:,} repeat_factor={args.repeat_factor}")
 
     if args.skip_train:
-        ckpt_path = output_dir / "final" / "bridge.pt"
         if ckpt_path.exists():
-            ckpt = torch.load(ckpt_path, map_location="cpu")
+            ckpt = loaded_checkpoint or torch.load(ckpt_path, map_location="cpu")
             bridge.load_state_dict(ckpt["bridge_state_dict"])
             print(f"[bridge] loaded checkpoint from {ckpt_path}")
         else:
