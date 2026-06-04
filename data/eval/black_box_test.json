@@ -1074,10 +1074,10 @@
     "expected_tool_calls": [
       {
         "name": "AppControl",
-        "arguments": {
-          "action": "打开",
-          "feature": "媒体"
-        }
+                "arguments": {
+                  "action": "打开",
+                  "feature": "音乐应用"
+                }
       }
     ],
     "query_audio": "black-box/sample_audios/app-2264.wav"
@@ -5373,7 +5373,8 @@
         "name": "RearviewControl",
         "arguments": {
           "action": "关闭",
-          "device": "后视镜"
+          "device": "后视镜",
+          "value": "除雾"
         }
       }
     ],
@@ -7970,7 +7971,8 @@
         "name": "RearviewControl",
         "arguments": {
           "action": "关闭",
-          "device": "后视镜"
+          "device": "后视镜",
+          "value": "除雾"
         }
       }
     ],
@@ -9204,10 +9206,11 @@
     "expected_tool_calls": [
       {
         "name": "RearviewControl",
-        "arguments": {
-          "action": "打开",
-          "device": "后视镜"
-        }
+                "arguments": {
+                  "action": "打开",
+                  "device": "后视镜",
+                  "value": "除雾"
+                }
       }
     ],
     "query_audio": "black-box/sample_audios/35abe6b01194b851.wav"
@@ -9875,10 +9878,11 @@
     "expected_tool_calls": [
       {
         "name": "RearviewControl",
-        "arguments": {
-          "action": "打开",
-          "device": "后视镜"
-        }
+                "arguments": {
+                  "action": "打开",
+                  "device": "后视镜",
+                  "value": "除雾"
+                }
       }
     ],
     "query_audio": "black-box/sample_audios/a13f3db1eb16ff47.wav"
@@ -9931,10 +9935,10 @@
     "expected_tool_calls": [
       {
         "name": "AppControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "媒体"
-        }
+                "arguments": {
+                  "action": "关闭",
+                  "feature": "音乐应用"
+                }
       }
     ],
     "query_audio": "black-box/sample_audios/app-2193.wav"
@@ -10920,10 +10924,10 @@
     "expected_tool_calls": [
       {
         "name": "AppControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "媒体"
-        }
+                "arguments": {
+                  "action": "关闭",
+                  "feature": "音乐应用"
+                }
       }
     ],
     "query_audio": "black-box/sample_audios/app-2195.wav"
@@ -10975,10 +10979,10 @@
     "expected_tool_calls": [
       {
         "name": "AppControl",
-        "arguments": {
-          "action": "打开",
-          "feature": "媒体"
-        }
+                "arguments": {
+                  "action": "打开",
+                  "feature": "音乐应用"
+                }
       }
     ],
     "query_audio": "black-box/sample_audios/app-2190.wav"
@@ -11066,10 +11070,10 @@
     "expected_tool_calls": [
       {
         "name": "AppControl",
-        "arguments": {
-          "action": "关闭",
-          "feature": "媒体"
-        }
+                "arguments": {
+                  "action": "关闭",
+                  "feature": "音乐应用"
+                }
       }
     ],
     "query_audio": "black-box/sample_audios/app-2267.wav"

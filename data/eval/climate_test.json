@@ -740,10 +740,11 @@
     "expected_tool_calls": [
       {
         "name": "RearviewControl",
-        "arguments": {
-          "action": "打开",
-          "device": "后视镜"
-        }
+                "arguments": {
+                  "action": "打开",
+                  "device": "后视镜",
+                  "value": "制热"
+                }
       }
     ],
     "query_audio": "audio/climate/climate_039.wav"
@@ -758,10 +759,11 @@
     "expected_tool_calls": [
       {
         "name": "RearviewControl",
-        "arguments": {
-          "action": "关闭",
-          "device": "后视镜"
-        }
+                "arguments": {
+                  "action": "关闭",
+                  "device": "后视镜",
+                  "value": "制热"
+                }
       }
     ],
     "query_audio": "audio/climate/climate_040.wav"

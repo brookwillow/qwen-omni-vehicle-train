@@ -8,4 +8,4 @@
 {"messages":[{"role":"user","content":"小P风不要对我吹"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"关闭\",\"device\":\"空调\",\"feature\":\"风\",\"value\":\"对人\"}}"}]}
 {"messages":[{"role":"user","content":"打开空调"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"空调\"}}"}]}
 {"messages":[{"role":"user","content":"暖气"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"空调\",\"value\":\"制热\"}}"}]}
-{"messages":[{"role":"user","content":"小P吹一下前挡风玻璃"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"前挡风\",\"feature\":\"除雾\"}}"}]}
+{"messages":[{"role":"user","content":"小P吹一下前挡风玻璃"},{"role":"assistant","content":"{\"name\":\"ClimateControl\",\"arguments\":{\"action\":\"打开\",\"device\":\"空调\",\"feature\":\"风\",\"value\":\"吹窗\"}}"}]}
