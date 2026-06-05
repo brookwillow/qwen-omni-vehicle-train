@@ -99,6 +99,14 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument(
+        "--print-whisper-shapes",
+        action="store_true",
+        help=(
+            "Run one audio sample through Whisper and print encoder module output "
+            "tensor shapes. Can be combined with --print-audio-shapes."
+        ),
+    )
+    parser.add_argument(
         "--shape-min-rank",
         type=int,
         default=3,
@@ -242,6 +250,98 @@ def print_audio_tower_shapes(
         return
 
     print("\n[shape] captured audio_tower outputs")
+    print(f"{'name':72} {'type':34} {'shape':22} {'dtype':10} device")
+    print("-" * 150)
+    for row in records:
+        shape = "[" + ",".join(str(part) for part in row["shape"]) + "]"
+        print(f"{row['name'][:72]:72} {row['type'][:34]:34} {shape:22} {row['dtype']:10} {row['device']}")
+
+
+def load_audio_array(audio_path: str, target_sr: int = 16000) -> tuple[Any, int]:
+    try:
+        import soundfile as sf
+    except ImportError as exc:
+        raise RuntimeError("soundfile is required for --print-whisper-shapes") from exc
+
+    audio, sr = sf.read(audio_path, dtype="float32")
+    if getattr(audio, "ndim", 1) > 1:
+        audio = audio.mean(axis=1)
+    if sr == target_sr:
+        return audio, sr
+
+    try:
+        import librosa
+
+        return librosa.resample(audio, orig_sr=sr, target_sr=target_sr), target_sr
+    except ImportError:
+        pass
+
+    try:
+        import torch.nn.functional as F
+
+        tensor = torch.as_tensor(audio, dtype=torch.float32).view(1, 1, -1)
+        new_len = max(1, round(tensor.shape[-1] * target_sr / sr))
+        resampled = F.interpolate(tensor, size=new_len, mode="linear", align_corners=False)
+        return resampled.view(-1).cpu().numpy(), target_sr
+    except Exception as exc:
+        raise RuntimeError(f"Could not resample audio from {sr}Hz to {target_sr}Hz") from exc
+
+
+def print_whisper_encoder_shapes(
+    whisper_model: WhisperForConditionalGeneration,
+    whisper_processor: WhisperProcessor,
+    audio_path: str,
+    dtype: torch.dtype,
+    min_rank: int,
+    name_filter: str,
+) -> None:
+    whisper_device = first_param_device(whisper_model)
+    audio, sr = load_audio_array(audio_path, target_sr=16000)
+    inputs = whisper_processor(audio, sampling_rate=sr, return_tensors="pt")
+    inputs = move_inputs(inputs, device=whisper_device, dtype=dtype)
+    print(f"[shape] whisper_audio={audio_path}")
+    if "input_features" in inputs:
+        print(f"[shape] whisper.input_features={tuple(inputs['input_features'].shape)}")
+
+    encoder = whisper_model.model.encoder
+    records: list[dict[str, Any]] = []
+    handles = []
+
+    def make_hook(module_name: str, module_type: str):
+        def hook(_module: torch.nn.Module, _inputs: tuple[Any, ...], output: Any) -> None:
+            tensor = first_tensor(output)
+            if tensor is None or tensor.ndim < min_rank:
+                return
+            records.append(
+                {
+                    "name": module_name,
+                    "type": module_type,
+                    "shape": tuple(tensor.shape),
+                    "dtype": str(tensor.dtype).replace("torch.", ""),
+                    "device": str(tensor.device),
+                }
+            )
+
+        return hook
+
+    for name, module in encoder.named_modules():
+        module_name = f"whisper.encoder.{name}" if name else "whisper.encoder"
+        if name_filter and name_filter not in module_name:
+            continue
+        handles.append(module.register_forward_hook(make_hook(module_name, type(module).__name__)))
+
+    try:
+        with torch.inference_mode():
+            encoder(**inputs)
+    finally:
+        for handle in handles:
+            handle.remove()
+
+    if not records:
+        print("[shape] no matching Whisper encoder tensor outputs captured")
+        return
+
+    print("\n[shape] captured Whisper encoder outputs")
     print(f"{'name':72} {'type':34} {'shape':22} {'dtype':10} device")
     print("-" * 150)
     for row in records:
@@ -595,18 +695,30 @@ def main() -> None:
         raise ValueError("No audio items found.")
 
     audio_tower = find_audio_tower(qwen_model)
-    if args.print_audio_shapes:
+    if args.print_audio_shapes or args.print_whisper_shapes:
         if not args.audio:
-            raise ValueError("--print-audio-shapes requires --audio")
-        print_audio_tower_shapes(
-            qwen_model=qwen_model,
-            qwen_processor=qwen_processor,
-            audio_tower=audio_tower,
-            audio_path=str(Path(args.audio).expanduser().resolve()),
-            dtype=dtype,
-            min_rank=args.shape_min_rank,
-            name_filter=args.shape_name_filter,
-        )
+            raise ValueError("--print-audio-shapes/--print-whisper-shapes requires --audio")
+        audio_path = str(Path(args.audio).expanduser().resolve())
+        if args.print_audio_shapes:
+            print_audio_tower_shapes(
+                qwen_model=qwen_model,
+                qwen_processor=qwen_processor,
+                audio_tower=audio_tower,
+                audio_path=audio_path,
+                dtype=dtype,
+                min_rank=args.shape_min_rank,
+                name_filter=args.shape_name_filter,
+            )
+        if args.print_whisper_shapes:
+            whisper_model, whisper_processor = load_whisper(args.whisper_dir, dtype, args.device_map)
+            print_whisper_encoder_shapes(
+                whisper_model=whisper_model,
+                whisper_processor=whisper_processor,
+                audio_path=audio_path,
+                dtype=dtype,
+                min_rank=args.shape_min_rank,
+                name_filter=args.shape_name_filter,
+            )
         return
 
     hook_target = (
