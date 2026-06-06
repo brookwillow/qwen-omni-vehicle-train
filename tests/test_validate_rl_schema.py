@@ -177,3 +177,22 @@ def test_eval_error_dpo_preferences_cover_suitable_error_types():
         set(row["rejected"]["arguments"]) - set(row["chosen"]["arguments"])
         for row in extra_arg_rows
     )
+
+
+def test_round3_over_noise_preferences_cover_latest_remaining_noise_errors():
+    import json
+    from pathlib import Path
+
+    path = Path("data/rl/still_over_noise_preferences_round3.jsonl")
+    assert path.exists()
+
+    rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    assert len(rows) == 45
+    assert {row["task_type"] for row in rows} == {"still_over_noise_round3"}
+    assert {row["rejected"]["name"] for row in rows} == {"NoiseDoNotAct"}
+    assert all(row["rejected"]["arguments"] == {} for row in rows)
+    assert all(row["chosen"]["name"] != "NoiseDoNotAct" for row in rows)
+    assert all(row["source_report"] == "eval_report_20260607_005951.json" for row in rows)
+    assert {"PhoneControl", "DrivingControl", "WindowControl"}.issubset(
+        {row["chosen"]["name"] for row in rows}
+    )

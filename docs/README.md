@@ -140,6 +140,7 @@ data/rl/*_preferences.jsonl  (chosen/rejected 偏好数据产物)
 | `data/rl/noise_false_positive_preferences.jsonl`   | 有效工具请求被误判为 `NoiseDoNotAct` 的偏好数据，`chosen=正确工具`、`rejected=NoiseDoNotAct`，用于修正 noise 过召                                                                                                                                                                                                                                                                                                                                          |
 | `data/rl/anti_over_noise_preferences.jsonl`        | 2026-06-06 评估报告中的 70 条 noise 过召偏好数据；其中 24 条已人工 review 确认为 `model_fail`，其余为同一报告中 `pred=NoiseDoNotAct` 且 GT 为有效工具的 over-noise 候选，作为当前 SFT 后的定向 DPO 首选数据                                                                                                                                                                                                                                                  |
 | `data/rl/still_over_noise_preferences_round2.jsonl` | 第二轮 DPO 偏好数据（49 条）：`eval_report_20260606_235501.json` 中仍然 `pred=NoiseDoNotAct` 但 GT 为有效工具的样本，继续修正 noise 过召                                                                                                                                                                                                                                                                                                                  |
+| `data/rl/still_over_noise_preferences_round3.jsonl` | 第三轮 DPO 偏好数据（45 条）：`eval_report_20260607_005951.json` 中仍然 `pred=NoiseDoNotAct` 但 GT 为有效工具的样本；只用于窄口径 over-noise 继续修正                                                                                                                                                                                                                                                                                                      |
 | `data/rl/wrong_tool_preferences.jsonl`             | 第二轮 DPO 偏好数据（49 条）：GT 工具和预测工具不同，且 chosen/rejected 均通过 schema 校验，用于修正工具混淆                                                                                                                                                                                                                                                                                                                                               |
 | `data/rl/false_reject_clarify_preferences.jsonl`   | 第二轮 DPO 偏好数据（12 条）：有效工具请求被输出为 `Reject` 或澄清话术，`chosen=正确工具`、`rejected=Reject/Clarify`                                                                                                                                                                                                                                                                                                                                       |
 | `data/rl/extra_args_preferences.jsonl`             | 第二轮 DPO 偏好数据（90 条）：预测工具正确但多输出了额外参数，`chosen=精简正确参数`、`rejected=多余参数版本`；训练时建议低权重使用，避免模型过度删槽                                                                                                                                                                                                                                                                                                      |
@@ -213,6 +214,26 @@ python train_memory_dpo_lora.py \
   --prompt-format chat_template \
   --system-prompt data/system-prompt.txt \
   --lr 8e-7 \
+  --beta 0.05 \
+  --epochs 1 \
+  --train-batch-size 1 \
+  --grad-accum 8 \
+  --sft-loss-weight 0.1 \
+  --reference-mode reference_free
+```
+
+第三轮如果第二轮结果表现为 `over_noise` 继续下降但 `wrong_tool/extra_args` 没有明显收益，应停止 mixed DPO，改为只针对最新剩余 over-noise 做窄训练。不要继续带 `extra_args_preferences.jsonl`，否则容易增加多余参数问题。
+
+```bash
+python train_memory_dpo_lora.py \
+  --model /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
+  --init-lora-dir lora_output_v2_0605_dpo_error_repair_round2 \
+  --preference-file data/rl/still_over_noise_preferences_round3.jsonl \
+  --preference-weight still_over_noise_preferences_round3.jsonl:6 \
+  --output-dir lora_output_v2_0605_dpo_over_noise_round3 \
+  --prompt-format chat_template \
+  --system-prompt data/system-prompt.txt \
+  --lr 6e-7 \
   --beta 0.05 \
   --epochs 1 \
   --train-batch-size 1 \
