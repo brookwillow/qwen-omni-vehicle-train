@@ -128,3 +128,52 @@ def test_anti_over_noise_preferences_cover_reviewed_false_positives():
         "WindowControl",
         "SteeringwheelControl",
     }.issubset({row["chosen"]["name"] for row in rows})
+
+
+def test_eval_error_dpo_preferences_cover_suitable_error_types():
+    import json
+    from pathlib import Path
+
+    expected = {
+        "still_over_noise_preferences_round2.jsonl": ("still_over_noise", 49),
+        "wrong_tool_preferences.jsonl": ("wrong_tool", 49),
+        "false_reject_clarify_preferences.jsonl": ("false_reject_or_clarify", 12),
+        "extra_args_preferences.jsonl": ("extra_args", 90),
+    }
+
+    for filename, (task_type, count) in expected.items():
+        path = Path("data/rl") / filename
+        assert path.exists(), filename
+        rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+        assert len(rows) == count, filename
+        assert {row["task_type"] for row in rows} == {task_type}
+        assert all(row["chosen"]["name"] != "NoiseDoNotAct" for row in rows)
+        assert all(row["source_eval_key"] for row in rows)
+
+    still_noise_rows = [
+        json.loads(line)
+        for line in Path("data/rl/still_over_noise_preferences_round2.jsonl")
+        .read_text(encoding="utf-8")
+        .splitlines()
+        if line.strip()
+    ]
+    assert {row["rejected"]["name"] for row in still_noise_rows} == {"NoiseDoNotAct"}
+    assert all(row["rejected"]["arguments"] == {} for row in still_noise_rows)
+
+    wrong_tool_rows = [
+        json.loads(line)
+        for line in Path("data/rl/wrong_tool_preferences.jsonl").read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
+    assert all(row["chosen"]["name"] != row["rejected"]["name"] for row in wrong_tool_rows)
+
+    extra_arg_rows = [
+        json.loads(line)
+        for line in Path("data/rl/extra_args_preferences.jsonl").read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
+    assert all(row["chosen"]["name"] == row["rejected"]["name"] for row in extra_arg_rows)
+    assert all(
+        set(row["rejected"]["arguments"]) - set(row["chosen"]["arguments"])
+        for row in extra_arg_rows
+    )

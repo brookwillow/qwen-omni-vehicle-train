@@ -139,6 +139,10 @@ data/rl/*_preferences.jsonl  (chosen/rejected 偏好数据产物)
 | `data/rl/current_noise_boundary_preferences.jsonl` | 多轮边界偏好数据（200 条）：历史存在工具调用但当前轮为“嗯/好/先这样/空输入/不是那个”等无动作 query 时，`NoiseDoNotAct` chosen，错误继承历史工具 rejected                                                                                                                                                                                                                                                                                                |
 | `data/rl/noise_false_positive_preferences.jsonl`   | 有效工具请求被误判为 `NoiseDoNotAct` 的偏好数据，`chosen=正确工具`、`rejected=NoiseDoNotAct`，用于修正 noise 过召                                                                                                                                                                                                                                                                                                                                          |
 | `data/rl/anti_over_noise_preferences.jsonl`        | 2026-06-06 评估报告中的 70 条 noise 过召偏好数据；其中 24 条已人工 review 确认为 `model_fail`，其余为同一报告中 `pred=NoiseDoNotAct` 且 GT 为有效工具的 over-noise 候选，作为当前 SFT 后的定向 DPO 首选数据                                                                                                                                                                                                                                                  |
+| `data/rl/still_over_noise_preferences_round2.jsonl` | 第二轮 DPO 偏好数据（49 条）：`eval_report_20260606_235501.json` 中仍然 `pred=NoiseDoNotAct` 但 GT 为有效工具的样本，继续修正 noise 过召                                                                                                                                                                                                                                                                                                                  |
+| `data/rl/wrong_tool_preferences.jsonl`             | 第二轮 DPO 偏好数据（49 条）：GT 工具和预测工具不同，且 chosen/rejected 均通过 schema 校验，用于修正工具混淆                                                                                                                                                                                                                                                                                                                                               |
+| `data/rl/false_reject_clarify_preferences.jsonl`   | 第二轮 DPO 偏好数据（12 条）：有效工具请求被输出为 `Reject` 或澄清话术，`chosen=正确工具`、`rejected=Reject/Clarify`                                                                                                                                                                                                                                                                                                                                       |
+| `data/rl/extra_args_preferences.jsonl`             | 第二轮 DPO 偏好数据（90 条）：预测工具正确但多输出了额外参数，`chosen=精简正确参数`、`rejected=多余参数版本`；训练时建议低权重使用，避免模型过度删槽                                                                                                                                                                                                                                                                                                      |
 | `data/train_final.jsonl`                           | 最终训练数据（含 SP）                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `data/eval/`                                       | 评测数据集（当前工具 schema 已清洗，`音乐应用` 和 `媒体` 按新版 schema 分开保留）                                                                                                                                                                                                                                                                                                                                                                         |
 
@@ -196,6 +200,26 @@ python train_memory_dpo_lora.py \
 ```
 
 `train_memory_dpo_lora.py` 默认使用 reference-free DPO-style loss，适合先在单卡上快速验证；服务器显存充足时可用 `--reference-mode frozen_init` 加载一份冻结的 `--init-lora-dir` 作为 reference，代价是显存约翻倍。DPO 不是重新选择 LoRA 挂载层，而是从已有 SFT LoRA adapter 初始化，继续训练其中已经存在的 `q_proj/k_proj/v_proj/o_proj/gate_proj/up_proj/down_proj` LoRA 参数。DPO 默认 `--prompt-format chat_template`，会把 preference 行里的 `history + current_query` 按 `data/system-prompt.txt` 和 tokenizer chat template 组织成与 `serve.py` 一致的真实多轮输入；历史分布实验不要退回旧的 `json_instruction`，否则训练输入和线上输入不一致。为适配 24GB 显存，DPO 默认开启 `--gradient-checkpointing` 和 `--empty-cache-between-pairs`；如果仍 OOM，优先加 `--max-length 3584`，再降到 `3072`。DPO 阶段学习率和训练步数要保守，本轮 anti-over-noise 建议先用 `lr=1e-6`、`beta=0.05`、`epochs=1`，并保留少量 `--sft-loss-weight 0.1` 防止整体工具格式漂移。训练后必须同时回归原始 eval、multiturn、orchestration、reject/noise 边界集和 `noise_history_test.json`；如果真实 noise 被误工具化，先减少 `anti_over_noise_preferences.jsonl` 权重或补一份人工确认的真实 noise guard 偏好，再做下一轮。
+
+第二轮 DPO 可从上一轮 anti-over-noise LoRA 继续，目标是继续修正仍然 over-noise 的样本，同时加入工具混淆、误拒识/误澄清和少量 extra-args 偏好。`extra_args_preferences.jsonl` 只给低权重，避免模型学成“能少填就少填”。
+
+```bash
+python train_memory_dpo_lora.py \
+  --model /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
+  --init-lora-dir lora_output_v2_0605_dpo_anti_over_noise \
+  --preference-file data/rl/still_over_noise_preferences_round2.jsonl,data/rl/false_reject_clarify_preferences.jsonl,data/rl/wrong_tool_preferences.jsonl,data/rl/extra_args_preferences.jsonl,data/rl/noise_false_positive_preferences.jsonl \
+  --preference-weight still_over_noise_preferences_round2.jsonl:6 false_reject_clarify_preferences.jsonl:4 wrong_tool_preferences.jsonl:3 extra_args_preferences.jsonl:1 \
+  --output-dir lora_output_v2_0605_dpo_error_repair_round2 \
+  --prompt-format chat_template \
+  --system-prompt data/system-prompt.txt \
+  --lr 8e-7 \
+  --beta 0.05 \
+  --epochs 1 \
+  --train-batch-size 1 \
+  --grad-accum 8 \
+  --sft-loss-weight 0.1 \
+  --reference-mode reference_free
+```
 
 ## 训练配置
 
