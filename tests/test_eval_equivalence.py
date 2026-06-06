@@ -210,3 +210,49 @@ def test_appcontrol_ambiguous_content_tasks_are_ignored_by_eval(monkeypatch):
         assert row["eval_ignore_reason"]
         assert eval_mod.should_skip_eval_row(row)
         assert row["expected_tool_calls"] == []
+
+
+def test_reviewed_eval_label_fixes_are_applied():
+    expected = {
+        ("data/eval/black_box_test.json", "black_box_053"): [
+            {"name": "SpecialControl", "arguments": {"action": "关闭", "feature": "小憩模式"}}
+        ],
+        ("data/eval/black_box_test.json", "black_box_083"): [
+            {"name": "WindowControl", "arguments": {"action": "开到", "device": "车窗", "position": "全部", "value": "10"}}
+        ],
+        ("data/eval/black_box_test.json", "black_box_118"): [
+            {"name": "PowerControl", "arguments": {"action": "调到", "feature": "能量回收", "value": "最低"}}
+        ],
+        ("data/eval/black_box_test.json", "black_box_157"): [
+            {"name": "ClimateControl", "arguments": {"action": "关闭", "device": "空调"}}
+        ],
+        ("data/eval/black_box_test.json", "black_box_162"): [
+            {"name": "ProfileControl", "arguments": {"action": "复位", "feature": "习惯", "position": "副驾", "value": "标准模式"}}
+        ],
+        ("data/eval/black_box_test.json", "black_box_167"): [
+            {"name": "ProfileControl", "arguments": {"action": "调到", "feature": "习惯", "value": "放松模式"}}
+        ],
+        ("data/eval/black_box_test.json", "black_box_172"): [
+            {"name": "ProfileControl", "arguments": {"action": "复位", "feature": "习惯", "value": "4"}}
+        ],
+        ("data/eval/voice_test.json", "voice_051"): [
+            {"name": "VoiceControl", "arguments": {"action": "静音", "feature": "声音", "position": "全部"}}
+        ],
+        ("data/eval/window_test.json", "window_039"): [
+            {"name": "WindowControl", "arguments": {"action": "关闭", "device": "车窗"}}
+        ],
+        ("data/eval/wiper_test.json", "wiper_001"): [
+            {"name": "WiperControl", "arguments": {"action": "打开", "device": "雨刮"}}
+        ],
+        ("data/eval/wiper_test.json", "wiper_002"): [
+            {"name": "WiperControl", "arguments": {"action": "关闭", "device": "雨刮"}}
+        ],
+        ("data/eval/wiper_test.json", "wiper_008"): [
+            {"name": "WiperControl", "arguments": {"action": "打开", "device": "后雨刮"}}
+        ],
+    }
+
+    for (path, row_id), expected_calls in expected.items():
+        rows = json.loads(Path(path).read_text(encoding="utf-8"))
+        row = next(row for row in rows if row["id"] == row_id)
+        assert row["expected_tool_calls"] == expected_calls

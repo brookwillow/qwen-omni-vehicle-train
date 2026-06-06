@@ -710,8 +710,7 @@
         "name": "WindowControl",
         "arguments": {
           "action": "关闭",
-          "device": "车窗",
-          "position": "全部"
+          "device": "车窗"
         }
       }
     ],

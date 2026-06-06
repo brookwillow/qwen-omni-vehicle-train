@@ -78,3 +78,53 @@ def test_validate_tool_call_allows_numeric_value_with_description():
     )
 
     assert issues == []
+
+
+def test_anti_over_noise_preferences_cover_reviewed_false_positives():
+    import json
+    from pathlib import Path
+
+    path = Path("data/rl/anti_over_noise_preferences.jsonl")
+    assert path.exists()
+
+    rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    rows_by_source = {row["source_eval_key"]: row for row in rows}
+    reviewed_sources = {
+        "black_box_test.json#black_box_009",
+        "black_box_test.json#black_box_110",
+        "seat_test.json#seat_045",
+        "seat_test.json#seat_049",
+        "seat_test.json#seat_050",
+        "seat_test.json#seat_051",
+        "seat_test.json#seat_056",
+        "steering_test.json#steering_014",
+        "steering_test.json#steering_018",
+        "steering_test.json#steering_045",
+        "voice_test.json#voice_010",
+        "voice_test.json#voice_011",
+        "voice_test.json#voice_031",
+        "voice_test.json#voice_032",
+        "voice_test.json#voice_035",
+        "voice_test.json#voice_036",
+        "voice_test.json#voice_043",
+        "voice_test.json#voice_044",
+        "window_test.json#window_011",
+        "window_test.json#window_015",
+        "window_test.json#window_030",
+        "window_test.json#window_040",
+        "window_test.json#window_041",
+        "window_test.json#window_042",
+    }
+
+    assert len(rows) == 70
+    assert reviewed_sources.issubset(rows_by_source)
+    assert {row["task_type"] for row in rows} == {"valid_tool_vs_noise_false_positive"}
+    assert {row["rejected"]["name"] for row in rows} == {"NoiseDoNotAct"}
+    assert all(row["rejected"]["arguments"] == {} for row in rows)
+    assert all(row["chosen"]["name"] != "NoiseDoNotAct" for row in rows)
+    assert {
+        "VoiceControl",
+        "SeatControl",
+        "WindowControl",
+        "SteeringwheelControl",
+    }.issubset({row["chosen"]["name"] for row in rows})

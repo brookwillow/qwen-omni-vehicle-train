@@ -498,7 +498,7 @@
   {
     "id": "black_box_039",
     "category": "车控",
-    "sub_category": "ProfileControl",
+    "sub_category": "SpecialControl",
     "intent": "明确指令",
     "difficulty": "easy",
     "query": "主驾座椅恢复到用车习惯一",
@@ -769,11 +769,10 @@
     "query": "小P退出退出小憩模式",
     "expected_tool_calls": [
       {
-        "name": "ProfileControl",
+        "name": "SpecialControl",
         "arguments": {
-          "action": "复位",
-          "feature": "习惯",
-          "value": "小憩模式"
+          "action": "关闭",
+          "feature": "小憩模式"
         }
       }
     ],
@@ -1337,9 +1336,10 @@
       {
         "name": "WindowControl",
         "arguments": {
+          "action": "开到",
+          "device": "车窗",
           "position": "全部",
-          "action": "再开",
-          "device": "车窗"
+          "value": "10"
         }
       }
     ],
@@ -2008,7 +2008,7 @@
         "arguments": {
           "action": "调到",
           "feature": "能量回收",
-          "value": "15"
+          "value": "最低"
         }
       }
     ],
@@ -2689,7 +2689,6 @@
       {
         "name": "ClimateControl",
         "arguments": {
-          "position": "全部",
           "action": "关闭",
           "device": "空调"
         }
@@ -2785,7 +2784,8 @@
         "arguments": {
           "action": "复位",
           "feature": "习惯",
-          "position": "副驾"
+          "position": "副驾",
+          "value": "标准模式"
         }
       }
     ],
@@ -2881,7 +2881,7 @@
       {
         "name": "ProfileControl",
         "arguments": {
-          "action": "打开",
+          "action": "调到",
           "feature": "习惯",
           "value": "放松模式"
         }
@@ -2976,8 +2976,9 @@
       {
         "name": "ProfileControl",
         "arguments": {
-          "action": "调到",
-          "feature": "习惯"
+          "action": "复位",
+          "feature": "习惯",
+          "value": "4"
         }
       }
     ],

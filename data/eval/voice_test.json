@@ -936,7 +936,8 @@
         "name": "VoiceControl",
         "arguments": {
           "action": "静音",
-          "feature": "声音"
+          "feature": "声音",
+          "position": "全部"
         }
       }
     ],

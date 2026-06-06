@@ -11,8 +11,7 @@
         "name": "WiperControl",
         "arguments": {
           "action": "打开",
-          "device": "雨刮",
-          "value": "自动"
+          "device": "雨刮"
         }
       }
     ]
@@ -29,8 +28,7 @@
         "name": "WiperControl",
         "arguments": {
           "action": "关闭",
-          "device": "雨刮",
-          "value": "自动"
+          "device": "雨刮"
         }
       }
     ]
@@ -137,8 +135,7 @@
         "name": "WiperControl",
         "arguments": {
           "action": "打开",
-          "device": "后雨刮",
-          "value": "自动"
+          "device": "后雨刮"
         }
       }
     ]

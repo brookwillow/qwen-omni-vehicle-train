@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import html
 import json
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -257,6 +258,255 @@ def format_training_backlog_markdown(backlog: list[dict[str, Any]]) -> str:
     return "\n".join(lines).rstrip() + "\n"
 
 
+def _review_error(error: dict[str, Any], required_by_tool: dict[str, set[str]]) -> dict[str, Any]:
+    gt_args = error.get("gt_args") or {}
+    pred_args = error.get("pred_args") or {}
+    return {
+        **error,
+        "issue": classify_error(error, required_by_tool),
+        "arg_delta": arg_delta(gt_args, pred_args)
+        if isinstance(gt_args, dict) and isinstance(pred_args, dict)
+        else {},
+    }
+
+
+def format_review_html(report: dict[str, Any], tools_path: str | Path, source_path: str | Path) -> str:
+    """Return a self-contained HTML review page for every eval error."""
+    required_by_tool = _required_fields_by_tool(tools_path)
+    errors = [_review_error(error, required_by_tool) for error in report.get("errors", []) or []]
+    summary = summarize_report(report, tools_path)
+    payload = {
+        "source": str(source_path),
+        "timestamp": report.get("timestamp"),
+        "lora_dir": report.get("lora_dir"),
+        "overall": report.get("overall", {}),
+        "errors": errors,
+    }
+    payload_json = json.dumps(payload, ensure_ascii=False).replace("</", "<\\/")
+    issue_counts = summary.get("issue_counts", {})
+    by_file = summary.get("by_file", {})
+    issue_items = "".join(
+        f"<li><code>{html.escape(issue)}</code><span>{count}</span></li>"
+        for issue, count in list(issue_counts.items())[:12]
+    )
+    file_options = "\n".join(
+        f'<option value="{html.escape(name)}">{html.escape(name)} ({count})</option>'
+        for name, count in by_file.items()
+    )
+    title = f"SFT Eval Error Review - {Path(source_path).name}"
+    return f"""<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{html.escape(title)}</title>
+  <style>
+    :root {{
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --line: #d8dde6;
+      --text: #16202a;
+      --muted: #627386;
+      --accent: #1769aa;
+      --bad: #a33b20;
+      --ok: #176f45;
+      --warn: #8a5b00;
+    }}
+    * {{ box-sizing: border-box; }}
+    body {{ margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--text); background: var(--bg); }}
+    header {{ position: sticky; top: 0; z-index: 3; background: rgba(246,247,249,.96); border-bottom: 1px solid var(--line); backdrop-filter: blur(8px); }}
+    .wrap {{ max-width: 1280px; margin: 0 auto; padding: 20px 24px; }}
+    h1 {{ font-size: 24px; margin: 0 0 10px; }}
+    h2 {{ font-size: 18px; margin: 0 0 12px; }}
+    .meta, .muted {{ color: var(--muted); font-size: 13px; }}
+    .metrics {{ display: grid; grid-template-columns: repeat(6, minmax(120px, 1fr)); gap: 10px; margin-top: 14px; }}
+    .metric {{ background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }}
+    .metric strong {{ display: block; font-size: 20px; }}
+    .toolbar {{ display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr auto; gap: 10px; margin-top: 14px; }}
+    input, select, button, textarea {{ font: inherit; }}
+    input, select {{ width: 100%; border: 1px solid var(--line); border-radius: 6px; padding: 9px 10px; background: #fff; }}
+    button {{ border: 1px solid var(--accent); background: var(--accent); color: #fff; border-radius: 6px; padding: 9px 14px; cursor: pointer; white-space: nowrap; }}
+    main {{ max-width: 1280px; margin: 0 auto; padding: 22px 24px 60px; }}
+    .summary {{ display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px; }}
+    .summary-card, .case {{ background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }}
+    .summary-card {{ padding: 16px; }}
+    .summary-card ul {{ margin: 0; padding: 0; list-style: none; columns: 2; }}
+    .summary-card li {{ display: flex; justify-content: space-between; gap: 8px; break-inside: avoid; margin-bottom: 7px; }}
+    .case {{ margin-bottom: 14px; overflow: hidden; }}
+    .case-head {{ display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; padding: 14px 16px; border-bottom: 1px solid var(--line); }}
+    .case-id {{ font-weight: 700; }}
+    .tags {{ display: flex; flex-wrap: wrap; gap: 6px; }}
+    .tag {{ border: 1px solid var(--line); background: #f9fafb; color: var(--muted); border-radius: 999px; padding: 3px 8px; font-size: 12px; }}
+    .err-type {{ color: var(--bad); border-color: #efc2b4; background: #fff3ef; }}
+    .issue {{ color: var(--warn); border-color: #e6c777; background: #fff8df; }}
+    .case-body {{ padding: 14px 16px 16px; }}
+    .query {{ font-size: 17px; font-weight: 650; margin-bottom: 12px; }}
+    .grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }}
+    .box {{ border: 1px solid var(--line); border-radius: 6px; padding: 10px; background: #fbfcfe; min-width: 0; }}
+    .box h3 {{ margin: 0 0 8px; font-size: 14px; color: var(--muted); }}
+    pre {{ margin: 0; white-space: pre-wrap; word-break: break-word; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; line-height: 1.45; }}
+    .review {{ display: grid; grid-template-columns: repeat(3, minmax(180px, auto)) 1fr; gap: 10px; align-items: center; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }}
+    .review label {{ display: flex; align-items: center; gap: 6px; border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; background: #fff; }}
+    .review input[type="radio"] {{ width: auto; }}
+    textarea {{ width: 100%; min-height: 38px; resize: vertical; border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; }}
+    .hidden {{ display: none; }}
+    @media (max-width: 900px) {{
+      .toolbar, .summary, .grid, .review, .metrics {{ grid-template-columns: 1fr; }}
+      .case-head {{ grid-template-columns: 1fr; }}
+    }}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>{html.escape(title)}</h1>
+      <div class="meta">source: <code>{html.escape(str(source_path))}</code> · lora: <code>{html.escape(str(report.get("lora_dir") or "-"))}</code> · timestamp: {html.escape(str(report.get("timestamp") or "-"))}</div>
+      <div class="metrics" id="metrics"></div>
+      <div class="toolbar">
+        <input id="q" type="search" placeholder="搜索 query / id / 工具 / 参数">
+        <select id="file"><option value="">全部文件</option>{file_options}</select>
+        <select id="err"><option value="">全部错误类型</option><option>type-err</option><option>tool-err</option><option>args-err</option></select>
+        <select id="decision"><option value="">全部判定</option><option value="unreviewed">未判定</option><option value="fix_eval">修改 eval</option><option value="model_fail">预测失败</option><option value="needs_discussion">待确认</option></select>
+        <button id="export">导出判定 JSON</button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="summary">
+      <div class="summary-card">
+        <h2>Top Issue Buckets</h2>
+        <ul>{issue_items}</ul>
+      </div>
+      <div class="summary-card">
+        <h2>使用方式</h2>
+        <p class="muted">逐条选择“修改 eval”“预测失败”或“待确认”。选择和备注会自动保存在浏览器 localStorage；点击导出可得到后续清洗/训练回流用的 JSON。</p>
+      </div>
+    </section>
+    <div class="meta" id="count"></div>
+    <section id="cases"></section>
+  </main>
+  <script id="payload" type="application/json">{payload_json}</script>
+  <script>
+    const payload = JSON.parse(document.getElementById('payload').textContent);
+    const storageKey = 'eval-review:' + payload.source + ':' + (payload.timestamp || '');
+    const reviews = JSON.parse(localStorage.getItem(storageKey) || '{{}}');
+    const fields = [
+      ['total', payload.overall.total],
+      ['type_acc', payload.overall.type_acc],
+      ['tool_acc', payload.overall.tool_acc],
+      ['args_em', payload.overall.args_em],
+      ['errors', payload.errors.length],
+      ['reviewed', Object.keys(reviews).filter(k => reviews[k]?.decision).length],
+    ];
+    const esc = (value) => String(value ?? '').replace(/[&<>"']/g, ch => ({{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}}[ch]));
+    const pretty = (value) => esc(JSON.stringify(value ?? null, null, 2));
+    const caseKey = (item) => `${{item.file}}#${{item.id}}`;
+    const saveReview = (key, patch) => {{
+      reviews[key] = {{...(reviews[key] || {{}}), ...patch}};
+      localStorage.setItem(storageKey, JSON.stringify(reviews));
+      renderMetrics();
+    }};
+    function renderMetrics() {{
+      fields[5][1] = Object.keys(reviews).filter(k => reviews[k]?.decision).length;
+      document.getElementById('metrics').innerHTML = fields.map(([k,v]) => `<div class="metric"><span class="muted">${{esc(k)}}</span><strong>${{esc(v)}}</strong></div>`).join('');
+    }}
+    function render() {{
+      const q = document.getElementById('q').value.trim().toLowerCase();
+      const file = document.getElementById('file').value;
+      const err = document.getElementById('err').value;
+      const decision = document.getElementById('decision').value;
+      const items = payload.errors.filter(item => {{
+        const key = caseKey(item);
+        const rv = reviews[key] || {{}};
+        if (file && item.file !== file) return false;
+        if (err && item.err_type !== err) return false;
+        if (decision === 'unreviewed' && rv.decision) return false;
+        if (decision && decision !== 'unreviewed' && rv.decision !== decision) return false;
+        if (q) {{
+          const hay = JSON.stringify(item).toLowerCase();
+          if (!hay.includes(q)) return false;
+        }}
+        return true;
+      }});
+      document.getElementById('count').textContent = `显示 ${{items.length}} / ${{payload.errors.length}} 条`;
+      document.getElementById('cases').innerHTML = items.map((item, index) => {{
+        const key = caseKey(item);
+        const rv = reviews[key] || {{}};
+        const decisionValue = rv.decision || '';
+        const radio = (value, label) => `<label><input type="radio" name="decision-${{esc(key)}}\" value="${{value}}" ${{decisionValue === value ? 'checked' : ''}}> ${{label}}</label>`;
+        return `<article class="case" data-key="${{esc(key)}}">
+          <div class="case-head">
+            <div class="case-id">${{index + 1}}. ${{esc(key)}}</div>
+            <div class="tags">
+              <span class="tag err-type">${{esc(item.err_type)}}</span>
+              <span class="tag issue">${{esc(item.issue)}}</span>
+              <span class="tag">${{esc(item.category)}}</span>
+              <span class="tag">${{esc(item.difficulty)}}</span>
+            </div>
+            <div class="muted">${{esc(item.file)}}</div>
+          </div>
+          <div class="case-body">
+            <div class="query">${{esc(item.query)}}</div>
+            <div class="grid">
+              <div class="box"><h3>Expected</h3><pre>${{pretty({{type:item.expected_type, tool:item.gt_tool, args:item.gt_args, tool_calls:item.expected_tool_calls}})}}</pre></div>
+              <div class="box"><h3>Predicted</h3><pre>${{pretty({{type:item.pred_type, tool:item.pred_tool, args:item.pred_args, tool_calls:item.pred_tool_calls, raw:item.pred_raw}})}}</pre></div>
+              <div class="box"><h3>Arg Delta</h3><pre>${{pretty(item.arg_delta)}}</pre></div>
+              <div class="box"><h3>Review Key</h3><pre>${{esc(key)}}</pre></div>
+            </div>
+            <div class="review">
+              ${{radio('fix_eval', '修改 eval')}}
+              ${{radio('model_fail', '预测失败')}}
+              ${{radio('needs_discussion', '待确认')}}
+              <textarea placeholder="备注，例如：GT 应改成 CameraControl / feature 应为音乐应用 / 模型漏 position" data-note="${{esc(key)}}">${{esc(rv.note || '')}}</textarea>
+            </div>
+          </div>
+        </article>`;
+      }}).join('');
+      document.querySelectorAll('.case input[type="radio"]').forEach(input => {{
+        input.addEventListener('change', event => {{
+          const article = event.target.closest('.case');
+          saveReview(article.dataset.key, {{decision: event.target.value}});
+        }});
+      }});
+      document.querySelectorAll('textarea[data-note]').forEach(input => {{
+        input.addEventListener('input', event => saveReview(event.target.dataset.note, {{note: event.target.value}}));
+      }});
+    }}
+    for (const id of ['q', 'file', 'err', 'decision']) document.getElementById(id).addEventListener('input', render);
+    document.getElementById('export').addEventListener('click', () => {{
+      const rows = payload.errors.map(item => {{
+        const key = caseKey(item);
+        return {{
+          key,
+          id: item.id,
+          file: item.file,
+          query: item.query,
+          err_type: item.err_type,
+          issue: item.issue,
+          gt_tool: item.gt_tool,
+          gt_args: item.gt_args,
+          pred_type: item.pred_type,
+          pred_tool: item.pred_tool,
+          pred_args: item.pred_args,
+          decision: reviews[key]?.decision || '',
+          note: reviews[key]?.note || '',
+        }};
+      }});
+      const blob = new Blob([JSON.stringify(rows, null, 2)], {{type: 'application/json;charset=utf-8'}});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'eval_error_review_' + (payload.timestamp || 'report').replace(/[:.]/g, '-') + '.json';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }});
+    renderMetrics();
+    render();
+  </script>
+</body>
+</html>
+"""
+
+
 def _print_counter(title: str, values: dict[str, int], limit: int) -> None:
     print(f"\n## {title}")
     for key, count in list(values.items())[:limit]:
@@ -295,9 +545,16 @@ def main() -> None:
     parser.add_argument("--limit", type=int, default=15, help="Rows per summary section")
     parser.add_argument("--json", action="store_true", help="Print machine-readable JSON")
     parser.add_argument("--backlog-md", help="Write a Markdown training backlog to this path")
+    parser.add_argument("--review-html", help="Write a self-contained HTML page for manual error review")
     args = parser.parse_args()
 
     summary = summarize_report(load_report(args.report), args.tools)
+    if args.review_html:
+        report = load_report(args.report)
+        out_path = Path(args.review_html)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        out_path.write_text(format_review_html(report, args.tools, args.report), encoding="utf-8")
+        print(f"[review] wrote {len(report.get('errors', []) or [])} cases -> {out_path}")
     if args.backlog_md:
         backlog = build_training_backlog(summary, args.limit)
         out_path = Path(args.backlog_md)

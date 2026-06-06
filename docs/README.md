@@ -137,6 +137,8 @@ data/rl/*_preferences.jsonl  (chosen/rejected 偏好数据产物)
 | `data/rl/tool_tts_preferences.jsonl`               | 工具调用 vs TTS 回复的输出契约偏好数据（工具 JSON chosen，执行完成话术 rejected）                                                                                                                                                                                                                                                                                                                                                                         |
 | `data/rl/tool_boundary_preferences.jsonl`          | 边界偏好数据（36 条）：`Reject/NoiseDoNotAct/澄清TTS` chosen，错误工具调用 rejected，用于约束 DPO 过度工具化                                                                                                                                                                                                                                                                                                                                              |
 | `data/rl/current_noise_boundary_preferences.jsonl` | 多轮边界偏好数据（200 条）：历史存在工具调用但当前轮为“嗯/好/先这样/空输入/不是那个”等无动作 query 时，`NoiseDoNotAct` chosen，错误继承历史工具 rejected                                                                                                                                                                                                                                                                                                |
+| `data/rl/noise_false_positive_preferences.jsonl`   | 有效工具请求被误判为 `NoiseDoNotAct` 的偏好数据，`chosen=正确工具`、`rejected=NoiseDoNotAct`，用于修正 noise 过召                                                                                                                                                                                                                                                                                                                                          |
+| `data/rl/anti_over_noise_preferences.jsonl`        | 2026-06-06 评估报告中的 70 条 noise 过召偏好数据；其中 24 条已人工 review 确认为 `model_fail`，其余为同一报告中 `pred=NoiseDoNotAct` 且 GT 为有效工具的 over-noise 候选，作为当前 SFT 后的定向 DPO 首选数据                                                                                                                                                                                                                                                  |
 | `data/train_final.jsonl`                           | 最终训练数据（含 SP）                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `data/eval/`                                       | 评测数据集（当前工具 schema 已清洗，`音乐应用` 和 `媒体` 按新版 schema 分开保留）                                                                                                                                                                                                                                                                                                                                                                         |
 
@@ -173,24 +175,27 @@ python build_train_data.py \
 
 偏好数据构造脚本属于阶段性实验工具，已从稳定脚本入口中移除。仓库只保留可直接训练的偏好数据产物；DPO 训练采用“方案 2”：从已有 SFT LoRA 初始化继续训练，原 SFT 产物不被覆盖，最终输出一个新的 DPO LoRA。线上只加载 `base model + 新 DPO LoRA`，不需要同时加载两个 LoRA。
 
+当前如果目标是修正“有效车控被过度判为 `NoiseDoNotAct`”，先放弃上一轮混合 DPO 数据，只使用 anti-over-noise 正样本偏好和已有 false-positive 偏好；不要把 `current_noise_boundary_preferences.jsonl` 一起放进本轮实验，否则会继续强化 `NoiseDoNotAct` chosen，容易抵消这次修正方向。`--preference-weight` 只适合放大权重，当前脚本不支持用小于 1 的权重做下采样。
+
 ```bash
 python train_memory_dpo_lora.py \
   --model /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
-  --init-lora-dir lora_output_sft_0520 \
-  --preference-file data/rl/memory_preferences.jsonl,data/rl/memory_contrast_preferences.jsonl,data/rl/tool_tts_preferences.jsonl,data/rl/tool_boundary_preferences.jsonl,data/rl/current_noise_boundary_preferences.jsonl \
-  --preference-weight tool_boundary_preferences.jsonl:3 current_noise_boundary_preferences.jsonl:5 \
-  --output-dir lora_output_sft_dpo_memory_0520 \
+  --init-lora-dir lora_output_v2_0604 \
+  --preference-file data/rl/anti_over_noise_preferences.jsonl,data/rl/noise_false_positive_preferences.jsonl \
+  --preference-weight anti_over_noise_preferences.jsonl:4 \
+  --output-dir lora_output_v2_0604_dpo_anti_over_noise \
   --prompt-format chat_template \
   --system-prompt data/system-prompt.txt \
-  --lr 5e-6 \
-  --beta 0.1 \
+  --lr 1e-6 \
+  --beta 0.05 \
   --epochs 1 \
   --train-batch-size 1 \
   --grad-accum 8 \
+  --sft-loss-weight 0.1 \
   --reference-mode reference_free
 ```
 
-`train_memory_dpo_lora.py` 默认使用 reference-free DPO-style loss，适合先在单卡上快速验证；服务器显存充足时可用 `--reference-mode frozen_init` 加载一份冻结的 `--init-lora-dir` 作为 reference，代价是显存约翻倍。DPO 不是重新选择 LoRA 挂载层，而是从已有 SFT LoRA adapter 初始化，继续训练其中已经存在的 `q_proj/k_proj/v_proj/o_proj/gate_proj/up_proj/down_proj` LoRA 参数。DPO 默认 `--prompt-format chat_template`，会把 preference 行里的 `history + current_query` 按 `data/system-prompt.txt` 和 tokenizer chat template 组织成与 `serve.py` 一致的真实多轮输入；历史分布实验不要退回旧的 `json_instruction`，否则训练输入和线上输入不一致。`--preference-weight` 可按文件名、stem、路径后缀或 glob 对偏好文件加权，当前建议将 `tool_boundary_preferences.jsonl` 放大到 3 倍，并将 `current_noise_boundary_preferences.jsonl` 放大到 5 倍，专门抵消“多轮无意义 query 错误继承历史工具”和 `tool_tts_preferences.jsonl` 对工具输出概率的单向推高。为适配 24GB 显存，DPO 默认开启 `--gradient-checkpointing` 和 `--empty-cache-between-pairs`；如果仍 OOM，优先加 `--max-length 3584`，再降到 `3072`。DPO 阶段学习率和训练步数要保守，训练后必须同时回归原始 eval、multiturn、orchestration、reject/noise 边界集和 `noise_history_test.json`；若单工具指标回退或 false-positive tool rate 上升，优先降低 `--lr`、减少 epochs，或提高边界偏好数据的采样占比。
+`train_memory_dpo_lora.py` 默认使用 reference-free DPO-style loss，适合先在单卡上快速验证；服务器显存充足时可用 `--reference-mode frozen_init` 加载一份冻结的 `--init-lora-dir` 作为 reference，代价是显存约翻倍。DPO 不是重新选择 LoRA 挂载层，而是从已有 SFT LoRA adapter 初始化，继续训练其中已经存在的 `q_proj/k_proj/v_proj/o_proj/gate_proj/up_proj/down_proj` LoRA 参数。DPO 默认 `--prompt-format chat_template`，会把 preference 行里的 `history + current_query` 按 `data/system-prompt.txt` 和 tokenizer chat template 组织成与 `serve.py` 一致的真实多轮输入；历史分布实验不要退回旧的 `json_instruction`，否则训练输入和线上输入不一致。为适配 24GB 显存，DPO 默认开启 `--gradient-checkpointing` 和 `--empty-cache-between-pairs`；如果仍 OOM，优先加 `--max-length 3584`，再降到 `3072`。DPO 阶段学习率和训练步数要保守，本轮 anti-over-noise 建议先用 `lr=1e-6`、`beta=0.05`、`epochs=1`，并保留少量 `--sft-loss-weight 0.1` 防止整体工具格式漂移。训练后必须同时回归原始 eval、multiturn、orchestration、reject/noise 边界集和 `noise_history_test.json`；如果真实 noise 被误工具化，先减少 `anti_over_noise_preferences.jsonl` 权重或补一份人工确认的真实 noise guard 偏好，再做下一轮。
 
 ## 训练配置
 
@@ -495,7 +500,7 @@ Batch 模式运行后自动输出 JSON 报告；默认有 `--lora-dir` 时写入
 | `train_aut_asr_bridge.py`            | 实验脚本：用 eval 音频训练 Qwen AUT/audio_tower hidden states 到 Whisper decoder 的轻量 ASR bridge，默认保留 10% 验证集                                            |
 | `serve.py`                           | **OpenAI 兼容推理服务**（FastAPI，支持文本+音频）                                                                                                                  |
 | `eval.py`                            | 统一评测（batch / single），音频输入 + 多维度统计，支持`--batch-size` 批量推理                                                                                     |
-| `scripts/analyze_eval_errors.py`     | 读取`eval_report*.json`，按类型、工具、文件、类别、参数槽位变化和混淆对聚类错误；可用 `--backlog-md` 输出训练补强任务清单                                          |
+| `scripts/analyze_eval_errors.py`     | 读取`eval_report*.json`，按类型、工具、文件、类别、参数槽位变化和混淆对聚类错误；可用 `--backlog-md` 输出训练补强任务清单，或用 `--review-html` 生成逐 case 人工复核页面 |
 | `scripts/schema_coverage_report.py`  | 统计 SFT / eval / RL 的工具调用、参数枚举和完整参数组合覆盖，定位 eval/RL 中有但 SFT 弱覆盖或缺失的 schema 组合                                                    |
 | `scripts/validate_splits.py`         | 校验 split 样本消息结构、工具调用和响应形态                                                                                                                        |
 | `scripts/validate_by_tool_schema.py` | 校验`data/splits/by_tool/*.jsonl` 是否符合 `data/tools.json` schema                                                                                                |
@@ -538,6 +543,7 @@ python train_aut_asr_bridge.py \
 ```bash
 python scripts/analyze_eval_errors.py lora_output/eval_report_<timestamp>.json --limit 20
 python scripts/analyze_eval_errors.py lora_output/eval_report_<timestamp>.json --limit 20 --backlog-md docs/eval-error-training-backlog.md
+python scripts/analyze_eval_errors.py lora_output/eval_report_<timestamp>.json --review-html docs/eval-error-review.html
 python scripts/schema_coverage_report.py --output-md docs/schema-coverage-report.md --limit 50
 python scripts/schema_coverage_report.py --backlog-md docs/schema-coverage-hardcase-backlog.md --limit 80
 ```
