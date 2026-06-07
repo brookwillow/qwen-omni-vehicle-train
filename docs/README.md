@@ -119,6 +119,12 @@ data/rl/*_preferences.jsonl  (chosen/rejected 偏好数据产物)
 >
 > `build_train_data.py` 默认开启 `--validate-schema`，合并后会对每条样本中的工具调用做 schema 校验（required 字段、enum 值、未知参数），不合格样本会被移除并在 stderr 打印详情。可用 `--no-validate-schema` 跳过校验。
 
+### 决策边界
+
+- `NoiseDoNotAct`：当前轮次没有明显意图，或这句话不是对车载助手说的；如果样本里出现车控/电话/车况等关键词，必须显式写明“不是对小P说的 / 不用执行 / 不是车内指令”，避免覆盖有效工具请求。
+- `Reject`：当前轮次有明确意图，但意图不在当前工具和模型能力范围内，例如外部应用内任务、通用百科/新闻/娱乐问答、家居控制等。
+- 工具调用：当前轮次必须是有意义且在工具范围内的请求，才输出紧凑 JSON tool call；不要因为历史里有工具调用而继承到当前无意义轮次。
+
 ### 关键文件
 
 
@@ -126,12 +132,13 @@ data/rl/*_preferences.jsonl  (chosen/rejected 偏好数据产物)
 | -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `data/system-prompt.txt`                           | 紧凑版 System Prompt（~5.8K chars，基于当前工具白名单生成）                                                                                                                                                                                                                                                                                                                                                                                               |
 | `data/tools.json`                                  | 40 个车载工具定义（新版`inputSchema` 格式，已包含 `IdentityControl`）                                                                                                                                                                                                                                                                                                                                                                                     |
-| `data/splits/by_tool/*.jsonl`                      | 按工具拆分的训练数据；每个工具文件内已拆为`user -> JSON tool call` 决策样本和独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本；`AppControl` 覆盖明确打开/关闭/下载应用的意图，`音乐应用` 和 `媒体` 分别按 schema 保留，播放内容/导航到目的地等应用内任务走 `Reject`；`IdentityControl.jsonl` 覆盖 FaceID 昵称录入；`PhoneControl.jsonl` 包含小鹏客服、小鹏救援、儿童手表等官方默认联系人样本；其中 `NoiseDoNotAct.jsonl` 当前为 450 条 |
+| `data/splits/by_tool/*.jsonl`                      | 按工具拆分的训练数据；每个工具文件内已拆为`user -> JSON tool call` 决策样本和独立 `JSON tool call -> tool-role JSON result -> TTS text` 回复样本；`AppControl` 覆盖明确打开/关闭/下载应用的意图，`音乐应用` 和 `媒体` 分别按 schema 保留，播放内容/导航到目的地等应用内任务走 `Reject`；`IdentityControl.jsonl` 覆盖 FaceID 昵称录入；`PhoneControl.jsonl` 包含小鹏客服、小鹏救援、儿童手表等官方默认联系人样本；其中 `NoiseDoNotAct.jsonl` 当前为 449 条 |
 | `data/splits/clarify.jsonl`                        | required 字段缺失后的自然语言追问样本                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `data/splits/edge_case.jsonl`                      | 多轮上下文边界、易混淆与任务列表选择样本                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | `data/splits/multiturn.jsonl`                      | 最多三轮纯文本历史上下文样本；历史可来自导航/音乐/新闻/百科/AIGC/天气等外部域，当前轮优先，只有代词、省略、纠错、延续或查询缺槽时才参考历史补全                                                                                                                                                                                                                                                                                                           |
 | `data/splits/orchestration.jsonl`                  | feature 分支复杂任务编排样本：并行指令、多工具 JSON 数组、显式多步、最近意图继承、列表选择和模糊导航边界                                                                                                                                                                                                                                                                                                                                                  |
 | `data/splits/reject.jsonl`                         | 单轮 + 多轮硬负例                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `data/splits/hard_cases/OverNoiseRemaining_20260607.jsonl` | 2026-06-07 最新评估中仍被预测为 `NoiseDoNotAct`、但 GT 为有效工具请求的 42 条 SFT hard case；用于在下一轮 SFT 中直接降低 noise 过召                                                                                                                                                                                                                                                                                                                       |
 | `data/rl/memory_preferences.jsonl`                 | 记忆使用偏好数据（299 条），用于 DPO 阶段强化多轮上下文选择                                                                                                                                                                                                                                                                                                                                                                                               |
 | `data/rl/memory_contrast_preferences.jsonl`        | 正确工具 JSON vs 错误历史工具 JSON 的记忆强对比偏好数据                                                                                                                                                                                                                                                                                                                                                                                                   |
 | `data/rl/tool_tts_preferences.jsonl`               | 工具调用 vs TTS 回复的输出契约偏好数据（工具 JSON chosen，执行完成话术 rejected）                                                                                                                                                                                                                                                                                                                                                                         |
@@ -154,7 +161,7 @@ data/rl/*_preferences.jsonl  (chosen/rejected 偏好数据产物)
 
 | 类型                                   | 数量 | 说明                                                                                                                                                                                                                                                                                            |
 | -------------------------------------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| By-tool                                | 7315 | 每个工具文件内混合：Action JSON 4564 条、NoiseDoNotAct 457 条、独立`JSON tool call -> tool-role JSON result -> TTS text` 回复样本 2294 条                                                                                                                                                       |
+| By-tool                                | 7314 | 每个工具文件内混合：Action JSON、NoiseDoNotAct、独立`JSON tool call -> tool-role JSON result -> TTS text` 回复样本；`NoiseDoNotAct` 中高风险裸表达已改写为明确非对小P说/不用执行口径                                                                                                                                                |
 | Clarify                                | 189  | 已拆为两类样本：`user -> 追问 TTS`（94 条，教模型何时追问）+ 完整 4 轮 `user -> 追问 -> 用户补齐 -> tool call`（95 条，教模型追问后如何响应）；已移除纯位置追问（音区可自动判定位置）与意图明确的方向性追问（如"太晒→打开/关闭遮阳帘"）；配合 final-assistant 标签监督，两类样本均能被正确监督 |
 | Edge case                              | 100  | 多轮当前轮边界、查询 vs 控制、popup/task 列表`GeneralSelect` 等易混淆样本                                                                                                                                                                                                                       |
 | Hard case: CurrentNoiseWithHistoryTool | 200  | 历史存在明确工具调用，当前轮为无意义/终止/闲聊/空输入时必须`NoiseDoNotAct`，避免从历史轮次错误继承工具                                                                                                                                                                                          |
@@ -162,7 +169,7 @@ data/rl/*_preferences.jsonl  (chosen/rejected 偏好数据产物)
 | Orchestration                          | 30   | feature 分支复杂任务编排样本；包含多工具 JSON 数组输出、显式多步、最近意图继承、列表选择与模糊导航拒识                                                                                                                                                                                          |
 | Reject                                 | 1135 | 单轮 + 多轮硬负例（已合并），最后一条 assistant 均为`Reject`；已抽稀家居控制负例并移除高风险车控状态拒识                                                                                                                                                                                        |
 
-`build_train_data.py` 默认递归合并全部 split，当前最终训练集在重建后约 9609 条；统计时多轮样本按最后一个有效决策标签计入对应类别。当前输出类型约为 Action JSON 5284、MultiAction JSON 数组 18、NoiseDoNotAct 737、TTS 2400、Reject 1170。`NoiseDoNotAct` 以工具 JSON 形式训练，但语义上属于不执行动作边界，训练日志会单独统计 `Noise`，避免和普通 Action 混在一起误判工具化倾向。
+`build_train_data.py` 默认递归合并全部 split，当前未加权最终训练集为 9755 条；统计时多轮样本按最后一个有效决策标签计入对应类别。当前未加权输出类型为 Action JSON 5431、MultiAction JSON 数组 18、NoiseDoNotAct 736、TTS 2400、Reject 1170。`NoiseDoNotAct` 以工具 JSON 形式训练，但语义上属于不执行动作边界，训练日志会单独统计 `Noise`，避免和普通 Action 混在一起误判工具化倾向。
 
 ### Hard Case 加权
 
@@ -170,11 +177,11 @@ data/rl/*_preferences.jsonl  (chosen/rejected 偏好数据产物)
 
 ```bash
 python build_train_data.py \
-  --sample-weight 'hard_cases/*.jsonl:3' ProfileControl:2 WindowControl:1.5 CurrentNoiseWithHistoryTool:0.5 NoiseDoNotAct_coverage:0.5 \
+  --sample-weight 'hard_cases/OverNoiseRemaining_20260607.jsonl:4' 'hard_cases/*.jsonl:3' ProfileControl:2 WindowControl:1.5 CurrentNoiseWithHistoryTool:0.5 NoiseDoNotAct_coverage:0.5 \
   --output data/train_final.jsonl
 ```
 
-推荐流程：先用 `scripts/analyze_eval_errors.py --backlog-md` 生成错误族补强清单，再为 P0/P1 错误族补充非评估原句 hard case；训练时对这些 hard case 文件做 2-4 倍采样，避免新增样本在 9K 级训练集中被稀释。多轮无意义 query 和普通 noise 覆盖数据已经足够密集，当前建议在全量 hard case 放大时显式下调 `CurrentNoiseWithHistoryTool` 与 `NoiseDoNotAct_coverage`，防止 `NoiseDoNotAct` 过强导致短但有效的车控/电话/查询请求被误拒识。
+推荐流程：先用 `scripts/analyze_eval_errors.py --backlog-md` 生成错误族补强清单，再为 P0/P1 错误族补充 hard case；训练时对这些 hard case 文件做 2-4 倍采样，避免新增样本在 9K 级训练集中被稀释。多轮无意义 query 和普通 noise 覆盖数据已经足够密集，当前建议在全量 hard case 放大时显式下调 `CurrentNoiseWithHistoryTool` 与 `NoiseDoNotAct_coverage`，并对 `OverNoiseRemaining_20260607` 使用 4 倍采样，防止 `NoiseDoNotAct` 过强导致短但有效的车控/电话/查询请求被误拒识。上述推荐命令试跑后输出 10818 条，Noise 占比约 5.9%。
 
 ### DPO 偏好训练
 
@@ -244,13 +251,48 @@ python train_memory_dpo_lora.py \
 
 ## 训练配置
 
+### 标准 Pipeline 入口
+
+后续训练命令以 `scripts/run_training_pipeline.py` 为单一入口维护；每次 SFT/DPO 采样比例、LoRA 输出目录或偏好数据组合变化，优先更新该脚本，再同步本文档。脚本默认 dry-run，只打印将要执行的命令；加 `--run` 才会真正启动训练或评估。
+
+```bash
+# 打印完整 SFT -> eval -> DPO -> eval 流程
+python scripts/run_training_pipeline.py full
+
+# 真正执行完整流程
+python scripts/run_training_pipeline.py full --run
+
+# 只执行 SFT 段：validate -> build -> sft -> eval-sft
+python scripts/run_training_pipeline.py sft-only --run
+
+# SFT 已完成后，只跑 noise 修复 DPO 和 DPO 评估
+python scripts/run_training_pipeline.py dpo-only --run
+```
+
+可单独运行的 stage 包括：`validate`、`build`、`sft`、`eval-sft`、`dpo-noise`、`eval-dpo`。常用覆盖参数如下：
+
+```bash
+python scripts/run_training_pipeline.py full --run \
+  --model-dir /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
+  --sft-output-dir lora_output_sft_over_noise_repair \
+  --dpo-noise-output-dir lora_output_sft_over_noise_repair_dpo_noise
+```
+
+当前 pipeline 固定了以下策略：SFT 构建时 `OverNoiseRemaining_20260607` 4 倍、全量 hard case 3 倍、`ProfileControl` 2 倍、`WindowControl` 1.5 倍，同时将 `CurrentNoiseWithHistoryTool` 和 `NoiseDoNotAct_coverage` 降到 0.5；DPO 第一轮只修有效请求被误判为 `NoiseDoNotAct`，使用 `anti_over_noise_preferences.jsonl`、`noise_false_positive_preferences.jsonl`、`still_over_noise_preferences_round3.jsonl`，不混入 `extra_args_preferences.jsonl`。
+
 ### SFT 训练流程
 
-SFT 训练前必须先重建 `data/train_final.jsonl`。当前推荐构建命令会递归合并 `data/splits/**/*.jsonl`、注入 `data/system-prompt.txt`，并对 hard case、`ProfileControl`、`WindowControl` 做采样加权，避免补强数据在 9K 级训练集中被稀释。
+SFT 训练前必须先重建 `data/train_final.jsonl`。推荐优先使用 pipeline 入口：
+
+```bash
+python scripts/run_training_pipeline.py sft-only --run
+```
+
+等价展开命令如下。该命令会递归合并 `data/splits/**/*.jsonl`、注入 `data/system-prompt.txt`，并对最新 over-noise hard case、全量 hard case、`ProfileControl`、`WindowControl` 做采样加权，同时下调多轮 no-op/noise 覆盖数据，避免补强数据在 9K 级训练集中被稀释。
 
 ```bash
 python build_train_data.py \
-  --sample-weight 'hard_cases/*.jsonl:3' ProfileControl:2 WindowControl:1.5 CurrentNoiseWithHistoryTool:0.5 NoiseDoNotAct_coverage:0.5 \
+  --sample-weight 'hard_cases/OverNoiseRemaining_20260607.jsonl:4' 'hard_cases/*.jsonl:3' ProfileControl:2 WindowControl:1.5 CurrentNoiseWithHistoryTool:0.5 NoiseDoNotAct_coverage:0.5 \
   --output data/train_final.jsonl
 ```
 
