@@ -107,6 +107,13 @@ data/rl/*_preferences.jsonl  (chosen/rejected 偏好数据产物)
   └─ train_memory_dpo_lora.py --init-lora-dir lora_output_sft/
                                 │
                                 └─ lora_output_sft_dpo/ ──→ eval.py / serve.py
+
+可选 Teacher SFT 阶段
+data/train_final.jsonl  (与 Omni SFT 相同，已注入 SP)
+  │
+  └─ train_teacher_sft_lora.py ──→ teacher_lora_qwen35_27b_sft/
+                                      │
+                                      └─ 后续作为 GKD / 标注 / 边界判定 teacher
 ```
 
 训练产物使用方式：
@@ -295,6 +302,58 @@ python build_train_data.py \
   --sample-weight 'hard_cases/OverNoiseRemaining_20260607.jsonl:4' 'hard_cases/*.jsonl:3' ProfileControl:2 WindowControl:1.5 CurrentNoiseWithHistoryTool:0.5 NoiseDoNotAct_coverage:0.5 \
   --output data/train_final.jsonl
 ```
+
+### Qwen3.5-27B Teacher SFT
+
+`train_teacher_sft_lora.py` 用于训练一个 teacher，目标不是直接替代 Omni 线上模型，而是把当前车控工具 schema、`NoiseDoNotAct/Reject/tool_call` 边界和 SP 约束对齐到更大的 Qwen3.5 teacher 上，后续用于 GKD、错误样本判定或候选生成。
+
+该脚本完全复用 Omni SFT 的训练数据入口：`data/train_final.jsonl` 必须由 `build_train_data.py` 生成，里面已经注入 `data/system-prompt.txt`。监督口径也和 `train_thinker_lora.py` 一致：只监督最后一个 user 之后的最后一条 assistant 内容；历史 assistant TTS 不参与 loss。`Qwen/Qwen3.5-27B` 带 vision encoder，脚本会优先尝试 `AutoModelForCausalLM`，失败后回退到 `AutoModelForImageTextToText`，并默认冻结 `vision/visual/image` 等相关 LoRA 参数，只训练语言决策路径；如确实要训练视觉路径，可显式加 `--no-freeze-vision`。
+
+H800 上推荐先用 BF16 LoRA 训练 `Qwen/Qwen3.5-27B`：
+
+```bash
+python train_teacher_sft_lora.py \
+  --model Qwen/Qwen3.5-27B \
+  --train-file data/train_final.jsonl \
+  --system-prompt data/system-prompt.txt \
+  --output-dir teacher_lora_qwen35_27b_sft \
+  --torch-dtype bfloat16 \
+  --attn-implementation flash_attention_2 \
+  --max-length 4096 \
+  --train-batch-size 1 \
+  --grad-accum 16 \
+  --lora-r 16 \
+  --lora-alpha 32 \
+  --epochs 2
+```
+
+如果需要在启动前强制重建训练集，可加 `--rebuild-train-data`；它会使用当前 Omni pipeline 相同的 hard case 加权：
+
+```bash
+python train_teacher_sft_lora.py \
+  --model Qwen/Qwen3.5-27B \
+  --output-dir teacher_lora_qwen35_27b_sft \
+  --rebuild-train-data
+```
+
+5090 32GB 不适合直接 BF16 训练或加载 27B teacher。若只在 5090 上做小规模验证或量化 teacher 推理，可使用 4bit QLoRA/量化加载：
+
+```bash
+python train_teacher_sft_lora.py \
+  --model Qwen/Qwen3.5-27B \
+  --train-file data/train_final.jsonl \
+  --output-dir teacher_lora_qwen35_27b_qlora \
+  --load-in-4bit \
+  --torch-dtype bfloat16 \
+  --max-length 4096 \
+  --train-batch-size 1 \
+  --grad-accum 16 \
+  --lora-r 16 \
+  --lora-alpha 32 \
+  --epochs 2
+```
+
+用于 GKD logits 蒸馏时，teacher 最好在 H800 上以 BF16 加载；4bit teacher 可以跑通流程，但概率分布会被量化压粗，建议降低 GKD loss 权重并保留 SFT CE anchor。
 
 ### RTX 3090 (24GB) 显存控制
 
@@ -583,6 +642,7 @@ Batch 模式运行后自动输出 JSON 报告；默认有 `--lora-dir` 时写入
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `build_train_data.py`                | 合并 splits + 注入 SP → 训练集                                                                                                                                    |
 | `train_thinker_lora.py`              | LoRA 训练，含冻结审计 + 训练指标记录                                                                                                                               |
+| `train_teacher_sft_lora.py`          | Qwen3.5-27B teacher 的 SFT LoRA/QLoRA 训练；复用同一份 `data/train_final.jsonl` 和最终 assistant span 监督口径，默认冻结 vision 相关 LoRA 参数                     |
 | `train_memory_dpo_lora.py`           | 从已有 SFT LoRA 初始化，基于 memory chosen/rejected 偏好数据继续做 DPO-style LoRA 训练                                                                             |
 | `train_aut_asr_bridge.py`            | 实验脚本：用 eval 音频训练 Qwen AUT/audio_tower hidden states 到 Whisper decoder 的轻量 ASR bridge，默认保留 10% 验证集                                            |
 | `serve.py`                           | **OpenAI 兼容推理服务**（FastAPI，支持文本+音频）                                                                                                                  |
