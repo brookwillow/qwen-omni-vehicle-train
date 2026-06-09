@@ -41,6 +41,7 @@ logging.getLogger().addFilter(
 
 ACTION_RE = re.compile(r"Action:\s*([A-Za-z0-9_]+)")
 ACTION_INPUT_RE = re.compile(r"Action Input:\s*(\{[\s\S]*\})")
+TOOL_JSON_RE = re.compile(r"(\{[\s\S]*?\"name\"\s*:[\s\S]*?\"arguments\"\s*:[\s\S]*?\})")
 EVALUATION_MODE = "raw_model_output"
 POSTPROCESS_APPLIED = False
 
@@ -177,13 +178,42 @@ def _coerce_tool_call(item: Any) -> Optional[ToolCallTuple]:
     return item["name"], args if isinstance(args, dict) else {}
 
 
+def _is_plain_reject(pred: str) -> bool:
+    return pred.strip().strip("。.!！").lower() == "reject"
+
+
+def _parse_embedded_tool_json(pred: str) -> list[ToolCallTuple]:
+    decoder = json.JSONDecoder()
+    calls: list[ToolCallTuple] = []
+    for match in TOOL_JSON_RE.finditer(pred):
+        start = match.start()
+        try:
+            data, _ = decoder.raw_decode(pred[start:])
+        except json.JSONDecodeError:
+            continue
+        if isinstance(data, dict):
+            call = _coerce_tool_call(data)
+            if call:
+                calls.append(call)
+        elif isinstance(data, list):
+            parsed_calls = []
+            for item in data:
+                call = _coerce_tool_call(item)
+                if not call:
+                    parsed_calls = []
+                    break
+                parsed_calls.append(call)
+            calls.extend(parsed_calls)
+    return calls
+
+
 def parse_actions(pred: str) -> Tuple[List[ToolCallTuple], str]:
     """Returns (tool_calls, pred_type).
 
     pred_type: 'Action' | 'Clarify' | 'Reject' | 'ParseFail'
     """
     s = (pred or "").strip()
-    if s.startswith("Reject"):
+    if _is_plain_reject(s):
         return [], "Reject"
     if s.startswith("Clarify"):
         return [], "Clarify"
@@ -205,6 +235,9 @@ def parse_actions(pred: str) -> Tuple[List[ToolCallTuple], str]:
                 return [], "ParseFail"
             calls.append(call)
         return calls, "Action" if calls else "ParseFail"
+    embedded_calls = _parse_embedded_tool_json(s)
+    if embedded_calls:
+        return embedded_calls, "Action"
     m_tool = ACTION_RE.search(s)
     if not m_tool:
         # New protocol treats plain assistant text as the user-facing

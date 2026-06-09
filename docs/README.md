@@ -256,6 +256,39 @@ python train_memory_dpo_lora.py \
   --reference-mode reference_free
 ```
 
+新一轮 SFT 后如果报告里仍有 `NoiseDoNotAct` 过召或有效工具请求被误判为 `Reject`，先从评估报告生成当轮边界偏好数据，再跑窄口径 DPO。以下命令基于 `eval_report_20260609_105416.json` 生成了 51 条 over-noise 偏好和 14 条 false-reject 偏好：
+
+```bash
+python scripts/build_boundary_preferences_from_eval.py \
+  /Users/wangjie/Downloads/serve_logs/eval_report_20260609_105416.json \
+  --output-dir data/rl
+```
+
+生成文件：
+
+- `data/rl/still_over_noise_preferences_20260609.jsonl`
+- `data/rl/false_reject_preferences_20260609.jsonl`
+
+然后从新 SFT LoRA 继续做边界 DPO：
+
+```bash
+python train_memory_dpo_lora.py \
+  --model /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
+  --init-lora-dir lora_output_sft_over_noise_repair \
+  --preference-file data/rl/still_over_noise_preferences_20260609.jsonl,data/rl/false_reject_preferences_20260609.jsonl,data/rl/noise_false_positive_preferences.jsonl \
+  --preference-weight still_over_noise_preferences_20260609.jsonl:6 false_reject_preferences_20260609.jsonl:4 \
+  --output-dir lora_output_sft_over_noise_repair_dpo_boundary_20260609 \
+  --prompt-format chat_template \
+  --system-prompt data/system-prompt.txt \
+  --lr 6e-7 \
+  --beta 0.05 \
+  --epochs 1 \
+  --train-batch-size 1 \
+  --grad-accum 8 \
+  --sft-loss-weight 0.1 \
+  --reference-mode reference_free
+```
+
 ## 训练配置
 
 ### 标准 Pipeline 入口
@@ -608,6 +641,7 @@ python eval.py single \
 
 评测脚本支持少量业务等价答案：例如「车里太闷了」这类未明确指定车窗或空调的通风意图，`ClimateControl` 切外循环和 `WindowControl` 打开车窗都计为正确。
 评测和服务端都不做规则后处理修正预测工具或参数，指标与线上响应都反映模型原始输出。
+评测解析时只有纯 `Reject`（允许末尾标点）才计为拒识；如果 raw 输出同时包含 `Reject` 前缀和可解析的工具 JSON/`Action:`，优先按模型实际给出的工具调用计入 Action，避免把带工具调用的 raw 输出误记为拒识。
 默认单工具评测仍会 mask 多意图/多工具样本；feature 分支需要评估复杂任务编排时，增加 `--include-multi-tool`，此时 JSON 数组形式的多工具输出会按无序集合匹配，样本设置 `ordered_tool_calls: true` 时按顺序匹配。
 
 ### 评测维度
@@ -648,6 +682,7 @@ Batch 模式运行后自动输出 JSON 报告；默认有 `--lora-dir` 时写入
 | `serve.py`                           | **OpenAI 兼容推理服务**（FastAPI，支持文本+音频）                                                                                                                  |
 | `eval.py`                            | 统一评测（batch / single），音频输入 + 多维度统计，支持`--batch-size` 批量推理                                                                                     |
 | `scripts/analyze_eval_errors.py`     | 读取`eval_report*.json`，按类型、工具、文件、类别、参数槽位变化和混淆对聚类错误；可用 `--backlog-md` 输出训练补强任务清单，或用 `--review-html` 生成逐 case 人工复核页面 |
+| `scripts/build_boundary_preferences_from_eval.py` | 从评估报告中抽取 `NoiseDoNotAct` 过召和 false-reject case，生成当轮 DPO 边界修复偏好数据 |
 | `scripts/schema_coverage_report.py`  | 统计 SFT / eval / RL 的工具调用、参数枚举和完整参数组合覆盖，定位 eval/RL 中有但 SFT 弱覆盖或缺失的 schema 组合                                                    |
 | `scripts/validate_splits.py`         | 校验 split 样本消息结构、工具调用和响应形态                                                                                                                        |
 | `scripts/validate_by_tool_schema.py` | 校验`data/splits/by_tool/*.jsonl` 是否符合 `data/tools.json` schema                                                                                                |

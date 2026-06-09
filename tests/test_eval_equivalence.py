@@ -150,6 +150,26 @@ def test_parse_actions_accepts_json_array(monkeypatch):
     ]
 
 
+def test_parse_actions_only_treats_plain_reject_as_reject(monkeypatch):
+    eval_mod = _load_eval_module(monkeypatch)
+
+    calls, pred_type = eval_mod.parse_actions("Reject。")
+
+    assert pred_type == "Reject"
+    assert calls == []
+
+
+def test_parse_actions_prefers_embedded_tool_call_over_reject_prefix(monkeypatch):
+    eval_mod = _load_eval_module(monkeypatch)
+
+    calls, pred_type = eval_mod.parse_actions(
+        'Reject\n{"name":"WindowControl","arguments":{"action":"打开","device":"车窗"}}'
+    )
+
+    assert pred_type == "Action"
+    assert calls == [("WindowControl", {"action": "打开", "device": "车窗"})]
+
+
 def test_multi_tool_match_is_orderless_by_default(monkeypatch):
     eval_mod = _load_eval_module(monkeypatch)
 
