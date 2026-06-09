@@ -1,0 +1,27 @@
+tests/test_teacher_sft_lora.py
+  9dec22358ecde48e 5,15-17,28-49
+docs/README.md
+  9dec22358ecde48e 367,373-374,392-393,402-403
+train_teacher_sft_lora.py
+  9dec22358ecde48e 30-31,80-100,162-180,402,420-421,447-448
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.22",
+  "base_commit_sha": "0d1618a62ac287e236f264af2bad998400d7826d",
+  "prompts": {
+    "9dec22358ecde48e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e1f62-2202-7870-af16-54e6c4691c4d",
+        "model": "gpt-5.5"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 84,
+      "total_deletions": 9,
+      "accepted_lines": 84,
+      "overriden_lines": 0
+    }
+  }
+}
