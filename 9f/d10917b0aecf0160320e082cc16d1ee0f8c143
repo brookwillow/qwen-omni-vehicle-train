@@ -1,0 +1,35 @@
+data/system-prompt.txt
+  bddf8e4db06deb8a 32-43
+docs/README.md
+  bddf8e4db06deb8a 141,158-159,171-172,179
+data/rl/wrong_tool_preferences.jsonl
+  bddf8e4db06deb8a 14
+tests/test_validate_rl_schema.py
+  bddf8e4db06deb8a 139-140
+data/eval/parking_test.json
+  bddf8e4db06deb8a 13,30,47,64,81,98,115,121
+data/splits/by_tool/LeavingCarParkingControl.jsonl
+  bddf8e4db06deb8a 1-27
+data/tools.json
+  bddf8e4db06deb8a 1654,1661-1665,1669
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.22",
+  "base_commit_sha": "9fd10917b0aecf0160320e082cc16d1ee0f8c143",
+  "prompts": {
+    "bddf8e4db06deb8a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019eacdb-465f-7232-8447-6dafa7b41c3e",
+        "model": "gpt-5.5"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 63,
+      "total_deletions": 404,
+      "accepted_lines": 63,
+      "overriden_lines": 0
+    }
+  }
+}
