@@ -30,6 +30,7 @@ DEFAULT_RL_DATASETS = (
     "still_over_noise_preferences_round2.jsonl",
     "still_over_noise_preferences_round3.jsonl",
     "still_over_noise_preferences_20260609.jsonl",
+    "still_over_noise_preferences_20260609_round2.jsonl",
     "false_reject_preferences_20260609.jsonl",
     "wrong_tool_preferences.jsonl",
     "false_reject_clarify_preferences.jsonl",

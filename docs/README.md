@@ -289,6 +289,30 @@ python train_memory_dpo_lora.py \
   --reference-mode reference_free
 ```
 
+如果上述边界 DPO 表现为 over-noise 下降但 type/reject/args 副作用变大，不要继续在该 DPO LoRA 上叠训练。回到新 SFT LoRA，只使用最新剩余 over-noise 偏好做窄训练。基于 `eval_report_20260609_143403.json` 已生成：
+
+- `data/rl/still_over_noise_preferences_20260609_round2.jsonl`（42 条）
+
+推荐命令：
+
+```bash
+python train_memory_dpo_lora.py \
+  --model /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen2.5-Omni-3B \
+  --init-lora-dir lora_output_sft_over_noise_repair \
+  --preference-file data/rl/still_over_noise_preferences_20260609_round2.jsonl \
+  --preference-weight still_over_noise_preferences_20260609_round2.jsonl:6 \
+  --output-dir lora_output_sft_over_noise_repair_dpo_over_noise_20260609_round2 \
+  --prompt-format chat_template \
+  --system-prompt data/system-prompt.txt \
+  --lr 4e-7 \
+  --beta 0.05 \
+  --epochs 1 \
+  --train-batch-size 1 \
+  --grad-accum 8 \
+  --sft-loss-weight 0.1 \
+  --reference-mode reference_free
+```
+
 ## 训练配置
 
 ### 标准 Pipeline 入口
