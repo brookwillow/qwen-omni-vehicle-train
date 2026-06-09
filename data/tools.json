@@ -1434,51 +1434,6 @@
     }
   },
   {
-    "name": "ParkingControl",
-    "description": "Controls the autonomous parking system of the vehicle, handling parking in, driving out (unparking), and vehicle alignment.",
-    "inputSchema": {
-      "type": "object",
-      "properties": {
-        "action": {
-          "type": "string",
-          "enum": [
-            "开始",
-            "暂停",
-            "取消"
-          ]
-        },
-        "feature": {
-          "type": "string",
-          "enum": [
-            "泊入",
-            "泊出",
-            "自定义泊入"
-          ]
-        },
-        "value": {
-          "type": "string",
-          "enum": [
-            "向左",
-            "向右",
-            "向前",
-            "向左前",
-            "向右前",
-            "向用户",
-            "向中间"
-          ]
-        },
-        "index": {
-          "type": "string",
-          "description": "Optional parameter specifying the index of the parking space to park in when multiple spaces are detected."
-        }
-      },
-      "required": [
-        "action",
-        "feature"
-      ]
-    }
-  },
-  {
     "name": "PullOverControl",
     "description": "Controls parking operations, allowing you to start or cancel parking. Currently, only right-side parking is supported.",
     "inputSchema": {
@@ -1696,29 +1651,22 @@
   },
   {
     "name": "LeavingCarParkingControl",
-    "description": "Controls leaving car parking operations, allowing you to start, pause or cancel parking. This parking operation will automatically activate after the user closes the car door.",
+    "description": "Controls leaving car parking operations, allowing you to start or cancel parking. This parking operation will automatically activate after the user closes the car door.",
     "inputSchema": {
       "type": "object",
       "properties": {
         "action": {
           "type": "string",
           "enum": [
-            "执行",
-            "暂停",
-            "取消"
-          ]
-        },
-        "feature": {
-          "type": "string",
-          "enum": [
-            "关门触发离车泊入",
-            "车外确认离车泊入"
-          ]
+            "关门泊入",
+            "确认离车泊入",
+            "取消离车泊入"
+          ],
+          "description": "The primary operation or state change to execute."
         }
       },
       "required": [
-        "action",
-        "feature"
+        "action"
       ]
     }
   },

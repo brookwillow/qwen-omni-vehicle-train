@@ -136,8 +136,8 @@ def test_eval_error_dpo_preferences_cover_suitable_error_types():
 
     expected = {
         "still_over_noise_preferences_round2.jsonl": ("still_over_noise", 49),
-        "wrong_tool_preferences.jsonl": ("wrong_tool", 49),
-        "false_reject_clarify_preferences.jsonl": ("false_reject_or_clarify", 12),
+        "wrong_tool_preferences.jsonl": ("wrong_tool", 44),
+        "false_reject_clarify_preferences.jsonl": ("false_reject_or_clarify", 11),
         "extra_args_preferences.jsonl": ("extra_args", 90),
     }
 
