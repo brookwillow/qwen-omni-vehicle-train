@@ -364,13 +364,14 @@ python build_train_data.py \
 
 `train_teacher_sft_lora.py` 用于训练一个 teacher，目标不是直接替代 Omni 线上模型，而是把当前车控工具 schema、`NoiseDoNotAct/Reject/tool_call` 边界和 SP 约束对齐到更大的 Qwen3.5 teacher 上，后续用于 GKD、错误样本判定或候选生成。
 
-该脚本完全复用 Omni SFT 的训练数据入口：`data/train_final.jsonl` 必须由 `build_train_data.py` 生成，里面已经注入 `data/system-prompt.txt`。监督口径也和 `train_thinker_lora.py` 一致：只监督最后一个 user 之后的最后一条 assistant 内容；历史 assistant TTS 不参与 loss。`Qwen/Qwen3.5-27B` 带 vision encoder，脚本会优先尝试 `AutoModelForCausalLM`，失败后回退到 `AutoModelForImageTextToText`，并默认冻结 `vision/visual/image` 等相关 LoRA 参数，只训练语言决策路径；如确实要训练视觉路径，可显式加 `--no-freeze-vision`。
+该脚本完全复用 Omni SFT 的训练数据入口：`data/train_final.jsonl` 必须由 `build_train_data.py` 生成，里面已经注入 `data/system-prompt.txt`。监督口径也和 `train_thinker_lora.py` 一致：只监督最后一个 user 之后的最后一条 assistant 内容；历史 assistant TTS 不参与 loss。脚本默认从 ModelScope 使用 `Qwen/Qwen3.5-27B`，本地目录为 `/home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen3.5-27B`；如果目录不存在，会自动执行 `modelscope download --model Qwen/Qwen3.5-27B --local_dir <本地目录>`。`Qwen/Qwen3.5-27B` 带 vision encoder，脚本会优先尝试 `AutoModelForCausalLM`，失败后回退到 `AutoModelForImageTextToText`，并默认冻结 `vision/visual/image` 等相关 LoRA 参数，只训练语言决策路径；如确实要训练视觉路径，可显式加 `--no-freeze-vision`。
 
 H800 上推荐先用 BF16 LoRA 训练 `Qwen/Qwen3.5-27B`：
 
 ```bash
 python train_teacher_sft_lora.py \
-  --model Qwen/Qwen3.5-27B \
+  --model /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen3.5-27B \
+  --modelscope-model Qwen/Qwen3.5-27B \
   --train-file data/train_final.jsonl \
   --system-prompt data/system-prompt.txt \
   --output-dir teacher_lora_qwen35_27b_sft \
@@ -388,7 +389,8 @@ python train_teacher_sft_lora.py \
 
 ```bash
 python train_teacher_sft_lora.py \
-  --model Qwen/Qwen3.5-27B \
+  --model /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen3.5-27B \
+  --modelscope-model Qwen/Qwen3.5-27B \
   --output-dir teacher_lora_qwen35_27b_sft \
   --rebuild-train-data
 ```
@@ -397,7 +399,8 @@ python train_teacher_sft_lora.py \
 
 ```bash
 python train_teacher_sft_lora.py \
-  --model Qwen/Qwen3.5-27B \
+  --model /home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen3.5-27B \
+  --modelscope-model Qwen/Qwen3.5-27B \
   --train-file data/train_final.jsonl \
   --output-dir teacher_lora_qwen35_27b_qlora \
   --load-in-4bit \

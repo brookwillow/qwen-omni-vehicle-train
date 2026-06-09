@@ -2,6 +2,7 @@ from train_teacher_sft_lora import (
     TeacherSftConfig,
     build_build_data_command,
     build_label_mask,
+    build_modelscope_download_command,
     normalize_chatml_text,
     parse_args,
     render_chatml_messages,
@@ -11,7 +12,9 @@ from train_teacher_sft_lora import (
 def test_teacher_defaults_target_qwen35_27b():
     args = parse_args([])
 
-    assert args.model == "Qwen/Qwen3.5-27B"
+    assert args.model == "/home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen3.5-27B"
+    assert args.modelscope_model == "Qwen/Qwen3.5-27B"
+    assert args.download_modelscope is True
     assert args.train_file == "data/train_final.jsonl"
     assert args.system_prompt == "data/system-prompt.txt"
     assert args.torch_dtype == "bfloat16"
@@ -20,6 +23,30 @@ def test_teacher_defaults_target_qwen35_27b():
     assert args.lora_alpha == 32
     assert args.load_in_4bit is False
     assert args.freeze_vision is True
+
+
+def test_teacher_modelscope_download_command_uses_local_dir():
+    args = parse_args(
+        [
+            "--model",
+            "/models/Qwen3.5-27B",
+            "--modelscope-model",
+            "Qwen/Qwen3.5-27B",
+            "--modelscope-cache-dir",
+            "/models/.modelscope_cache",
+        ]
+    )
+
+    assert build_modelscope_download_command(args) == [
+        "modelscope",
+        "download",
+        "--model",
+        "Qwen/Qwen3.5-27B",
+        "--cache_dir",
+        "/models/.modelscope_cache",
+        "--local_dir",
+        "/models/Qwen3.5-27B",
+    ]
 
 
 def test_teacher_build_data_command_uses_current_omni_weights():

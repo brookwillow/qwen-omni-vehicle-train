@@ -27,6 +27,8 @@ DEFAULT_SAMPLE_WEIGHTS = (
     "CurrentNoiseWithHistoryTool:0.5",
     "NoiseDoNotAct_coverage:0.5",
 )
+DEFAULT_MODELSCOPE_MODEL = "Qwen/Qwen3.5-27B"
+DEFAULT_MODELSCOPE_MODEL_DIR = "/home/wangjie/.cache/modelscope/hub/models/Qwen/Qwen3.5-27B"
 CHAT_TEMPLATE_FALLBACK_WARNED = False
 
 
@@ -75,7 +77,27 @@ def setup_run_logs(output_dir: Path) -> TextIO:
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Qwen3.5-27B teacher SFT LoRA training")
-    parser.add_argument("--model", default="Qwen/Qwen3.5-27B", help="Qwen3.5 teacher model path or HF id")
+    parser.add_argument(
+        "--model",
+        default=DEFAULT_MODELSCOPE_MODEL_DIR,
+        help="Local Qwen3.5 teacher model path. Defaults to the ModelScope local_dir.",
+    )
+    parser.add_argument(
+        "--modelscope-model",
+        default=DEFAULT_MODELSCOPE_MODEL,
+        help="ModelScope model id used when --download-modelscope is enabled.",
+    )
+    parser.add_argument(
+        "--modelscope-cache-dir",
+        default="",
+        help="Optional ModelScope cache_dir passed to `modelscope download`.",
+    )
+    parser.add_argument(
+        "--download-modelscope",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Download --modelscope-model to --model if the local model directory is missing.",
+    )
     parser.add_argument("--train-file", default="data/train_final.jsonl", help="SP-injected chat JSONL")
     parser.add_argument("--system-prompt", default="data/system-prompt.txt", help="Documented SP source")
     parser.add_argument("--output-dir", default="teacher_lora_qwen35_27b_sft", help="LoRA output dir")
@@ -135,6 +157,27 @@ def build_build_data_command(config: TeacherSftConfig) -> list[str]:
         "--output",
         config.train_file,
     ]
+
+
+def build_modelscope_download_command(args: argparse.Namespace) -> list[str]:
+    command = ["modelscope", "download", "--model", args.modelscope_model]
+    if args.modelscope_cache_dir:
+        command.extend(["--cache_dir", args.modelscope_cache_dir])
+    command.extend(["--local_dir", args.model])
+    return command
+
+
+def resolve_model_path(args: argparse.Namespace) -> str:
+    model_path = Path(args.model).expanduser()
+    if model_path.exists():
+        return str(model_path)
+    if not args.download_modelscope:
+        return args.model
+    model_path.parent.mkdir(parents=True, exist_ok=True)
+    command = build_modelscope_download_command(args)
+    print("[modelscope] local model not found; downloading:", " ".join(command))
+    subprocess.run(command, check=True)
+    return str(model_path)
 
 
 def normalize_chatml_text(text: str) -> str:
@@ -356,6 +399,7 @@ def main(argv: list[str] | None = None) -> None:
     args = parse_args(argv)
     output_dir = Path(args.output_dir)
     setup_run_logs(output_dir)
+    model_path = resolve_model_path(args)
 
     if args.rebuild_train_data:
         command = build_build_data_command(
@@ -373,8 +417,8 @@ def main(argv: list[str] | None = None) -> None:
     dtype = dtype_from_name(torch, args.torch_dtype)
     compute_dtype = dtype_from_name(torch, args.bnb_4bit_compute_dtype)
 
-    print(f"[1/5] loading tokenizer: {args.model}")
-    tokenizer = transformers.AutoTokenizer.from_pretrained(args.model, trust_remote_code=True, use_fast=True)
+    print(f"[1/5] loading tokenizer: {model_path}")
+    tokenizer = transformers.AutoTokenizer.from_pretrained(model_path, trust_remote_code=True, use_fast=True)
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "right"
@@ -400,7 +444,8 @@ def main(argv: list[str] | None = None) -> None:
     train_dataset = train_dataset.remove_columns([c for c in train_dataset.column_names if c not in keep_columns])
     eval_dataset = eval_dataset.remove_columns([c for c in eval_dataset.column_names if c not in keep_columns])
 
-    print(f"[4/5] loading model: {args.model}")
+    print(f"[4/5] loading model: {model_path}")
+    args.model = model_path
     quantization_config = None
     if args.load_in_4bit:
         quantization_config = transformers.BitsAndBytesConfig(
