@@ -1,0 +1,27 @@
+scripts/validate_rl_schema.py
+  9dec22358ecde48e 33
+data/rl/still_over_noise_preferences_20260609_round2.jsonl
+  9dec22358ecde48e 1-42
+docs/README.md
+  9dec22358ecde48e 292-315
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.22",
+  "base_commit_sha": "95d62f2f8410ccb72aad1d1b665c5e8c6f9c757e",
+  "prompts": {
+    "9dec22358ecde48e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e1f62-2202-7870-af16-54e6c4691c4d",
+        "model": "gpt-5.5"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 67,
+      "total_deletions": 0,
+      "accepted_lines": 67,
+      "overriden_lines": 0
+    }
+  }
+}
