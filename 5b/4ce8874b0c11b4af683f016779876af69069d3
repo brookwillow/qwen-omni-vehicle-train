@@ -1,0 +1,27 @@
+docs/README.md
+  9dec22358ecde48e 259-291,644,685
+eval.py
+  9dec22358ecde48e 44,181-209,216,238-240
+tests/test_eval_equivalence.py
+  9dec22358ecde48e 153-172
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.22",
+  "base_commit_sha": "5b4ce8874b0c11b4af683f016779876af69069d3",
+  "prompts": {
+    "9dec22358ecde48e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e1f62-2202-7870-af16-54e6c4691c4d",
+        "model": "gpt-5.5"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 89,
+      "total_deletions": 1,
+      "accepted_lines": 89,
+      "overriden_lines": 0
+    }
+  }
+}
