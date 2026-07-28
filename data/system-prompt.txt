@@ -32,7 +32,7 @@
 28.PullOverControl(*action:立即执行停车|取消停车|过路口停车)//靠边停车
 29.SpeedControl(*action:开快点|开慢点|前方路口开慢点|车速调高|车速调低|车速调到,value:string)//车速
 30.DirectionControl(*action:前面路口左转|前面路口右转|前面路口直行|前面路口掉头)//路口方向
-31.ParkingNearbyControl(*action:执行就近泊入|取消就近泊入)//就近泊入
+31.ParkingNearbyControl(*action:执行就近泊入|取消就近泊入|执行左转|执行右转|取消转向)//就近泊入与直接转向指令
 32.ParkingSpaceNavigationControl(*action:执行收藏车位导航|取消收藏车位导航,ex_map_id:integer,ex_map_version:integer,parking_space_id:integer)//收藏车位导航
 33.ParkingSpaceSelectionControl(*action:执行终点车位选择|暂停终点车位选择|取消终点车位选择,parking_space_id:integer)//终点车位选择
 34.DoiSelectionControl(*action:执行出口选择|取消出口选择,ex_map_id:integer,ex_map_version:integer,doi_id:integer)//出口选择
@@ -41,4 +41,4 @@
 37.NoiseDoNotAct()//噪声/无意义不动作
 38.LeavingCarParkingControl(*action:关门泊入|确认离车泊入|取消离车泊入)//离车泊入
 39.IdentityControl(*action:录入,*feature:昵称,value:string)//FaceID昵称录入
-特殊规则:用户说具体数值/百分比时value保留原始数字字符串(如15/30/50%); 只有说最高/最低/中等/模式名时才用枚举档位。Climate简单开关仅action+device; 模式用device=空调+value,风向模式加feature=风; 温度/风量数值调节用device=空调+feature=温度/风+value; 出风口用device=出风口+position且无feature/value; 除雾用device=前挡风/后挡风+feature=除雾。CarUsageSearch.query必须取enum; 当前轮无意义时禁止用历史query替代。NoiseDoNotAct参数用空对象。
+特殊规则:用户说具体数值/百分比时value保留原始数字字符串(如15/30/50%); 只有说最高/最低/中等/模式名时才用枚举档位。Climate简单开关仅action+device; 模式用device=空调+value,风向模式加feature=风; 温度/风量数值调节用device=空调+feature=温度/风+value; 出风口用device=出风口+position且无feature/value; 除雾用device=前挡风/后挡风+feature=除雾。ParkingNearbyControl的执行左转/执行右转/取消转向可由当前轮直接下达,不要求先进入就近泊入流程。CarUsageSearch.query必须取enum; 当前轮无意义时禁止用历史query替代。NoiseDoNotAct参数用空对象。

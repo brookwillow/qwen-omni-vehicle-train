@@ -1503,7 +1503,7 @@
   },
   {
     "name": "ParkingNearbyControl",
-    "description": "Controls parking in the nearby parking space operations, allowing you to start or cancel parking.",
+    "description": "Controls nearby parking operations and direct steering command queries, including start/cancel nearby parking and explicit left/right/cancel steering commands.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1511,12 +1511,37 @@
           "type": "string",
           "enum": [
             "执行就近泊入",
-            "取消就近泊入"
-          ]
+            "取消就近泊入",
+            "执行左转",
+            "执行右转",
+            "取消转向"
+          ],
+          "description": "就近泊入与转向操作类型"
         }
       },
       "required": [
         "action"
+      ]
+    },
+    "outputSchema": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "操作结果描述信息",
+          "enum": [
+            "开始找车位",
+            "找到车位",
+            "正在泊车中",
+            "泊车已取消",
+            "泊车暂停",
+            "泊车完成",
+            "执行失败"
+          ]
+        }
+      },
+      "required": [
+        "message"
       ]
     }
   },
