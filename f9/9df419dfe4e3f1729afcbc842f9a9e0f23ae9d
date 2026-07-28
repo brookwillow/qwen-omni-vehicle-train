@@ -1,0 +1,33 @@
+scripts/build_macro_sp.py
+  d5e291061ceb02fa 1-195
+scripts/build_guided_schema.py
+  d5e291061ceb02fa 1-78
+constrained_decoding.py
+  d5e291061ceb02fa 1-123
+build_train_data.py
+  d5e291061ceb02fa 54-58,370-379
+tests/test_constrained_decoding.py
+  d5e291061ceb02fa 1-134
+server_omni_openai.py
+  d5e291061ceb02fa 822-826,835,849-850,1075,1184-1185,1200,1227-1240
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.24",
+  "base_commit_sha": "f99df419dfe4e3f1729afcbc842f9a9e0f23ae9d",
+  "prompts": {
+    "d5e291061ceb02fa": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7244e954-8d5e-464c-9962-00c04db39520",
+        "model": "claude-fable-5"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 572,
+      "overriden_lines": 0
+    }
+  }
+}
