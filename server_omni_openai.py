@@ -819,6 +819,11 @@ def run_inference(
     cache_active = cached_length > 0 and (use_full_cache or use_system_cache)
     _thinker = _get_thinker_model(model) if (cache_active and not has_media) else None
 
+    guided_kwargs: dict = {}
+    if _guided_decoder is not None:
+        from transformers import LogitsProcessorList
+        guided_kwargs["logits_processor"] = LogitsProcessorList([_guided_decoder.processor()])
+
     if cache_active and _thinker is not None:
         gen_kwargs: dict = {
             "input_ids": inputs["input_ids"],
@@ -827,6 +832,7 @@ def run_inference(
             "max_new_tokens": max_new_tokens,
             "do_sample": temperature > 0,
             "use_cache": True,
+            **guided_kwargs,
         }
         if temperature > 0:
             gen_kwargs["temperature"] = temperature
@@ -840,6 +846,8 @@ def run_inference(
                 temperature=temperature,
                 do_sample=temperature > 0,
                 return_audio=False,
+                # thinker_ 前缀 kwargs 由 Omni wrapper 路由给 thinker.generate
+                **{f"thinker_{k}": v for k, v in guided_kwargs.items()},
             )
     generate_ms = (time.perf_counter() - t4) * 1000
 
@@ -1064,6 +1072,7 @@ _model = None
 _processor = None
 _system_prompt = ""
 _model_name = "qwen-omni"
+_guided_decoder = None
 _tmp_dir = tempfile.mkdtemp(prefix="qwen_serve_")
 _inference_perf_averages = _PerfAverages()
 _request_perf_averages = _PerfAverages()
@@ -1172,6 +1181,8 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--lora-dir", default="", help="Optional LoRA adapter directory")
     p.add_argument("--system-prompt-file", default=str(_DEFAULT_SP_FILE))
     p.add_argument("--system-prompt", default="", help="Inline system prompt (overrides file)")
+    p.add_argument("--guided-schema", default="",
+                   help="联合工具 schema JSON 路径(scripts/build_guided_schema.py 生成); 非空则启用触发式约束解码")
     p.add_argument("--host", default="0.0.0.0")
     p.add_argument("--port", type=int, default=8000)
     p.add_argument("--model-name", default="qwen-omni")
@@ -1186,7 +1197,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def main():
-    global _model, _processor, _system_prompt, _model_name, _kv_cache_manager
+    global _model, _processor, _system_prompt, _model_name, _kv_cache_manager, _guided_decoder
 
     args = parse_args()
     setup_file_logging(args.log_file, args.log_file_mode)
@@ -1213,6 +1224,20 @@ def main():
     print(f"[model] loading {args.model_dir} ...")
     _model, _processor = load_model(args.model_dir, args.lora_dir, args.torch_dtype)
     print(f"[model] ready  lora={args.lora_dir or 'none'}")
+
+    if args.guided_schema:
+        from constrained_decoding import GuidedDecoder
+        thinker = _get_thinker_model(_model)
+        vocab_size = thinker.get_output_embeddings().weight.shape[0]
+        eos = getattr(thinker.generation_config, "eos_token_id", None)
+        if eos is None:
+            eos = _processor.tokenizer.eos_token_id
+        eos_ids = list(eos) if isinstance(eos, (list, tuple)) else [eos]
+        _guided_decoder = GuidedDecoder(
+            args.guided_schema, _processor.tokenizer, vocab_size, eos_ids
+        )
+        print(f"[guided] schema={args.guided_schema} vocab={vocab_size} eos={eos_ids}")
+
     print(f"[server] http://{args.host}:{args.port}")
 
     uvicorn.run(app, host=args.host, port=args.port, log_level="info")

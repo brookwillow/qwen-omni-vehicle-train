@@ -51,6 +51,12 @@ def parse_args():
         help="System prompt text file",
     )
     p.add_argument(
+        "--macro-sp",
+        action="store_true",
+        help="注入前对 SP 做枚举宏压缩(scripts/build_macro_sp.py), "
+             "并写出 <sp-file同目录>/system-prompt-macro.txt 供推理/评估使用",
+    )
+    p.add_argument(
         "--output",
         default="data/train_final.jsonl",
         help="Output training JSONL",
@@ -360,6 +366,16 @@ def main():
         raise FileNotFoundError(f"System prompt file not found: {sp_path}")
     sp = sp_path.read_text(encoding="utf-8").strip()
     print(f"[sp] loaded from {sp_path} ({len(sp)} chars)")
+
+    if args.macro_sp:
+        from scripts.build_macro_sp import build_macro_sp
+
+        macro_text, macros = build_macro_sp(sp + "\n")
+        macro_path = sp_path.with_name("system-prompt-macro.txt")
+        macro_path.write_text(macro_text, encoding="utf-8")
+        sp = macro_text.strip()
+        print(f"[sp] macro-compressed: {len(sp)} chars, {len(macros)} macros → {macro_path}")
+        print(f"[sp] 训练/推理/评估请统一使用 --system-prompt-file {macro_path}")
 
     # Discover split files
     if args.splits:
