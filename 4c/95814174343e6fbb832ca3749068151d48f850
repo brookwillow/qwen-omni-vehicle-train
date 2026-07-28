@@ -1,0 +1,40 @@
+data/tools.json
+  30f8f9ae572fe0ec 1506,1514-1519,1525-1544
+data/system-prompt.txt
+  30f8f9ae572fe0ec 35,44
+data/splits/by_tool/ParkingNearbyControl.jsonl
+  30f8f9ae572fe0ec 17-18,21-45,50-53,57-58
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.24",
+  "base_commit_sha": "4c95814174343e6fbb832ca3749068151d48f850",
+  "prompts": {
+    "30f8f9ae572fe0ec": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "02c8de0d-93b8-4884-97c1-30484407756d",
+        "model": "copilot/auto"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 73,
+      "total_deletions": 8,
+      "accepted_lines": 63,
+      "overriden_lines": 7
+    },
+    "d5e291061ceb02fa": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7244e954-8d5e-464c-9962-00c04db39520",
+        "model": "claude-fable-5"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 696,
+      "total_deletions": 54,
+      "accepted_lines": 572,
+      "overriden_lines": 0
+    }
+  }
+}
