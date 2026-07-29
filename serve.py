@@ -1106,6 +1106,11 @@ def run_inference(
     generate_start = time.perf_counter()
     thinker = _get_thinker_model(model) if cache_hit else None
     old_rope_deltas = getattr(thinker, "rope_deltas", None) if thinker is not None else None
+    guided_kwargs: dict = {}
+    if _guided_decoder is not None:
+        from transformers import LogitsProcessorList
+
+        guided_kwargs["thinker_logits_processor"] = LogitsProcessorList([_guided_decoder.processor()])
     try:
         if cache_hit and thinker is not None:
             thinker.rope_deltas = _clone_past_key_values(cache_hit.rope_deltas)
@@ -1116,6 +1121,7 @@ def run_inference(
                 temperature=temperature,
                 do_sample=temperature > 0,
                 return_audio=False,
+                **guided_kwargs,
             )
     finally:
         if cache_hit and thinker is not None:
@@ -1417,6 +1423,7 @@ _inference_perf_averages = _PerfAverages()
 _request_perf_averages = _PerfAverages()
 _prompt_cache_mode = "none"
 _kv_prompt_cache: Optional[_KvPromptCache] = None
+_guided_decoder = None
 
 
 @app.get("/v1/models")
@@ -1531,6 +1538,12 @@ def parse_args() -> argparse.Namespace:
         help="Prompt cache mode. 'kv' is experimental and caches the fixed system-prompt prefix.",
     )
     p.add_argument(
+        "--guided-schema",
+        default="",
+        help="JSON schema file for triggered constrained decoding (e.g. data/guided_schema.json). "
+             "Requires xgrammar. 配合宏压缩 SP 使用。",
+    )
+    p.add_argument(
         "--log-file",
         default=str(_DEFAULT_LOG_FILE),
         help=(
@@ -1548,7 +1561,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def main():
-    global _model, _processor, _system_prompt, _model_name, _debug_asr_enabled, _prompt_cache_mode, _kv_prompt_cache
+    global _model, _processor, _system_prompt, _model_name, _debug_asr_enabled, _prompt_cache_mode, _kv_prompt_cache, _guided_decoder
 
     args = parse_args()
     setup_file_logging(args.log_file, args.log_file_mode)
@@ -1579,6 +1592,17 @@ def main():
             _kv_prompt_cache = None
             _prompt_cache_mode = "none"
             print("[prompt_cache] mode=kv disabled; falling back to none")
+    if args.guided_schema:
+        from constrained_decoding import GuidedDecoder
+
+        thinker = _get_thinker_model(_model)
+        vocab_size = thinker.get_output_embeddings().weight.shape[0]
+        eos = getattr(thinker.generation_config, "eos_token_id", None)
+        if eos is None:
+            eos = _processor.tokenizer.eos_token_id
+        eos_ids = list(eos) if isinstance(eos, (list, tuple)) else [eos]
+        _guided_decoder = GuidedDecoder(args.guided_schema, _processor.tokenizer, vocab_size, eos_ids)
+        print(f"[guided] schema loaded from {args.guided_schema}")
     print(f"[model] ready  lora={args.lora_dir or 'none'}")
     print(f"[server] starting on http://{args.host}:{args.port}")
 
