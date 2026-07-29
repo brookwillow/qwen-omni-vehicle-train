@@ -1,0 +1,23 @@
+serve.py
+  d5e291061ceb02fa 1109-1113,1124,1426,1541-1545,1564,1595-1605
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.24",
+  "base_commit_sha": "d94aefc44b049aa3d728e0ba499e9981358d8d74",
+  "prompts": {
+    "d5e291061ceb02fa": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7244e954-8d5e-464c-9962-00c04db39520",
+        "model": "claude-fable-5"
+      },
+      "human_author": "brook",
+      "messages": [],
+      "total_additions": 25,
+      "total_deletions": 1,
+      "accepted_lines": 25,
+      "overriden_lines": 0
+    }
+  }
+}
